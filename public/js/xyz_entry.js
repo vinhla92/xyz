@@ -18,10 +18,14 @@ function init() {
 
     // Initiate leaflet.
     const L = require('leaflet');
+    //require('leaflet-editable');
+    require('leaflet-draw');
 
     // Initiate map object.
     global._xyz.map = L
         .map('Map', {
+            //editable: true, // this is for leaflet-editable
+            drawControl: true, // this is for leaflet-draw
             renderer: L.svg(),
             scrollWheelZoom: true,
             zoomControl: false,

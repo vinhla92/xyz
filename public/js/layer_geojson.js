@@ -72,19 +72,22 @@ module.exports = function() {
                     return layer.style.default;
                 }
 
-                // Add geoJSON feature collection to the map.
-                layer.L = L.geoJSON(features, {
+                let geojson_options = {
                     style: applyLayerStyle,
                     pane: layer.pane[0],
-                    interactive: layer.infoj? true: false,
+                    interactive: layer.infoj ? true: false,
                     pointToLayer: function(point, latlng){
                         return L.circleMarker(latlng, {
                             radius: 9,
                             pane: layer.pane[0]
                         });
                     }
-                })
-                    .on('click', function(e){
+                };
+
+                // Add geoJSON feature collection to the map.
+                layer.L = L.geoJSON(features, geojson_options);
+                
+                layer.L.on('click', function(e){
                     global._xyz.select.selectLayerFromEndpoint({
                         layer: layer.layer,
                         table: layer.table,
@@ -100,6 +103,8 @@ module.exports = function() {
                     e.layer.setStyle(layer.style.default);
                 })
                     .addTo(global._xyz.map);
+
+                //layer.L.enableEdit();
 
                 layer.loader.style.display = 'none';
                 layer.loaded = true;

@@ -4,7 +4,8 @@ const formats = {
     mvt: require('./layer_mvt'),
     geojson: require('./layer_geojson'),
     grid: require('./layer_grid'),
-    tiles: require('./layer_tiles')
+    tiles: require('./layer_tiles'),
+    vector: require('./layer_vector')
 };
 
 const svg_symbols = require('./svg_symbols');
