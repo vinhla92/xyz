@@ -592,6 +592,10 @@ input[type=range]::-moz-range-thumb {
     padding: 5px 5px 3px 5px;
     border-radius: 3px;
     box-shadow: 1px 1px 3px #555; }
+  .map_container .leaflet-control.leaflet-draw {
+    display: none; }
+    .map_container .leaflet-control.leaflet-draw.visible {
+      display: block !important; }
 
 /* required styles */
 .leaflet-pane,

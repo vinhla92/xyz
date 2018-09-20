@@ -25,7 +25,7 @@ function init() {
     global._xyz.map = L
         .map('Map', {
             //editable: true, // this is for leaflet-editable
-            drawControl: true, // this is for leaflet-draw
+            //drawControl: true, // this is for leaflet-draw
             renderer: L.svg(),
             scrollWheelZoom: true,
             zoomControl: false,

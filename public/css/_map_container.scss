@@ -31,4 +31,12 @@
         border-radius: 3px;
         box-shadow: 1px 1px 3px #555;
     }
+    
+    .leaflet-control.leaflet-draw  {
+        display: none;
+
+        &.visible {
+            display: block !important;
+        }
+    }
 }

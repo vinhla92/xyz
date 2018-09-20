@@ -291,5 +291,5 @@ async function setIndices(req, res, fastify){
     res.code(200).send(idx);
 
     //console.log(req.body);
-    res.code(200).send();
+    //res.code(200).send();
 }

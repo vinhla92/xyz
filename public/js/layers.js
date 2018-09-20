@@ -4,8 +4,8 @@ const formats = {
     mvt: require('./layer_mvt'),
     geojson: require('./layer_geojson'),
     grid: require('./layer_grid'),
-    tiles: require('./layer_tiles'),
-    vector: require('./layer_vector')
+    tiles: require('./layer_tiles')//,
+    //vector: require('./layer_vector')
 };
 
 const svg_symbols = require('./svg_symbols');
@@ -314,6 +314,31 @@ module.exports = () => {
                                     }
                                 }));
                             });
+                        }
+                    }
+                });
+            }
+
+            if(layer.draw){
+                utils._createElement({
+                    tag: 'i',
+                    options: {
+                        textContent: "create",
+                        className: 'material-icons cursor noselect btn_header',
+                        title: 'Draw'
+                    },
+                    appendTo: layer.header,
+                    eventListener: {
+                        event: "click",
+                        funct: e => {
+                            //e.stopPropagation();
+                            let control = global._xyz.map.getContainer().querySelector('.leaflet-draw.leaflet-control');
+                            control.classList += " visible";
+                            //utils.addClass(control, "visible");
+                            //control.style.display = "block";
+                            console.log(global._xyz.map.getContainer());
+                            console.log(control);
+                            //control.style.display = "block";
                         }
                     }
                 });
