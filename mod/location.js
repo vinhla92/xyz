@@ -46,8 +46,6 @@ async function select(req, res, fastify) {
     let access_filter = layer.access_filter && token.email && layer.access_filter[token.email.toLowerCase()] ?
     layer.access_filter[token.email] : null;
 
-    if(!access_filter && typeof(layer.access_filter) == 'string') access_filter = layer.access_filter ? layer.access_filter : null;
-
     //sql_filter = filter ? require('./filters').sql_filter(filter) : '';
 
     let fields = '';
