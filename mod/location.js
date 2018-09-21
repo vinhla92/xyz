@@ -25,6 +25,8 @@ async function select(req, res, fastify) {
         sql_filter = layer.sql_filter ? layer.sql_filter : '',
         infoj = JSON.parse(JSON.stringify(layer.infoj));
 
+        //console.log(layer.access_filter);
+
     // Check whether string params are found in the settings to prevent SQL injections.
     if ([table, qID, geomj, geomq, geomdisplay]
         .some(val => (typeof val === 'string' && val.length > 0 && global.workspace[token.access].values.indexOf(val) < 0))) {
@@ -42,7 +44,9 @@ async function select(req, res, fastify) {
     }
 
     let access_filter = layer.access_filter && token.email && layer.access_filter[token.email.toLowerCase()] ?
-        layer.access_filter[token.email] : null;
+    layer.access_filter[token.email] : null;
+
+    if(!access_filter && typeof(layer.access_filter) == 'string') access_filter = layer.access_filter ? layer.access_filter : null;
 
     //sql_filter = filter ? require('./filters').sql_filter(filter) : '';
 
@@ -102,6 +106,8 @@ async function select(req, res, fastify) {
     WHERE 
     ${layer.log_table ? 'rank = 1 AND ' : ''}
     ${qID} = $1;`;
+
+    //console.log(q);
 
     try {
         var db_connection = await fastify.pg[layer.dbs].connect();
