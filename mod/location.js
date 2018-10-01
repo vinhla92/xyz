@@ -11,6 +11,8 @@ async function select(req, res, fastify) {
     const token = req.query.token ?
         fastify.jwt.decode(req.query.token) : { access: 'public' };
 
+        //console.log(req.query);
+
     let
         layer = global.workspace[token.access].config.locales[req.query.locale].layers[req.query.layer],
         table = req.query.table,
@@ -24,6 +26,7 @@ async function select(req, res, fastify) {
         //filter = req.query.filter ? JSON.parse(req.query.filter) : {},
         sql_filter = layer.sql_filter ? layer.sql_filter : '',
         infoj = JSON.parse(JSON.stringify(layer.infoj));
+
 
     // Check whether string params are found in the settings to prevent SQL injections.
     if ([table, qID, geomj, geomq, geomdisplay]

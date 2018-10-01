@@ -33,7 +33,8 @@ module.exports = function(layer, panel){
         },
         draw: {
             polygon: drawOptions,
-            polyline: drawOptions,
+            //polyline: drawOptions,
+            polyline: false,
             circle: false,
             marker: false,
             rectangle: drawOptions,
@@ -72,34 +73,52 @@ module.exports = function(layer, panel){
             }
 
             if (e.target.status === 200) {
-                /*layer.getLayer();
+                layer.getLayer();
                 global._xyz.select.selectLayerFromEndpoint({
                     layer: layer.layer,
                     table: layer.table,
                     id: e.target.response,
                     marker: marker,
                     editable: true
-                });*/
+                });
             }
 
         }
+
+        let _marker = drawnItems.getBounds().getCenter();
+        let marker = [_marker.lng.toFixed(5), _marker.lat.toFixed(5)];
+
+        //console.log('marker');
+        //console.log(marker);
+
+        let featureCollection = drawnItems.toGeoJSON();
+
+        let coords = [];
+
+        featureCollection.features.map(item => {
+            coords.push(item.geometry.coordinates);
+        });
+
+        let multiPoly = {
+            "type": "Multipolygon",
+            "coordinates": coords
+        };
+
+        console.log(multiPoly);
         
-        /*xhr.send(JSON.stringify({
+        xhr.send(JSON.stringify({
             locale: _xyz.locale,
             layer: layer.layer,
             table: layer.table,
-            geometry: {
-                type: 'Point',
-                coordinates: marker
-            }
-        }));*/
+            geometry: multiPoly
+        }));
 
         console.log(JSON.stringify({
             locale: _xyz.locale,
             layer: layer.layer,
             table: layer.table,
-            geometry: drawnItems.toGeoJSON()
+            geometry: multiPoly
         }));
-        
+
     });
 }
