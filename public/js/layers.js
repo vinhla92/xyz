@@ -334,6 +334,7 @@ module.exports = () => {
                             //e.stopPropagation();
                             let control = global._xyz.map.getContainer().querySelector('.leaflet-draw.leaflet-control');
                             control.classList += " visible";
+
                             //utils.addClass(control, "visible");
                             //control.style.display = "block";
                             console.log(global._xyz.map.getContainer());

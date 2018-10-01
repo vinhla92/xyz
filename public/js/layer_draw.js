@@ -46,8 +46,60 @@ module.exports = function(layer, panel){
 
         //_layer.options.pane = "vector_test";
         //_layer.options = layer.style.default;
-        console.log(_layer);
+        //console.log(_layer);
 
         drawnItems.addLayer(_layer);
+        //console.log(drawnItems);
+        //console.log(drawnItems.toGeoJSON());
+    });
+
+    global._xyz.map.on(L.Draw.Event.EDITSTOP, e => {
+        console.log('this is a feature to post and save');
+
+        // Make select tab active on mobile device.
+        if (global._xyz.activateLocationsTab) global._xyz.activateLocationsTab();
+
+        let xhr = new XMLHttpRequest();
+        
+        xhr.open('POST', global._xyz.host + '/api/location/new?token=' + global._xyz.token);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        
+        xhr.onload = e => {
+            if (e.target.status === 401) {
+                document.getElementById('timeout_mask').style.display = 'block';
+                console.log(e.target.response);
+                return
+            }
+
+            if (e.target.status === 200) {
+                /*layer.getLayer();
+                global._xyz.select.selectLayerFromEndpoint({
+                    layer: layer.layer,
+                    table: layer.table,
+                    id: e.target.response,
+                    marker: marker,
+                    editable: true
+                });*/
+            }
+
+        }
+        
+        /*xhr.send(JSON.stringify({
+            locale: _xyz.locale,
+            layer: layer.layer,
+            table: layer.table,
+            geometry: {
+                type: 'Point',
+                coordinates: marker
+            }
+        }));*/
+
+        console.log(JSON.stringify({
+            locale: _xyz.locale,
+            layer: layer.layer,
+            table: layer.table,
+            geometry: drawnItems.toGeoJSON()
+        }));
+        
     });
 }
