@@ -27,6 +27,7 @@ async function select(req, res, fastify) {
         sql_filter = layer.sql_filter ? layer.sql_filter : '',
         infoj = JSON.parse(JSON.stringify(layer.infoj));
 
+        //console.log(layer.access_filter);
 
     // Check whether string params are found in the settings to prevent SQL injections.
     if ([table, qID, geomj, geomq, geomdisplay]
@@ -45,7 +46,7 @@ async function select(req, res, fastify) {
     }
 
     let access_filter = layer.access_filter && token.email && layer.access_filter[token.email.toLowerCase()] ?
-        layer.access_filter[token.email] : null;
+    layer.access_filter[token.email] : null;
 
     //sql_filter = filter ? require('./filters').sql_filter(filter) : '';
 
@@ -67,13 +68,13 @@ async function select(req, res, fastify) {
             FROM ${entry_table || entry_layer.table}
             WHERE true ${sql_filter || `AND ST_Intersects(${entry_table || entry_layer.table}.${entry_layer.geom || 'geom'}, ${table}.${geomq})`}
             ${access_filter ? 'AND ' + access_filter : ''}
-            ) AS "${entry.field}",`;
+            ) AS "${entry.field}", `;
             return
         }
         
-        if (entry.type && entry.type !== 'group') fields += `${entry.fieldfx || entry.field}::${entry.type} AS ${entry.field},`;
+        if (entry.type && entry.type !== 'group') fields += `${entry.fieldfx || entry.field}::${entry.type} AS ${entry.field}, `;
         
-        if (entry.subfield) fields += `${entry.subfield}::${entry.type} AS ${entry.subfield},`
+        if (entry.subfield) fields += `${entry.subfield}::${entry.type} AS ${entry.subfield}, `
     }
 
     infoj.forEach(entry => {
@@ -107,11 +108,27 @@ async function select(req, res, fastify) {
     ${qID} = $1;`;
 
     //console.log(q);
-    //console.log(id);
 
-    var db_connection = await fastify.pg[layer.dbs].connect();
-    var result = await db_connection.query(q, [id]);
-    db_connection.release();
+    try {
+        var db_connection = await fastify.pg[layer.dbs].connect();
+        var result = await db_connection.query(q, [id]);
+        db_connection.release();
+    } catch(err) {
+        err.detail = {
+            token: token,
+            locale: req.query.locale,
+            layer: req.query.layer,
+            q: q.replace(/\n/g,'').replace(/\s\s+/g, ' ').replace(/\$1/, id)
+        };
+
+        fastify.log.error(err);
+
+        return res.code(401).send();
+    }
+
+    if (result.rowCount === 0) {
+        return res.code(401).send();
+    }
 
     // Iterate through the infoj object's entries and assign the values returned from the database query.
     Object.values(infoj).map(entry => {

@@ -2,6 +2,8 @@ const utils = require('./utils');
 
 module.exports = (layer, panel) => {
 
+    setIndices(layer); // set min/max for range filters
+
     // Add filter block to layer panel.
     let filters = utils._createElement({
         tag: 'div',
@@ -737,4 +739,38 @@ function filter_checkbox(options, layer) {
     let checkbox = utils.checkbox(filter_checkbox_onchange, { label: options.value });
 
     return checkbox;
+}
+
+// set min/max values for range filter;
+function setIndices(layer){
+    layer._xhr = new XMLHttpRequest();
+
+    let idx = {};
+
+    Object.values(layer.infoj).forEach(l => {
+        if(l.type === "group"){
+            Object.values(l.items).forEach(item => {
+                if(item.filter === "numeric") idx[item.field] = {};
+            });
+        } else {
+            if(l.filter === "numeric") idx[l.field] = {};
+        }
+    });
+
+    layer._xhr.open("POST", global._xyz.host + "/api/idx?token=" + global._xyz.token);
+    layer._xhr.setRequestHeader('Content-Type', 'application/json');
+
+    layer._xhr.onload = function(){
+        if(this.status === 200){
+            layer.idx = JSON.parse(this.responseText);
+        }
+    }
+
+    if(!layer.idx) layer._xhr.send(JSON.stringify({
+        locale: _xyz.locale,
+        layer: layer.layer,
+        table: layer.table,
+        idx: idx,
+        token: global._xyz.token}));
+
 }
