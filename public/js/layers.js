@@ -336,11 +336,17 @@ module.exports = () => {
                         funct: e => {
                             e.stopPropagation();
                             let control = global._xyz.map.getContainer().querySelector('.leaflet-draw.leaflet-control');
-                            control.classList += " visible";
-                                                       
+
+                            if(control.classList.contains("visible")){
+                                control.classList.remove("visible");
+                            } else {
+                                control.classList += " visible";
+                            }
+                            //utils.addClass(control, "visible");
+                            //control.style.display = "block";
                             console.log(global._xyz.map.getContainer());
                             console.log(control);
-
+                            //control.style.display = "block";
                         }
                     }
                 });

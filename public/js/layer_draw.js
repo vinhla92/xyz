@@ -149,4 +149,8 @@ module.exports = function(layer, panel){
         }));*/
 
     });
+
+    global._xyz.map.on(L.Draw.Event.TOOLBAROPENED, e => {
+        console.log(e);
+    });
 }
