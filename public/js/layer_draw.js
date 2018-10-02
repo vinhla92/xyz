@@ -2,13 +2,7 @@ const utils = require('./utils');
 
 module.exports = function(layer, panel){
     
-    //let layer = this;
-    //console.log('draw');
     console.log(layer);
-    //console.log(panel);
-
-    /*global._xyz.map.createPane("vector_test");
-    global._xyz.map.getPane("vector_test").style.zIndex = 650;*/
 
     let drawnItems = L.featureGroup().addTo(global._xyz.map);
 
@@ -45,14 +39,50 @@ module.exports = function(layer, panel){
     global._xyz.map.on(L.Draw.Event.CREATED, function (event) {
         let _layer = event.layer;
 
-        //_layer.options.pane = "vector_test";
-        //_layer.options = layer.style.default;
-        //console.log(_layer);
-
         drawnItems.addLayer(_layer);
-        //console.log(drawnItems);
-        //console.log(drawnItems.toGeoJSON());
     });
+    
+    /*global._xyz.map.on(L.Draw.Event.EDITSTOP, e => {
+        console.log('this is a feature to post and save');
+
+        // Make select tab active on mobile device.
+        if (global._xyz.activateLocationsTab) global._xyz.activateLocationsTab();
+
+        let _marker = drawnItems.getBounds().getCenter();
+        let marker = [_marker.lng.toFixed(5), _marker.lat.toFixed(5)];
+
+        let featureCollection = drawnItems.toGeoJSON();
+
+        let coords = [];
+
+        featureCollection.features.map(item => {
+            coords.push(item.geometry.coordinates);
+        });
+
+        let multiPoly = {
+            "type": "Multipolygon",
+            "coordinates": coords
+        };
+
+        //console.log(_xyz.locale);
+
+            //console.log(_xyz.locale);
+            fetch(global._xyz.host + '/api/location/new?token=' + global._xyz.token, {
+                method: "POST",
+                body: JSON.stringify({
+                    locale: _xyz.locale,
+                    layer: layer.layer,
+                    table: layer.table,
+                    geometry: multiPoly
+                })
+            }).then((res) => {
+                console.log(res.json());
+                return res.json();
+            }).then((data) => {
+                console.log(data);
+            })
+    });*/
+
 
     global._xyz.map.on(L.Draw.Event.EDITSTOP, e => {
         console.log('this is a feature to post and save');
@@ -88,9 +118,6 @@ module.exports = function(layer, panel){
         let _marker = drawnItems.getBounds().getCenter();
         let marker = [_marker.lng.toFixed(5), _marker.lat.toFixed(5)];
 
-        //console.log('marker');
-        //console.log(marker);
-
         let featureCollection = drawnItems.toGeoJSON();
 
         let coords = [];
@@ -101,7 +128,8 @@ module.exports = function(layer, panel){
 
         let multiPoly = {
             "type": "Multipolygon",
-            "coordinates": coords
+            "coordinates": coords,
+            "properties": {}
         };
 
         console.log(multiPoly);
@@ -113,12 +141,12 @@ module.exports = function(layer, panel){
             geometry: multiPoly
         }));
 
-        console.log(JSON.stringify({
+        /*console.log(JSON.stringify({
             locale: _xyz.locale,
             layer: layer.layer,
             table: layer.table,
             geometry: multiPoly
-        }));
+        }));*/
 
     });
 }

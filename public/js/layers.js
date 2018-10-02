@@ -320,6 +320,9 @@ module.exports = () => {
             }
 
             if(layer.draw){
+
+                layer.editable = true;
+
                 utils._createElement({
                     tag: 'i',
                     options: {
@@ -331,15 +334,13 @@ module.exports = () => {
                     eventListener: {
                         event: "click",
                         funct: e => {
-                            //e.stopPropagation();
+                            e.stopPropagation();
                             let control = global._xyz.map.getContainer().querySelector('.leaflet-draw.leaflet-control');
                             control.classList += " visible";
-
-                            //utils.addClass(control, "visible");
-                            //control.style.display = "block";
+                                                       
                             console.log(global._xyz.map.getContainer());
                             console.log(control);
-                            //control.style.display = "block";
+
                         }
                     }
                 });
