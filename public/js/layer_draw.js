@@ -198,6 +198,7 @@ module.exports = function(layer, panel){
                         e.stopPropagation();
                         if(e.keyCode === 27) {
                             layer.header.classList.remove('edited');
+                            utils.toggleClass(btn, 'activate');
                             global._xyz.map.off('click');
                             dom.map.style.cursor = '';
                             return
