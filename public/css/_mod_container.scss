@@ -146,6 +146,9 @@
                         color: $glxgreen;
                         font-size: 14px;
                         float: right;
+                        &.left {
+                            float: left!important;
+                        }
                     }
                     .range-tooltip {
                         &._max {
@@ -154,8 +157,6 @@
                         }
                     }
                 }
-                
-                
                 
                 .half {
                     width: 48%;

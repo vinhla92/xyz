@@ -3,6 +3,9 @@
     font-size: 15px;
     color: $glxgreen;
     height: 25px;
+    &.left {
+        float: left;
+    }
 }
 
 .btn_subtext {

@@ -24,7 +24,7 @@ module.exports = layer => {
     // add cluster control block.
     if (layer.format === 'cluster') require('./panel_cluster')(layer, panel);
 
-    if(layer.draw) require('./layer_draw')(layer, panel);
+    if(layer.draw || layer.editable) require('./layer_draw')(layer, panel);
 
     // add filters block.
     if (layer.infoj && layer.infoj.some( entry => entry.filter )) require('./layers_filters')(layer, panel);

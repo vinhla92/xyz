@@ -246,7 +246,7 @@ module.exports = () => {
             });
 
             // Add edit control to layer header.
-            if (layer.editable && layer.editable === 'geometry') {
+            /*if (layer.editable && layer.editable === 'geometry') {
 
                 utils._createElement({
                     tag: 'i',
@@ -269,11 +269,13 @@ module.exports = () => {
                             }
 
                             let btn = e.target;
-                            utils.toggleClass(btn, 'active');
+                            //utils.toggleClass(btn, 'active');
+                            utils.toggleClass(btn, 'activate');
 
                             layer.header.classList += ' edited';
 
-                            if (!utils.hasClass(btn, 'active')) {
+                            //if (!utils.hasClass(btn, 'active')) {
+                            if (!utils.hasClass(btn, 'activate')) {
                                 layer.header.classList.remove('edited');
                                 global._xyz.map.off('click');
                                 dom.map.style.cursor = '';
@@ -287,7 +289,8 @@ module.exports = () => {
 
                                 let marker = [e.latlng.lng.toFixed(5), e.latlng.lat.toFixed(5)];
 
-                                utils.removeClass(btn, 'active');
+                                //utils.removeClass(btn, 'active');
+                                utils.removeClass(btn, 'activate');
                                 global._xyz.map.off('click');
                                 dom.map.style.cursor = '';
 
@@ -339,42 +342,7 @@ module.exports = () => {
                         }
                     }
                 });
-            }
-
-            if(layer.draw){
-
-                layer.editable = true;
-
-                utils._createElement({
-                    tag: 'i',
-                    options: {
-                        textContent: "create",
-                        className: 'material-icons cursor noselect btn_header',
-                        title: 'Draw'
-                    },
-                    appendTo: layer.header,
-                    eventListener: {
-                        event: "click",
-                        funct: e => {
-                            e.stopPropagation();
-                            let control = global._xyz.map.getContainer().querySelector('.leaflet-draw.leaflet-control');
-
-                            if(control.classList.contains("visible")){
-                                control.classList.remove("visible");
-                                e.target.classList.remove("activate");
-                            } else {
-                                control.classList += " visible";
-                                e.target.classList += " activate";
-                            }
-                            //utils.addClass(control, "visible");
-                            //control.style.display = "block";
-                            console.log(global._xyz.map.getContainer());
-                            console.log(control);
-                            //control.style.display = "block";
-                        }
-                    }
-                });
-            }
+            }*/
 
             //Add panel to layer control.
             require('./layers_panel')(layer, global._xyz);

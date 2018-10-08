@@ -48,6 +48,8 @@
   font-size: 15px;
   color: #079e00;
   height: 25px; }
+  .btn_text.left {
+    float: left; }
 
 .btn_subtext {
   font-family: ffmark;
@@ -502,6 +504,8 @@ input[type=range]::-moz-range-thumb {
             color: #079e00;
             font-size: 14px;
             float: right; }
+            .mod_container .module .drawer .panel .block i.left {
+              float: left !important; }
           .mod_container .module .drawer .panel .block .range-tooltip._max {
             float: right;
             margin-bottom: 6px; }
