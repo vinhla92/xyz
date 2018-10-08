@@ -259,10 +259,21 @@ module.exports = () => {
                         event: 'click',
                         funct: e => {
                             e.stopPropagation();
+
+                            if(!layer.display) {
+                                layer.display = true;
+                                layer.clear_icon.textContent = layer.display ? 'layers' : 'layers_clear';
+                                global._xyz.pushHook('layers', layer.layer);
+                                layer.getLayer();
+                            }
+
                             let btn = e.target;
                             utils.toggleClass(btn, 'active');
 
+                            layer.header.classList += ' edited';
+
                             if (!utils.hasClass(btn, 'active')) {
+                                layer.header.classList.remove('edited');
                                 global._xyz.map.off('click');
                                 dom.map.style.cursor = '';
                                 return
@@ -313,6 +324,16 @@ module.exports = () => {
                                         coordinates: marker
                                     }
                                 }));
+                            });
+
+                            document.addEventListener('keyup', e => {
+                                e.stopPropagation();
+                                if(e.keyCode === 27) {
+                                    layer.header.classList.remove('edited');
+                                    global._xyz.map.off('click');
+                                    dom.map.style.cursor = '';
+                                    return
+                                } 
                             });
                         }
                     }
