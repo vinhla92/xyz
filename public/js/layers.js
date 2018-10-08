@@ -172,7 +172,8 @@ module.exports = () => {
             layer.header = utils._createElement({
                 tag: 'div',
                 options: {
-                    textContent: layer.name,
+                    innerHTML: (layer.group ? ('&#10149; ' + layer.name) : layer.name),
+                    //textContent: layer.name,
                     className: 'header'
                 },
                 style: {
