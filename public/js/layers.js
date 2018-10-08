@@ -361,8 +361,10 @@ module.exports = () => {
 
                             if(control.classList.contains("visible")){
                                 control.classList.remove("visible");
+                                e.target.classList.remove("activate");
                             } else {
                                 control.classList += " visible";
+                                e.target.classList += " activate";
                             }
                             //utils.addClass(control, "visible");
                             //control.style.display = "block";

@@ -277,6 +277,15 @@ function trash(record) {
     });
 }
 
+function edit(record){
+    utils._createElement({
+        tag: 'i',
+        options: {
+            textContent: ''
+        }
+    });
+}
+
 module.exports = {
     clear: clear,
     zoom: zoom,

@@ -132,6 +132,10 @@
   .btn_wide.disabled {
     opacity: 0.3; }
 
+.activate {
+  color: #777;
+  text-shadow: #090 1px 2px 5px; }
+
 .range {
   width: 100%;
   width: calc(100% - 5px);

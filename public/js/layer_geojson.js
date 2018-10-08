@@ -88,6 +88,10 @@ module.exports = function() {
                 layer.L = L.geoJSON(features, geojson_options);
                 
                 layer.L.on('click', function(e){
+
+                    if(layer.editable) console.log('make it editable/drawable');
+                    console.log(e.target.feature);
+
                     global._xyz.select.selectLayerFromEndpoint({
                         layer: layer.layer,
                         table: layer.table,

@@ -4,6 +4,36 @@ module.exports = function(layer, panel){
     
     console.log(layer);
 
+    let edits = utils._createElement({
+        tag: "div",
+        options: {
+            classList: "section expandable"
+        },
+        appendTo: panel
+    });
+
+      // Edit control expander.
+      utils._createElement({
+        tag: 'div',
+        options: {
+            className: 'btn_text cursor noselect',
+            textContent: 'Editing'
+        },
+        appendTo: edits,
+        eventListener: {
+            event: 'click',
+            funct: e => {
+                e.stopPropagation();
+                utils.toggleExpanderParent({
+                    expandable: edits,
+                    accordeon: true,
+                    scrolly: document.querySelector('.mod_container > .scrolly')
+                })
+            }
+        }
+    });
+
+
     let drawnItems = L.featureGroup().addTo(global._xyz.map);
 
     let shapeOptions = Object.assign(layer.style.default, {
@@ -151,6 +181,11 @@ module.exports = function(layer, panel){
     });
 
     global._xyz.map.on(L.Draw.Event.TOOLBAROPENED, e => {
-        console.log(e);
+        //console.log(e);
+    });
+
+    global._xyz.map.on(L.Draw.Event.EDITSTOP, e => {
+        //console.log(e);
+        drawnItems.clearLayers();
     });
 }
