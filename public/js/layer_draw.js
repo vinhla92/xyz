@@ -1,8 +1,9 @@
 const utils = require('./utils');
+const svg_symbols = require('./svg_symbols');
 
 module.exports = function(layer, panel){
     
-    console.log(layer);
+    //console.log(layer);
 
     let dom = {
         map: document.getElementById('Map')
@@ -41,76 +42,8 @@ module.exports = function(layer, panel){
 
     let block, draw;
 
-    block = utils._createElement({
-        tag: 'div',
-        options: {
-            className: 'block'
-        },
-        appendTo: edits
-    });
-
-    draw = utils._createElement({
-        tag: 'div',
-        appendTo: block,
-        eventListener: {
-            event: "click",
-            funct: e => {
-                e.stopPropagation();
-                let control = global._xyz.map.getContainer().querySelector('.leaflet-draw.leaflet-control');
-                if(control.classList.contains("visible")){
-                    control.classList.remove("visible");
-                    e.target.parentNode.classList.remove("activate");
-                } else {
-                    control.classList += " visible";
-                    e.target.parentNode.classList += " activate";
-                }
-                //utils.addClass(control, "visible");
-                //control.style.display = "block";
-                console.log(global._xyz.map.getContainer());
-                console.log(control);
-            }
-        }
-    });
-
-    utils._createElement({
-        tag: 'i',
-        options: {
-            classList: 'material-icons cursor noselect left',
-            textContent: "create",
-            title: 'Draw'
-        },
-        appendTo: draw/*,
-        eventListener: {
-            event: "click",
-            funct: e => {
-                e.stopPropagation();
-                let control = global._xyz.map.getContainer().querySelector('.leaflet-draw.leaflet-control');
-                if(control.classList.contains("visible")){
-                    control.classList.remove("visible");
-                    e.target.classList.remove("activate");
-                } else {
-                    control.classList += " visible";
-                    e.target.classList += " activate";
-                }
-                //utils.addClass(control, "visible");
-                //control.style.display = "block";
-                console.log(global._xyz.map.getContainer());
-                console.log(control);
-            }
-        }*/
-    });
-
-    utils._createElement({
-        tag: 'span',
-        options: {
-            classList: "title cursor noselect",
-            textContent: 'Draw'
-        },
-        appendTo: draw
-    });
-
-    // Add descent edit control
-    if(layer.editable && layer.editable === 'geometry'){
+    if(layer.format === 'geojson' && layer.editable === 'geometry'){
+        
         block = utils._createElement({
             tag: 'div',
             options: {
@@ -127,6 +60,204 @@ module.exports = function(layer, panel){
                 funct: e => {
                     e.stopPropagation();
                     
+                    layer.edited = layer.edited ? false : true;
+                    
+                    if(layer.edited && !layer.display) {
+                        layer.display = true;
+                        layer.clear_icon.textContent = layer.display ? 'layers' : 'layers_clear';
+                        global._xyz.pushHook('layers', layer.layer);
+                        layer.getLayer();
+                    }
+                    
+                    if(!layer.edited){
+                        
+                        utils.removeClass(e.target.parentNode, "activate");
+                        utils.removeClass(layer.header, "edited");
+                    } else {
+                        let btn = e.target;
+                        btn.parentNode.classList += " activate";
+                        layer.header.classList += ' edited';
+
+                        //btn.parentNode.style.textShadow = '2px 2px 2px #cf9;';
+                        dom.map.style.cursor = 'crosshair';
+
+                        let drawnItems = L.featureGroup().addTo(global._xyz.map);
+                        let featureCollection = drawnItems.toGeoJSON();
+                        let coords = [];
+                        let trail = L.featureGroup().addTo(global._xyz.map);
+                        let tmp_trail = L.featureGroup().addTo(global._xyz.map);
+
+                        /*let multiPoly = {
+                            "type": "Multipolygon",
+                            "coordinates": coords,
+                            "properties": {}
+                        };*/
+
+                        let start_pnt, prev_pnt, current_pnt;
+                        global._xyz.map.on('click', e => {
+                            
+
+                            start_pnt = [global._xyz.map.mouseEventToLatLng(e.originalEvent).lat, global._xyz.map.mouseEventToLatLng(e.originalEvent).lng];
+                            
+                            drawnItems.addLayer(L.circleMarker(global._xyz.map.mouseEventToLatLng(e.originalEvent), {
+                                pane: layer.pane[0],
+                                stroke: true,
+                                color: "crimson",
+                                fillColor: "#EEE",
+                                weight: 1,
+                                radius: 4
+                            }));
+
+                            console.log(drawnItems.getLayers().length);
+
+                            let len = drawnItems.getLayers().length, part = [];
+                            
+
+                            if(len > 1){
+                                console.log('add line');
+                                //prev_pnt = [global._xyz.map.mouseEventToLatLng(e.originalEvent).lat, global._xyz.map.mouseEventToLatLng(e.originalEvent).lng];
+
+                                let pts = drawnItems.toGeoJSON();
+                                part = [pts.features[len-2].geometry.coordinates.reverse(), pts.features[len-1].geometry.coordinates.reverse()];
+                                console.log(part.toString());
+
+                                coords.push(part); // this is geojson
+                                
+                                trail.addLayer(L.polyline([part], {
+                                    pane: layer.pane[0],
+                                    stroke: true,
+                                    color: '#666',
+                                    dashArray: "5 5",
+                                    weight: 1
+                                }));
+
+                            }
+
+                            global._xyz.map.on('mousemove', e => {
+                                tmp_trail.clearLayers();
+                                //let anchor = current_pnt ? current_pnt : prev_pnt;
+                                //if(prev_pnt){
+                                tmp_trail.addLayer(L.polyline([start_pnt, [global._xyz.map.mouseEventToLatLng(e.originalEvent).lat, global._xyz.map.mouseEventToLatLng(e.originalEvent).lng]], {
+                                    pane: layer.pane[0],
+                                    stroke: true,
+                                    color: '#666',
+                                    dashArray: "5 5",
+                                    weight: 1
+                                }));
+                                //}*/
+
+                                //return false;
+                            });
+                            
+                                //return false;
+                            //}
+                            global._xyz.map.on('contextmenu', e => {
+                                //global._xyz.map.off('click');
+                                global._xyz.map.off('mousemove');
+
+                                console.log('save multi linestring, send back and clear  feature groups');
+                                
+                                tmp_trail.clearLayers();
+                                /*trail.addLayer(L.polyline([part[1], start_pnt], {
+                                    pane: layer.pane[0],
+                                    stroke: true,
+                                    color: '#666',
+                                    dashArray: "5 5",
+                                    weight: 1
+                                }));*/
+
+                                global._xyz.map.off('contextmenu');
+
+                                /*featureCollection.features.map(item => {
+                                    coords.push(item.geometry.coordinates);
+                                });*/
+
+                                let multiLine = {
+                                    "type": "MultiLineString",
+                                    "coordinates": coords,
+                                    "properties": {}
+                                };
+
+                                console.log(multiLine);
+                                coords = [];
+                                start_pnt = null;
+                                part = [];
+
+
+                                //global._xyz.map.off('mousemove');
+                                //return false;
+                            });
+
+                            
+                            });
+
+                            
+
+                        
+
+                           
+
+                        //}
+
+                            /*document.addEventListener('keyup', e => { // ESC support
+                                e.stopPropagation();
+                                if(e.keyCode === 27) {
+                                    //layer.header.classList.remove('edited');
+                                    utils.removeClass(layer.header, 'edited');
+                                    //btn.parentNode.classList.remove('activate');
+                                    utils.removeClass(btn.parentNode, 'activate');
+                                    //global._xyz.map.off('click');
+                                    dom.map.style.cursor = '';
+                                    layer.edited = false;
+                                    //return
+                                }
+                            });*/
+                            //return false;
+                      
+                    }
+                }
+            }
+        });
+        
+        utils._createElement({
+            tag: 'i',
+            options: {
+                classList: 'material-icons cursor noselect left',
+                textContent: "create",
+                title: 'Draw'
+            },
+            appendTo: draw
+        });
+        
+        utils._createElement({
+            tag: 'span',
+            options: {
+                classList: "title cursor noselect",
+                textContent: 'Draw a polyline'
+            },
+            appendTo: draw
+        });
+    }
+
+
+    // Add cluster edit control
+    if(layer.format === "cluster" && layer.editable === 'geometry'){
+        
+        block = utils._createElement({
+            tag: 'div',
+            options: {
+                className: 'block'
+            },
+            appendTo: edits
+        });
+        
+        draw = utils._createElement({
+            tag: 'div',
+            eventListener: {
+                event: "click",
+                funct: e => {
+                    e.stopPropagation();
+                    
                     if(!layer.display) {
                         layer.display = true;
                         layer.clear_icon.textContent = layer.display ? 'layers' : 'layers_clear';
@@ -136,25 +267,25 @@ module.exports = function(layer, panel){
                     
                     let btn = e.target;
                     //utils.toggleClass(btn, 'active');
-                    utils.toggleClass(btn, 'activate');
+                    utils.toggleClass(btn.parentNode, 'activate');
                     
                     layer.header.classList += ' edited';
 
                     //if (!utils.hasClass(btn, 'active')) {
-                    if (!utils.hasClass(btn, 'activate')) {
-                        layer.header.classList.remove('edited');
+                    if (!utils.hasClass(btn.parentNode, 'activate')) {
+                        utils.removeClass(layer.header, 'edited');
                         global._xyz.map.off('click');
                         dom.map.style.cursor = '';
                         return
                     }
                     
-                    btn.style.textShadow = '2px 2px 2px #cf9;';
+                    btn.parentNode.style.textShadow = '2px 2px 2px #cf9;';
                     dom.map.style.cursor = 'crosshair';
                     
                     global._xyz.map.on('click', e => {
                         let marker = [e.latlng.lng.toFixed(5), e.latlng.lat.toFixed(5)];
-                        //utils.removeClass(btn, 'active');
-                        utils.removeClass(btn, 'activate');
+
+                        utils.removeClass(btn.parentNode, 'activate');
                         global._xyz.map.off('click');
                         dom.map.style.cursor = '';
                         
@@ -197,15 +328,17 @@ module.exports = function(layer, panel){
                     document.addEventListener('keyup', e => {
                         e.stopPropagation();
                         if(e.keyCode === 27) {
-                            layer.header.classList.remove('edited');
-                            utils.toggleClass(btn, 'activate');
+                            
+                            utils.removeClass(layer.header, 'edited');
+                            utils.removeClass(btn.parentNode, 'activate');
                             global._xyz.map.off('click');
                             dom.map.style.cursor = '';
                             return
                         } 
                     });
                 }
-            }
+            },
+            appendTo: block
         });
 
         utils._createElement({
@@ -227,164 +360,5 @@ module.exports = function(layer, panel){
             appendTo: draw
         });
     }
-
-
-
-
-    // End make UI elements
-
-    let drawnItems = L.featureGroup().addTo(global._xyz.map);
-
-    let shapeOptions = Object.assign(layer.style.default, {
-        pane: layer.pane[0]
-    });
-
-    let drawOptions = {
-        allowIntersection: false,
-        showArea: false,
-        shapeOptions: shapeOptions,
-        guidelineDistance: 15,
-        repeatMode: false
-    };
-
-    global._xyz.map.addControl(new L.Control.Draw({
-        edit: {
-            featureGroup: drawnItems,
-            poly: {
-                allowIntersection: false
-            }
-        },
-        draw: {
-            polygon: drawOptions,
-            //polyline: drawOptions,
-            polyline: false,
-            circle: false,
-            marker: false,
-            rectangle: drawOptions,
-            circlemarker: false
-        }
-    }));
-
-    global._xyz.map.on(L.Draw.Event.CREATED, function (event) {
-        let _layer = event.layer;
-
-        drawnItems.addLayer(_layer);
-    });
-    
-    /*global._xyz.map.on(L.Draw.Event.EDITSTOP, e => {
-        console.log('this is a feature to post and save');
-
-        // Make select tab active on mobile device.
-        if (global._xyz.activateLocationsTab) global._xyz.activateLocationsTab();
-
-        let _marker = drawnItems.getBounds().getCenter();
-        let marker = [_marker.lng.toFixed(5), _marker.lat.toFixed(5)];
-
-        let featureCollection = drawnItems.toGeoJSON();
-
-        let coords = [];
-
-        featureCollection.features.map(item => {
-            coords.push(item.geometry.coordinates);
-        });
-
-        let multiPoly = {
-            "type": "Multipolygon",
-            "coordinates": coords
-        };
-
-        //console.log(_xyz.locale);
-
-            //console.log(_xyz.locale);
-            fetch(global._xyz.host + '/api/location/new?token=' + global._xyz.token, {
-                method: "POST",
-                body: JSON.stringify({
-                    locale: _xyz.locale,
-                    layer: layer.layer,
-                    table: layer.table,
-                    geometry: multiPoly
-                })
-            }).then((res) => {
-                console.log(res.json());
-                return res.json();
-            }).then((data) => {
-                console.log(data);
-            })
-    });*/
-
-
-    global._xyz.map.on(L.Draw.Event.EDITSTOP, e => {
-        console.log('this is a feature to post and save');
-
-        // Make select tab active on mobile device.
-        if (global._xyz.activateLocationsTab) global._xyz.activateLocationsTab();
-
-        let xhr = new XMLHttpRequest();
-        
-        xhr.open('POST', global._xyz.host + '/api/location/new?token=' + global._xyz.token);
-        xhr.setRequestHeader('Content-Type', 'application/json');
-        
-        xhr.onload = e => {
-            if (e.target.status === 401) {
-                document.getElementById('timeout_mask').style.display = 'block';
-                console.log(e.target.response);
-                return
-            }
-
-            if (e.target.status === 200) {
-                layer.getLayer();
-                global._xyz.select.selectLayerFromEndpoint({
-                    layer: layer.layer,
-                    table: layer.table,
-                    id: e.target.response,
-                    marker: marker,
-                    editable: true
-                });
-            }
-
-        }
-
-        let _marker = drawnItems.getBounds().getCenter();
-        let marker = [_marker.lng.toFixed(5), _marker.lat.toFixed(5)];
-
-        let featureCollection = drawnItems.toGeoJSON();
-
-        let coords = [];
-
-        featureCollection.features.map(item => {
-            coords.push(item.geometry.coordinates);
-        });
-
-        let multiPoly = {
-            "type": "Multipolygon",
-            "coordinates": coords,
-            "properties": {}
-        };
-
-        console.log(multiPoly);
-        
-        xhr.send(JSON.stringify({
-            locale: _xyz.locale,
-            layer: layer.layer,
-            table: layer.table,
-            geometry: multiPoly
-        }));
-
-        /*console.log(JSON.stringify({
-            locale: _xyz.locale,
-            layer: layer.layer,
-            table: layer.table,
-            geometry: multiPoly
-        }));*/
-
-    });
-
-    global._xyz.map.on(L.Draw.Event.TOOLBAROPENED, e => {
-        //console.log(e);
-    });
-
-    global._xyz.map.on(L.Draw.Event.EDITSTOP, e => {
-        //console.log(e);
-        drawnItems.clearLayers();
-    });
+    // End make UI elements  
 }

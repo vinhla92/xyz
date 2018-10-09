@@ -19,7 +19,7 @@ function init() {
     // Initiate leaflet.
     const L = require('leaflet');
     //require('leaflet-editable');
-    require('leaflet-draw');
+    //require('leaflet-draw');
 
     // Initiate map object.
     global._xyz.map = L

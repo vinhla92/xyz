@@ -270,6 +270,9 @@ function trash(record) {
                     });
     
                     if (freeRecords.length === global._xyz.select.records.length) global._xyz.select.resetModule();
+
+                    utils.removeClass(layer.header, 'edited');
+                    layer.edited = false;
                 }
                 xhr.send();
             }

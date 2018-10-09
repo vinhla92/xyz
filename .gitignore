@@ -14,3 +14,4 @@ workspaces/
 
 env
 workspaces/geodata.json
+public/js/layer_draw2.js
