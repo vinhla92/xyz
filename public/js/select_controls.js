@@ -192,6 +192,8 @@ function update(record) {
 
                     if (e.target.status !== 200) return;
 
+                    utils.removeClass(layer.header, 'edited'); // remove layer highlight
+
                     // Hide upload symbol.
                     record.upload.style.display = 'none';
 

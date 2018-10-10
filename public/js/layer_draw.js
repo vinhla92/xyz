@@ -2,8 +2,6 @@ const utils = require('./utils');
 const svg_symbols = require('./svg_symbols');
 
 module.exports = function(layer, panel){
-    
-    //console.log(layer);
 
     let dom = {
         map: document.getElementById('Map')
@@ -40,7 +38,7 @@ module.exports = function(layer, panel){
 
     // Begin make UI elements
 
-    let block, draw, polyline_draw, polygon_draw;
+    let block, polyline_draw, polygon_draw;
 
     if(layer.format === 'geojson' && layer.editable === 'geometry'){
         
@@ -86,17 +84,9 @@ module.exports = function(layer, panel){
                         let trail = L.featureGroup().addTo(global._xyz.map);
                         let tmp_trail = L.featureGroup().addTo(global._xyz.map);
 
-                        /*let multiPoly = {
-                            "type": "Multipolygon",
-                            "coordinates": coords,
-                            "properties": {}
-                        };*/
-
-                        let start_pnt, prev_pnt, current_pnt;
                         global._xyz.map.on('click', e => {
                             
-
-                            start_pnt = [global._xyz.map.mouseEventToLatLng(e.originalEvent).lat, global._xyz.map.mouseEventToLatLng(e.originalEvent).lng];
+                            let start_pnt = [global._xyz.map.mouseEventToLatLng(e.originalEvent).lat, global._xyz.map.mouseEventToLatLng(e.originalEvent).lng];
                             
                             drawnItems.addLayer(L.circleMarker(global._xyz.map.mouseEventToLatLng(e.originalEvent), {
                                 pane: layer.pane[0],
@@ -107,8 +97,6 @@ module.exports = function(layer, panel){
                                 radius: 4
                             }));
 
-                            console.log(drawnItems.getLayers().length);
-
                             let len = drawnItems.getLayers().length, part = [];
                             
 
@@ -116,10 +104,14 @@ module.exports = function(layer, panel){
                                 console.log('add line');
 
                                 let pts = drawnItems.toGeoJSON();
-                                part = [pts.features[len-2].geometry.coordinates.reverse(), pts.features[len-1].geometry.coordinates.reverse()];
+                                part = [
+                                    [drawnItems.getLayers()[len-2].getLatLng().lat, drawnItems.getLayers()[len-2].getLatLng().lng],
+                                    [drawnItems.getLayers()[len-1].getLatLng().lat, drawnItems.getLayers()[len-1].getLatLng().lng]
+                                ];
+                                //part = [pts.features[len-2].geometry.coordinates.reverse(), pts.features[len-1].geometry.coordinates.reverse()];
                                 console.log(part.toString());
 
-                                coords.push(part); // this is geojson
+                                //coords.push(part.reverse()); // this is geojson
                                 
                                 trail.addLayer(L.polyline([part], {
                                     pane: layer.pane[0],
@@ -128,7 +120,6 @@ module.exports = function(layer, panel){
                                     dashArray: "5 5",
                                     weight: 1
                                 }));
-
                             }
 
                             global._xyz.map.on('mousemove', e => {
@@ -153,17 +144,74 @@ module.exports = function(layer, panel){
                                 
 
                                 global._xyz.map.off('contextmenu');
+                                global._xyz.map.off('contextmenu');
+                                global._xyz.map.off('click');
+                                
+                                dom.map.style.cursor = '';
+                                utils.removeClass(btn.parentNode, 'activate');
 
-                                let multiLine = {
+                                layer.edited = false;
+
+                                coords = [];
+                                drawnItems.eachLayer(layer => {
+                                    coords.push([[layer.getLatLng().lng, layer.getLatLng().lat]]);
+                                });
+                                //coords[0] = coords[0].map(item => item.reverse());
+                                console.log(coords);
+
+                                let multiline = {
                                     "type": "MultiLineString",
                                     "coordinates": coords,
                                     "properties": {}
                                 };
 
-                                console.log(multiLine);
-                                coords = [];
-                                start_pnt = null;
-                                part = [];
+                                console.log(JSON.stringify(multiline));
+
+                                // Make select tab active on mobile device.
+                                if (global._xyz.activateLocationsTab) global._xyz.activateLocationsTab();
+
+                                let xhr = new XMLHttpRequest();
+                                xhr.open('POST', global._xyz.host + '/api/location/new?token=' + global._xyz.token);
+                                xhr.setRequestHeader('Content-Type', 'application/json');
+
+                                let _marker = drawnItems.getBounds().getCenter();
+                                let marker = [_marker.lng.toFixed(5), _marker.lat.toFixed(5)];
+
+                                xhr.onload = e => {
+
+                                    if (e.target.status === 401) {
+                                        document.getElementById('timeout_mask').style.display = 'block';
+                                        console.log(e.target.response);
+                                        return
+                                    }
+                                    
+                                    if (e.target.status === 200) {
+
+                                        drawnItems.clearLayers();
+                                        trail.clearLayers();
+                                        layer.edited = false;
+                                        //utils.removeClass(layer.header, 'edited'); // this should happen where final save
+                                        //utils.removeClass(btn.parentNode, 'activate');
+
+                                        layer.getLayer();
+                                        global._xyz.select.selectLayerFromEndpoint({
+                                            layer: layer.layer,
+                                            table: layer.table,
+                                            id: e.target.response,
+                                            marker: marker,
+                                            editable: true
+                                        });
+                                    }
+                                }
+
+                                xhr.send(JSON.stringify({
+                                    locale: _xyz.locale,
+                                    layer: layer.layer,
+                                    table: layer.table,
+                                    geometry: multiline
+                                }));
+                                
+
                             });
                         });  
 
@@ -322,30 +370,76 @@ module.exports = function(layer, panel){
                                 global._xyz.map.off('mousemove');
                                 tmp_trail.clearLayers();
                                 global._xyz.map.off('contextmenu');
+                                global._xyz.map.off('click');
+
+                                dom.map.style.cursor = '';
+                                utils.removeClass(btn.parentNode, 'activate');
+                                //utils.removeClass(layer.header, 'edited');
+                                
+                                layer.edited = false;
 
                                 //let shape = [];
                                 coords = [];
                                 drawnItems.eachLayer(layer => {
-                                    //console.log(layer.getLatLng());
-                                    //console.log([layer.getLatLng().lat, layer.getLatLng().lng]);
                                     coords.push([layer.getLatLng().lng, layer.getLatLng().lat]);
                                 });
 
                                 coords.push(coords[0]);
 
-                                //console.log(coords);
-
-                                //let geometry = coords.map(item => item.reverse());
-
-                                //console.log(geometry);
-
                                 let poly = {
                                     "type": "Polygon",
-                                    "coordinates": coords,
+                                    "coordinates": [coords],
                                     "properties": {}
                                 };
 
-                                console.log(poly);
+                                //console.log(JSON.stringify(poly));
+                                
+                                // Make select tab active on mobile device.
+                                if (global._xyz.activateLocationsTab) global._xyz.activateLocationsTab();
+
+                                let xhr = new XMLHttpRequest();
+                                xhr.open('POST', global._xyz.host + '/api/location/new?token=' + global._xyz.token);
+                                xhr.setRequestHeader('Content-Type', 'application/json');
+
+                                let _marker = drawnItems.getBounds().getCenter();
+                                let marker = [_marker.lng.toFixed(5), _marker.lat.toFixed(5)];
+
+                                xhr.onload = e => {
+
+                                    if (e.target.status === 401) {
+                                        document.getElementById('timeout_mask').style.display = 'block';
+                                        console.log(e.target.response);
+                                        return
+                                    }
+                                    
+                                    if (e.target.status === 200) {
+
+                                        drawnItems.clearLayers();
+                                        trail.clearLayers();
+                                        layer.edited = false;
+                                        //utils.removeClass(layer.header, 'edited'); // this should happen where final save
+                                        //utils.removeClass(btn.parentNode, 'activate');
+
+                                        layer.getLayer();
+                                        global._xyz.select.selectLayerFromEndpoint({
+                                            layer: layer.layer,
+                                            table: layer.table,
+                                            id: e.target.response,
+                                            marker: marker,
+                                            editable: true
+                                        });
+                                    }
+                                }
+
+                                xhr.send(JSON.stringify({
+                                    locale: _xyz.locale,
+                                    layer: layer.layer,
+                                    table: layer.table,
+                                    geometry: poly
+                                }));
+
+
+
                             });
                         });
                     }
@@ -372,6 +466,8 @@ module.exports = function(layer, panel){
             appendTo: polygon_draw
         });
 
+        // -- End Polygon
+
     }
 
 
@@ -386,7 +482,7 @@ module.exports = function(layer, panel){
             appendTo: edits
         });
         
-        draw = utils._createElement({
+        let draw = utils._createElement({
             tag: 'div',
             eventListener: {
                 event: "click",
@@ -403,8 +499,8 @@ module.exports = function(layer, panel){
                     let btn = e.target;
                     //utils.toggleClass(btn, 'active');
                     utils.toggleClass(btn.parentNode, 'activate');
-                    
-                    layer.header.classList += ' edited';
+                
+                    utils.addClass(layer.header, 'edited');
 
                     //if (!utils.hasClass(btn, 'active')) {
                     if (!utils.hasClass(btn.parentNode, 'activate')) {
@@ -495,5 +591,5 @@ module.exports = function(layer, panel){
             appendTo: draw
         });
     }
-    // End make UI elements  
+    // End cluster edit control
 }
