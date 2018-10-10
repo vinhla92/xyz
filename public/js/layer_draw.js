@@ -40,7 +40,7 @@ module.exports = function(layer, panel){
 
     // Begin make UI elements
 
-    let block, draw;
+    let block, draw, polyline_draw, polygon_draw;
 
     if(layer.format === 'geojson' && layer.editable === 'geometry'){
         
@@ -52,7 +52,8 @@ module.exports = function(layer, panel){
             appendTo: edits
         });
         
-        draw = utils._createElement({
+        // Begin Polyline
+        polyline_draw = utils._createElement({
             tag: 'div',
             appendTo: block,
             eventListener: {
@@ -69,8 +70,7 @@ module.exports = function(layer, panel){
                         layer.getLayer();
                     }
                     
-                    if(!layer.edited){
-                        
+                    if(!layer.edited){            
                         utils.removeClass(e.target.parentNode, "activate");
                         utils.removeClass(layer.header, "edited");
                     } else {
@@ -78,7 +78,6 @@ module.exports = function(layer, panel){
                         btn.parentNode.classList += " activate";
                         layer.header.classList += ' edited';
 
-                        //btn.parentNode.style.textShadow = '2px 2px 2px #cf9;';
                         dom.map.style.cursor = 'crosshair';
 
                         let drawnItems = L.featureGroup().addTo(global._xyz.map);
@@ -115,7 +114,6 @@ module.exports = function(layer, panel){
 
                             if(len > 1){
                                 console.log('add line');
-                                //prev_pnt = [global._xyz.map.mouseEventToLatLng(e.originalEvent).lat, global._xyz.map.mouseEventToLatLng(e.originalEvent).lng];
 
                                 let pts = drawnItems.toGeoJSON();
                                 part = [pts.features[len-2].geometry.coordinates.reverse(), pts.features[len-1].geometry.coordinates.reverse()];
@@ -135,8 +133,7 @@ module.exports = function(layer, panel){
 
                             global._xyz.map.on('mousemove', e => {
                                 tmp_trail.clearLayers();
-                                //let anchor = current_pnt ? current_pnt : prev_pnt;
-                                //if(prev_pnt){
+                                
                                 tmp_trail.addLayer(L.polyline([start_pnt, [global._xyz.map.mouseEventToLatLng(e.originalEvent).lat, global._xyz.map.mouseEventToLatLng(e.originalEvent).lng]], {
                                     pane: layer.pane[0],
                                     stroke: true,
@@ -144,33 +141,18 @@ module.exports = function(layer, panel){
                                     dashArray: "5 5",
                                     weight: 1
                                 }));
-                                //}*/
-
-                                //return false;
                             });
-                            
-                                //return false;
-                            //}
+
                             global._xyz.map.on('contextmenu', e => {
-                                //global._xyz.map.off('click');
+
                                 global._xyz.map.off('mousemove');
 
                                 console.log('save multi linestring, send back and clear  feature groups');
                                 
                                 tmp_trail.clearLayers();
-                                /*trail.addLayer(L.polyline([part[1], start_pnt], {
-                                    pane: layer.pane[0],
-                                    stroke: true,
-                                    color: '#666',
-                                    dashArray: "5 5",
-                                    weight: 1
-                                }));*/
+                                
 
                                 global._xyz.map.off('contextmenu');
-
-                                /*featureCollection.features.map(item => {
-                                    coords.push(item.geometry.coordinates);
-                                });*/
 
                                 let multiLine = {
                                     "type": "MultiLineString",
@@ -182,23 +164,10 @@ module.exports = function(layer, panel){
                                 coords = [];
                                 start_pnt = null;
                                 part = [];
-
-
-                                //global._xyz.map.off('mousemove');
-                                //return false;
                             });
-
-                            
-                            });
-
-                            
-
-                        
-
-                           
+                        });  
 
                         //}
-
                             /*document.addEventListener('keyup', e => { // ESC support
                                 e.stopPropagation();
                                 if(e.keyCode === 27) {
@@ -224,9 +193,9 @@ module.exports = function(layer, panel){
             options: {
                 classList: 'material-icons cursor noselect left',
                 textContent: "create",
-                title: 'Draw'
+                title: 'Polyline'
             },
-            appendTo: draw
+            appendTo: polyline_draw
         });
         
         utils._createElement({
@@ -235,8 +204,174 @@ module.exports = function(layer, panel){
                 classList: "title cursor noselect",
                 textContent: 'Draw a polyline'
             },
-            appendTo: draw
+            appendTo: polyline_draw
         });
+
+        // ---- End Polyline
+
+        // -- Begin Polygon
+
+        polygon_draw = utils._createElement({
+            tag: 'div',
+            appendTo: block,
+            eventListener: {
+                event: "click",
+                funct: e => {
+                    e.stopPropagation();
+
+                    layer.edited = layer.edited ? false : true;
+
+                    if(layer.edited && !layer.display){
+                        layer.display = true;
+                        layer.clear_icon.textContent = layer.display ? 'layers' : 'layers_clear';
+                        global._xyz.pushHook('layers', layer.layer);
+                        layer.getLayer();
+                    }
+
+                    if(!layer.edited){
+                        utils.removeClass(e.target.parentNode, "activate");
+                        utils.removeClass(layer.header, "edited");
+                    } else {
+                        let btn = e.target;
+                        btn.parentNode.classList += " activate";
+                        layer.header.classList += ' edited';
+
+                        dom.map.style.cursor = 'crosshair';
+
+                        let drawnItems = L.featureGroup().addTo(global._xyz.map);
+                        let coords = [];
+                        let trail = L.featureGroup().addTo(global._xyz.map);
+                        let tmp_trail = L.featureGroup().addTo(global._xyz.map);
+
+                        let start_pnt, prev_pnt, current_pnt;
+                        global._xyz.map.on('click', e => {
+                            start_pnt = [global._xyz.map.mouseEventToLatLng(e.originalEvent).lat, global._xyz.map.mouseEventToLatLng(e.originalEvent).lng];
+                            
+                            drawnItems.addLayer(L.circleMarker(global._xyz.map.mouseEventToLatLng(e.originalEvent), {
+                                pane: layer.pane[0],
+                                stroke: true,
+                                color: "darkgrey",
+                                fillColor: "steelblue",
+                                weight: 1,
+                                radius: 5
+                            }));
+
+                            let len = drawnItems.getLayers().length, part = [];
+
+                            console.log(len);
+
+                            if(len === 2) {
+                                console.log('draw line');
+                                let pts = drawnItems.toGeoJSON();
+                                part = [pts.features[len-2].geometry.coordinates.reverse(), pts.features[len-1].geometry.coordinates.reverse()];
+                                //coords.push(part); // this is geojson
+
+                                trail.addLayer(L.polyline([part], {
+                                    pane: layer.pane[0],
+                                    stroke: true,
+                                    color: '#666',
+                                    dashArray: "5 5",
+                                    weight: 1
+                                }));
+
+                            }
+
+                            if(len > 2){
+                                trail.clearLayers();
+                                coords = [];
+                                part = [];
+                                console.log('start polygon now');
+                                let pts = drawnItems.toGeoJSON();
+                                pts.features.map(item => {
+                                    coords.push(item.geometry.coordinates);
+                                    part.push(item.geometry.coordinates.reverse())
+                                });
+
+                                console.log(coords);
+
+                                trail.addLayer(L.polygon(coords, {
+                                    pane: layer.pane[0],
+                                    stroke: true,
+                                    color: '#666',
+                                    dashArray: "5 5",
+                                    fill: true,
+                                    fillColor: "#cf9",
+                                    weight: 1
+                                }));
+
+                                
+                            }
+                            
+                            global._xyz.map.on('mousemove', e => {
+                                tmp_trail.clearLayers();
+                                
+                                tmp_trail.addLayer(L.polyline([
+                                    [drawnItems.getLayers()[0].getLatLng().lat, drawnItems.getLayers()[0].getLatLng().lng],
+                                    [global._xyz.map.mouseEventToLatLng(e.originalEvent).lat, global._xyz.map.mouseEventToLatLng(e.originalEvent).lng], 
+                                    [drawnItems.getLayers()[len-1].getLatLng().lat, drawnItems.getLayers()[len-1].getLatLng().lng]
+                                ], {
+                                    pane: layer.pane[0],
+                                    stroke: true,
+                                    color: '#666',
+                                    dashArray: "5 5",
+                                    weight: 1
+                                }));
+                            });
+
+                            global._xyz.map.on('contextmenu', e => {
+                                global._xyz.map.off('mousemove');
+                                tmp_trail.clearLayers();
+                                global._xyz.map.off('contextmenu');
+
+                                //let shape = [];
+                                coords = [];
+                                drawnItems.eachLayer(layer => {
+                                    //console.log(layer.getLatLng());
+                                    //console.log([layer.getLatLng().lat, layer.getLatLng().lng]);
+                                    coords.push([layer.getLatLng().lng, layer.getLatLng().lat]);
+                                });
+
+                                coords.push(coords[0]);
+
+                                //console.log(coords);
+
+                                //let geometry = coords.map(item => item.reverse());
+
+                                //console.log(geometry);
+
+                                let poly = {
+                                    "type": "Polygon",
+                                    "coordinates": coords,
+                                    "properties": {}
+                                };
+
+                                console.log(poly);
+                            });
+                        });
+                    }
+                }
+            }
+        });
+
+        utils._createElement({
+            tag: 'i',
+            options: {
+                classList: 'material-icons cursor noselect left',
+                textContent: 'signal_cellular_4_bar',
+                title: "Polygon"
+            },
+            appendTo: polygon_draw
+        });
+
+        utils._createElement({
+            tag: 'span',
+            options: {
+                classList: "title cursor noselect",
+                textContent: "Draw a polygon"
+            },
+            appendTo: polygon_draw
+        });
+
     }
 
 
