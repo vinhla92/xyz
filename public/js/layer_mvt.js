@@ -53,8 +53,11 @@ module.exports = function () {
                 let style = layer.style.theme.cat[0].style;
 
                 for (let i = 0; i < layer.style.theme.cat.length; i++) {
-                    if (properties[layer.style.theme.field] < layer.style.theme.cat[i].val) break;
-                    style = layer.style.theme.cat[i].style;
+                    if (properties[layer.style.theme.field] < layer.style.theme.cat[i].val) {
+                        style = layer.style.theme.cat[i].style;
+                    } else {
+                        continue;
+                    }
                 }
 
                 return style;
