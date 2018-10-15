@@ -4,7 +4,12 @@ const svg_symbols = require('./svg_symbols');
 module.exports = function(layer, panel){
 
     let dom = {
-        map: document.getElementById('Map')
+        map: document.getElementById('Map'),
+        polygon: '',
+        rect: '',
+        polyline: '',
+        circle: '',
+        location: ''
     };
 
     let vertex_style = {
@@ -78,8 +83,12 @@ module.exports = function(layer, panel){
         });
 
         // -- Begin Polygon
-        let polygon_draw = utils._createElement({
+        dom.polygon = utils._createElement({
             tag: 'div',
+            options: {
+                classList: "btn_wide cursor noselect",
+                textContent: "Polygon"
+            },
             appendTo: block,
             eventListener: {
                 event: "click",
@@ -87,6 +96,10 @@ module.exports = function(layer, panel){
                     e.stopPropagation();
 
                     layer.edited = layer.edited ? false : true;
+                    //global._xyz.state = global._xyz.state === "select" ? global._xyz.state === "edit" : global._xyz.state === "select";
+                    layer.edited ? global._xyz.state = "edit" : global._xyz.state = "select";
+
+                    console.log(global._xyz.state);
 
                     if(layer.edited && !layer.display){
                         layer.display = true;
@@ -96,77 +109,80 @@ module.exports = function(layer, panel){
                     }
 
                     if(!layer.edited){
-                        utils.removeClass(e.target, "activate");
+                        utils.removeClass(e.target, "disabled");
+                        //utils.removeClass(e.target.)
                         utils.removeClass(layer.header, "edited");
                     } else {
                         let btn = e.target;
+                        utils.addClass(dom.polygon, "disabled");
                         //btn.classList += " activate";
-                        utils.addClass(btn, 'activate');
+                        //utils.addClass(btn, 'activate');
                         //layer.header.classList += ' edited';
                         utils.addClass(layer.header, 'edited');
 
                         dom.map.style.cursor = 'crosshair';
 
-                        let drawnItems = L.featureGroup().addTo(global._xyz.map);
+                        layer.drawnItems = L.featureGroup().addTo(global._xyz.map);
                         let coords = [];
-                        let trail = L.featureGroup().addTo(global._xyz.map);
-                        let tmp_trail = L.featureGroup().addTo(global._xyz.map);
+                        layer.trail = L.featureGroup().addTo(global._xyz.map);
+                        layer.tmp_trail = L.featureGroup().addTo(global._xyz.map);
 
                         let start_pnt;
                         global._xyz.map.on('click', e => {
                             start_pnt = [global._xyz.map.mouseEventToLatLng(e.originalEvent).lat, global._xyz.map.mouseEventToLatLng(e.originalEvent).lng];
                             
-                            drawnItems.addLayer(L.circleMarker(global._xyz.map.mouseEventToLatLng(e.originalEvent), vertex_style));
+                            layer.drawnItems.addLayer(L.circleMarker(global._xyz.map.mouseEventToLatLng(e.originalEvent), vertex_style));
 
-                            let len = drawnItems.getLayers().length, part = [];
+                            let len = layer.drawnItems.getLayers().length, part = [];
 
-                            console.log(len);
+                            //console.log(len);
 
                             if(len === 2) {
-                                console.log('draw line');
-                                let pts = drawnItems.toGeoJSON();
+                                //console.log('draw line');
+                                let pts = layer.drawnItems.toGeoJSON();
                                 part = [pts.features[len-2].geometry.coordinates.reverse(), pts.features[len-1].geometry.coordinates.reverse()];
 
-                                trail.addLayer(L.polyline([part], trail_style));
+                                layer.trail.addLayer(L.polyline([part], trail_style));
                             }
 
                             if(len > 2){
-                                trail.clearLayers();
+                                layer.trail.clearLayers();
                                 coords = [];
                                 part = [];
-                                let pts = drawnItems.toGeoJSON();
+                                let pts = layer.drawnItems.toGeoJSON();
                                 pts.features.map(item => {
                                     coords.push(item.geometry.coordinates);
                                     part.push(item.geometry.coordinates.reverse())
                                 });
-                                trail.addLayer(L.polygon(coords, trail_style));
+                                layer.trail.addLayer(L.polygon(coords, trail_style));
                             }
                             
                             global._xyz.map.on('mousemove', e => {
-                                tmp_trail.clearLayers();
+                                layer.tmp_trail.clearLayers();
                                 
-                                tmp_trail.addLayer(L.polyline([
-                                    [drawnItems.getLayers()[0].getLatLng().lat, drawnItems.getLayers()[0].getLatLng().lng],
+                                layer.tmp_trail.addLayer(L.polyline([
+                                    [layer.drawnItems.getLayers()[0].getLatLng().lat, layer.drawnItems.getLayers()[0].getLatLng().lng],
                                     [global._xyz.map.mouseEventToLatLng(e.originalEvent).lat, global._xyz.map.mouseEventToLatLng(e.originalEvent).lng], 
-                                    [drawnItems.getLayers()[len-1].getLatLng().lat, drawnItems.getLayers()[len-1].getLatLng().lng]
+                                    [layer.drawnItems.getLayers()[len-1].getLatLng().lat, layer.drawnItems.getLayers()[len-1].getLatLng().lng]
                                 ], tmp_trail_style));
                             });
 
                             global._xyz.map.on('contextmenu', e => {
                                 global._xyz.map.off('mousemove');
-                                tmp_trail.clearLayers();
+                                layer.tmp_trail.clearLayers();
+                                //trail.clearLayers();
                                 global._xyz.map.off('contextmenu');
                                 global._xyz.map.off('click');
 
                                 dom.map.style.cursor = '';
-                                utils.removeClass(btn, 'activate');
+                                utils.removeClass(dom.polygon, "disabled");
                                 //utils.removeClass(layer.header, 'edited');
                                 
                                 layer.edited = false;
 
                                 //let shape = [];
                                 coords = [];
-                                drawnItems.eachLayer(layer => {
+                                layer.drawnItems.eachLayer(layer => {
                                     coords.push([layer.getLatLng().lng, layer.getLatLng().lat]);
                                 });
 
@@ -187,21 +203,21 @@ module.exports = function(layer, panel){
                                 xhr.open('POST', global._xyz.host + '/api/location/new?token=' + global._xyz.token);
                                 xhr.setRequestHeader('Content-Type', 'application/json');
 
-                                let _marker = drawnItems.getBounds().getCenter();
+                                let _marker = layer.drawnItems.getBounds().getCenter();
                                 let marker = [_marker.lng.toFixed(5), _marker.lat.toFixed(5)];
 
                                 xhr.onload = e => {
 
                                     if (e.target.status === 401) {
                                         document.getElementById('timeout_mask').style.display = 'block';
-                                        console.log(e.target.response);
+                                        //console.log(e.target.response);
                                         return
                                     }
                                     
                                     if (e.target.status === 200) {
 
-                                        drawnItems.clearLayers();
-                                        trail.clearLayers();
+                                        layer.drawnItems.clearLayers();
+                                        layer.trail.clearLayers();
                                         layer.edited = false;
                                         //utils.removeClass(layer.header, 'edited'); // this should happen where final save
                                         //utils.removeClass(btn.parentNode, 'activate');
@@ -233,36 +249,25 @@ module.exports = function(layer, panel){
             }
         });
 
-        utils._createElement({
-            tag: 'i',
-            options: {
-                classList: 'material-icons cursor noselect left',
-                textContent: 'change_history',
-                title: "Draw a polygon"
-            },
-            appendTo: polygon_draw
-        });
-
-        utils._createElement({
-            tag: 'span',
-            options: {
-                classList: "title cursor noselect",
-                textContent: "Polygon"
-            },
-            appendTo: polygon_draw
-        });
-
         // -- End Polygon
 
         // -- Begin rectangle draw
-        let rect_draw = utils._createElement({
+        dom.rect = utils._createElement({
             tag: 'div',
+            options: {
+                classList: "btn_wide cursor noselect",
+                textContent: "Rectangle"
+            },
             appendTo: 'block',
             eventListener: {
                 event: 'click',
                 funct: e => {
                     e.stopPropagation();
+
                     layer.edited = layer.edited ? false : true;
+                    layer.edited ? global._xyz.state = "edit" : global._xyz.state = "select";
+
+                    console.log(global._xyz.state);
                     
                     if(layer.edited && !layer.display){
                         layer.display = true;
@@ -272,30 +277,33 @@ module.exports = function(layer, panel){
                     }
 
                     if(!layer.edited){
-                        utils.removeClass(e.target.parentNode, "activate");
+                        //utils.removeClass(e.target.parentNode, "activate");
+                        //utils.removeClass(layer.header, "edited");
+                        utils.removeClass(e.target, "disabled");
                         utils.removeClass(layer.header, "edited");
                     } else {
                         let btn = e.target;
                         //btn.parentNode.classList += " activate";
-                        utils.addClass(btn, "activate");
-                        utils.addClass(layer.headerm, "edited");
+                        //utils.addClass(btn, "activate");
+                        utils.addClass(dom.rect, "disabled");
+                        utils.addClass(layer.header, "edited");
                         //layer.header.classList += ' edited';
 
                         dom.map.style.cursor = 'crosshair';
 
-                        let drawnItems = L.featureGroup().addTo(global._xyz.map);
+                        layer.drawnItems = L.featureGroup().addTo(global._xyz.map);
                         let coords = [];
-                        let trail = L.featureGroup().addTo(global._xyz.map);
-                        let tmp_trail = L.featureGroup().addTo(global._xyz.map);
+                        layer.trail = L.featureGroup().addTo(global._xyz.map);
+                        layer.tmp_trail = L.featureGroup().addTo(global._xyz.map);
 
                         let start_pnt;
                         global._xyz.map.on('click', e => {
                             start_pnt = [global._xyz.map.mouseEventToLatLng(e.originalEvent).lat, global._xyz.map.mouseEventToLatLng(e.originalEvent).lng];
 
 
-                            drawnItems.addLayer(L.circleMarker(global._xyz.map.mouseEventToLatLng(e.originalEvent), vertex_style));
+                            layer.drawnItems.addLayer(L.circleMarker(global._xyz.map.mouseEventToLatLng(e.originalEvent), vertex_style));
 
-                            let len = drawnItems.getLayers().length;
+                            let len = layer.drawnItems.getLayers().length;
 
                             /*function editend(e){
                                 console.log('editend');
@@ -312,8 +320,8 @@ module.exports = function(layer, panel){
                             if(len === 1){
 
                                 global._xyz.map.on('mousemove', e => {
-                                    tmp_trail.clearLayers();
-                                    tmp_trail.addLayer(L.rectangle([start_pnt, [global._xyz.map.mouseEventToLatLng(e.originalEvent).lat, global._xyz.map.mouseEventToLatLng(e.originalEvent).lng]], tmp_trail_style));
+                                    layer.tmp_trail.clearLayers();
+                                    layer.tmp_trail.addLayer(L.rectangle([start_pnt, [global._xyz.map.mouseEventToLatLng(e.originalEvent).lat, global._xyz.map.mouseEventToLatLng(e.originalEvent).lng]], tmp_trail_style));
                                 });
 
                             /*global._xyz.map.once('contextmenu', e => {
@@ -339,26 +347,27 @@ module.exports = function(layer, panel){
 
                             if(len === 2) {
                                 global._xyz.map.off('mousemove');
-                                tmp_trail.clearLayers();
+                                layer.tmp_trail.clearLayers();
                                 global._xyz.map.off('click');
 
                                 dom.map.style.cursor = '';
-                                utils.removeClass(btn, 'activate');
+                                //utils.removeClass(btn, 'activate');
+                                utils.removeClass(dom.rect, "disabled");
 
                                 layer.edited = false;
 
                                 let rect = [];
-                                drawnItems.eachLayer(layer => {
+                                layer.drawnItems.eachLayer(layer => {
                                     let latlng = layer.getLatLng();
                                     //console.log(layer.getLatLng());
                                     rect.push([latlng.lat, latlng.lng]);
                                 });
 
-                                console.log(rect);
+                                //console.log(rect);
 
-                                trail.addLayer(L.rectangle(rect, trail_style));
+                                layer.trail.addLayer(L.rectangle(rect, trail_style));
 
-                                console.log(JSON.stringify(trail.toGeoJSON()));
+                                //console.log(JSON.stringify(layer.trail.toGeoJSON()));
 
                                 // Make select tab active on mobile device.
                                 if (global._xyz.activateLocationsTab) global._xyz.activateLocationsTab();
@@ -367,21 +376,21 @@ module.exports = function(layer, panel){
                                 xhr.open('POST', global._xyz.host + '/api/location/new?token=' + global._xyz.token);
                                 xhr.setRequestHeader('Content-Type', 'application/json');
                                 
-                                let _marker = trail.getBounds().getCenter();
+                                let _marker = layer.trail.getBounds().getCenter();
                                 let marker = [_marker.lng.toFixed(5), _marker.lat.toFixed(5)];
 
                                 xhr.onload = e => {
 
                                     if (e.target.status === 401) {
                                         document.getElementById('timeout_mask').style.display = 'block';
-                                        console.log(e.target.response);
+                                        //console.log(e.target.response);
                                         return
                                     }
                                     
                                     if (e.target.status === 200) {
 
-                                        drawnItems.clearLayers();
-                                        trail.clearLayers();
+                                        layer.drawnItems.clearLayers();
+                                        layer.trail.clearLayers();
                                         layer.edited = false;
 
                                         layer.getLayer();
@@ -399,7 +408,7 @@ module.exports = function(layer, panel){
                                     locale: _xyz.locale,
                                     layer: layer.layer,
                                     table: layer.table,
-                                    geometry: trail.toGeoJSON().features[0].geometry
+                                    geometry: layer.trail.toGeoJSON().features[0].geometry
                                 }));
                             }
                             
@@ -409,59 +418,36 @@ module.exports = function(layer, panel){
             },
             appendTo: block
         });
-        
-        utils._createElement({
-            tag: 'i',
-            options: {
-                classList: 'material-icons cursor noselect left',
-                textContent: 'crop_din',
-                title: "Draw a rectangle"
-            },
-            appendTo: rect_draw
-        });
-
-        utils._createElement({
-            tag: 'span',
-            options: {
-                classList: "title cursor noselect",
-                textContent: "Rectangle"
-            },
-            appendTo: rect_draw
-        });
 
         // -- End rectangle draw
 
         // -- Begin circle draw
 
-        let circle_draw = utils._createElement({
+        dom.circle = utils._createElement({
             tag: 'div',
+            options: {
+                classList: "btn_wide cursor noselect",
+                textContent: "Circle"
+            },
             appendTo: 'block',
             eventListener: {
-
+                event: 'click',
+                funct: e => {
+                    e.stopPropagation();
+                }
             },
             appendTo: block
         });
-        
-        utils._createElement({
-            tag: 'i',
-            options: {
-                classList: 'material-icons cursor noselect left',
-                textContent: 'panorama_fish_eye',
-                title: "Draw a circle"
-            },
-            appendTo: circle_draw
-        });
-
-        utils._createElement({
-            tag: 'span',
-            options: {
-                classList: "title cursor noselect",
-                textContent: "Circle"
-            },
-            appendTo: circle_draw
-        });
 
         // -- End circle draw
+
+        function switch_mode(el){
+            let arr = [dom.polygon, dom.rect, dom.circle];
+
+            if(utils.hasClass(el, "disabled")){
+
+            }
+        }
 
     }
 
@@ -476,8 +462,12 @@ module.exports = function(layer, panel){
             appendTo: edits
         });
 
-        let polyline_draw = utils._createElement({
+        dom.polyline = utils._createElement({
             tag: 'div',
+            options: {
+                classList: "btn_wide cursor noselect",
+                textContent: "Polyline"
+            },
             appendTo: block,
             eventListener: {
                 event: "click",
@@ -505,44 +495,44 @@ module.exports = function(layer, panel){
 
                         dom.map.style.cursor = 'crosshair';
 
-                        let drawnItems = L.featureGroup().addTo(global._xyz.map);
-                        let featureCollection = drawnItems.toGeoJSON();
+                        layer.drawnItems = L.featureGroup().addTo(global._xyz.map);
+                        let featureCollection = layer.drawnItems.toGeoJSON();
                         let coords = [];
-                        let trail = L.featureGroup().addTo(global._xyz.map);
-                        let tmp_trail = L.featureGroup().addTo(global._xyz.map);
+                        layer.trail = L.featureGroup().addTo(global._xyz.map);
+                        layer.tmp_trail = L.featureGroup().addTo(global._xyz.map);
 
                         global._xyz.map.on('click', e => {
                             
                             let start_pnt = [global._xyz.map.mouseEventToLatLng(e.originalEvent).lat, global._xyz.map.mouseEventToLatLng(e.originalEvent).lng];
                             
-                            drawnItems.addLayer(L.circleMarker(global._xyz.map.mouseEventToLatLng(e.originalEvent), vertex_style));
+                            layer.drawnItems.addLayer(L.circleMarker(global._xyz.map.mouseEventToLatLng(e.originalEvent), vertex_style));
 
-                            let len = drawnItems.getLayers().length, part = [];
+                            let len = layer.drawnItems.getLayers().length, part = [];
                             
 
                             if(len > 1){
-                                console.log('add line');
+                                //console.log('add line');
 
-                                let pts = drawnItems.toGeoJSON();
+                                let pts = layer.drawnItems.toGeoJSON();
                                 part = [
-                                    [drawnItems.getLayers()[len-2].getLatLng().lat, drawnItems.getLayers()[len-2].getLatLng().lng],
-                                    [drawnItems.getLayers()[len-1].getLatLng().lat, drawnItems.getLayers()[len-1].getLatLng().lng]
+                                    [layer.drawnItems.getLayers()[len-2].getLatLng().lat, layer.drawnItems.getLayers()[len-2].getLatLng().lng],
+                                    [layer.drawnItems.getLayers()[len-1].getLatLng().lat, layer.drawnItems.getLayers()[len-1].getLatLng().lng]
                                 ];
                                 
-                                trail.addLayer(L.polyline([part], trail_style));
+                                layer.trail.addLayer(L.polyline([part], trail_style));
                             }
 
                             global._xyz.map.on('mousemove', e => {
-                                tmp_trail.clearLayers();
+                                layer.tmp_trail.clearLayers();
                                 
-                                tmp_trail.addLayer(L.polyline([start_pnt, [global._xyz.map.mouseEventToLatLng(e.originalEvent).lat, global._xyz.map.mouseEventToLatLng(e.originalEvent).lng]], tmp_trail_style));
+                                layer.tmp_trail.addLayer(L.polyline([start_pnt, [global._xyz.map.mouseEventToLatLng(e.originalEvent).lat, global._xyz.map.mouseEventToLatLng(e.originalEvent).lng]], tmp_trail_style));
                             });
 
                             global._xyz.map.on('contextmenu', e => {
 
                                 global._xyz.map.off('mousemove');
                                 
-                                tmp_trail.clearLayers();
+                                layer.tmp_trail.clearLayers();
                                 
                                 global._xyz.map.off('contextmenu');
                                 global._xyz.map.off('contextmenu');
@@ -555,7 +545,7 @@ module.exports = function(layer, panel){
 
                                 coords = [];
                                 
-                                trail.eachLayer(layer => {
+                                layer.trail.eachLayer(layer => {
                                     let latlngs = layer.getLatLngs();
                                     if(latlngs) latlngs.map(latlng => {
                                         let coord = [];
@@ -578,21 +568,21 @@ module.exports = function(layer, panel){
                                 xhr.open('POST', global._xyz.host + '/api/location/new?token=' + global._xyz.token);
                                 xhr.setRequestHeader('Content-Type', 'application/json');
 
-                                let _marker = drawnItems.getLayers()[Math.ceil(len/2)].getLatLng();
+                                let _marker = layer.drawnItems.getLayers()[Math.ceil(len/2)].getLatLng();
                                 let marker = [_marker.lng.toFixed(5), _marker.lat.toFixed(5)];
 
                                 xhr.onload = e => {
 
                                     if (e.target.status === 401) {
                                         document.getElementById('timeout_mask').style.display = 'block';
-                                        console.log(e.target.response);
+                                        //console.log(e.target.response);
                                         return
                                     }
                                     
                                     if (e.target.status === 200) {
 
-                                        drawnItems.clearLayers();
-                                        trail.clearLayers();
+                                        layer.drawnItems.clearLayers();
+                                        layer.trail.clearLayers();
                                         layer.edited = false;
                                         //utils.removeClass(layer.header, 'edited'); // this should happen where final save
                                         //utils.removeClass(btn.parentNode, 'activate');
@@ -639,25 +629,6 @@ module.exports = function(layer, panel){
                 }
             }
         });
-        
-        utils._createElement({
-            tag: 'i',
-            options: {
-                classList: 'material-icons cursor noselect left',
-                textContent: "create",
-                title: 'Draw a polyline'
-            },
-            appendTo: polyline_draw
-        });
-        
-        utils._createElement({
-            tag: 'span',
-            options: {
-                classList: "title cursor noselect",
-                textContent: 'Polyline'
-            },
-            appendTo: polyline_draw
-        });
     }
      // ---- End Polyline
 
@@ -672,8 +643,12 @@ module.exports = function(layer, panel){
             appendTo: edits
         });
         
-        let draw = utils._createElement({
+        dom.circle = utils._createElement({
             tag: 'div',
+            options: {
+                classList: "btn_wide cursor noselect",
+                textContent: "New location"
+            },
             eventListener: {
                 event: "click",
                 funct: e => {
@@ -719,7 +694,7 @@ module.exports = function(layer, panel){
                         xhr.onload = e => {
                             if (e.target.status === 401) {
                                 document.getElementById('timeout_mask').style.display = 'block';
-                                console.log(e.target.response);
+                                //console.log(e.target.response);
                                 return
                             }
                             
@@ -760,25 +735,6 @@ module.exports = function(layer, panel){
                 }
             },
             appendTo: block
-        });
-
-        utils._createElement({
-            tag: 'i',
-            options: {
-                textContent: 'add_location',
-                classList: 'material-icons cursor noselect left'//,
-                //title: 'Create new location'
-            },
-            appendTo: draw
-        });
-
-        utils._createElement({
-            tag: 'span',
-            options: {
-                classList: "title cursor noselect",
-                textContent: 'Create new location'
-            },
-            appendTo: draw
         });
     }
     // End cluster edit control

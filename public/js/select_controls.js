@@ -31,6 +31,11 @@ function clear(record) {
                 });
 
                 if (freeRecords.length === global._xyz.select.records.length) global._xyz.select.resetModule();
+
+                // clear helper editing layers if exist
+                if(layer.drawnItems) layer.drawnItems.clearLayers();
+                if(layer.trail) layer.trail.clearLayers();
+                if(layer.tmp_trail) layer.tmp_trail.clearLayers();
             }
         }
     });
