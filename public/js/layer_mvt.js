@@ -54,16 +54,11 @@ module.exports = function () {
 
                 for (let i = 0; i < layer.style.theme.cat.length; i++) {
                     if (properties[layer.style.theme.field] < layer.style.theme.cat[i].val) {
-                        style = layer.style.theme.cat[i].style;
-                    } else {
-                        continue;
-                    }
+                        return layer.style.theme.cat[i].style;
+                    } 
                 }
-
                 return style;
-
             }
-
             return layer.style.default;
         }
 
