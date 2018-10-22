@@ -194,7 +194,7 @@ function populateTable(record, entry, tr, table) {
   }
 
   // Remove row if not editable (or entry is locked) and entry has no value.
-  if ((!record.location.editable || entry.locked) && !entry.value) {
+  if ((!record.location.edit || entry.locked) && !entry.value) {
     tr.remove();
     return;
   }
@@ -223,7 +223,7 @@ function populateTable(record, entry, tr, table) {
   }
 
   // Set field value if layer is not editable (or entry is locked) and return from object.map function.
-  if ((!record.location.editable || entry.locked || entry.layer) && entry.value) {
+  if ((!record.location.edit || entry.locked || entry.layer) && entry.value) {
 
     //console.log(entry);
 
@@ -510,7 +510,7 @@ function populateTable(record, entry, tr, table) {
   }
 
   // Creat input for editable fields
-  if (record.location.editable && !entry.locked && !entry.layer) {
+  if (record.location.edit && !entry.locked && !entry.layer) {
     _xyz.utils.createElement({
       tag: 'input',
       options: {

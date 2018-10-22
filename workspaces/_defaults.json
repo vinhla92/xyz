@@ -50,8 +50,7 @@
             "infoj": "optional",
             "geom": "geom",
             "catchments": "optional",
-            "editable": "optional",
-            "editing": "optional",
+            "edit": {},
             "log_table": "optional",
             "style": {
                 "default": {
@@ -84,8 +83,7 @@
             "qID": "optional",
             "infoj": "optional",
             "properties": "optional",
-            "editable": "optional",
-            "editing": "optional",
+            "edit": {},
             "log_table": "optional",
             "tilecache": "optional",
             "style": {
@@ -116,8 +114,7 @@
             "qID": "optional",
             "infoj": "optional",
             "geom": "geom",
-            "editable": "optional",
-            "editing": "optional",
+            "edit": {},
             "log_table": "optional",
             "cluster_label": "optional",
             "cluster_kmeans": 0.05,

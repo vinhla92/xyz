@@ -57,10 +57,10 @@ export default record => {
   controls.expander(record);
 
   // Create control to update editable items.
-  if (record.location.editable) controls.update(record);
+  if (record.location.edit.properties) controls.update(record);
 
   // Create control to trash editable items.
-  if (record.location.editable) controls.trash(record);
+  if (record.location.edit.properties) controls.trash(record);
 
   // Add header element to the drawer.
   record.drawer.appendChild(record.header);
