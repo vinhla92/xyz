@@ -308,6 +308,18 @@ module.exports = async (fastify, startListen) => {
       // Check whether layer.style keys are valid or missing.
       if (layer.style) await chkOptionals(layer.style, _layer.style);
 
+      // Check infoJ
+      if (layer.qID && !layer.infoj) {
+        layer.infoj = [
+          {
+            field: layer.qID,
+            label: 'qID',
+            type: 'text',
+            inline: true
+          }
+        ];
+      }
+
       // Check whether the layer connects.
       await chkLayerConnect(layer, layers);
 

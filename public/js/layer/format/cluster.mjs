@@ -130,7 +130,7 @@ export default function(){
             iconUrl: icon,
             iconSize: iconSize
           }),
-          interactive: (layer.infoj) ? true : false
+          interactive: (layer.qID) ? true : false
         });
 
         // Bind tooltip to marker.

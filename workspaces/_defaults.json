@@ -163,5 +163,12 @@
                 ]
             }
         }
-    }
+    },
+    "infoj": [
+        {
+            "field": "id",
+            "label": "qID",
+            "type": "text"
+        }
+    ]
 }

@@ -2,6 +2,9 @@ import _xyz from '../../../_xyz.mjs';
 
 export default layer => {
 
+
+  if (layer.format === 'cluster') return;
+
   // Timeout to debounce layer.get on sliders.
   let timeout;
 
@@ -50,7 +53,8 @@ export default layer => {
       tag: 'span',
       options: {
         classList: 'bold',
-        textContent: get_colour() || 'default',
+        //textContent: get_colour() || 'default',
+        textContent: 'default'
       },
       appendTo: block
     });

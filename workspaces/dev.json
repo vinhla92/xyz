@@ -1,9 +1,6 @@
 {
-  "Title": "GEOLYTIX | XYZ",
-  "titel": "GEOLYTIX | XYZ",
+  "title": "GEOLYTIX | XYZ",
   "locales": {
-    "locale": "locale",
-    "test": {},
     "foo": {
       "layers": {
         "OSM": {
@@ -11,11 +8,9 @@
           "format": "tiles",
           "URI": "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         },
-        "bark": "boo",
         "base": {
           "Name": "test",
           "group": "Base maps",
-          "display": true,
           "name": "Mapbox Baselayer",
           "attribution": {
             "© Mapbox": "https://www.mapbox.com/about/maps",
@@ -29,7 +24,8 @@
           "name": "Retail Points",
           "format": "cluster",
           "dbs": "XYZ",
-          "table": "gb_retailpoint"
+          "table": "gb_retailpoint",
+          "qID": "id"
         }
       }
     }

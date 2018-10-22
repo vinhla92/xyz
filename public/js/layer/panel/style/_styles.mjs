@@ -104,7 +104,7 @@ export default layer => {
     if (layer.format === 'cluster'
       && layer.style.theme.type === 'graduated') clusterGraduated(layer);
   
-    if (!layer.style.theme.type) customStyle(layer);
+    //if (!layer.style.theme.type) customStyle(layer);
   
   }
 
