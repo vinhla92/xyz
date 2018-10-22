@@ -56,13 +56,12 @@ export default function(){
     layer.L = L.geoJson(cluster, {
       pointToLayer: (point, latlng) => {
         
-        // Set icon to default marker. 
-        let marker_style = layer.style.marker;
-
-        let icon = _xyz.utils.svg_symbols(marker_style);
+        let icon = _xyz.utils.svg_symbols(layer.style.marker);
 
         // Set tooltip for desktop if corresponding layer has hover property.
-        let tooltip = (layer.theme && layer.theme.hover && _xyz.view.mode === 'desktop') || false;
+        let tooltip = (layer.style.theme && layer.style.theme.hover && _xyz.view.mode === 'desktop') || false;
+
+        if(!layer.style.theme && point.properties.count > 1) icon = _xyz.utils.svg_symbols(layer.style.markerMulti);
 
         // Check whether layer has categorized theme and more than a single location in cluster.
         if (layer.style.theme && layer.style.theme.type === 'categorized' && Object.keys(point.properties.cat).length > 1) {

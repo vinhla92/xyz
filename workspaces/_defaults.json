@@ -120,7 +120,6 @@
             "editing": "optional",
             "log_table": "optional",
             "cluster_label": "optional",
-            "cluster_cat": "optional",
             "cluster_kmeans": 0.05,
             "cluster_dbscan": 0.01,
             "style": {
@@ -137,7 +136,7 @@
                     "type": "target",
                     "style": [
                         400,
-                        "#333"
+                        "#cf9"
                     ]
                 },
                 "theme": "optional",

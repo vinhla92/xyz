@@ -25,7 +25,185 @@
           "format": "cluster",
           "dbs": "XYZ",
           "table": "gb_retailpoint",
-          "qID": "id"
+          "qID": "id",
+          "cluster_label": "store",
+          "infoj": [
+            {
+              "field": "store",
+              "label": "Store",
+              "type": "text"
+            },
+            {
+              "field": "retailer",
+              "label": "Retailer",
+              "type": "text",
+              "filter": "like"
+            }
+          ],
+          "style": {
+            "theme": {
+              "label": "Retailer",
+              "type": "categorized",
+              "field": "brand",
+              "other": true,
+              "competitors": {
+                "tesco": {
+                  "colour": "#0055a8",
+                  "label": "Tesco"
+                },
+                "sainsburys": {
+                  "colour": "#ee8a00",
+                  "label": "Sainsbury's"
+                }
+              },
+              "cat": {
+                "tesco": {
+                  "marker": {
+                    "type": "target",
+                    "style": [
+                      400,
+                      "#0055a8",
+                      300,
+                      "#ffffff",
+                      150,
+                      "#f02f26"
+                    ]
+                  },
+                  "label": "Tesco"
+                },
+                "sainsburys": {
+                  "marker": {
+                    "type": "target",
+                    "style": [
+                      400,
+                      "#ee8a00",
+                      250,
+                      "#ffffff",
+                      150,
+                      "#ee8a00"
+                    ]
+                  },
+                  "label": "Sainsbury's"
+                }
+              }
+            }
+          }
+        },
+        "traffic_count": {
+          "name": "Traffic",
+          "meta": "Department for Transport Traffic Count Points",
+          "format": "cluster",
+          "dbs": "XYZ",
+          "qID": "id",
+          "table": "traffic_counts_all",
+          "cluster_label": "road_num",
+          "infoj": [
+            {
+              "field": "cp_type",
+              "label": "Type",
+              "type": "text",
+              "filter": {
+                "in": [
+                  "Major",
+                  "Minor"
+                ]
+              }
+            },
+            {
+              "field": "road_num",
+              "label": "Road Number",
+              "type": "text",
+              "filter": "like"
+            },
+            {
+              "field": "start_junc",
+              "label": "from junction",
+              "type": "text"
+            },
+            {
+              "field": "end_junc",
+              "label": "to junction",
+              "type": "text"
+            },
+            {
+              "field": "len_mi",
+              "label": "Segment (miles)",
+              "type": "numeric"
+            },
+            {
+              "field": "road_class",
+              "label": "Road Class",
+              "type": "text",
+              "filter": "match"
+            },
+            {
+              "field": "area_cat",
+              "label": "Area Category",
+              "type": "text"
+            },
+            {
+              "field": "all_mv_14",
+              "label": "Annual traffic count 2014",
+              "type": "integer",
+              "filter": "numeric"
+            },
+            {
+              "field": "all_mv_15",
+              "label": "Annual traffic count 2015",
+              "type": "integer",
+              "filter": "numeric"
+            },
+            {
+              "field": "all_mv_16",
+              "label": "Annual traffic count 2016",
+              "type": "integer",
+              "filter": "numeric"
+            }
+          ],
+          "style": {
+            "theme": {
+              "label": "Motor vehicles 2016 (000's)",
+              "type": "graduated",
+              "field": "all_mv_000__16",
+              "hover": true,
+              "size": "all_mv_000__16",
+              "cat": [
+                {
+                  "val": 1,
+                  "label": "1 to 10",
+                  "marker": {
+                    "type": "target",
+                    "style": [
+                      400,
+                      "#fde725"
+                    ]
+                  }
+                },
+                {
+                  "val": 10,
+                  "label": "10 to 25",
+                  "marker": {
+                    "type": "target",
+                    "style": [
+                      400,
+                      "#8fd744"
+                    ]
+                  }
+                },
+                {
+                  "val": 25,
+                  "label": "25 or more",
+                  "marker": {
+                    "type": "target",
+                    "style": [
+                      400,
+                      "#35b779"
+                    ]
+                  }
+                }
+              ]
+            }
+          }
         }
       }
     }

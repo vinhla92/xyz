@@ -38,7 +38,7 @@ async function get(req, res, fastify) {
         *,
         ROW_NUMBER()
         OVER (
-          PARTITION BY ${layer.qID || 'id'}
+          PARTITION BY ${layer.qID}
           ORDER BY ((${layer.log_table.field || 'log'} -> 'time') :: VARCHAR) :: TIMESTAMP DESC ) AS rank
       FROM gb_retailpoint_editable_logs
     ) AS logfilter` : null;

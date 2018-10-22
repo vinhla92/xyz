@@ -323,6 +323,9 @@ module.exports = async (fastify, startListen) => {
       // Check whether the layer connects.
       await chkLayerConnect(layer, layers);
 
+      // Check whether the layer connects.
+      if (layer.qID) await chkLayerSelect(layer);
+
     }
   }
 
@@ -356,6 +359,29 @@ module.exports = async (fastify, startListen) => {
         console.log(`${layer.format} | ${layer.dbs} | ${table} | ${err.message}`);
         layers['__'+layer.key] = layer;
         delete layers[layer.key];
+        return;
+      }
+
+    }
+
+  }
+
+  async function chkLayerSelect(layer) {
+
+    let tables = layer.tables ? Object.values(layer.tables) : [layer.table];
+
+    for (const table of tables){
+
+      if (!table) return;
+
+      try {
+        db_connection = await fastify.pg[layer.dbs].connect();
+        result = await db_connection.query(`SELECT ${layer.qID} FROM ${table} LIMIT 1`);
+        db_connection.release();
+      } catch(err) {
+        console.log(`${layer.dbs} | ${table} | ${layer.qID} | ${err.message}`);
+        layer['__qID'] = layer.qID;
+        delete layer.qID;
         return;
       }
 
