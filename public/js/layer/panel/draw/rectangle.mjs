@@ -86,7 +86,7 @@ export default (e, layer) => {
                             table: layer.table,
                             id: e.target.response,
                             marker: marker,
-                            editable: true
+                            editable: layer.edit.properties
                         });
                     }
                 }

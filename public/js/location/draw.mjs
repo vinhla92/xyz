@@ -73,7 +73,7 @@ export default record => {
             }),
             pane: 'select_circle',
             interactive: _xyz.ws.select ? true : false,
-            draggable: record.location.editable
+            draggable: record.location.edit.point
           });
       }
     }).addTo(_xyz.map);

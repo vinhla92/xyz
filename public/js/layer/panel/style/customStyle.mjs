@@ -8,8 +8,6 @@ export default layer => {
   // if palette is an object then apply it. Else just take the default.
   let colours = (layer.style.palette && layer.style.palette instanceof Object) ? layer.style.palette : _xyz.style.defaults.colours;
 
-  console.log(colours);
-
   if (!layer.style) layer.style = {};
 
   if (!layer.style.default) layer.style.default =  _xyz.style.defaults.default;

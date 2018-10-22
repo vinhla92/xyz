@@ -68,7 +68,7 @@ export default location => {
 
     location.geometry = JSON.parse(json.geomj);
     location.infoj = json.infoj;
-    location.editable = layer.editable;
+    location.edit = layer.edit;
     location.geomdisplay = layer.geomdisplay ? JSON.parse(json.geomdisplay) : null;
     location.dbs = layer.dbs;
     location.qID = layer.qID;
