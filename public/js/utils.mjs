@@ -183,6 +183,8 @@ export function createStateButton(param){
 
   btn.addEventListener('click', e => {
 
+    console.log('reset previously started edit. how?');
+
     if (_xyz.state == btn) {
       btn.classList.remove('active');
       return _xyz.state = 'select';

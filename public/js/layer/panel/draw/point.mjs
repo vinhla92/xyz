@@ -1,9 +1,10 @@
 import _xyz from '../../../_xyz.mjs';
 import style from './style.mjs';
-import { switchState } from './_draw.mjs';
 
 export default (e, layer) => {
     e.stopPropagation();
+
+    //_xyz.resetEditSession(layer);
 
     layer.edited = layer.edited ? false : true;
 

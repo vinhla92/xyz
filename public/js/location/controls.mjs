@@ -1,6 +1,6 @@
 import _xyz from '../_xyz.mjs';
 import pointOnFeature from '@turf/point-on-feature';
-import { switchState } from '../layer/panel/draw/_draw';
+
 
 export function clear(record) {
   _xyz.utils.createElement({
@@ -22,7 +22,8 @@ export function clear(record) {
         e.stopPropagation();
         record.drawer.remove();
         
-        switchState(_xyz.state);
+        _xyz.switchState(_xyz.state);
+        //console.log(_xyz.state);
       
         _xyz.hooks.filter('select', record.location.layer + '!' + record.location.table + '!' + record.location.id + '!' + record.location.marker[0] + ';' + record.location.marker[1]);
         if (record.location.L) _xyz.map.removeLayer(record.location.L);
@@ -246,8 +247,6 @@ export function trash(record) {
       event: 'click',
       funct: e => {
         e.stopPropagation();
-
-        switchState(_xyz.state);
 
         let layer = _xyz.layers.list[record.location.layer],
           xhr = new XMLHttpRequest();

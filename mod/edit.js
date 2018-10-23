@@ -9,6 +9,7 @@ async function newRecord(req, res, fastify) {
     layer = global.workspace[token.access].config.locales[req.body.locale].layers[req.body.layer],
     table = req.body.table,
     geom = layer.geom ? layer.geom : 'geom',
+    geom_3857 = layer.format === 'mvt' ? (layer.geom_3857 ? layer.geom_3857 : 'geom_3857') : null,
     geometry = JSON.stringify(req.body.geometry),
     qID = layer.qID ? layer.qID : 'id';
 
@@ -21,16 +22,21 @@ async function newRecord(req, res, fastify) {
   const d = new Date();
 
   var q = `
-    INSERT INTO ${table} (${geom} ${layer.log ? `, ${layer.log.field || 'log'}` : ''})
+    INSERT INTO ${table} (${geom} ${geom_3857 ? `, ${geom_3857}` : ''} ${layer.log ? `, ${layer.log.field || 'log'}` : ''})
         SELECT ST_SetSRID(ST_GeomFromGeoJSON('${geometry}'), 4326)
+        ${geom_3857 ? `, ST_Transform(ST_SetSRID(ST_GeomFromGeoJSON('${geometry}'), 4326), 3857)` : ''}
         ${layer.log && layer.log.table ? `,'{ "user": "${token.email}", "op": "new", "time": "${d.toUTCString()}"}'`: ''}
         RETURNING ${qID} AS id;`;
+
+       // console.log(q);
 
   var db_connection = await fastify.pg[layer.dbs].connect();
   var result = await db_connection.query(q);
   db_connection.release();
 
   if (layer.log && layer.log.table) await writeLog(fastify, layer, result.rows[0].id);
+
+  if(layer.mvt_cache) await updateMvtCache(fastify, layer, result.rows[0].id);
 
   res.code(200).send(result.rows[0].id.toString());
 }
@@ -234,6 +240,19 @@ async function writeLog(fastify, layer, id) {
   await db_connection.query(q, [id]);
 
   return db_connection.release();
+}
+
+async function updateMvtCache(fastify, layer, id){
+
+    var q = `
+      DELETE FROM ${layer.mvt_cache} 
+      WHERE ST_Intersects(tile, 
+        (SELECT ${geom_3857} FROM ${layer.table} WHERE ${layer.qID || 'id'} = $1)
+      );`;
+
+    var db_connection = await fastify.pg[layer.dbs].connect();
+    await db_connection.query(q, [id]);
+    return db_connection.release();
 }
 
 async function setIndices(req, res, fastify){
