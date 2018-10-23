@@ -308,20 +308,11 @@ module.exports = async (fastify, startListen) => {
       // Check whether layer.style keys are valid or missing.
       if (layer.style) await chkOptionals(layer.style, _layer.style);
 
-      // Check infoJ
-      if (layer.qID && !layer.infoj) {
-        layer.infoj = [
-          {
-            field: layer.qID,
-            label: 'qID',
-            type: 'text',
-            inline: true
-          }
-        ];
-      }
-
       // Check whether the layer connects.
       await chkLayerConnect(layer, layers);
+
+      // Check or create mvt_cache table.
+      if (layer.mvt_cache) await chkMVTCache(layer);
 
       // Check whether the layer connects.
       if (layer.qID) await chkLayerSelect(layer);
@@ -398,7 +389,96 @@ module.exports = async (fastify, startListen) => {
 
   }
 
+  async function chkMVTCache(layer) {
+  
+    // Get all MVT tables defined in layer tables.
+    let tables = layer.tables ? Object.values(layer.tables) : [layer.table];
+
+    for (const table of tables){
+
+      // Get a sample MVT from the cache table.
+      try {
+        db_connection = await fastify.pg[layer.dbs].connect();
+        result = await db_connection.query(`SELECT z, x, y, mvt, tile FROM ${table}__mvts LIMIT 1`);
+        db_connection.release();
+      } catch(err) {
+        console.log(err.code);
+        await createMVTCache(layer, table);
+      }
+
+      // Check sample MVT.
+      if (result.rows.length > 0) {
+
+        const VectorTile = require('@mapbox/vector-tile').VectorTile;
+        const Protobuf = require('pbf');
+        const tile = new VectorTile(new Protobuf(result.rows[0].mvt));
+
+        // Check if all mvt_fields are contained in cached MVT.
+        for (const field in layer.mvt_fields){
+
+          // Truncate cache table if field is not in sample MVT.
+          if (tile.layers[layer.key]._keys.indexOf(field) < 0) {
+            try {
+              db_connection = await fastify.pg[layer.dbs].connect();
+              await db_connection.query(`TRUNCATE ${table}__mvts;`);
+              db_connection.release();
+            } catch(err) {
+              console.log(err.code);
+            }
+          }
+        }
+      }
+
+    }
+  
+  }
+
+  async function createMVTCache(layer, table){
+
+    try {
+      db_connection = await fastify.pg[layer.dbs].connect();
+      await db_connection.query(`
+      create table ${table}__mvts
+      (
+        z integer not null,
+        x integer not null,
+        y integer not null,
+        mvt bytea,
+        tile geometry(Polygon,3857),
+        constraint ${table.replace(/\./,'_')}__mvts_z_x_y_pk
+          primary key (z, x, y)
+      );
+      
+      create index ${table.replace(/\./,'_')}__mvts_z_x_y_idx on ${table}__mvts (z, x, y);
+  
+      create index ${table.replace(/\./,'_')}__mvts_tile on ${table}__mvts (tile);
+      `);
+      db_connection.release();
+    } catch(err) {
+      console.log(err);
+      // console.log(`${layer.format} | ${layer.dbs} | ${table} | ${err.message}`);
+      // layers['__'+layer.key] = layer;
+      // delete layers[layer.key];
+
+      //await createMVTCache(layer);
+      //return;
+    }
+
+  }
+
   async function chkLayerSelect(layer) {
+
+    // Create default infoj if non exist on selectable layer.
+    if (!layer.infoj) {
+      layer.infoj = [
+        {
+          field: layer.qID,
+          label: 'qID',
+          type: 'text',
+          inline: true
+        }
+      ];
+    }
 
     let tables = layer.tables ? Object.values(layer.tables) : [layer.table];
 

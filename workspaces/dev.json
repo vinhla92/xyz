@@ -19,7 +19,6 @@
           "URI": "https://api.mapbox.com/styles/v1/dbauszus/ciozrimi3002bdsm8bjtn2v1y/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZGJhdXN6dXMiLCJhIjoiY2pnZGsyaDhwMmpjaDMzbnBiNzJiaHR5NyJ9.C6zuLjG4Q3dmflE-LQZY4g"
         },
         "retail_points": {
-          "display": true,
           "name": "Retail Points",
           "format": "cluster",
           "dbs": "XYZ",
@@ -928,7 +927,8 @@
           "format": "mvt",
           "geom_3857": "geom_3857",
           "dbs": "XYZ",
-          "properties": "rp_type",
+          "mvt_fields": ["rp_type"],
+          "mvt_cache": true,
           "qID": "id",
           "tables": {
             "12": "gb_retailplace"
@@ -1196,15 +1196,184 @@
             }
           }
         },
+        "postal_areas": {
+          "name": "Postal Areas",
+          "format": "mvt",
+          "geom_3857": "geom_3857",
+          "geomj": "geomj",
+          "dbs": "XYZ",
+          "mvt_fields": ["rank", "gen_male__11"],
+          "mvt_cache": true,
+          "qID": "qid",
+          "tables": {
+            "7": "gb_postaldistrict_census__11",
+            "8": "gb_postalsector_census__11",
+            "9": "gb_postalsector_census__11",
+            "10": "gb_postalsector_census__11",
+            "11": "gb_postalsector_census__11",
+            "12": "gb_postalsector_census__11"
+          },
+          "infoj": [
+            {
+              "field": "postal_label",
+              "label": "Name",
+              "type": "text",
+              "filter": "like"
+            },
+            {
+              "field": "rank",
+              "label": "Rank",
+              "type": "text",
+              "inline": true
+            },
+            {
+              "field": "rank",
+              "label": "Rank",
+              "type": "text",
+              "inline": true
+            },
+            {
+              "field": "pop__11",
+              "label": "Total Population",
+              "type": "integer",
+              "filter": "numeric"
+            },
+            {
+              "field": "gen_female__11",
+              "label": "Female Population",
+              "type": "integer",
+              "level": 1
+            },
+            {
+              "field": "gen_male__11",
+              "label": "Male Population",
+              "type": "integer",
+              "level": 1
+            },
+            {
+              "label": "Age Groups"
+            },
+            {
+              "field": "age_15un",
+              "fieldfx": "(age_00to04__11 + age_05to07__11 + age_08to09__11 + age_10to14__11 + age_15__11)",
+              "label": "under 16",
+              "type": "integer",
+              "level": 1
+            },
+            {
+              "field": "age_16pl__11",
+              "label": "16 and above",
+              "type": "integer",
+              "level": 1
+            },
+            {
+              "label": "Education"
+            },
+            {
+              "field": "edu_primary_i1__11",
+              "label": "Primary (IESCD 1)",
+              "type": "integer",
+              "level": 1
+            },
+            {
+              "field": "edu_secondary",
+              "fieldfx": "(edu_secondary_i2__11 + edu_secondary_i2_l__11 + edu_secondary_i3__11 + edu_secondary_i3v__11)",
+              "label": "Secondary (IESCD 2)",
+              "type": "integer",
+              "level": 1
+            },
+            {
+              "field": "edu_tertiary_i6__11",
+              "label": "Tertiary (IESCD 6)",
+              "type": "integer",
+              "level": 1
+            },
+            {
+              "label": "Economic Activity"
+            },
+            {
+              "field": "eac_employed__11",
+              "label": "Employed",
+              "type": "integer",
+              "level": 1,
+              "filter": "numeric"
+            },
+            {
+              "field": "eac_unemployed__11",
+              "label": "Unemployed",
+              "type": "integer",
+              "level": 1,
+              "filter": "numeric"
+            },
+            {
+              "field": "ea_student",
+              "fieldfx": "(eac_student__11 + ein_student__11)",
+              "label": "Student",
+              "type": "integer",
+              "level": 1,
+              "filter": "numeric"
+            },
+            {
+              "field": "ein_pensioner__11",
+              "label": "Pensioner",
+              "type": "integer",
+              "level": 1,
+              "filter": "numeric"
+            }
+          ],
+          "style": {
+            "theme": {
+              "label": "Rank",
+              "type": "categorized",
+              "field": "rank",
+              "other": true,
+              "cat": {
+                "Primary": {
+                  "style": {
+                    "fill": true,
+                    "color": "#A51C30",
+                    "opacity": 0.2,
+                    "weight": 1,
+                    "fillColor": "#A51C30",
+                    "fillOpacity": 0.4
+                  }
+                },
+                "Secondary": {
+                  "style": {
+                    "color": "#F58A07",
+                    "opacity": 0.2,
+                    "weight": 1,
+                    "fill": true,
+                    "fillColor": "#F58A07",
+                    "fillOpacity": 0.4
+                  }
+                },
+                "Tertiary": {
+                  "style": {
+                    "color": "#F9CB40",
+                    "opacity": 0.2,
+                    "weight": 1,
+                    "fill": true,
+                    "fillColor": "#F9CB40",
+                    "fillOpacity": 0.4
+                  }
+                }
+              }
+            }
+          }
+        },
         "dong": {
-          "display": true,
           "name": "Dong",
           "format": "mvt",
           "dbs": "XYZ",
           "geom_3857": "geom_3857",
           "geomj": "ST_asGeoJson(ST_Transform(geom_3857, 4326))",
           "qID": "dong_code",
-          "properties": "mkt_size",
+          "mvt_fields": [
+            "mkt_size",
+            "pop_15"
+          ],
+          "mvt_cache": true,
           "infoj": [
             {
               "field": "dong_name",
