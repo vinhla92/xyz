@@ -4,7 +4,7 @@ import style from './style.mjs';
 export default (e, layer) => {
     e.stopPropagation();
 
-    //_xyz.resetEditSession(layer);
+    _xyz.resetEditSession(layer);
 
     layer.edited = layer.edited ? false : true;
 

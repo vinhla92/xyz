@@ -4,7 +4,7 @@ import style from './style.mjs';
 export default (e, layer) => {
     e.stopPropagation();
 
-    //_xyz.resetEditSession(layer);
+    _xyz.resetEditSession(layer);
 
     layer.edited = layer.edited ? false : true;
 
@@ -32,6 +32,8 @@ export default (e, layer) => {
         layer.path = L.featureGroup().addTo(_xyz.map);
 
         _xyz.map.on('click', e => {
+
+            if(_xyz.state != btn) return;
             //let start_pnt = [e.latlng.lat, e.latlng.lng];
             layer.vertices.addLayer(L.circleMarker(e.latlng, style(layer).vertex));
             
@@ -62,6 +64,8 @@ export default (e, layer) => {
             
             _xyz.map.on('mousemove', e => {
                 layer.trail.clearLayers();
+
+                if(_xyz.state != btn) return;
                 
                 layer.trail.addLayer(L.polyline([
                     [layer.vertices.getLayers()[0].getLatLng().lat, layer.vertices.getLayers()[0].getLatLng().lng],
@@ -114,7 +118,7 @@ export default (e, layer) => {
                         
                         layer.get();
 
-                        _xyz.switchState(btn); // jumps back to select state;
+                        _xyz.switchState(layer, btn); // jumps back to select state;
                         layer.edited = false;
                         
                         _xyz.locations.select({

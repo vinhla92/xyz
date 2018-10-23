@@ -36,6 +36,8 @@ export default (e, layer) => {
 
             let len = layer.vertices.getLayers().length, part = [];
 
+            if(_xyz.state != btn) return;
+
             if(len > 1){
                 part = [
                     [layer.vertices.getLayers()[len-2].getLatLng().lat, layer.vertices.getLayers()[len-2].getLatLng().lng],
@@ -46,6 +48,9 @@ export default (e, layer) => {
 
             _xyz.map.on('mousemove', e => {
                 layer.trail.clearLayers();
+
+                if(_xyz.state != btn) return;
+                
                 layer.trail.addLayer(L.polyline(
                     [start_pnt, 
                         [e.latlng.lat, e.latlng.lng]
@@ -109,7 +114,7 @@ export default (e, layer) => {
 
                         layer.get();
 
-                        _xyz.switchState(btn);
+                        _xyz.switchState(layer, btn);
 
                         _xyz.locations.select({
                             layer: layer.key,

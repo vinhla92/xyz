@@ -22,8 +22,7 @@ export function clear(record) {
         e.stopPropagation();
         record.drawer.remove();
         
-        _xyz.switchState(_xyz.state);
-        //console.log(_xyz.state);
+        _xyz.switchState(layer, _xyz.state);
       
         _xyz.hooks.filter('select', record.location.layer + '!' + record.location.table + '!' + record.location.id + '!' + record.location.marker[0] + ';' + record.location.marker[1]);
         if (record.location.L) _xyz.map.removeLayer(record.location.L);
