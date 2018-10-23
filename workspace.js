@@ -331,7 +331,7 @@ module.exports = async (fastify, startListen) => {
 
   async function chkLayerConnect(layer, layers) {
 
-    if (layer.format === 'tiles') return;
+    if (layer.format === 'tiles') return chkLayerURL(layer, layers);
 
     if (layer.format === 'cluster') await chkLayerGeom(layer, layers);
 
@@ -363,6 +363,38 @@ module.exports = async (fastify, startListen) => {
       }
 
     }
+
+  }
+
+  async function chkLayerURL(layer, layers) {
+
+    // Get uri from layer and split at provider definition.
+    let uri = layer.URI.split('&provider=');
+
+    // Replace provider definition with provider key.
+    uri = `${uri[0]}${uri[1] ? global.KEYS[uri[1]] : ''}`;
+
+    // Replace subdomain (a) and x,y,z (0) location.
+    uri = uri.replace(/\{s\}/i,'a').replace(/\{.\}/ig,'0');
+
+    const req = require('request');
+
+    await req(uri, function (error, response) {
+      if (error || (response && response.statusCode !== 200)) {
+
+        console.log(`${layer.format} | ${layer.URI} | ${error ? error.code : response.statusCode}`);
+
+        // Make layer invalid if tiles service is not readable.
+        layers['__'+layer.key] = layer;
+        delete layers[layer.key];
+      }
+
+      //console.log('error:', error); // Print the error if one occurred
+      //console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+      //console.log('body:', body); // Print the HTML for the Google homepage.
+
+
+    });
 
   }
 
