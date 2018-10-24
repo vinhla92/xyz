@@ -61,6 +61,8 @@ module.exports = fastify => {
       beforeHandler: fastify.auth([fastify.authAPI]),
       handler: (req, res) => {
         var q = `${req.query.uri}${req.query.size?'&size='+req.query.size+'&':''}${global.KEYS[req.query.provider]}`;
+        let test = require('request')(q);
+        console.log(test);
         res.send(require('request')(q));
       }
     });

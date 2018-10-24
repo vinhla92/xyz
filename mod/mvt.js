@@ -9,8 +9,6 @@ async function get(req, res, fastify) {
     layer = global.workspace[token.access].config.locales[req.query.locale].layers[req.query.layer],
     table = req.query.table,
     geom_3857 = layer.geom_3857 ? layer.geom_3857 : 'geom_3857',
-    properties = layer.properties ? layer.properties : '',
-    tilecache = layer.tilecache ? layer.tilecache : null,
     id = layer.qID ? layer.qID : null,
     x = parseInt(req.params.x),
     y = parseInt(req.params.y),
@@ -19,17 +17,15 @@ async function get(req, res, fastify) {
     r = (m * 2) / (Math.pow(2, z));
 
   // Check whether string params are found in the settings to prevent SQL injections.
-  if ([id, table, tilecache, layer, geom_3857, properties]
+  if ([id, table, layer, geom_3857]
     .some(val => (typeof val === 'string' && global.workspace[token.access].values.indexOf(val) < 0))) {
     return res.code(406).send('Parameter not acceptable.');
   }
 
-  if (properties) properties = `${properties},`;
-
-  if (tilecache) {
+  if (layer.mvt_cache) {
     try {
       var db_connection = await fastify.pg[layer.dbs].connect();
-      var result = await db_connection.query(`SELECT mvt FROM ${tilecache} WHERE z = ${z} AND x = ${x} AND y = ${y}`);
+      var result = await db_connection.query(`SELECT mvt FROM ${table}__mvts WHERE z = ${z} AND x = ${x} AND y = ${y}`);
       db_connection.release();
     } catch (err) {
       console.error(err);
@@ -47,7 +43,7 @@ async function get(req, res, fastify) {
 
   // ST_MakeEnvelope() in ST_AsMVT is based on https://github.com/mapbox/postgis-vt-util/blob/master/src/TileBBox.sql
   var q = `
-        ${tilecache ? `INSERT INTO ${tilecache} (z, x, y, mvt, tile)` : ''}
+        ${layer.mvt_cache ? `INSERT INTO ${table}__mvts (z, x, y, mvt, tile)` : ''}
         SELECT
             ${z},
             ${x},
@@ -63,7 +59,7 @@ async function get(req, res, fastify) {
         FROM (
             SELECT
                 ${id} id,
-                ${properties}
+                ${layer.mvt_fields ? layer.mvt_fields.toString() + ',' : ''}
                 ST_AsMVTGeom(
                     ${geom_3857},
                     ST_MakeEnvelope(
@@ -85,7 +81,7 @@ async function get(req, res, fastify) {
                 3857
             ),${geom_3857},0)
         ) tile
-        ${tilecache ? 'RETURNING mvt;' : ';'}
+        ${layer.mvt_cache ? 'RETURNING mvt;' : ';'}
         `;
 
   db_connection = await fastify.pg[layer.dbs].connect();

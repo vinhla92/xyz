@@ -12,10 +12,11 @@ import customStyle from './customStyle.mjs';
 
 export default layer => {
 
+  // Meaningful styles can only be set for vector and cluster objects.
   if (layer.format === 'grid' || layer.format === 'tiles') return;
 
   // Create styles panel and add to layer dashboard.
-  const panel = _xyz.utils.createElement({
+  layer.style.panel = _xyz.utils.createElement({
     tag: 'div',
     options: {
       classList: 'panel expandable'
@@ -44,16 +45,14 @@ export default layer => {
     }
   });
 
-  // Set layer theme
-  layer.style.theme = layer.style.theme ?
-    layer.style.theme :
-    layer.style.themes ?
-      layer.style.themes[0] :
+  // Set layer theme to be the theme defined in the workspace,
+  // the first theme from an array or null.
+  layer.style.theme = layer.style.theme ? layer.style.theme :
+    layer.style.themes ? layer.style.themes[0] :
       null;
 
   // Create custom style panel if theme and themes array are null/none.
   if (!layer.style.themes && !layer.style.theme) {
-    layer.style.panel = panel;
     return customStyle(layer);
   }
 

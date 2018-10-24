@@ -1,0 +1,401 @@
+{
+  "title": "GEOLYTIX | CLINIQUE",
+  "locales": {
+    "KR": {
+      "gazetteer": {
+        "provider": "GOOGLE",
+        "code": "KR",
+        "placeholder": "e.g. Seoul"
+      },
+      "bounds": {
+        "north": 41,
+        "east": 134,
+        "south": 31,
+        "west": 120
+      },
+      "minZoom": 7,
+      "maxZoom": 17,
+      "layers": {
+        "base": {
+          "display": true,
+          "name": "Mapbox Baselayer",
+          "attribution": {
+            "© Mapbox": "https://www.mapbox.com/about/maps",
+            "© OpenStreetMap": "http://www.openstreetmap.org/copyright"
+          },
+          "format": "tiles",
+          "URI": "https://api.mapbox.com/styles/v1/dbauszus/ciozrimi3002bdsm8bjtn2v1y/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZGJhdXN6dXMiLCJhIjoiY2pnZGsyaDhwMmpjaDMzbnBiNzJiaHR5NyJ9.C6zuLjG4Q3dmflE-LQZY4g"
+        },
+        "here": {
+          "name": "HERE Imagery",
+          "attribution": {
+            "© HERE": "https://legal.here.com/us-en/terms/serviceterms"
+          },
+          "format": "tiles",
+          "URI": "https://1.aerial.maps.api.here.com/maptile/2.1/maptile/newest/satellite.day/{z}/{x}/{y}/256/png8?&provider=HERE"
+        },
+        "dong": {
+          "display": true,
+          "name": "Dong",
+          "format": "mvt",
+          "dbs": "XYZ",
+          "geom_3857": "geom_3857",
+          "geomj": "ST_asGeoJson(ST_Transform(geom_3857, 4326))",
+          "qID": "dong_code",
+          "properties": "mkt_size",
+          "infoj": [
+            {
+              "field": "dong_name",
+              "label": "Dong",
+              "type": "text"
+            },
+            {
+              "field": "district",
+              "label": "District",
+              "type": "text"
+            },
+            {
+              "field": "province",
+              "label": "Province",
+              "type": "text"
+            },
+            {
+              "field": "pop_15",
+              "label": "Population '15",
+              "type": "integer"
+            },
+            {
+              "field": "mkt_size_bn",
+              "label": "Market Size (₩ billions)",
+              "type": "numeric"
+            }
+          ],
+          "tables": {
+            "7": "clinique.dong"
+          },
+          "style": {
+            "theme": {
+              "label": "Market Size 2016 (₩ billions)",
+              "type": "graduated",
+              "field": "mkt_size",
+              "cat": [
+                {
+                  "val": 250000,
+                  "style": {
+                    "stroke": false,
+                    "fillColor": "#fcfdbf",
+                    "fill": true,
+                    "fillOpacity": 0.3
+                  },
+                  "label": "up to .25"
+                },
+                {
+                  "val": 500000,
+                  "style": {
+                    "stroke": false,
+                    "fillColor": "#fec387",
+                    "fill": true,
+                    "fillOpacity": 0.3
+                  },
+                  "label": ".5"
+                },
+                {
+                  "val": 1000000,
+                  "style": {
+                    "stroke": false,
+                    "fillColor": "#fc8761",
+                    "fill": true,
+                    "fillOpacity": 0.3
+                  },
+                  "label": "1"
+                },
+                {
+                  "val": 1500000,
+                  "style": {
+                    "stroke": false,
+                    "fillColor": "#e75163",
+                    "fill": true,
+                    "fillOpacity": 0.3
+                  },
+                  "label": "1.5"
+                },
+                {
+                  "val": 2000000,
+                  "style": {
+                    "stroke": false,
+                    "fillColor": "#b63679",
+                    "fill": true,
+                    "fillOpacity": 0.3
+                  },
+                  "label": "2"
+                },
+                {
+                  "val": 2500000,
+                  "style": {
+                    "stroke": false,
+                    "fillColor": "#822581",
+                    "fill": true,
+                    "fillOpacity": 0.3
+                  },
+                  "label": "2.5"
+                },
+                {
+                  "val": 5000000,
+                  "style": {
+                    "stroke": false,
+                    "fillColor": "#50127b",
+                    "fill": true,
+                    "fillOpacity": 0.3
+                  },
+                  "label": "5"
+                },
+                {
+                  "val": 999999999,
+                  "style": {
+                    "stroke": false,
+                    "fillColor": "#1c1046",
+                    "fill": true,
+                    "fillOpacity": 0.3
+                  },
+                  "label": "5 or more"
+                }
+              ]
+            },
+            "default": {
+              "weight": 1,
+              "color": "#333",
+              "fill": true,
+              "opacity": 0.3,
+              "fillColor": "#fff",
+              "fillOpacity": 0.3
+            },
+            "highlight": {
+              "weight": 1,
+              "color": "#090",
+              "fill": true,
+              "fillOpacity": 0
+            }
+          }
+        },
+        "__grid": {
+          "name": "Demand Grid",
+          "format": "grid",
+          "dbs": "XYZ",
+          "geom": "geomcntr",
+          "tables": {
+            "9": "clinique.demand_hx8k",
+            "10": "clinique.demand_hx4k",
+            "11": "clinique.demand_hx2k",
+            "12": "clinique.demand_hx1k",
+            "13": "clinique.demand_hx500"
+          },
+          "style": {
+            "range": [
+              "#fcfdbf",
+              "#fec387",
+              "#fc8761",
+              "#e75163",
+              "#b63679",
+              "#822581",
+              "#50127b"
+            ]
+          },
+          "grid_color": "hb_demand",
+          "queryFields": [
+            {
+              "pop": "Population"
+            },
+            {
+              "hb_demand": "Demand"
+            }
+          ]
+        },
+        "__rp_cluster": {
+          "display": true,
+          "name": "Retail Place (cluster)",
+          "format": "cluster",
+          "dbs": "XYZ",
+          "table": "clinique.rp_",
+          "qID": "rp_id",
+          "geomdisplay": "geom_4326",
+          "cluster_label": "rp_name",
+          "infoj": [
+            {
+              "field": "rp_name",
+              "label": "Retail Place",
+              "type": "text"
+            },
+            {
+              "field": "province_name",
+              "label": "Province",
+              "type": "text"
+            },
+            {
+              "field": "no_smc",
+              "label": "SMC Count",
+              "type": "integer",
+              "level": 1
+            },
+            {
+              "field": "no_hb",
+              "label": "Mass H&B Count",
+              "type": "integer",
+              "level": 1
+            },
+            {
+              "field": "no_ds",
+              "label": "Department Store Count",
+              "type": "integer",
+              "level": 1
+            },
+            {
+              "field": "model_sales_2016_krwb",
+              "label": "Demand 2016 (₩ billions)",
+              "type": "numeric",
+              "level": 1
+            },
+            {
+              "field": "model_sales_2021_krwb",
+              "label": "Demand 2021 (₩ billions)",
+              "type": "numeric",
+              "level": 1
+            },
+            {
+              "field": "cagr_2016_2021",
+              "label": "CAGR",
+              "type": "numeric",
+              "level": 1
+            },
+            {
+              "field": "no_clinique_ds",
+              "label": "Clinique Doors (DS)",
+              "type": "integer",
+              "level": 1
+            },
+            {
+              "field": "no_clinique_smc",
+              "label": "Clinique Doors (SMC)",
+              "type": "integer",
+              "level": 1
+            },
+            {
+              "field": "no_clinique_smc_potential",
+              "label": "Potential Clinique Doors",
+              "type": "integer",
+              "level": 1
+            },
+            {
+              "field": "no_clinique_smc_potential_exp",
+              "label": "Clinique Expansion Opportunity",
+              "type": "integer",
+              "level": 1
+            },
+            {
+              "field": "priority_cluster_deliverability",
+              "label": "Priority Cluster",
+              "type": "text",
+              "level": 1
+            }
+          ],
+          "style": {
+            "theme": {
+              "label": "Demand 2016 (₩ billions)",
+              "type": "graduated",
+              "field": "model_sales_2016_krwb",
+              "hover": true,
+              "cat": [
+                {
+                  "val": 0.01,
+                  "marker": {
+                    "type": "target",
+                    "style": [
+                      400,
+                      "#fcfdbf"
+                    ]
+                  },
+                  "label": "0.01"
+                },
+                {
+                  "val": 5,
+                  "marker": {
+                    "type": "target",
+                    "style": [
+                      400,
+                      "#fec387"
+                    ]
+                  },
+                  "label": "5"
+                },
+                {
+                  "val": 10,
+                  "marker": {
+                    "type": "target",
+                    "style": [
+                      400,
+                      "#fc8761"
+                    ]
+                  },
+                  "label": "10"
+                },
+                {
+                  "val": 25,
+                  "marker": {
+                    "type": "target",
+                    "style": [
+                      400,
+                      "#e75163"
+                    ]
+                  },
+                  "label": "25"
+                },
+                {
+                  "val": 50,
+                  "marker": {
+                    "type": "target",
+                    "style": [
+                      400,
+                      "#b63679"
+                    ]
+                  },
+                  "label": "50"
+                },
+                {
+                  "val": 75,
+                  "marker": {
+                    "type": "target",
+                    "style": [
+                      400,
+                      "#822581"
+                    ]
+                  },
+                  "label": "75"
+                },
+                {
+                  "val": 100,
+                  "marker": {
+                    "type": "target",
+                    "style": [
+                      400,
+                      "#50127b"
+                    ]
+                  },
+                  "label": "100 and more"
+                }
+              ]
+            }
+          }
+        },
+        "__label": {
+          "display": true,
+          "name": "Mapbox Labels",
+          "attribution": {
+            "© Mapbox": "https://www.mapbox.com/about/maps",
+            "© OpenStreetMap": "http://www.openstreetmap.org/copyright"
+          },
+          "format": "tiles",
+          "URI": "https://api.mapbox.com/styles/v1/dbauszus/cj9puo8pr5o0c2sovhdwhkc7z/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZGJhdXN6dXMiLCJhIjoiY2pnZGsyaDhwMmpjaDMzbnBiNzJiaHR5NyJ9.C6zuLjG4Q3dmflE-LQZY4g"
+        }
+      }
+    }
+  }
+}

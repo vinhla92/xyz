@@ -82,10 +82,11 @@
             "geom": "optional",
             "qID": "optional",
             "infoj": "optional",
-            "properties": "optional",
             "edit": {},
             "log_table": "optional",
             "tilecache": "optional",
+            "mvt_cache": "optional",
+            "mvt_fields": "optional",
             "style": {
                 "default": {
                     "weight": 1,
