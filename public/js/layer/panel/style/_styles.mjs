@@ -31,13 +31,13 @@ export default layer => {
       className: 'btn_text cursor noselect',
       textContent: 'Style'
     },
-    appendTo: panel,
+    appendTo: layer.style.panel,
     eventListener: {
       event: 'click',
       funct: e => {
         e.stopPropagation();
         _xyz.utils.toggleExpanderParent({
-          expandable: panel,
+          expandable: layer.style.panel,
           accordeon: true,
           scrolly: document.querySelector('.mod_container > .scrolly')
         });
@@ -65,7 +65,7 @@ export default layer => {
   // Create theme drop down
   _xyz.utils.dropdown({
     title: 'Select thematic style…',
-    appendTo: panel,
+    appendTo: layer.style.panel,
     entries: layer.style.themes,
     label: 'label',
     onchange: e => {
@@ -80,10 +80,10 @@ export default layer => {
   });
 
   // Create style panel element for the theme.
-  layer.style.panel = _xyz.utils.createElement({
+  /*layer.style.panel = _xyz.utils.createElement({
     tag: 'div',
     appendTo: panel
-  });
+  });*/
 
   applyTheme(layer);
 
