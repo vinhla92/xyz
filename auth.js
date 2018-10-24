@@ -1,7 +1,7 @@
 module.exports = { init, authToken };
 
 // Get ACL table name from env settings.
-const user_table = (process.env.PUBLIC || process.env.PRIVATE) ?
+let user_table = (process.env.PUBLIC || process.env.PRIVATE) ?
   (process.env.PUBLIC || process.env.PRIVATE).split('|')[1] : null;
 
 function init(fastify) {
@@ -11,6 +11,38 @@ function init(fastify) {
     fastify.register(require('fastify-postgres'), {
       connectionString: (process.env.PUBLIC || process.env.PRIVATE).split('|')[0],
       name: 'users'
+    }).after(async () => {
+
+      // Check ACL
+      const acl_schema = {
+        _id: 'integer',
+        email: 'text',
+        password: 'text',
+        verified: 'boolean',
+        approved: 'boolean',
+        admin: 'boolean',
+        verificationtoken: 'text',
+        approvaltoken: 'text',
+        failedattempts: 'integer',
+        password_reset: 'text',
+        api: 'text'
+      };
+
+      try {
+        db_connection = await fastify.pg.users.connect();
+        result = await db_connection.query(`SELECT column_name, data_type FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = '${user_table}';`);
+        db_connection.release();
+        result.rows.forEach(row => {
+          if (!acl_schema[row.column_name] || acl_schema[row.column_name] !== row.data_type){
+            console.log('There seems to be a problem with the ACL configuration.');
+            user_table = null;
+          }
+        });
+      } catch(err) {
+        console.error(err);
+        user_table = null;
+      }
+
     });
   }
 
@@ -29,7 +61,8 @@ function init(fastify) {
                         + 'More details will have been sent via mail to prevent user enumeration.',
           validation: 'Please check your inbox for an email with additional details.',
           reset: 'The password has been reset for this account.',
-          approval: 'This account has been verified but requires administrator approval.'
+          approval: 'This account has been verified but requires administrator approval.',
+          badconfig: 'There seems to be a problem with the ACL configuration.'
         };
 
         res
@@ -52,6 +85,8 @@ function init(fastify) {
 
         if (!req.body.email) return;
         if (!req.body.password) return;
+
+        if (!user_table) return res.redirect(global.dir + '/login?msg=badconfig');
 
         // Get user from ACL.
         var user_db = await fastify.pg.users.connect();

@@ -107,28 +107,45 @@ module.exports = async (fastify, startListen) => {
   // Create workspace loader from Postgres database.
   if (process.env.WORKSPACE && process.env.WORKSPACE.split(':')[0] === 'postgres') {
 
-    // Register Postgres connection string to fastify.
-    await fastify.register(require('fastify-postgres'), {
-      connectionString: process.env.WORKSPACE.split('|')[0],
-      name: 'workspace'
-    });
+    DBS_promises.push(
+      new Promise(resolve => {
+        // fastify.register(require('fastify-postgres'), {
+        //   connectionString: process.env[key],
+        //   name: key.split('_')[1]
+        // }).after(() => resolve());
 
-    // Assign load method to global workspace object.
-    global.workspace.load = async fastify => {
+        // Register Postgres connection string to fastify.
+        fastify.register(require('fastify-postgres'), {
+          connectionString: process.env.WORKSPACE.split('|')[0],
+          name: 'workspace'
+        }).after(()=>{
 
-      let
-        workspace_db = await fastify.pg.workspace.connect(),
-        workspace_table = process.env.WORKSPACE.split('|').pop(),
-        config = await workspace_db.query(`SELECT * FROM ${workspace_table} ORDER BY _id DESC LIMIT 1`);
+          // Assign load method to global workspace object.
+          global.workspace.load = async fastify => {
 
-      workspace_db.release();
+            try {
+              var workspace_db = await fastify.pg.workspace.connect();
+              var workspace_table = process.env.WORKSPACE.split('|').pop();
+              var config = await workspace_db.query(`SELECT * FROM ${workspace_table} ORDER BY _id DESC LIMIT 1`);
+              workspace_db.release();
 
-      // Return empty object as workspace if no rows are returned from Postgres query.
-      if (config.rows.length === 0) return {};
+            } catch(err) {
+              console.error(err);
+              resolve();
+              return {};
+            }
 
-      // Return settings from first row as workspace.
-      return chkWorkspace(config.rows[0].settings);
-    };
+            // Return empty object as workspace if no rows are returned from Postgres query.
+            if (config.rows.length === 0) return chkWorkspace({});
+
+            // Return settings from first row as workspace.
+            return chkWorkspace(config.rows[0].settings);
+          };
+
+          resolve();
+        });
+      })
+    );
   }
 
   // Create file stream reader.
