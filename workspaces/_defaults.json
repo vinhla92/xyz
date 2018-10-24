@@ -50,7 +50,6 @@
             "infoj": "optional",
             "geom": "geom",
             "catchments": "optional",
-            "edit": {},
             "log_table": "optional",
             "style": {
                 "default": {
@@ -82,7 +81,6 @@
             "geom": "optional",
             "qID": "optional",
             "infoj": "optional",
-            "edit": {},
             "log_table": "optional",
             "tilecache": "optional",
             "mvt_cache": "optional",
@@ -115,7 +113,6 @@
             "qID": "optional",
             "infoj": "optional",
             "geom": "geom",
-            "edit": {},
             "log_table": "optional",
             "cluster_label": "optional",
             "cluster_kmeans": 0.05,
