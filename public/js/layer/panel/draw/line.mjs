@@ -1,9 +1,10 @@
 import _xyz from '../../../_xyz.mjs';
 import style from './style.mjs';
-import { switchState } from './_draw.mjs';
 
 export default (e, layer) => {
     e.stopPropagation();
+
+    _xyz.resetEditSession(layer);
 
     layer.edited = layer.edited ? false : true;
 
@@ -35,6 +36,8 @@ export default (e, layer) => {
 
             let len = layer.vertices.getLayers().length, part = [];
 
+            if(_xyz.state != btn) return;
+
             if(len > 1){
                 part = [
                     [layer.vertices.getLayers()[len-2].getLatLng().lat, layer.vertices.getLayers()[len-2].getLatLng().lng],
@@ -45,6 +48,9 @@ export default (e, layer) => {
 
             _xyz.map.on('mousemove', e => {
                 layer.trail.clearLayers();
+
+                if(_xyz.state != btn) return;
+                
                 layer.trail.addLayer(L.polyline(
                     [start_pnt, 
                         [e.latlng.lat, e.latlng.lng]
@@ -108,14 +114,14 @@ export default (e, layer) => {
 
                         layer.get();
 
-                        switchState(btn);
+                        _xyz.switchState(layer, btn);
 
                         _xyz.locations.select({
                             layer: layer.key,
                             table: layer.table,
                             id: e.target.response,
                             marker: marker,
-                            editable: layer.edit.properties
+                            editable: layer.edit ? layer.edit.properties : false
                         });
                     }
                 }

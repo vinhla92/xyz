@@ -8,7 +8,7 @@ import { point } from './draw/_draw.mjs';
 export default layer => {
 
   // Create cluster panel and add to layer dashboard.
-  const panel = _xyz.utils.createElement({
+  layer.edit.panel = _xyz.utils.createElement({
     tag: 'div',
     options: {
       classList: 'panel expandable'
@@ -23,13 +23,13 @@ export default layer => {
       className: 'btn_text cursor noselect',
       textContent: 'Editing'
     },
-    appendTo: panel,
+    appendTo: layer.edit.panel,
     eventListener: {
       event: 'click',
       funct: e => {
         e.stopPropagation();
         _xyz.utils.toggleExpanderParent({
-          expandable: panel,
+          expandable: layer.edit.panel,
           accordeon: true,
           scrolly: document.querySelector('.mod_container > .scrolly')
         });
@@ -44,7 +44,7 @@ export default layer => {
   if(layer.edit && layer.edit.point){
     _xyz.utils.createStateButton({
       text: 'Point',
-      appendTo: panel,
+      appendTo: layer.edit.panel,
       layer: layer,
       fx: point
     });
@@ -53,7 +53,7 @@ export default layer => {
   if(layer.edit && layer.edit.polygon){
     _xyz.utils.createStateButton({
       text: 'Polygon',
-      appendTo: panel,
+      appendTo: layer.edit.panel,
       layer: layer,
       fx: polygon
     });
@@ -62,7 +62,7 @@ export default layer => {
   if(layer.edit && layer.edit.rectangle){
     _xyz.utils.createStateButton({
       text: 'Rectangle',
-      appendTo: panel,
+      appendTo: layer.edit.panel,
       layer: layer,
       fx: rect
     });
@@ -71,7 +71,7 @@ export default layer => {
   if(layer.edit && layer.edit.circle){
     _xyz.utils.createStateButton({
       text: 'Circle',
-      appendTo: panel,
+      appendTo: layer.edit.panel,
       layer: layer,
       fx: circle
     });
@@ -80,7 +80,7 @@ export default layer => {
   if(layer.edit && layer.edit.line){
     _xyz.utils.createStateButton({
       text: 'Line',
-      appendTo: panel,
+      appendTo: layer.edit.panel,
       layer: layer,
       fx: line
     });
@@ -89,7 +89,7 @@ export default layer => {
   if(layer.edit && layer.edit.catchment){
     _xyz.utils.createStateButton({
       text: 'Catchment',
-      appendTo: panel,
+      appendTo: layer.edit.panel,
       fx: someFunction
     });
   }

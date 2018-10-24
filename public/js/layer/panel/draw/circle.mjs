@@ -1,6 +1,5 @@
 import _xyz from '../../../_xyz.mjs';
 import style from './style.mjs';
-import { switchState } from './_draw.mjs';
 
 import circle from '@turf/circle';
 import distance from '@turf/distance';
@@ -8,6 +7,8 @@ import helpers from '@turf/helpers';
 
 export default (e, layer) => {
     e.stopPropagation();
+
+    _xyz.resetEditSession(layer);
 
     layer.edited = layer.edited ? false : true;
 
@@ -33,6 +34,8 @@ export default (e, layer) => {
         _xyz.map.on('click', e => {
 
             layer.vertices.addLayer(L.circleMarker(e.latlng, style(layer).vertex));
+
+            if(_xyz.state != btn) return;
 
             let len = layer.vertices.getLayers().length, 
                 o, c, s, r, // origin, cursor, segment, radius
@@ -81,14 +84,14 @@ export default (e, layer) => {
                         
                         layer.get();
 
-                        switchState(btn); // jumps back to select state;
+                        _xyz.switchState(layer, btn); // jumps back to select state;
                         
                         _xyz.locations.select({
                             layer: layer.key,
                             table: layer.table,
                             id: e.target.response,
                             marker: o.geometry.coordinates,
-                            editable: layer.edit.properties
+                            editable: layer.edit ? layer.edit.properties : false
                         });
                     }
                 }
