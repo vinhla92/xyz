@@ -91,7 +91,7 @@ export default (e, layer) => {
                             table: layer.table,
                             id: e.target.response,
                             marker: o.geometry.coordinates,
-                            editable: layer.edit.properties
+                            editable: layer.edit ? layer.edit.properties : false
                         });
                     }
                 }

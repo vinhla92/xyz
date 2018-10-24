@@ -51,7 +51,7 @@ export default (e, layer) => {
                         table: layer.table,
                         id: e.target.response,
                         marker: marker,
-                        editable: layer.edit.properties
+                        editable: layer.edit ? layer.edit.properties : false
                     });
                 }
             }
