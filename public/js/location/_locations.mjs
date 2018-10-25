@@ -9,6 +9,9 @@ _xyz.locations.draw = draw;
 import add from './add.mjs';
 _xyz.locations.add = add;
 
+import new from './new.mjs';
+_xyz.locations.new = new;
+
 export default () => {
 
   // Make select tab active on mobile device.
