@@ -168,7 +168,7 @@ async function updateRecord(req, res, fastify) {
 
   } catch (err) {
     console.error(err);
-    res.code(500).send('soz. it\'s not you. it\'s me.');
+    return res.code(500).send('soz. it\'s not you. it\'s me.');
   }
 }
 

@@ -103,37 +103,23 @@ async function select(req, res, fastify) {
     ${layer.log_table ? 'rank = 1 AND ' : ''}
     ${qID} = $1;`;
 
-  try {
-    db_connection = await fastify.pg[layer.dbs].connect();
-    result = await db_connection.query(q, [id]);
-    db_connection.release();
-  } catch(err) {
-    err.detail = {
-      token: token,
-      locale: req.query.locale,
-      layer: req.query.layer,
-      q: q.replace(/\n/g,'').replace(/\s\s+/g, ' ').replace(/\$1/, id)
-    };
 
-    fastify.log.error(err);
+  var rows = await global.pg.dbs[layer.dbs](q, [id]);
 
-    return res.code(401).send();
-  }
+  if (rows.err) return res.code(500).send('soz. it\'s not you. it\'s me.');
 
-  if (result.rowCount === 0) {
-    return res.code(401).send();
-  }
+  if (rows.length === 0) return res.code(401).send();
 
   // Iterate through the infoj object's entries and assign the values returned from the database query.
   Object.values(infoj).map(entry => {
     
     if(entry.type == 'group'){
       Object.values(entry.items).map(item => {
-        setValues(result, item);
+        setValues(rows, item);
       });
       return;
     }
-    setValues(result, entry);
+    setValues(rows, entry);
   });
 
   function formatDate(str){
@@ -150,28 +136,28 @@ async function select(req, res, fastify) {
     return d ? d.toLocaleDateString(loc, options) + ', ' + d.toLocaleTimeString(loc) : false;
   }
     
-  function setValues(result, entry){
+  function setValues(rows, entry){
         
-    if (result.rows[0][entry.field] || result.rows[0][entry.field] == 0) {
+    if (rows[0][entry.field] || rows[0][entry.field] == 0) {
       if(entry.datetime){
-        entry.value = formatDateTime(result.rows[0][entry.field]); 
+        entry.value = formatDateTime(rows[0][entry.field]); 
         return;
       }
       if(entry.date){
-        entry.value = formatDate(result.rows[0][entry.field]);
+        entry.value = formatDate(rows[0][entry.field]);
         return;
       }
-      entry.value = result.rows[0][entry.field];
+      entry.value = rows[0][entry.field];
     }
-    if (result.rows[0][entry.subfield]) {
-      entry.subvalue = result.rows[0][entry.subfield];
+    if (rows[0][entry.subfield]) {
+      entry.subvalue = rows[0][entry.subfield];
     }
   }
     
   // Send the infoj object with values back to the client.
   res.code(200).send({
-    geomj: result.rows[0].geomj,
-    geomdisplay: result.rows[0].geomdisplay || false,
+    geomj: rows[0].geomj,
+    geomdisplay: rows[0].geomdisplay || false,
     infoj: infoj
   });
 }

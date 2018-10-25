@@ -3,14 +3,15 @@ import _xyz from '../_xyz.mjs';
 import select from './select.mjs';
 _xyz.locations.select = select;
 
+
 import draw from './draw.mjs';
 _xyz.locations.draw = draw;
 
 import add from './add.mjs';
 _xyz.locations.add = add;
 
-import new from './new.mjs';
-_xyz.locations.new = new;
+import _new from './new.mjs';
+_xyz.locations.new = _new;
 
 export default () => {
 

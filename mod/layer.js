@@ -16,12 +16,11 @@ async function get_extent(req, res, fastify) {
     return res.code(406).send('Parameter not acceptable.');
   }
 
-  var q = `SELECT ST_EstimatedExtent('${table}','${geom}');`;
-  var db_connection = await fastify.pg[layer.dbs].connect();
-  var result = await db_connection.query(q);
-  db_connection.release();
+  rows = await global.pg.dbs[layer.dbs](`SELECT ST_EstimatedExtent('${table}','${geom}');`);
 
-  let bounds = Object.values(Object.values(result.rows)[0])[0];
+  if (rows.err) return res.code(500).send('soz. it\'s not you. it\'s me.');
+
+  let bounds = Object.values(Object.values(rows)[0])[0];
 
   if (!bounds) return res.code(401).send();
 

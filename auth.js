@@ -343,8 +343,8 @@ function init(fastify) {
             text: `You are now able to log on to ${process.env.HTTP || 'https'}://${global.alias || req.headers.host}${global.dir}`
           });
 
-        if (update.rowCount === 0) res.code(500).send();
-        if (update.rowCount === 1) res.code(200).send();
+        if (update.rowCount === 0) return res.code(500).send();
+        if (update.rowCount === 1) return res.code(200).send();
       }
     });
 
@@ -362,7 +362,7 @@ function init(fastify) {
                     WHERE lower(email) = lower($1);`, [req.body.email]);
         user_db.release();
 
-        if (update.rowCount === 0) res.code(500).send();
+        if (update.rowCount === 0) return res.code(500).send();
 
         if (update.rowCount === 1) {
 

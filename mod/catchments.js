@@ -267,6 +267,7 @@ async function catchment_calc(req, res, fastify) {
   let result = await storeFeatures(res.data.iso.features);
 
   async function storeFeatures(features) {
+
     let pArray = features.map(async f => {
       var q = `
             INSERT INTO ${table_target} (${geom_target})
@@ -279,21 +280,22 @@ async function catchment_calc(req, res, fastify) {
         
             RETURNING id, ST_X(ST_Centroid(geom)) as lng, ST_Y(ST_Centroid(geom)) as lat;`;
 
-      var db_connection = await fastify.pg[layer.dbs].connect();
-      var result = await db_connection.query(q);
-      db_connection.release();
+      var rows = await global.pg.dbs[layer.dbs](q);
+
+      //if (rows.err) return res.code(500).send('soz. it\'s not you. it\'s me.');
         
-      return result;
+      return rows;
     });
+
     let result = await Promise.all(pArray);
     return result;
   }
 
   res.code(200).send(
     {
-      id: result[0].rows[0].id.toString(),
-      lat: parseFloat(result[0].rows[0].lat),
-      lng: parseFloat(result[0].rows[0].lng),
+      id: result.rows[0].id.toString(),
+      lat: parseFloat(result.rows[0].lat),
+      lng: parseFloat(result.rows[0].lng),
       tin: res.data.tin,
       circlePoints: res.data.circlePoints,
       samplePoints: res.data.samplePoints

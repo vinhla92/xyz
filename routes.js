@@ -54,16 +54,83 @@ module.exports = fastify => {
       }
     });
 
+    // Get the stored workspace config for the token access level.
+    fastify.route({
+      method: 'GET',
+      url: '/workspace/get',
+      beforeHandler: fastify.auth([fastify.authAPI]),
+      handler: (req, res) => {
+      
+        // Decode token from query or use a public access if no token has been provided.
+        const token = req.query.token ? fastify.jwt.decode(req.query.token) : { access: 'public' };
+      
+        // Send workspace
+        res.send(global.workspace[token.access].config);
+      }
+    });
+
+    // Open workspace admin interface (tree view).
+    fastify.route({
+      method: 'GET',
+      url: '/admin/workspace',
+      beforeHandler: fastify.auth([fastify.authAdmin]),
+      handler: (req, res) => {
+      
+        // Render and send admin template with 'tree' as view mode.
+        res.type('text/html').send(require('jsrender').templates('./views/workspace_admin.html').render({
+          dir: global.dir,
+          mode: 'tree'
+        }));
+      }
+    });
+      
+    // Open workspace admin interface (json view).
+    fastify.route({
+      method: 'GET',
+      url: '/admin/workspacejson',
+      beforeHandler: fastify.auth([fastify.authAdmin]),
+      handler: (req, res) => {
+      
+        // Render and send admin template with 'code' as view mode.
+        res.type('text/html').send(require('jsrender').templates('./views/workspace_admin.html').render({
+          dir: global.dir,
+          mode: 'code'
+        }));
+      }
+    });
+
+    // Save workspace provided in post body to the Postgres table.
+    fastify.route({
+      method: 'POST',
+      url: '/admin/workspace/save',
+      beforeHandler: fastify.auth([fastify.authAdminAPI]),
+      handler: async (req, res) => {
+      
+        let workspace = await require('./mod/workspace/check').chkWorkspace(req.body.settings);
+      
+        if (process.env.WORKSPACE && process.env.WORKSPACE.split(':')[0] === 'postgres') {
+      
+          let q = `INSERT INTO ${process.env.WORKSPACE.split('|').pop()} (settings) SELECT $1 AS settings;`;
+
+          await global.pg.ws(q, [JSON.stringify(workspace)]);
+        
+        }
+        
+        await loadWorkspace(workspace);
+        
+        res.code(200).send(workspace);
+      
+      }
+    });
+
     //proxy/image
     fastify.route({
       method: 'GET',
       url: '/proxy/image',
       beforeHandler: fastify.auth([fastify.authAPI]),
       handler: (req, res) => {
-        var q = `${req.query.uri}${req.query.size?'&size='+req.query.size+'&':''}${global.KEYS[req.query.provider]}`;
-        let test = require('request')(q);
-        console.log(test);
-        res.send(require('request')(q));
+        const uri = `${req.query.uri}${req.query.size?'&size='+req.query.size+'&':''}${global.KEYS[req.query.provider]}`;
+        res.send(require('request')(uri));
       }
     });
 

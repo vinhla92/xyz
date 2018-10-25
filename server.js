@@ -73,6 +73,8 @@ global.access = process.env.PRIVATE ? 'private' : 'public';
 
 global.failed_attempts = parseInt(process.env.FAILED_ATTEMPTS) || 3;
 
+global.pg = {};
+
 global.KEYS = {};
 Object.keys(process.env).forEach(key => {
   if (key.split('_')[0] === 'KEY') {
@@ -84,7 +86,7 @@ require('./auth').init(fastify);
   
 require('./routes')(fastify);
 
-require('./workspace')(fastify, startListen);
+require('./mod/workspace/init')(fastify, startListen);
 
 // Start to listen for requests (after workspaces are loaded).
 function startListen(){

@@ -36,24 +36,24 @@ async function get(req, res, fastify) {
             ST_MakeEnvelope(${west}, ${south}, ${east}, ${north}, 4326),
             ${geom}, 0.000001);`;
 
-  var db_connection = await fastify.pg[layer.dbs].connect();
-  var result = await db_connection.query(q);
-  db_connection.release();
+  var rows = await global.pg.dbs[layer.dbs](q, [id]);
 
-  res.code(200).send(Object.keys(result.rows).map(row => {
+  if (rows.err) return res.code(500).send('soz. it\'s not you. it\'s me.');
+
+  res.code(200).send(Object.keys(rows).map(row => {
     let props = {};
 
-    Object.keys(result.rows[row]).map(function (key) {
+    Object.keys(rows[row]).map(function (key) {
       if (key !== 'geomj') {
-        props[key] = result.rows[row][key];
+        props[key] = rows[row][key];
       }
     });
 
     return {
       type: 'Feature',
-      geometry: JSON.parse(result.rows[row].geomj),
+      geometry: JSON.parse(rows[row].geomj),
       properties: props || {
-        id: result.rows[row].id
+        id: rows[row].id
       }
     };
   }));

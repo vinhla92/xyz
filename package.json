@@ -31,13 +31,11 @@
     "mobile-detect": "^1.4.3",
     "nanoid": "^1.2.3",
     "nodemailer": "^4.6.8",
+    "pg": "^7.5.0",
     "pino-pretty": "^2.2.1",
     "request": "^2.88.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.1.0",
-    "@babel/preset-env": "^7.1.0",
-    "babel-loader": "^8.0.2",
     "webpack": "^4.20.2",
     "webpack-cli": "^3.1.1"
   }
