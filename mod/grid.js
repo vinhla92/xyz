@@ -35,15 +35,16 @@ async function get(req, res, fastify) {
             ${geom}, 0.000001)
         AND ${size} >= 1 LIMIT 10000;`;
 
-  var db_connection = await fastify.pg[layer.dbs].connect();
-  var result = await db_connection.query(q);
-  db_connection.release();
 
-  if (result.rows.length === 0) return res.code(204).send();
+  var rows = await global.pg.dbs[layer.dbs](q);
 
-  res.code(200).send(Object.keys(result.rows).map(record => {
-    return Object.keys(result.rows[record]).map(field => {
-      return result.rows[record][field];
+  if (rows.err) return res.code(500).send('soz. it\'s not you. it\'s me.');
+
+  if (rows.length === 0) return res.code(204).send();
+
+  res.code(200).send(Object.keys(rows).map(record => {
+    return Object.keys(rows[record]).map(field => {
+      return rows[record][field];
     });
   }));
 }

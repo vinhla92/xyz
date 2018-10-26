@@ -8,8 +8,6 @@ import panel_style from './style/_styles.mjs';
 
 import panel_grid from './grid.mjs';
 
-import panel_catchments from './catchments.mjs';
-
 import panel_editing from './editing.mjs';
 
 export default layer => {
@@ -47,10 +45,6 @@ export default layer => {
 
   // Add styles panel.
   panel_style(layer);
-
-
-  // Add catchments panel.
-  if (layer.catchments) panel_catchments(layer);
 
 
   // Add dashboard if it contains panel.

@@ -30,12 +30,12 @@ async function placesAutoComplete(req, res, locale, fastify) {
             ORDER BY length(${dataset.label})
             LIMIT 10`;
 
-    var db_connection = await fastify.pg[locale.layers[dataset.layer].dbs].connect();
-    var result = await db_connection.query(q,[`${dataset.leading_wildcard ? '%': ''}${decodeURIComponent(req.query.q)}%`]);
-    db_connection.release();
+    var rows = await global.pg.dbs[locale.layers[dataset.layer].dbs](q, [id]);
 
-    if (result.rows.length > 0) {
-      res.code(200).send(Object.values(result.rows).map(row => {
+    if (rows.err) return res.code(500).send('soz. it\'s not you. it\'s me.');
+
+    if (rows.length > 0) {
+      res.code(200).send(Object.values(rows).map(row => {
         return {
           label: row.label,
           id: row.id,

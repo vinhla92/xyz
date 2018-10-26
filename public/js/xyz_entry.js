@@ -46,13 +46,10 @@ function init() {
   _xyz.locations.init();
 
   // Initialize gazetteer module.
-  if (_xyz.view.mode !== 'report') gazetteer();
+  gazetteer();
 
   // Initialize locate module.
-  if (_xyz.ws.locate && _xyz.view.mode !== 'report') locate();
-
-  // Initialize report module.
-  // if (_xyz.ws.report) report();
+  if (_xyz.ws.locate) locate();
 
   // Add redirect to login button click event.
   document.getElementById('btnLogin').addEventListener('click', () => {

@@ -1,11 +1,6 @@
 {
     "title": "GEOLYTIX | XYZ Geodata",
-    "documentation": "documentation",
-    "select": {},
     "locate": {},
-    "report": {},
-    "gazetteer": {},
-    "locale": "UK",
     "locales": {
       "UK": {
         "name": "United Kingdom",

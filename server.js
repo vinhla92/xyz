@@ -17,6 +17,21 @@ const dotenv = req_res('dotenv') ? require('dotenv') : null;
 // Load environment from dotenv if available.
 if (dotenv) dotenv.load();
 
+// Global appRoot for absolute require paths.
+global.appRoot = require('path').resolve(__dirname);
+
+// Global dir expands the domain to create the root path for the application.
+global.dir = process.env.DIR || '';
+
+// If set the alias will override the host header in notifications.
+global.alias = process.env.ALIAS ? process.env.ALIAS : null;
+
+// Application access. Default is public.
+global.access = process.env.PRIVATE ? 'private' : 'public';
+
+// Create PG connections.
+require('./mod/pg/connections')();
+
 // Set fastify
 const fastify = require('fastify')({
   logger: {
@@ -30,7 +45,7 @@ const fastify = require('fastify')({
   }
 });
 
-// Register fastify modules.
+// Register fastify modules and routes.
 fastify
   .register(require('fastify-helmet'), {
     contentSecurityPolicy: {
@@ -46,54 +61,37 @@ fastify
         scriptSrc: ['\'self\'', 'www.google.com', 'www.gstatic.com'],
         imgSrc: ['\'self\'', '*.tile.openstreetmap.org', 'api.mapbox.com', 'res.cloudinary.com', 'data:']
       },
-      //reportOnly: true,
       setAllHeaders: true
     },
     noCache: true
   })
   .register(require('fastify-formbody'))
   .register(require('fastify-static'), {
-    root: require('path').join(__dirname, 'public'),
+    root: global.appRoot + '/public',
     prefix: (process.env.DIR || '') + '/'
   })
   .register(require('fastify-auth'))
   .register(require('fastify-jwt'), {
     secret: process.env.SECRET || 'some-secret-password-at-least-32-characters-long'
   })
-  .decorate('authAccess', (req, res, done) => require('./auth').authToken(req, res, fastify, {lv: global.access, API: false}, done))
-  .decorate('authAPI', (req, res, done) => require('./auth').authToken(req, res, fastify, {lv: global.access, API: true}, done))
-  .decorate('authAdmin', (req, res, done) => require('./auth').authToken(req, res, fastify, {lv: 'admin', API: false}, done))
-  .decorate('authAdminAPI', (req, res, done) => require('./auth').authToken(req, res, fastify, {lv: 'admin', API: true}, done));
+  .addContentTypeParser('*', (req, done) => done())
+  .decorate('authAccess', (req, res, done) => require('./mod/authToken')(req, res, fastify, { lv: global.access, API: false }, done))
+  .decorate('authAPI', (req, res, done) => require('./mod/authToken')(req, res, fastify, { lv: global.access, API: true }, done))
+  .decorate('authAdmin', (req, res, done) => require('./mod/authToken')(req, res, fastify, { lv: 'admin', API: false }, done))
+  .decorate('authAdminAPI', (req, res, done) => require('./mod/authToken')(req, res, fastify, { lv: 'admin', API: true }, done))
+  .register((fastify, opts, next) => { require('./routes/_routes')(fastify); next(); }, { prefix: global.dir });
 
-global.dir = process.env.DIR || '';
 
-global.alias = process.env.ALIAS ? process.env.ALIAS : null;
+// Load and check workspace, then start listening for requests.
+require('./mod/workspace/init')(startListen);
 
-global.access = process.env.PRIVATE ? 'private' : 'public';
-
-global.failed_attempts = parseInt(process.env.FAILED_ATTEMPTS) || 3;
-
-global.KEYS = {};
-Object.keys(process.env).forEach(key => {
-  if (key.split('_')[0] === 'KEY') {
-    global.KEYS[key.split('_')[1]] = process.env[key];
-  }
-});
-  
-require('./auth').init(fastify);
-  
-require('./routes')(fastify);
-
-require('./workspace')(fastify, startListen);
-
-// Start to listen for requests (after workspaces are loaded).
-function startListen(){
+function startListen() {
   fastify.listen(process.env.PORT || 3000, '0.0.0.0', err => {
     if (err) {
       console.error(err);
       process.exit(1);
-    }  
-  
+    }
+
     console.log(`Serving ${global.workspace.admin.config.title} workspace.`);
   });
 }

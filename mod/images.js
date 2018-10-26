@@ -40,9 +40,7 @@ function save(req, res, fastify) {
         WHERE ${qID} = $1;`;
 
     // add filename to images field
-    var db_connection = await fastify.pg[req.query.dbs].connect();
-    await db_connection.query(q, [id]);
-    db_connection.release();
+    await global.pg.dbs[req.query.dbs](q, [id]);
 
     res.code(200).send({
       'image_id': body.public_id,
@@ -90,9 +88,7 @@ function remove(req, res, fastify) {
             images = array_remove(images, '${image_src}')
         WHERE ${qID} = $1;`;
 
-    var db_connection = await fastify.pg[layer.dbs].connect();
-    await db_connection.query(q, [id]);
-    db_connection.release();
+    await global.pg.dbs[layer.dbs](q, [id]);
 
     res.code(200).send();
   });

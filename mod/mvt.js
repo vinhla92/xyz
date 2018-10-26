@@ -23,21 +23,19 @@ async function get(req, res, fastify) {
   }
 
   if (layer.mvt_cache) {
-    try {
-      var db_connection = await fastify.pg[layer.dbs].connect();
-      var result = await db_connection.query(`SELECT mvt FROM ${table}__mvts WHERE z = ${z} AND x = ${x} AND y = ${y}`);
-      db_connection.release();
-    } catch (err) {
-      console.error(err);
-      res.code(500).send('soz. it\'s not you. it\'s me.');
-    }
+
+    // Get a sample MVT from the cache table.
+    var rows = await global.pg.dbs[layer.dbs](`SELECT mvt FROM ${table}__mvts WHERE z = ${z} AND x = ${x} AND y = ${y}`);
+
+    if (rows.err) return res.code(500).send('soz. it\'s not you. it\'s me.');
+
   }
 
-  if (result && result.rowCount === 1) {
+  if (rows.length === 1) {
     res
       .type('application/x-protobuf')
       .code(200)
-      .send(result.rows[0].mvt);
+      .send(rows[0].mvt);
     return;
   }
 
@@ -84,12 +82,12 @@ async function get(req, res, fastify) {
         ${layer.mvt_cache ? 'RETURNING mvt;' : ';'}
         `;
 
-  db_connection = await fastify.pg[layer.dbs].connect();
-  result = await db_connection.query(q);
-  db_connection.release();
+  rows = await global.pg.dbs[layer.dbs](q);
+
+  if (rows.err) return res.code(500).send('soz. it\'s not you. it\'s me.');
 
   res
     .type('application/x-protobuf')
     .code(200)
-    .send(result.rows[0].mvt);
+    .send(rows[0].mvt);
 }

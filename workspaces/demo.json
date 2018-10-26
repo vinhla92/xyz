@@ -248,28 +248,6 @@
           "tables": {
             "3": "demo.global_catchments"
           },
-          "catchments": {
-            "modes": {
-              "driving": {
-                "minMin": 15,
-                "defMin": 45,
-                "maxMin": 180,
-                "detail": 3,
-                "reach": 40
-              },
-              "walking": {
-                "minMin": 5,
-                "defMin": 15,
-                "maxMin": 45,
-                "detail": 2,
-                "reach": 600
-              }
-            },
-            "provider": [
-              "GOOGLE",
-              "MAPBOX"
-            ]
-          },
           "infoj": [
             {
               "field": "id",
@@ -2385,7 +2363,6 @@
             "delete": true,
             "circle": true,
             "rectangle": true,
-            "catchments": {"default": "something"},
             "polygon": true,
             "point": true
           },
@@ -2790,28 +2767,6 @@
           "qID": "id",
           "tables": {
             "3": "uk_catchments"
-          },
-          "catchments": {
-            "modes": {
-              "driving": {
-                "minMin": 15,
-                "defMin": 45,
-                "maxMin": 180,
-                "detail": 3,
-                "reach": 40
-              },
-              "walking": {
-                "minMin": 5,
-                "defMin": 15,
-                "maxMin": 45,
-                "detail": 2,
-                "reach": 600
-              }
-            },
-            "provider": [
-              "GOOGLE",
-              "MAPBOX"
-            ]
           },
           "infoj": [
             {

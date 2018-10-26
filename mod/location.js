@@ -34,11 +34,13 @@ async function select(req, res, fastify) {
   if (geomdisplay) geomdisplay = `, ST_AsGeoJSON(${layer.geomdisplay}) AS geomdisplay`;
 
   if (sql_filter) {
-    var q = `select ${sql_filter} from ${table} where ${qID} = $1;`;
-    var db_connection = await fastify.pg[layer.dbs].connect();
-    var result = await db_connection.query(q, [id]);
-    db_connection.release();
-    sql_filter = result.rows[0].sql_filter;
+
+    var rows = await global.pg.dbs[layer.dbs](`select ${sql_filter} from ${table} where ${qID} = $1;`, [id]);
+
+    if (rows.err) return res.code(500).send('soz. it\'s not you. it\'s me.');
+
+    sql_filter = rows[0].sql_filter;
+
   }
 
   let access_filter = layer.access_filter && token.email && layer.access_filter[token.email.toLowerCase()] ?
@@ -91,7 +93,8 @@ async function select(req, res, fastify) {
           PARTITION BY ${layer.qID || 'id'}
           ORDER BY ((${layer.log_table.field || 'log'} -> 'time') :: VARCHAR) :: TIMESTAMP DESC ) AS rank
       FROM gb_retailpoint_editable_logs
-    ) AS logfilter` : null;
+    ) AS logfilter`
+    : null;
 
   q = `
     SELECT
@@ -103,37 +106,23 @@ async function select(req, res, fastify) {
     ${layer.log_table ? 'rank = 1 AND ' : ''}
     ${qID} = $1;`;
 
-  try {
-    db_connection = await fastify.pg[layer.dbs].connect();
-    result = await db_connection.query(q, [id]);
-    db_connection.release();
-  } catch(err) {
-    err.detail = {
-      token: token,
-      locale: req.query.locale,
-      layer: req.query.layer,
-      q: q.replace(/\n/g,'').replace(/\s\s+/g, ' ').replace(/\$1/, id)
-    };
 
-    fastify.log.error(err);
+  rows = await global.pg.dbs[layer.dbs](q, [id]);
 
-    return res.code(401).send();
-  }
+  if (rows.err) return res.code(500).send('soz. it\'s not you. it\'s me.');
 
-  if (result.rowCount === 0) {
-    return res.code(401).send();
-  }
+  if (rows.length === 0) return res.code(401).send();
 
   // Iterate through the infoj object's entries and assign the values returned from the database query.
   Object.values(infoj).map(entry => {
     
     if(entry.type == 'group'){
       Object.values(entry.items).map(item => {
-        setValues(result, item);
+        setValues(rows, item);
       });
       return;
     }
-    setValues(result, entry);
+    setValues(rows, entry);
   });
 
   function formatDate(str){
@@ -150,28 +139,28 @@ async function select(req, res, fastify) {
     return d ? d.toLocaleDateString(loc, options) + ', ' + d.toLocaleTimeString(loc) : false;
   }
     
-  function setValues(result, entry){
+  function setValues(rows, entry){
         
-    if (result.rows[0][entry.field] || result.rows[0][entry.field] == 0) {
+    if (rows[0][entry.field] || rows[0][entry.field] == 0) {
       if(entry.datetime){
-        entry.value = formatDateTime(result.rows[0][entry.field]); 
+        entry.value = formatDateTime(rows[0][entry.field]); 
         return;
       }
       if(entry.date){
-        entry.value = formatDate(result.rows[0][entry.field]);
+        entry.value = formatDate(rows[0][entry.field]);
         return;
       }
-      entry.value = result.rows[0][entry.field];
+      entry.value = rows[0][entry.field];
     }
-    if (result.rows[0][entry.subfield]) {
-      entry.subvalue = result.rows[0][entry.subfield];
+    if (rows[0][entry.subfield]) {
+      entry.subvalue = rows[0][entry.subfield];
     }
   }
     
   // Send the infoj object with values back to the client.
   res.code(200).send({
-    geomj: result.rows[0].geomj,
-    geomdisplay: result.rows[0].geomdisplay || false,
+    geomj: rows[0].geomj,
+    geomdisplay: rows[0].geomdisplay || false,
     infoj: infoj
   });
 }
@@ -222,23 +211,23 @@ async function select_ll(req, res, fastify) {
     FROM ${table}
     WHERE ST_Contains(${geom}, ST_SetSRID(ST_Point(${lng}, ${lat}), 4326));`;
 
-  var db_connection = await fastify.pg[layer.dbs].connect();
-  var result = await db_connection.query(q);
-  db_connection.release();
+  var rows = await global.pg.dbs[layer.dbs](q, [id]);
+
+  if (rows.err) return res.code(500).send('soz. it\'s not you. it\'s me.');
 
   // Iterate through the infoj object's entries and assign the values returned from the database query.
   infoj.forEach(entry => {
-    if (result.rows[0][entry.field] || result.rows[0][entry.field] == 0) {
-      entry.value = result.rows[0][entry.field];
+    if (rows[0][entry.field] || rows[0][entry.field] == 0) {
+      entry.value = rows[0][entry.field];
     }
-    if (result.rows[0][entry.subfield]) {
-      entry.subvalue = result.rows[0][entry.subfield];
+    if (rows[0][entry.subfield]) {
+      entry.subvalue = rows[0][entry.subfield];
     }
   });
     
   // Send the infoj object with values back to the client.
   res.code(200).send({
-    geomj: result.rows[0].geomj,
+    geomj: rows[0].geomj,
     infoj: infoj
   });
 }
@@ -291,12 +280,12 @@ async function select_ll_nnearest(req, res, fastify) {
     ORDER BY ST_SetSRID(ST_Point(${lng}, ${lat}), 4326) <#> ${geom}
     LIMIT ${nnearest};`;
 
-  var db_connection = await fastify.pg[layer.dbs].connect();
-  var result = await db_connection.query(q);
-  db_connection.release();
+  var rows = await global.pg.dbs[layer.dbs](q);
+
+  if (rows.err) return res.code(500).send('soz. it\'s not you. it\'s me.');
 
   // Iterate through the infoj object's entries and assign the values returned from the database query.
-  result.rows.forEach(row => {
+  rows.forEach(row => {
     infoj.forEach(entry => {
       if (row[entry.field] || row[entry.field] == 0) {
         entry.value = row[entry.field];
@@ -308,7 +297,7 @@ async function select_ll_nnearest(req, res, fastify) {
   });
 
   // Send the infoj object with values back to the client.
-  res.code(200).send(result.rows);
+  res.code(200).send(rows);
 }
 
 async function select_ll_intersect(req, res, fastify) {
@@ -364,12 +353,12 @@ async function select_ll_intersect(req, res, fastify) {
     FROM ${table}, T
     WHERE ST_Intersects(${geom}, _geom);`;
 
-  var db_connection = await fastify.pg[layer.dbs].connect();
-  var result = await db_connection.query(q);
-  db_connection.release();
+  var rows = await global.pg.dbs[layer.dbs](q);
+
+  if (rows.err) return res.code(500).send('soz. it\'s not you. it\'s me.');
 
   // Iterate through the infoj object's entries and assign the values returned from the database query.
-  result.rows.forEach(row => {
+  rows.forEach(row => {
     infoj.forEach(entry => {
       if (row[entry.field] || row[entry.field] == 0) {
         entry.value = row[entry.field];
@@ -381,18 +370,5 @@ async function select_ll_intersect(req, res, fastify) {
   });
 
   // Send the infoj object with values back to the client.
-  res.code(200).send(result.rows);
-}
-
-async function chart_data(req, res, fastify) {
-  let table = req.body.table,
-    qID = req.body.qID,
-    id = req.body.id,
-    series = req.body.series;
-
-  var q = `SELECT ${series} FROM ${table} WHERE ${qID} = $1;`;
-  var db_connection = await fastify.pg[req.body.dbs].connect();
-  var result = await db_connection.query(q, [id]);
-  db_connection.release();
-  res.code(200).send(result.rows[0]);
+  res.code(200).send(rows);
 }
