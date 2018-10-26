@@ -32,7 +32,8 @@
     "nanoid": "^1.2.3",
     "nodemailer": "^4.6.8",
     "pino-pretty": "^2.2.1",
-    "request": "^2.88.0"
+    "request": "^2.88.0",
+    "turf-isvalid": "^1.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.1.0",

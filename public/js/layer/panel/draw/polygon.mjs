@@ -1,5 +1,6 @@
 import _xyz from '../../../_xyz.mjs';
 import style from './style.mjs';
+//import valid from '@turf/isvalid';
 
 export default (e, layer) => {
     e.stopPropagation();
@@ -27,51 +28,53 @@ export default (e, layer) => {
 
         _xyz.dom.map.style.cursor = 'crosshair';
 
-        layer.vertices = L.featureGroup().addTo(_xyz.map);
-        layer.trail = L.featureGroup().addTo(_xyz.map);
-        layer.path = L.featureGroup().addTo(_xyz.map);
+        layer.edit.vertices = L.featureGroup().addTo(_xyz.map);
+        layer.edit.trail = L.featureGroup().addTo(_xyz.map);
+        layer.edit.path = L.featureGroup().addTo(_xyz.map);
 
         _xyz.map.on('click', e => {
 
             if(_xyz.state != btn) return;
-            //let start_pnt = [e.latlng.lat, e.latlng.lng];
-            layer.vertices.addLayer(L.circleMarker(e.latlng, style(layer).vertex));
+
+            layer.edit.vertices.addLayer(L.circleMarker(e.latlng, style(layer).vertex));
             
-            let len = layer.vertices.getLayers().length,
+            let len = layer.edit.vertices.getLayers().length,
                 segment = [];
             
             if(len === 2) {
                 segment = [
-                    [layer.vertices.getLayers()[len-2].getLatLng().lat, layer.vertices.getLayers()[len-2].getLatLng().lng],
-                    [layer.vertices.getLayers()[len-1].getLatLng().lat, layer.vertices.getLayers()[len-1].getLatLng().lng]
+                    [layer.edit.vertices.getLayers()[len-2].getLatLng().lat, layer.edit.vertices.getLayers()[len-2].getLatLng().lng],
+                    [layer.edit.vertices.getLayers()[len-1].getLatLng().lat, layer.edit.vertices.getLayers()[len-1].getLatLng().lng]
                 ];
-                layer.path.addLayer(L.polyline([segment], style(layer).path));
+                layer.edit.path.addLayer(L.polyline([segment], style(layer).path));
             }
             
             if(len > 2) {
-                layer.path.clearLayers();
+                layer.edit.path.clearLayers();
                 coords = [];
                 segment = [];
 
-                layer.vertices.eachLayer(layer => {
+                layer.edit.vertices.eachLayer(layer => {
                     let latlng = [layer.getLatLng().lng, layer.getLatLng().lat];
                     coords.push(latlng);
                     segment.push(latlng.reverse());
                 });
 
-                layer.path.addLayer(L.polygon(coords, style(layer).path));
+                layer.edit.path.addLayer(L.polygon(coords, style(layer).path));
             }
             
             _xyz.map.on('mousemove', e => {
-                layer.trail.clearLayers();
+                layer.edit.trail.clearLayers();
 
                 if(_xyz.state != btn) return;
                 
-                layer.trail.addLayer(L.polyline([
-                    [layer.vertices.getLayers()[0].getLatLng().lat, layer.vertices.getLayers()[0].getLatLng().lng],
+                layer.edit.trail.addLayer(L.polyline([
+                    [layer.edit.vertices.getLayers()[0].getLatLng().lat, layer.edit.vertices.getLayers()[0].getLatLng().lng],
                     [e.latlng.lat,e.latlng.lng], 
-                    [layer.vertices.getLayers()[len-1].getLatLng().lat, layer.vertices.getLayers()[len-1].getLatLng().lng]
+                    [layer.edit.vertices.getLayers()[len-1].getLatLng().lat, layer.edit.vertices.getLayers()[len-1].getLatLng().lng]
                 ], style(layer).path));
+
+                //console.log(valid(layer.edit.trail.toGeoJSON()));
             });
             
             _xyz.map.on('contextmenu', e => {
@@ -81,10 +84,10 @@ export default (e, layer) => {
                 _xyz.map.off('click');
                 _xyz.dom.map.style.cursor = '';
 
-                layer.trail.clearLayers();
+                layer.edit.trail.clearLayers();
                 
                 coords = [];
-                layer.vertices.eachLayer(layer => {
+                layer.edit.vertices.eachLayer(layer => {
                     coords.push([layer.getLatLng().lng, layer.getLatLng().lat]);
                 });
                 coords.push(coords[0]);
@@ -96,13 +99,13 @@ export default (e, layer) => {
                 };
                 
                 // Make select tab active on mobile device.
-                //if (_xyz.view.mobile.activateLocationsTab) _xyz.view.mobile.activateLocationsTab(); // resolve this name
+                if (_xyz.view.mobile) _xyz.view.mobile.activateLayersTab();
                 
                 let xhr = new XMLHttpRequest();
                 xhr.open('POST', _xyz.host + '/api/location/new?token=' + _xyz.token);
                 xhr.setRequestHeader('Content-Type', 'application/json');
                 
-                let _marker = layer.vertices.getBounds().getCenter(),
+                let _marker = layer.edit.vertices.getBounds().getCenter(),
                     marker = [_marker.lng.toFixed(5), _marker.lat.toFixed(5)];
                     
                 xhr.onload = e => {
@@ -113,8 +116,8 @@ export default (e, layer) => {
                     }
                     
                     if (e.target.status === 200) {
-                        layer.vertices.clearLayers();
-                        layer.path.clearLayers();
+                        layer.edit.vertices.clearLayers();
+                        layer.edit.path.clearLayers();
                         
                         layer.get();
 

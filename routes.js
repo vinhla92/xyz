@@ -60,10 +60,37 @@ module.exports = fastify => {
       url: '/proxy/image',
       beforeHandler: fastify.auth([fastify.authAPI]),
       handler: (req, res) => {
-        var q = `${req.query.uri}${req.query.size?'&size='+req.query.size+'&':''}${global.KEYS[req.query.provider]}`;
-        let test = require('request')(q);
-        console.log(test);
-        res.send(require('request')(q));
+        const uri = `${req.query.uri}${req.query.size?'&size='+req.query.size+'&':''}${global.KEYS[req.query.provider]}`;
+        //let test = require('request')(q);
+        //console.log(test);
+
+     
+
+
+
+    const request = require('request');
+
+    request(uri, function (error, response) {
+      if (error || (response && response.statusCode !== 200)) {
+
+        //console.log(`${layer.format} | ${layer.URI} | ${error ? error.code : response.statusCode}`);
+        console.log('Proxy request fails');
+        return res.code(400).send();
+
+        // Make layer invalid if tiles service is not readable.
+        //layers['__'+layer.key] = layer;
+        //delete layers[layer.key];
+      }
+      //console.log(response);
+      //res.send(require('request')(q));
+      res.send(response.body);
+      //console.log('error:', error); // Print the error if one occurred
+      //console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+      //console.log('body:', body); // Print the HTML for the Google homepage.
+
+
+    });
+       
       }
     });
 

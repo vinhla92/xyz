@@ -29,21 +29,6 @@ export default location => {
     }
   });
 
-  // fetch(_xyz.host + '/api/location/select?' + _xyz.utils.paramString({
-  //     locale: _xyz.locale,
-  //     layer: layer.key,
-  //     table: location.table,
-  //     id: location.id,
-  //     token: _xyz.token
-  // }))
-  //     .then(res => {
-  //         return res.json();
-  //     })
-  //     .then(loc => {
-  //         console.log(loc);
-  //     })
-  //     .catch(err => console.error(err));
-
   const xhr = new XMLHttpRequest();
 
   xhr.open('GET', _xyz.host + '/api/location/select?' + _xyz.utils.paramString({

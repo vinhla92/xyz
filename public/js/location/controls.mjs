@@ -22,7 +22,7 @@ export function clear(record) {
         e.stopPropagation();
         record.drawer.remove();
         
-        _xyz.switchState(layer, _xyz.state);
+        if(_xyz.state && _xyz.state != 'select') _xyz.switchState(record.location.layer, _xyz.state);
       
         _xyz.hooks.filter('select', record.location.layer + '!' + record.location.table + '!' + record.location.id + '!' + record.location.marker[0] + ';' + record.location.marker[1]);
         if (record.location.L) _xyz.map.removeLayer(record.location.L);
@@ -171,6 +171,7 @@ export function marker(record) {
 }
 
 export function update(record) {
+  
   record.upload = _xyz.utils.createElement({
     tag: 'i',
     options: {

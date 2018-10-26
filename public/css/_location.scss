@@ -73,3 +73,11 @@
         font-size: 50px;
     }
 }
+
+.stage-tooltip {
+    width: 65px;
+    height: 30px;
+    padding: 2px;
+    border-radius: 4px;
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0) , rgba(255, 255, 255, 0.6));
+}
