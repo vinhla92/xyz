@@ -49,7 +49,6 @@
             "qID": "optional",
             "infoj": "optional",
             "geom": "geom",
-            "catchments": "optional",
             "edit": "optional",
             "style": {
                 "default": {

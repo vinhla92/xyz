@@ -7,7 +7,7 @@ export default layer => {
   const panel = _xyz.utils.createElement({
     tag: 'div',
     options: {
-      className: 'panel report-block'
+      className: 'panel'
     },
     appendTo: layer.dashboard
   });

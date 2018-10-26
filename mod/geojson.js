@@ -36,7 +36,7 @@ async function get(req, res, fastify) {
             ST_MakeEnvelope(${west}, ${south}, ${east}, ${north}, 4326),
             ${geom}, 0.000001);`;
 
-  var rows = await global.pg.dbs[layer.dbs](q, [id]);
+  var rows = await global.pg.dbs[layer.dbs](q);
 
   if (rows.err) return res.code(500).send('soz. it\'s not you. it\'s me.');
 

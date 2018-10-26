@@ -1,6 +1,4 @@
-module.exports = { chkWorkspace };
-
-async function chkWorkspace(workspace) {
+module.exports = async workspace => {
   
   // Get default workspace
   const _workspace = global.workspace._defaults.ws;
@@ -12,7 +10,7 @@ async function chkWorkspace(workspace) {
   await chkLocales(workspace.locales);
   
   return workspace;
-}
+};
 
 function chkOptionals(chk, opt) {
   
@@ -202,10 +200,10 @@ async function chkMVTCache(layer) {
         if (Object.keys(tile.layers).length > 0 && tile.layers[layer.key]._keys.indexOf(field) < 0) {
 
           // Get a sample MVT from the cache table.
-          let _rows = await global.pg.dbs[layer.dbs](`TRUNCATE ${table}__mvts;`);
+          rows = await global.pg.dbs[layer.dbs](`TRUNCATE ${table}__mvts;`);
 
-          if (_rows.err) {
-            console.log(_rows.err.code);
+          if (rows.err) {
+            console.log(rows.err.code);
           }
         }
       }

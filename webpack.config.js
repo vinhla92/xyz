@@ -18,8 +18,8 @@ module.exports = {
   optimization: {
     concatenateModules: true
   },
-  stats: {
-    maxModules: Infinity,
-    optimizationBailout: true
-  }
+  // stats: {
+  //   optimizationBailout: true,
+  //   maxModules: Infinity
+  // }
 };

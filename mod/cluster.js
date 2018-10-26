@@ -71,17 +71,17 @@ async function get(req, res, fastify) {
     ${filter_sql}
     ${access_filter ? 'AND ' + access_filter : ''};`;
 
-  var db_connection = await fastify.pg[layer.dbs].connect();
-  var result = await db_connection.query(q);
-  db_connection.release();
+  var rows = await global.pg.dbs[layer.dbs](q);
+
+  if (rows.err) return res.code(500).send('soz. it\'s not you. it\'s me.');
 
   // return 204 if no locations found within the envelope.
-  if (parseInt(result.rows[0].count) === 0) return res.code(204).send();
+  if (parseInt(rows[0].count) === 0) return res.code(204).send();
 
   let
-    count = result.rows[0].count,
-    xExtent = result.rows[0].xextent,
-    xEnvelope = result.rows[0].xenvelope;
+    count = rows[0].count,
+    xExtent = rows[0].xextent,
+    xEnvelope = rows[0].xenvelope;
 
   if (kmeans >= count) kmeans = count;
 
@@ -175,41 +175,40 @@ async function get(req, res, fastify) {
     ) kmeans
   ) dbscan GROUP BY kmeans_cid, dbscan_cid;`;
 
-  //console.log(q);
 
-  db_connection = await fastify.pg[layer.dbs].connect();
-  result = await db_connection.query(q);
-  db_connection.release();
+  rows = await global.pg.dbs[layer.dbs](q);
 
-  if (!theme) res.code(200).send(Object.keys(result.rows).map(record => {
+  if (rows.err) return res.code(500).send('soz. it\'s not you. it\'s me.');
+
+  if (!theme) res.code(200).send(Object.keys(rows).map(record => {
     return {
       type: 'Feature',
-      geometry: JSON.parse(result.rows[record].geomj),
+      geometry: JSON.parse(rows[record].geomj),
       properties: {
-        count: parseInt(result.rows[record].count)
+        count: parseInt(rows[record].count)
       }
     };
   }));
 
-  if (theme === 'categorized') res.code(200).send(Object.keys(result.rows).map(record => {
+  if (theme === 'categorized') res.code(200).send(Object.keys(rows).map(record => {
     return {
       type: 'Feature',
-      geometry: JSON.parse(result.rows[record].geomj),
+      geometry: JSON.parse(rows[record].geomj),
       properties: {
-        count: parseInt(result.rows[record].count),
-        cat: Object.assign({}, ...result.rows[record].cat)
+        count: parseInt(rows[record].count),
+        cat: Object.assign({}, ...rows[record].cat)
       }
     };
   }));
 
-  if (theme === 'graduated') res.code(200).send(Object.keys(result.rows).map(record => {
+  if (theme === 'graduated') res.code(200).send(Object.keys(rows).map(record => {
     return {
       type: 'Feature',
-      geometry: JSON.parse(result.rows[record].geomj),
+      geometry: JSON.parse(rows[record].geomj),
       properties: {
-        count: parseInt(result.rows[record].count),
-        size: parseInt(result.rows[record].size),
-        sum: result.rows[record].sum
+        count: parseInt(rows[record].count),
+        size: parseInt(rows[record].size),
+        sum: rows[record].sum
       }
     };
   }));
@@ -249,15 +248,15 @@ async function select(req, res, fastify) {
     ${filter_sql} 
   ORDER BY ST_Point(${lnglat}) <#> ${geom} LIMIT ${count};`;
 
-  var db_connection = await fastify.pg[layer.dbs].connect();
-  var result = await db_connection.query(q);
-  db_connection.release();
+  var rows = await global.pg.dbs[layer.dbs](q);
 
-  res.code(200).send(Object.keys(result.rows).map(record => {
+  if (rows.err) return res.code(500).send('soz. it\'s not you. it\'s me.');
+
+  res.code(200).send(Object.keys(rows).map(record => {
     return {
-      id: result.rows[record].id,
-      label: result.rows[record].label,
-      lnglat: result.rows[record].lnglat
+      id: rows[record].id,
+      label: rows[record].label,
+      lnglat: rows[record].lnglat
     };
   }));
 }

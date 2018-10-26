@@ -79,17 +79,11 @@ export default layer => {
     }
   });
 
-  // Create style panel element for the theme.
-  /*layer.style.panel = _xyz.utils.createElement({
-    tag: 'div',
-    appendTo: panel
-  });*/
-
   applyTheme(layer);
 
   function applyTheme(layer) {
 
-    layer.style.panel.innerHTML = '';
+    //layer.style.panel.innerHTML = '';
   
     if ((layer.format === 'mvt' || layer.format === 'geojson')
       && layer.style.theme.type === 'categorized') polyCategorized(layer);
