@@ -27,45 +27,45 @@ export default (e, layer) => {
         layer.header.classList.add('edited');
         _xyz.dom.map.style.cursor = 'crosshair';
 
-        layer.vertices = L.featureGroup().addTo(_xyz.map);
-        layer.trail = L.featureGroup().addTo(_xyz.map);
-        layer.path = L.featureGroup().addTo(_xyz.map);
+        layer.edit.vertices = L.featureGroup().addTo(_xyz.map);
+        layer.edit.trail = L.featureGroup().addTo(_xyz.map);
+        layer.edit.path = L.featureGroup().addTo(_xyz.map);
 
         _xyz.map.on('click', e => {
 
-            layer.vertices.addLayer(L.circleMarker(e.latlng, style(layer).vertex));
+            layer.edit.vertices.addLayer(L.circleMarker(e.latlng, style(layer).vertex));
 
             if(_xyz.state != btn) return;
 
-            let len = layer.vertices.getLayers().length, 
+            let len = layer.edit.vertices.getLayers().length, 
                 o, c, s, r, // origin, cursor, segment, radius
                 options = {units: "metres", steps: 128}; // circle options
 
-            o = helpers.point([layer.vertices.getLayers()[0].getLatLng().lng, layer.vertices.getLayers()[0].getLatLng().lat]);
+            o = helpers.point([layer.edit.vertices.getLayers()[0].getLatLng().lng, layer.edit.vertices.getLayers()[0].getLatLng().lat]);
 
             if(len === 1){
                 _xyz.map.on('mousemove', e => {
-                    layer.trail.clearLayers();
+                    layer.edit.trail.clearLayers();
                     c = helpers.point([e.latlng.lng, e.latlng.lat]);
                     r = distance(o, c, options).toFixed(2);
                     
-                    layer.trail.addLayer(L.circle([layer.vertices.getLayers()[0].getLatLng().lat, layer.vertices.getLayers()[0].getLatLng().lng], Object.assign(style(layer).path, {radius: parseFloat(r)})));
+                    layer.edit.trail.addLayer(L.circle([layer.edit.vertices.getLayers()[0].getLatLng().lat, layer.edit.vertices.getLayers()[0].getLatLng().lng], Object.assign(style(layer).path, {radius: parseFloat(r)})));
                 });
             }
 
             if(len === 2){
-                layer.trail.clearLayers();
-                s = helpers.point([layer.vertices.getLayers()[len-1].getLatLng().lng, layer.vertices.getLayers()[len-1].getLatLng().lat]);
+                layer.edit.trail.clearLayers();
+                s = helpers.point([layer.edit.vertices.getLayers()[len-1].getLatLng().lng, layer.edit.vertices.getLayers()[len-1].getLatLng().lat]);
                 r = distance(o, s, options).toFixed(2);
-                layer.trail.clearLayers();
+                layer.edit.trail.clearLayers();
                 _xyz.dom.map.style.cursor = '';
                 _xyz.map.off('mousemove');
                 _xyz.map.off('click');
 
-                layer.path.addLayer(L.circle([layer.vertices.getLayers()[0].getLatLng().lat, layer.vertices.getLayers()[0].getLatLng().lng], Object.assign(style(layer).path, {radius: parseFloat(r)})));
+                layer.edit.path.addLayer(L.circle([layer.edit.vertices.getLayers()[0].getLatLng().lat, layer.edit.vertices.getLayers()[0].getLatLng().lng], Object.assign(style(layer).path, {radius: parseFloat(r)})));
 
                 // Make select tab active on mobile device.
-                //if (_xyz.view.mobile.activateLocationsTab) _xyz.view.mobile.activateLocationsTab(); // resolve this name
+                if (_xyz.view.mobile) _xyz.view.mobile.activateLayersTab();
 
                 let xhr = new XMLHttpRequest();
                 xhr.open('POST', _xyz.host + '/api/location/new?token=' + _xyz.token);
@@ -79,8 +79,8 @@ export default (e, layer) => {
                     }
 
                     if (e.target.status === 200) {
-                        layer.vertices.clearLayers();
-                        layer.path.clearLayers();
+                        layer.edit.vertices.clearLayers();
+                        layer.edit.path.clearLayers();
                         
                         layer.get();
 

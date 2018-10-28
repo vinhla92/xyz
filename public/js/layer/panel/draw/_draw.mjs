@@ -36,7 +36,10 @@ export function switchState(layer, btn){
     return _xyz.state = 'select';
   }
 
-  if (_xyz.state !== 'select') _xyz.state.classList.remove('active');
+  if (_xyz.state !== 'select') {
+    _xyz.state.classList.remove('active'); 
+    _xyz.dom.map.style.cursor = '';
+  }
 
   _xyz.state = btn;
   _xyz.dom.map.style.cursor = 'crosshair';
@@ -50,4 +53,9 @@ function resetEditSession(layer){
     if(layer.trail) layer.trail.clearLayers();
     if(layer.path) layer.path.clearLayers();
     if(layer.vertices) layer.vertices.clearLayers();
+    if(layer.edit.stage) {
+      layer.edit.stage.clearLayers();
+      layer.edit.stage.unbindTooltip();
+    }
+
 }

@@ -23,35 +23,35 @@ export default (e, layer) => {
         layer.header.classList.add('edited');
         _xyz.dom.map.style.cursor = 'crosshair';
 
-        layer.vertices = L.featureGroup().addTo(_xyz.map);
-        layer.trail = L.featureGroup().addTo(_xyz.map);
-        layer.path = L.featureGroup().addTo(_xyz.map);
+        layer.edit.vertices = L.featureGroup().addTo(_xyz.map);
+        layer.edit.trail = L.featureGroup().addTo(_xyz.map);
+        layer.edit.trail = L.featureGroup().addTo(_xyz.map);
 
         let coords = [];
 
         _xyz.map.on('click', e => {
             let start_pnt = [e.latlng.lat, e.latlng.lng];
 
-            layer.vertices.addLayer(L.circleMarker(e.latlng, style(layer).vertex));
+            layer.edit.vertices.addLayer(L.circleMarker(e.latlng, style(layer).vertex));
 
-            let len = layer.vertices.getLayers().length, part = [];
+            let len = layer.edit.vertices.getLayers().length, part = [];
 
             if(_xyz.state != btn) return;
 
             if(len > 1){
                 part = [
-                    [layer.vertices.getLayers()[len-2].getLatLng().lat, layer.vertices.getLayers()[len-2].getLatLng().lng],
-                    [layer.vertices.getLayers()[len-1].getLatLng().lat, layer.vertices.getLayers()[len-1].getLatLng().lng]
+                    [layer.edit.vertices.getLayers()[len-2].getLatLng().lat, layer.edit.vertices.getLayers()[len-2].getLatLng().lng],
+                    [layer.edit.vertices.getLayers()[len-1].getLatLng().lat, layer.edit.vertices.getLayers()[len-1].getLatLng().lng]
                 ];
-                layer.path.addLayer(L.polyline([part], style(layer).path));
+                layer.edit.trail.addLayer(L.polyline([part], style(layer).path));
             }
 
             _xyz.map.on('mousemove', e => {
-                layer.trail.clearLayers();
+                layer.edit.trail.clearLayers();
 
                 if(_xyz.state != btn) return;
                 
-                layer.trail.addLayer(L.polyline(
+                layer.edit.trail.addLayer(L.polyline(
                     [start_pnt, 
                         [e.latlng.lat, e.latlng.lng]
                     ], 
@@ -60,7 +60,7 @@ export default (e, layer) => {
 
             _xyz.map.on('contextmenu', e => {
                 _xyz.map.off('mousemove');
-                layer.trail.clearLayers();
+                layer.edit.trail.clearLayers();
                 
                 _xyz.map.off('contextmenu');
                 _xyz.map.off('contextmenu');
@@ -70,7 +70,7 @@ export default (e, layer) => {
                 layer.edited = false;
                 coords = [];
 
-                layer.path.eachLayer(layer => {
+                layer.edit.trail.eachLayer(layer => {
                     let latlngs = layer.getLatLngs();
                     if(latlngs) latlngs.map(latlng => {
                         let coord = [];
@@ -87,13 +87,13 @@ export default (e, layer) => {
                 };
 
                 // Make select tab active on mobile device.
-                //if (global._xyz.activateLocationsTab) global._xyz.activateLocationsTab();
+                if (_xyz.view.mobile) _xyz.view.mobile.activateLayersTab();
 
                 let xhr = new XMLHttpRequest();
                 xhr.open('POST', _xyz.host + '/api/location/new?token=' + _xyz.token);
                 xhr.setRequestHeader('Content-Type', 'application/json');
 
-                let _marker = layer.vertices.getLayers()[Math.ceil(len/2)].getLatLng();
+                let _marker = layer.edit.vertices.getLayers()[Math.ceil(len/2)].getLatLng();
                 let marker = [_marker.lng, _marker.lat];
 
                 xhr.onload = e => {
@@ -106,8 +106,8 @@ export default (e, layer) => {
                     
                     if (e.target.status === 200) {
 
-                        layer.vertices.clearLayers();
-                        layer.path.clearLayers();
+                        layer.edit.vertices.clearLayers();
+                        layer.edit.trail.clearLayers();
                         layer.edited = false;
 
                         layer.header.classList.remove('edited'); // this should happen on final save, delete, unselect

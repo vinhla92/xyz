@@ -24,6 +24,14 @@ export default (layer) => {
             fill: true,
             fillColor: "#cf9",
             weight: 1
+        },
+        point: { // new staged point
+            pane: layer.key,
+            stroke: true,
+            color: "darkgrey",
+            fillColor: "steelblue",
+            weight: 2,
+            radius: 8
         }
     }
 }

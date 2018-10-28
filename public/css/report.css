@@ -43,102 +43,6 @@
   .input_group input:focus ~ .bar:before, .input_group input:focus ~ .bar:after {
     width: 50%; }
 
-.btn_text {
-  font-family: ffmark_bold;
-  font-size: 15px;
-  color: #090;
-  height: 25px; }
-
-.btn_subtext {
-  font-family: ffmark;
-  font-size: 14px;
-  color: #090;
-  padding: 8px 0px 8px 0px; }
-
-.btn_column {
-  top: 0;
-  z-index: 999;
-  position: absolute;
-  left: -10px; }
-  .btn_column div:hover {
-    background: #090;
-    color: #fff;
-    cursor: pointer; }
-    .btn_column div:hover a {
-      color: #fff; }
-  .btn_column button,
-  .btn_column > div {
-    margin-top: 10px;
-    float: left;
-    clear: both;
-    height: 50px;
-    width: 50px;
-    padding: 0;
-    color: #090;
-    background: #fff;
-    border-radius: 50%;
-    box-shadow: 1px 1px 3px 0 rgba(0, 0, 0, 0.2);
-    text-align: center;
-    cursor: default;
-    border: none;
-    outline: none; }
-    .btn_column button a,
-    .btn_column > div a {
-      color: #090; }
-    .btn_column button i,
-    .btn_column > div i {
-      font-size: 30px;
-      line-height: 1.7; }
-    .btn_column button.active,
-    .btn_column > div.active {
-      background: #090;
-      color: #fff; }
-    .btn_column button:disabled,
-    .btn_column > div:disabled {
-      opacity: 0.3; }
-    .btn_column button:hover:enabled,
-    .btn_column > div:hover:enabled {
-      background: #090;
-      color: #fff;
-      cursor: pointer; }
-      .btn_column button:hover:enabled a,
-      .btn_column > div:hover:enabled a {
-        color: #fff; }
-
-.btn_header {
-  font-size: 25px;
-  margin-left: 5px;
-  float: right;
-  color: #090; }
-  .btn_header.active {
-    text-shadow: 2px 2px 2px #cf9; }
-
-.btn_small {
-  font-family: sans-serif;
-  font-size: 11px;
-  color: #090;
-  height: 14px;
-  display: none; }
-
-.btn_wide {
-  font-size: 13px;
-  border-radius: 2px;
-  line-height: 2;
-  text-align: center;
-  font-weight: 600;
-  color: #090;
-  box-shadow: 1px 1px 3px #666;
-  margin: 5px 2px 0 1px; }
-  .btn_wide.disabled {
-    opacity: 0.3; }
-
-.btn_state {
-  /*color: black;*/
-  color: #090; }
-  .btn_state.active {
-    /*color: #090;*/
-    color: black; }
-
 .range {
   width: 100%;
   width: calc(100% - 5px);
@@ -380,227 +284,6 @@ input[type=range]::-moz-range-thumb {
         background-color: #cf9; }
       #Gazetteer > ul li.active {
         background-color: #cf9; }
-
-.checkbox {
-  padding: 5px 0 5px 25px;
-  position: relative;
-  cursor: pointer;
-  display: block;
-  width: 90%; }
-  .checkbox input[type=checkbox] {
-    position: absolute;
-    opacity: 0;
-    overflow: hidden;
-    display: none; }
-  .checkbox .checkbox_i {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 0;
-    width: 0;
-    font-size: 22px;
-    color: #090;
-    cursor: pointer; }
-  .checkbox .checkbox_i:after {
-    font-family: "Material Icons";
-    content: '\E835'; }
-  .checkbox input[type=checkbox]:checked + .checkbox_i:after {
-    font-family: "Material Icons";
-    content: '\E834'; }
-
-.mod_container {
-  position: fixed;
-  height: 100%;
-  padding: 0 20px;
-  width: 330px; }
-  .mod_container > .scrolly {
-    width: calc(100% + 50px); }
-  .mod_container .tab_bar {
-    width: 100%;
-    color: #090;
-    border-bottom: 1px solid #090;
-    text-align: center;
-    table-layout: fixed;
-    height: 50px; }
-    .mod_container .tab_bar .swipe_icon {
-      display: none; }
-    .mod_container .tab_bar .active {
-      color: white;
-      background-color: #090; }
-      .mod_container .tab_bar .active .tab_icon {
-        display: none; }
-      .mod_container .tab_bar .active .swipe_icon {
-        display: inline-block; }
-  .mod_container .hidden {
-    display: none; }
-  .mod_container .module {
-    padding: 10px 0; }
-    .mod_container .module .title {
-      font-family: ffmark_bold, sans-serif;
-      font-size: 18px;
-      margin-bottom: 10px; }
-    .mod_container .module input {
-      width: 100%; }
-    .mod_container .module .drawer {
-      margin-top: 10px; }
-      .mod_container .module .drawer.expandable {
-        max-height: 35px;
-        overflow: hidden;
-        transition: max-height 0.3s ease-out; }
-        .mod_container .module .drawer.expandable .expander::before {
-          content: "expand_more"; }
-      .mod_container .module .drawer.expanded {
-        max-height: 2500px; }
-        .mod_container .module .drawer.expanded .expander::before {
-          content: "expand_less"; }
-      .mod_container .module .drawer.drawer-group .header-group {
-        font-family: ffmark_bold, sans-serif !important;
-        font-size: 15px !important;
-        line-height: 2; }
-        .mod_container .module .drawer.drawer-group .header-group:hover {
-          cursor: pointer; }
-      .mod_container .module .drawer.drawer-group.expandable-group {
-        max-height: 30px;
-        overflow: hidden;
-        transition: max-height 0.3s ease-out; }
-        .mod_container .module .drawer.drawer-group.expandable-group .expander-group::before {
-          content: "expand_more"; }
-      .mod_container .module .drawer.drawer-group.expanded-group {
-        max-height: 2500px; }
-        .mod_container .module .drawer.drawer-group.expanded-group .expander-group::before {
-          content: "expand_less"; }
-      .mod_container .module .drawer .header {
-        font-size: 14px;
-        line-height: 2;
-        font-family: ffmark, sans-serif; }
-        .mod_container .module .drawer .header:hover {
-          cursor: pointer; }
-        .mod_container .module .drawer .header.edited {
-          background-image: linear-gradient(white, #fff176); }
-      .mod_container .module .drawer .dashboard {
-        border-bottom: 1px solid #333;
-        font-size: 13px; }
-        .mod_container .module .drawer .dashboard .title {
-          font-family: ffmark_bold, sans-serif;
-          line-height: 1.5;
-          font-size: 13px;
-          margin-bottom: 0; }
-        .mod_container .module .drawer .dashboard .panel {
-          padding: 10px 0;
-          border-bottom: 1px solid #555; }
-          .mod_container .module .drawer .dashboard .panel.expandable {
-            max-height: 30px;
-            overflow: hidden;
-            transition: max-height 0.3s ease-out; }
-            .mod_container .module .drawer .dashboard .panel.expandable .expander::before {
-              content: "expand_more"; }
-          .mod_container .module .drawer .dashboard .panel.expanded {
-            max-height: 2500px !important; }
-            .mod_container .module .drawer .dashboard .panel.expanded .expander::before {
-              content: "expand_less"; }
-        .mod_container .module .drawer .dashboard .block {
-          padding: 5px 0;
-          margin-right: 10px; }
-          .mod_container .module .drawer .dashboard .block i {
-            color: #090;
-            font-size: 14px;
-            float: right; }
-          .mod_container .module .drawer .dashboard .block .range-tooltip._max {
-            float: right;
-            margin-bottom: 6px; }
-        .mod_container .module .drawer .dashboard .half {
-          width: 48%;
-          display: inline-block; }
-          .mod_container .module .drawer .dashboard .half.right {
-            float: right; }
-        .mod_container .module .drawer .dashboard .third {
-          width: 15%;
-          display: inline-block;
-          margin: 1px; }
-          .mod_container .module .drawer .dashboard .third.right {
-            float: right; }
-      .mod_container .module .drawer .bar {
-        fill: #5AB664 !important;
-        width: 10px; }
-      .mod_container .module .drawer div.chart-tooltip {
-        position: absolute;
-        text-align: center;
-        width: 40px;
-        padding: 2px;
-        font: 12px sans-serif;
-        background: #EFC9A5;
-        border: 0px;
-        border-radius: 2px;
-        pointer-events: none;
-        vertical-align: baseline; }
-      .mod_container .module .drawer .bar:hover {
-        fill: #D8BC8E !important; }
-      .mod_container .module .drawer .axis {
-        font: 10px sans-serif;
-        color: #333; }
-      .mod_container .module .drawer .axis path,
-      .mod_container .module .drawer .axis line {
-        fill: none;
-        stroke: #333;
-        shape-rendering: crispEdges; }
-  .mod_container .pane_shadow {
-    box-shadow: 0 3px 3px -3px #000; }
-  .mod_container .loader {
-    height: 2px;
-    margin-top: -2px;
-    width: 100%;
-    position: relative;
-    overflow: hidden;
-    display: none; }
-  .mod_container .loader:before {
-    display: block;
-    position: absolute;
-    content: "";
-    left: -200px;
-    width: 200px;
-    height: 2px;
-    background-color: #fff;
-    animation: loading 2s linear infinite; }
-@keyframes loading {
-  from {
-    left: -200px;
-    width: 30%; }
-  50% {
-    width: 30%; }
-  70% {
-    width: 70%; }
-  80% {
-    left: 50%; }
-  95% {
-    left: 120%; }
-  to {
-    left: 100%; } }
-.map_container {
-  position: fixed;
-  right: 0;
-  width: calc(100% - 330px);
-  height: 100%; }
-  .map_container .map {
-    width: 100%;
-    height: 100%; }
-    .map_container .map div.leaflet-select-pane svg > g path {
-      filter: url(#dropshadow); }
-  .map_container .leaflet-interactive.wait-cursor-enabled {
-    cursor: wait !important; }
-  .map_container .leaflet-control-attribution {
-    display: none; }
-  .map_container .leaflet-popup-content {
-    width: 401px !important; }
-  .map_container .leaflet-popup-content {
-    width: 401px !important; }
-  .map_container .tooltip {
-    font-family: 'PT Mono', monospace;
-    font-weight: 600;
-    font-size: 15px;
-    background-color: #fff;
-    padding: 5px 5px 3px 5px;
-    border-radius: 3px;
-    box-shadow: 1px 1px 3px #555; }
 
 /* required styles */
 .leaflet-pane,
@@ -986,15 +669,22 @@ input[type=range]::-moz-range-thumb {
   bottom: 5px;
   right: 5px;
   position: absolute;
-  z-index: 999; }
+  z-index: 999;
+  right: 0;
+  bottom: 0;
+  padding: 5px;
+  background-color: rgba(255, 255, 255, 0.5);
+  width: 100%; }
   .attribution #attribution_links {
     float: right;
     clear: right;
     font-family: ffmark_bold, sans-serif;
     font-size: 18px;
+    font-size: 15px;
     text-shadow: 2px 2px #cf9; }
     .attribution #attribution_links i {
-      font-size: 14px; }
+      font-size: 14px;
+      font-size: 10px; }
     .attribution #attribution_links a {
       border-bottom: 2px solid black;
       margin-left: 5px; }
@@ -1002,7 +692,8 @@ input[type=range]::-moz-range-thumb {
     font-family: ffmark_black, sans-serif;
     text-shadow: 2px 2px #cf9;
     float: right;
-    font-size: 40px; }
+    font-size: 40px;
+    font-size: 30px; }
 
 *,
 *::after,
@@ -1013,13 +704,15 @@ input[type=range]::-moz-range-thumb {
   -o-box-sizing: border-box;
   box-sizing: border-box; }
 
+html,
 body {
   position: absolute;
   width: 100%;
   height: 100%;
   margin: 0;
   padding: 0;
-  font-family: ffmark, sans-serif; }
+  font-family: ffmark, sans-serif;
+  background-color: #eee; }
 
 a {
   color: #000;
@@ -1049,18 +742,130 @@ i,
   background-color: #fff;
   padding-top: 5px; }
 
-#timeout_mask {
-  display: none;
+#Layers {
   position: absolute;
-  width: 100%;
-  height: 100%;
-  background-color: black;
-  opacity: 0.5;
-  font-size: 50px;
-  text-align: center;
-  color: #090;
-  font-family: ffmark_black;
-  padding-top: 30%;
-  text-shadow: 2px 2px #cf9; }
+  left: 0; }
 
-/*# sourceMappingURL=desktop.css.map */
+#Locations {
+  position: absolute;
+  left: 25%; }
+
+.mod_container .hidden {
+  display: none; }
+.mod_container .section {
+  display: none; }
+.mod_container .report-block {
+  display: block; }
+.mod_container .report-off {
+  display: none; }
+.mod_container .drawer {
+  margin-bottom: 15px; }
+.mod_container .module {
+  padding: 0 10px 0 0;
+  width: 25%;
+  height: 100%;
+  overflow: hidden; }
+  .mod_container .module .title {
+    display: none; }
+  .mod_container .module input {
+    width: 100%; }
+  .mod_container .module .drawer .header {
+    font-size: 15px;
+    font-family: ffmark, sans-serif;
+    font-weight: 600;
+    height: 6mm; }
+    .mod_container .module .drawer .header:hover {
+      cursor: pointer; }
+  .mod_container .module .drawer .dashboard {
+    border-bottom: 1px solid #333;
+    font-size: 13px; }
+    .mod_container .module .drawer .dashboard .title {
+      font-family: ffmark_bold, sans-serif;
+      line-height: 1.5; }
+    .mod_container .module .drawer .dashboard .panel {
+      padding: 10px 0;
+      border-bottom: 1px solid #555; }
+    .mod_container .module .drawer .dashboard .block {
+      padding: 5px 0; }
+    .mod_container .module .drawer .dashboard .half {
+      width: 48%;
+      display: inline-block; }
+      .mod_container .module .drawer .dashboard .half.right {
+        float: right; }
+    .mod_container .module .drawer .dashboard .third {
+      width: 15%;
+      display: inline-block;
+      margin: 1px; }
+      .mod_container .module .drawer .dashboard .third.right {
+        float: right; }
+.mod_container .loader {
+  height: 2px;
+  margin-top: -2px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  display: none; }
+.mod_container .loader:before {
+  display: block;
+  position: absolute;
+  content: "";
+  left: -200px;
+  width: 200px;
+  height: 2px;
+  background-color: #fff;
+  animation: loading 2s linear infinite; }
+@keyframes loading {
+  from {
+    left: -200px;
+    width: 30%; }
+  50% {
+    width: 30%; }
+  70% {
+    width: 70%; }
+  80% {
+    left: 50%; }
+  95% {
+    left: 120%; }
+  to {
+    left: 100%; } }
+.map_container {
+  position: absolute;
+  right: 0;
+  width: 50%;
+  height: 100%; }
+  .map_container .map {
+    width: 100%;
+    height: 100%; }
+    .map_container .map div.leaflet-select-pane svg > g path {
+      filter: url(#dropshadow); }
+  .map_container .leaflet-control-attribution {
+    display: none; }
+
+.report-spacer {
+  height: 10mm; }
+  @media print {
+    .report-spacer {
+      display: none; } }
+
+#Report {
+  position: relative;
+  width: 297mm;
+  height: 210mm;
+  margin: 0 auto;
+  background: white;
+  box-shadow: 3px 3px 5px #999; }
+  @media print {
+    #Report {
+      width: 100%;
+      height: 100%; } }
+
+.btn_text,
+.btn_column,
+.btn_header {
+  display: none; }
+
+@media print {
+  * {
+    box-shadow: none; } }
+
+/*# sourceMappingURL=report.css.map */

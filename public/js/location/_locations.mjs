@@ -10,9 +10,12 @@ _xyz.locations.draw = draw;
 import add from './add.mjs';
 _xyz.locations.add = add;
 
+<<<<<<< HEAD
+=======
 import _new from './new.mjs';
 _xyz.locations.new = _new;
 
+>>>>>>> esm
 export default () => {
 
   // Make select tab active on mobile device.

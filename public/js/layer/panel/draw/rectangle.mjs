@@ -22,49 +22,49 @@ export default (e, layer) => {
         layer.header.classList.add('edited');
         _xyz.dom.map.style.cursor = 'crosshair';
 
-        layer.vertices = L.featureGroup().addTo(_xyz.map);
-        layer.trail = L.featureGroup().addTo(_xyz.map);
-        layer.path = L.featureGroup().addTo(_xyz.map);
+        layer.edit.vertices = L.featureGroup().addTo(_xyz.map);
+        layer.edit.trail = L.featureGroup().addTo(_xyz.map);
+        layer.edit.path = L.featureGroup().addTo(_xyz.map);
 
         _xyz.map.on('click', e => {
             let start_pnt = [e.latlng.lat, e.latlng.lng];
-            layer.vertices.addLayer(L.circleMarker(e.latlng, style(layer).vertex));
+            layer.edit.vertices.addLayer(L.circleMarker(e.latlng, style(layer).vertex));
 
-            let len = layer.vertices.getLayers().length;
+            let len = layer.edit.vertices.getLayers().length;
 
             if(_xyz.state != btn) return;
 
             if(len === 1){
                 _xyz.map.on('mousemove', e => {
-                    layer.trail.clearLayers();
-                    layer.trail.addLayer(L.rectangle([start_pnt, [e.latlng.lat, e.latlng.lng]], style(layer).trail));
+                    layer.edit.trail.clearLayers();
+                    layer.edit.trail.addLayer(L.rectangle([start_pnt, [e.latlng.lat, e.latlng.lng]], style(layer).trail));
                 });
             }
 
             if(len === 2){
                 _xyz.map.off('mousemove');
-                layer.trail.clearLayers();
+                layer.edit.trail.clearLayers();
                 _xyz.map.off('click');
                 _xyz.dom.map.style.cursor = '';
 
                 layer.edited = false;
 
                 let rect = [];
-                layer.vertices.eachLayer(layer => {
+                layer.edit.vertices.eachLayer(layer => {
                     let latlng = layer.getLatLng();
                     rect.push([latlng.lat, latlng.lng]);
                 });
 
-                layer.path.addLayer(L.rectangle(rect, style(layer).path));
+                layer.edit.path.addLayer(L.rectangle(rect, style(layer).path));
 
                 // Make select tab active on mobile device.
-                //if (global._xyz.activateLocationsTab) global._xyz.activateLocationsTab();
+                if (_xyz.view.mobile) _xyz.view.mobile.activateLayersTab();
 
                 let xhr = new XMLHttpRequest();
                 xhr.open('POST', _xyz.host + '/api/location/new?token=' + _xyz.token);
                 xhr.setRequestHeader('Content-Type', 'application/json');
                 
-                let _marker = layer.path.getBounds().getCenter();
+                let _marker = layer.edit.path.getBounds().getCenter();
                 let marker = [_marker.lng.toFixed(5), _marker.lat.toFixed(5)];
 
                 xhr.onload = e => {
@@ -75,8 +75,8 @@ export default (e, layer) => {
                     }
 
                     if (e.target.status === 200) {
-                        layer.vertices.clearLayers();
-                        layer.path.clearLayers();
+                        layer.edit.vertices.clearLayers();
+                        layer.edit.path.clearLayers();
                         layer.edited = false;
 
                         layer.get();
@@ -96,7 +96,7 @@ export default (e, layer) => {
                     locale: _xyz.locale,
                     layer: layer.key,
                     table: layer.table,
-                    geometry: layer.path.toGeoJSON().features[0].geometry
+                    geometry: layer.edit.path.toGeoJSON().features[0].geometry
                 }));
             }
         });
