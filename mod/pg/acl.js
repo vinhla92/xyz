@@ -1,9 +1,14 @@
-module.exports = async (acl_connection) => {
+// Create ACL connection pool for PostgreSQL.
+module.exports = async () => {
+
+  let acl_connection = (process.env.PUBLIC || process.env.PRIVATE).split('|');
+
+  if (!acl_connection) return;
 
   // Set the maximum number of failed login attempts before an account will be locked.
   global.failed_attempts = parseInt(process.env.FAILED_ATTEMPTS) || 3;
 
-  // Register Postgres connection string to fastify.
+  // Create PostgreSQL connection pool for ACL table.
   const pool = new require('pg').Pool({
     connectionString: acl_connection[0]
   });

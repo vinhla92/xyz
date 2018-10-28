@@ -1,13 +1,16 @@
+// Load workspace into memory.
 module.exports = async workspace => {
 
-  // Get admin workspace.
-  global.workspace.admin.config = workspace || await global.workspace.load();
+  // Assign admin level workspace.
+  global.workspace.admin.config = workspace;
   
   await createLookup(global.workspace.admin);
   
+  // Assign private workspace.
   global.workspace.private.config = await removeAccess('admin');
   await createLookup(global.workspace.private);
   
+  // Assign public workspacee.
   global.workspace.public.config = await removeAccess('private');
   await createLookup(global.workspace.public);
   

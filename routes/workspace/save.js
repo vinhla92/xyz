@@ -5,19 +5,17 @@ module.exports = fastify => {
     url: '/admin/workspace/save',
     beforeHandler: fastify.auth([fastify.authAdminAPI]),
     handler: async (req, res) => {
-        
-      let workspace = await require('./mod/workspace/check')(req.body.settings);
-        
-      if (process.env.WORKSPACE && process.env.WORKSPACE.split(':')[0] === 'postgres') {
-        
-        let q = `INSERT INTO ${process.env.WORKSPACE.split('|').pop()} (settings) SELECT $1 AS settings;`;
-  
-        await global.pg.ws(q, [JSON.stringify(workspace)]);
-          
-      }
-          
+      
+      // Check workspace.
+      const workspace = await require(global.appRoot + '/mod/workspace/check')(req.body.settings);
+      
+      // Save checked workspace to PostgreSQL table.
+      if (global.pg.ws_save) await global.pg.ws_save(workspace);
+
+      // Load checked workspace into memory.
       await require(global.appRoot + '/mod/workspace/load')(workspace);
           
+      // Return checked workspace to sender.
       res.code(200).send(workspace);
         
     }

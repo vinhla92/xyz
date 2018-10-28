@@ -1,10 +1,15 @@
 module.exports = async workspace => {
   
-  // Get default workspace
-  const _workspace = global.workspace._defaults.ws;
+  // Set global workspace.
+  global.workspace = {
+    _defaults: await JSON.parse(require('fs').readFileSync('./workspaces/_defaults.json'), 'utf8'),
+    public: {},
+    private: {},
+    admin: {}
+  };
   
   // Check whether workspace keys are valid or missing.
-  await chkOptionals(workspace, _workspace);
+  await chkOptionals(workspace, global.workspace._defaults.ws);
   
   // Check locales.
   await chkLocales(workspace.locales);

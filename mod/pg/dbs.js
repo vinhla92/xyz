@@ -1,3 +1,4 @@
+// Create DBS connection pools for PostGIS.
 module.exports = () => {
 
   global.pg.dbs = {};

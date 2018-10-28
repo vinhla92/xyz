@@ -29,63 +29,62 @@ global.alias = process.env.ALIAS ? process.env.ALIAS : null;
 // Application access. Default is public.
 global.access = process.env.PRIVATE ? 'private' : 'public';
 
+global.logs = (process.env.LOG_LEVEL === 'info');
+
 // Create PG connections.
-require('./mod/pg/connections')();
+require('./mod/pg/connections')(startFastify);
 
-// Set fastify
-const fastify = require('fastify')({
-  logger: {
-    level: process.env.LOG_LEVEL || 'error',
-    prettifier: require('pino-pretty'),
-    prettyPrint: {
-      errorProps: ['hint', 'detail'],
-      levelFirst: true,
-      crlf: true
+function startFastify(){
+
+  // Set fastify
+  const fastify = require('fastify')({
+    logger: {
+      level: process.env.LOG_LEVEL || 'error',
+      prettifier: require('pino-pretty'),
+      prettyPrint: {
+        errorProps: ['hint', 'detail'],
+        levelFirst: true,
+        crlf: true
+      }
     }
-  }
-});
+  });
 
-// Register fastify modules and routes.
-fastify
-  .register(require('fastify-helmet'), {
-    contentSecurityPolicy: {
-      directives: {
-        defaultSrc: ['\'self\''],
-        baseURI: ['\'self\''],
-        objectSrc: ['\'self\''],
-        workerSrc: ['\'self\'', 'blob:'],
-        frameSrc: ['\'self\'', 'www.google.com', 'www.gstatic.com'],
-        formAction: ['\'self\''],
-        styleSrc: ['\'self\'', '\'unsafe-inline\'', 'fonts.googleapis.com'],
-        fontSrc: ['\'self\'', 'fonts.gstatic.com'],
-        scriptSrc: ['\'self\'', 'www.google.com', 'www.gstatic.com'],
-        imgSrc: ['\'self\'', '*.tile.openstreetmap.org', 'api.mapbox.com', 'res.cloudinary.com', 'data:']
+  // Register fastify modules and routes.
+  fastify
+    .register(require('fastify-helmet'), {
+      contentSecurityPolicy: {
+        directives: {
+          defaultSrc: ['\'self\''],
+          baseURI: ['\'self\''],
+          objectSrc: ['\'self\''],
+          workerSrc: ['\'self\'', 'blob:'],
+          frameSrc: ['\'self\'', 'www.google.com', 'www.gstatic.com'],
+          formAction: ['\'self\''],
+          styleSrc: ['\'self\'', '\'unsafe-inline\'', 'fonts.googleapis.com'],
+          fontSrc: ['\'self\'', 'fonts.gstatic.com'],
+          scriptSrc: ['\'self\'', 'www.google.com', 'www.gstatic.com'],
+          imgSrc: ['\'self\'', '*.tile.openstreetmap.org', 'api.mapbox.com', 'res.cloudinary.com', 'data:']
+        },
+        setAllHeaders: true
       },
-      setAllHeaders: true
-    },
-    noCache: true
-  })
-  .register(require('fastify-formbody'))
-  .register(require('fastify-static'), {
-    root: global.appRoot + '/public',
-    prefix: (process.env.DIR || '') + '/'
-  })
-  .register(require('fastify-auth'))
-  .register(require('fastify-jwt'), {
-    secret: process.env.SECRET || 'some-secret-password-at-least-32-characters-long'
-  })
-  .addContentTypeParser('*', (req, done) => done())
-  .decorate('authAccess', (req, res, done) => require('./mod/authToken')(req, res, fastify, { lv: global.access, API: false }, done))
-  .decorate('authAPI', (req, res, done) => require('./mod/authToken')(req, res, fastify, { lv: global.access, API: true }, done))
-  .decorate('authAdmin', (req, res, done) => require('./mod/authToken')(req, res, fastify, { lv: 'admin', API: false }, done))
-  .decorate('authAdminAPI', (req, res, done) => require('./mod/authToken')(req, res, fastify, { lv: 'admin', API: true }, done))
-  .register((fastify, opts, next) => { require('./routes/_routes')(fastify); next(); }, { prefix: global.dir });
+      noCache: true
+    })
+    .register(require('fastify-formbody'))
+    .register(require('fastify-static'), {
+      root: global.appRoot + '/public',
+      prefix: (process.env.DIR || '') + '/'
+    })
+    .register(require('fastify-auth'))
+    .register(require('fastify-jwt'), {
+      secret: process.env.SECRET || 'some-secret-password-at-least-32-characters-long'
+    })
+    .addContentTypeParser('*', (req, done) => done())
+    .decorate('authAccess', (req, res, done) => require('./mod/authToken')(req, res, fastify, { lv: global.access, API: false }, done))
+    .decorate('authAPI', (req, res, done) => require('./mod/authToken')(req, res, fastify, { lv: global.access, API: true }, done))
+    .decorate('authAdmin', (req, res, done) => require('./mod/authToken')(req, res, fastify, { lv: 'admin', API: false }, done))
+    .decorate('authAdminAPI', (req, res, done) => require('./mod/authToken')(req, res, fastify, { lv: 'admin', API: true }, done))
+    .register((fastify, opts, next) => { require('./routes/_routes')(fastify); next(); }, { prefix: global.dir });
 
-
-// Load and check workspace, then start listening for requests.
-require('./mod/workspace/init')(startListen);
-
-function startListen() {
   fastify.listen(process.env.PORT || 3000, '0.0.0.0', err => {
     if (err) {
       console.error(err);
@@ -94,4 +93,5 @@ function startListen() {
 
     console.log(`Serving ${global.workspace.admin.config.title} workspace.`);
   });
+  
 }

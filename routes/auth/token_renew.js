@@ -5,7 +5,7 @@ module.exports = fastify => {
     url: '/token/renew',
     handler: (req, res) => {
 
-      if (req.query.nanoid) console.log({
+      if (global.logs && req.query.nanoid) console.log({
         nanoid: req.query.nanoid,
         timenow: req.query.timenow,
         token: req.query.token

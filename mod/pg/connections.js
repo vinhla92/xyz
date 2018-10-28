@@ -1,15 +1,16 @@
-module.exports = () => {
+module.exports = async startFastify => {
 
   // Global pg stores all node postgres connection pools.
   global.pg = {};
 
-  // Create PostGIS data connection pools.
-  require('./dbs')();
+  // Create PostGIS dbs connection pools.
+  await require('./dbs')();
 
   // Create PostgreSQL ACL connection pool.
-  if (process.env.PUBLIC || process.env.PRIVATE) {
-    require('./acl')((process.env.PUBLIC || process.env.PRIVATE).split('|'));
-  }
+  await require('./acl')();
+
+  // Create PostgreSQL Workspace connection pool.
+  await require('./ws')();
 
   // Store provider keys.
   global.KEYS = {};
@@ -18,5 +19,7 @@ module.exports = () => {
       global.KEYS[key.split('_')[1]] = process.env[key];
     }
   });
+
+  startFastify();
 
 };
