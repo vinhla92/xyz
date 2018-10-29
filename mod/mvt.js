@@ -31,7 +31,7 @@ async function get(req, res, fastify) {
 
   }
 
-  if (rows.length === 1) {
+  if (rows && rows.length === 1) {
     res
       .type('application/x-protobuf')
       .code(200)

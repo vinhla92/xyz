@@ -161,17 +161,24 @@ async function chkLayerGeom(layer, layers) {
 
   for (const table of tables){
 
-    if (!table) return;
+    if (!table) return invalidateLayer();
+
+    if (!layer.dbs) return invalidateLayer();
+
+    if (!global.pg.dbs[layer.dbs]) return invalidateLayer();
 
     let rows = await global.pg.dbs[layer.dbs](`SELECT ${layer.geom_3857 || layer.geom} FROM ${table} LIMIT 1`);
 
     if (rows.err) {
       console.log(`${layer.format} | ${layer.dbs} | ${table} | ${rows.err.message}`);
-      layers['__'+layer.key] = layer;
-      delete layers[layer.key];
-      return;
+      return invalidateLayer();
     }
 
+  }
+
+  function invalidateLayer() {
+    layers['__'+layer.key] = layer;
+    delete layers[layer.key];
   }
 
 }

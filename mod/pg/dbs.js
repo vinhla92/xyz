@@ -4,7 +4,7 @@ module.exports = () => {
   global.pg.dbs = {};
   
   // Iterate through environment variables to find DBS_* entries.
-  Object.keys(process.env).forEach(key => {
+  Object.keys(process.env).forEach(async key => {
 
     if (key.split('_')[0] === 'DBS') {
     
@@ -26,6 +26,18 @@ module.exports = () => {
         }
     
       };
+
+      const PostGIS = await global.pg.dbs[key.split('_')[1]]('SELECT postgis_version();');
+
+      if (PostGIS.err) {
+        console.log(`${key}: Can't detect PostGIS.`);
+        delete global.pg.dbs[key.split('_')[1]];
+      }
+
+      if (PostGIS.length === 1) console.log(`${key}: ${PostGIS[0].postgis_version}`);
+
+
+
     }
 
   });
