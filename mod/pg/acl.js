@@ -1,7 +1,8 @@
 // Create ACL connection pool for PostgreSQL.
 module.exports = async () => {
 
-  let acl_connection = (process.env.PUBLIC || process.env.PRIVATE).split('|');
+  const acl_connection = (process.env.PUBLIC || process.env.PRIVATE) ?
+    (process.env.PUBLIC || process.env.PRIVATE).split('|') : null;
 
   if (!acl_connection) return;
 

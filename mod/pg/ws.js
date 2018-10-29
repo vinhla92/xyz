@@ -83,11 +83,13 @@ module.exports = async () => {
   // Save workspace to PostgreSQL.
   global.pg.ws_save = async workspace => {
  
-    await ws_query(`INSERT INTO ${workspace_table} (settings) SELECT $1 AS settings;`, [JSON.stringify(workspace)]);
+    await ws_query(`
+    INSERT INTO ${workspace_table} (settings) SELECT $1 AS settings;`,
+    [JSON.stringify(workspace)]);
  
   };
 
-  // Load workspace
+  // Check and load workspace.
   await require(global.appRoot + '/mod/workspace/load')(
     await require(global.appRoot + '/mod/workspace/check')(
       await global.pg.ws_get()
@@ -100,12 +102,14 @@ async function getWorkspaceFromFile(file){
 
   var workspace = {};
  
+  // Attempt to read workspace from file in workspaces folder.
   try {
     workspace = await JSON.parse(require('fs').readFileSync('./workspaces/' + file), 'utf8');
 
   } catch (err) {
     console.error(err);
 
+  // Check and load the workspace from file into memory.
   } finally {
     await require(global.appRoot + '/mod/workspace/load')(
       await require(global.appRoot + '/mod/workspace/check')(workspace)
