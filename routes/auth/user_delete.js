@@ -7,8 +7,8 @@ module.exports = fastify => {
     handler: async (req, res) => {
 
       // Delete user account in ACL.
-      rows = await global.pg.users(`
-      DELETE FROM ${global.pg.acl}
+      var rows = await global.pg.users(`
+      DELETE FROM acl_table
       WHERE lower(email) = lower($1);`,
       [req.body.email]);
 

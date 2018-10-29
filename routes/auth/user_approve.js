@@ -6,10 +6,9 @@ module.exports = fastify => {
     beforeHandler: fastify.auth([fastify.authAdmin]),
     handler: async (req, res) => {
 
-      rows = await global.pg.users(`
-      SELECT * FROM ${global.pg.acl} WHERE approvaltoken = $1;`,
-      [req.params.token]
-      );
+      var rows = await global.pg.users(`
+      SELECT * FROM acl_table WHERE approvaltoken = $1;`,
+      [req.params.token]);
 
       if (rows.err) return res.redirect(global.dir + '/login?msg=badconfig');
 
@@ -18,9 +17,9 @@ module.exports = fastify => {
       if (!user) return res.send('Token not found. The token has probably been resolved already.');
 
       rows = await global.pg.users(`
-      UPDATE ${user_global.pg.acltable} SET
-      approved = true,
-      approvaltoken = null
+      UPDATE acl_table SET
+        approved = true,
+        approvaltoken = null
       WHERE lower(email) = lower($1);`,
       [user.email]);
 
