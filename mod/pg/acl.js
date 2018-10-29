@@ -17,6 +17,8 @@ module.exports = async () => {
   // Method to query ACL. arr must be empty array by default.
   global.pg.users = async (q, arr) => {
 
+    console.log(q.replace(/acl_table/g, acl_connection[1]));
+
     try {
       const { rows } = await pool.query(q.replace(/acl_table/g, acl_connection[1]), arr);
       return rows;
