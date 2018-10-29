@@ -12,6 +12,8 @@ module.exports = fastify => {
 
   require('./layer/cluster_get')(fastify);
 
+  require('./layer/cluster_select')(fastify);
+
   // location
 
   require('./location/select')(fastify);

@@ -1,6 +1,5 @@
 module.exports = {
   select,
-  chart_data,
   select_ll,
   select_ll_nnearest,
   select_ll_intersect
