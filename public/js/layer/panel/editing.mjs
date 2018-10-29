@@ -4,6 +4,7 @@ import { rect } from './draw/_draw.mjs';
 import { circle } from './draw/_draw.mjs';
 import { line } from './draw/_draw.mjs';
 import { point } from './draw/_draw.mjs';
+import { catchment } from './draw/_draw.mjs';
 
 export default layer => {
 
@@ -36,10 +37,6 @@ export default layer => {
       }
     }
   });
-
-  function someFunction(word){
-    console.log(word);
-  }
 
   if(layer.edit && layer.edit.point){
     _xyz.utils.createStateButton({
@@ -87,10 +84,40 @@ export default layer => {
   }
   
   if(layer.edit && layer.edit.catchment){
+    
+    // set these for now
+    layer.edit.catchment = {
+      polygons: true,
+      profile: 'driving' // or "mapbox/driving"?
+    };
+    
+    // add minute slider // add mode of transport
+    let block = _xyz.utils.createElement({
+      tag: 'div',
+      options: {
+        classList: "block"
+      },
+      appendTo: layer.edit.panel
+    });
+
+    _xyz.utils.slider({
+      title: "Travel time in minutes: ",
+      default: layer.edit.catchment.minutes || 5,
+      min: 5,
+      max: 60,
+      value: 5,
+      appendTo: block,
+      oninput: e => {
+        layer.edit.catchment.minutes = parseInt(e.target.value);
+        e.target.parentNode.previousSibling.textContent = layer.edit.catchment.minutes;
+      }
+    });
+
     _xyz.utils.createStateButton({
       text: 'Catchment',
+      layer: layer,
       appendTo: layer.edit.panel,
-      fx: someFunction
+      fx: catchment
     });
   }
 

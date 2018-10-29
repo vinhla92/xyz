@@ -1,6 +1,6 @@
 import _xyz from '../../../_xyz.mjs';
 import style from './style.mjs';
-//import valid from '@turf/isvalid';
+//import { booleanValid } from '@turf/boolean-valid';
 
 export default (e, layer) => {
     e.stopPropagation();

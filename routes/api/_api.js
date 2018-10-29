@@ -30,6 +30,8 @@ module.exports = fastify => {
 
   require('./location/aggregate')(fastify);
 
+  require('./location/catchment')(fastify);
+
   // gazetteer
 
   require('./gazetteer/autocomplete')(fastify);

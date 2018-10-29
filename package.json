@@ -33,6 +33,7 @@
     "pg": "^7.5.0",
     "pino-pretty": "^2.2.1",
     "request": "^2.88.0",
+    "turf": "^3.0.14",
     "turf-isvalid": "^1.0.0"
   },
   "devDependencies": {

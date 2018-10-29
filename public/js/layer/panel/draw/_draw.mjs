@@ -4,6 +4,7 @@ import _rect from './rectangle.mjs';
 import _circle from './circle.mjs';
 import _line from './line.mjs';
 import _point from './point.mjs';
+import _catchment from './catchment.mjs';
 
 export function point(e, layer){
   _point(e, layer);
@@ -23,6 +24,10 @@ export function circle(e, layer){
 
 export function line(e, layer){
   _line(e, layer);
+}
+
+export function catchment(e, layer){
+  _catchment(e, layer);
 }
 
 _xyz.switchState = switchState;
