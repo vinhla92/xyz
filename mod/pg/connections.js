@@ -1,6 +1,14 @@
 module.exports = async startFastify => {
 
-  // Global pg stores all node postgres connection pools.
+  // Store provider keys.
+  global.KEYS = {};
+  Object.keys(process.env).forEach(key => {
+    if (key.split('_')[0] === 'KEY') {
+      global.KEYS[key.split('_')[1]] = process.env[key];
+    }
+  });
+
+  // global.pg stores all node postgres connection pools.
   global.pg = {};
 
   // Create PostGIS dbs connection pools.
@@ -11,14 +19,6 @@ module.exports = async startFastify => {
 
   // Create PostgreSQL Workspace connection pool.
   await require('./ws')();
-
-  // Store provider keys.
-  global.KEYS = {};
-  Object.keys(process.env).forEach(key => {
-    if (key.split('_')[0] === 'KEY') {
-      global.KEYS[key.split('_')[1]] = process.env[key];
-    }
-  });
 
   startFastify();
 

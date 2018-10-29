@@ -29,6 +29,7 @@ global.alias = process.env.ALIAS ? process.env.ALIAS : null;
 // Application access. Default is public.
 global.access = process.env.PRIVATE ? 'private' : 'public';
 
+// Additional logs will be written to console if global.logs is true.
 global.logs = (process.env.LOG_LEVEL === 'info');
 
 // Create PG connections.
