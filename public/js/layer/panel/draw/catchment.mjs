@@ -47,6 +47,7 @@ export default (e, layer) => {
             _xyz.dom.map.style.cursor = '';
             layer.edited = false;
             _xyz.switchState(layer, btn);
+            layer.header.classList.remove('edited');
 
             // post request here
             let xhr = new XMLHttpRequest();
