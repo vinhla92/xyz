@@ -7,9 +7,8 @@ module.exports = fastify => {
     handler: async (req, res) => {
 
       // Get user list from ACL.
-      rows = await global.pg.users(`
-      SELECT email, verified, approved, admin, failedattempts
-      FROM ${global.pg.acl};`);
+      var rows = await global.pg.users(`
+      SELECT email, verified, approved, admin, failedattempts FROM acl_table;`);
 
       if (rows.err) return res.redirect(global.dir + '/login?msg=badconfig');
 

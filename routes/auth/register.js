@@ -25,8 +25,8 @@ module.exports = fastify => {
         return res.redirect(global.dir + '/login?msg=validation');
       }
   
-      rows = await global.pg.users(`
-          SELECT * FROM ${global.pg.acl} WHERE lower(email) = lower($1);`,
+      var rows = await global.pg.users(`
+      SELECT * FROM acl_table WHERE lower(email) = lower($1);`,
       [email]);
   
       if (rows.err) return res.redirect(global.dir + '/login?msg=badconfig');
@@ -39,10 +39,10 @@ module.exports = fastify => {
       if (user) {
   
         rows = await global.pg.users(`
-            UPDATE ${global.pg.acl} SET
-              password_reset = '${password}',
-              verificationtoken = '${verificationtoken}'
-            WHERE lower(email) = lower($1);`,
+        UPDATE acl_table SET
+          password_reset = '${password}',
+          verificationtoken = '${verificationtoken}'
+        WHERE lower(email) = lower($1);`,
         [email]);
     
         if (rows.err) return res.redirect(global.dir + '/login?msg=badconfig');
@@ -61,11 +61,11 @@ module.exports = fastify => {
   
       // Create new user account
       rows = await global.pg.users(`
-          INSERT INTO ${global.pg.acl} (email, password, verificationtoken)
-          SELECT
-            '${email}' AS email,
-            '${password}' AS password,
-            '${verificationtoken}' AS verificationtoken;`);
+      INSERT INTO acl_table (email, password, verificationtoken)
+      SELECT
+        '${email}' AS email,
+        '${password}' AS password,
+        '${verificationtoken}' AS verificationtoken;`);
   
       if (rows.err) return res.redirect(global.dir + '/login?msg=badconfig');
   

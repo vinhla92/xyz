@@ -33,7 +33,7 @@ module.exports = function(req, res, fastify, access, done) {
       // Get user from ACL.
 
       rows = await global.pg.users(`
-      SELECT * FROM ${global.pg.acl} WHERE lower(email) = lower($1);`,
+      SELECT * FROM acl_table WHERE lower(email) = lower($1);`,
       [token.email]);
 
       if (rows.err) return res.redirect(global.dir + '/login?msg=badconfig');
