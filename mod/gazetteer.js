@@ -59,6 +59,7 @@ function MAPBOX_placesAutoComplete(req, res, gazetteer) {
 
   require('request').get(q, (err, response, body) => {
     if (err) {
+      Object.keys(err).forEach(key => !err[key] && delete err[key]);
       console.error(err);
       return;
     }
@@ -87,6 +88,7 @@ function GOOGLE_placesAutoComplete(req, res, gazetteer) {
 
   require('request').get(q, (err, response, body) => {
     if (err) {
+      Object.keys(err).forEach(key => !err[key] && delete err[key]);
       console.error(err);
       return;
     }
@@ -107,6 +109,7 @@ function googleplaces(req, res) {
 
   require('request').get(q, (err, response, body) => {
     if (err) {
+      Object.keys(err).forEach(key => !err[key] && delete err[key]);
       console.error(err);
       return;
     }

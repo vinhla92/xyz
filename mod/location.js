@@ -17,10 +17,8 @@ async function select(req, res, fastify) {
     id = req.query.id,
     geom = layer.geom ? layer.geom : 'geom',
     geomj = layer.geomj ? layer.geomj : `ST_asGeoJson(${geom})`,
-    //geomj = layer.geomj ? `ST_asGeoJson(${layer.geomj})` : `ST_asGeoJson(${geom})`,
     geomq = layer.geomq ? layer.geomq : geom,
     geomdisplay = layer.geomdisplay ? layer.geomdisplay : '',
-    //filter = req.query.filter ? JSON.parse(req.query.filter) : {},
     sql_filter = layer.sql_filter ? layer.sql_filter : '',
     infoj = JSON.parse(JSON.stringify(layer.infoj));
 
@@ -44,8 +42,6 @@ async function select(req, res, fastify) {
 
   let access_filter = layer.access_filter && token.email && layer.access_filter[token.email.toLowerCase()] ?
     layer.access_filter[token.email] : null;
-
-  //sql_filter = filter ? require('./filters').sql_filter(filter) : '';
 
   let fields = '';
     
@@ -75,13 +71,14 @@ async function select(req, res, fastify) {
   }
 
   infoj.forEach(entry => {
-    if(entry.type == 'group'){
-      Object.values(entry.items).forEach(item => {
-        processInfoj(item);
-      });
-    } else {
-      processInfoj(entry);
-    }
+    processInfoj(entry);
+    // if(entry.type == 'group'){
+    //   Object.values(entry.items).forEach(item => {
+    //     processInfoj(item);
+    //   });
+    // } else {
+    //   processInfoj(entry);
+    // }
   });
 
   let qLog = layer.log_table ?
@@ -114,14 +111,14 @@ async function select(req, res, fastify) {
 
   // Iterate through the infoj object's entries and assign the values returned from the database query.
   Object.values(infoj).map(entry => {
-    
-    if(entry.type == 'group'){
-      Object.values(entry.items).map(item => {
-        setValues(rows, item);
-      });
-      return;
-    }
     setValues(rows, entry);
+    // if(entry.type == 'group'){
+    //   Object.values(entry.items).map(item => {
+    //     setValues(rows, item);
+    //   });
+    //   return;
+    // }
+    // setValues(rows, entry);
   });
 
   function formatDate(str){

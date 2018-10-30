@@ -1,6 +1,6 @@
 import _xyz from '../_xyz.mjs';
 
-import addInfojToList from './table.mjs';
+import addInfojToList from './info/_info.mjs';
 
 import * as controls from './controls.mjs';
 
@@ -66,7 +66,7 @@ export default record => {
   record.drawer.appendChild(record.header);
 
   // Add create and append infoj table to drawer.
-  record.drawer.appendChild(addInfojToList(record));
+  addInfojToList(record);
 
   // Find free space and insert record.
   let idx = _xyz.locations.list.indexOf(record);

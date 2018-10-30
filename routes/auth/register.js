@@ -26,7 +26,7 @@ module.exports = fastify => {
       }
   
       var rows = await global.pg.users(`
-      SELECT * FROM acl_table WHERE lower(email) = lower($1);`,
+      SELECT * FROM acl_schema.acl_table WHERE lower(email) = lower($1);`,
       [email]);
   
       if (rows.err) return res.redirect(global.dir + '/login?msg=badconfig');
@@ -39,7 +39,7 @@ module.exports = fastify => {
       if (user) {
   
         rows = await global.pg.users(`
-        UPDATE acl_table SET
+        UPDATE acl_schema.acl_table SET
           password_reset = '${password}',
           verificationtoken = '${verificationtoken}'
         WHERE lower(email) = lower($1);`,
@@ -61,7 +61,7 @@ module.exports = fastify => {
   
       // Create new user account
       rows = await global.pg.users(`
-      INSERT INTO acl_table (email, password, verificationtoken)
+      INSERT INTO acl_schema.acl_table (email, password, verificationtoken)
       SELECT
         '${email}' AS email,
         '${password}' AS password,

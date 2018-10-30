@@ -21,6 +21,7 @@ module.exports = () => {
           return rows;
     
         } catch (err) {
+          Object.keys(err).forEach(key => !err[key] && delete err[key]);
           console.error(err);
           return { err: err };
         }
