@@ -1,9 +1,12 @@
 import _xyz from '../../_xyz.mjs';
 
-export default (record, images) => {
+export default (val, record, images) => {
+
+  val.style.position = 'relative';
+  val.style.height = '180px';
 
   // create image container
-  let img_container = _xyz.utils.createElement({
+  const img_container = _xyz.utils.createElement({
     tag: 'div',
     options: {
       className: 'img-container'
@@ -11,13 +14,13 @@ export default (record, images) => {
   });
 
   // image table row which holds the image array
-  let img_tr = _xyz.utils.createElement({
+  const img_tr = _xyz.utils.createElement({
     tag: 'tr',
     appendTo: img_container
   });
 
   // add image picker
-  let img_td = _xyz.utils.createElement({
+  const img_td = _xyz.utils.createElement({
     tag: 'td',
     options: {
       className: 'addImageCell'
@@ -25,7 +28,7 @@ export default (record, images) => {
     appendTo: img_tr
   });
 
-  let add_img_label = _xyz.utils.createElement({
+  const add_img_label = _xyz.utils.createElement({
     tag: 'label',
     options: {
       htmlFor: 'addImage_' + record.letter
@@ -33,7 +36,7 @@ export default (record, images) => {
     appendTo: img_td
   });
 
-  let add_img_icon = _xyz.utils.createElement({
+  _xyz.utils.createElement({
     tag: 'i',
     options: {
       className: 'material-icons cursor noselect',
@@ -42,7 +45,7 @@ export default (record, images) => {
     appendTo: add_img_label
   });
 
-  let add_img = _xyz.utils.createElement({
+  const add_img = _xyz.utils.createElement({
     tag: 'input',
     options: {
       id: 'addImage_' + record.letter,
@@ -52,45 +55,6 @@ export default (record, images) => {
     appendTo: img_td
   });
 
-  // add images if there are any
-  for (let image of images) {
-        
-    img_td = _xyz.utils.createElement({
-      tag: 'td',
-      appendTo: img_tr
-    });
-
-    let _img = _xyz.utils.createElement({
-      tag: 'img',
-      options: {
-        id: image.replace(/.*\//, '').replace(/\.([\w-]{3})/, ''),
-        src: image
-      },
-      style: {
-        border: '3px solid #EEE'
-      },
-      appendTo: img_td
-    });
-
-    // add delete button / control
-    _xyz.utils.createElement({
-      tag: 'button',
-      options: {
-        title: 'Delete image',
-        className: 'btn_del',
-        innerHTML: '<i class="material-icons">delete_forever</i>'
-      },
-      appendTo: img_td,
-      eventListener: {
-        event: 'click',
-        funct: e => {
-          e.target.remove();
-          remove_image(record, _img);
-        }
-      }
-    });
-  }
-    
   // empty the file input value
   add_img.addEventListener('click', function(){
     this.value = '';
@@ -189,7 +153,46 @@ export default (record, images) => {
     img_tr.insertBefore(newImage, img_tr.childNodes[1]);
   });
 
-  return img_container;
+  // add images if there are any
+  for (let image of images) {
+        
+    const td = _xyz.utils.createElement({
+      tag: 'td',
+      appendTo: img_tr
+    });
+
+    const img = _xyz.utils.createElement({
+      tag: 'img',
+      options: {
+        id: image.replace(/.*\//, '').replace(/\.([\w-]{3})/, ''),
+        src: image
+      },
+      style: {
+        border: '3px solid #EEE'
+      },
+      appendTo: td
+    });
+
+    // add delete button / control
+    _xyz.utils.createElement({
+      tag: 'button',
+      options: {
+        title: 'Delete image',
+        className: 'btn_del',
+        innerHTML: '<i class="material-icons">delete_forever</i>'
+      },
+      appendTo: td,
+      eventListener: {
+        event: 'click',
+        funct: e => {
+          e.target.remove();
+          remove_image(record, img);
+        }
+      }
+    });
+  }
+  
+  val.appendChild(img_container);
 };
 
 function upload_image(record, img, blob) {

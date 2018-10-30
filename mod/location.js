@@ -71,13 +71,14 @@ async function select(req, res, fastify) {
   }
 
   infoj.forEach(entry => {
-    if(entry.type == 'group'){
-      Object.values(entry.items).forEach(item => {
-        processInfoj(item);
-      });
-    } else {
-      processInfoj(entry);
-    }
+    processInfoj(entry);
+    // if(entry.type == 'group'){
+    //   Object.values(entry.items).forEach(item => {
+    //     processInfoj(item);
+    //   });
+    // } else {
+    //   processInfoj(entry);
+    // }
   });
 
   let qLog = layer.log_table ?
@@ -110,14 +111,14 @@ async function select(req, res, fastify) {
 
   // Iterate through the infoj object's entries and assign the values returned from the database query.
   Object.values(infoj).map(entry => {
-    
-    if(entry.type == 'group'){
-      Object.values(entry.items).map(item => {
-        setValues(rows, item);
-      });
-      return;
-    }
     setValues(rows, entry);
+    // if(entry.type == 'group'){
+    //   Object.values(entry.items).map(item => {
+    //     setValues(rows, item);
+    //   });
+    //   return;
+    // }
+    // setValues(rows, entry);
   });
 
   function formatDate(str){

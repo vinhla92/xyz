@@ -260,13 +260,14 @@ export default layer => {
 
     // process filters from infoj
     Object.values(layer.infoj).map(item => {
-      if (item.type === 'group') {
-        Object.values(item.items).map(_item => {
-          processInfoj(_val, _item);
-        });
-      } else {
-        processInfoj(_val, item);
-      }
+      processInfoj(_val, item);
+      // if (item.type === 'group') {
+      //   Object.values(item.items).map(_item => {
+      //     processInfoj(_val, _item);
+      //   });
+      // } else {
+      //   processInfoj(_val, item);
+      // }
     });
 
     this.selectedIndex = 0;
@@ -293,13 +294,14 @@ export default layer => {
 
   // add options to select
   Object.values(layer.infoj).forEach(entry => {
-    if (entry.type === 'group') {
-      Object.values(entry.items).map(item => {
-        createOptions(select, item);
-      });
-    } else {
-      createOptions(select, entry);
-    }
+    createOptions(select, entry);
+    // if (entry.type === 'group') {
+    //   Object.values(entry.items).map(item => {
+    //     createOptions(select, item);
+    //   });
+    // } else {
+    //   createOptions(select, entry);
+    // }
   });
 
   let clear_all = _xyz.utils.createElement({
