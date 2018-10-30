@@ -284,12 +284,12 @@ export function trash(record) {
           // Return from selection if no free record is available.
           if (freeRecords.length === 0) _xyz.locations.init();
     
-          //let freeRecords = _xyz.ws.select.layers.records.filter(record => {
-         // let freeRecords = _xyz.locations.list.filter(record => {
+          // let freeRecords = _xyz.ws.select.layers.records.filter(record => {
+          // let freeRecords = _xyz.locations.list.filter(record => {
           //  if (!record.location) return record;
-          //});
+          // });
     
-          //if (freeRecords.length === _xyz.ws.select.layers.records.length) _xyz.ws.select.resetModule();
+          // if (freeRecords.length === _xyz.ws.select.layers.records.length) _xyz.ws.select.resetModule();
         };
         xhr.send();
       }

@@ -179,6 +179,7 @@ async function chkLayerGeom(layer, layers) {
   function invalidateLayer() {
     layers['__'+layer.key] = layer;
     delete layers[layer.key];
+    return false;
   }
 
 }
@@ -266,13 +267,17 @@ async function chkLayerSelect(layer) {
 
     if (!table) return;
 
+    if (!global.pg.dbs[layer.dbs]) {
+      layer['__qID'] = layer.qID;
+      return delete layer.qID;
+    }
+
     let rows = await global.pg.dbs[layer.dbs](`SELECT ${layer.qID} FROM ${table} LIMIT 1`);
 
     if (rows.err) {
       console.log(`${layer.dbs} | ${table} | ${layer.qID} | ${rows.err.message}`);
       layer['__qID'] = layer.qID;
-      delete layer.qID;
-      return;
+      return delete layer.qID;
     }
 
   }
