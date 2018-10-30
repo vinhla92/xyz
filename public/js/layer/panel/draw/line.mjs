@@ -25,7 +25,7 @@ export default (e, layer) => {
 
         layer.edit.vertices = L.featureGroup().addTo(_xyz.map);
         layer.edit.trail = L.featureGroup().addTo(_xyz.map);
-        layer.edit.trail = L.featureGroup().addTo(_xyz.map);
+        layer.edit.path = L.featureGroup().addTo(_xyz.map);
 
         let coords = [];
 
@@ -43,7 +43,7 @@ export default (e, layer) => {
                     [layer.edit.vertices.getLayers()[len-2].getLatLng().lat, layer.edit.vertices.getLayers()[len-2].getLatLng().lng],
                     [layer.edit.vertices.getLayers()[len-1].getLatLng().lat, layer.edit.vertices.getLayers()[len-1].getLatLng().lng]
                 ];
-                layer.edit.trail.addLayer(L.polyline([part], style(layer).path));
+                layer.edit.path.addLayer(L.polyline([part], style(layer).path));
             }
 
             _xyz.map.on('mousemove', e => {
@@ -60,9 +60,7 @@ export default (e, layer) => {
 
             _xyz.map.on('contextmenu', e => {
                 _xyz.map.off('mousemove');
-                layer.edit.trail.clearLayers();
-                
-                _xyz.map.off('contextmenu');
+            
                 _xyz.map.off('contextmenu');
                 _xyz.map.off('click');
                 _xyz.dom.map.style.cursor = '';
@@ -70,7 +68,7 @@ export default (e, layer) => {
                 layer.edited = false;
                 coords = [];
 
-                layer.edit.trail.eachLayer(layer => {
+                layer.edit.path.eachLayer(layer => {
                     let latlngs = layer.getLatLngs();
                     if(latlngs) latlngs.map(latlng => {
                         let coord = [];
@@ -106,15 +104,11 @@ export default (e, layer) => {
                     
                     if (e.target.status === 200) {
 
-                        layer.edit.vertices.clearLayers();
-                        layer.edit.trail.clearLayers();
+                        _xyz.switchState(layer, btn);
+                        _xyz.resetEditSession(layer);
                         layer.edited = false;
 
-                        layer.header.classList.remove('edited'); // this should happen on final save, delete, unselect
-
                         layer.get();
-
-                        _xyz.switchState(layer, btn);
 
                         _xyz.locations.select({
                             layer: layer.key,

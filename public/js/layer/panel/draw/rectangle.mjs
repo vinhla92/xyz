@@ -37,7 +37,7 @@ export default (e, layer) => {
             if(len === 1){
                 _xyz.map.on('mousemove', e => {
                     layer.edit.trail.clearLayers();
-                    layer.edit.trail.addLayer(L.rectangle([start_pnt, [e.latlng.lat, e.latlng.lng]], style(layer).trail));
+                    layer.edit.trail.addLayer(L.rectangle([start_pnt, [e.latlng.lat, e.latlng.lng]], style(layer).path));
                 });
             }
 
@@ -82,6 +82,7 @@ export default (e, layer) => {
                         layer.get();
 
                         _xyz.switchState(layer, btn);
+                        _xyz.resetEditSession(layer);
 
                         _xyz.locations.select({
                             layer: layer.key,

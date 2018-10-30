@@ -76,7 +76,7 @@ export default layer => {
 
   if(layer.edit && layer.edit.line){
     _xyz.utils.createStateButton({
-      text: 'Line',
+      text: 'Linestring',
       appendTo: layer.edit.panel,
       layer: layer,
       fx: line
@@ -90,7 +90,7 @@ export default layer => {
       polygons: true,
       profile: 'driving' // or "mapbox/driving"?
     };
-    
+
     // add minute slider // add mode of transport
     let block = _xyz.utils.createElement({
       tag: 'div',
