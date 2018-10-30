@@ -6,6 +6,10 @@ module.exports = async () => {
 
   if (!acl_connection) return;
 
+  const acl_table = acl_connection[1].split('.').pop();
+
+  const acl_schema = acl_connection[1].split('.')[0] === acl_table ? 'public' : acl_connection[1].split('.')[0];
+
   // Set the maximum number of failed login attempts before an account will be locked.
   global.failed_attempts = parseInt(process.env.FAILED_ATTEMPTS) || 3;
 
@@ -17,13 +21,12 @@ module.exports = async () => {
   // Method to query ACL. arr must be empty array by default.
   global.pg.users = async (q, arr) => {
 
-    console.log(q.replace(/acl_table/g, acl_connection[1]));
-
     try {
-      const { rows } = await pool.query(q.replace(/acl_table/g, acl_connection[1]), arr);
+      const { rows } = await pool.query(q.replace(/acl_table/g, acl_table).replace(/acl_schema/g, acl_schema), arr);
       return rows;
     
     } catch (err) {
+      Object.keys(err).forEach(key => !err[key] && delete err[key]);
       console.error(err);
       return { err: err };
     }
@@ -31,7 +34,7 @@ module.exports = async () => {
   };
     
   // Check ACL
-  const acl_schema = {
+  const user_schema = {
     _id: 'integer',
     email: 'text',
     password: 'text',
@@ -48,7 +51,8 @@ module.exports = async () => {
   var users = await global.pg.users(`
   SELECT column_name, data_type
   FROM INFORMATION_SCHEMA.COLUMNS
-  WHERE table_name = 'acl_table';`);
+  WHERE table_name = 'acl_table'
+    AND table_schema = 'acl_schema';`);
     
   if (users.length === 0) {
 
@@ -79,7 +83,7 @@ module.exports = async () => {
       true AS admin;
     `);
 
-  } else if (users.some(row => (!acl_schema[row.column_name] || acl_schema[row.column_name] !== row.data_type))) {
+  } else if (users.some(row => (!user_schema[row.column_name] || user_schema[row.column_name] !== row.data_type))) {
     console.log('There seems to be a problem with the ACL configuration.');
 
   }

@@ -193,10 +193,7 @@ async function chkMVTCache(layer) {
     // Get a sample MVT from the cache table.
     let rows = await global.pg.dbs[layer.dbs](`SELECT z, x, y, mvt, tile FROM ${table}__mvts LIMIT 1`);
 
-    if (rows.err) {
-      console.log(rows.err.code);
-      await createMVTCache(layer, table);
-    }
+    if (rows && rows.err) await createMVTCache(layer, table);
 
     // Check sample MVT.
     if (rows.length > 0) {
@@ -207,6 +204,8 @@ async function chkMVTCache(layer) {
 
       // Check if all mvt_fields are contained in cached MVT.
       for (const field of layer.mvt_fields){
+
+        console.log(tile.layers[layer.key]._keys.indexOf(field) < 0);
 
         // Truncate cache table if field is not in sample MVT.
         if (Object.keys(tile.layers).length > 0 && tile.layers[layer.key]._keys.indexOf(field) < 0) {
@@ -243,7 +242,7 @@ async function createMVTCache(layer, table){
 
     create index ${table.replace(/\./,'_')}__mvts_tile on ${table}__mvts (tile);`);
 
-  if (rows.err) layer.mvt_cache = false;
+  if (rows && rows.err) layer.mvt_cache = false;
 
 }
 

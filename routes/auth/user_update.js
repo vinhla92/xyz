@@ -10,7 +10,7 @@ module.exports = fastify => {
   
       // Get user to update from ACL.
       var rows = await global.pg.users(`
-      UPDATE acl_table SET ${req.body.role} = ${req.body.chk}
+      UPDATE acl_schema.acl_table SET ${req.body.role} = ${req.body.chk}
       WHERE lower(email) = lower($1);`,
       [email]);
   

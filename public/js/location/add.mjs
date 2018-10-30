@@ -1,6 +1,6 @@
 import _xyz from '../_xyz.mjs';
 
-import addInfojToList from './table.mjs';
+import addInfojToList from './info/_info.mjs';
 
 import * as controls from './controls.mjs';
 

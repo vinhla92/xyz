@@ -37,7 +37,7 @@ module.exports = fastify => {
       if (!req.body.password) return;
   
       var rows = await global.pg.users(`
-      SELECT * FROM acl_table WHERE lower(email) = lower($1);`,
+      SELECT * FROM acl_schema.acl_table WHERE lower(email) = lower($1);`,
       [req.body.email]);
   
       if (rows.err) return res.redirect(global.dir + '/login?msg=badconfig');
@@ -86,7 +86,7 @@ module.exports = fastify => {
       } else {
   
         rows = await global.pg.users(`
-        UPDATE acl_table SET failedattempts = failedattempts + 1
+        UPDATE acl_schema.acl_table SET failedattempts = failedattempts + 1
         WHERE lower(email) = lower($1)
         RETURNING failedattempts;`,
         [req.body.email]);
@@ -100,7 +100,7 @@ module.exports = fastify => {
           const verificationtoken = require('crypto').randomBytes(20).toString('hex');
   
           rows = await global.pg.users(`
-          UPDATE acl_table SET
+          UPDATE acl_schema.acl_table SET
             verified = false,
             verificationtoken = '${verificationtoken}'
           WHERE lower(email) = lower($1);`,

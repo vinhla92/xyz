@@ -215,7 +215,10 @@ export function update(record) {
             record.location.M
               .getLayers()[0].setLatLng(L.latLng(pof.geometry.coordinates.reverse()));
 
-          } catch (err) { console.error(err); }
+          } catch (err) { 
+            Object.keys(err).forEach(key => !err[key] && delete err[key]);
+            console.error(err);
+          }
         };
 
         xhr.send(JSON.stringify({

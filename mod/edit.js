@@ -163,6 +163,7 @@ async function updateRecord(req, res, fastify) {
     res.code(200).send();
 
   } catch (err) {
+    Object.keys(err).forEach(key => !err[key] && delete err[key]);
     console.error(err);
     return res.code(500).send('soz. it\'s not you. it\'s me.');
   }

@@ -17,10 +17,8 @@ async function select(req, res, fastify) {
     id = req.query.id,
     geom = layer.geom ? layer.geom : 'geom',
     geomj = layer.geomj ? layer.geomj : `ST_asGeoJson(${geom})`,
-    //geomj = layer.geomj ? `ST_asGeoJson(${layer.geomj})` : `ST_asGeoJson(${geom})`,
     geomq = layer.geomq ? layer.geomq : geom,
     geomdisplay = layer.geomdisplay ? layer.geomdisplay : '',
-    //filter = req.query.filter ? JSON.parse(req.query.filter) : {},
     sql_filter = layer.sql_filter ? layer.sql_filter : '',
     infoj = JSON.parse(JSON.stringify(layer.infoj));
 
@@ -44,8 +42,6 @@ async function select(req, res, fastify) {
 
   let access_filter = layer.access_filter && token.email && layer.access_filter[token.email.toLowerCase()] ?
     layer.access_filter[token.email] : null;
-
-  //sql_filter = filter ? require('./filters').sql_filter(filter) : '';
 
   let fields = '';
     

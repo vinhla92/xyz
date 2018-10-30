@@ -88,6 +88,7 @@ function startFastify(){
 
   fastify.listen(process.env.PORT || 3000, '0.0.0.0', err => {
     if (err) {
+      Object.keys(err).forEach(key => !err[key] && delete err[key]);
       console.error(err);
       process.exit(1);
     }

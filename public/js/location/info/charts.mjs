@@ -1,4 +1,4 @@
-import _xyz from '../_xyz.mjs';
+import _xyz from '../../_xyz.mjs';
 
 import d3_selection from 'd3-selection';
 import d3_scale from 'd3-scale';

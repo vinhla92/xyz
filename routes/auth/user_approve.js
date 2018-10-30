@@ -7,7 +7,7 @@ module.exports = fastify => {
     handler: async (req, res) => {
 
       var rows = await global.pg.users(`
-      SELECT * FROM acl_table WHERE approvaltoken = $1;`,
+      SELECT * FROM acl_schema.acl_table WHERE approvaltoken = $1;`,
       [req.params.token]);
 
       if (rows.err) return res.redirect(global.dir + '/login?msg=badconfig');
@@ -17,7 +17,7 @@ module.exports = fastify => {
       if (!user) return res.send('Token not found. The token has probably been resolved already.');
 
       rows = await global.pg.users(`
-      UPDATE acl_table SET
+      UPDATE acl_schema.acl_table SET
         approved = true,
         approvaltoken = null
       WHERE lower(email) = lower($1);`,

@@ -26,6 +26,7 @@ module.exports = async () => {
       return rows;
 
     } catch (err) {
+      Object.keys(err).forEach(key => !err[key] && delete err[key]);
       console.error(err);
       return { err: err };
     }
@@ -70,13 +71,7 @@ module.exports = async () => {
     // Return empty object as workspace if no rows are returned from Postgres query.
     if (config.err || config.length === 0) return {};
 
-    try {
-      return config[0].settings || {};
-
-    } catch(err) {
-      console.error(err);
-      return {};
-    }
+    return config[0].settings || {};
       
   };
 
@@ -107,6 +102,7 @@ async function getWorkspaceFromFile(file){
     workspace = await JSON.parse(require('fs').readFileSync('./workspaces/' + file), 'utf8');
 
   } catch (err) {
+    Object.keys(err).forEach(key => !err[key] && delete err[key]);
     console.error(err);
 
   // Check and load the workspace from file into memory.

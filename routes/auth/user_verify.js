@@ -7,7 +7,7 @@ module.exports = fastify => {
   
       // Find user account in ACL from matching token.
       var rows = await global.pg.users(`
-      SELECT * FROM acl_table WHERE verificationtoken = $1;`,
+      SELECT * FROM acl_schema.acl_table WHERE verificationtoken = $1;`,
       [req.params.token]);
   
       if (rows.err) return res.redirect(global.dir + '/login?msg=badconfig');
@@ -20,7 +20,7 @@ module.exports = fastify => {
   
       // Update user account in ACL.
       rows = await global.pg.users(`
-      UPDATE acl_table SET
+      UPDATE acl_schema.acl_table SET
         failedattempts = 0,
         ${user.password_reset ? `password = '${user.password_reset}', password_reset = null,` : ''}
         verified = true,
@@ -38,7 +38,7 @@ module.exports = fastify => {
       if (!user.approved) {
   
         // Get all admin accounts from the ACL.
-        rows = await global.pg.users('SELECT email FROM acl_table WHERE admin = true;');
+        rows = await global.pg.users('SELECT email FROM acl_schema.acl_table WHERE admin = true;');
     
         if (rows.err) return res.redirect(global.dir + '/login?msg=badconfig');
   
