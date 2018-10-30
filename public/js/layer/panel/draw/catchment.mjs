@@ -8,7 +8,7 @@ export default (e, layer) => {
 
     let btn = e.target;
 
-    if(layer.edited && !layer.display){
+    if(layer.edited && !layer.display){ // display layer if hidden
         layer.display = true;
         layer.toggle.textContent = layer.display ? 'layers' : 'layers_clear';
         _xyz.hooks.push('layers', layer.key);
@@ -24,11 +24,9 @@ export default (e, layer) => {
         layer.edit.origin = L.featureGroup().addTo(_xyz.map);
 
         _xyz.map.once('click', e => {
-            let _marker = [e.latlng.lng, e.latlng.lat];
+            let _marker = [e.latlng.lng.toFixed(5), e.latlng.lat.toFixed(5)];
             layer.edit.catchment.coordinates = _marker.join(",");
             
-            console.log(layer.edit.catchment);
-
             layer.edit.origin.addLayer(L.marker([_marker[1], _marker[0]], {
                 interactive: false,
                 icon: L.icon({
@@ -49,9 +47,8 @@ export default (e, layer) => {
             _xyz.switchState(layer, btn);
             layer.header.classList.remove('edited');
 
-            // post request here
-            let xhr = new XMLHttpRequest();
-            xhr.open('POST', _xyz.host + '/api/location/catchment?token=' + _xyz.token);
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', _xyz.host + '/api/location/catchment?token=' + _xyz.token); // request from third party API
             xhr.setRequestHeader('Content-Type', 'application/json');
 
             xhr.onload = e => {
@@ -62,12 +59,41 @@ export default (e, layer) => {
                 }
 
                 if(e.target.status === 200){
-                    console.log('status 200');
+
+                    let json = JSON.parse(e.target.response),
+                        feature = json.features[0].geometry;
+
+                    xhr = new XMLHttpRequest();
+                    xhr.open('POST', _xyz.host + '/api/location/new?token=' + _xyz.token); // request to 'new' endpoint
+                    xhr.setRequestHeader('Content-Type', 'application/json');
+
+                    xhr.onload = e => {
+
+                        layer.edit.origin.clearLayers(); // clear marker
+
+                        layer.get();
+
+                        // Make select tab active on mobile device.
+                        if (_xyz.view.mobile) _xyz.view.mobile.activateLayersTab();
+
+                        _xyz.locations.select({ // select newly added feature
+                            layer: layer.key,
+                            table: layer.table,
+                            id: e.target.response,
+                            marker: _marker,
+                            editable: layer.edit ? layer.edit.properties : false
+                        });
+                    };
+
+                    xhr.send(JSON.stringify({ // add new feature
+                        locale: _xyz.locale,
+                        layer: layer.key,
+                        table: layer.table,
+                        geometry: feature
+                    }));
                 }
             }
-
-            xhr.send(JSON.stringify(layer.edit.catchment));
-            //console.log(layer.edit.catchment);
+            xhr.send(JSON.stringify(layer.edit.catchment)); // get catchment contour
         });
     }
 }
