@@ -60,7 +60,7 @@ export default record => {
       appendTo: table
     });
 
-    if (entry.type === 'group') return group(record.location.infogroups, tr, entry);
+    if (entry.type === 'group') return group(record.location.infogroups, tr, entry, record.location.infoj);
 
     if (entry.group) {
 

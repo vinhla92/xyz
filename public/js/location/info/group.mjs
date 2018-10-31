@@ -1,6 +1,8 @@
 import _xyz from '../../_xyz.mjs';
 
-export default (groups, tr, entry) => {
+import chart from './chart.mjs';
+
+export default (groups, tr, entry, infoj) => {
 
   const group = {};
 
@@ -87,7 +89,7 @@ export default (groups, tr, entry) => {
       event: 'click',
       funct: e => {
         e.stopPropagation();
-        // make graph
+        chart(entry.label, infoj);
       }
     }
   });
