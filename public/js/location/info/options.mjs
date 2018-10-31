@@ -77,11 +77,12 @@ export default (val, entry, record) => {
   let subselect, subselect_input;
 
   if (entry.subfield) {
+    
     // Create a new table row for select sub label
     tr = _xyz.utils.createElement({ tag: 'tr', appendTo: table });
 
     // Add select sub label to new tabel row.
-    let label = _xyz.utils.createElement({
+    _xyz.utils.createElement({
       tag: 'td',
       options: {
         className: 'label lv-' + (entry.level || 0),
@@ -120,12 +121,13 @@ export default (val, entry, record) => {
     });
 
     // Create options for current data-list and append to subselect element.
-
     let suboptions = String(select.options[select.selectedIndex].dataset.list).split(';');
+
     suboptions.unshift('undefined');
 
     // Remove last option if empty.
     if (suboptions[1] == '') suboptions.pop();
+
     suboptions.push('other');
 
     Object.keys(suboptions).map(function (i) {
@@ -176,6 +178,7 @@ export default (val, entry, record) => {
   }
 
   select.addEventListener('change', e => {
+
     toggleSelectVisible(select, select_input, entry);
 
     // Clear subselect and add suboptions from select option dataset list.

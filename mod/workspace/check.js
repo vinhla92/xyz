@@ -203,6 +203,9 @@ async function chkMVTCache(layer) {
       const Protobuf = require('pbf');
       const tile = new VectorTile(new Protobuf(rows[0].mvt));
 
+      // MVT cache without fields.
+      if (!layer.mvt_fields) return;
+
       // Check if all mvt_fields are contained in cached MVT.
       for (const field of layer.mvt_fields){
 

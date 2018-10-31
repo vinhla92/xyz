@@ -12,8 +12,6 @@ import text from './text.mjs';
 
 import options from './options.mjs';
 
-// import { bar_chart } from './charts.mjs';
-
 export default record => {
 
   // Create infojTable table to be returned from this function.
@@ -78,11 +76,6 @@ export default record => {
 
     // Create streetview control.
     if (entry.streetview) return streetview(table, record, tr);
-
-    // if (entry.chart) {
-    //   let chart = bar_chart(record.location.layer, entry.chart);
-    //   if (chart) table.appendChild(chart);
-    // }
 
     // Create new table cell for label and append to table.
     if (entry.label) {

@@ -74,6 +74,24 @@ export default (groups, tr, entry) => {
     }
   });
 
+  // Add chart control to group header.
+  if (entry.chart) _xyz.utils.createElement({
+    tag: 'i',
+    options: {
+      className: 'material-icons cursor noselect btn_header',
+      title: 'Show graph',
+      textContent: 'bar_chart'
+    },
+    appendTo: group.header,
+    eventListener: {
+      event: 'click',
+      funct: e => {
+        e.stopPropagation();
+        // make graph
+      }
+    }
+  });
+
   group.table = _xyz.utils.createElement({
     tag: 'table',
     style: {

@@ -66,36 +66,43 @@ export default (val, record, images) => {
     let newImage = document.createElement('td');
 
     let reader = new FileReader();
+
     reader.onload = function (readerOnload) {
 
       let img = new Image();
+
       img.onload = function () {
 
-        let canvas = document.createElement('canvas'),
+        let
+          canvas = document.createElement('canvas'),
           max_size = 1024,
           width = img.width,
           height = img.height;
 
         // resize
         if (width > height) {
+
           if (width > max_size) {
             height *= max_size / width;
             width = max_size;
           }
+
         } else {
+
           if (height > max_size) {
             width *= max_size / height;
             height = max_size;
           }
+
         }
 
         canvas.width = width;
         canvas.height = height;
         canvas.getContext('2d').drawImage(img, 0, 0, width, height);
 
-        let dataURL = canvas.toDataURL('image/jpeg', 0.5);
+        const dataURL = canvas.toDataURL('image/jpeg', 0.5);
 
-        let _img = _xyz.utils.createElement({
+        const _img = _xyz.utils.createElement({
           tag: 'img',
           options: {
             src: dataURL
@@ -106,7 +113,7 @@ export default (val, record, images) => {
         });
 
         // add delete button / control
-        let btn_del = _xyz.utils.createElement({
+        const btn_del = _xyz.utils.createElement({
           tag: 'button',
           options: {
             title: 'Delete image',
@@ -123,7 +130,7 @@ export default (val, record, images) => {
         });
                     
         // add save button / control
-        let btn_save = _xyz.utils.createElement({
+        const btn_save = _xyz.utils.createElement({
           tag: 'button',
           options: {
             title: 'Save image',
@@ -197,7 +204,8 @@ export default (val, record, images) => {
 
 function upload_image(record, img, blob) {
 
-  let xhr = new XMLHttpRequest();
+  const xhr = new XMLHttpRequest();
+
   xhr.open('POST', _xyz.host + '/api/images/new?' + _xyz.utils.paramString({
     dbs: record.location.dbs,
     table: record.location.table,
@@ -205,50 +213,55 @@ function upload_image(record, img, blob) {
     id: record.location.id,
     token: _xyz.token
   }));
-  xhr.setRequestHeader('Content-Type', 'application/octet-stream');
-  xhr.onload = e => {
-    if (e.target.status === 200) {
-            
-      let json = JSON.parse(e.target.responseText);
-                        
-      img.style.opacity = 1;
-      img.style.border = '3px solid #eee';
-      img.id = json.image_id;
-      img.src = json.image_url;
 
-      // add delete button / control
-      let btn_del = _xyz.utils.createElement({
-        tag: 'button',
-        options: {
-          title: 'Delete image',
-          className: 'btn_del',
-          innerHTML: '<i class="material-icons">delete_forever</i>'
-        },
-        appendTo: img.parentElement,
-        eventListener: {
-          event: 'click',
-          funct: e => {
-            e.target.remove();
-            remove_image(record, img);
-          }
+  xhr.setRequestHeader('Content-Type', 'application/octet-stream');
+
+  xhr.onload = e => {
+
+    if (e.target.status !== 200) return console.log('image_upload failed');
+            
+    const json = JSON.parse(e.target.responseText);
+                        
+    img.style.opacity = 1;
+    img.style.border = '3px solid #eee';
+    img.id = json.image_id;
+    img.src = json.image_url;
+
+    // add delete button / control
+    _xyz.utils.createElement({
+      tag: 'button',
+      options: {
+        title: 'Delete image',
+        className: 'btn_del',
+        innerHTML: '<i class="material-icons">delete_forever</i>'
+      },
+      appendTo: img.parentElement,
+      eventListener: {
+        event: 'click',
+        funct: e => {
+          e.target.remove();
+          remove_image(record, img);
         }
-      });
-    }
+      }
+    });
+
   };
+
   img.style.opacity = '0';
+
   xhr.onprogress = e => {
     if (e.lengthComputable) {
       img.style.opacity = e.loaded / e.total;
     }
   };
+
   xhr.send(blob);
 }
 
 function remove_image(record, img) {
-    
-  document.getElementById(img.id).remove();
-    
-  let xhr = new XMLHttpRequest();
+        
+  const xhr = new XMLHttpRequest();
+
   xhr.open('GET', _xyz.host + '/api/images/delete?' + _xyz.utils.paramString({
     locale: _xyz.locale,
     layer: record.location.layer,
@@ -258,31 +271,36 @@ function remove_image(record, img) {
     image_src: encodeURIComponent(img.src),
     token: _xyz.token
   }));
-  /*xhr.onload = e => {
-        if (e.target.status === 200) {
-            //console.log(this.responseText);
-        }
-    }*/
+
+  xhr.onload = e => {
+
+    if (e.target.status === 200) return console.log('remove_image failed');
+
+    console.log('image_remove success');
+    document.getElementById(img.id).remove();
+  };
+
   xhr.send();
 }
 
 function dataURLToBlob(dataURL) {
 
   if (dataURL.indexOf(';base64,') == -1) {
-    let parts = dataURL.split(','),
+    let
+      parts = dataURL.split(','),
       contentType = parts[0].split(':')[1],
       raw = parts[1];
 
     return new Blob([raw], { type: contentType });
   }
 
-  let parts = dataURL.split(';base64,'),
+  let
+    parts = dataURL.split(';base64,'),
     contentType = parts[0].split(':')[1],
     raw = window.atob(parts[1]),
-    rawLength = raw.length,
-    uInt8Array = new Uint8Array(rawLength);
+    uInt8Array = new Uint8Array(raw.length);
 
-  for (let i = 0; i < rawLength; ++i) {
+  for (let i = 0; i < raw.length; ++i) {
     uInt8Array[i] = raw.charCodeAt(i);
   }
 
