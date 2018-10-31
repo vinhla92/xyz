@@ -4,6 +4,7 @@ import _rect from './rectangle.mjs';
 import _circle from './circle.mjs';
 import _line from './line.mjs';
 import _point from './point.mjs';
+import _catchment from './catchment.mjs';
 
 export function point(e, layer){
   _point(e, layer);
@@ -25,10 +26,14 @@ export function line(e, layer){
   _line(e, layer);
 }
 
+export function catchment(e, layer){
+  _catchment(e, layer);
+}
+
 _xyz.switchState = switchState;
 export function switchState(layer, btn){
 
-    _xyz.resetEditSession(layer);
+    //_xyz.resetEditSession(layer);
 
   if (_xyz.state == btn) {
     if(btn.classList.contains('active')) btn.classList.remove('active');
@@ -50,12 +55,13 @@ export function switchState(layer, btn){
 
 _xyz.resetEditSession = resetEditSession;
 function resetEditSession(layer){
-    if(layer.trail) layer.trail.clearLayers();
-    if(layer.path) layer.path.clearLayers();
-    if(layer.vertices) layer.vertices.clearLayers();
+    if(layer.edit.trail) layer.edit.trail.clearLayers();
+    if(layer.edit.path) layer.edit.path.clearLayers();
+    if(layer.edit.vertices) layer.edit.vertices.clearLayers();
     if(layer.edit.stage) {
       layer.edit.stage.clearLayers();
       layer.edit.stage.unbindTooltip();
     }
-
+    layer.header.classList.remove('edited');
+    _xyz.dom.map.style.cursor = '';
 }

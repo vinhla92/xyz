@@ -1,6 +1,6 @@
 import _xyz from '../../../_xyz.mjs';
 import style from './style.mjs';
-//import valid from '@turf/isvalid';
+//import { booleanValid } from '@turf/boolean-valid';
 
 export default (e, layer) => {
     e.stopPropagation();
@@ -123,6 +123,8 @@ export default (e, layer) => {
 
                         _xyz.switchState(layer, btn); // jumps back to select state;
                         layer.edited = false;
+
+                        _xyz.resetEditSession(layer);
                         
                         _xyz.locations.select({
                             layer: layer.key,

@@ -26,6 +26,9 @@ export default (layer, marker, btn) => {
           
           let xhr = new XMLHttpRequest();
 
+          // Make select tab active on mobile device.
+          if (_xyz.view.mobile) _xyz.view.mobile.activateLayersTab();
+
           xhr.open('POST', _xyz.host + '/api/location/new?token=' + _xyz.token);
           xhr.setRequestHeader('Content-Type', 'application/json');
           
@@ -38,8 +41,9 @@ export default (layer, marker, btn) => {
               if (e.target.status === 200) {
                   layer.get();
                   
-                  _xyz.switchState(layer, btn);
+                  layer.edited = false;
                   _xyz.resetEditSession(layer);
+                  _xyz.switchState(layer, btn);
 
                   _xyz.locations.select({
                       layer: layer.key,
@@ -81,6 +85,7 @@ export default (layer, marker, btn) => {
       
         _xyz.switchState(layer, btn);
         _xyz.resetEditSession(layer);
+  
       }
     }
   });

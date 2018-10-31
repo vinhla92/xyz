@@ -85,6 +85,7 @@ export default (e, layer) => {
                         layer.get();
 
                         _xyz.switchState(layer, btn); // jumps back to select state;
+                        _xyz.resetEditSession(layer);
                         
                         _xyz.locations.select({
                             layer: layer.key,
