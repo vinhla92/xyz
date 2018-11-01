@@ -181,24 +181,38 @@ export function createStateButton(param){
     appendTo: param.appendTo
   });
 
-  btn.addEventListener('click', e => {
-
-    console.log('reset previously started edit.');
-
-    if (_xyz.state == btn) {
-      btn.classList.remove('active');
-      return _xyz.state = 'select';
-    }
-
-    if (_xyz.state !== 'select') _xyz.state.classList.remove('active');
+  btn.activate = () => {
 
     _xyz.state = btn;
 
-    _xyz.state.classList.add('active');
+    btn.classList.add('active');
 
-    param.fx(e, param.layer);
+    param.activate(param.layer);
 
+  };
+
+  btn.finish = () => {
+
+    _xyz.state = 'select';
+
+    btn.classList.remove('active');
+
+    param.finish(param.layer);
+    
+  };
+
+  btn.addEventListener('click', e => {
+
+    e.stopPropagation();
+
+    if (_xyz.state === btn) return _xyz.state.finish();
+
+    _xyz.state.finish && _xyz.state.finish();
+
+    btn.activate(e);
+      
   });
+
 }
 
 // Slider factory.

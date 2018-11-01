@@ -476,7 +476,7 @@ input[type=range]::-moz-range-thumb {
         .mod_container .module .drawer .header:hover {
           cursor: pointer; }
         .mod_container .module .drawer .header.edited {
-          background-image: linear-gradient(white, #fff176); }
+          background-image: linear-gradient(white, #cf9); }
       .mod_container .module .drawer .dashboard {
         border-bottom: 1px solid #333;
         font-size: 13px; }

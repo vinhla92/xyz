@@ -1,12 +1,15 @@
 import _xyz from '../../_xyz.mjs';
-import { polygon } from './draw/_draw.mjs';
-import { rect } from './draw/_draw.mjs';
-import { circle } from './draw/_draw.mjs';
-import { line } from './draw/_draw.mjs';
-import { point } from './draw/_draw.mjs';
-import { catchment } from './draw/_draw.mjs';
+import * as edit from './draw/_draw.mjs';
+// import { polygon } from './draw/_draw.mjs';
+// import { rect } from './draw/_draw.mjs';
+// import { circle } from './draw/_draw.mjs';
+// import { line } from './draw/_draw.mjs';
+// import { point } from './draw/_draw.mjs';
+// import { catchment } from './draw/_draw.mjs';
 
 export default layer => {
+
+  if (!layer.edit) return;
 
   // Create cluster panel and add to layer dashboard.
   layer.edit.panel = _xyz.utils.createElement({
@@ -38,52 +41,57 @@ export default layer => {
     }
   });
 
-  if(layer.edit && layer.edit.point){
+  if(layer.edit.point){
     _xyz.utils.createStateButton({
       text: 'Point',
       appendTo: layer.edit.panel,
       layer: layer,
-      fx: point
+      activate: edit.point,
+      finish: edit.finish
     });
   }
   
-  if(layer.edit && layer.edit.polygon){
+  if(layer.edit.polygon){
     _xyz.utils.createStateButton({
       text: 'Polygon',
       appendTo: layer.edit.panel,
       layer: layer,
-      fx: polygon
+      activate: edit.polygon,
+      finish: edit.finish
     });
   }
   
-  if(layer.edit && layer.edit.rectangle){
+  if(layer.edit.rectangle){
     _xyz.utils.createStateButton({
       text: 'Rectangle',
       appendTo: layer.edit.panel,
       layer: layer,
-      fx: rect
+      activate: edit.rect,
+      finish: edit.finish
     });
   }
   
-  if(layer.edit && layer.edit.circle){
+  if(layer.edit.circle){
     _xyz.utils.createStateButton({
       text: 'Circle',
       appendTo: layer.edit.panel,
       layer: layer,
-      fx: circle
+      activate: edit.circle,
+      finish: edit.finish
     });
   }
 
-  if(layer.edit && layer.edit.line){
+  if(layer.edit.line){
     _xyz.utils.createStateButton({
       text: 'Linestring',
       appendTo: layer.edit.panel,
       layer: layer,
-      fx: line
+      activate: edit.line,
+      finish: edit.finish
     });
   }
   
-  if(layer.edit && layer.edit.catchment){
+  if(layer.edit.catchment){
     
     // set these for now
     layer.edit.catchment = {
@@ -95,13 +103,13 @@ export default layer => {
     let block = _xyz.utils.createElement({
       tag: 'div',
       options: {
-        classList: "block"
+        classList: 'block'
       },
       appendTo: layer.edit.panel
     });
 
     _xyz.utils.slider({
-      title: "Travel time in minutes: ",
+      title: 'Travel time in minutes: ',
       default: layer.edit.catchment.minutes || 5,
       min: 5,
       max: 60,
@@ -117,7 +125,7 @@ export default layer => {
       text: 'Catchment',
       layer: layer,
       appendTo: layer.edit.panel,
-      fx: catchment
+      fx: edit.catchment
     });
   }
 
