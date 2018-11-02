@@ -8,9 +8,7 @@ async function catchment(req, res, fastify){
 }
 
 function MAPBOX_isochrones(req, res){
-    
-  let
-    profile = req.body.profile,
+  let profile = req.body.profile,
     coordinates = req.body.coordinates,
     contours_minutes = req.body.minutes ? `contours_minutes=${req.body.minutes}` : '',  
     polygons = req.body.polygons ? '&polygons=true' : '',

@@ -10,7 +10,20 @@
     "build": "webpack --mode production",
     "dev": "webpack --mode development",
     "start": "node server.js",
-    "debug": "nodemon --inspect server.js"
+    "debug": "nodemon --inspect server.js",
+    "lint": "eslint --debug ./",
+    "lint:write": "eslint --debug ./ --fix"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.(js|mjs)": [
+      "npm run lint:write",
+      "git add"
+    ]
   },
   "dependencies": {
     "@mapbox/vector-tile": "^1.3.1",
@@ -37,6 +50,11 @@
     "turf-isvalid": "^1.0.0"
   },
   "devDependencies": {
+    "babel-eslint": "^8.2.3",
+    "eslint": "^4.19.1",
+    "eslint-plugin-babel": "^5.1.0",
+    "eslint-plugin-import": "^2.12.0",
+    "husky": "^1.1.3",
     "webpack": "^4.20.2",
     "webpack-cli": "^3.1.1"
   }
