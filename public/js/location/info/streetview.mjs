@@ -1,43 +1,36 @@
 import _xyz from '../../_xyz.mjs';
 
-export default (table, record, tr) => {
+export default (record, entry) => {
 
-  tr.classList.add('tr_streetview');
+  entry.row.classList.add('tr_streetview');
   
-  let td = _xyz.utils.createElement({
+  const streetview_td = _xyz.utils.createElement({
     tag: 'td',
     options: {
       className: 'td_streetview',
       colSpan: '2'
     },
-    appendTo: tr
+    appendTo: entry.row
   });
   
-  _xyz.utils.createElement({
-    tag: 'div',
-    options: {
-      className: 'div_streetview'
-    },
-    appendTo: td
-  });
-  
-  let a = _xyz.utils.createElement({
+  const streetview_link = _xyz.utils.createElement({
     tag: 'a',
     options: {
       href: 'https://www.google.com/maps?cbll=' + record.location.marker[1] + ',' + record.location.marker[0] + '&layer=c',
       target: '_blank'
     },
-    appendTo: td
+    appendTo: streetview_td
   });
   
+  // Create StreetView image and append into link element.
   _xyz.utils.createElement({
     tag: 'img',
     options: {
       className: 'img_streetview',
       src: _xyz.host + '/proxy/image?uri=https://maps.googleapis.com/maps/api/streetview?location=' + record.location.marker[1] + ',' + record.location.marker[0] + '&size=290x230&provider=GOOGLE&token=' + _xyz.token
     },
-    appendTo: a
+    appendTo: streetview_link
   });
   
-  table.appendChild(tr);
+  record.table.appendChild(entry.row);
 };

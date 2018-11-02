@@ -4,7 +4,7 @@ module.exports = fastify => {
     url: '/api/images/delete',
     beforeHandler: fastify.auth([fastify.authAPI]),
     handler: (req, res) => {
-      require(global.appRoot + '/mod/images').remove(req, res, fastify);
+      require(global.appRoot + '/mod/location/images').remove(req, res, fastify);
     }
   });
 };

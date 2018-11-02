@@ -1,6 +1,8 @@
 import _xyz from '../../_xyz.mjs';
 
-export default (val, record, images) => {
+export default (record, entry) => {
+
+  const images = entry.value.reverse() || [];
 
   val.style.position = 'relative';
   val.style.height = '180px';

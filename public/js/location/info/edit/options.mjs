@@ -1,6 +1,6 @@
-import _xyz from '../../_xyz.mjs';
+import _xyz from '../../../_xyz.mjs';
 
-export default (val, entry, record) => {
+export default (record, entry) => {
 
   // Add undefined/other to the options array.
   entry.options.unshift('undefined');

@@ -8,7 +8,7 @@ module.exports = fastify => {
       req.req.on('data', chunk => data.push(chunk));
       req.req.on('end', () => {
         req.body = Buffer.concat(data);
-        require(global.appRoot + '/mod/images').save(req, res, fastify);
+        require(global.appRoot + '/mod/location/images').save(req, res, fastify);
       });
     }
   });

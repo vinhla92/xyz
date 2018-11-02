@@ -1,8 +1,6 @@
 {
   "title": "GEOLYTIX | XYZ Test",
-  "documentation": "documentation",
   "locate": {},
-  "report": {},
   "locales": {
     "Global": {
       "gazetteer": {
