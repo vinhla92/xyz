@@ -4,7 +4,7 @@ import group from './group.mjs';
 
 import streetview from './streetview.mjs';
 
-import images from './images.mjs';
+import images from './images/_images.mjs';
 
 import geometry from './geometry.mjs';
 

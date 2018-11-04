@@ -34,16 +34,14 @@ module.exports = fastify => {
 
   require('./location/catchment')(fastify);
 
+  require('./location/images/upload')(fastify);
+
+  require('./location/images/delete')(fastify);
+
   // gazetteer
 
   require('./gazetteer/autocomplete')(fastify);
 
   require('./gazetteer/googleplaces')(fastify);
-
-  // images
-
-  require('./images/new')(fastify);
-
-  require('./images/delete')(fastify);
 
 };
