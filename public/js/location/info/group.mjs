@@ -2,18 +2,16 @@ import _xyz from '../../_xyz.mjs';
 
 import chart from './chart.mjs';
 
-export default (groups, tr, entry, infoj) => {
+export default (record, group) => {
 
-  const group = {};
-
-  groups[entry.label] = group;
+  record.location.infogroups[group.label] = group;
 
   group.td = _xyz.utils.createElement({
     tag: 'td',
     options: {
       colSpan: '2'
     },
-    appendTo: tr
+    appendTo: group.row
   });
 
   group.div = _xyz.utils.createElement({
@@ -51,7 +49,7 @@ export default (groups, tr, entry, infoj) => {
   _xyz.utils.createElement({
     tag: 'span',
     options: {
-      textContent: entry.label
+      textContent: group.label
     },
     appendTo: group.header
   });
@@ -77,7 +75,7 @@ export default (groups, tr, entry, infoj) => {
   });
 
   // Add chart control to group header.
-  if (entry.chart) _xyz.utils.createElement({
+  if (group.chart) _xyz.utils.createElement({
     tag: 'i',
     options: {
       className: 'material-icons cursor noselect btn_header',
@@ -89,7 +87,8 @@ export default (groups, tr, entry, infoj) => {
       event: 'click',
       funct: e => {
         e.stopPropagation();
-        chart(entry.label, infoj);
+        group.fields = record.location.infoj.filter(entry => entry.group === group.label);
+        chart(group);
       }
     }
   });

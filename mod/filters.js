@@ -3,6 +3,7 @@ module.exports = { sql_filter, legend_filter };
 function sql_filter(filter){
 
   let sql_filter = '';
+  
   Object.keys(filter).forEach(field => {
     if (filter[field].ni && filter[field].ni.length > 0) sql_filter += ` AND ${field} NOT IN ('${filter[field].ni.join('\',\'')}')`;
     if (filter[field].in && filter[field].in.length > 0) sql_filter += ` AND ${field} IN ('${filter[field].in.join('\',\'')}')`;

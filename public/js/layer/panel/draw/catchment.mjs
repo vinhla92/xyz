@@ -1,21 +1,21 @@
 import _xyz from '../../../_xyz.mjs';
-import marker from '../../../svg_symbols.mjs';
 
 export default (e, layer) => {
+
     e.stopPropagation();
 
     layer.edited = layer.edited ? false : true;
 
     let btn = e.target;
 
-    if(layer.edited && !layer.display){ // display layer if hidden
+    if (layer.edited && !layer.display) { // display layer if hidden
         layer.display = true;
         layer.toggle.textContent = layer.display ? 'layers' : 'layers_clear';
         _xyz.hooks.push('layers', layer.key);
         layer.get();
     }
 
-    if(!layer.edited){
+    if (!layer.edited) {
         layer.header.classList.remove('edited')
     } else {
         layer.header.classList.add('edited');
@@ -26,11 +26,11 @@ export default (e, layer) => {
         _xyz.map.once('click', e => {
             let _marker = [e.latlng.lng.toFixed(5), e.latlng.lat.toFixed(5)];
             layer.edit.catchment.coordinates = _marker.join(",");
-            
+
             layer.edit.origin.addLayer(L.marker([_marker[1], _marker[0]], {
                 interactive: false,
                 icon: L.icon({
-                    iconUrl: marker({
+                    iconUrl: _xyz.utils.svg_symbols({
                         type: "markerColor",
                         style: {
                             colorMarker: "#444",
@@ -58,7 +58,7 @@ export default (e, layer) => {
                     return
                 }
 
-                if(e.target.status === 200){
+                if (e.target.status === 200) {
 
                     let json = JSON.parse(e.target.response),
                         feature = json.features[0].geometry;

@@ -1,0 +1,732 @@
+{
+	"title": "GEOLYTIX | Tanaka",
+	"documentation": "documentation",
+	"locate": {},
+	"locales": {
+		"JP": {
+			"gazetteer": {
+				"provider": "GOOGLE",
+				"code": "JP",
+				"placeholder": "e.g. Yamanashi"
+			},
+			"bounds": [[25, 118], [47, 160]],
+			"minZoom": 6,
+			"maxZoom": 17,
+			"groups": {
+				"basemaps": {
+					"label": "Base maps"
+				}
+			},
+			"layers": {	
+                "base": {
+                    "group": "basemaps",
+                    "display": true,
+                    "name": "Mapbox Baselayer",
+                    "attribution": [
+                        "mapbox",
+                        "osm"
+                    ],
+                    "pane": [
+                        "base",
+                        500
+                    ],
+                    "format": "tiles",
+                    "URI": "https://api.mapbox.com/styles/v1/dbauszus/ciozrimi3002bdsm8bjtn2v1y/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZGJhdXN6dXMiLCJhIjoiY2pnbTFwNWh3MWwxdjJ4bno5M3pndDNubiJ9.fMKui_Ypb0qJz0r1QzYzGg"
+                },
+                "label": {
+                    "group": "basemaps",
+                    "display": true,
+                    "name": "Mapbox Labels",
+                    "attribution": [
+                        "mapbox",
+                        "osm"
+                    ],
+                    "pane": [
+                        "base_labels",
+                        550
+                    ],
+                    "format": "tiles",
+                    "URI": "https://api.mapbox.com/styles/v1/dbauszus/cj9puo8pr5o0c2sovhdwhkc7z/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZGJhdXN6dXMiLCJhIjoiY2pnbTFwNWh3MWwxdjJ4bno5M3pndDNubiJ9.fMKui_Ypb0qJz0r1QzYzGg"
+                },
+                "here": {
+                    "group": "basemaps",
+                    "name": "HERE Imagery",
+                    "attribution": [
+                        "here"
+                    ],
+                    "pane": [
+                        "base",
+                        500
+                    ],
+                    "format": "tiles",
+                    "URI": "https://1.aerial.maps.api.here.com/maptile/2.1/maptile/newest/satellite.day/{z}/{x}/{y}/256/png8?",
+                    "provider": "HERE"
+                },
+                "here_hybrid": {
+                    "group": "basemaps",
+                    "name": "HERE Hybrid",
+                    "attribution": [
+                        "here"
+                    ],
+                    "pane": [
+                        "base",
+                        500
+                    ],
+                    "format": "tiles",
+                    "URI": "https://1.aerial.maps.api.here.com/maptile/2.1/maptile/newest/hybrid.day/{z}/{x}/{y}/256/png8?",
+                    "provider": "HERE"
+                },
+                "store": {
+                    "display": true,
+                    "streetview": true,
+                    "name": "Tanaka Stores",
+                    "meta": "Tanaka Shops August 2018.",
+                    "format": "cluster",
+                    "pane": ["store", 540],
+                    "dbs": "XYZ",
+                    "qID": "id",
+                    "table": "tanaka.store",
+                    "properties": "brand",
+                    "cluster_label": "store_name",
+                    "geomdisplay": "catchment1",
+                    "cluster_cat": "area",
+                    "cluster_kmeans": 0.05,
+                    "cluster_dbscan": 0.05,
+                    "infoj": [
+                    	{
+                    		"field": "store_code",
+                    		"label": "Store code",
+                    		"type": "text",
+                    		"inline": true
+                    	},
+                    	{
+                    		"field": "store_name",
+                    		"label": "Store name",
+                    		"type": "text"
+                    	},
+                    	{
+                    		"field": "store_name_abrv",
+                    		"label": "Short store name",
+                    		"type": "text",
+                            "inline": true,
+                            "level": 1
+                    	},
+                    	{
+                    		"field": "store_name_en",
+                    		"label": "Store name (en)",
+                    		"type": "text",
+                            "filter": "like",
+                            "level": 1
+                    	},
+                    	{
+                    		"field": "store_type",
+                    		"label": "Store type",
+                    		"type": "text",
+                            "level": 1
+                    	},
+                    	{
+                    		"field": "contract_type",
+                    		"label": "Contract type",
+                    		"type": "text",
+                            "level": 1
+                    	},
+                    	{
+                    		"field": "location",
+                    		"label": "Location",
+                    		"type": "text",
+                            "level": 1
+                    	},
+                    	{
+                    		"field": "area",
+                    		"label": "Area",
+                    		"type": "text",
+                            "inline": true,
+                            "level": 1
+                        },
+                    	{
+                    		"field": "sales_area",
+                    		"label": "Sales area",
+                    		"type": "numeric",
+                    		"inline": true,
+                            "level": 1
+                    	},
+                    	{
+                    		"field": "area_name",
+                    		"label": "Area name",
+                    		"type": "text",
+                            "level": 1
+                    	},
+                    	{
+                    		"field": "area_name_abrv",
+                    		"label": "Short area name",
+                    		"type": "text",
+                    		"inline": true,
+                            "level": 1
+                    	},
+                    	{
+                    		"field": "area_type",
+                    		"label": "Area type",
+                    		"type": "text",
+                            "level": 1
+                    	},
+                    	{
+                    		"field": "sales_area",
+                    		"label": "Sales area",
+                    		"type": "numeric",
+                    		"inline": true,
+                            "level": 1
+                        },
+                        {
+                            "label": "Tenure"
+                        },
+                    	{
+                    		"field": "rent_monthly",
+                    		"label": "Rent monthly",
+                    		"type": "numeric",
+                            "inline": true,
+                            "level": 2
+                    	},
+                    	{
+                    		"field": "common_services_fee_monthly",
+                    		"label": "Common services fee monthly",
+                    		"type": "numeric",
+                            "level": 2
+                    	},
+                    	{
+                    		"field": "ping_unit_price_common_service_charge_included",
+                    		"label": "Ping unit price; common service change included",
+                    		"type": "numeric",
+                            "level": 2
+                    	},
+                    	{
+                    		"field": "deposit",
+                    		"label": "Deposit",
+                    		"type": "numeric",
+                    		"inline": true,
+                            "level": 2
+                    	},
+                    	{
+                    		"field": "total_monthly_rent",
+                    		"label": "Total monthly rent",
+                    		"type": "numeric",
+                    		"inline": true,
+                            "level": 2
+                    	},
+                    	{
+                    		"field": "renewal_fee",
+                    		"label": "Renewal fee",
+                    		"type": "text",
+                            "inline": true,
+                            "level": 2
+                    	},
+                    	{
+                    		"field": "renter_name",
+                    		"label": "Renter name",
+                    		"type": "text",
+                            "inline": true,
+                            "level": 2
+                    	},
+                    	{
+                    		"field": "management_company_name",
+                    		"label": "Management company name",
+                    		"type": "text",
+                            "level": 2
+                        },
+                        {
+                            "label": "Sales 2017",
+                            "type": "group",
+                            "items": [
+                                {
+                                    "field": "glasses_2017",
+                                    "label": "Glasses",
+                                    "type": "integer",
+                                    "inline": true
+                                },
+                                {
+                                    "field": "sunglasses_2017",
+                                    "label": "Sunglasses",
+                                    "type": "integer",
+                                    "inline": true
+                                },
+                                {
+                                    "field": "contact_lenses_2017",
+                                    "label": "Contact lenses",
+                                    "type": "integer",
+                                    "inline": true
+                                },
+                                {
+                                    "field": "hearing_aid_2017",
+                                    "label": "Hearing aid",
+                                    "type": "integer",
+                                    "inline": true
+                                },
+                                {
+                                    "field": "total_2017",
+                                    "label": "Total",
+                                    "type": "integer",
+                                    "inline": true
+                                }
+                            ]
+                        }
+                    ],
+                	"style": {
+                        "marker": {
+                            "type": "target",
+                            "style": [400, "#000", 300, "#fff", 200, "#E70000"]
+                        },
+                        "markerMulti": {
+                            "type": "target",
+                            "style" :[400, "#78909c"]
+                        },
+                        "themes": [
+                            {
+                                "label": "Default",
+                                "field": "brand",
+                                "type": "categorized",
+                                "cat": {
+                                    "Tanaka": {
+                                        "marker": {
+                                            "type": "target",
+                                            "style": [400, "#000", 300, "#fff", 200, "#E70000"]
+                                        }
+                                    }
+                                }
+                            },
+                            {
+                                "label": "Area type",
+                                "field": "area_type",
+                                "type": "categorized",
+                                "cat": {
+                                    "City centre": {
+                                        "marker": {
+                                            "type": "target",
+                                            "style": [400,"#448aff", 300, "#fff", 200, "#e57373"]
+                                        }
+                                    },
+                                    "Food mall": {
+                                        "marker": {
+                                            "type": "target",
+                                            "style": [400,"#8e24aa", 300, "#fff", 200, "#e57373"]
+                                        }
+                                    },
+                                    "Huge mall above train station": {
+                                        "marker": {
+                                            "type": "target",
+                                            "style": [400,"#bbdefb", 300, "#fff", 200, "#e57373"]
+                                        }
+                                    },
+                                    "Retail park": {
+                                        "marker": {
+                                            "type": "target",
+                                            "style": [400,"#26c6da", 300, "#fff", 200, "#e57373"]
+                                        }
+                                    },
+                                    "Secondary city centre": {
+                                        "marker": {
+                                            "type": "target",
+                                            "style": [400,"#00897b", 300, "#fff", 200, "#e57373"]
+                                        }
+                                    },
+                                    "Secondary retail": {
+                                        "marker": {
+                                            "type": "target",
+                                            "style": [400,"#b2dfdb", 300, "#fff", 200, "#e57373"]
+                                        }
+                                    },
+                                    "Shopping mall": {
+                                        "marker": {
+                                            "type": "target",
+                                            "style": [400,"#66bb6a", 300, "#fff", 200, "#e57373"]
+                                        }
+                                    },
+                                    "Small city centre": {
+                                        "marker": {
+                                            "type": "target",
+                                            "style": [400,"#2e7d32", 300, "#fff", 200, "#e57373"]
+                                        }
+                                    },
+                                    "Small mall above train station": {
+                                        "marker": {
+                                            "type": "target",
+                                            "style": [400,"#d4e157", 300, "#fff", 200, "#e57373"]
+                                        }
+                                    },
+                                    "Small urban centre": {
+                                        "marker": {
+                                            "type": "target",
+                                            "style": [400,"#fff176", 300, "#fff", 200, "#e57373"]
+                                        }
+                                    },
+                                    "Solus": {
+                                        "marker": {
+                                            "type": "target",
+                                            "style": [400,"#0d47a1", 300, "#fff", 200, "#e57373"]
+                                        }
+                                    },
+                                    "Suburban parade": {
+                                        "marker": {
+                                            "type": "target",
+                                            "style": [400,"#b39ddb", 300, "#fff", 200, "#e57373"]
+                                        }
+                                    },
+                                    "Supermarket": {
+                                        "marker": {
+                                            "type": "target",
+                                            "style": [400,"#a1887f", 300, "#fff", 200, "#e57373"]
+                                        }
+                                    },
+                                    "Urban centre": {
+                                        "marker": {
+                                            "type": "target",
+                                            "style": [400,"#607d8b", 300, "#fff", 200, "#e57373"]
+                                        }
+                                    }
+                                }
+                            },
+                            {
+                                "label": "Store type",
+                                "field": "store_type",
+                                "type": "categorized",
+                                "other": true,
+                                "cat": {
+                                    "その他": {
+                                        "marker": {
+                                            "type": "target",
+                                            "style": [400, "#000", 300, "#fff", 200, "#E4959E"]
+                                        }
+                                    },
+                                    "ショッピング内": {
+                                        "marker": {
+                                            "type": "target",
+                                            "style": [400, "#000", 300, "#fff", 200, "#37515F"]
+                                        }
+                                    },
+                                    "郊外型店舗": {
+                                        "marker": {
+                                            "type": "target",
+                                            "style": [400, "#000", 300, "#fff", 200, "#7FB285"]
+                                        }
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                },
+                "competition": {
+                	"streetview": true,
+                	"name": "Competition",
+                	"format": "cluster",
+                	"pane": ["competition", 538],
+                	"dbs": "XYZ",
+                	"qID": "id",
+                	"table": "tanaka.competition",
+                	"cluster_label": "shop_name",
+                	"cluster_cat": "prefecture",
+                	"infoj": [
+                		{
+                			"field": "id", 
+                			"label": "ID",
+                			"type": "text",
+                			"inline": true
+                		},
+                		{
+                			"field": "shop_status",
+                			"label": "Status",
+                			"type": "text",
+                			"inline": true,
+                			"filter": {
+                				"in": ["New", "Open"]
+                			}
+                		},
+                		{
+                			"field": "brand",
+                			"label": "Brand",
+                			"type": "text",
+                			"inline": true
+                		},
+                		{
+                			"field": "shop_name",
+                			"label": "Shop name",
+                			"type": "text",
+                			"inline": true
+                		},
+                		{
+                			"field": "prefecture",
+                			"label": "Prefecture",
+                			"type": "text",
+                			"inline": true,
+                			"level": 1
+                		},
+                		{
+                			"field": "address",
+                			"label": "Address",
+                			"type": "text",
+                			"inline": true,
+                			"level": 1
+                		},
+                		{
+                			"field": "phone",
+                			"label": "Phone",
+                			"type": "text",
+                			"inline": true,
+                			"level": 1
+                		},
+                		{
+                			"field": "contact_lense_specialty",
+                			"label": "Contact lens speciality",
+                			"type": "text",
+                            "inline": true,
+                            "filter": {
+                                "in": ["Yes", "No"]
+                            }
+                		},
+                		{
+                			"field": "independents",
+                			"label": "Independents",
+                			"type": "integer",
+                			"inline": true
+                		}
+                	],
+                	"style": {
+                        "marker": {
+                            "type": "target",
+                            "style": [400,"#016FB9", 300, "#68B0AB", 200, "#eee"]
+                        },
+                        "markerMulti": {
+                            "type": "target",
+                            "style" :[400, "#9e9e9e"]
+                        },
+                        "themes": [
+                            {
+                                "label": "Brand",
+                                "type": "categorized",
+                                "field": "brand",
+                                "other": true,
+                                "cat": {
+                                    "個人・零細": {
+                                        "marker": {
+                                            "type": "target",
+                                            "style": [400, "#0091ea", 300, "#FFF", 200, "#0091ea"]
+                                        }
+                                    },
+                                    "Megane Top": {
+                                        "marker": {
+                                            "type": "target",
+                                            "style": [400, "#0277bd", 300, "#FFF", 200, "#0277bd"]
+                                        }
+                                    },
+                                    "Paris Miki": {
+                                        "marker": {
+                                            "type": "target",
+                                            "style": [400, "#ff4081", 300, "#FFF", 200, "#ff4081"]
+                                        }
+                                    },
+                                    "メガネスーパー": {
+                                        "marker": {
+                                            "type": "target",
+                                            "style": [400, "#ad1457", 300, "#FFF", 200, "#ad1457"]
+                                        }
+                                    },
+                                    "JINS": {
+                                        "marker": {
+                                            "type": "target",
+                                            "style": [400, "#6a1b9a", 300, "#FFF", 200, "#6a1b9a"]
+                                        }
+                                    },
+                                    "Eye City": {
+                                        "marker": {
+                                            "type": "target",
+                                            "style": [400, "#ab47bc", 300, "#FFF", 200, "#ab47bc"]
+                                        }
+                                    },
+                                    "aigan": {
+                                        "marker": {
+                                            "type": "target",
+                                            "style": [400, "#4527a0", 300, "#FFF", 200, "#4527a0"]
+                                        }
+                                    },
+                                    "メガネストアー": {
+                                        "marker": {
+                                            "type": "target",
+                                            "style": [400, "#9575cd", 300, "#FFF", 200, "#9575cd"]
+                                        }
+                                    },
+                                    "メガネのヨネザワ": {
+                                        "marker": {
+                                            "type": "target",
+                                            "style": [400, "#00796b", 300, "#FFF", 200, "#00796b"]
+                                        }
+                                    },
+                                    "zoff": {
+                                        "marker": {
+                                            "type": "target",
+                                            "style": [400, "#00897b", 300, "#FFF", 200, "#00897b"]
+                                        }
+                                    },
+                                    "中央コンタクト": {
+                                        "marker": {
+                                            "type": "target",
+                                            "style": [400, "#80cbc4", 300, "#FFF", 200, "#80cbc4"]
+                                        }
+                                    },
+                                    "ハートアップ": {
+                                        "marker": {
+                                            "type": "target",
+                                            "style": [400, "#ff8f00", 300, "#FFF", 200, "#ff8f00"]
+                                        }
+                                    },
+                                    "キクチメガネ": {
+                                        "marker": {
+                                            "type": "target",
+                                            "style": [400, "#ffca28", 300, "#FFF", 200, "#ffca28"]
+                                        }
+                                    },
+                                    "Owndays": {
+                                        "marker": {
+                                            "type": "target",
+                                            "style": [400, "#d84315", 300, "#FFF", 200, "#d84315"]
+                                        }
+                                    },
+                                    "ビジョンメガネ": {
+                                        "marker": {
+                                            "type": "target",
+                                            "style": [400, "#ff8a65", 300, "#FFF", 200, "#ff8a65"]
+                                        }
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                },
+                "venue": {
+                    "display": true,
+                	"streetview": true,
+                	"name": "Venues",
+                	"format": "cluster",
+                	"pane": ["venues", 539],
+                	"dbs": "XYZ",
+                	"qID": "id",
+                	"table": "tanaka.venue",
+                	"cluster_label": "venuename",
+                	"cluster_cat": "town",
+                	"cluster_kmeans": 0.05,
+                	"infoj": [
+                		{
+                			"field": "id",
+                			"label": "ID",
+                			"type": "text",
+                			"inline": true
+                		},
+                		{
+                			"field": "town",
+                			"label": "Town",
+                			"type": "text",
+                			"inline": true
+                		},
+                		{
+                			"field": "venuename",
+                			"label": "Venue name",
+                			"type": "text",
+                			"inline": true
+                		},
+                		{
+                			"field": "size",
+                			"label": "Size",
+                			"type": "text",
+                			"inline": true
+                		},
+                		{
+                			"field": "opendate",
+                			"label": "Date open",
+                			"type": "text",
+                			"inline": true
+                		},
+                		{
+                			"field": "competition_all",
+                			"label": "All competition",
+                			"type": "text",
+                			"inline": true
+                		},
+                		{
+                			"field": "independents",
+                			"label": "Independents",
+                			"type": "text",
+                			"inline": true
+                		}
+                	],
+                	"style": {
+                        "marker": {
+                            "type": "target",
+                            "style": [400,"#CFCFEA", 300, "#A89B9D", 200, "#816C61"]
+                        },
+                        "markerMulti": {
+                            "type": "target",
+                            "style" :[400,"#CFCFEA", 300, "#A89B9D", 200, "#816C61"]
+                        }
+                    }
+                },
+                "catchment": {
+                	"name": "Tanaka store catchment",
+                	"format": "mvt",
+                	"pane": ["catchment", 520],
+                    "dbs": "XYZ",
+                    "qID": "id",
+                	"arrayZoom": {
+                		"8": "tanaka.catchment"
+                	},
+                	"infoj": [
+                		{
+                			"field": "storeid",
+                			"label": "Store ID",
+                			"type": "text",
+                			"inline": true
+                		},
+                		{
+                			"field": "chomokucod",
+                			"label": "Chomokucod",
+                			"type": "text",
+                            "inline": true
+                		},
+                		{
+                			"field": "distance_degrees",
+                			"label": "Distance (degrees)",
+                			"type": "text",
+                			"inline": true
+                		},
+                		{
+                			"field": "orders",
+                			"label": "Orders",
+                			"type": "numeric",
+                			"inline": true
+                		},
+                		{
+                			"field": "catchment",
+                			"label": "Catchment",
+                			"type": "text",
+                			"inline": true
+                		}
+                	],
+                	"style": {
+                		"default": {
+                			"weight": 1,
+                            "color": "#56A3A6",
+                            "stroke": false,
+                			"opacity": 1,
+                			"fillColor": "#56A3A6",
+                			"fill": true,
+                		    "fillOpacity": 0.5
+                	    },
+                		"highlight": {
+                            "color": "#56A3A6",
+                            "stroke": false,
+							"fillColor": "#DBD56E",
+                			"fill": true,
+                			"fillOpacity": 0.3
+                		}
+                	}
+
+                }
+			}
+		}
+	}
+}
