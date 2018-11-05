@@ -1,6 +1,6 @@
 import _xyz from '../_xyz.mjs';
 
-import addInfojToList from './info/_info.mjs';
+import info from './info/_info.mjs';
 
 import * as controls from './controls.mjs';
 
@@ -57,16 +57,17 @@ export default record => {
   controls.expander(record);
 
   // Create control to update editable items.
-  if (record.location.edit && record.location.edit.properties) controls.update(record);
+  // Update button will be invisible unless info has changed.
+  controls.update(record);
 
   // Create control to trash editable items.
-  if (record.location.edit && record.location.edit.properties) controls.trash(record);
+  if (record.location.edit && record.location.edit.delete) controls.trash(record);
 
   // Add header element to the drawer.
   record.drawer.appendChild(record.header);
 
   // Add create and append infoj table to drawer.
-  addInfojToList(record);
+  info(record);
 
   // Find free space and insert record.
   let idx = _xyz.locations.list.indexOf(record);

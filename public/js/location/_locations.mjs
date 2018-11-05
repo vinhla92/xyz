@@ -3,19 +3,18 @@ import _xyz from '../_xyz.mjs';
 import select from './select.mjs';
 _xyz.locations.select = select;
 
-
 import draw from './draw.mjs';
 _xyz.locations.draw = draw;
 
 import add from './add.mjs';
 _xyz.locations.add = add;
 
+_xyz.locations.dom = document.getElementById('locations');
+
 export default () => {
 
   // Make select tab active on mobile device.
   if (_xyz.view.mobile) _xyz.view.mobile.activateLayersTab();
-
-  _xyz.locations.dom = document.getElementById('locations');
 
   document.getElementById('clear_locations').addEventListener('click', () => {
     _xyz.hooks.remove('select');
