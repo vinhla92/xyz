@@ -83,8 +83,9 @@ export default (layer, marker, btn) => {
       funct: e => {
         e.stopPropagation();
       
-        _xyz.switchState(layer, btn);
-        _xyz.resetEditSession(layer);
+        //_xyz.switchState(layer, btn);
+        //_xyz.resetEditSession(layer);
+        console.log('stage complete');
   
       }
     }

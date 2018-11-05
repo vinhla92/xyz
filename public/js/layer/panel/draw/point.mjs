@@ -6,8 +6,10 @@ _xyz.locations.stage = stage;
 
 export default (e, layer) => {
     e.stopPropagation();
+    console.log(e);
+    console.log(layer);
 
-    _xyz.resetEditSession(layer);
+    //_xyz.resetEditSession(layer);
 
     layer.edited = layer.edited ? false : true;
 

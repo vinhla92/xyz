@@ -11,9 +11,9 @@ export function point(e, layer){
   _point(e, layer);
 }
 
-// export function polygon(e, layer){
-//   _polygon(e, layer);
-// }
+ /*export function polygon(e, layer){
+   _polygon(e, layer);
+ }*/
 
 export function rect(e, layer){
   _rect(e, layer);
