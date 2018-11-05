@@ -5,16 +5,16 @@ module.exports = fastify => {
     beforeHandler: fastify.auth([fastify.authAPI]),
     handler: (req, res) => {
 
-      const images = process.env.IMAGES ? process.env.IMAGES.split(' ') : [];
+      const cloudinary = process.env.CLOUDINARY ? process.env.CLOUDINARY.split(' ') : [];
 
       let
         ts = Date.now(),
-        sig = require('crypto').createHash('sha1').update(`public_id=${req.query.image_id}&timestamp=${ts}${images[2]}`).digest('hex');
+        sig = require('crypto').createHash('sha1').update(`public_id=${req.query.image_id}&timestamp=${ts}${cloudinary[1]}`).digest('hex');
 
       require('request').post({
-        url: `https://api.cloudinary.com/v1_1/${images[3]}/image/destroy`,
+        url: `https://api.cloudinary.com/v1_1/${cloudinary[2]}/image/destroy`,
         body: {
-          'api_key': images[1],
+          'api_key': cloudinary[0],
           'public_id': req.query.image_id,
           'timestamp': ts,
           'signature': sig

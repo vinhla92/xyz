@@ -5,7 +5,7 @@ module.exports = fastify => {
     beforeHandler: fastify.auth([fastify.authAPI]),
     handler: (req, res) => {
 
-      const images = process.env.IMAGES ? process.env.IMAGES.split(' ') : [];
+      const cloudinary = process.env.CLOUDINARY ? process.env.CLOUDINARY.split(' ') : [];
 
       var data = [];
 
@@ -17,14 +17,14 @@ module.exports = fastify => {
 
         let
           ts = Date.now(),
-          sig = require('crypto').createHash('sha1').update(`folder=${images[4]}&timestamp=${ts}${images[2]}`).digest('hex');
+          sig = require('crypto').createHash('sha1').update(`folder=${cloudinary[3]}&timestamp=${ts}${cloudinary[1]}`).digest('hex');
 
         require('request').post({
-          url: `https://api.cloudinary.com/v1_1/${images[3]}/image/upload`,
+          url: `https://api.cloudinary.com/v1_1/${cloudinary[2]}/image/upload`,
           body: {
             'file': `data:image/jpeg;base64,${req.body.toString('base64')}`,
-            'api_key': images[1],
-            'folder': images[4],
+            'api_key': cloudinary[0],
+            'folder': cloudinary[3],
             'timestamp': ts,
             'signature': sig
           },
