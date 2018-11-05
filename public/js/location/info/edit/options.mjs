@@ -1,5 +1,7 @@
 import _xyz from '../../../_xyz.mjs';
 
+import valChange from './valChange.mjs';
+
 export default (record, entry) => {
 
   // Add undefined/other to the options array.

@@ -2,7 +2,19 @@ import _xyz from '../_xyz.mjs';
 
 import info from './info/_info.mjs';
 
-import * as controls from './controls.mjs';
+import trash from './controls/trash.mjs';
+
+import clear from './controls/clear.mjs';
+
+import clipboard from './controls/clipboard.mjs';
+
+import expander from './controls/expander.mjs';
+
+import update from './controls/update.mjs';
+
+import zoom from './controls/zoom.mjs';
+
+import marker from './controls/marker.mjs';
 
 export default record => {
 
@@ -42,26 +54,26 @@ export default record => {
   });
 
   // Create the clear control element to control the removal of a feature from the select.layers.
-  controls.clear(record);
-        
+  clear(record);
+
   // Create copy to clipboard element
-  controls.clipboard(record);
+  clipboard(record);
 
   // Create the zoom control element which zoom the map to the bounds of the feature.
-  controls.zoom(record);
+  zoom(record);
 
   // Create control to toggle marker.
-  controls.marker(record);
-        
-  // Create the expand control element which controls whether the data table is displayed for the feature.
-  controls.expander(record);
+  marker(record);
 
   // Create control to update editable items.
   // Update button will be invisible unless info has changed.
-  controls.update(record);
+  update(record);
 
   // Create control to trash editable items.
-  if (record.location.edit && record.location.edit.delete) controls.trash(record);
+  trash(record);
+
+  // Create the expand control element which controls whether the data table is displayed for the feature.
+  expander(record);
 
   // Add header element to the drawer.
   record.drawer.appendChild(record.header);
@@ -71,6 +83,7 @@ export default record => {
 
   // Find free space and insert record.
   let idx = _xyz.locations.list.indexOf(record);
+  
   _xyz.locations.dom.insertBefore(record.drawer, _xyz.locations.dom.children[idx]);
 
   if (_xyz.view.mode === 'desktop') setTimeout(() => {

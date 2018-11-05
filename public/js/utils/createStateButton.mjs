@@ -1,3 +1,5 @@
+import _xyz from '../_xyz.mjs';
+
 import {createElement} from './createElement.mjs';
 
 // StateButton factory

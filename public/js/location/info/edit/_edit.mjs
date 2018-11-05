@@ -6,6 +6,8 @@ import options from './options.mjs';
 
 import date from './options.mjs';
 
+import valChange from './valChange.mjs';
+
 export default (record, entry) => {
 
   // Create a date control.
@@ -46,11 +48,3 @@ export default (record, entry) => {
   });
 
 };
-
-function valChange(input, record, entry) {
-
-  input.classList.add('changed');
-  record.upload.style.display = 'block';
-  entry.value = e.target.value;
-
-}

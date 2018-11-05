@@ -1,5 +1,7 @@
 import _xyz from '../../../_xyz.mjs';
 
+import valChange from './valChange.mjs';
+
 export default (record, entry) => {
 
   _xyz.utils.createElement({
@@ -25,7 +27,10 @@ export default (record, entry) => {
     value: entry.value,
     appendTo: entry.val,
     oninput: e => {
+
       lbl.innerHTML = e.target.value;
+      valChange(e.target, record, entry)
+      
     }
   });
 
