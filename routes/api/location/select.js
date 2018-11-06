@@ -69,7 +69,6 @@ module.exports = fastify => {
         
         fields += `${entry.fieldfx || entry.field} AS ${entry.field}, `;
         
-        // if (entry.subfield) fields += `${entry.subfield}::${entry.type} AS ${entry.subfield}, `;
       }
 
       let qLog = layer.log_table ?
@@ -78,6 +77,7 @@ module.exports = fastify => {
             ORDER BY ((${layer.log_table.field || 'log'} -> 'time') :: VARCHAR) :: TIMESTAMP DESC ) AS rank
             FROM gb_retailpoint_editable_logs  AS logfilter`
         : null;
+        
 
       q = `
       SELECT

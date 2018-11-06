@@ -1,4 +1,4 @@
-module.exports = { autocomplete, googleplaces };
+module.exports = { autocomplete };
 
 async function autocomplete(req, res, fastify) {
 
@@ -13,7 +13,6 @@ async function autocomplete(req, res, fastify) {
 
   if (!res.sent && locale.gazetteer.provider) await eval(locale.gazetteer.provider + '_placesAutoComplete')(req, res, locale.gazetteer);
 
-  //if (!res.sent) res.code(200).send([{label: 'no results'}]);
   if (!res.sent && !locale.gazetteer.provider) res.code(200).send([]);
 }
 
@@ -100,24 +99,5 @@ function GOOGLE_placesAutoComplete(req, res, gazetteer) {
         source: 'google'
       };
     }));
-  });
-}
-
-function googleplaces(req, res) {
-  var q = `https://maps.googleapis.com/maps/api/place/details/json?placeid=${req.query.id}`
-        + `&${global.KEYS.GOOGLE}`;
-
-  require('request').get(q, (err, response, body) => {
-    if (err) {
-      Object.keys(err).forEach(key => !err[key] && delete err[key]);
-      console.error(err);
-      return;
-    }
-
-    let r = JSON.parse(body).result;
-    res.code(200).send({
-      type: 'Point',
-      coordinates: [r.geometry.location.lng, r.geometry.location.lat]
-    });
   });
 }
