@@ -1,15 +1,16 @@
 import _xyz from '../../_xyz.mjs';
 import * as edit from './draw/_draw.mjs';
-// import { polygon } from './draw/_draw.mjs';
-// import { rect } from './draw/_draw.mjs';
-// import { circle } from './draw/_draw.mjs';
-// import { line } from './draw/_draw.mjs';
-// import { point } from './draw/_draw.mjs';
-// import { catchment } from './draw/_draw.mjs';
 
 export default layer => {
 
   if (!layer.edit) return;
+
+  if (!(!layer.edit.point
+    ^ !layer.edit.polygon
+    ^ !layer.edit.line
+    ^ !layer.edit.circle
+    ^ !layer.edit.rectangle
+    ^ !layer.edit.catchment)) return;
 
   // Create cluster panel and add to layer dashboard.
   layer.edit.panel = _xyz.utils.createElement({
