@@ -5,10 +5,7 @@ module.exports = fastify => {
     beforeHandler: fastify.auth([fastify.authAPI]),
     handler: async (req, res) => {
       
-      // require(global.appRoot + '/mod/location').select(req, res, fastify);
-
-      const token = req.query.token ?
-        fastify.jwt.decode(req.query.token) : { access: 'public' };
+      const token = req.query.token ? fastify.jwt.decode(req.query.token) : { access: 'public' };
 
       let
         layer = global.workspace[token.access].config.locales[req.query.locale].layers[req.query.layer],

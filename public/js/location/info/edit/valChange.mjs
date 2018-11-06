@@ -1,5 +1,7 @@
 export default (input, record, entry) => {
 
+    if (!entry.value) entry.value = '';
+
     // Create newValue if input value is different from entry value.
     if (entry.value !== input.value) {
 

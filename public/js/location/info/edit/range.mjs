@@ -7,7 +7,7 @@ export default (record, entry) => {
   _xyz.utils.createElement({
     tag: 'span',
     options: {
-      textContent: entry.range.label
+      textContent: entry.edit.range.label
     },
     appendTo: entry.val
   });
@@ -22,8 +22,8 @@ export default (record, entry) => {
   });
 
   _xyz.utils.slider({
-    min: entry.range.min,
-    max: entry.range.max,
+    min: entry.edit.range.min,
+    max: entry.edit.range.max,
     value: entry.value,
     appendTo: entry.val,
     oninput: e => {

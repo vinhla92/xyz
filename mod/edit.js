@@ -1,4 +1,4 @@
-module.exports = { newRecord, newAggregate, updateRecord, deleteRecord, setIndices };
+module.exports = { newRecord, newAggregate, deleteRecord, setIndices };
 
 async function newRecord(req, res, fastify) {
 
@@ -110,74 +110,6 @@ async function newAggregate(req, res, fastify) {
     lng: parseFloat(rows[0].lng),
     filter: filter
   });
-}
-
-async function updateRecord(req, res, fastify) {
-  try {
-
-    const token = req.query.token ?
-      fastify.jwt.decode(req.query.token) : { access: 'public' };
-
-    let
-      layer = global.workspace[token.access].config.locales[req.body.locale].layers[req.body.layer],
-      table = req.body.table,
-      qID = layer.qID ? layer.qID : 'id',
-      id = req.body.id,
-      geom = layer.geom ? layer.geom : 'geom',
-      geometry = JSON.stringify(req.body.geometry);
-
-    // Check whether string params are found in the settings to prevent SQL injections.
-    if ([table, geom, qID]
-      .some(val => (typeof val === 'string' && val.length > 0 && global.workspace[token.access].values.indexOf(val) < 0))) {
-      return res.code(406).send('Parameter not acceptable.');
-    }
-
-    let fields = '';
-    Object.values(req.body.infoj).forEach(entry => {
-      if(entry.type === 'group'){
-        Object.values(entry.items).forEach(item => {
-          fields = processInfoj(fields, item);
-        });
-      } else {
-        fields = processInfoj(fields, entry);
-      }
-    });
-
-    const d = new Date();
-
-    var q = `
-            UPDATE ${table} SET
-                ${fields}
-                ${geom} = ST_SetSRID(ST_GeomFromGeoJSON('${geometry}'), 4326)
-                ${layer.log && layer.log.table ?
-    `, ${layer.log.field || 'log'} = '{ "user": "${token.email}", "op": "update", "time": "${d.toUTCString()}"}'` : ''}
-            WHERE ${qID} = $1;`;
-
-    var rows = await global.pg.dbs[layer.dbs](q, [id]);
-
-    if (rows.err) return res.code(500).send('soz. it\'s not you. it\'s me.');
-
-    // Write into logtable if logging is enabled.
-    if (layer.log && layer.log.table) await writeLog(layer, id);
-
-    res.code(200).send();
-
-  } catch (err) {
-    Object.keys(err).forEach(key => !err[key] && delete err[key]);
-    console.error(err);
-    return res.code(500).send('soz. it\'s not you. it\'s me.');
-  }
-}
-
-function processInfoj(fields, entry){
-  //if (entry.images) return;
-  if (entry.field && entry.type === 'text' && entry.value) fields += `${entry.field} = '${entry.value.replace(/'/g, '\'\'')}',`;
-  if (entry.type === 'integer' && entry.value) fields += `${entry.field} = ${entry.value},`;
-  if (entry.type === 'integer' && !entry.value) fields += `${entry.field} = null,`;
-  if (entry.subfield && entry.subvalue) fields += `${entry.subfield} = '${entry.subvalue}',`;
-  if (entry.type === 'date' && entry.value) fields += `${entry.field} = '${entry.value}',`;
-  if (entry.type === 'date' && !entry.value) fields += `${entry.field} = null,`;
-  return fields;
 }
 
 async function deleteRecord(req, res, fastify) {

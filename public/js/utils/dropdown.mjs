@@ -11,7 +11,7 @@ export function dropdown(param) {
         appendTo: param.appendTo
     });
 
-    let select = createElement({
+    const _select = createElement({
         tag: 'select',
         appendTo: param.appendTo
     });
@@ -28,7 +28,7 @@ export function dropdown(param) {
                     // Assign first key as value if entry is object.
                     value: typeof (entry) == 'object' ? Object.keys(entry)[0] : entry
                 },
-                appendTo: select
+                appendTo: _select
             });
         });
 
@@ -42,25 +42,22 @@ export function dropdown(param) {
                     textContent: param.entries[entry][param.label] || entry,
                     value: param.entries[entry][param.val] || entry
                 },
-                appendTo: select
+                appendTo: _select
             });
         });
     }
 
-    select.disabled = (select.childElementCount === 1);
+    _select.disabled = (_select.childElementCount === 1);
 
-    select.onchange = param.onchange;
+    _select.onchange = param.onchange;
 
     // Get the index of the selected option from the select element.
-    select.selectedIndex = () => {
+    if (!param.selected) _select.selectedIndex = 0;
 
-        if (!param.selected) return 0;
+    for (let i = 0; i < _select.length; i++) {
+        if (_select[i].value == param.selected) _select.selectedIndex = i;
+    }
 
-        for (let i = 0; i < select.length; i++) {
-            if (select[i].value == param.selected) return i;
-        }
-    
-        return -1;
-    };
+    return _select;
 
 }

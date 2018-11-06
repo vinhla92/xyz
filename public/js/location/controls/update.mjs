@@ -22,9 +22,7 @@ export default record => {
 
                 e.stopPropagation();
 
-                let
-                    layer = _xyz.layers.list[record.location.layer],
-                    xhr = new XMLHttpRequest();
+                const xhr = new XMLHttpRequest();
 
                 xhr.open('POST', _xyz.host + '/api/location/update?token=' + _xyz.token);
                 xhr.setRequestHeader('Content-Type', 'application/json');
@@ -36,34 +34,49 @@ export default record => {
                     record.upload.style.display = 'none';
 
                     // Remove changed class from all changed entries.
-                    let changedElements = record.drawer.querySelectorAll('.changed');
-                    changedElements.forEach(el => el.classList.remove('changed'));
+                    record.drawer.querySelectorAll('.changed').forEach(el => el.classList.remove('changed'));
 
-                    layer.get();
+                    record.location.infoj.forEach(entry => {
+                        if (entry.newValue) {
+                            entry.value = entry.newValue;
+                            delete entry.newValue;
+                        }
+                    });
 
-                    try {
+                    _xyz.layers.list[record.location.layer].get();
 
-                        let pof = pointOnFeature(record.location.L.toGeoJSON());
+                    // try {
+                    //     let pof = pointOnFeature(record.location.L.toGeoJSON());
 
-                        record
-                            .location
-                            .M
-                            .getLayers()[0]
-                            .setLatLng(L.latLng(pof.geometry.coordinates.reverse()));
+                    //     record
+                    //         .location
+                    //         .M
+                    //         .getLayers()[0]
+                    //         .setLatLng(L.latLng(pof.geometry.coordinates.reverse()));
 
-                    } catch (err) {
-                        Object.keys(err).forEach(key => !err[key] && delete err[key]);
-                        console.error(err);
-                    }
+                    // } catch (err) {
+                    //     Object.keys(err).forEach(key => !err[key] && delete err[key]);
+                    //     console.error(err);
+                    // }
                 };
+
+                const infoj_newValues = record.location.infoj
+                    .filter(entry => (entry.newValue))
+                    .map(entry => {
+                        return {
+                            field: entry.field,
+                            newValue: entry.newValue,
+                            type: entry.type
+                        }
+                    });
 
                 xhr.send(JSON.stringify({
                     locale: _xyz.locale,
-                    layer: layer.key,
+                    layer: _xyz.layers.list[record.location.layer].key,
                     table: record.location.table,
                     id: record.location.id,
-                    infoj: record.location.infoj,
-                    geometry: record.location.L.toGeoJSON().features[0].geometry
+                    infoj: infoj_newValues,
+                    //geometry: record.location.L.toGeoJSON().features[0].geometry
                 }));
 
             }

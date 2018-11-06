@@ -1,20 +1,20 @@
 import _xyz from '../_xyz.mjs';
 
-import info from './info/_info.mjs';
-
-import trash from './controls/trash.mjs';
-
 import clear from './controls/clear.mjs';
 
 import clipboard from './controls/clipboard.mjs';
 
-import expander from './controls/expander.mjs';
-
-import update from './controls/update.mjs';
-
 import zoom from './controls/zoom.mjs';
 
 import marker from './controls/marker.mjs';
+
+import update from './controls/update.mjs';
+
+import trash from './controls/trash.mjs';
+
+import expander from './controls/expander.mjs';
+
+import info from './info/_info.mjs';
 
 export default record => {
 
@@ -74,9 +74,6 @@ export default record => {
 
   // Create the expand control element which controls whether the data table is displayed for the feature.
   expander(record);
-
-  // Add header element to the drawer.
-  record.drawer.appendChild(record.header);
 
   // Add create and append infoj table to drawer.
   info(record);
