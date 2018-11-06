@@ -37,17 +37,11 @@ export default (e, layer) => {
         xhr.open('POST', _xyz.host + '/api/location/catchment?token=' + _xyz.token); // request from third party API
         xhr.setRequestHeader('Content-Type', 'application/json');
 
-        xhr.onprogress = () => {
-            document.getElementById('timeout_mask').textContent = 'Please wait';
-            document.getElementById('timeout_mask').style.display = 'block';
-        };
-
         xhr.onload = e => {
-            
-            document.getElementById('timeout_mask').style.display = 'none';
 
             if (e.target.status === 401) {
                 document.getElementById('timeout_mask').style.display = 'block';
+                _xyz.dom.map.style.cursor = '';
                 //console.log(e.target.response);
                 return
             }
@@ -64,6 +58,7 @@ export default (e, layer) => {
                 xhr.onload = e => {
 
                     layer.edit.origin.clearLayers(); // clear marker
+                    _xyz.dom.map.style.cursor = '';
 
                     layer.get();
 
@@ -87,5 +82,6 @@ export default (e, layer) => {
             }
         }
         xhr.send(JSON.stringify(layer.edit.catchment)); // get catchment contour
+        _xyz.dom.map.style.cursor = 'progress';
     });
 }
