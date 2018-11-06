@@ -124,9 +124,10 @@ export default layer => {
 
     _xyz.utils.createStateButton({
       text: 'Catchment',
-      layer: layer,
       appendTo: layer.edit.panel,
-      fx: edit.catchment
+      layer: layer,
+      activate: edit.catchment,
+      finish: edit.finish
     });
   }
 
