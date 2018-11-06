@@ -5,6 +5,8 @@ import { finish } from './_draw.mjs';
 
 export function polygon (e, layer) {
 
+  e.stopPropagation();
+
   if(!layer.display) layer.show();
 
   let coords = [];
@@ -104,6 +106,7 @@ export function polygon (e, layer) {
 
               finish(layer);
               _xyz.state.finish();
+              _xyz.map.off('click');
               
               _xyz.locations.select({
                   layer: layer.key,
