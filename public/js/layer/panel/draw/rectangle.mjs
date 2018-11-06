@@ -64,7 +64,6 @@ export default (e, layer) => {
                 if (e.target.status === 200) {
                     layer.edit.vertices.clearLayers();
                     layer.edit.path.clearLayers();
-                    layer.edited = false;
 
                     layer.get();
 
