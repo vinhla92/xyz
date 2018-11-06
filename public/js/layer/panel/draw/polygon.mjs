@@ -112,8 +112,7 @@ export function polygon (e, layer) {
                   layer: layer.key,
                   table: layer.table,
                   id: e.target.response,
-                  marker: marker,
-                  editable: layer.edit ? layer.edit.properties : false
+                  marker: marker
               });
           }
       }

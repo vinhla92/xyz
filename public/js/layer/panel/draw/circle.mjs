@@ -80,8 +80,7 @@ export default (e, layer) => {
                         layer: layer.key,
                         table: layer.table,
                         id: e.target.response,
-                        marker: o.geometry.coordinates,
-                        editable: layer.edit ? layer.edit.properties : false
+                        marker: o.geometry.coordinates
                     });
                 }
             }

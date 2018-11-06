@@ -1,6 +1,7 @@
 import _xyz from '../_xyz.mjs';
+import { finish } from '../layer/panel/draw/_draw.mjs';
 
-export default (layer, marker, btn) => {
+export default (layer, marker) => {
   let tooltip = _xyz.utils.createElement({
     tag: 'div',
     options: {
@@ -38,19 +39,16 @@ export default (layer, marker, btn) => {
           if (e.target.status !== 200) return document.getElementById('timeout_mask').style.display = 'block';
 
           layer.get();
-
-          layer.edited = false;
-          _xyz.resetEditSession(layer);
-          _xyz.switchState(layer, btn);
+          
+          finish(layer);
+          _xyz.state.finish();
 
           _xyz.locations.select({
             layer: layer.key,
             table: layer.table,
             id: e.target.response,
-            marker: marker,
-            editable: layer.edit ? layer.edit.properties : false
+            marker: marker
           });
-
         }
 
         xhr.send(JSON.stringify({
@@ -81,17 +79,12 @@ export default (layer, marker, btn) => {
     eventListener: {
       event: 'click',
       funct: e => {
-
         e.stopPropagation();
-      
-        //_xyz.switchState(layer, btn);
-        //_xyz.resetEditSession(layer);
-        console.log('stage complete');
-  
 
+        finish(layer);
+        _xyz.state.finish();
       }
     }
   });
-
   return tooltip;
 }
