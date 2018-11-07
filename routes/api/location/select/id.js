@@ -96,33 +96,9 @@ module.exports = fastify => {
 
       // Iterate through the infoj object's entries and assign the values returned from the database query.
       Object.values(infoj).map(entry =>  setValues(rows, entry));
-
-      function formatDate(str){
-        let d = new Date(str),
-          options = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' },
-          loc = 'en-GB';
-        return d ? d.toLocaleDateString(loc, options) : false;
-      }
-
-      function formatDateTime(str){
-        let d = new Date(str),
-          options = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' },
-          loc = 'en-GB';
-        return d ? d.toLocaleDateString(loc, options) + ', ' + d.toLocaleTimeString(loc) : false;
-      }
     
       function setValues(rows, entry){ 
         if (rows[0][entry.field] || rows[0][entry.field] == 0) {
-
-          if(entry.datetime){
-            entry.value = formatDateTime(rows[0][entry.field]); 
-            return;
-          }
-
-          if(entry.date){
-            entry.value = formatDate(rows[0][entry.field]);
-            return;
-          }
 
           entry.value = rows[0][entry.field];
         }
