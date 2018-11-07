@@ -15,7 +15,7 @@ export default function () {
     // Augment request with token if proxied through backend.
     // Otherwise requests will be sent directly to the URI and may not pass through the XYZ backend.  
     let uri = layer.URI.indexOf('provider') > 0 ?
-      _xyz.host + '/proxy/image?uri=' + layer.URI + '&token=' + _xyz.token :
+      _xyz.host + '/proxy/key?uri=' + layer.URI + '&token=' + _xyz.token :
       layer.URI;
 
     // Assign the tile layer to the layer L object and add to map.

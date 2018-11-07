@@ -14,11 +14,7 @@ module.exports = fastify => {
     beforeHandler: fastify.auth([fastify.authAccess]),
     handler: async (req, res) => {
 
-      const token = req.query.token ?
-        fastify.jwt.decode(req.query.token) :
-        {
-          access: 'public'
-        };
+      const token = req.query.token ? fastify.jwt.decode(req.query.token) : { access: 'public' };
 
       let config = global.workspace[token.access].config;
 
