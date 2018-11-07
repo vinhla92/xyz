@@ -1,6 +1,6 @@
 .qs-datepicker {
     color:#000;
-    position:absolute;
+    position: absolute;
     width:250px;
     display:-webkit-box;
     display:-ms-flexbox;
@@ -10,13 +10,13 @@
     -ms-flex-direction:column;
     flex-direction:column;
     font-family:sans-serif;
-    font-size:14px;
-    z-index:19001;
+    font-size:12px;
+    z-index: 9001!important;
     -webkit-user-select:none;
     -moz-user-select:none;
     -ms-user-select:none;
     user-select:none;
-    border:1px solid grey;
+    border:1px solid #EEE;
     border-radius:4.22275px;
     overflow:hidden;
     background:#fff;
@@ -80,7 +80,7 @@
     border-bottom:1px solid #fff;
     border-radius:0;
     color:#fff;
-    font-size:14px;
+    font-size:12px;
     padding:.25em 0;
     margin:auto 0 .5em;
     width:calc(100% - 1em)
