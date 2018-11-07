@@ -5,19 +5,28 @@ import datepicker from 'js-datepicker';
 
 export default (record, entry) => {
 
+  console.log('default date');
   console.log(record);
   //console.log(entry);
-  
-   if(entry.type === 'datetime'){
-     entry.value = formatDateTime(entry.value); 
-     return;
+  if(entry.type === 'datetime') entry.value = formatDateTime(entry.value);
+  if(entry.type === 'date') entry.value = formatDate(entry.value);
+
+  let input = _xyz.utils.createElement({
+    tag: 'input',
+    options: {
+      value: entry.value || '',
+      type: 'text'
+    },
+    appendTo: entry.val,
+    eventListener: {
+      event: 'click',
+      funct: e => {
+        //valChange(e.target, record, entry); // add date picker
+      }
     }
-    
-    if(entry.type === 'date'){
-      entry.value = formatDate(entry.value);
-      console.log(entry.value);
-      return;
-    }
+  });
+
+  pickDate(input, record, entry);
 
 };
 
@@ -37,13 +46,15 @@ export function formatDateTime(str){
   return d ? d.toLocaleDateString(loc, options) + ', ' + d.toLocaleTimeString(loc) : false;
 }
 
-export function pickDate(record, entry){
-  /*const picker = datepicker(document.querySelector('#date'), {
+export function pickDate(element, record, entry){
+  datepicker(element, {
     formatter: function(el, date, instance) {
         
-        let _d = new Date(date);
+        let _d = new Date(date), dateStr;
         
-        let dd = _d.getDate();
+        if(entry.type === 'date') dateStr = formatDate(_d);
+        if(entry.type === 'datetime') dateStr = formatDateTime(_d);
+        /*let dd = _d.getDate();
         let mm = _d.getMonth()+1; 
         let yyyy = _d.getFullYear();
         
@@ -51,14 +62,15 @@ export function pickDate(record, entry){
         { dd=`0${dd}`; } 
         if(mm<10) { mm=`0${mm}`; } 
         
-        let dateStr = `${dd}/${mm}/${yyyy}`;
+        let dateStr = `${dd}/${mm}/${yyyy}`;*/
         
         //document.querySelector("#test").textContent = dateStr;
-        
         el.value = dateStr;
       },
       onSelect: function(el, date, instance){
-      document.querySelector('.clear').classList.add('show');
+        console.log('date selected');
+        //valChange(el, record, entry); 
+      //document.querySelector('.clear').classList.add('show');
       }
-    });*/
+    });
 }
