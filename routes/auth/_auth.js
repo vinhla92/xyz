@@ -3,19 +3,23 @@ module.exports = fastify => {
   require('./login')(fastify);
   
   require('./register')(fastify);
+
+  // token
   
-  require('./token_api')(fastify);
+  require('./token/api')(fastify);
   
-  require('./token_renew')(fastify);
+  require('./token/renew')(fastify);
 
-  require('./user_admin')(fastify);
+  // user
 
-  require('./user_approve')(fastify);
+  require('./user/admin')(fastify);
 
-  require('./user_delete')(fastify);
+  require('./user/approve')(fastify);
 
-  require('./user_update')(fastify);
+  require('./user/delete')(fastify);
 
-  require('./user_verify')(fastify);
+  require('./user/update')(fastify);
+
+  require('./user/verify')(fastify);
     
 };

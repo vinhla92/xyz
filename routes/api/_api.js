@@ -1,47 +1,49 @@
 module.exports = fastify => {
 
-  // layer
-
-  require('./layer/get_extent')(fastify);
-
-  require('./layer/mvt_get')(fastify);
-
-  require('./layer/grid_get')(fastify);
-
-  require('./layer/geojson_get')(fastify);
-
-  require('./layer/cluster_get')(fastify);
-
-  require('./layer/cluster_select')(fastify);
-
-  // location
-
-  require('./location/select')(fastify);
-
-  require('./location/select_ll')(fastify);
-
-  require('./location/select_ll_nearest')(fastify);
-
-  require('./location/select_ll_intersect')(fastify);
-
-  require('./location/new')(fastify);
-
-  require('./location/update')(fastify);
-
-  require('./location/delete')(fastify);
-
-  require('./location/aggregate')(fastify);
-
-  require('./location/catchment')(fastify);
-
-  require('./location/images/upload')(fastify);
-
-  require('./location/images/delete')(fastify);
-
   // gazetteer
 
   require('./gazetteer/autocomplete')(fastify);
 
   require('./gazetteer/googleplaces')(fastify);
+
+  // layer
+
+  require('./layer/cluster')(fastify);
+
+  require('./layer/extent')(fastify);
+
+  require('./layer/geojson')(fastify);
+
+  require('./layer/grid')(fastify);  
+
+  require('./layer/mvt')(fastify);
+
+  // location/edit
+
+  require('./location/edit/delete')(fastify);
+
+  require('./location/edit/image_delete')(fastify);
+
+  require('./location/edit/image_upload')(fastify);
+
+  require('./location/edit/new_aggregate')(fastify);
+
+  require('./location/edit/new_catchment')(fastify);
+
+  require('./location/edit/new')(fastify);
+
+  require('./location/edit/update')(fastify);
+
+  // location/select
+
+  require('./location/select/cluster')(fastify);
+
+  require('./location/select/id')(fastify);
+
+  require('./location/select/latlng_intersect')(fastify);
+
+  require('./location/select/latlng_nnearest')(fastify);
+
+  require('./location/select/latlng')(fastify);
 
 };
