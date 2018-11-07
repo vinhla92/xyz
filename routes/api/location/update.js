@@ -16,8 +16,8 @@ module.exports = fastify => {
         qID = layer.qID,
         id = req.body.id,
         infoj = req.body.infoj,
-        geom = layer.geom,
-        geometry = req.body.geometry && JSON.stringify(req.body.geometry);
+        geom = layer.geom;
+        //geometry = req.body.geometry && JSON.stringify(req.body.geometry);
 
       // Check whether string params are found in the settings to prevent SQL injections.
       if ([table, geom, qID]
@@ -44,9 +44,9 @@ module.exports = fastify => {
 
       var rows = await global.pg.dbs[layer.dbs](q, [id]);
 
-      if (rows.err) return res.code(500).send('soz. it\'s not you. it\'s me.');
+      if (rows.err) return res.code(500).send('PostgreSQL query error - please check backend logs.');
 
-      res.code(200).send();
+      res.code(200).send('Location update successful');
 
     }
   });
