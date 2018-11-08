@@ -7,20 +7,14 @@ module.exports = fastify => {
 
       const url = `https://maps.googleapis.com/maps/api/place/details/json?placeid=${req.query.id}&${global.KEYS.GOOGLE}`;
 
-      try {
-        const response = await require('node-fetch')(url);
-        const json = await response.json();
+      const fetched = await require(global.appRoot + '/mod/fetch')(url);
 
-        res.code(200).send({
-          type: 'Point',
-          coordinates: [json.result.geometry.location.lng, json.result.geometry.location.lat]
-        });
-    
-      } catch (err) {
-        Object.keys(err).forEach(key => !err[key] && delete err[key]);
-        console.error(err);
-        res.code(200).send({err: 'Error fetching from Google place API.'});
-      }
+      if (fetched._err) res.code(500).send(fetched._err);
+
+      res.code(200).send({
+        type: 'Point',
+        coordinates: [fetched.result.geometry.location.lng, fetched.result.geometry.location.lat]
+      });
 
     }
   });

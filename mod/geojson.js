@@ -20,7 +20,7 @@ async function get(req, res, fastify) {
   // Check whether string params are found in the settings to prevent SQL injections.
   if ([table, geom, id, properties]
     .some(val => (typeof val === 'string' && global.workspace[token.access].values.indexOf(val) < 0))) {
-    return res.code(406).send('Parameter not acceptable.');
+    return res.code(406).send('Invalid parameter.');
   }
 
   if (properties) properties = `${properties},`;

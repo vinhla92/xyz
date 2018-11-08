@@ -16,7 +16,7 @@ export default layer => _xyz.utils.createElement({
       // Request to get the extent of layer data.
       const xhr = new XMLHttpRequest();
 
-      xhr.open('GET', _xyz.host + '/api/layer/get_extent?' + _xyz.utils.paramString({
+      xhr.open('GET', _xyz.host + '/api/layer/extent?' + _xyz.utils.paramString({
         locale: _xyz.locale,
         layer: layer.key,
         token: _xyz.token

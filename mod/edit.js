@@ -16,7 +16,7 @@ async function newRecord(req, res, fastify) {
   // Check whether string params are found in the settings to prevent SQL injections.
   if ([table, qID, geom]
     .some(val => (typeof val === 'string' && val.length > 0 && global.workspace[token.access].values.indexOf(val) < 0))) {
-    return res.code(406).send('Parameter not acceptable.');
+    return res.code(406).send('Invalid parameter.');
   }
 
   const d = new Date();
@@ -57,7 +57,7 @@ async function newAggregate(req, res, fastify) {
   // Check whether string params are found in the settings to prevent SQL injections.
   if ([table_target, table_source, geom_target, geom_source]
     .some(val => (typeof val === 'string' && val.length > 0 && global.workspace[token.access].values.indexOf(val) < 0))) {
-    return res.code(406).send('Parameter not acceptable.');
+    return res.code(406).send('Invalid parameter.');
   }
 
   let access_filter = layer.access_filter && token.email && layer.access_filter[token.email.toLowerCase()] ?

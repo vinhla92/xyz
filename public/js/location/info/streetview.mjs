@@ -21,7 +21,7 @@ export default (record, entry) => {
     },
     appendTo: streetview_td
   });
-  
+ 
   // Create StreetView image and append into link element.
   _xyz.utils.createElement({
     tag: 'img',

@@ -1,7 +1,9 @@
 module.exports = async (term, locale) => {
 
+  // Loop through dataset entries in gazetteer configuration.
   for (let dataset of locale.gazetteer.datasets) {
 
+    // Build PostgreSQL query to fetch gazetteer results.
     var q = `
     SELECT
       ${dataset.label} AS label,
@@ -13,10 +15,12 @@ module.exports = async (term, locale) => {
       ORDER BY length(${dataset.label})
       LIMIT 10`;
 
+    // Get gazetteer results from dataset table.
     var rows = await global.pg.dbs[locale.layers[dataset.layer].dbs](q, [term + '%']);
 
     if (rows.err) return {err: 'Error fetching gazetteer results.'};
 
+    // Format JSON array of gazetteer results from rows object.
     if (rows.length > 0) return Object.values(rows).map(row => ({
       label: row.label,
       id: row.id,
@@ -28,5 +32,6 @@ module.exports = async (term, locale) => {
 
   }
 
+  // Return empty results array if no results where found in any dataset.
   return [];
 };
