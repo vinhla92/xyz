@@ -159,7 +159,7 @@ export default () => {
       _xyz.gazetteer.loader.style.display = 'none';
 
       // List results or show that no results were found
-      if (!e.target.status === 200) return;
+      if (e.target.status !== 200) return;
       
       // Parse the response as JSON and check for results length.
       let json = JSON.parse(e.target.responseText);

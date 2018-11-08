@@ -3,25 +3,25 @@ module.exports = fastify => {
     method: 'GET',
     url: '/api/gazetteer/googleplaces',
     beforeHandler: fastify.auth([fastify.authAPI]),
-    handler: (req, res) => {
+    handler: async (req, res) => {
 
-      var q = `https://maps.googleapis.com/maps/api/place/details/json?placeid=${req.query.id}&${global.KEYS.GOOGLE}`;
+      const url = `https://maps.googleapis.com/maps/api/place/details/json?placeid=${req.query.id}&${global.KEYS.GOOGLE}`;
 
-      require('request').get(q, (err, response, body) => {
-        if (err) {
-          Object.keys(err).forEach(key => !err[key] && delete err[key]);
-          return console.error(err);
-        }
+      try {
+        const response = await require('node-fetch')(url);
+        const json = await response.json();
 
-        // Parse response from Google places API request.
-        let r = JSON.parse(body).result;
-
-        // Sent point location back to client.
         res.code(200).send({
           type: 'Point',
-          coordinates: [r.geometry.location.lng, r.geometry.location.lat]
+          coordinates: [json.result.geometry.location.lng, json.result.geometry.location.lat]
         });
-      });
+    
+      } catch (err) {
+        Object.keys(err).forEach(key => !err[key] && delete err[key]);
+        console.error(err);
+        res.code(200).send({err: 'Error fetching from Google place API.'});
+      }
+
     }
   });
 };

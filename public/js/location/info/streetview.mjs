@@ -27,7 +27,7 @@ export default (record, entry) => {
     tag: 'img',
     options: {
       className: 'img_streetview',
-      src: _xyz.host + '/proxy/key?uri=https://maps.googleapis.com/maps/api/streetview?location=' + record.location.marker[1] + ',' + record.location.marker[0] + '&size=290x230&provider=GOOGLE&token=' + _xyz.token
+      src: _xyz.host + '/proxy/request?uri=https://maps.googleapis.com/maps/api/streetview?location=' + record.location.marker[1] + ',' + record.location.marker[0] + '&size=290x230&provider=GOOGLE&token=' + _xyz.token
     },
     appendTo: streetview_link
   });
