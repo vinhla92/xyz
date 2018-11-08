@@ -6,12 +6,9 @@ module.exports = {
 	},
 	extends: [],
 	plugins: [
-		'babel',
-		'import'
 	],
-	parser: 'babel-eslint',
 	parserOptions: {
-		ecmaVersion: 6,
+		ecmaVersion: 2017,
 		sourceType: 'module',
 		ecmaFeatures: {
 			jsx: true
