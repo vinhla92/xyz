@@ -31,7 +31,7 @@ export default location => {
 
   const xhr = new XMLHttpRequest();
 
-  xhr.open('GET', _xyz.host + '/api/location/select?' + _xyz.utils.paramString({
+  xhr.open('GET', _xyz.host + '/api/location/select/id?' + _xyz.utils.paramString({
     locale: _xyz.locale,
     layer: layer.key,
     table: location.table,

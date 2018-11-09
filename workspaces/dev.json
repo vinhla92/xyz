@@ -1,0 +1,193 @@
+{
+    "title": "XYZ dev",
+    "locales": {
+        "GB": {
+            "gazetteer": {
+                "provider": "GOOGLE",
+                "code": "GB",
+                "placeholder": "e.g. London",
+                "datasets": [
+                    {
+                        "layer": "cluster",
+                        "table": "dev_cluster",
+                        "label": "postcode"
+                    }
+                ]
+            },
+            "bounds": {
+                "north": 62,
+                "east": 5,
+                "south": 48,
+                "west": -13
+            },
+            "minZoom": 6,
+            "maxZoom": 17,
+            "layers": {
+                "OSM": {
+                    "format": "tiles",
+                    "URI": "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                },
+                "oa": {
+                    "name": "Output areas",
+                    "display": true,
+                    "format": "mvt",
+                    "dbs": "XYZ",
+                    "tables": {
+                        "14": "dev_oa"
+                    },
+                    "qID": "id",
+                    "infoj": [
+                        {
+                            "label": "Population '11",
+                            "field": "pop_11",
+                            "type": "integer"
+                        }
+                    ]
+                },
+                "retail_places": {
+                    "name": "Retail Places",
+                    "display": true,
+                    "format": "mvt",
+                    "dbs": "XYZ",
+                    "tables": {
+                        "9": "dev_retailplaces"
+                    },
+                    "qID": "tid",
+                    "infoj": [
+                        {
+                            "label": "ID",
+                            "field": "id",
+                            "type": "text",
+                            "inline": true
+                        },
+                        {
+                            "label": "Name",
+                            "field": "uniq_name",
+                            "type": "text"
+                        },
+                        {
+                            "label": "Competition Str.",
+                            "field": "comp_strgh",
+                            "type": "integer"
+                        },
+                        {
+                            "label": "OA pop_11",
+                            "field": "pop_11",
+                            "type": "integer",
+                            "lookup": {
+                                "table": "dev_oa",
+                                "geom": "geom",
+                                "condition": "ST_INTERSECTS",
+                                "function": "AVG"
+                            }
+                        },
+                        {
+                            "label": "Population '11",
+                            "field": "pop__11",
+                            "type": "integer"
+                        },
+                        {
+                            "label": "Population '11",
+                            "field": "pop__16",
+                            "type": "integer",
+                            "edit": true
+                        },
+                        {
+                            "label": "Population 16 - 11",
+                            "field": "pop_diff",
+                            "fieldfx": "(pop__16 - pop__11)",
+                            "type": "integer"
+                        }
+                    ]
+                },
+                "retail_points": {
+                    "name": "Retail Points",
+                    "display": true,
+                    "format": "cluster",
+                    "cluster_label": "store",
+                    "dbs": "XYZ",
+                    "qID": "id",
+                    "table": "dev_retailpoints",
+                    "infoj": [
+                        {
+                            "type": "streetview"
+                        },
+                        {
+                            "label": "ID",
+                            "field": "retailpoint_id",
+                            "type": "text",
+                            "inline": true
+                        },
+                        {
+                            "label": "Store",
+                            "field": "store",
+                            "type": "text"
+                        },
+                        {
+                            "label": "Retailer",
+                            "field": "retailer",
+                            "type": "text"
+                        },
+                        {
+                            "label": "Fascia",
+                            "field": "fascia",
+                            "type": "text"
+                        },
+                        {
+                            "label": "Address"
+                        },
+                        {
+                            "field": "address_1",
+                            "type": "text",
+                            "level": 1
+                        },
+                        {
+                            "field": "address_2",
+                            "type": "text",
+                            "level": 1
+                        },
+                        {
+                            "field": "locality",
+                            "type": "text",
+                            "level": 1
+                        },
+                        {
+                            "field": "town",
+                            "type": "text",
+                            "level": 1
+                        },
+                        {
+                            "label": "Postcode",
+                            "field": "postcode",
+                            "type": "text",
+                            "level": 1,
+                            "filter": "like"
+                        },
+                        {
+                            "label": "RP competition",
+                            "field": "comp_strgh",
+                            "type": "integer",
+                            "lookup": {
+                                "table": "dev_retailplaces",
+                                "geom": "geom",
+                                "condition": "ST_INTERSECTS",
+                                "function": "AVG"
+                            }
+                        },
+                        {
+                            "label": "OA pop_11",
+                            "field": "pop_11",
+                            "type": "integer",
+                            "lookup": {
+                                "table": "dev_oa",
+                                "geom": "geom",
+                                "condition": "ST_INTERSECTS",
+                                "function": "SUM"
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}

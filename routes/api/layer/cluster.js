@@ -6,14 +6,23 @@ module.exports = fastify => {
     handler: async (req, res) => {
 
       const token = req.query.token ? fastify.jwt.decode(req.query.token) : { access: 'public' };
+
+      const locale = global.workspace[token.access].config.locales[req.query.locale];
+
+      // Return 406 if locale is not found in workspace.
+      if (!locale) return res.code(406).send('Invalid locale.');
+
+      const layer = locale.layers[req.query.layer];
+
+      // Return 406 if locale is not found in workspace.
+      if (!layer) return res.code(406).send('Invalid layer.');
   
       let
-        layer = global.workspace[token.access].config.locales[req.query.locale].layers[req.query.layer],
         geom = layer.geom,
         table = req.query.table,
-        cat = req.query.cat ? req.query.cat : null,
-        size = req.query.size ? req.query.size : 1,
-        theme = req.query.theme ? req.query.theme : null,
+        cat = req.query.cat || null,
+        size = req.query.size || 1,
+        theme = req.query.theme || null,
         filter = req.query.filter && JSON.parse(req.query.filter),
         kmeans = parseInt(1 / req.query.kmeans),
         dbscan = parseFloat(req.query.dbscan),
@@ -28,24 +37,25 @@ module.exports = fastify => {
         return res.code(406).send('Invalid parameter.');
       }
   
-      // Access filter
-      let access_filter = layer.access_filter && token.email && layer.access_filter[token.email.toLowerCase()] ?
-        layer.access_filter[token.email] : null;
-  
-      if (access_filter && layer.aggregate_layer) global.workspace[token.access].config.locales[req.query.locale].layers[layer.aggregate_layer].access_filter = access_filter;
+
+      // // Access filter
+      // let access_filter = layer.access_filter && token.email && layer.access_filter[token.email.toLowerCase()] ?
+      //   layer.access_filter[token.email] : null;
 
 
-      let filter_sql = filter ? require(global.appRoot + '/mod/filters').sql_filter(filter) : '';
+      // SQL filter
+      const filter_sql = filter && await require(global.appRoot + '/mod/pg/sql_filter')(filter) || '';
   
 
-      // Set log table filter.
-      let qLog = layer.log_table ? `
-      ( SELECT *, ROW_NUMBER() OVER (
-          PARTITION BY ${layer.qID}
-          ORDER BY ((${layer.log_table.field || 'log'} -> 'time') :: VARCHAR) :: TIMESTAMP DESC ) AS rank
-        FROM ${log_table}
-      ) AS logfilter` : null;
+      // // Set log table filter.
+      // let qLog = layer.log_table ? `
+      // ( SELECT *, ROW_NUMBER() OVER (
+      //     PARTITION BY ${layer.qID}
+      //     ORDER BY ((${layer.log_table.field || 'log'} -> 'time') :: VARCHAR) :: TIMESTAMP DESC ) AS rank
+      //   FROM ${log_table}
+      // ) AS logfilter` : null;
   
+
       // Query the feature count from lat/lng bounding box.
       var q = `
       SELECT
@@ -64,19 +74,17 @@ module.exports = fastify => {
           ST_Point(${west}, ${south}),
           ST_Point(${east}, ${north})
         ) AS xEnvelope
-      FROM ${layer.log_table ? qLog : table}
+      FROM ${table}
       WHERE
-        ${layer.log_table ? 'rank = 1 AND ' : ''}
         ST_DWithin(
           ST_MakeEnvelope(${west}, ${south}, ${east}, ${north}, 4326),
             ${geom},
             0.00001)
-        ${filter_sql}
-        ${access_filter ? 'AND ' + access_filter : ''};`;
+        ${filter_sql};`;
   
       var rows = await global.pg.dbs[layer.dbs](q);
   
-      if (rows.err) return res.code(500).send('soz. it\'s not you. it\'s me.');
+      if (rows.err) return res.code(500).send('Failed to query PostGIS table.');
   
       // return 204 if no locations found within the envelope.
       if (parseInt(rows[0].count) === 0) return res.code(204).send();
@@ -106,9 +114,8 @@ module.exports = fastify => {
           SELECT
             ST_ClusterKMeans(${geom}, ${kmeans}) OVER () kmeans_cid,
             ${geom}
-          FROM ${layer.log_table ? qLog : table}
+          FROM ${table}
           WHERE
-            ${layer.log_table ? 'rank = 1 AND ' : ''}
             ST_DWithin(
               ST_MakeEnvelope(${west}, ${south}, ${east}, ${north}, 4326),
             ${geom}, 0.00001)
@@ -146,7 +153,6 @@ module.exports = fastify => {
                 ST_MakeEnvelope(${west}, ${south}, ${east}, ${north}, 4326),
               ${geom}, 0.00001)
             ${filter_sql}
-            ${access_filter ? 'and ' + access_filter : ''}
           ) kmeans
         ) dbscan GROUP BY kmeans_cid, dbscan_cid, cat
       ) cluster GROUP BY kmeans_cid, dbscan_cid;`;
@@ -177,12 +183,12 @@ module.exports = fastify => {
               ST_MakeEnvelope(${west}, ${south}, ${east}, ${north}, 4326),
             ${geom}, 0.00001)
           ${filter_sql}
-          ${access_filter ? 'and ' + access_filter : ''}
         ) kmeans
       ) dbscan GROUP BY kmeans_cid, dbscan_cid;`;
   
   
       rows = await global.pg.dbs[layer.dbs](q);
+      
   
       if (rows.err) return res.code(500).send('soz. it\'s not you. it\'s me.');
   

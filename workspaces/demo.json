@@ -2356,7 +2356,6 @@
           "format": "cluster",
           "dbs": "XYZ",
           "table": "gb_retailpoint_editable",
-          "log_table": "gb_retailpoint_editable_logs",
           "cluster_label": "store",
           "cluster_cat": "brand",
           "editing": {

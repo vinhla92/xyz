@@ -1,112 +1,95 @@
 module.exports = fastify => {
   fastify.route({
     method: 'GET',
-    url: '/api/location/select',
+    url: '/api/location/select/id',
     beforeHandler: fastify.auth([fastify.authAPI]),
     handler: async (req, res) => {
       
       const token = req.query.token ? fastify.jwt.decode(req.query.token) : { access: 'public' };
 
-      let
-        layer = global.workspace[token.access].config.locales[req.query.locale].layers[req.query.layer],
-        table = req.query.table,
-        qID = layer.qID,
-        id = req.query.id,
-        geom = layer.geom,
-        geomj = layer.geomj ? layer.geomj : `ST_asGeoJson(${geom})`,
-        geomq = layer.geomq ? layer.geomq : geom,
-        sql_filter = layer.sql_filter ? layer.sql_filter : '',
-        infoj = JSON.parse(JSON.stringify(layer.infoj));
+      const locale = global.workspace[token.access].config.locales[req.query.locale];
+
+      // Return 406 if locale is not found in workspace.
+      if (!locale) return res.code(406).send('Invalid locale.');
+
+      const layer = locale.layers[req.query.layer];
+
+      // Return 406 if locale is not found in workspace.
+      if (!layer) return res.code(406).send('Invalid layer.');
+
+      const table = req.query.table;
+
+      // Return 406 if locale is not found in workspace.
+      if (!table) return res.code(406).send('Missing table.');
+
+      const id = req.query.id;
+
+      // Return 406 if locale is not found in workspace.
+      if (!id) return res.code(406).send('Missing id.');  
+      
+      const qID = layer.qID;
+      
+      // Clone the infoj from the memory workspace layer.
+      const infoj = JSON.parse(JSON.stringify(layer.infoj));
+
+      // Get a EPSG:4326 geom field which is used to generate geojson for the client map.
+      // The geom field is also required for lookup fields.
+      const geom = layer.geom ?
+        `${table}.${layer.geom}`
+        : `(ST_Transform(ST_SetSRID(${table}.${layer.geom_3857}, 3857), 4326))`;
+
 
       // Check whether string params are found in the settings to prevent SQL injections.
-      if ([table, qID, geomj, geomq]
+      if ([table]
         .some(val => (typeof val === 'string' && val.length > 0 && global.workspace[token.access].values.indexOf(val) < 0))) {
         return res.code(406).send('Invalid parameter.');
       }
 
-      if (sql_filter) {
 
-        var rows = await global.pg.dbs[layer.dbs](`select ${sql_filter} from ${table} where ${qID} = $1;`, [id]);
+      // let access_filter = layer.access_filter && token.email && layer.access_filter[token.email.toLowerCase()] ?
+      //   layer.access_filter[token.email] : null;
 
-        if (rows.err) return res.code(500).send('soz. it\'s not you. it\'s me.');
 
-        sql_filter = rows[0].sql_filter;
+      // The fields array stores all fields to be queried for the location info.
+      const fields = await require(global.appRoot + '/mod/pg/sql_fields')([], infoj, locale, geom);
 
-      }
-
-      let access_filter = layer.access_filter && token.email && layer.access_filter[token.email.toLowerCase()] ?
-        layer.access_filter[token.email] : null;
-
-      let fields = '';
-
-      infoj.forEach(entry => processInfoj(entry));
-    
-      function processInfoj(entry){
-
-        if (!entry.type) return;
-
-        if (entry.type === 'streetview') return;
-
-        if (entry.type === 'group') return;
+      // Push JSON geometry field into fields array.
+      fields.push(`\n   ST_asGeoJson(${geom}) AS geomj`);
         
-        if (entry.layer) {
-          let entry_layer = global.workspace[token.access].config.locales[req.query.locale].layers[entry.layer];
-
-          // For grids we want to use the highest resolution grid for the lookup.
-          let tableArray = entry_layer.tables ? Array.from(Object.values(entry_layer.tables)) : null;
-
-          // Get the last tableArray table name.
-          let entry_table = tableArray ? tableArray[tableArray.length - 1] : null;
-
-          fields += `
-            (SELECT ${entry.field.split('.')[0]}(${entry.field.split('.')[1]})
-            FROM ${entry_table || entry_layer.table}
-            WHERE true ${sql_filter || `AND ST_Intersects(${entry_table || entry_layer.table}.${entry_layer.geom || 'geom'}, ${table}.${geomq})`}
-            ${access_filter ? 'AND ' + access_filter : ''}
-            ) AS "${entry.field}", `;
-          return;
-        }
+       
+      // let qLog = layer.log_table ?
+      //   `( SELECT *, ROW_NUMBER() OVER (
+      //       PARTITION BY ${layer.qID || 'id'}
+      //       ORDER BY ((${layer.log_table.field || 'log'} -> 'time') :: VARCHAR) :: TIMESTAMP DESC ) AS rank
+      //       FROM gb_retailpoint_editable_logs  AS logfilter`
+      //   : null;
         
-        fields += `${entry.fieldfx || entry.field} AS ${entry.field}, `;
-        
-      }
+      // q = `
+      // SELECT
+      //     ${fields}
+      //     ${geomj} AS geomj
+      // FROM ${layer.log_table ? qLog : table}
+      // WHERE 
+      // ${layer.log_table ? 'rank = 1 AND ' : ''}
+      // ${qID} = $1;`;
 
-      let qLog = layer.log_table ?
-        `( SELECT *, ROW_NUMBER() OVER (
-            PARTITION BY ${layer.qID || 'id'}
-            ORDER BY ((${layer.log_table.field || 'log'} -> 'time') :: VARCHAR) :: TIMESTAMP DESC ) AS rank
-            FROM gb_retailpoint_editable_logs  AS logfilter`
-        : null;
-        
 
-      q = `
-      SELECT
-          ${fields}
-          ${geomj} AS geomj
-      FROM ${layer.log_table ? qLog : table}
-      WHERE 
-      ${layer.log_table ? 'rank = 1 AND ' : ''}
-      ${qID} = $1;`;
+      var q =
+      `SELECT ${fields.join()}`
+      + `\n FROM ${table}`
+      + `\n WHERE ${qID} = $1;`;
 
-      rows = await global.pg.dbs[layer.dbs](q, [id]);
+      var rows = await global.pg.dbs[layer.dbs](q, [id]);
 
-      if (rows.err) return res.code(500).send('soz. it\'s not you. it\'s me.');
+      if (rows.err) return res.code(500).send('Failed to query PostGIS table.');
 
-      if (rows.length === 0) return res.code(401).send();
+      // return 204 if no record was returned from database.
+      if (rows.length === 0) return res.code(204).send('No rows returned from table.');
 
-      // Iterate through the infoj object's entries and assign the values returned from the database query.
-      Object.values(infoj).map(entry =>  setValues(rows, entry));
-    
-      function setValues(rows, entry){ 
-        if (rows[0][entry.field] || rows[0][entry.field] == 0) {
-
-          entry.value = rows[0][entry.field];
-        }
-
-        if (rows[0][entry.subfield]) {
-          entry.subvalue = rows[0][entry.subfield];
-        }
-      }
+      // Iterate through infoj entries and assign values returned from query.
+      Object.values(infoj).map(entry =>  {
+        if (rows[0][entry.field]) entry.value = rows[0][entry.field];
+      });
     
       // Send the infoj object with values back to the client.
       res.code(200).send({

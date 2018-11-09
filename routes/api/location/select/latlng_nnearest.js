@@ -1,18 +1,23 @@
 module.exports = fastify => {
   fastify.route({
     method: 'GET',
-    url: '/api/location/select_ll_nnearest',
+    url: '/api/location/select/latlng_nnearest',
     beforeHandler: fastify.auth([fastify.authAPI]),
     handler: async (req, res) => {
 
-      // require(global.appRoot + '/mod/location').select_ll_nnearest(req, res, fastify);
+      const token = req.query.token ? fastify.jwt.decode(req.query.token) : { access: 'public' };
 
-      const token = req.query.token ?
-        fastify.jwt.decode(req.query.token) : { access: 'public' };
+      const locale = global.workspace[token.access].config.locales[req.query.locale];
+
+      // Return 406 if locale is not found in workspace.
+      if (!locale) return res.code(406).send('Invalid locale.');
+
+      const layer = locale.layers[req.query.layer];
+
+      // Return 406 if locale is not found in workspace.
+      if (!layer) return res.code(406).send('Invalid layer.');
   
       let
-        locale = req.query.locale,
-        layer = global.workspace[token.access].config.locales[req.query.locale].layers[req.query.layer],
         table = req.query.table,
         geom = layer.geom ? layer.geom : 'geom',
         geomj = layer.geomj ? layer.geomj : `ST_asGeoJson(${geom})`,
@@ -28,22 +33,8 @@ module.exports = fastify => {
         return res.code(406).send('Invalid parameter.');
       }
   
-      let fields = '';
-  
-      infoj.forEach(entry => {
-        if (entry.layer) {
-          fields += `
-              (SELECT ${entry.field.split('.')[0]}(${entry.field.split('.')[1]})
-               FROM ${entry.layer.table}
-               WHERE true ${sql_filter || `AND ST_Intersects(${entry.layer.table}.${entry.layer.geom || 'geom'}, ${table}.${geomq})`}
-              ) AS "${entry.field}",`;
-          return;
-        }
-  
-        if (entry.type) fields += `${entry.fieldfx || entry.field}::${entry.type} AS ${entry.field},`;
-  
-        if (entry.subfield) fields += `${entry.subfield}::${entry.type} AS ${entry.subfield},`;
-      });
+      // The fields array stores all fields to be queried for the location info.
+      const fields = await require(global.appRoot + '/mod/pg/sql_fields')([], infoj, locale, geom);
   
       var q = `
       SELECT

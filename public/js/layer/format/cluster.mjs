@@ -161,7 +161,7 @@ function clusterMouseClick(e, layer) {
     count = e.layer.feature.properties.count,
     lnglat = e.layer.feature.geometry.coordinates;
 
-  xhr.open('GET', _xyz.host + '/api/cluster/select?' + _xyz.utils.paramString({
+  xhr.open('GET', _xyz.host + '/api/location/select/cluster?' + _xyz.utils.paramString({
     locale: _xyz.locale,
     layer: layer.key,
     table: layer.table,

@@ -137,7 +137,7 @@ export default record => {
     }
 
     // Create controls for editable fields.
-    if (entry.edit) return edit(record, entry);
+    if (entry.edit && !entry.fieldfx) return edit(record, entry);
 
     // Set field value.
     entry.val.textContent =
@@ -145,7 +145,7 @@ export default record => {
         entry.type === 'integer' ? parseInt(entry.value).toLocaleString('en-GB', { maximumFractionDigits: 0 }) :
           entry.type === 'date' ? formatDate(entry.value) :
             entry.type === 'datetime' ? formatDateTime(entry.value) :
-             entry.value;
+              entry.value;
 
   });
   
