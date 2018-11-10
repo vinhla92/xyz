@@ -1,7 +1,7 @@
 module.exports = fastify => {
   fastify.route({
     method: 'GET',
-    url: '/api/location/select/latlng_intersect',
+    url: '/api/location/select/latlng/intersect',
     beforeHandler: fastify.auth([fastify.authAPI]),
     handler: async (req, res) => {
 

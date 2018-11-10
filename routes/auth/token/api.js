@@ -2,13 +2,16 @@ module.exports = fastify => {
     
   fastify.route({
     method: 'GET',
-    url: '/api/key',
+    url: '/auth/token/api',
     beforeHandler: fastify.auth([fastify.authAccess]),
     handler: (req, res) => {
+
+      // Verify token.
       fastify.jwt.verify(req.query.token, async (err, token) => {
+
         if (err) {
           fastify.log.error(err);
-          return res.send('This is not happening');
+          return res.code(401).send('Invalid token');
         }
   
         // Get user from ACL.
@@ -20,7 +23,10 @@ module.exports = fastify => {
   
         const user = rows[0];
   
-        if (!user || !user.api || !user.verified || !user.approved) return res.send('This is not happening');
+        if (!user
+          || !user.api
+          || !user.verified
+          || !user.approved) return res.code(401).send('Invalid token');
   
         // Create signed api_token
         const api_token = fastify.jwt.sign({
@@ -29,7 +35,7 @@ module.exports = fastify => {
         });
   
         // Store api_token in ACL.
-        rows = await global.pg.users(`
+        var rows = await global.pg.users(`
         UPDATE acl_schema.acl_table SET api = '${api_token}'
         WHERE lower(email) = lower($1);`,
         [user.email]);

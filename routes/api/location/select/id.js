@@ -87,7 +87,7 @@ module.exports = fastify => {
       if (rows.length === 0) return res.code(204).send('No rows returned from table.');
 
       // Iterate through infoj entries and assign values returned from query.
-      Object.values(infoj).map(entry =>  {
+      infoj.forEach(entry =>  {
         if (rows[0][entry.field]) entry.value = rows[0][entry.field];
       });
     

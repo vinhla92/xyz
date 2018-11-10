@@ -44,6 +44,6 @@ module.exports = fastify => {
 
   require('./location/select/latlng_nnearest')(fastify);
 
-  require('./location/select/latlng')(fastify);
+  require('./location/select/latlng_contains')(fastify);
 
 };
