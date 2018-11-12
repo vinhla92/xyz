@@ -3,7 +3,7 @@ let token = window.location.search.replace('?token=','');
 history.pushState({ token: true }, 'token', document.head.dataset.dir + '/admin/user');
 
 const _xhr = new XMLHttpRequest();
-_xhr.open('GET', document.head.dataset.dir + '/token/renew?token=' + token);
+_xhr.open('GET', document.head.dataset.dir + '/auth/token/renew?token=' + token);
 _xhr.onload = e => {
   token = e.target.response;
   setTimeout(renewToken, 6000);
@@ -12,7 +12,7 @@ _xhr.send();
 
 const renewToken = () => {
   const xhr = new XMLHttpRequest();
-  xhr.open('GET', document.head.dataset.dir + '/token/renew?token=' + token);
+  xhr.open('GET', document.head.dataset.dir + '/auth/token/renew?token=' + token);
   xhr.onload = e => {
     token = e.target.response;
     setTimeout(renewToken, 6000);

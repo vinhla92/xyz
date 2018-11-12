@@ -790,7 +790,7 @@
             "11": "gb_hx_2k",
             "12": "gb_hx_1k"
           },
-          "queryFields": [
+          "grid_fields": [
             {
               "pop__01": "Population 2001"
             },

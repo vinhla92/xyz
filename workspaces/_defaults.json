@@ -141,7 +141,7 @@
             "table": "optional",
             "tables": "optional",
             "grid_color": "optional",
-            "queryFields": "optional",
+            "grid_fields": "optional",
             "geom": "geom",
             "style": {
                 "range": [

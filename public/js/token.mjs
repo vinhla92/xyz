@@ -16,7 +16,7 @@ export default init => {
 
   // XHR to renew token.
   const xhr = new XMLHttpRequest();
-  xhr.open('GET', document.head.dataset.dir + '/token/renew?token=' + search[1]);
+  xhr.open('GET', document.head.dataset.dir + '/auth/token/renew?token=' + search[1]);
   xhr.onload = e => {
 
     // Set timeout for the token to be renewed.
@@ -29,7 +29,7 @@ export default init => {
 };
 
 // Renew token method to be run a regular interval.
-// Interval must be shorter than expiry of token defined in /token/renew method in auth.js.
+// Interval must be shorter than expiry of token defined in /auth/token/renew method in auth.js.
 const renewToken = () => {
 
   const timenow = Date.now();
@@ -42,7 +42,7 @@ const renewToken = () => {
 
   // XHR to renew token.
   const xhr = new XMLHttpRequest();
-  xhr.open('GET', document.head.dataset.dir + '/token/renew?' + _xyz.utils.paramString({
+  xhr.open('GET', document.head.dataset.dir + '/auth/token/renew?' + _xyz.utils.paramString({
     token: _xyz.token,
     nanoid: _xyz.nanoid,
     timenow: timenow

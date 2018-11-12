@@ -47,7 +47,7 @@ utils.dropdrop factory to create dropdowns from entries array.
 Restructure grid fields array. 
 
 ```
-"queryFields": [
+"grid_fields": [
  {
   "pop__01": "Population 2001"
  },

@@ -2,7 +2,7 @@ module.exports = fastify => {
     
   fastify.route({
     method: 'GET',
-    url: '/token/renew',
+    url: '/auth/token/renew',
     handler: (req, res) => {
 
       if (global.logs && req.query.nanoid) console.log({
