@@ -45,11 +45,9 @@ export default record => {
 
           _xyz.hooks.filter('select', record.location.layer + '!' + record.location.table + '!' + record.location.id + '!' + record.location.marker[0] + ';' + record.location.marker[1]);
 
-          if (record.location.L) _xyz.map.removeLayer(record.location.L);
-          if (record.location.M) _xyz.map.removeLayer(record.location.M);
-          if (record.location.D) _xyz.map.removeLayer(record.location.D);
-
+          record.location.geometries.forEach(geom => _xyz.map.removeLayer(geom));
           record.location = null;
+          record.location.geometries = [];
 
           // Find free records in locations array.
           let freeRecords = _xyz.locations.list.filter(record => record.location);

@@ -1,7 +1,7 @@
 module.exports = fastify => {
   fastify.route({
     method: 'GET',
-    url: '/api/location/select/latlng/intersect',
+    url: '/api/location/select/latlng/intersects',
     beforeHandler: fastify.auth([fastify.authAPI]),
     handler: async (req, res) => {
 
@@ -16,24 +16,37 @@ module.exports = fastify => {
 
       // Return 406 if locale is not found in workspace.
       if (!layer) return res.code(406).send('Invalid layer.');
+
+      const table = req.query.table || layer.table || Object.values(layer.tables).pop();
+    
+      // Return 406 if locale is not found in workspace.
+      if (!table) return res.code(406).send('Missing table.');
+
+      // Clone the infoj from the memory workspace layer.
+      const infoj = JSON.parse(JSON.stringify(layer.infoj));
+
+      const geom = req.query.geom || layer.geom;
+
+      // Return 406 if table does not have EPSG:4326 geometry field.
+      if (!geom) return res.code(406).send('Missing geom (SRID 4326) field on layer.');
   
-      let
-        table = req.query.table,
-        geom = layer.geom ? layer.geom : 'geom',
-        geomj = layer.geomj ? layer.geomj : `ST_asGeoJson(${geom})`,
-        geomq = layer.geomq ? layer.geomq : 'geom',
-        lat = parseFloat(req.query.lat),
-        lng = parseFloat(req.query.lng),
-        infoj = JSON.parse(JSON.stringify(layer.infoj));
-  
+      const lat = parseFloat(req.query.lat);
+      if (!lat) return res.code(406).send('Missing lat.');
+
+      const lng = parseFloat(req.query.lng);
+      if (!lng) return res.code(406).send('Missing lng.');      
+   
       // Check whether string params are found in the settings to prevent SQL injections.
-      if ([table, geom, geomj, geomq, locale, layer]
+      if ([table]
         .some(val => (typeof val === 'string' && val.length > 0 && global.workspace[token.access].values.indexOf(val) < 0))) {
         return res.code(406).send('Invalid parameter.');
       }
   
       // The fields array stores all fields to be queried for the location info.
-      const fields = await require(global.appRoot + '/mod/pg/sql_fields')([], infoj, locale, geom);
+      const fields = await require(global.appRoot + '/mod/pg/sql_fields')([], infoj, locale, table, geom);
+
+      // Push JSON geometry field into fields array.
+      fields.push(`\n   ST_asGeoJson(${geom}) AS geomj`);
   
       var q = `
       WITH T AS (
@@ -43,28 +56,26 @@ module.exports = fastify => {
           WHERE ST_Contains(${geom}, ST_SetSRID(ST_Point(${lng}, ${lat}), 4326))
           LIMIT 1
       )
-      SELECT
-          ${fields}
-          ${geomj} AS geomj
-      FROM ${table}, T
+      SELECT ${fields.join()} FROM ${table}, T
       WHERE ST_Intersects(${geom}, _geom);`;
   
       var rows = await global.pg.dbs[layer.dbs](q);
   
-      if (rows.err) return res.code(500).send('soz. it\'s not you. it\'s me.');
+      if (rows.err) return res.code(500).send('Failed to query PostGIS table.');
+
+      // return 204 if no record was returned from database.
+      if (rows.length === 0) return res.code(204).send('No rows returned from table.');
   
-      // Iterate through the infoj object's entries and assign the values returned from the database query.
+      // Iterate through the rows whereas each row is one location.
       rows.forEach(row => {
-        infoj.forEach(entry => {
-          if (row[entry.field] || row[entry.field] == 0) {
-            entry.value = row[entry.field];
-          }
-          if (row[entry.subfield]) {
-            entry.subvalue = row[entry.subfield];
-          }
+
+        // Iterate through infoj entries and assign values returned from query.
+        infoj.forEach(entry =>  {
+          if (row[entry.field]) entry.value = row[entry.field];
         });
+        
       });
-  
+          
       // Send the infoj object with values back to the client.
       res.code(200).send(rows);
 

@@ -33,7 +33,7 @@ export default {
       },
       {
         letter: 'D',
-        color: '#cddc39'
+        color: '#cddc39',
       },
       {
         letter: 'E',
@@ -115,11 +115,11 @@ export default {
         { hex: '#78909c', name: 'Light Slate Gray' }
       ],
       default: {
-        "weight": 1,
-        "color": "#333",
-        "fill": true,
-        "fillColor": "#333",
-        "fillOpacity": 0.1
+        weight: 1,
+        color: '#333',
+        fill: true,
+        fillColor: '#333',
+        fillOpacity: 0.1
       },
       highlight: {
         stroke: true,

@@ -51,7 +51,7 @@ module.exports = fastify => {
 
 
       // The fields array stores all fields to be queried for the location info.
-      const fields = await require(global.appRoot + '/mod/pg/sql_fields')([], infoj, locale, geom);
+      const fields = await require(global.appRoot + '/mod/pg/sql_fields')([], infoj, locale, table, geom);
 
       // Push JSON geometry field into fields array.
       fields.push(`\n   ST_asGeoJson(${geom}) AS geomj`);

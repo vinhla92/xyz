@@ -1,4 +1,4 @@
-module.exports = async (fields, infoj, locale, geom) => {
+module.exports = async (fields, infoj, locale, table, geom) => {
 
   // Iterate through infoj and push individual entries into fields array.
   await infoj.forEach(entry => {
@@ -17,6 +17,8 @@ module.exports = async (fields, infoj, locale, geom) => {
       const lookup_geom = entry.lookup.geom || lookup_layer && lookup_layer.geom;
     
       if (!lookup_geom) return;
+
+      if (entry.lookup.location_geom) geom = `${table}.${entry.lookup.location_geom}`;
     
       return fields.push(`(SELECT ${entry.lookup.function || 'SUM'}(${entry.field})
                 FROM ${lookup_table}

@@ -1,6 +1,6 @@
 module.exports = fastify => {
   fastify.route({
-    method: 'GET',
+    method: 'POST',
     url: '/api/cluster/get',
     beforeHandler: fastify.auth([fastify.authAPI]),
     handler: async (req, res) => {
@@ -32,7 +32,7 @@ module.exports = fastify => {
         north = parseFloat(req.query.north);
   
       // Check whether string params are found in the settings to prevent SQL injections.
-      if ([table, geom, cat]
+      if ([table, cat]
         .some(val => (typeof val === 'string' && global.workspace[token.access].values.indexOf(val) < 0))) {
         return res.code(406).send('Invalid parameter.');
       }
@@ -154,7 +154,9 @@ module.exports = fastify => {
               ${geom}, 0.00001)
             ${filter_sql}
           ) kmeans
+          
         ) dbscan GROUP BY kmeans_cid, dbscan_cid, cat
+
       ) cluster GROUP BY kmeans_cid, dbscan_cid;`;
 
 

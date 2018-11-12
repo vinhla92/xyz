@@ -19,7 +19,7 @@ export default function(){
   let bounds = _xyz.map.getBounds();
         
   // Build XHR request.
-  xhr.open('GET', _xyz.host + '/api/cluster/get?' + _xyz.utils.paramString({
+  xhr.open('POST', _xyz.host + '/api/cluster/get?' + _xyz.utils.paramString({
     locale: _xyz.locale,
     layer: layer.key,
     table: layer.table,

@@ -41,6 +41,15 @@
                             "label": "Population '11",
                             "field": "pop_11",
                             "type": "integer"
+                        },
+                        {
+                            "label": "GRID pop__01",
+                            "field": "pop__01",
+                            "type": "integer",
+                            "lookup": {
+                                "layer": "grid",
+                                "function": "AVG"
+                            }
                         }
                     ]
                 },
@@ -184,9 +193,61 @@
                                 "condition": "ST_INTERSECTS",
                                 "function": "SUM"
                             }
+                        },
+                        {
+                            "field": "geom_rplace",
+                            "fieldfx": "ST_asGeoJson(geom_rplace)",
+                            "type": "geometry",
+                            "style": {
+                                "stroke": true,
+                                "color": "#cf0",
+                                "weight": 2,
+                                "fill": true,
+                                "fillOpacity": 0.5
+                            }
+                        },
+                        {
+                            "label": "GRID pop__01",
+                            "field": "pop__01",
+                            "type": "integer",
+                            "lookup": {
+                                "layer": "grid",
+                                "function": "AVG",
+                                "location_geom": "geom_rplace"
+                            }
                         }
                     ]
-                }
+                },
+                "grid": {
+                    "name": "Grid",
+                    "format": "grid",
+                    "dbs": "XYZ",
+                    "geom": "geomcntr",
+                    "grid_color": "pop__11",
+                    "tables": {
+                      "6": "gb_hx_64k",
+                      "7": "gb_hx_32k",
+                      "8": "gb_hx_16k",
+                      "9": "gb_hx_8k",
+                      "10": "gb_hx_4k",
+                      "11": "gb_hx_2k",
+                      "12": "gb_hx_1k"
+                    },
+                    "queryFields": [
+                      {
+                        "pop__01": "Population 2001"
+                      },
+                      {
+                        "pop__11": "Population 2011"
+                      },
+                      {
+                        "gen_female__11": "Female population"
+                      },
+                      {
+                        "gen_male__11": "Male population"
+                      }
+                    ]
+                  }
             }
         }
     }

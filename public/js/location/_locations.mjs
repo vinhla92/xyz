@@ -28,10 +28,13 @@ export default () => {
   _xyz.locations.dom.innerHTML = '';
   
   _xyz.locations.list.forEach(record => {
-    if (record.location && record.location.L) _xyz.map.removeLayer(record.location.L);
-    if (record.location && record.location.M) _xyz.map.removeLayer(record.location.M);
-    if (record.location && record.location.D) _xyz.map.removeLayer(record.location.D);
+
+    // Return if location doesn't exist. ie. on init.
+    if (!record.location) return;
+    record.location.geometries.forEach(geom => _xyz.map.removeLayer(geom));
     record.location = null;
+    record.location.geometries = [];
+
   });
     
   // Set the layer display from hooks if present; Overwrites the default setting.

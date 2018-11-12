@@ -2,25 +2,25 @@ import _xyz from '../../../_xyz.mjs';
 
 export default (record, entry, img) => {
 
-    const xhr = new XMLHttpRequest();
+  const xhr = new XMLHttpRequest();
 
-    xhr.open('GET', _xyz.host + '/api/location/images/delete?' + _xyz.utils.paramString({
-        locale: _xyz.locale,
-        layer: record.location.layer,
-        table: record.location.table,
-        field: entry.field,
-        id: record.location.id,
-        image_id: img.id,
-        image_src: encodeURIComponent(img.src),
-        token: _xyz.token
-    }));
+  xhr.open('GET', _xyz.host + '/api/location/images/delete?' + _xyz.utils.paramString({
+    locale: _xyz.locale,
+    layer: record.location.layer,
+    table: record.location.table,
+    field: entry.field,
+    id: record.location.id,
+    image_id: img.id,
+    image_src: encodeURIComponent(img.src),
+    token: _xyz.token
+  }));
 
-    xhr.onload = e => {
+  xhr.onload = e => {
 
-        if (e.target.status !== 200) return;
+    if (e.target.status !== 200) return;
 
-        document.getElementById(img.id).remove();
-    };
+    document.getElementById(img.id).remove();
+  };
 
-    xhr.send();
-}
+  xhr.send();
+};

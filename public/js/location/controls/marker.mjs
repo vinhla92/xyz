@@ -20,12 +20,12 @@ export default record => {
         e.stopPropagation();
 
         if (e.target.textContent === 'location_off') {
-          _xyz.map.removeLayer(record.location.M);
+          _xyz.map.removeLayer(record.location.Marker);
           e.target.textContent = 'location_on';
           e.target.title = 'Show marker';
 
         } else {
-          _xyz.map.addLayer(record.location.M);
+          _xyz.map.addLayer(record.location.Marker);
           e.target.textContent = 'location_off';
           e.target.title = 'Hide marker';
         }
