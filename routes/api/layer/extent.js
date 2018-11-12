@@ -14,7 +14,7 @@ module.exports = fastify => {
 
       const layer = locale.layers[req.query.layer];
 
-      // Return 406 if locale is not found in workspace.
+      // Return 406 if layer is not found in locale.
       if (!layer) return res.code(406).send('Invalid layer.');
 
       let

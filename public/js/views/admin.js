@@ -1,6 +1,6 @@
 let token = window.location.search.replace('?token=','');
 
-history.pushState({ token: true }, 'token', document.head.dataset.dir + '/admin/user');
+history.pushState({ token: true }, 'token', document.head.dataset.dir + '/auth/user/admin');
 
 const _xhr = new XMLHttpRequest();
 _xhr.open('GET', document.head.dataset.dir + '/auth/token/renew?token=' + token);
@@ -29,7 +29,7 @@ const xhr = new XMLHttpRequest();
 
     let user = el.parentNode.parentNode.parentNode.firstChild.nextSibling;
 
-    xhr.open('POST', document.head.dataset.dir + '/admin/user/update?token=' + token);
+    xhr.open('POST', document.head.dataset.dir + '/auth/user/update?token=' + token);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.onload = () => {
       if (xhr.status === 500) alert('Soz. It\'s me not you.');
@@ -53,7 +53,7 @@ const xhr = new XMLHttpRequest();
     row.style.color = '#999';
 
     if (confirm('Delete account ' + email.innerText)) {
-      xhr.open('POST', document.head.dataset.dir + '/admin/user/delete?token=' + token);
+      xhr.open('POST', document.head.dataset.dir + '/auth/user/delete?token=' + token);
       xhr.setRequestHeader('Content-Type', 'application/json');
       xhr.onload = () => {
         if (xhr.status === 500) alert('Soz. It\'s me not you.');

@@ -2,7 +2,7 @@ module.exports = fastify => {
     
   fastify.route({
     method: 'POST',
-    url: '/admin/user/update',
+    url: '/auth/user/update',
     beforeHandler: fastify.auth([fastify.authAdminAPI]),
     handler: async (req, res) => {
 

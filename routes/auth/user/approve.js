@@ -2,7 +2,7 @@ module.exports = fastify => {
     
   fastify.route({
     method: 'GET',
-    url: '/admin/user/approve/:token',
+    url: '/auth/user/approve/:token',
     beforeHandler: fastify.auth([fastify.authAdmin]),
     handler: async (req, res) => {
 

@@ -2,7 +2,7 @@ module.exports = fastify => {
     
   fastify.route({
     method: 'POST',
-    url: '/admin/user/delete',
+    url: '/auth/user/delete',
     beforeHandler: fastify.auth([fastify.authAdminAPI]),
     handler: async (req, res) => {
 
@@ -23,7 +23,7 @@ module.exports = fastify => {
         text: `You will no longer be able to log in to ${process.env.HTTP || 'https'}://${global.alias || req.headers.host}${global.dir}`
       });
 
-      res.code(200).send();
+      res.code(200).send('User account deleted.');
 
     }
   });

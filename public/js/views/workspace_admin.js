@@ -1,11 +1,11 @@
 let token = window.location.search.replace('?token=','');
 
-if (document.body.dataset.mode === 'tree') history.pushState({ token: true }, 'token', document.head.dataset.dir + '/admin/workspace');
+if (document.body.dataset.mode === 'tree') history.pushState({ token: true }, 'token', document.head.dataset.dir + '/workspace/admin');
 
-if (document.body.dataset.mode === 'code') history.pushState({ token: true }, 'token', document.head.dataset.dir + '/admin/workspacejson');
+if (document.body.dataset.mode === 'code') history.pushState({ token: true }, 'token', document.head.dataset.dir + '/workspace/admin/json');
 
 const _xhr = new XMLHttpRequest();
-_xhr.open('GET', document.head.dataset.dir + '/token/renew?token=' + token);
+_xhr.open('GET', document.head.dataset.dir + '/auth/token/renew?token=' + token);
 _xhr.onload = e => {
   token = e.target.response;
   setTimeout(renewToken, 6000);
@@ -14,7 +14,7 @@ _xhr.send();
 
 const renewToken = () => {
   const xhr = new XMLHttpRequest();
-  xhr.open('GET', document.head.dataset.dir + '/token/renew?token=' + token);
+  xhr.open('GET', document.head.dataset.dir + '/auth/token/renew?token=' + token);
   xhr.onload = e => {
     token = e.target.response;
     setTimeout(renewToken, 6000);
@@ -52,7 +52,7 @@ function init(json) {
     
   btnSave.addEventListener('click', function () {
     let xhr = new XMLHttpRequest();
-    xhr.open('POST', 'workspace/save?token=' + token);
+    xhr.open('POST', document.head.dataset.dir + '/workspace/load?token=' + token);
     xhr.setRequestHeader('Content-Type', 'application/json');
     
     xhr.onload = function () {

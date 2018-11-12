@@ -1,6 +1,6 @@
 module.exports = fastify => {
   require('./admin')(fastify);
-  require('./adminjson')(fastify);
+  require('./admin_json')(fastify);
   require('./get')(fastify);
   require('./load')(fastify);
 };

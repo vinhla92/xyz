@@ -2,7 +2,7 @@ module.exports = fastify => {
 
   fastify.route({
     method: 'GET',
-    url: '/admin/user/verify/:token',
+    url: '/auth/user/verify/:token',
     handler: async (req, res) => {
   
       // Find user account in ACL from matching token.
@@ -51,8 +51,8 @@ module.exports = fastify => {
         require(global.appRoot + '/mod/mailer')({
           bcc: adminmail,
           subject: `A new account has been verified on ${global.alias || req.headers.host}${global.dir}`,
-          text: `Please log into the admin panel ${process.env.HTTP || 'https'}://${global.alias || req.headers.host}${global.dir}/admin/user to approve ${user.email} \n \n`
-                + `You can also approve the account by following this link: ${process.env.HTTP || 'https'}://${global.alias || req.headers.host}${global.dir}/admin/user/approve/${approvaltoken}`
+          text: `Please log into the admin panel ${process.env.HTTP || 'https'}://${global.alias || req.headers.host}${global.dir}/auth/user/admin to approve ${user.email} \n \n`
+                + `You can also approve the account by following this link: ${process.env.HTTP || 'https'}://${global.alias || req.headers.host}${global.dir}/auth/user/approve/${approvaltoken}`
         });
   
         return res.redirect(global.dir + '/login?msg=approval');

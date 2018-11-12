@@ -114,7 +114,7 @@ module.exports = fastify => {
             subject: `Too many failed login attempts occured on ${global.alias || req.headers.host}${global.dir}`,
             text: `${global.failed_attempts} failed login attempts have been recorded on this account. \n \n`
                   + 'This account has now been locked until verified. \n \n'
-                  + `Please verify that you are the account holder: ${process.env.HTTP || 'https'}://${global.alias || req.headers.host}${global.dir}/admin/user/verify/${verificationtoken} \n \n`
+                  + `Please verify that you are the account holder: ${process.env.HTTP || 'https'}://${global.alias || req.headers.host}${global.dir}/auth/user/verify/${verificationtoken} \n \n`
                   + 'Verifying the account will reset the failed login attempts. \n \n'
                   + `The failed attempt occured from this remote address ${req.req.connection.remoteAddress} \n \n`
                   + 'This wasn\'t you? Please let your manager know. \n \n'

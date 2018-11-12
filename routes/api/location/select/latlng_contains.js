@@ -14,14 +14,11 @@ module.exports = fastify => {
 
       const layer = locale.layers[req.query.layer];
 
-      // Return 406 if locale is not found in workspace.
+      // Return 406 if layer is not found in locale.
       if (!layer) return res.code(406).send('Invalid layer.');
 
       const table = req.query.table || layer.table || Object.values(layer.tables).pop();
     
-      // Return 406 if locale is not found in workspace.
-      if (!table) return res.code(406).send('Missing table.');
-
       // Clone the infoj from the memory workspace layer.
       const infoj = JSON.parse(JSON.stringify(layer.infoj));
 

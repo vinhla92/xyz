@@ -14,12 +14,16 @@ module.exports = fastify => {
 
       const layer = locale.layers[req.query.layer];
 
-      // Return 406 if locale is not found in workspace.
+      // Return 406 if layer is not found in locale.
       if (!layer) return res.code(406).send('Invalid layer.');
+
+      const table = req.query.table;
+
+      // Return 406 if table is not defined as request parameter.
+      if (!table) return res.code(406).send('Missing table.');
   
       let
         geom = layer.geom,
-        table = req.query.table,
         cat = req.query.cat || null,
         size = req.query.size || 1,
         theme = req.query.theme || null,

@@ -2,7 +2,7 @@
 module.exports = fastify => {
   fastify.route({
     method: 'GET',
-    url: '/admin/workspace',
+    url: '/workspace/admin',
     beforeHandler: fastify.auth([fastify.authAdmin]),
     handler: (req, res) => {
         
