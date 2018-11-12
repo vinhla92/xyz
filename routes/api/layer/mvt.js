@@ -1,7 +1,7 @@
 module.exports = fastify => {
   fastify.route({
     method: 'GET',
-    url: '/api/mvt/get/:z/:x/:y',
+    url: '/api/layer/mvt/:z/:x/:y',
     beforeHandler: fastify.auth([fastify.authAPI]),
     handler: async (req, res) => {
 
@@ -12,6 +12,7 @@ module.exports = fastify => {
         layer = global.workspace[token.access].config.locales[req.query.locale].layers[req.query.layer],
         table = req.query.table,
         geom_3857 = layer.geom_3857 ? layer.geom_3857 : 'geom_3857',
+        filter = req.query.filter && JSON.parse(req.query.filter),
         id = layer.qID ? layer.qID : null,
         x = parseInt(req.params.x),
         y = parseInt(req.params.y),
@@ -24,6 +25,9 @@ module.exports = fastify => {
         .some(val => (typeof val === 'string' && global.workspace[token.access].values.indexOf(val) < 0))) {
         return res.code(406).send('Invalid parameter.');
       }
+
+      // SQL filter
+      const filter_sql = filter && await require(global.appRoot + '/mod/pg/sql_filter')(filter) || '';
 
       if (layer.mvt_cache) {
 
@@ -81,6 +85,7 @@ module.exports = fastify => {
                   ${ m - (y * r) - r},
                   3857
               ),${geom_3857},0)
+              ${filter_sql}
           ) tile
           ${layer.mvt_cache ? 'RETURNING mvt;' : ';'}
           `;

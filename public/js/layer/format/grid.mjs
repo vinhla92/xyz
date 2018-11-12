@@ -17,7 +17,7 @@ export default function(){
   // Open & send vector.xhr;
   let bounds = _xyz.map.getBounds();
 
-  xhr.open('GET', _xyz.host + '/api/grid/get?' + _xyz.utils.paramString({
+  xhr.open('GET', _xyz.host + '/api/layer/grid?' + _xyz.utils.paramString({
     locale: _xyz.locale,
     layer: layer.key,
     table: layer.table,

@@ -1,7 +1,7 @@
 module.exports = fastify => {
   fastify.route({
     method: 'GET',
-    url: '/api/geojson/get',
+    url: '/api/layer/geojson',
     beforeHandler: fastify.auth([fastify.authAPI]),
     handler: async (req, res) => {
 

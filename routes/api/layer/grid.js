@@ -1,7 +1,7 @@
 module.exports = fastify => {
   fastify.route({
     method: 'GET',
-    url: '/api/grid/get',
+    url: '/api/layer/grid',
     beforeHandler: fastify.auth([fastify.authAPI]),
     handler: async (req, res) => {
 

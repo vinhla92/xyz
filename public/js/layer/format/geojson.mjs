@@ -17,7 +17,7 @@ export default function(){
   // Build xhr request.
   let bounds = _xyz.map.getBounds();      
     
-  xhr.open('GET', _xyz.host + '/api/geojson/get?' + _xyz.utils.paramString({
+  xhr.open('GET', _xyz.host + '/api/layer/geojson?' + _xyz.utils.paramString({
     locale: _xyz.locale,
     layer: layer.key,
     table: layer.table,

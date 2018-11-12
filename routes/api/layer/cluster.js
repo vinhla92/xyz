@@ -1,7 +1,7 @@
 module.exports = fastify => {
   fastify.route({
     method: 'POST',
-    url: '/api/cluster/get',
+    url: '/api/layer/cluster',
     beforeHandler: fastify.auth([fastify.authAPI]),
     handler: async (req, res) => {
 

@@ -38,9 +38,17 @@
                     "qID": "id",
                     "infoj": [
                         {
+                            "label": "OA Code",
+                            "field": "oacode",
+                            "type": "text",
+                            "inline": true,
+                            "filter": "like"
+                        },
+                        {
                             "label": "Population '11",
                             "field": "pop_11",
-                            "type": "integer"
+                            "type": "integer",
+                            "filter": "numeric"
                         },
                         {
                             "label": "GRID pop__01",

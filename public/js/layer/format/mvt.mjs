@@ -14,11 +14,12 @@ export default function(){
 
   if (!layer.table || !layer.display) return _xyz.layers.check(layer);
 
-  let url = _xyz.host + '/api/mvt/get/{z}/{x}/{y}?' + _xyz.utils.paramString({
+  let url = _xyz.host + '/api/layer/mvt/{z}/{x}/{y}?' + _xyz.utils.paramString({
       locale: _xyz.locale,
       layer: layer.key,
       table: layer.table,
       properties: layer.properties,
+      filter: JSON.stringify(layer.filter),
       token: _xyz.token
     }),
     options = {
