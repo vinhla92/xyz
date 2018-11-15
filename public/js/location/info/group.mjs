@@ -92,8 +92,9 @@ export default (record, group) => {
         e.stopPropagation();
         group.fields = record.location.infoj.filter(entry => entry.group === group.label);
         //chart(group);
-       // group.table.appendChild(chart(group));
-       chart(group);
+        group.table.innerHTML = '';
+        group.table.appendChild(chart(group));
+       //chart(group);
       }
     }
   });

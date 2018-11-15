@@ -4,13 +4,12 @@ import {camelize} from '../../utils/camelize.mjs';
 
 export default (group) => {
 
-  let chart_id = 'chart_' + camelize(group.label);
+  //let chart_id = 'chart_' + camelize(group.label);
+  let div = createElement({tag: 'div', style: {position: 'relative'}});
 
-  var canvas = createElement({
+  let canvas = createElement({
     tag: 'canvas',
-    options: {
-      id: chart_id
-    }
+    appendTo: div
   });
 
   //console.log(group);
@@ -19,7 +18,7 @@ export default (group) => {
   let labels = group.fields.map(field => {return field.label}),
       data = group.fields.map(field => {return field.value}),
       
-      _chart = new Chart(chart_id, {
+      _chart = new Chart(canvas, {
         type: group.chart.type || 'line',
         data: {
           labels: labels,
@@ -34,6 +33,6 @@ export default (group) => {
             responsive: true
         }
     });
-    //return canvas;
-    console.log(canvas);
+    return div;
+    //console.log(canvas);
 };
