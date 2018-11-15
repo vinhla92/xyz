@@ -30,7 +30,22 @@ export default (group) => {
             }]
         },
         options: {
-            responsive: true
+            responsive: true,
+            scales: {
+              yAxes: [
+                {
+                  ticks: {
+                    callback: (label, index, labels) => {
+                      return label/1000 + 'k';
+                    }
+                  },
+                  scaleLabel: {
+                    display: true,
+                    labelString: '1k = 1000'
+                  }
+                }
+              ]
+            }
         }
     });
     return div;
