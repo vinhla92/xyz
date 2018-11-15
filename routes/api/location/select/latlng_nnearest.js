@@ -57,7 +57,7 @@ module.exports = fastify => {
       if (rows.err) return res.code(500).send('Failed to query PostGIS table.');
 
       // return 204 if no record was returned from database.
-      if (rows.length === 0) return res.code(204).send('No rows returned from table.');
+      if (rows.length === 0) return res.code(202).send('No rows returned from table.');
   
       // Iterate through the rows whereas each row is one location.
       rows.forEach(row => {

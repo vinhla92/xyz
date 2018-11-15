@@ -1,6 +1,7 @@
 import _xyz from '../../../_xyz.mjs';
 
 import valChange from './valChange.mjs';
+
 import datepicker from 'js-datepicker';
 
 export default (record, entry) => {
@@ -45,9 +46,9 @@ export function formatDateTime(str){
 
 export function meltDateStr(str){ // from beautiful string to sql-date format
   let _d = new Date(str),
-      dd = _d.getDate(),
-      mm = _d.getMonth()+1,
-      yyyy = _d.getFullYear();
+    dd = _d.getDate(),
+    mm = _d.getMonth()+1,
+    yyyy = _d.getFullYear();
   
   if(dd<10) 
   { dd=`0${dd}`; } 
@@ -57,22 +58,24 @@ export function meltDateStr(str){ // from beautiful string to sql-date format
 }
 
 export function pickDate(element, record, entry){
+
   return datepicker(element, {
     position: 'tr',
     formatter: function(el, date, instance) {
         
-        let _d = new Date(date), dateStr;
+      let _d = new Date(date), dateStr;
         
-        if(entry.type === 'date') dateStr = formatDate(_d);
-        if(entry.type === 'datetime') dateStr = formatDateTime(_d);
+      if(entry.type === 'date') dateStr = formatDate(_d);
+      if(entry.type === 'datetime') dateStr = formatDateTime(_d);
         
-        el.value = dateStr;
+      el.value = dateStr;
         
-      },
-      onSelect: function(el, date, instance){
-        entry.val = meltDateStr(date);
-        console.log(entry.val);
-      }
-    });
+    },
+    onSelect: function(el, date, instance){
+      entry.val = meltDateStr(date);
+      console.log(entry.val);
+    }
+  });
+
 }
 

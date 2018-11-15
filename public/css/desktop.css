@@ -118,7 +118,8 @@
   font-size: 11px;
   color: #090;
   height: 14px;
-  display: none; }
+  display: none;
+  margin-bottom: 4px; }
 
 .btn_wide {
   font-size: 13px;
@@ -726,12 +727,11 @@ input[type=range]::-moz-range-thumb {
           background-image: linear-gradient(white, #cf9); }
       .mod_container .module .drawer .dashboard {
         border-bottom: 1px solid #333;
-        font-size: 13px; }
+        font-size: 14px; }
         .mod_container .module .drawer .dashboard .title {
           font-family: ffmark_bold, sans-serif;
-          line-height: 1.5;
-          font-size: 13px;
-          margin-bottom: 0; }
+          font-size: 14px;
+          margin-bottom: 7px; }
         .mod_container .module .drawer .dashboard .panel {
           padding: 10px 0;
           border-bottom: 1px solid #555; }
@@ -747,14 +747,19 @@ input[type=range]::-moz-range-thumb {
               content: "expand_less"; }
         .mod_container .module .drawer .dashboard .block {
           padding: 5px 0;
-          margin-right: 10px; }
-          .mod_container .module .drawer .dashboard .block i {
+          position: relative; }
+          .mod_container .module .drawer .dashboard .block .cancel-btn {
             color: #090;
-            font-size: 14px;
-            float: right; }
-          .mod_container .module .drawer .dashboard .block .range-tooltip._max {
+            font-size: 20px;
+            top: 2px;
+            right: -4px;
+            position: absolute; }
+          .mod_container .module .drawer .dashboard .block .range-label {
+            display: inline;
+            line-height: 1.7; }
+          .mod_container .module .drawer .dashboard .block .range-input {
             float: right;
-            margin-bottom: 6px; }
+            width: 60%; }
         .mod_container .module .drawer .dashboard .half {
           width: 48%;
           display: inline-block; }

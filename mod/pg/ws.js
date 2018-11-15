@@ -13,7 +13,7 @@ module.exports = async () => {
   }
 
   // Global workspace table name.
-  let workspace_table = process.env.WORKSPACE.split('|')[1] || 'workspace';
+  const workspace_table = process.env.WORKSPACE.split('|')[1] || 'workspace';
 
   // Create PostgreSQL connection pool for workspace table.
   const pool = new require('pg').Pool({
@@ -37,10 +37,17 @@ module.exports = async () => {
     settings: 'json'
   };
 
+  let table_name = workspace_table.split('.').pop();
+
+  let schema_name = workspace_table.split('.').shift();
+
+  if (table_name === schema_name) schema_name = 'public';
+
   var schema = await ws_query(`
   SELECT column_name, data_type
   FROM INFORMATION_SCHEMA.COLUMNS
-  WHERE table_name = '${workspace_table}';`);
+  WHERE table_name = '${table_name}'
+  AND table_schema = '${schema_name}';`);
 
   if (schema.length === 0) {
     

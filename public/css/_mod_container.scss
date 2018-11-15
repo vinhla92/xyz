@@ -113,12 +113,11 @@
             }
             .dashboard {
                 border-bottom: 1px solid #333;
-                font-size: 13px;
+                font-size: 14px;
                 .title {
                     font-family: ffmark_bold, sans-serif;
-                    line-height: 1.5;
-                    font-size: 13px;
-                    margin-bottom: 0;
+                    font-size: 14px;
+                    margin-bottom: 7px;
                 }
                 .panel {
                     padding: 10px 0;
@@ -140,18 +139,28 @@
                 }
                 .block {
                     padding: 5px 0;
-                    margin-right: 10px;
+                    position: relative;
                     
-                    i {
+                    .cancel-btn {
                         color: $glxgreen;
-                        font-size: 14px;
-                        float: right;
+                        font-size: 20px;
+                        top: 2px;
+                        right: -4px;
+                        position: absolute;
                     }
-                    .range-tooltip {
-                        &._max {
-                            float: right;
-                            margin-bottom: 6px;
-                        }
+
+                    .range-label {
+
+                        display: inline;
+                        line-height: 1.7;
+
+                    }
+
+                    .range-input {
+
+                        float: right;
+                        width: 60%;
+
                     }
                 }
                 

@@ -38,7 +38,6 @@ export default layer => {
   // Add grid panel to dashboard.
   if (layer.format === 'grid') panel_grid(layer);
 
-
   // Add filters panel.
   if (layer.infoj && layer.infoj.some(entry => entry.filter)) panel_filters(layer);
 
