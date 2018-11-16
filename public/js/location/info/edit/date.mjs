@@ -15,17 +15,9 @@ export default (record, entry) => {
       value: entry.value || '',
       type: 'text'
     },
-    appendTo: entry.val,
-    eventListener: {
-      event: 'input',
-      funct: e => {
-        //valChange(e.target, record, entry); 
-      }
-    }
+    appendTo: entry.val
   });
-
   pickDate(input, record, entry);
-
 };
 
 export function formatDate(str){
@@ -73,9 +65,8 @@ export function pickDate(element, record, entry){
     },
     onSelect: function(el, date, instance){
       entry.val = meltDateStr(date);
-      console.log(entry.val);
+      valChange(element, record, entry); 
     }
   });
-
 }
 
