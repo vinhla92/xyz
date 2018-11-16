@@ -14,17 +14,9 @@ export default (record, entry) => {
       value: entry.value || '',
       type: 'text'
     },
-    appendTo: entry.val,
-    eventListener: {
-      event: 'input',
-      funct: e => {
-        //valChange(e.target, record, entry); 
-      }
-    }
+    appendTo: entry.val
   });
-
   pickDate(input, record, entry);
-
 };
 
 export function formatDate(str){
@@ -45,9 +37,9 @@ export function formatDateTime(str){
 
 export function meltDateStr(str){ // from beautiful string to sql-date format
   let _d = new Date(str),
-      dd = _d.getDate(),
-      mm = _d.getMonth()+1,
-      yyyy = _d.getFullYear();
+    dd = _d.getDate(),
+    mm = _d.getMonth()+1,
+    yyyy = _d.getFullYear();
   
   if(dd<10) 
   { dd=`0${dd}`; } 
@@ -61,18 +53,18 @@ export function pickDate(element, record, entry){
     position: 'tr',
     formatter: function(el, date, instance) {
         
-        let _d = new Date(date), dateStr;
+      let _d = new Date(date), dateStr;
         
-        if(entry.type === 'date') dateStr = formatDate(_d);
-        if(entry.type === 'datetime') dateStr = formatDateTime(_d);
+      if(entry.type === 'date') dateStr = formatDate(_d);
+      if(entry.type === 'datetime') dateStr = formatDateTime(_d);
         
-        el.value = dateStr;
+      el.value = dateStr;
         
-      },
-      onSelect: function(el, date, instance){
-        entry.val = meltDateStr(date);
-        console.log(entry.val);
-      }
-    });
+    },
+    onSelect: function(el, date, instance){
+      entry.val = meltDateStr(date);
+      valChange(element, record, entry); 
+    }
+  });
 }
 
