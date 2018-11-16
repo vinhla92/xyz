@@ -109,23 +109,23 @@ export default {
         { hex: '#fb8c00', name: 'Dark Orange' },
         { hex: '#f4511e', name: 'Orioles Orange' },
         { hex: '#8d6e63', name: 'Dark Chestnut' },
-        { hex: '#777', name: 'Sonic Silver' },
+        { hex: '#777777', name: 'Sonic Silver' },
         { hex: '#bdbdbd', name: 'X11 Gray' },
-        { hex: '#aaa', name: 'Dark Medium Gray' },
+        { hex: '#aaaaaa', name: 'Dark Medium Gray' },
         { hex: '#78909c', name: 'Light Slate Gray' }
       ],
       default: {
         weight: 1,
-        color: '#333',
+        color: '#333333',
         fill: true,
-        fillColor: '#333',
+        fillColor: '#333333',
         fillOpacity: 0.1
       },
       highlight: {
         stroke: true,
-        color: '#090',
+        color: '#009900',
         weight: 2,
-        fillColor: '#cf9',
+        fillColor: '#ccff99',
         fillOpacity: 0.2,
         fill: true
       }

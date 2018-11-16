@@ -53,16 +53,16 @@
             "style": {
                 "default": {
                     "weight": 1,
-                    "color": "#333",
+                    "color": "#333333",
                     "fill": true,
-                    "fillColor": "#333",
+                    "fillColor": "#333333",
                     "fillOpacity": 0.1
                 },
                 "highlight": {
                     "stroke": true,
-                    "color": "#090",
+                    "color": "#009900",
                     "weight": 2,
-                    "fillColor": "#cf9",
+                    "fillColor": "#ccff99",
                     "fillOpacity": 0.2,
                     "fill": true
                 },
@@ -86,16 +86,16 @@
             "style": {
                 "default": {
                     "weight": 1,
-                    "color": "#333",
+                    "color": "#333333",
                     "fill": true,
-                    "fillColor": "#333",
+                    "fillColor": "#333333",
                     "fillOpacity": 0.1
                 },
                 "highlight": {
                     "stroke": true,
-                    "color": "#090",
+                    "color": "#009900",
                     "weight": 2,
-                    "fillColor": "#cf9",
+                    "fillColor": "#ccff99",
                     "fillOpacity": 0.2,
                     "fill": true
                 },
@@ -122,14 +122,14 @@
                     "type": "target",
                     "style": [
                         400,
-                        "#aaa"
+                        "#aaaaaa"
                     ]
                 },
                 "markerMulti": {
                     "type": "target",
                     "style": [
                         400,
-                        "#cf9"
+                        "#ccff99"
                     ]
                 },
                 "theme": "optional",

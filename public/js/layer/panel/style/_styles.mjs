@@ -8,15 +8,15 @@ import clusterCategorized from './clusterCategorized.mjs';
 
 import clusterGraduated from './clusterGraduated.mjs';
 
-import customStyle from './customStyle.mjs';
+import polyStyle from './polyStyle.mjs';
 
 export default layer => {
 
   // Meaningful styles can only be set for vector and cluster objects.
   if (layer.format === 'grid' || layer.format === 'tiles') return;
 
-  // Create styles panel and add to layer dashboard.
-  layer.style.panel = _xyz.utils.createElement({
+  // Add style panel to layer dashboard.
+  const panel = _xyz.utils.createElement({
     tag: 'div',
     options: {
       classList: 'panel expandable'
@@ -24,20 +24,21 @@ export default layer => {
     appendTo: layer.dashboard
   });
 
-  // Panel title / expander.
+  // Style panel title / expander.
   _xyz.utils.createElement({
     tag: 'div',
     options: {
       className: 'btn_text cursor noselect',
       textContent: 'Style'
     },
-    appendTo: layer.style.panel,
+    appendTo: panel,
     eventListener: {
       event: 'click',
       funct: e => {
         e.stopPropagation();
+
         _xyz.utils.toggleExpanderParent({
-          expandable: layer.style.panel,
+          expandable: panel,
           accordeon: true,
           scrolly: document.querySelector('.mod_container > .scrolly')
         });
@@ -45,60 +46,72 @@ export default layer => {
     }
   });
 
+  // Create empty layer themes array if none exists.
+  if (!layer.style.themes) layer.style.themes = [];
+
   // Set layer theme to be the theme defined in the workspace,
   // the first theme from an array or null.
-  layer.style.theme = layer.style.theme ? layer.style.theme :
-    layer.style.themes ? layer.style.themes[0] :
-      null;
-
-  // Create custom style panel if theme and themes array are null/none.
-  if (!layer.style.themes && !layer.style.theme) {
-    return customStyle(layer);
-  }
+  layer.style.theme = layer.style.theme || layer.style.themes[0];
 
   // Set themes array to the theme if array doesn't exist.
   if (!layer.style.themes) layer.style.themes = [layer.style.theme];
 
   // Push no theme entry into themes array.
-  layer.style.themes.push({ label: 'No theme.' });
+  layer.style.themes.unshift({ label: 'No theme.' });
 
   // Create theme drop down
-  _xyz.utils.dropdown({
+  const theme_select = _xyz.utils.dropdown({
     title: 'Select thematic style…',
-    appendTo: layer.style.panel,
+    appendTo: panel,
     entries: layer.style.themes,
     label: 'label',
     onchange: e => {
 
       //clear any applied 'ni' filters when theme changes
-      if (layer.style.theme && layer.filter.legend[layer.style.theme.field] && layer.filter.legend[layer.style.theme.field].ni) layer.filter.legend[layer.style.theme.field].ni = [];
+      //if (layer.style.theme && layer.filter.legend[layer.style.theme.field] && layer.filter.legend[layer.style.theme.field].ni) layer.filter.legend[layer.style.theme.field].ni = [];
 
       layer.style.theme = layer.style.themes[e.target.selectedIndex];
       applyTheme(layer);
-      layer.get();
+      
     }
+  });
+
+  layer.style.legend = _xyz.utils.createElement({
+    tag: 'div',
+    appendTo: panel,
   });
 
   applyTheme(layer);
 
-  function applyTheme(layer) {
-
-    //layer.style.panel.innerHTML = '';
-  
-    if ((layer.format === 'mvt' || layer.format === 'geojson')
-      && layer.style.theme.type === 'categorized') polyCategorized(layer);
-  
-    if ((layer.format === 'mvt' || layer.format === 'geojson')
-      && layer.style.theme.type === 'graduated') polyGraduated(layer);
-  
-    if (layer.format === 'cluster'
-      && layer.style.theme.type === 'categorized') clusterCategorized(layer);
-  
-    if (layer.format === 'cluster'
-      && layer.style.theme.type === 'graduated') clusterGraduated(layer);
-  
-    //if (!layer.style.theme.type) customStyle(layer);
-  
-  }
+  //layer.get();
 
 };
+
+function applyTheme(layer) {
+
+  layer.style.legend.innerHTML = '';
+
+  if (!layer.style.theme) {
+
+    polyStyle(layer, layer.style.default, 'Polygon');
+
+    polyStyle(layer, layer.style.highlight, 'Highlight');
+
+    return;
+  }
+
+  if ((layer.format === 'mvt' || layer.format === 'geojson')
+    && layer.style.theme.type === 'categorized') polyCategorized(layer);
+
+  if ((layer.format === 'mvt' || layer.format === 'geojson')
+    && layer.style.theme.type === 'graduated') polyGraduated(layer);
+
+  if (layer.format === 'cluster'
+    && layer.style.theme.type === 'categorized') clusterCategorized(layer);
+
+  if (layer.format === 'cluster'
+    && layer.style.theme.type === 'graduated') clusterGraduated(layer);
+
+  //layer.get();
+
+}

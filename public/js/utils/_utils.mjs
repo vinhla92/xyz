@@ -6,6 +6,8 @@ export {debounce} from './debounce.mjs';
 
 export {paramString} from './paramString.mjs';
 
+export {rgbToHex} from './rgbToHex.mjs';
+
 export {toggleExpanderParent} from './toggleExpanderParent.mjs';
 
 export {scrolly} from './scrolly.mjs';
@@ -21,3 +23,5 @@ export {createStateButton} from './createStateButton.mjs';
 export {slider} from './slider.mjs';
 
 export {dropdown} from './dropdown.mjs';
+
+export {hexToRGBA} from './hexToRGBA.mjs';

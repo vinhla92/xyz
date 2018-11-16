@@ -4,40 +4,40 @@ import {createElement} from './createElement.mjs';
 // StateButton factory
 export function createStateButton(param){
 
-    const btn = createElement({
-      tag: 'div',
-      options: {
-        className: 'btn_state btn_wide cursor noselect',
-        textContent: param.text
-      },
-      appendTo: param.appendTo
-    });
+  const btn = createElement({
+    tag: 'div',
+    options: {
+      className: 'btn_state btn_wide cursor noselect',
+      textContent: param.text
+    },
+    appendTo: param.appendTo
+  });
   
-    btn.activate = (e) => {
+  btn.activate = (e) => {
   
-      _xyz.state = btn;
-      btn.classList.add('active');
-      param.activate(e, param.layer);
+    _xyz.state = btn;
+    btn.classList.add('active');
+    param.activate(e, param.layer);
   
-    };
+  };
   
-    btn.finish = (createElement) => {
+  btn.finish = (createElement) => {
   
-      _xyz.state = 'select';
-      btn.classList.remove('active');
-      param.finish(param.layer);
+    _xyz.state = 'select';
+    btn.classList.remove('active');
+    param.finish(param.layer);
       
-    };
+  };
   
-    btn.addEventListener('click', e => {
+  btn.addEventListener('click', e => {
   
-      e.stopPropagation();
+    e.stopPropagation();
   
-      if (_xyz.state === btn) return _xyz.state.finish();
+    if (_xyz.state === btn) return _xyz.state.finish();
   
-      _xyz.state.finish && _xyz.state.finish();
-      btn.activate(e);
+    _xyz.state.finish && _xyz.state.finish();
+    btn.activate(e);
         
-    });
+  });
   
-  }
+}

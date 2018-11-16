@@ -745,6 +745,12 @@ input[type=range]::-moz-range-thumb {
             max-height: 2500px !important; }
             .mod_container .module .drawer .dashboard .panel.expanded .expander::before {
               content: "expand_less"; }
+        .mod_container .module .drawer .dashboard .block-title {
+          width: 100%;
+          border-bottom: 1px solid #ccc;
+          line-height: 1.5;
+          padding-top: 5px;
+          margin-bottom: 6px; }
         .mod_container .module .drawer .dashboard .block {
           padding: 5px 0;
           position: relative; }
@@ -760,6 +766,21 @@ input[type=range]::-moz-range-thumb {
           .mod_container .module .drawer .dashboard .block .range-input {
             float: right;
             width: 60%; }
+          .mod_container .module .drawer .dashboard .block .sample-poly {
+            width: 30%;
+            height: 32px;
+            border-radius: 5px;
+            box-shadow: 2px 2px 2px #999;
+            position: absolute;
+            right: 2px;
+            top: 5px; }
+          .mod_container .module .drawer .dashboard .block .colour-label {
+            color: #090; }
+          .mod_container .module .drawer .dashboard .block .colour-swatch {
+            width: 100%;
+            margin-bottom: 10px; }
+          .mod_container .module .drawer .dashboard .block .colour-td {
+            height: 20px; }
         .mod_container .module .drawer .dashboard .half {
           width: 48%;
           display: inline-block; }

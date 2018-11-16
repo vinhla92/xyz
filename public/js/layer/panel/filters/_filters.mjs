@@ -17,7 +17,7 @@ export default layer => {
   // Add select info to infoj array of filter entries.
   infoj.unshift('Select filter from list.');
 
-  // Add filter block to layer panel.
+  // Add filter panel to layer dashboard.
   const panel = _xyz.utils.createElement({
     tag: 'div',
     options: {
@@ -26,7 +26,7 @@ export default layer => {
     appendTo: layer.dashboard
   });
 
-  // Filter control title / expander.
+  // Filter panel title / expander.
   _xyz.utils.createElement({
     tag: 'div',
     options: {

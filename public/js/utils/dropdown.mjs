@@ -23,8 +23,10 @@ export function dropdown(param) {
       createElement({
         tag: 'option',
         options: {
+
           // Assign first value as text if entry is object.
           textContent: typeof (entry) == 'object' ? entry[param.label] || Object.values(entry)[0] : entry,
+          
           // Assign first key as value if entry is object.
           value: typeof (entry) == 'object' ? entry[param.val] || Object.keys(entry)[0] : entry
         },

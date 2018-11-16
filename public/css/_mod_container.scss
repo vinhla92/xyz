@@ -137,6 +137,13 @@
                         }
                     }
                 }
+                .block-title {
+                    width: 100%;
+                    border-bottom: 1px solid #ccc;
+                    line-height: 1.5;
+                    padding-top: 5px;
+                    margin-bottom: 6px;
+                }
                 .block {
                     padding: 5px 0;
                     position: relative;
@@ -150,22 +157,39 @@
                     }
 
                     .range-label {
-
                         display: inline;
                         line-height: 1.7;
-
                     }
 
                     .range-input {
-
                         float: right;
                         width: 60%;
+                    }
 
+                    .sample-poly {
+                        width: 30%;
+                        height: 32px;
+                        border-radius: 5px;
+                        box-shadow: 2px 2px 2px #999;
+                        position: absolute;
+                        right: 2px;
+                        top: 5px;
+                    }
+
+                    .colour-label {
+                        color: #090;
+                    }
+
+                    .colour-swatch {
+                        width: 100%;
+                        margin-bottom: 10px;
+                    }
+
+                    .colour-td {
+                        height: 20px;
                     }
                 }
-                
-                
-                
+                                
                 .half {
                     width: 48%;
                     display: inline-block;
@@ -173,6 +197,7 @@
                         float: right;
                     }
                 }
+
                 .third {
                     width: 15%;
                     display: inline-block;
