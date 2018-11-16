@@ -1,19 +1,14 @@
 import Chart from 'chart.js';
 import {createElement} from '../../utils/createElement.mjs';
-import {camelize} from '../../utils/camelize.mjs';
 
 export default (group) => {
 
-  //let chart_id = 'chart_' + camelize(group.label);
   let div = createElement({tag: 'div', style: {position: 'relative'}});
 
   let canvas = createElement({
     tag: 'canvas',
     appendTo: div
   });
-
-  //console.log(group);
-  //console.log(JSON.stringify(group));
 
   let labels = group.fields.map(field => {return field.label;}),
     data = group.fields.map(field => {return field.value;}),
@@ -49,5 +44,4 @@ export default (group) => {
       }
     });
   return div;
-  //console.log(canvas);
 };
