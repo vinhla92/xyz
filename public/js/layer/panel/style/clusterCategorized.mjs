@@ -16,6 +16,8 @@ export default layer => {
   if (!layer.style.theme.field) return;
       
   let _field = layer.style.theme.field;
+
+  if(!layer.filter.legend) layer.filter.legend = {};
       
   if (!layer.filter.legend[_field]) layer.filter.legend[_field] = {};
   if (!layer.filter.legend[_field].in) layer.filter.legend[_field].in = [];
