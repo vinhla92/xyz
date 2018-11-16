@@ -46,7 +46,7 @@ export default record => {
           _xyz.hooks.filter('select', record.location.layer + '!' + record.location.table + '!' + record.location.id + '!' + record.location.marker[0] + ';' + record.location.marker[1]);
 
           record.location.geometries.forEach(geom => _xyz.map.removeLayer(geom));
-          record.location = null;
+          record.location = {};
           record.location.geometries = [];
 
           // Find free records in locations array.
