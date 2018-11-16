@@ -11,7 +11,6 @@ export default (group) => {
     tag: 'canvas',
     appendTo: div
   });
-  
 
   //console.log(group);
   //console.log(JSON.stringify(group));
