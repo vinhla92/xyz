@@ -19,7 +19,7 @@ export default function(){
       layer: layer.key,
       table: layer.table,
       properties: layer.properties,
-      filter: JSON.stringify(layer.filter),
+      filter: JSON.stringify(layer.filter.current),
       token: _xyz.token
     }),
     options = {

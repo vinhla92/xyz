@@ -78,6 +78,25 @@
                             "inline": true
                         },
                         {
+                            "label": "Some Date",
+                            "field": "dev_date",
+                            "type": "date",
+                            "edit": "true"
+                        },
+                        {
+                            "label": "RP Type",
+                            "field": "rp_type",
+                            "type": "text",
+                            "filter": {
+                                "in": [
+                                    "Major City Centre",
+                                    "Large Town Centre",
+                                    "Village Centre",
+                                    "Weak Parade"
+                                ]
+                            }
+                        },
+                        {
                             "label": "Name",
                             "field": "uniq_name",
                             "type": "text"
@@ -99,15 +118,48 @@
                             }
                         },
                         {
+                            "label": "Population",
+                            "type": "group",
+                            "chart": {
+                                "x": "label x",
+                                "y": "label y"
+                            }
+                        },
+                        {
+                            "group": "Population",
                             "label": "Population '11",
                             "field": "pop__11",
                             "type": "integer"
                         },
                         {
-                            "label": "Population '11",
+                            "group": "Population",
+                            "label": "Population '12",
+                            "field": "pop__12",
+                            "type": "integer"
+                        },
+                        {
+                            "group": "Population",
+                            "label": "Population '13",
+                            "field": "pop__13",
+                            "type": "integer"
+                        },
+                        {
+                            "group": "Population",
+                            "label": "Population '14",
+                            "field": "pop__14",
+                            "type": "integer"
+                        },
+                        {
+                            "group": "Population",
+                            "label": "Population '15",
+                            "field": "pop__15",
+                            "type": "integer"
+                        },
+                        {
+                            "group": "Population",
+                            "label": "Population '16",
                             "field": "pop__16",
-                            "type": "integer",
-                            "edit": true
+                            "type": "integer"
                         },
                         {
                             "label": "Population 16 - 11",

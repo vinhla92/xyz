@@ -1,58 +1,138 @@
 import _xyz from '../../../_xyz.mjs';
 
-export default (layer, options) => {
+import create_block from './create_block.mjs';
 
-  function onkeyup() {
-    let val = parseFloat(this.value);
+export default (layer, filter_entry) => {
+
+  const xhr = new XMLHttpRequest();
+
+  xhr.open('GET', _xyz.host + '/api/location/field/range?' + _xyz.utils.paramString({
+    locale: _xyz.locale,
+    layer: layer.key,
+    table: layer.table,
+    field: filter_entry.field,
+    token: _xyz.token
+  }));
+
+  xhr.onload = e => {
+
+    const field_range = JSON.parse(e.target.response);
+
+    const block = create_block(layer, filter_entry);
   
-    if (!layer.filter[options.field]) layer.filter[options.field] = {};
+    // Label for min / greater then control.
+    _xyz.utils.createElement({
+      tag: 'div',
+      options: {
+        classList: 'range-label',
+        textContent: 'Greater then >',
+      },
+      appendTo: block
+    });
   
-    if (typeof (val) == 'number') {
-      layer.filter[options.field][this.name] = val;
-    } else {
-      layer.filter[options.field][this.name] = null;
+    const input_min = _xyz.utils.createElement({
+      tag: 'input',
+      options: {
+        classList: 'range-input',
+        type: 'number',
+        min: field_range.min,
+        max: field_range.max,
+        value: field_range.min
+      },
+      appendTo: block,
+      eventListener: {
+        event: 'keyup',
+        funct: e => {
+    
+          // Set slider value and apply filter.
+          slider_min.value = e.target.value;
+          applyFilter();
+        }
+      }
+    });
+  
+    const slider_min = _xyz.utils.slider({
+      min: field_range.min,
+      max: field_range.max,
+      value: field_range.min,
+      appendTo: block,
+      oninput: e => {
+  
+        // Set input value and apply filter.
+        input_min.value = e.target.value;
+        applyFilter();
+      }
+    });
+  
+    // Label for max / smaller then control.
+    _xyz.utils.createElement({
+      tag: 'div',
+      options: {
+        classList: 'range-label',
+        textContent: 'Smaller then <'
+      },
+      appendTo: block
+    });
+  
+    const input_max = _xyz.utils.createElement({
+      tag: 'input',
+      options: {
+        classList: 'range-input',
+        type: 'number',
+        min: field_range.min,
+        max: field_range.max,
+        value: field_range.max
+      },
+      appendTo: block,
+      eventListener: {
+        event: 'keyup',
+        funct: e => {
+
+          // Set slider value and apply filter.
+          slider_max.value = e.target.value;
+          applyFilter();
+        }
+      }
+    });
+  
+    const slider_max = _xyz.utils.slider({
+      min: field_range.min,
+      max: field_range.max,
+      value: field_range.max,
+      appendTo: block,
+      oninput: e => {
+  
+        // Set input value and apply filter.
+        input_max.value = e.target.value;
+        applyFilter();
+      }
+    });
+
+    // Apply max value after the slider has been created.
+    slider_max.value = field_range.max;
+
+
+    // Use timeout to debounce applyFilter from multiple and slider inputs.
+    let timeout;
+
+    function applyFilter(){
+
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        timeout = null;
+
+        // Create filter.
+        layer.filter.current[filter_entry.field] = {};
+        layer.filter.current[filter_entry.field].gt = parseFloat(input_min.value);
+        layer.filter.current[filter_entry.field].lt = parseFloat(input_max.value);
+
+        // Reload layer.
+        layer.get();
+
+      }, 500);
     }
-  
-    layer.get();
-  }
-  
-  _xyz.utils.createElement({
-    tag: 'div',
-    options: {
-      className: 'label half',
-      textContent: '> greater than'
-    },
-    appendTo: options.appendTo
-  });
-  
-  _xyz.utils.createElement({
-    tag: 'div',
-    options: {
-      className: 'label half right',
-      textContent: '< less than'
-    },
-    appendTo: options.appendTo
-  });
-  
-  _xyz.utils.createElement({
-    tag: 'input',
-    options: {
-      className: 'label half',
-      placeholder: 'Set value.',
-      name: 'gt',
-      onkeyup: onkeyup
-    },
-    appendTo: options.appendTo
-  });
-  
-  _xyz.utils.createElement({
-    tag: 'input',
-    options: {
-      className: 'label half right',
-      placeholder: 'Set value.',
-      onkeyup: onkeyup,
-      name: 'lt'
-    },
-    appendTo: options.appendTo
-  });
+
+  };
+
+  xhr.send(); 
 };

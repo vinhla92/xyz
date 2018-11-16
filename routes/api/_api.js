@@ -46,4 +46,6 @@ module.exports = fastify => {
 
   require('./location/select/latlng_contains')(fastify);
 
+  require('./location/field_range')(fastify);
+
 };

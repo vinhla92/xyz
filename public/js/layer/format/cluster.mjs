@@ -19,7 +19,7 @@ export default function(){
   let bounds = _xyz.map.getBounds();
         
   // Build XHR request.
-  xhr.open('POST', _xyz.host + '/api/layer/cluster?' + _xyz.utils.paramString({
+  xhr.open('GET', _xyz.host + '/api/layer/cluster?' + _xyz.utils.paramString({
     locale: _xyz.locale,
     layer: layer.key,
     table: layer.table,
@@ -28,7 +28,7 @@ export default function(){
     theme: layer.style.theme && layer.style.theme.type ? layer.style.theme.type : null,
     cat: layer.style.theme && layer.style.theme.field ? layer.style.theme.field : null,
     size: layer.style.theme && layer.style.theme.size ? layer.style.theme.size : null,
-    filter: JSON.stringify(layer.filter),
+    filter: JSON.stringify(layer.filter.current),
     west: bounds.getWest(),
     south: bounds.getSouth(),
     east: bounds.getEast(),
@@ -165,7 +165,7 @@ function clusterMouseClick(e, layer) {
     locale: _xyz.locale,
     layer: layer.key,
     table: layer.table,
-    filter: JSON.stringify(layer.filter),
+    filter: JSON.stringify(layer.filter.current),
     count: count > 99 ? 99 : count,
     lnglat: lnglat,
     token: _xyz.token

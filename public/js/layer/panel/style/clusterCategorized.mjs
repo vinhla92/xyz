@@ -17,9 +17,9 @@ export default layer => {
       
   let _field = layer.style.theme.field;
       
-  if (!layer.filter[_field]) layer.filter[_field] = {};
-  if (!layer.filter[_field].in) layer.filter[_field].in = [];
-  if (!layer.filter[_field].ni) layer.filter[_field].ni = [];
+  if (!layer.filter.legend[_field]) layer.filter.legend[_field] = {};
+  if (!layer.filter.legend[_field].in) layer.filter.legend[_field].in = [];
+  if (!layer.filter.legend[_field].ni) layer.filter.legend[_field].ni = [];
       
   Object.keys(layer.style.theme.cat).forEach(item => {
       
@@ -48,12 +48,12 @@ export default layer => {
       .on('click', function () {
         if (this.style.opacity == 0.5) {
           this.style.opacity = 1;
-          layer.filter[_field].ni.splice(layer.filter[_field].ni.indexOf(item), 1);
+          layer.filter.legend[_field].ni.splice(layer.filter.legend[_field].ni.indexOf(item), 1);
         } else {
           this.style.opacity = 0.5;
-          //if(!layer.filter[_field]) layer.filter[_field] = {};
-          //if(!layer.filter[_field].ni) layer.filter[_field].ni = [];
-          layer.filter[_field].ni.push(item);
+          //if(!layer.filter.legend[_field]) layer.filter.legend[_field] = {};
+          //if(!layer.filter.legend[_field].ni) layer.filter.legend[_field].ni = [];
+          layer.filter.legend[_field].ni.push(item);
         }
       
         layer.get();
@@ -82,11 +82,11 @@ export default layer => {
       .on('click', function () {
         if (this.style.opacity == 0.5) {
           this.style.opacity = 1;
-          //if(!layer.filter[_field]) layer.filter[_field] = {};
-          layer.filter[_field].in = [];
+          //if(!layer.filter.legend[_field]) layer.filter.legend[_field] = {};
+          layer.filter.legend[_field].in = [];
         } else {
           this.style.opacity = 0.5;
-          layer.filter[_field].in = Object.keys(layer.style.theme.cat);
+          layer.filter.legend[_field].in = Object.keys(layer.style.theme.cat);
         }
       
         layer.get();

@@ -16,7 +16,7 @@ module.exports = async (term, locale) => {
       LIMIT 10`;
 
     // Get gazetteer results from dataset table.
-    var rows = await global.pg.dbs[locale.layers[dataset.layer].dbs](q, [term + '%']);
+    var rows = await global.pg.dbs[locale.layers[dataset.layer].dbs](q, [`${dataset.leading_wildcard ? '%': ''}${decodeURIComponent(term)}%`]);
 
     if (rows.err) return {err: 'Error fetching gazetteer results.'};
 

@@ -1,21 +1,30 @@
 import _xyz from '../../../_xyz.mjs';
 
-export default (layer, _options) => {
+import create_block from './create_block.mjs';
 
-  function onkeyup() {
-    let val = this.value;
-    if (!layer.filter[_options.field]) layer.filter[_options.field] = {};
-    layer.filter[_options.field][this.name] = val;
-    layer.get();
-  }
-  
+export default (layer, filter_entry) => {
+
+  const block = create_block(layer, filter_entry);
+
   _xyz.utils.createElement({
     tag: 'input',
     options: {
       placeholder: 'Search.',
-      onkeyup: onkeyup,
-      name: _options.operator
     },
-    appendTo: _options.appendTo
+    appendTo: block,
+    eventListener: {
+      event: 'keyup',
+      funct: e => {
+
+        // Create filter.
+        layer.filter.current[filter_entry.field] = {};
+        layer.filter.current[filter_entry.field][filter_entry.filter] = e.target.value;
+
+        // Reload layer.
+        layer.get();
+
+      }
+    }
   });
+  
 };

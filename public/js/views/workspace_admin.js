@@ -110,7 +110,7 @@ function init(json) {
     editormenu.insertBefore(btnCode, search);
     
     btnCode.addEventListener('click', function () {
-      window.location.replace('workspacejson');
+      window.location.replace(document.head.dataset.dir + '/workspace/admin/json');
     });
   }
     
@@ -121,7 +121,7 @@ function init(json) {
     editormenu.insertBefore(btnTree, search);
     
     btnTree.addEventListener('click', function () {
-      window.location.replace('workspace');
+      window.location.replace(document.head.dataset.dir + '/workspace/admin');
     });
   }
 

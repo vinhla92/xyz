@@ -36,7 +36,7 @@ export default (layer, options) => {
       if (val && val > 0 && val < 32) {
         if (val < 10) val = '0' + String(val);
         def.df[2] = val;
-        if (def.df[0]) layer.filter[options.field][e.target.name] = date_to_string(def.df);
+        if (def.df[0]) layer.filter.current[options.field][e.target.name] = date_to_string(def.df);
       } else {
         def.df[2] = def[format];
       } break;
@@ -45,16 +45,16 @@ export default (layer, options) => {
       if (val && val > 0 && val < 13) {
         if (val < 10) val = '0' + String(val);
         def.df[1] = val;
-        if (def.df[0]) layer.filter[options.field][e.target.name] = date_to_string(def.df);
+        if (def.df[0]) layer.filter.current[options.field][e.target.name] = date_to_string(def.df);
       } else {
         def.df[1] = def[format];
       } break;
   
     case 'yyyy':
-      if (!layer.filter[options.field]) layer.filter[options.field] = {};
+      if (!layer.filter.current[options.field]) layer.filter.current[options.field] = {};
       if (val && val > 99) {
         def.df[0] = val;
-        layer.filter[options.field][e.target.name] = date_to_string(def.df);
+        layer.filter.current[options.field][e.target.name] = date_to_string(def.df);
       } else {
         def.df[0] = null;
         layer.filter[options.field] = {};
@@ -184,7 +184,7 @@ export default (layer, options) => {
           if (sibling.tagName === 'INPUT') sibling.value = '';
         }
         e.target.style.display = 'none';
-        layer.filter[options.field] = {};
+        layer.filter.current[options.field] = {};
         layer.get();
       }
     },
