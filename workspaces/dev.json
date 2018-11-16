@@ -81,7 +81,15 @@
                             "label": "Some Date",
                             "field": "dev_date",
                             "type": "date",
-                            "edit": "true"
+                            "edit": "true",
+                            "filter": "date"
+                        },
+                        {
+                            "label": "Integer Date",
+                            "field": "int_date",
+                            "type": "date",
+                            "edit": "true",
+                            "filter": "date"
                         },
                         {
                             "label": "RP Type",

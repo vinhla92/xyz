@@ -67,6 +67,8 @@ export default layer => {
       // Display clear all button.
       layer.filter.clear_all.style.display = 'block';
 
+      if (entry.filter === 'date') return filter_date(layer, entry);
+
       if (entry.filter === 'numeric') return filter_numeric(layer, entry);
 
       if (entry.filter === 'like' || entry.filter === 'match') return filter_text(layer, entry);

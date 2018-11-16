@@ -32,7 +32,7 @@ export default () => {
     // Return if location doesn't exist. ie. on init.
     if (!record.location) return;
     record.location.geometries.forEach(geom => _xyz.map.removeLayer(geom));
-    record.location = null;
+    record.location = {};
     record.location.geometries = [];
 
   });
