@@ -83,18 +83,25 @@ export default (record, group) => {
     options: {
       className: 'material-icons cursor noselect btn_header',
       title: 'Show graph',
-      textContent: 'bar_chart'
+      textContent: 'show_chart'
     },
     appendTo: group.header,
     eventListener: {
       event: 'click',
       funct: e => {
         e.stopPropagation();
-        group.fields = record.location.infoj.filter(entry => entry.group === group.label);
-        //chart(group);
-        group.table.innerHTML = '';
-        group.table.appendChild(chart(group));
-       //chart(group);
+        if(e.target.textContent === 'show_chart') {
+          group.fields = record.location.infoj.filter(entry => entry.group === group.label);
+          group.div.appendChild(chart(group));
+          group.table.style.display = 'none';
+          e.target.textContent = 'notes';
+          e.target.title = 'Show table';
+        } else if(e.target.textContent === 'notes'){
+          e.target.textContent = 'show_chart';
+          e.target.title = 'Show graph';
+          group.table.style.display = 'table';
+          group.div.removeChild(group.div.lastChild);
+        }
       }
     }
   });
