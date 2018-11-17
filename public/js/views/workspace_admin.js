@@ -66,17 +66,26 @@ function init(json) {
 
     document.getElementById('workspace_mask').style.display = 'block';
     
+    let settings = {};
+
+    try {
+      settings = editor.get();
+    } catch(err) {
+      console.error(err);
+    }
+    
     xhr.send(JSON.stringify({
-      settings: editor.get()
+      settings: settings
     }));
   });
     
   if (mode === 'tree') {
+
     let btnFile = document.createElement('button');
     btnFile.style.background = 'none';
     btnFile.innerHTML = '<i class="material-icons" title="Upload settings file.">description</i>';
     editormenu.insertBefore(btnFile, search);
-        
+  
     let fileSelector = document.createElement('input');
     fileSelector.style.display = 'none';
     fileSelector.setAttribute('type', 'file');
@@ -104,6 +113,7 @@ function init(json) {
   }
     
   if (mode === 'tree') {
+
     let btnCode = document.createElement('button');
     btnCode.style.background = 'none';
     btnCode.innerHTML = '<i class="material-icons" title="JSON code view.">code</i>';

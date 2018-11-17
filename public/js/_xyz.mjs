@@ -113,22 +113,7 @@ export default {
         { hex: '#bdbdbd', name: 'X11 Gray' },
         { hex: '#aaaaaa', name: 'Dark Medium Gray' },
         { hex: '#78909c', name: 'Light Slate Gray' }
-      ],
-      default: {
-        weight: 1,
-        color: '#333333',
-        fill: true,
-        fillColor: '#333333',
-        fillOpacity: 0.1
-      },
-      highlight: {
-        stroke: true,
-        color: '#009900',
-        weight: 2,
-        fillColor: '#ccff99',
-        fillOpacity: 0.2,
-        fill: true
-      }
+      ]
     }
   },
   token: null,

@@ -18,13 +18,24 @@ module.exports = async workspace => {
 };
 
 function chkOptionals(chk, opt) {
+
+  // Set default for non optional key values.
+  Object.keys(opt).forEach(key => {
+
+    if (!(key in chk) && opt[key] !== 'optional') {
+      console.log(opt[key]);
+      chk[key] = opt[key];
+    }
+  });
   
   // Check whether optionals exist.
   Object.keys(chk).forEach(key => {
   
-    if (chk[key] === 'optional') return delete chk[key];
+    if (chk[key] === 'optional') {
+      return delete chk[key];
+    }
   
-    if (!(key in opt)) {
+    if (!(key in opt) && chk[key] === 'optional') {
   
       // Prefix key with double underscore if opt key does not exist.
       chk['__' + key] = chk[key];
@@ -32,10 +43,6 @@ function chkOptionals(chk, opt) {
     }
   });
   
-  // Set default for non optional key values.
-  Object.keys(opt).forEach(key => {
-    if (!(key in chk) && opt[key] !== 'optional') chk[key] = opt[key];
-  });
 }
 
 async function chkLocales(locales) {   

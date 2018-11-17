@@ -10,6 +10,8 @@ import clusterGraduated from './clusterGraduated.mjs';
 
 import polyStyle from './polyStyle.mjs';
 
+import clusterStyle from './clusterStyle.mjs';
+
 export default layer => {
 
   // Meaningful styles can only be set for vector and cluster objects.
@@ -54,7 +56,7 @@ export default layer => {
   layer.style.theme = layer.style.theme || layer.style.themes[0];
 
   // Set themes array to the theme if array doesn't exist.
-  if (!layer.style.themes) layer.style.themes = [layer.style.theme];
+  if (layer.style.theme) layer.style.themes.push(layer.style.theme);
 
   // Push no theme entry into themes array.
   layer.style.themes.unshift({ label: 'No theme.' });
@@ -93,9 +95,11 @@ function applyTheme(layer) {
 
   if (!layer.style.theme) {
 
-    polyStyle(layer, layer.style.default, 'Polygon');
+    if (layer.style.default && layer.format === 'cluster') clusterStyle(layer, layer.style.default, 'Cluster');
 
-    polyStyle(layer, layer.style.highlight, 'Highlight');
+    if (layer.style.default) polyStyle(layer, layer.style.default, 'Polygon');
+
+    if (layer.style.highlight) polyStyle(layer, layer.style.highlight, 'Highlight');
 
     return;
   }

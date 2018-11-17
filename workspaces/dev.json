@@ -70,6 +70,38 @@
                         "9": "dev_retailplaces"
                     },
                     "qID": "tid",
+                    "mvt_fields": ["rp_type"],
+                    "style": {
+                        "theme": {
+                            "label": "Retail Place type",
+                            "type": "categorized",
+                            "field": "rp_type",
+                            "other": true,
+                            "cat": {
+                                "Major City Centre": {
+                                    "style": {
+                                        "weight": 2,
+                                        "color": "#EF271B",
+                                        "opacity": 1,
+                                        "fillColor": "#EF271B",
+                                        "fill": true,
+                                        "fillOpacity": 0.3
+                                    }
+                                },
+                                "City Centre": {
+                                    "label": "City Centre",
+                                    "style": {
+                                        "weight": 2,
+                                        "color": "#BA2D0B",
+                                        "opacity": 1,
+                                        "fillColor": "#BA2D0B",
+                                        "fill": true,
+                                        "fillOpacity": 0.3
+                                    }
+                                }
+                            }
+                        }
+                    },
                     "infoj": [
                         {
                             "label": "ID",
@@ -293,29 +325,29 @@
                     "geom": "geomcntr",
                     "grid_color": "pop__11",
                     "tables": {
-                      "6": "gb_hx_64k",
-                      "7": "gb_hx_32k",
-                      "8": "gb_hx_16k",
-                      "9": "gb_hx_8k",
-                      "10": "gb_hx_4k",
-                      "11": "gb_hx_2k",
-                      "12": "gb_hx_1k"
+                        "6": "gb_hx_64k",
+                        "7": "gb_hx_32k",
+                        "8": "gb_hx_16k",
+                        "9": "gb_hx_8k",
+                        "10": "gb_hx_4k",
+                        "11": "gb_hx_2k",
+                        "12": "gb_hx_1k"
                     },
                     "grid_fields": [
-                      {
-                        "pop__01": "Population 2001"
-                      },
-                      {
-                        "pop__11": "Population 2011"
-                      },
-                      {
-                        "gen_female__11": "Female population"
-                      },
-                      {
-                        "gen_male__11": "Male population"
-                      }
+                        {
+                            "pop__01": "Population 2001"
+                        },
+                        {
+                            "pop__11": "Population 2011"
+                        },
+                        {
+                            "gen_female__11": "Female population"
+                        },
+                        {
+                            "gen_male__11": "Male population"
+                        }
                     ]
-                  }
+                }
             }
         }
     }
