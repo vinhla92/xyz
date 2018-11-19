@@ -4,12 +4,14 @@ import valChange from './valChange.mjs';
 
 import datepicker from 'js-datepicker';
 
+import { createElement } from '../../../utils/createElement.mjs';
+
 export default (record, entry) => {
 
   if(entry.type === 'datetime') entry.value = formatDateTime(entry.value);
   if(entry.type === 'date') entry.value = formatDate(entry.value);
 
-  let input = _xyz.utils.createElement({
+  let input = createElement({
     tag: 'input',
     options: {
       value: entry.value || '',
