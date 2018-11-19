@@ -54,7 +54,7 @@ export function meltDateStr(str){ // from beautiful string to sql-date format
 export function pickDate(element, record, entry){
 
   return datepicker(element, {
-    position: 'tr',
+    position: 'tl',
     formatter: function(el, date, instance) {
         
       let _d = new Date(date), dateStr;
