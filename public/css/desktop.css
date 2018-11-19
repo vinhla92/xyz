@@ -276,7 +276,9 @@ input[type=range]::-moz-range-thumb {
 
 .qs-datepicker {
   color: #000;
-  position: absolute;
+  position: fixed;
+  transform: translate(20%, 340%);
+  -webkit-transform: translate(20%, 340%);
   width: 250px;
   display: -webkit-box;
   display: -ms-flexbox;
