@@ -70,33 +70,38 @@
                         "9": "dev_retailplaces"
                     },
                     "qID": "tid",
-                    "mvt_fields": ["rp_type"],
+                    "mvt_fields": [
+                        "rp_type",
+                        "pop__11"
+                    ],
                     "style": {
-                        "theme": {
-                            "label": "Retail Place type",
-                            "type": "categorized",
-                            "field": "rp_type",
-                            "other": true,
-                            "cat": {
-                                "Major City Centre": {
-                                    "style": {
-                                        "weight": 2,
-                                        "color": "#EF271B",
-                                        "opacity": 1,
-                                        "fillColor": "#EF271B",
-                                        "fill": true,
-                                        "fillOpacity": 0.3
-                                    }
-                                },
-                                "City Centre": {
-                                    "label": "City Centre",
-                                    "style": {
-                                        "weight": 2,
+                        "themes": {
+                            "Retail Place type": {
+                                "type": "categorized",
+                                "field": "rp_type",
+                                "other": true,
+                                "cat": {
+                                    "Major City Centre": {
+                                        "fillColor": "#EF271B"
+                                    },
+                                    "City Centre": {
+                                        "label": "City Centre",
                                         "color": "#BA2D0B",
-                                        "opacity": 1,
-                                        "fillColor": "#BA2D0B",
-                                        "fill": true,
-                                        "fillOpacity": 0.3
+                                        "fillColor": "#BA2D0B"
+                                    }
+                                }
+                            },
+                            "Population '11": {
+                                "type": "graduated",
+                                "field": "pop__11",
+                                "cat": {
+                                    "0": {
+                                        "fillColor": "#ffeb3b"
+                                    },
+                                    "200000": {
+                                        "label": "200,000 or more",
+                                        "color": "#BA2D0B",
+                                        "fillColor": "#cddc39"
                                     }
                                 }
                             }
@@ -217,6 +222,50 @@
                     "dbs": "XYZ",
                     "qID": "id",
                     "table": "dev_retailpoints",
+                    "style": {
+                        "themes": {
+                            "Retailer": {
+                                "type": "categorized",
+                                "field": "retailer",
+                                "other": true,
+                                "cat": {
+                                    "Sainsburys": {
+                                        "label": "Sainsbury's",
+                                        "fillColor": "#ee8a00",
+                                        "layers": {
+                                            "0.5": "#ffffff",
+                                            "0.35": "#ee8a00"
+                                        }
+                                    },
+                                    "Marks and Spencer": {
+                                        "label": "Marks & Spencer",
+                                        "fillColor": "#0a0d10",
+                                        "layers": {
+                                            "0.5": "#def036",
+                                            "0.25": "#0a0d10"
+                                        }
+                                    }
+                                }
+                            },
+                            "Households": {
+                                "type": "graduated",
+                                "field": "hhdooc_11",
+                                "cat": {
+                                    "0": {
+                                        "fillColor": "#ffffff"
+                                    },
+                                    "200": {
+                                        "label": "200 to 2000",
+                                        "fillColor": "#555555"
+                                    },
+                                    "2000": {
+                                        "label": "2000+",
+                                        "fillColor": "#000000"
+                                    }
+                                }
+                            }
+                        }
+                    },
                     "infoj": [
                         {
                             "type": "streetview"
@@ -284,6 +333,11 @@
                             }
                         },
                         {
+                            "label": "Households",
+                            "field": "hhdooc_11",
+                            "type": "integer"
+                        },
+                        {
                             "label": "OA pop_11",
                             "field": "pop_11",
                             "type": "integer",
@@ -333,20 +387,12 @@
                         "11": "gb_hx_2k",
                         "12": "gb_hx_1k"
                     },
-                    "grid_fields": [
-                        {
-                            "pop__01": "Population 2001"
-                        },
-                        {
-                            "pop__11": "Population 2011"
-                        },
-                        {
-                            "gen_female__11": "Female population"
-                        },
-                        {
-                            "gen_male__11": "Male population"
-                        }
-                    ]
+                    "grid_fields": {
+                        "Population 2001": "pop__01",
+                        "Population 2011": "pop__11",
+                        "Female population": "gen_female__11",
+                        "Male population": "gen_male__11"
+                    }
                 }
             }
         }

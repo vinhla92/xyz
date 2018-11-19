@@ -80,7 +80,7 @@ export default function(){
 
     })
     .on('mouseover', e => {
-      e.target.setFeatureStyle(e.layer.properties.id, layer.style.highlight || { 'color': '#090' });
+      e.target.setFeatureStyle(e.layer.properties.id, layer.style.highlight);
     })
     .on('mouseout', e => {
       e.target.setFeatureStyle(e.layer.properties.id, applyLayerStyle);
@@ -89,24 +89,33 @@ export default function(){
 
   function applyLayerStyle(properties, zoom) {
 
-    if (layer.style && layer.style.theme && layer.style.theme.type === 'categorized' && layer.style.theme.cat[properties[layer.style.theme.field]]) {
+    if (!layer.style.theme) return layer.style.default;
 
-      return layer.style.theme.cat[properties[layer.style.theme.field]].style;
+    const theme = layer.style.theme;
+
+    if (theme.type === 'categorized' && theme.cat[properties[theme.field]]) {
+
+      return Object.assign({}, layer.style.default, theme.cat[properties[theme.field]]);
 
     }
 
-    if (layer.style && layer.style.theme && layer.style.theme.type === 'graduated') {
+    if (theme.type === 'graduated') {
 
-      let style = layer.style.theme.cat[0].style;
+      const cats = Object.entries(theme.cat);
 
-      for (let i = 0; i < layer.style.theme.cat.length; i++) {
-        if (properties[layer.style.theme.field] < layer.style.theme.cat[i].val) return layer.style.theme.cat[i].style;
+      let cat_style = {};
+
+      for (let i = 0; i < cats.length; i++) {
+
+        if (parseFloat(properties[theme.field]) < parseFloat(cats[i][0])) break;
+
+        cat_style = cats[i][1];
+
       }
 
-      return style;
+      return Object.assign({}, layer.style.default, cat_style);
 
     }
 
-    return layer.style.default;
   }
 }

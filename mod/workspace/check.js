@@ -23,7 +23,6 @@ function chkOptionals(chk, opt) {
   Object.keys(opt).forEach(key => {
 
     if (!(key in chk) && opt[key] !== 'optional') {
-      console.log(opt[key]);
       chk[key] = opt[key];
     }
   });

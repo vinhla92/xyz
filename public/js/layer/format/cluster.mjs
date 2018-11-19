@@ -16,7 +16,7 @@ export default function(){
   const xhr = new XMLHttpRequest();
     
   // Get bounds for request.
-  let bounds = _xyz.map.getBounds();
+  const bounds = _xyz.map.getBounds();
         
   // Build XHR request.
   xhr.open('GET', _xyz.host + '/api/layer/cluster?' + _xyz.utils.paramString({
@@ -25,9 +25,9 @@ export default function(){
     table: layer.table,
     kmeans: layer.cluster_kmeans,// * window.devicePixelRatio,
     dbscan: layer.cluster_dbscan,// * window.devicePixelRatio,
-    theme: layer.style.theme && layer.style.theme.type ? layer.style.theme.type : null,
-    cat: layer.style.theme && layer.style.theme.field ? layer.style.theme.field : null,
-    size: layer.style.theme && layer.style.theme.size ? layer.style.theme.size : null,
+    theme: layer.style.theme && layer.style.theme.type,
+    cat: layer.style.theme && layer.style.theme.field,
+    size: layer.style.theme && layer.style.theme.size,
     filter: JSON.stringify(layer.filter.current),
     west: bounds.getWest(),
     south: bounds.getSouth(),
@@ -59,7 +59,7 @@ export default function(){
         let icon = _xyz.utils.svg_symbols(layer.style.marker);
 
         // Set tooltip for desktop if corresponding layer has hover property.
-        let tooltip = (layer.style.theme && layer.style.theme.hover && _xyz.view.mode === 'desktop') || false;
+        // let tooltip = (layer.style.theme && layer.style.theme.hover && _xyz.view.mode === 'desktop') || false;
 
         if(!layer.style.theme && point.properties.count > 1) icon = _xyz.utils.svg_symbols(layer.style.markerMulti);
 
@@ -87,21 +87,33 @@ export default function(){
 
         // Check whether layer has categorized theme and only 1 location in cluster.
         if (layer.style.theme && layer.style.theme.type === 'categorized' && Object.keys(point.properties.cat).length === 1) {
+
+
+          let cat = layer.style.theme.cat[Object.keys(point.properties.cat)[0]];
+
+          let target = Object.assign({}, layer.style.marker, cat || {});
                 
-          icon = layer.style.theme.cat[Object.keys(point.properties.cat)[0]] ?
-            _xyz.utils.svg_symbols(layer.style.theme.cat[Object.keys(point.properties.cat)[0]].marker) : icon;
-                
+          icon = _xyz.utils.svg_symbols(target);
         }
 
         // Graduated theme.
         if (layer.style.theme && layer.style.theme.type === 'graduated') {
-          for (let i = 0; i < layer.style.theme.cat.length; i++) {
-            if (point.properties.sum < layer.style.theme.cat[i].val) break;
-            icon = _xyz.utils.svg_symbols(layer.style.theme.cat[i].marker);
-          }
 
-          // Set tooltip for graduated theme property (sum).
-          tooltip = tooltip ? parseFloat(point.properties.sum).toLocaleString() : false;
+          const cats = Object.entries(layer.style.theme.cat);
+
+          let cat_style = {};
+    
+          for (let i = 0; i < cats.length; i++) {
+    
+            if (point.properties.sum < parseFloat(cats[i][0])) break;
+    
+            cat_style = cats[i][1];
+    
+          }
+  
+
+          icon = _xyz.utils.svg_symbols(Object.assign({}, layer.style.marker, cat_style));
+
         }
 
         // Define iconSize from number of locations in cluster.
@@ -133,12 +145,12 @@ export default function(){
         });
 
         // Bind tooltip to marker.
-        if (tooltip) marker.bindTooltip(tooltip, {
-          sticky: true,
-          className: 'tooltip',
-          direction: 'top',
-          offset: [0, -10]
-        }).openTooltip();
+        // if (tooltip) marker.bindTooltip(tooltip, {
+        //   sticky: true,
+        //   className: 'tooltip',
+        //   direction: 'top',
+        //   offset: [0, -10]
+        // }).openTooltip();
             
         return marker;
       }

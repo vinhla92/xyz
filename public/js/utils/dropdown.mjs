@@ -41,8 +41,8 @@ export function dropdown(param) {
       createElement({
         tag: 'option',
         options: {
-          textContent: param.entries[entry][param.label] || entry,
-          value: param.entries[entry][param.val] || entry
+          textContent: param.label ? param.entries[entry][param.label] || entry : entry,
+          value: param.val ? param.entries[entry][param.val] || entry : entry
         },
         appendTo: _select
       });

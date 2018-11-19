@@ -8,10 +8,12 @@ export default layer => {
       
   let
     svg = d3_selection
-      .select(layer.style.panel)
+      .select(layer.style.legend)
       .append('svg')
       .attr('width', width),
     y = 10;
+
+  return;
       
   if (!layer.style.theme.field) return;
       

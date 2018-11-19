@@ -50,6 +50,7 @@
             "infoj": "optional",
             "geom": "geom",
             "edit": "optional",
+            "filter": {},
             "style": {
                 "default": {
                     "weight": 1,
@@ -66,8 +67,7 @@
                     "fillOpacity": 0.2,
                     "fill": true
                 },
-                "theme": "optional",
-                "themes": "optional"
+                "themes": {}
             }
         },
         "mvt": {
@@ -83,6 +83,7 @@
             "edit": "optional",
             "mvt_cache": "optional",
             "mvt_fields": "optional",
+            "filter": {},
             "style": {
                 "default": {
                     "weight": 1,
@@ -99,8 +100,7 @@
                     "fillOpacity": 0.2,
                     "fill": true
                 },
-                "theme": "optional",
-                "themes": "optional"
+                "themes": {}
             }
         },
         "cluster": {
@@ -115,25 +115,19 @@
             "cluster_label": "optional",
             "cluster_kmeans": 0.05,
             "cluster_dbscan": 0.01,
+            "filter": {},
             "style": {
                 "markerMin": 20,
                 "markerMax": 40,
                 "marker": {
                     "type": "target",
-                    "style": [
-                        400,
-                        "#aaaaaa"
-                    ]
+                    "fillColor": "#999999"
                 },
                 "markerMulti": {
                     "type": "target",
-                    "style": [
-                        400,
-                        "#ccff99"
-                    ]
+                    "fillColor": "#333333"
                 },
-                "theme": "optional",
-                "themes": "optional"
+                "themes": {}
             }
         },
         "grid": {
@@ -143,6 +137,7 @@
             "grid_color": "optional",
             "grid_fields": "optional",
             "geom": "geom",
+            "filter": {},
             "style": {
                 "range": [
                     "#15773f",
