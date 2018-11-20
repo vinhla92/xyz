@@ -49,7 +49,6 @@ module.exports = fastify => {
 
       // SQL filter
       const filter_sql = filter && await require(global.appRoot + '/mod/pg/sql_filter')(filter) || '';
-  
 
       // // Set log table filter.
       // let qLog = layer.log_table ? `
@@ -203,13 +202,10 @@ module.exports = fastify => {
 
       ) dbscan GROUP BY kmeans_cid, dbscan_cid;`;
   
-  
       var rows = await global.pg.dbs[layer.dbs](q);
       
-  
       if (rows.err) return res.code(500).send('soz. it\'s not you. it\'s me.');
   
-
       if (!theme) res.code(200).send(Object.keys(rows).map(record => {
         return {
           type: 'Feature',

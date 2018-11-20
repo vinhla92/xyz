@@ -28,14 +28,11 @@ export default (layer, filter_entry) => {
     appendTo: block,
     eventListener: {
       event: 'focus',
-      funct: e => { 
-        translateDatePicker(e.target); 
-      }
+      funct: e => { translateDatePicker(e.target); }
     }
-    
   });
 
-  createElement({
+  createElement({ // separator container
     tag: 'div',
     appendTo: block,
     style: {
@@ -62,13 +59,9 @@ export default (layer, filter_entry) => {
     appendTo: block,
     eventListener: {
       event: 'focus',
-      funct: e => {
-        translateDatePicker(e.target);
-      }
+      funct: e => { translateDatePicker(e.target); }
     }
   });
-
-  //function mycallback(){ applyFilter(); console.log('date picked'); };
 
   pickDate(input_min, layer, filter_entry, applyFilter);
   pickDate(input_max, layer, filter_entry, applyFilter);
@@ -83,8 +76,8 @@ export default (layer, filter_entry) => {
 
       // Create filter.
       layer.filter.current[filter_entry.field] = {};
-      layer.filter.current[filter_entry.field].gt = parseFloat(meltDateStr(input_min.value));
-      layer.filter.current[filter_entry.field].lt = parseFloat(meltDateStr(input_max.value));
+      layer.filter.current[filter_entry.field].gt = meltDateStr(input_min.value) || null;
+      layer.filter.current[filter_entry.field].lt = meltDateStr(input_max.value) || null;
 
       console.log(layer.filter);
 
