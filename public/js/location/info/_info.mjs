@@ -98,7 +98,7 @@ export default record => {
     if (entry.type === 'log') return log(record, entry);
 
     // Create geometry control.
-    if (entry.type === 'geometry') return geometry(record, entry);
+    if (entry.type === 'geometry') return geometry(record, entry);    
 
     // Remove empty row which is not editable.
     if (!entry.edit && !entry.value) return entry.row.remove();

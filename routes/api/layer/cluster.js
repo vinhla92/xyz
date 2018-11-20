@@ -108,152 +108,110 @@ module.exports = fastify => {
       SELECT
         ${cat} AS cat,
         ${size} AS size,
-        ST_ClusterKMeans(${geom}, ${kmeans}) OVER () kmeans_cid,
-        ${geom}
+        ${geom} AS geom,
+        ST_ClusterKMeans(${geom}, ${kmeans}) OVER () kmeans_cid
+        
       FROM ${table}
       WHERE
         ST_DWithin(
           ST_MakeEnvelope(${west}, ${south}, ${east}, ${north}, 4326),
           ${geom}, 0.00001)
         ${filter_sql}`;
+
+      const dbscan_sql = `
+      SELECT
+        cat,
+        size,
+        geom,
+        kmeans_cid,
+        ST_ClusterDBSCAN(${geom}, ${dbscan}, 1) OVER (PARTITION BY kmeans_cid) dbscan_cid
+      FROM (${kmeans_sql}) kmeans`;
   
 
-      if (!theme) q = `
+      if (!theme) var q = `
       SELECT
-        COUNT(geom) count,
+        SUM(size) size,
         ST_AsGeoJson(ST_PointOnSurface(ST_Union(geom))) geomj
 
-      FROM (
-        SELECT
-          kmeans_cid,
-          ${geom} AS geom,
-          ST_ClusterDBSCAN(${geom}, ${dbscan}, 1) OVER (PARTITION BY kmeans_cid) dbscan_cid
+      FROM (${dbscan_sql}) dbscan GROUP BY kmeans_cid, dbscan_cid;`;
 
-        FROM (${kmeans_sql}) kmeans
 
-      ) dbscan GROUP BY kmeans_cid, dbscan_cid;`;
-
-      if (theme === 'categorized') q = `
+      if (theme === 'categorized') var q = `
       SELECT
-        COUNT(cat) count,
         SUM(size) size,
         array_agg(cat) cat,
         ST_AsGeoJson(ST_PointOnSurface(ST_Union(geom))) geomj
 
-      FROM (
-        SELECT
-          cat,
-          size,
-          kmeans_cid,
-          ${geom} AS geom,
-          ST_ClusterDBSCAN(${geom}, ${dbscan}, 1) OVER (PARTITION BY kmeans_cid) dbscan_cid
-
-        FROM (${kmeans_sql}) kmeans
-          
-        ) dbscan GROUP BY kmeans_cid, dbscan_cid;`;
+      FROM (${dbscan_sql}) dbscan GROUP BY kmeans_cid, dbscan_cid;`;
   
 
-      if (theme === 'competition') q = `
+      if (theme === 'graduated') var q = `
       SELECT
-        SUM(count) count,
         SUM(size) size,
-        JSON_Agg(JSON_Build_Object(cat, count)) cat,
+        SUM(cat) cat,
+        ST_AsGeoJson(ST_PointOnSurface(ST_Union(geom))) geomj
+
+      FROM (${dbscan_sql}) dbscan GROUP BY kmeans_cid, dbscan_cid;`;
+
+
+      if (theme === 'competition') var q = `
+      SELECT
+        SUM(size) size,
+        JSON_Agg(JSON_Build_Object(cat, size)) cat,
         ST_AsGeoJson(ST_PointOnSurface(ST_Union(geom))) geomj
 
       FROM (
         SELECT
-          COUNT(cat) count,
           SUM(size) size,
           cat,
           ST_Union(geom) geom,
           kmeans_cid,
           dbscan_cid
 
-        FROM (
-          SELECT
-            cat,
-            size,
-            kmeans_cid,
-            ${geom} AS geom,
-            ST_ClusterDBSCAN(${geom}, ${dbscan}, 1) OVER (PARTITION BY kmeans_cid) dbscan_cid
-
-          FROM (${kmeans_sql}) kmeans
-          
-        ) dbscan GROUP BY kmeans_cid, dbscan_cid, cat
+        FROM (${dbscan_sql}) dbscan GROUP BY kmeans_cid, dbscan_cid, cat
 
       ) cluster GROUP BY kmeans_cid, dbscan_cid;`;
-
-
-      if (theme === 'graduated') q = `
-      SELECT
-        COUNT(${geom}) count,
-        SUM(size) size,
-        SUM(cat) sum,
-        ST_AsGeoJson(ST_PointOnSurface(ST_Union(geom))) geomj
-
-      FROM (
-        SELECT
-          cat,
-          size,
-          kmeans_cid,
-          ${geom} AS geom,
-          ST_ClusterDBSCAN(${geom}, ${dbscan}, 1) OVER (PARTITION BY kmeans_cid) dbscan_cid
-
-        FROM (${kmeans_sql}) kmeans
-
-      ) dbscan GROUP BY kmeans_cid, dbscan_cid;`;
   
-  
-      var rows = await global.pg.dbs[layer.dbs](q);
       
-  
-      if (rows.err) return res.code(500).send('soz. it\'s not you. it\'s me.');
-  
-
-      if (!theme) res.code(200).send(Object.keys(rows).map(record => {
-        return {
-          type: 'Feature',
-          geometry: JSON.parse(rows[record].geomj),
-          properties: {
-            count: parseInt(rows[record].count)
-          }
-        };
-      }));
-
-      if (theme === 'categorized') res.code(200).send(rows.map(row => {
-        return {
-          type: 'Feature',
-          geometry: JSON.parse(row.geomj),
-          properties: {
-            count: parseInt(row.count),
-            cat: row.cat.length === 1? row.cat[0] : null
-          }
-        };
-      }));
-
-      if (theme === 'competition') res.code(200).send(Object.keys(rows).map(record => {
-        return {
-          type: 'Feature',
-          geometry: JSON.parse(rows[record].geomj),
-          properties: {
-            count: parseInt(rows[record].count),
-            cat: Object.assign({}, ...rows[record].cat)
-          }
-        };
-      }));
+      var rows = await global.pg.dbs[layer.dbs](q);
+        
+      if (rows.err) return res.code(500).send('Failed to query PostGIS table.');
   
 
-      if (theme === 'graduated') res.code(200).send(Object.keys(rows).map(record => {
-        return {
-          type: 'Feature',
-          geometry: JSON.parse(rows[record].geomj),
-          properties: {
-            count: parseInt(rows[record].count),
-            size: parseInt(rows[record].size),
-            sum: parseFloat(rows[record].sum)
-          }
-        };
-      }));
+      if (!theme) return res.code(200).send(rows.map(row => ({
+        type: 'Feature',
+        geometry: JSON.parse(row.geomj),
+        properties: {
+          size: parseInt(row.size)
+        }
+      })));
+
+      if (theme === 'categorized') return res.code(200).send(rows.map(row => ({
+        type: 'Feature',
+        geometry: JSON.parse(row.geomj),
+        properties: {
+          size: parseInt(row.size),
+          cat: row.cat.length === 1? row.cat[0] : null
+        }
+      })));
+
+      if (theme === 'graduated') return res.code(200).send(rows.map(row => ({
+        type: 'Feature',
+        geometry: JSON.parse(row.geomj),
+        properties: {
+          size: parseInt(row.size),
+          cat: parseFloat(row.cat)
+        }
+      })));
+
+      if (theme === 'competition') return res.code(200).send(rows.map(row => ({
+        type: 'Feature',
+        geometry: JSON.parse(row.geomj),
+        properties: {
+          size: parseInt(row.size),
+          cat: Object.assign({}, ...row.cat)
+        }
+      })));
 
     }
   });

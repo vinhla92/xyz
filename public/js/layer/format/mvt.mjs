@@ -35,6 +35,9 @@ export default function(){
 
   if (layer.L) _xyz.map.removeLayer(layer.L);
 
+  // Create cat array for graduated theme.
+  if (layer.style.theme) layer.style.theme.cat_arr = Object.entries(layer.style.theme.cat);
+
   layer.L = L.vectorGrid.protobuf(url, options)
     .on('error', err => console.error(err))
     .on('load', () => {
@@ -42,12 +45,15 @@ export default function(){
       if (locale === _xyz.locale) _xyz.layers.check(layer);
     })
     .on('click', e => {
+
       if (e.layer.properties.selected) return;
 
       e.layer.properties.selected = true;
 
       function checkCurrentSelection(e) {
+
         let check = false;
+
         if (_xyz.hooks.current.select) {
           _xyz.hooks.current.select.map(item => {
             item = item.split('!');
@@ -56,16 +62,19 @@ export default function(){
             }
           });
         }
+
         return check;
       }
 
       if (!checkCurrentSelection(e)) {
+
         // set cursor to wait
         let els = _xyz.map.getContainer().querySelectorAll('.leaflet-interactive');
 
         for (let el of els) {
           el.classList += ' wait-cursor-enabled';
         }
+
         // get selection
         _xyz.locations.select({
           layer: layer.key,
@@ -74,8 +83,6 @@ export default function(){
           marker: [e.latlng.lng.toFixed(5), e.latlng.lat.toFixed(5)]
         });
         e.layer.properties.selected = false;
-      } else {
-        //console.log('feature ' + e.layer.properties.id + ' already selected');
       }
 
     })
@@ -89,31 +96,36 @@ export default function(){
 
   function applyLayerStyle(properties, zoom) {
 
+    // Return default style if no theme is set on layer.
     if (!layer.style.theme) return layer.style.default;
 
     const theme = layer.style.theme;
 
+    // Categorized theme.
     if (theme.type === 'categorized' && theme.cat[properties[theme.field]]) {
 
       return Object.assign({}, layer.style.default, theme.cat[properties[theme.field]]);
 
     }
 
+    // Graduated theme.
     if (theme.type === 'graduated') {
 
-      const cats = Object.entries(theme.cat);
+      theme.cat_style = {};
 
-      let cat_style = {};
+      // Iterate through cat array.
+      for (let i = 0; i < theme.cat_arr.length; i++) {
 
-      for (let i = 0; i < cats.length; i++) {
+        // Break iteration is cat value is below current cat array value.
+        if (parseFloat(properties[theme.field]) < parseFloat(theme.cat_arr[i][0])) break;
 
-        if (parseFloat(properties[theme.field]) < parseFloat(cats[i][0])) break;
-
-        cat_style = cats[i][1];
+        // Set cat_style to current cat style after value check.
+        theme.cat_style = theme.cat_arr[i][1];
 
       }
 
-      return Object.assign({}, layer.style.default, cat_style);
+      // Assign style from base & cat_style.
+      return Object.assign({}, layer.style.default, theme.cat_style);
 
     }
 

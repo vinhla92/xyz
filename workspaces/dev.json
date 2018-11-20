@@ -229,6 +229,14 @@
                                 "field": "retailer",
                                 "other": true,
                                 "cat": {
+                                    "Tesco": {
+                                        "label": "Tesco",
+                                        "fillColor": "#0055a8",
+                                        "layers": {
+                                            "0.75": "#ffffff",
+                                            "0.35": "#f02f26"
+                                        }
+                                    },
                                     "Sainsburys": {
                                         "label": "Sainsbury's",
                                         "fillColor": "#ee8a00",
@@ -252,15 +260,46 @@
                                 "field": "hhdooc_11",
                                 "cat": {
                                     "0": {
-                                        "fillColor": "#ffffff"
+                                        "label": "0 to 100",
+                                        "fillColor": "#15773f"
                                     },
-                                    "200": {
-                                        "label": "200 to 2000",
-                                        "fillColor": "#555555"
+                                    "100": {
+                                        "label": "100 to 250",
+                                        "fillColor": "#66bd63"
                                     },
-                                    "2000": {
-                                        "label": "2000+",
-                                        "fillColor": "#000000"
+                                    "250": {
+                                        "label": "250 to 500",
+                                        "fillColor": "#a6d96a"
+                                    },
+                                    "500": {
+                                        "label": "500 to 1000",
+                                        "fillColor": "#d9ef8b"
+                                    },
+                                    "1000": {
+                                        "label": "1000 to 2500",
+                                        "fillColor": "#fdae61"
+                                    },
+                                    "2500": {
+                                        "label": "2500 to 5000",
+                                        "fillColor": "#f46d43"
+                                    },
+                                    "5000": {
+                                        "label": "5000 or more",
+                                        "fillColor": "#d73027"
+                                    }
+                                }
+                            },
+                            "Tesco/Sainsbury's": {
+                                "type": "competition",
+                                "field": "retailer",
+                                "cat": {
+                                    "Tesco": {
+                                        "label": "Sainsbury's",
+                                        "fillColor": "#0055a8"
+                                    },
+                                    "Sainsburys": {
+                                        "label": "Sainsbury's",
+                                        "fillColor": "#ee8a00"
                                     }
                                 }
                             }
@@ -349,9 +388,15 @@
                             }
                         },
                         {
+                            "label": "Catchment 10min",
                             "field": "geom_rplace",
                             "fieldfx": "ST_asGeoJson(geom_rplace)",
                             "type": "geometry",
+                            "edit": {
+                                "catchment": {
+
+                                }
+                            },
                             "style": {
                                 "stroke": true,
                                 "color": "#cf0",

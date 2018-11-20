@@ -34,7 +34,7 @@ module.exports = fastify => {
         // Get a sample MVT from the cache table.
         var rows = await global.pg.dbs[layer.dbs](`SELECT mvt FROM ${table}__mvts WHERE z = ${z} AND x = ${x} AND y = ${y}`);
 
-        if (rows.err) return res.code(500).send('soz. it\'s not you. it\'s me.');
+        if (rows.err) return res.code(500).send('Failed to query PostGIS table.');
 
       }
 

@@ -18,6 +18,9 @@ export default function () {
       _xyz.host + '/proxy/request?uri=' + layer.URI + '&token=' + _xyz.token :
       layer.URI;
 
+    // Remove existing layer.
+    if (layer.L) _xyz.map.removeLayer(layer.L);
+
     // Assign the tile layer to the layer L object and add to map.
     layer.L = L.tileLayer(uri, {
       updateWhenIdle: true,
