@@ -1,5 +1,9 @@
 import _xyz from '../../../_xyz.mjs';
 
+import { createElement } from '../../../utils/createElement.mjs';
+import { dropdown } from '../../../utils/dropdown.mjs';
+import { toggleExpanderParent } from '../../../utils/toggleExpanderParent.mjs';
+
 import filter_text from './filter_text.mjs';
 
 import filter_numeric from './filter_numeric.mjs';
@@ -18,7 +22,7 @@ export default layer => {
   infoj.unshift('Select filter from list.');
 
   // Add filter panel to layer dashboard.
-  const panel = _xyz.utils.createElement({
+  const panel = createElement({
     tag: 'div',
     options: {
       classList: 'panel expandable'
@@ -27,7 +31,7 @@ export default layer => {
   });
 
   // Filter panel title / expander.
-  _xyz.utils.createElement({
+  createElement({
     tag: 'div',
     options: {
       className: 'btn_text cursor noselect',
@@ -39,7 +43,7 @@ export default layer => {
       funct: e => {
         e.stopPropagation();
 
-        _xyz.utils.toggleExpanderParent({
+        toggleExpanderParent({
           expandable: panel,
           accordeon: true,
           scrolly: document.querySelector('.mod_container > .scrolly')
@@ -49,7 +53,7 @@ export default layer => {
   });
 
   // Create locales dropdown.
-  layer.filter.select = _xyz.utils.dropdown({
+  layer.filter.select = dropdown({
     appendTo: panel,
     entries: infoj,
     label: 'label',
@@ -67,7 +71,7 @@ export default layer => {
       // Display clear all button.
       layer.filter.clear_all.style.display = 'block';
 
-      if (entry.filter === 'date') return filter_date(layer, entry);
+      if (entry.filter == 'date') return filter_date(layer, entry);
 
       if (entry.filter === 'numeric') return filter_numeric(layer, entry);
 
@@ -78,11 +82,11 @@ export default layer => {
     }
   });
 
-  layer.filter.clear_all = _xyz.utils.createElement({
+  layer.filter.clear_all = createElement({
     tag: 'div',
     options: {
       classList: 'btn_small cursor noselect',
-      textContent: 'Clear all filter'
+      textContent: 'Clear all filters'
     },
     appendTo: panel,
     eventListener: {
@@ -109,7 +113,7 @@ export default layer => {
     }
   });
 
-  layer.filter.list = _xyz.utils.createElement({
+  layer.filter.list = createElement({
     tag: 'div',
     appendTo: panel,
   });
