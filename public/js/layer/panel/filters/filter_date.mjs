@@ -68,10 +68,10 @@ export default (layer, filter_entry) => {
     }
   });
 
-  function mycallback(){ applyFilter(); console.log('date picked'); };
+  //function mycallback(){ applyFilter(); console.log('date picked'); };
 
-  pickDate(input_min, layer, filter_entry, mycallback);
-  pickDate(input_max, layer, filter_entry, mycallback);
+  pickDate(input_min, layer, filter_entry, applyFilter);
+  pickDate(input_max, layer, filter_entry, applyFilter);
 
   let timeout;
 
@@ -89,7 +89,7 @@ export default (layer, filter_entry) => {
       console.log(layer.filter);
 
       // Reload layer.
-      //layer.get();
+      layer.get();
 
     }, 500);
   }

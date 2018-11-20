@@ -28,33 +28,32 @@ export default (record, entry) => {
   pickDate(input, record, entry);
 };
 
-export function formatDate(str){
+export function formatDate(unix_timestamp){
 
-  let d = new Date(str),
-    options = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' },
-    loc = 'en-GB';
+  let months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+    days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
 
-  return d ? d.toLocaleDateString(loc, options) : false;
+  let d = new Date(unix_timestamp*1000),
+    year = d.getFullYear(),
+    month = months[d.getMonth()],
+    day = d.getDate(),
+    weekday = days[d.getDay()];
+  return `${weekday} ${day} ${month} ${year}`;
 }
 
-export function formatDateTime(str){
-  let d = new Date(str),
-    options = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' },
-    loc = 'en-GB';
-  return d ? d.toLocaleDateString(loc, options) + ', ' + d.toLocaleTimeString(loc) : false;
+export function formatDateTime(unix_timestamp){
+  let dateStr = formatDate(unix_timestamp),
+    d = new Date(unix_timestamp*1000);
+
+  let h = d.getHours(),
+    min = '0' + d.getMinutes(),
+    sec = '0' + d.getSeconds();
+
+  return `${dateStr}, ${h}:${min.substr(-2)}:${sec.substr(-2)}`;
 }
 
-export function meltDateStr(str){ // from beautiful string to sql-date format
-  let _d = new Date(str),
-    dd = _d.getDate(),
-    mm = _d.getMonth()+1,
-    yyyy = _d.getFullYear();
-  
-  if(dd<10) 
-  { dd=`0${dd}`; } 
-  if(mm<10) { mm=`0${mm}`; } 
-  
-  return `${yyyy}-${mm}-${dd}`;
+export function meltDateStr(str){ // from beautiful string to bigint format
+  return Math.round((new Date(str)).getTime() / 1000);
 }
 
 export function pickDate(element, record, entry, callback){
@@ -64,11 +63,11 @@ export function pickDate(element, record, entry, callback){
     position: 'c',
     formatter: function(el, date, instance) {
         
-      let _d = new Date(date), dateStr;
+      let _d = meltDateStr(new Date(date)), dateStr;
         
       if(entry.type === 'date') dateStr = formatDate(_d);
       if(entry.type === 'datetime') dateStr = formatDateTime(_d);
-        
+
       el.value = dateStr;
     },
     onSelect: function(el, date, instance){
