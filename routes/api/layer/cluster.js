@@ -90,7 +90,7 @@ module.exports = fastify => {
       if (rows.err) return res.code(500).send('Failed to query PostGIS table.');
   
       // return 202 if no locations found within the envelope.
-      if (parseInt(rows[0].count) === 0) return res.code(202).send('No clusters found.');
+      if (parseInt(rows[0].count) === 0) return res.code(200).send([]);
   
       let
         count = rows[0].count,

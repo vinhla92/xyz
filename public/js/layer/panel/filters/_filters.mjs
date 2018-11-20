@@ -1,9 +1,5 @@
 import _xyz from '../../../_xyz.mjs';
 
-import { createElement } from '../../../utils/createElement.mjs';
-import { dropdown } from '../../../utils/dropdown.mjs';
-import { toggleExpanderParent } from '../../../utils/toggleExpanderParent.mjs';
-
 import filter_text from './filter_text.mjs';
 
 import filter_numeric from './filter_numeric.mjs';
@@ -25,7 +21,7 @@ export default layer => {
   infoj.unshift('Select filter from list.');
 
   // Add filter panel to layer dashboard.
-  const panel = createElement({
+  const panel = _xyz.utils.createElement({
     tag: 'div',
     options: {
       classList: 'panel expandable'
@@ -34,7 +30,7 @@ export default layer => {
   });
 
   // Filter panel title / expander.
-  createElement({
+  _xyz.utils.createElement({
     tag: 'div',
     options: {
       className: 'btn_text cursor noselect',
@@ -46,7 +42,7 @@ export default layer => {
       funct: e => {
         e.stopPropagation();
 
-        toggleExpanderParent({
+        _xyz.utils.toggleExpanderParent({
           expandable: panel,
           accordeon: true,
           scrolly: document.querySelector('.mod_container > .scrolly')
@@ -55,8 +51,8 @@ export default layer => {
     }
   });
 
-  // Create locales dropdown.
-  layer.filter.select = dropdown({
+  // Create locales _xyz.utils.dropdown.
+  layer.filter.select = _xyz.utils.dropdown({
     appendTo: panel,
     entries: infoj,
     label: 'label',
@@ -65,7 +61,7 @@ export default layer => {
 
       const entry = infoj.find(entry => entry.field === e.target.value);
 
-      // Disable the current filter in dropdown.
+      // Disable the current filter in _xyz.utils.dropdown.
       layer.filter.select.options[layer.filter.select.selectedIndex].disabled = true;
 
       // Set selected index back to select text.
@@ -85,7 +81,7 @@ export default layer => {
     }
   });
 
-  layer.filter.clear_all = createElement({
+  layer.filter.clear_all = _xyz.utils.createElement({
     tag: 'div',
     options: {
       classList: 'btn_small cursor noselect',
@@ -104,7 +100,7 @@ export default layer => {
         // Remove all filter blocks.
         layer.filter.list.innerHTML = null;
 
-        // Enable all options in dropdown.
+        // Enable all options in _xyz.utils.dropdown.
         Object.values(layer.filter.select.options).forEach(opt => opt.disabled = false);
 
         // Reset layer filter object.
@@ -116,7 +112,7 @@ export default layer => {
     }
   });
 
-  layer.filter.list = createElement({
+  layer.filter.list = _xyz.utils.createElement({
     tag: 'div',
     appendTo: panel,
   });

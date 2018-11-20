@@ -13,12 +13,11 @@ export default layer => {
   
   let y = 10;
 
-  layer.filter.legend = {};
-      
-  // if (!layer.filter.legend[_field]) layer.filter.legend[_field] = {};
-  // if (!layer.filter.legend[_field].in) layer.filter.legend[_field].in = [];
-  // if (!layer.filter.legend[_field].ni) layer.filter.legend[_field].ni = [];
-      
+  // Create array for NI (not in) value filter.
+  layer.filter.legend[layer.style.theme.field] = {
+    ni: []
+  };
+
   Object.entries(layer.style.theme.cat).forEach(cat => {
            
     svg.append('image')
@@ -38,13 +37,14 @@ export default layer => {
       .on('click', function () {
         if (this.style.opacity == 0.5) {
           this.style.opacity = 1;
-          //layer.filter.legend[_field].ni.splice(layer.filter.legend[_field].ni.indexOf(item), 1);
+
+          // Splice value out of the NI (not in) legend filter.
+          layer.filter.legend[layer.style.theme.field].ni.splice(layer.filter.legend[layer.style.theme.field].ni.indexOf(cat[0]), 1);
+
         } else {
           this.style.opacity = 0.5;
           
-          if(!layer.filter.legend[layer.style.theme.field].ni) layer.filter.legend[layer.style.theme.field].ni = [];
-          //if(!layer.filter.legend[_field].ni) layer.filter.legend[_field].ni = [];
-          //layer.filter.legend[_field].ni.push(item);
+          // Push value into the NI (not in) legend filter.
           layer.filter.legend[layer.style.theme.field].ni.push(cat[0]);
         }
       
@@ -74,12 +74,15 @@ export default layer => {
       .on('click', function () {
         if (this.style.opacity == 0.5) {
           this.style.opacity = 1;
-          //if(!layer.filter.legend[_field]) layer.filter.legend[_field] = {};
-          //layer.filter.legend[_field].in = [];
+
+          // Empty IN values filter array.
+          layer.filter.legend[layer.style.theme.field].in = [];
+          
         } else {
           this.style.opacity = 0.5;
-          //layer.filter.legend[_field].in = Object.keys(layer.style.theme.cat);
-          layer.filter.legend[layer.style.theme.field].in.push(cat[0]);
+          
+          // Assign all cat keys to IN filter.
+          layer.filter.legend[layer.style.theme.field].in = Object.keys(layer.style.theme.cat);
         }
       
         layer.get();
@@ -103,5 +106,8 @@ export default layer => {
     .style('alignment-baseline', 'central')
     .style('cursor', 'pointer')
     .text('Multiple Locations');
+
+  // Set height of the svg element.
+  svg.attr('height', y + 50);    
       
 };

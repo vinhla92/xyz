@@ -55,16 +55,14 @@ export default layer => {
   const themes = Object.assign({},{ 'Basic': null }, layer.style.themes);
 
   // Create theme drop down
-  const theme_select = _xyz.utils.dropdown({
+  _xyz.utils.dropdown({
     title: 'Select thematic style…',
     appendTo: panel,
     entries: themes,
     selected: Object.keys(layer.style.themes)[0],
     onchange: e => {
 
-      //clear any applied 'ni' filters when theme changes
-      //if (layer.style.theme && layer.filter.legend[layer.style.theme.field] && layer.filter.legend[layer.style.theme.field].ni) layer.filter.legend[layer.style.theme.field].ni = [];
-
+      // Set layer theme from themes object.
       layer.style.theme = themes[e.target.value];
 
       applyTheme(layer);
@@ -85,7 +83,11 @@ export default layer => {
 
 function applyTheme(layer) {
 
+  // Empty legend.
   layer.style.legend.innerHTML = '';
+
+  // Create / empty legend filter when theme is applied.
+  layer.filter.legend = {};
 
   // Basic controls for cluster marker, default polygon and highlight.
   if (!layer.style.theme) {
@@ -111,7 +113,10 @@ function applyTheme(layer) {
     && layer.style.theme.type === 'categorized') clusterCategorized(layer);
 
   if (layer.format === 'cluster'
-    && layer.style.theme.type === 'graduated') clusterGraduated(layer);
+    && layer.style.theme.type === 'competition') clusterCategorized(layer);
+
+  if (layer.format === 'cluster'
+    && layer.style.theme.type === 'graduated') clusterGraduated(layer);    
 
   layer.get();
 

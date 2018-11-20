@@ -82,12 +82,89 @@
                                 "other": true,
                                 "cat": {
                                     "Major City Centre": {
+                                        "label": "Major City Centre",
+                                        "color": "#EF271B",
                                         "fillColor": "#EF271B"
                                     },
                                     "City Centre": {
                                         "label": "City Centre",
                                         "color": "#BA2D0B",
                                         "fillColor": "#BA2D0B"
+                                    },
+                                    "Large Town Centre": {
+                                        "label": "Large Town Centre",
+                                        "color": "#FE4E00",
+                                        "fillColor": "#FE4E00"
+                                    },
+                                    "Major Urban Centre": {
+                                        "label": "Major Urban Centre",
+                                        "color": "#E2711D",
+                                        "fillColor": "#E2711D"
+                                    },
+                                    "Town Centre": {
+                                        "label": "Town Centre",
+                                        "color": "#F3A712",
+                                        "fillColor": "#F3A712"
+                                    },
+                                    "Urban Centre": {
+                                        "label": "Urban Centre",
+                                        "color": "#FADF63",
+                                        "fillColor": "#FADF63"
+                                    },
+                                    "Small Town Centre": {
+                                        "label": "Small Town Centre",
+                                        "color": "#FFE74C",
+                                        "fillColor": "#FFE74C"
+                                    },
+                                    "Village Centre": {
+                                        "label": "Village Centre",
+                                        "color": "#DBFE87",
+                                        "fillColor": "#DBFE87"
+                                    },
+                                    "Regional SC": {
+                                        "label": "Regional SC",
+                                        "color": "#8ED081",
+                                        "fillColor": "#8ED081"
+                                    },
+                                    "Outlet Centre": {
+                                        "label": "Outlet Centre",
+                                        "color": "#7DDF64",
+                                        "fillColor": "#7DDF64"
+                                    },
+                                    "Shopping Park": {
+                                        "label": "Shopping Park",
+                                        "color": "#074F57",
+                                        "fillColor": "#074F57"
+                                    },
+                                    "Retail Park": {
+                                        "label": "Retail Park",
+                                        "color": "#32746D",
+                                        "fillColor": "#32746D"
+                                    },
+                                    "Leisure Park": {
+                                        "label": "Leisure Park",
+                                        "color": "#41D3BD",
+                                        "fillColor": "#41D3BD"
+                                    },
+                                    "Local Hub": {
+                                        "label": "Local Hub",
+                                        "color": "#08B2E3",
+                                        "fillColor": "#08B2E3"
+                                    },
+                                    "Large Parade": {
+                                        "label": "Large Parade",
+                                        "color": "#1F487E",
+                                        "fillColor": "#1F487E"
+                                    },
+                                    "Parade": {
+                                        "label": "Parade",
+                                        "color": "#541388",
+                                        "fillColor": "#541388"
+                                    },
+                                    "Weak Parade": {
+                                        "label": "Weak Parade",
+                                        "color": "#D90368",
+                                        "fillColor": "#D90368"
                                     }
                                 }
                             },
@@ -96,12 +173,32 @@
                                 "field": "pop__11",
                                 "cat": {
                                     "0": {
-                                        "fillColor": "#ffeb3b"
+                                        "label": "0 to 10000",
+                                        "fillColor": "#15773f"
                                     },
-                                    "200000": {
-                                        "label": "200,000 or more",
-                                        "color": "#BA2D0B",
-                                        "fillColor": "#cddc39"
+                                    "10000": {
+                                        "label": "10000 to 25000",
+                                        "fillColor": "#66bd63"
+                                    },
+                                    "25000": {
+                                        "label": "25000 to 50000",
+                                        "fillColor": "#a6d96a"
+                                    },
+                                    "50000": {
+                                        "label": "50000 to 100000",
+                                        "fillColor": "#d9ef8b"
+                                    },
+                                    "100000": {
+                                        "label": "100000 to 250000",
+                                        "fillColor": "#fdae61"
+                                    },
+                                    "250000": {
+                                        "label": "250000 to 500000",
+                                        "fillColor": "#f46d43"
+                                    },
+                                    "500000": {
+                                        "label": "500000 or more",
+                                        "fillColor": "#d73027"
                                     }
                                 }
                             }
@@ -292,9 +389,10 @@
                             "Tesco/Sainsbury's": {
                                 "type": "competition",
                                 "field": "retailer",
+                                "other": true,
                                 "cat": {
                                     "Tesco": {
-                                        "label": "Sainsbury's",
+                                        "label": "Tesco",
                                         "fillColor": "#0055a8"
                                     },
                                     "Sainsburys": {
@@ -393,9 +491,7 @@
                             "fieldfx": "ST_asGeoJson(geom_rplace)",
                             "type": "geometry",
                             "edit": {
-                                "catchment": {
-
-                                }
+                                "catchment": {}
                             },
                             "style": {
                                 "stroke": true,

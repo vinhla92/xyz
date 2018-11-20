@@ -20,7 +20,8 @@ export default function(){
   // Get bounds for request.
   const bounds = _xyz.map.getBounds();
 
-  console.log(layer.filter.legend);
+  // Create filter from legend and current filter.
+  const filter = Object.assign({},layer.filter.current,layer.filter.legend);
         
   // Build XHR request.
   xhr.open('GET', _xyz.host + '/api/layer/cluster?' + _xyz.utils.paramString({
@@ -32,7 +33,7 @@ export default function(){
     theme: layer.style.theme && layer.style.theme.type,
     cat: layer.style.theme && layer.style.theme.field,
     size: layer.style.theme && layer.style.theme.size,
-    filter: JSON.stringify(layer.filter.current),
+    filter: JSON.stringify(filter),
     west: bounds.getWest(),
     south: bounds.getSouth(),
     east: bounds.getEast(),
@@ -111,7 +112,7 @@ export default function(){
         if (layer.style.theme.type === 'competition') {
 
           // Set counter for point to 0.
-          let c = 0;
+          let size =  point.properties.size;
 
           // Create a new cat_style with an empty layers object to store the competition layers.
           param.cat_style = {
@@ -124,13 +125,13 @@ export default function(){
             // Check for the competition cat in point properties.
             if (point.properties.cat[comp]) {
 
-              // Add the competition size to the counter.
-              c += point.properties.cat[comp];
-
               // Add a cat layer to the marker obkject.
               // Calculate the size of the competition layer.
-              // Competition layer added first must be largest, ie. (1 - counter divided by point size)
-              param.cat_style.layers[1 - (c / point.properties.size)] = layer.style.theme.cat[comp].fillColor;
+              // Competition layer added first must be largest.
+              param.cat_style.layers[size / point.properties.size] = layer.style.theme.cat[comp].fillColor;
+
+              // Reduce the current size by the size of layer just added to marker.
+              size -= point.properties.cat[comp];
 
             }
 
