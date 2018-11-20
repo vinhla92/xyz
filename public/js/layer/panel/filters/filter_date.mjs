@@ -27,12 +27,9 @@ export default (layer, filter_entry) => {
     },
     appendTo: block,
     eventListener: {
-      event: 'click',
+      event: 'focus',
       funct: e => { 
-        //let to;
-        setTimeout(function(){
-          //translateDatePicker(e.target); 
-        }, 500);
+        translateDatePicker(e.target); 
       }
     }
     
@@ -62,7 +59,13 @@ export default (layer, filter_entry) => {
       classList: 'range-input',
       type: 'text'
     },
-    appendTo: block
+    appendTo: block,
+    eventListener: {
+      event: 'focus',
+      funct: e => {
+        translateDatePicker(e.target);
+      }
+    }
   });
 
   function mycallback(){ applyFilter(); console.log('date picked'); };
