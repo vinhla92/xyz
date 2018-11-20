@@ -1,12 +1,95 @@
 import _xyz from '../../../_xyz.mjs';
 
 import create_block from './create_block.mjs';
+import { createElement } from '../../../utils/createElement.mjs';
+import { paramString } from '../../../utils/paramString.mjs';
+import { pickDate, meltDateStr, translateDatePicker } from '../../../location/info/edit/date.mjs';
 
 export default (layer, filter_entry) => {
 
-  const xhr = new XMLHttpRequest();
+  const block = create_block(layer, filter_entry);
 
-  xhr.open('GET', _xyz.host + '/api/location/field/range?' + _xyz.utils.paramString({
+  // Label for min / greater then control.
+  createElement({
+    tag: 'div',
+    options: {
+      classList: 'range-label',
+      textContent: 'After ',
+    },
+    appendTo: block
+  });
+
+  const input_min = createElement({
+    tag: 'input',
+    options: {
+      classList: 'range-input',
+      type: 'text'
+    },
+    appendTo: block,
+    eventListener: {
+      event: 'focus',
+      funct: e => { translateDatePicker(e.target); }
+    }
+  });
+
+  createElement({ // separator container
+    tag: 'div',
+    appendTo: block,
+    style: {
+      width: '100%',
+      height: '10px'
+    }
+  });
+
+  createElement({
+    tag: 'div',
+    options: {
+      classList: 'range-label',
+      textContent: 'Before ',
+    },
+    appendTo: block
+  });
+
+  const input_max = createElement({
+    tag: 'input',
+    options: {
+      classList: 'range-input',
+      type: 'text'
+    },
+    appendTo: block,
+    eventListener: {
+      event: 'focus',
+      funct: e => { translateDatePicker(e.target); }
+    }
+  });
+
+  pickDate(input_min, layer, filter_entry, applyFilter);
+  pickDate(input_max, layer, filter_entry, applyFilter);
+
+  let timeout;
+
+  function applyFilter(){
+
+    clearTimeout(timeout);
+    timeout = setTimeout(() => {
+      timeout = null;
+
+      // Create filter.
+      layer.filter.current[filter_entry.field] = {};
+      layer.filter.current[filter_entry.field].gt = meltDateStr(input_min.value) || null;
+      layer.filter.current[filter_entry.field].lt = meltDateStr(input_max.value) || null;
+
+      console.log(layer.filter);
+
+      // Reload layer.
+      layer.get();
+
+    }, 500);
+  }
+
+  /*const xhr = new XMLHttpRequest();
+
+  xhr.open('GET', _xyz.host + '/api/location/field/range?' + paramString({
     locale: _xyz.locale,
     layer: layer.key,
     table: layer.table,
@@ -16,12 +99,14 @@ export default (layer, filter_entry) => {
 
   xhr.onload = e => {
 
+    console.log('date filter onload');
+
     const field_range = JSON.parse(e.target.response);
 
     const block = create_block(layer, filter_entry);
   
     // Label for min / greater then control.
-    _xyz.utils.createElement({
+    createElement({
       tag: 'div',
       options: {
         classList: 'range-label',
@@ -30,7 +115,7 @@ export default (layer, filter_entry) => {
       appendTo: block
     });
   
-    const input_min = _xyz.utils.createElement({
+    const input_min = createElement({
       tag: 'input',
       options: {
         classList: 'range-input',
@@ -51,7 +136,7 @@ export default (layer, filter_entry) => {
       }
     });
 
-    _xyz.utils.createElement({
+    createElement({
       tag: 'div',
       appendTo: block,
       style: {
@@ -74,7 +159,7 @@ export default (layer, filter_entry) => {
     // });
   
     // Label for max / smaller then control.
-    _xyz.utils.createElement({
+    createElement({
       tag: 'div',
       options: {
         classList: 'range-label',
@@ -83,7 +168,7 @@ export default (layer, filter_entry) => {
       appendTo: block
     });
   
-    const input_max = _xyz.utils.createElement({
+    const input_max = createElement({
       tag: 'input',
       options: {
         classList: 'range-input',
@@ -122,28 +207,11 @@ export default (layer, filter_entry) => {
 
 
     // Use timeout to debounce applyFilter from multiple and slider inputs.
-    let timeout;
+    
 
-    function applyFilter(){
 
-      clearTimeout(timeout);
-      timeout = setTimeout(() => {
-        timeout = null;
 
-        // Create filter.
-        layer.filter.current[filter_entry.field] = {};
-        layer.filter.current[filter_entry.field].gt = parseFloat(input_min.value);
-        layer.filter.current[filter_entry.field].lt = parseFloat(input_max.value);
-
-        // Reload layer.
-        layer.get();
-
-      }, 500);
-    }
-
-  };
-
-  xhr.send(); 
+  xhr.send(); */
 };
 
 function legacy() {
@@ -211,7 +279,7 @@ function legacy() {
     
   // labels
   // later than label
-  _xyz.utils.createElement({
+  createElement({
     tag: 'div',
     options: {
       classList: 'label half',
@@ -221,7 +289,7 @@ function legacy() {
   });
     
   // earlier than label
-  _xyz.utils.createElement({
+  createElement({
     tag: 'div',
     options: {
       classList: 'label half right',
@@ -231,7 +299,7 @@ function legacy() {
   });
     
   // later than year input
-  _xyz.utils.createElement({
+  createElement({
     tag: 'input',
     options: {
       classList: 'label third',
@@ -246,7 +314,7 @@ function legacy() {
   });
     
   // later than month input
-  _xyz.utils.createElement({
+  createElement({
     tag: 'input',
     options: {
       classList: 'label third',
@@ -260,7 +328,7 @@ function legacy() {
   });
     
   // later than day input
-  _xyz.utils.createElement({
+  createElement({
     tag: 'input',
     options: {
       classList: 'label third',
@@ -274,7 +342,7 @@ function legacy() {
   });
     
   // earlier than day input
-  _xyz.utils.createElement({
+  createElement({
     tag: 'input',
     options: {
       classList: 'label third right',
@@ -288,7 +356,7 @@ function legacy() {
   });
     
   // earlier than month input
-  _xyz.utils.createElement({
+  createElement({
     tag: 'input',
     options: {
       classList: 'label third right',
@@ -302,7 +370,7 @@ function legacy() {
   });
     
   // earlier than year input
-  _xyz.utils.createElement({
+  createElement({
     tag: 'input',
     options: {
       classList: 'label third right',
@@ -316,7 +384,7 @@ function legacy() {
     appendTo: options.appendTo
   });
     
-  _xyz.utils.createElement({
+  createElement({
     tag: 'div',
     options: {
       classList: 'btn_small cursor noselect',

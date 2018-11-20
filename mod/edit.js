@@ -25,7 +25,7 @@ async function newRecord(req, res, fastify) {
     INSERT INTO ${table} (${geom} ${geom_3857 ? `, ${geom_3857}` : ''} ${layer.log ? `, ${layer.log.field || 'log'}` : ''})
         SELECT ST_SetSRID(ST_GeomFromGeoJSON('${geometry}'), 4326)
         ${geom_3857 ? `, ST_Transform(ST_SetSRID(ST_GeomFromGeoJSON('${geometry}'), 4326), 3857)` : ''}
-        ${layer.log && layer.log.table ? `,'{ "user": "${token.email}", "op": "new", "time": "${d.toUTCString()}"}'`: ''}
+        ${layer.log && layer.log.table ? `,'{ "user": "${token.email}", "op": "new", "time": "${Date.now()}"}'`: ''}
         RETURNING ${qID} AS id;`;
 
   var rows = await global.pg.dbs[layer.dbs](q);

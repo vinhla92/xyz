@@ -49,7 +49,6 @@ module.exports = fastify => {
 
       // SQL filter
       const filter_sql = filter && await require(global.appRoot + '/mod/pg/sql_filter')(filter) || '';
-  
 
       // // Set log table filter.
       // let qLog = layer.log_table ? `
