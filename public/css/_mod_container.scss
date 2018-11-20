@@ -59,7 +59,6 @@
         input {
             width: 100%;
         }
-
         .drawer {
             margin-top: 10px;
             &.expandable {
@@ -174,6 +173,16 @@
                         position: absolute;
                         right: 2px;
                         top: 5px;
+                    }
+
+                    .sample-circle {
+                        width: 32px;
+                        height: 32px;
+                        border-radius: 50%;
+                        box-shadow: 2px 2px 2px #999;
+                        position: absolute;
+                        right: 2px;
+                        top: 0;
                     }
 
                     .colour-label {

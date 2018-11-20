@@ -26,7 +26,7 @@ module.exports = fastify => {
         geom = layer.geom,
         cat = req.query.cat || null,
         size = req.query.size || 1,
-        theme = req.query.theme || null,
+        theme = req.query.theme,
         filter = req.query.filter && JSON.parse(req.query.filter),
         kmeans = parseInt(1 / req.query.kmeans),
         dbscan = parseFloat(req.query.dbscan),
@@ -90,8 +90,8 @@ module.exports = fastify => {
   
       if (rows.err) return res.code(500).send('Failed to query PostGIS table.');
   
-      // return 204 if no locations found within the envelope.
-      if (parseInt(rows[0].count) === 0) return res.code(204).send();
+      // return 202 if no locations found within the envelope.
+      if (parseInt(rows[0].count) === 0) return res.code(202).send('No clusters found.');
   
       let
         count = rows[0].count,
@@ -103,61 +103,81 @@ module.exports = fastify => {
       if ((xExtent / xEnvelope) <= dbscan) kmeans = 1;
   
       dbscan *= xEnvelope;
+
+      const kmeans_sql = `
+      SELECT
+        ${cat} AS cat,
+        ${size} AS size,
+        ST_ClusterKMeans(${geom}, ${kmeans}) OVER () kmeans_cid,
+        ${geom}
+      FROM ${table}
+      WHERE
+        ST_DWithin(
+          ST_MakeEnvelope(${west}, ${south}, ${east}, ${north}, 4326),
+          ${geom}, 0.00001)
+        ${filter_sql}`;
   
 
       if (!theme) q = `
       SELECT
         COUNT(geom) count,
         ST_AsGeoJson(ST_PointOnSurface(ST_Union(geom))) geomj
+
       FROM (
         SELECT
           kmeans_cid,
           ${geom} AS geom,
           ST_ClusterDBSCAN(${geom}, ${dbscan}, 1) OVER (PARTITION BY kmeans_cid) dbscan_cid
-        FROM (
-          SELECT
-            ST_ClusterKMeans(${geom}, ${kmeans}) OVER () kmeans_cid,
-            ${geom}
-          FROM ${table}
-          WHERE
-            ST_DWithin(
-              ST_MakeEnvelope(${west}, ${south}, ${east}, ${north}, 4326),
-            ${geom}, 0.00001)
-            ${filter_sql}
-        ) kmeans
+
+        FROM (${kmeans_sql}) kmeans
+
       ) dbscan GROUP BY kmeans_cid, dbscan_cid;`;
-  
 
       if (theme === 'categorized') q = `
       SELECT
-        SUM(count)::integer count,
+        COUNT(cat) count,
+        SUM(size) size,
+        array_agg(cat) cat,
+        ST_AsGeoJson(ST_PointOnSurface(ST_Union(geom))) geomj
+
+      FROM (
+        SELECT
+          cat,
+          size,
+          kmeans_cid,
+          ${geom} AS geom,
+          ST_ClusterDBSCAN(${geom}, ${dbscan}, 1) OVER (PARTITION BY kmeans_cid) dbscan_cid
+
+        FROM (${kmeans_sql}) kmeans
+          
+        ) dbscan GROUP BY kmeans_cid, dbscan_cid;`;
+  
+
+      if (theme === 'competition') q = `
+      SELECT
+        SUM(count) count,
+        SUM(size) size,
         JSON_Agg(JSON_Build_Object(cat, count)) cat,
         ST_AsGeoJson(ST_PointOnSurface(ST_Union(geom))) geomj
+
       FROM (
         SELECT
           COUNT(cat) count,
-          ST_Union(geom) geom,
+          SUM(size) size,
           cat,
+          ST_Union(geom) geom,
           kmeans_cid,
           dbscan_cid
+
         FROM (
           SELECT
             cat,
+            size,
             kmeans_cid,
             ${geom} AS geom,
             ST_ClusterDBSCAN(${geom}, ${dbscan}, 1) OVER (PARTITION BY kmeans_cid) dbscan_cid
-          FROM (
-            SELECT
-              ${cat} AS cat,
-              ST_ClusterKMeans(${geom}, ${kmeans}) OVER () kmeans_cid,
-              ${geom}
-            FROM ${table}
-            WHERE
-              ST_DWithin(
-                ST_MakeEnvelope(${west}, ${south}, ${east}, ${north}, 4326),
-              ${geom}, 0.00001)
-            ${filter_sql}
-          ) kmeans
+
+          FROM (${kmeans_sql}) kmeans
           
         ) dbscan GROUP BY kmeans_cid, dbscan_cid, cat
 
@@ -170,6 +190,7 @@ module.exports = fastify => {
         SUM(size) size,
         SUM(cat) sum,
         ST_AsGeoJson(ST_PointOnSurface(ST_Union(geom))) geomj
+
       FROM (
         SELECT
           cat,
@@ -177,23 +198,13 @@ module.exports = fastify => {
           kmeans_cid,
           ${geom} AS geom,
           ST_ClusterDBSCAN(${geom}, ${dbscan}, 1) OVER (PARTITION BY kmeans_cid) dbscan_cid
-        FROM (
-          SELECT
-            ${cat} AS cat,
-            ${size} AS size,
-            ST_ClusterKMeans(${geom}, ${kmeans}) OVER () kmeans_cid,
-            ${geom}
-          FROM ${table}
-          WHERE
-            ST_DWithin(
-              ST_MakeEnvelope(${west}, ${south}, ${east}, ${north}, 4326),
-            ${geom}, 0.00001)
-          ${filter_sql}
-        ) kmeans
+
+        FROM (${kmeans_sql}) kmeans
+
       ) dbscan GROUP BY kmeans_cid, dbscan_cid;`;
   
   
-      rows = await global.pg.dbs[layer.dbs](q);
+      var rows = await global.pg.dbs[layer.dbs](q);
       
   
       if (rows.err) return res.code(500).send('soz. it\'s not you. it\'s me.');
@@ -208,9 +219,19 @@ module.exports = fastify => {
           }
         };
       }));
-  
 
-      if (theme === 'categorized') res.code(200).send(Object.keys(rows).map(record => {
+      if (theme === 'categorized') res.code(200).send(rows.map(row => {
+        return {
+          type: 'Feature',
+          geometry: JSON.parse(row.geomj),
+          properties: {
+            count: parseInt(row.count),
+            cat: row.cat.length === 1? row.cat[0] : null
+          }
+        };
+      }));
+
+      if (theme === 'competition') res.code(200).send(Object.keys(rows).map(record => {
         return {
           type: 'Feature',
           geometry: JSON.parse(rows[record].geomj),
@@ -229,7 +250,7 @@ module.exports = fastify => {
           properties: {
             count: parseInt(rows[record].count),
             size: parseInt(rows[record].size),
-            sum: rows[record].sum
+            sum: parseFloat(rows[record].sum)
           }
         };
       }));

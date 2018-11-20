@@ -13,13 +13,15 @@ export default layer => {
   });
 
   // Create grid_seize dropdown.
-  layer.grid_size = _xyz.hooks.current['grid_size'] || layer.grid_size || Object.keys(layer.grid_fields[0])[0];
+  layer.grid_size = _xyz.hooks.current['grid_size'] ||layer.grid_size || Object.values(layer.grid_fields)[0];
+
+
   _xyz.utils.dropdown({
     appendTo: panel,
     entries: layer.grid_fields,
-    selected: layer.grid_size,
+    selected: Object.keys(layer.grid_fields).find(key => layer.grid_fields[key] === layer.grid_size),
     onchange: e => {
-      layer.grid_size = e.target.value;
+      layer.grid_size = layer.grid_fields[e.target.value];
       _xyz.hooks.set('grid_size', layer.grid_size);
       layer.get();
     }
@@ -31,13 +33,14 @@ export default layer => {
     legend = d3_selection.select(panel).append('svg').attr('width', width);
 
   // Create grid_color dropdown.
-  layer.grid_color = _xyz.hooks.current['grid_color'] || layer.grid_color || Object.keys(layer.grid_fields[1])[0];
+  layer.grid_color = _xyz.hooks.current['grid_color'] || layer.grid_color || Object.values(layer.grid_fields)[0];
+
   _xyz.utils.dropdown({
     appendTo: panel,
     entries: layer.grid_fields,
-    selected: layer.grid_color,
+    selected:  Object.keys(layer.grid_fields).find(key => layer.grid_fields[key] === layer.grid_color),
     onchange: e => {
-      layer.grid_color = e.target.value;
+      layer.grid_color = layer.grid_fields[e.target.value];
       _xyz.hooks.set('grid_color', layer.grid_color);
       layer.get();
     }

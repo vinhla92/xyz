@@ -2,18 +2,14 @@ import _xyz from '../../../_xyz.mjs';
 
 export default (layer, style, title) => {
 
-  if (title) {
-
-    _xyz.utils.createElement({
-      tag: 'div',
-      options: {
-        textContent: title,
-        classList: 'block-title'
-      },
-      appendTo: layer.style.legend
-    });
-    
-  }
+  if (title) _xyz.utils.createElement({
+    tag: 'div',
+    options: {
+      textContent: title,
+      classList: 'block-title'
+    },
+    appendTo: layer.style.legend
+  });
 
   const block = {};
 
@@ -23,36 +19,6 @@ export default (layer, style, title) => {
       classList: 'block'
     },
     appendTo: layer.style.legend
-  });
-
-  block.stroke_colour = _xyz.utils.createElement({
-    tag: 'div',
-    options: {
-      textContent: 'Stroke Colour: ',
-      classList: 'title'
-    },
-    appendTo: block._
-  });
-
-  return;
-
-  block.color = _xyz.utils.createElement({
-    tag: 'span',
-    options: {
-      textContent: style.color,
-      classList: 'cursor colour-label'
-    },
-    appendTo: block.stroke_colour,
-    eventListener: {
-      event: 'click',
-      funct: () => {
-
-        block.colorSelect = 'color';
-        
-        block.colour_swatch.style.display = 'table';
-        
-      }
-    }
   });
 
   block.fill_colour = _xyz.utils.createElement({
@@ -83,15 +49,19 @@ export default (layer, style, title) => {
     }
   });
 
-  block.sample_poly = _xyz.utils.createElement({
+  block.sample = _xyz.utils.createElement({
     tag: 'div',
     options: {
-      classList: 'sample-poly'
+      classList: 'sample-circle'
     },
     style: {
-      'backgroundColor': _xyz.utils.hexToRGBA(style.fillColor, style.fillOpacity),
-      'border': style.weight + 'px solid ' + style.color
+      'backgroundColor': _xyz.utils.hexToRGBA(style.fillColor, 1)
     },
+    appendTo: block._
+  });
+
+  _xyz.utils.createElement({
+    tag: 'br',
     appendTo: block._
   });
 
@@ -126,9 +96,7 @@ export default (layer, style, title) => {
 
           style[block.colorSelect] = colour.hex;
 
-          block.sample_poly.style.backgroundColor = _xyz.utils.hexToRGBA(style.fillColor, style.fillOpacity);
-
-          block.sample_poly.style.border = style.weight + 'px solid ' + style.color;
+          block.sample.style.backgroundColor = _xyz.utils.hexToRGBA(style.fillColor, 1);
 
           block.colour_swatch.style.display = 'none';
 
@@ -139,77 +107,5 @@ export default (layer, style, title) => {
     });
     
   });
-
-
-  _xyz.utils.createElement({
-    tag: 'div',
-    options: {
-      textContent: 'Stroke Weight:',
-      classList: 'title'
-    },
-    appendTo: block._
-  });
-
-
-  let timeout;
-
-  block.stroke_slider = _xyz.utils.slider({
-    min: 1,
-    max: 5,
-    appendTo: block._,
-    oninput: e => {
-
-      style.weight = e.target.value;
-
-      // Set input value and apply filter.
-      block.sample_poly.style.border = style.weight + 'px solid ' + style.color;
-
-      clearTimeout(timeout);
-      timeout = setTimeout(() => {
-        timeout = null;
-
-        // Reload layer.
-        layer.get();
-
-      }, 500);
-
-    }
-  });
-  block.stroke_slider.value = style.weight;
-
-
-  _xyz.utils.createElement({
-    tag: 'div',
-    options: {
-      textContent: 'Fill Opacity:',
-      classList: 'title'
-    },
-    appendTo: block._
-  });
-
-  block.opacity_slider = _xyz.utils.slider({
-    min: 0,
-    max: 1,
-    step: 0.1,
-    appendTo: block._,
-    oninput: e => {
-
-      style.fillOpacity = e.target.value;
-
-      // Set input value and apply filter.
-      block.sample_poly.style.backgroundColor = _xyz.utils.hexToRGBA(style.fillColor, style.fillOpacity);
-
-      clearTimeout(timeout);
-      timeout = setTimeout(() => {
-        timeout = null;
-
-        // Reload layer.
-        layer.get();
-
-      }, 500);
-
-    }
-  });
-  block.opacity_slider.value = style.fillOpacity;
 
 };

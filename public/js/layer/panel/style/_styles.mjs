@@ -48,44 +48,38 @@ export default layer => {
     }
   });
 
-  // Create empty layer themes array if none exists.
-  if (!layer.style.themes) layer.style.themes = [];
+  // Set layer theme to be the first theme defined in the workspace.
+  layer.style.theme = Object.values(layer.style.themes)[0];
 
-  // Set layer theme to be the theme defined in the workspace,
-  // the first theme from an array or null.
-  layer.style.theme = layer.style.theme || layer.style.themes[0];
-
-  // Set themes array to the theme if array doesn't exist.
-  if (layer.style.theme) layer.style.themes.push(layer.style.theme);
-
-  // Push no theme entry into themes array.
-  layer.style.themes.unshift({ label: 'No theme.' });
+  // Assign 'Basic' style entry to themes object.
+  const themes = Object.assign({},{ 'Basic': null }, layer.style.themes);
 
   // Create theme drop down
   const theme_select = _xyz.utils.dropdown({
     title: 'Select thematic style…',
     appendTo: panel,
-    entries: layer.style.themes,
-    label: 'label',
+    entries: themes,
+    selected: Object.keys(layer.style.themes)[0],
     onchange: e => {
 
       //clear any applied 'ni' filters when theme changes
       //if (layer.style.theme && layer.filter.legend[layer.style.theme.field] && layer.filter.legend[layer.style.theme.field].ni) layer.filter.legend[layer.style.theme.field].ni = [];
 
-      layer.style.theme = layer.style.themes[e.target.selectedIndex];
+      layer.style.theme = themes[e.target.value];
+
       applyTheme(layer);
       
     }
   });
 
+  // Create empty legend container.
   layer.style.legend = _xyz.utils.createElement({
     tag: 'div',
     appendTo: panel,
   });
 
+  // Apply the current theme.
   applyTheme(layer);
-
-  //layer.get();
 
 };
 
@@ -93,15 +87,18 @@ function applyTheme(layer) {
 
   layer.style.legend.innerHTML = '';
 
+  // Basic controls for cluster marker, default polygon and highlight.
   if (!layer.style.theme) {
 
-    if (layer.style.default && layer.format === 'cluster') clusterStyle(layer, layer.style.default, 'Cluster');
+    if (layer.style.marker) clusterStyle(layer, layer.style.marker, 'Marker');
+
+    if (layer.style.markerMulti) clusterStyle(layer, layer.style.markerMulti, 'Marker (multi)');
 
     if (layer.style.default) polyStyle(layer, layer.style.default, 'Polygon');
 
     if (layer.style.highlight) polyStyle(layer, layer.style.highlight, 'Highlight');
 
-    return;
+    return layer.get();
   }
 
   if ((layer.format === 'mvt' || layer.format === 'geojson')
@@ -116,6 +113,6 @@ function applyTheme(layer) {
   if (layer.format === 'cluster'
     && layer.style.theme.type === 'graduated') clusterGraduated(layer);
 
-  //layer.get();
+  layer.get();
 
 }

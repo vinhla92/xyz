@@ -16,6 +16,9 @@ import output from './output.mjs';
 
 export default layer => {
 
+  // Create current filter object.
+  layer.filter.current = {};
+
   const infoj = layer.infoj.filter(entry => entry.filter);
 
   // Add select info to infoj array of filter entries.

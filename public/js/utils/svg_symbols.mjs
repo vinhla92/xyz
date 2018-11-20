@@ -7,7 +7,7 @@ export default marker => {
   const markers = {
     dot: dot(marker.style),
     circle: circle(marker.style),
-    target: target(marker.style),
+    target: target(marker),
     markerLetter: markerLetter(marker.style),
     markerColor: markerColor(marker.style),
     geo: geolocation()
@@ -76,9 +76,7 @@ function circle(style) {
 
 function target(style) {
 
-  if (!style) return;
-
-  let svg = d3_selection
+  const svg = d3_selection
     .select(document.createElementNS('http://www.w3.org/2000/svg', 'svg'))
     .attr('width', 1000)
     .attr('height', 1000)
@@ -89,18 +87,30 @@ function target(style) {
     .append('circle')
     .attr('cx', 540)
     .attr('cy', 540)
-    .attr('r', style[0])
+    .attr('r', 400)
     .style('fill', '#333')
     .style('opacity', 0.4);
 
-  for (let i = 0; i < style.length - 1; i += 2) {
+  svg
+    .append('circle')
+    .attr('cx', 500)
+    .attr('cy', 500)
+    .attr('r', 400)
+    .style('fill', style.fillColor);
+
+  if (!style.layers) return ('data:image/svg+xml,' + encodeURIComponent(xmlSerializer.serializeToString(svg.node())));
+  
+  Object.entries(style.layers).forEach(layer => {
+
     svg
       .append('circle')
       .attr('cx', 500)
       .attr('cy', 500)
-      .attr('r', style[i])
-      .style('fill', style[i + 1]);
-  }
+      .attr('r', parseFloat(layer[0]) * 400)
+      .style('fill', layer[1]);
+
+  });
+
   return ('data:image/svg+xml,' + encodeURIComponent(xmlSerializer.serializeToString(svg.node())));
 }
 

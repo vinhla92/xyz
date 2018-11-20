@@ -60,9 +60,6 @@ export default () => {
   // Loop through the layers and add to layers list.
   Object.values(_xyz.layers.list).forEach(layer => {
 
-    // Default filter.
-    layer.filter = {current: {}};
-
     // Create new layer group if group does not exist yet.
     if (layer.group && !_xyz.layers.groups[layer.group]) layer_group(layer.group);
 
