@@ -167,6 +167,8 @@ async function chkLayerGeom(layer, layers) {
 
   for (const table of tables){
 
+    if (!table && tables.length > 1) return;
+
     if (!table) return invalidateLayer();
 
     if (!layer.dbs) return invalidateLayer();

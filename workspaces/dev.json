@@ -602,13 +602,25 @@
                         "9": "gb_hx_8k",
                         "10": "gb_hx_4k",
                         "11": "gb_hx_2k",
-                        "12": "gb_hx_1k"
+                        "12": "gb_hx_1k",
+                        "13": "gb_hx_1k",
+                        "14": null
                     },
                     "grid_fields": {
                         "Population 2001": "pop__01",
                         "Population 2011": "pop__11",
                         "Female population": "gen_female__11",
                         "Male population": "gen_male__11"
+                    },
+                    "style": {
+                        "range": [
+                            "#15773f",
+                            "#66bd63",
+                            "#a6d96a",
+                            "#fdae61",
+                            "#f46d43",
+                            "#d73027"
+                        ]
                     }
                 }
             }
