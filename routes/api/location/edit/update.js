@@ -7,7 +7,12 @@ module.exports = fastify => {
 
       const token = req.query.token ? fastify.jwt.decode(req.query.token) : { access: 'public' };
 
-      const layer = global.workspace[token.access].config.locales[req.body.locale].layers[req.body.layer];
+      const locale = global.workspace[token.access].config.locales[req.body.locale];
+
+      // Return 406 if locale is not found in workspace.
+      if (!locale) return res.code(406).send('Invalid locale.');
+
+      const layer = locale.layers[req.body.layer];
 
       if (!layer) return res.code(500).send('Layer not found.');
 
@@ -24,7 +29,7 @@ module.exports = fastify => {
         return res.code(406).send('Invalid parameter.');
       }
 
-      const fields = await processInfoj(infoj);
+      let fields = await processInfoj(infoj);
 
       // const d = new Date();
 
@@ -36,9 +41,6 @@ module.exports = fastify => {
       // if (layer.log && layer.log.table) await writeLog(layer, id);
 
       var q = `UPDATE ${table} SET ${fields} WHERE ${qID} = $1;`;
-
-      console.log(q);
-      console.log(id);
 
       var rows = await global.pg.dbs[layer.dbs](q, [id]);
 
@@ -56,7 +58,7 @@ module.exports = fastify => {
       fields = await require(global.appRoot + '/mod/pg/sql_fields')([], infoj, locale, table, geom);
 
       // Push JSON geometry field into fields array.
-      fields.push(`\n   ST_asGeoJson(${geom}) AS geomj`);
+      //fields.push(`\n   ST_asGeoJson(${geom}) AS geomj`);
 
       var q =
       `SELECT ${fields.join()}`
@@ -73,10 +75,7 @@ module.exports = fastify => {
       });
     
       // Send the infoj object with values back to the client.
-      res.code(200).send({
-        geomj: rows[0].geomj,
-        infoj: infoj
-      });
+      res.code(200).send(infoj);
 
     }
   });
@@ -87,8 +86,6 @@ async function processInfoj(infoj) {
   let fields = '';
 
   await infoj.forEach(entry => {
-
-    console.log(entry);
 
     if (!entry.field) return;
 
