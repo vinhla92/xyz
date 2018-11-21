@@ -253,11 +253,17 @@
                             "inline": true
                         },
                         {
-                            "label": "Some Date",
+                            "label": "Date edit",
                             "field": "dev_date",
                             "type": "date",
                             "edit": "true",
                             "filter": "date"
+                        },
+                        {
+                            "label": "Date",
+                            "field": "dev_date_",
+                            "fieldfx": "dev_date",
+                            "type": "date"
                         },
                         {
                             "label": "RP Type",

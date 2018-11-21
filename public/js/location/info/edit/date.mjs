@@ -2,8 +2,6 @@ import _xyz from '../../../_xyz.mjs';
 
 import datepicker from 'js-datepicker';
 
-// import { createElement } from '../../../utils/createElement.mjs';
-
 export default (record, entry) => {
 
   if(entry.type === 'datetime') entry.value = formatDateTime(entry.value);
