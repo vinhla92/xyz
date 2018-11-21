@@ -36,6 +36,47 @@
                         "14": "dev_oa"
                     },
                     "qID": "id",
+                    "mvt_fields": [
+                        "pop_11"
+                    ],
+                    "style": {
+                        "themes":{
+                            "Population '11": {
+                                "type": "graduated",
+                                "field": "pop_11",
+                                "cat": {
+                                    "0": {
+                                        "label": "0 to 10000",
+                                        "fillColor": "#15773f"
+                                    },
+                                    "100": {
+                                        "label": "10000 to 25000",
+                                        "fillColor": "#66bd63"
+                                    },
+                                    "200": {
+                                        "label": "25000 to 50000",
+                                        "fillColor": "#a6d96a"
+                                    },
+                                    "300": {
+                                        "label": "50000 to 100000",
+                                        "fillColor": "#d9ef8b"
+                                    },
+                                    "400": {
+                                        "label": "100000 to 250000",
+                                        "fillColor": "#fdae61"
+                                    },
+                                    "500": {
+                                        "label": "250000 to 500000",
+                                        "fillColor": "#f46d43"
+                                    },
+                                    "600": {
+                                        "label": "500000 or more",
+                                        "fillColor": "#d73027"
+                                    }
+                                }
+                            }
+                        }
+                    },
                     "infoj": [
                         {
                             "label": "OA Code",

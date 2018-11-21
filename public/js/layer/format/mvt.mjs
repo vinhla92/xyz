@@ -14,12 +14,15 @@ export default function(){
 
   if (!layer.table || !layer.display) return _xyz.layers.check(layer);
 
+  // Create filter from legend and current filter.
+  const filter = Object.assign({},layer.filter.current,layer.filter.legend);
+
   let url = _xyz.host + '/api/layer/mvt/{z}/{x}/{y}?' + _xyz.utils.paramString({
       locale: _xyz.locale,
       layer: layer.key,
       table: layer.table,
       properties: layer.properties,
-      filter: JSON.stringify(layer.filter.current),
+      filter: JSON.stringify(filter),
       token: _xyz.token
     }),
     options = {

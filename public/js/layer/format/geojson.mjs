@@ -15,12 +15,16 @@ export default function(){
   const xhr = new XMLHttpRequest(); 
 
   // Build xhr request.
-  let bounds = _xyz.map.getBounds();      
+  const bounds = _xyz.map.getBounds();     
+  
+  // Create filter from legend and current filter.
+  const filter = Object.assign({},layer.filter.current,layer.filter.legend);
     
   xhr.open('GET', _xyz.host + '/api/layer/geojson?' + _xyz.utils.paramString({
     locale: _xyz.locale,
     layer: layer.key,
     table: layer.table,
+    filter: JSON.stringify(filter),
     west: bounds.getWest(),
     south: bounds.getSouth(),
     east: bounds.getEast(),
