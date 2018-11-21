@@ -42,6 +42,9 @@ module.exports = fastify => {
 
       var q = `UPDATE ${table} SET ${fields} WHERE ${qID} = $1;`;
 
+      console.log(q);
+      console.log(id);
+
       var rows = await global.pg.dbs[layer.dbs](q, [id]);
 
       if (rows.err) return res.code(500).send('PostgreSQL query error - please check backend logs.');
@@ -57,6 +60,8 @@ async function processInfoj(infoj) {
   let fields = '';
 
   await infoj.forEach(entry => {
+
+    console.log(entry);
 
     if (!entry.field) return;
 

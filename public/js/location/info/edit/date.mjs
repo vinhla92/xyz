@@ -30,6 +30,8 @@ export default (record, entry) => {
 
 export function formatDate(unix_timestamp){
 
+  if(isNaN(parseInt(unix_timestamp))) return '(empty)';
+
   let months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
     days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
 
@@ -42,6 +44,9 @@ export function formatDate(unix_timestamp){
 }
 
 export function formatDateTime(unix_timestamp){
+
+  if(isNaN(parseInt(unix_timestamp))) return '(empty)';
+  
   let dateStr = formatDate(unix_timestamp),
     d = new Date(unix_timestamp*1000);
 
@@ -74,8 +79,9 @@ export function pickDate(element, record, entry, callback){
       if(callback){
         callback();
       } else {
-        entry.val = meltDateStr(date);
-        valChange(element, record, entry); 
+        entry.newValue = meltDateStr(date);
+        //console.log(entry.newValue);
+        //valChange(element, record, entry); 
       }
     },
     onShow: function(instance){}
