@@ -2,14 +2,11 @@ import _xyz from '../../_xyz.mjs';
 
 import chart from './charts.mjs';
 
-import {createElement} from '../../utils/createElement.mjs';
-import {toggleExpanderParent} from '../../utils/toggleExpanderParent.mjs';
-
 export default (record, group) => {
 
   record.location.infogroups[group.label] = group;
 
-  group.td = createElement({
+  group.td = _xyz.utils.createElement({
     tag: 'td',
     options: {
       colSpan: '2'
@@ -17,7 +14,7 @@ export default (record, group) => {
     appendTo: group.row
   });
 
-  group.div = createElement({
+  group.div = _xyz.utils.createElement({
     tag: 'div',
     options: {
       classList: 'table-section expandable'
@@ -25,7 +22,7 @@ export default (record, group) => {
     appendTo: group.td
   });
 
-  group.header = createElement({
+  group.header = _xyz.utils.createElement({
     tag: 'div',
     options: {
       className: 'btn_subtext cursor noselect'
@@ -39,7 +36,7 @@ export default (record, group) => {
       event: 'click',
       funct: e => {
         e.stopPropagation();
-        toggleExpanderParent({
+        _xyz.utils.toggleExpanderParent({
           expandable: group.div,
           accordeon: true,
           scrolly: document.querySelector('.mod_container > .scrolly')
@@ -49,7 +46,7 @@ export default (record, group) => {
   });
 
   // Add label to group header.
-  createElement({
+  _xyz.utils.createElement({
     tag: 'span',
     options: {
       textContent: group.label
@@ -58,7 +55,7 @@ export default (record, group) => {
   });
 
   // Add expander to group header.
-  createElement({
+  _xyz.utils.createElement({
     tag: 'i',
     options: {
       className: 'material-icons cursor noselect btn_header t-expander',
@@ -69,7 +66,7 @@ export default (record, group) => {
       event: 'click',
       funct: e => {
         e.stopPropagation();
-        toggleExpanderParent({
+        _xyz.utils.toggleExpanderParent({
           expandable: group.div,
           scrolly: document.querySelector('.mod_container > .scrolly')
         });
@@ -78,7 +75,7 @@ export default (record, group) => {
   });
 
   // Add chart control to group header.
-  if (group.chart) createElement({
+  if (group.chart) _xyz.utils.createElement({
     tag: 'i',
     options: {
       className: 'material-icons cursor noselect btn_header',
@@ -106,7 +103,7 @@ export default (record, group) => {
     }
   });
 
-  group.table = createElement({
+  group.table = _xyz.utils.createElement({
     tag: 'table',
     style: {
       cellPadding: '0',

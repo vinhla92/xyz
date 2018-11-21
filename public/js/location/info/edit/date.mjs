@@ -2,8 +2,6 @@ import _xyz from '../../../_xyz.mjs';
 
 import datepicker from 'js-datepicker';
 
-// import { createElement } from '../../../utils/createElement.mjs';
-
 export default (record, entry) => {
 
   if(entry.type === 'datetime') entry.value = formatDateTime(entry.value);
@@ -101,11 +99,7 @@ export function pickDate(element, record, entry, callback){
       
           // Hide upload button if no other field in the infoj has a newValue.
           if (!record.location.infoj.some(field => field.newValue)) record.upload.style.display = 'none';
-        }
-
-
-
-        //valChange(element, record, entry); 
+        } 
       }
     },
     onShow: function(instance){}
