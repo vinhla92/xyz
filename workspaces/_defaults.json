@@ -93,12 +93,11 @@
                     "fillOpacity": 0.1
                 },
                 "highlight": {
-                    "stroke": true,
-                    "color": "#009900",
                     "weight": 2,
+                    "color": "#009900",
+                    "fill": true,
                     "fillColor": "#ccff99",
-                    "fillOpacity": 0.2,
-                    "fill": true
+                    "fillOpacity": 0.2
                 },
                 "themes": {}
             }

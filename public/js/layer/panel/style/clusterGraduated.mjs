@@ -35,3 +35,4 @@ export default layer => {
   // Set height of the svg element.
   svg.attr('height', y);
 };
+

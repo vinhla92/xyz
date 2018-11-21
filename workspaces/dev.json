@@ -402,27 +402,62 @@
                                         "fillColor": "#15773f"
                                     },
                                     "100": {
-                                        "label": "100 to 250",
+                                        "label": "100 to 200",
                                         "fillColor": "#66bd63"
                                     },
-                                    "250": {
-                                        "label": "250 to 500",
+                                    "200": {
+                                        "label": "200 to 400",
                                         "fillColor": "#a6d96a"
                                     },
-                                    "500": {
-                                        "label": "500 to 1000",
+                                    "400": {
+                                        "label": "400 to 600",
                                         "fillColor": "#d9ef8b"
                                     },
-                                    "1000": {
-                                        "label": "1000 to 2500",
+                                    "600": {
+                                        "label": "600 to 800",
                                         "fillColor": "#fdae61"
                                     },
-                                    "2500": {
-                                        "label": "2500 to 5000",
+                                    "800": {
+                                        "label": "800 to 1000",
                                         "fillColor": "#f46d43"
                                     },
-                                    "5000": {
-                                        "label": "5000 or more",
+                                    "1000": {
+                                        "label": "1000 or more",
+                                        "fillColor": "#d73027"
+                                    }
+                                }
+                            },
+                            "Households Sized": {
+                                "type": "graduated",
+                                "field": "hhdooc_11",
+                                "size": "hhdooc_11",
+                                "cat": {
+                                    "0": {
+                                        "label": "0 to 100",
+                                        "fillColor": "#15773f"
+                                    },
+                                    "100": {
+                                        "label": "100 to 200",
+                                        "fillColor": "#66bd63"
+                                    },
+                                    "200": {
+                                        "label": "200 to 400",
+                                        "fillColor": "#a6d96a"
+                                    },
+                                    "400": {
+                                        "label": "400 to 600",
+                                        "fillColor": "#d9ef8b"
+                                    },
+                                    "600": {
+                                        "label": "600 to 800",
+                                        "fillColor": "#fdae61"
+                                    },
+                                    "800": {
+                                        "label": "800 to 1000",
+                                        "fillColor": "#f46d43"
+                                    },
+                                    "1000": {
+                                        "label": "1000 or more",
                                         "fillColor": "#d73027"
                                     }
                                 }

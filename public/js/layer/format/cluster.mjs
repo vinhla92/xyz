@@ -112,7 +112,7 @@ export default function(){
         if (layer.style.theme.type === 'competition') {
 
           // Set counter for point to 0.
-          let size =  point.properties.size;
+          let size = point.properties.size;
 
           // Create a new cat_style with an empty layers object to store the competition layers.
           param.cat_style = {
@@ -120,20 +120,21 @@ export default function(){
           };
 
           // Iterate through cats in competition theme.
-          Object.keys(layer.style.theme.cat).forEach(comp => {
+          //Object.keys(point.properties.cat).forEach(comp => {
+          Object.entries(point.properties.cat).sort((a, b) => a[1] - b[1]).forEach(comp => {
 
             // Check for the competition cat in point properties.
-            if (point.properties.cat[comp]) {
-
+            if (layer.style.theme.cat[comp[0]]) {
+              
               // Add a cat layer to the marker obkject.
               // Calculate the size of the competition layer.
               // Competition layer added first must be largest.
-              param.cat_style.layers[size / point.properties.size] = layer.style.theme.cat[comp].fillColor;
-
-              // Reduce the current size by the size of layer just added to marker.
-              size -= point.properties.cat[comp];
+              param.cat_style.layers[size / point.properties.size] = layer.style.theme.cat[comp[0]].fillColor;
 
             }
+            
+            // Reduce the current size by the size of layer just added to marker.
+            size -= comp[1];
 
           });
 
