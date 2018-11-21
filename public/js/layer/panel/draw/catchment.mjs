@@ -84,7 +84,7 @@ export default (e, layer) => {
           }));
         } else {
           layer.edit.origin.clearLayers();
-          alert('No route found. Try a longer travel time');
+          return alert('No route found. Try a longer travel time');
         }
       }
     };
