@@ -260,13 +260,6 @@
                             "filter": "date"
                         },
                         {
-                            "label": "Integer Date",
-                            "field": "int_date",
-                            "type": "date",
-                            "edit": "true",
-                            "filter": "date"
-                        },
-                        {
                             "label": "RP Type",
                             "field": "rp_type",
                             "type": "text",
@@ -497,7 +490,8 @@
                         {
                             "label": "Retailer",
                             "field": "retailer",
-                            "type": "text"
+                            "type": "text",
+                            "edit": true
                         },
                         {
                             "label": "Fascia",
