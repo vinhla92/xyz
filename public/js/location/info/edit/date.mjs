@@ -1,17 +1,15 @@
 import _xyz from '../../../_xyz.mjs';
 
-import valChange from './valChange.mjs';
-
 import datepicker from 'js-datepicker';
 
-import { createElement } from '../../../utils/createElement.mjs';
+// import { createElement } from '../../../utils/createElement.mjs';
 
 export default (record, entry) => {
 
   if(entry.type === 'datetime') entry.value = formatDateTime(entry.value);
   if(entry.type === 'date') entry.value = formatDate(entry.value);
 
-  let input = createElement({
+  let input = _xyz.utils.createElement({
     tag: 'input',
     options: {
       value: entry.value || '',
@@ -79,8 +77,34 @@ export function pickDate(element, record, entry, callback){
       if(callback){
         callback();
       } else {
-        entry.newValue = meltDateStr(date);
-        //console.log(entry.newValue);
+
+        let timestamp = meltDateStr(date);
+
+        if (!entry.value) entry.value = '';
+
+        // Create newValue if input value is different from entry value.
+        if (entry.value !== timestamp) {
+      
+          entry.newValue = timestamp;
+      
+          // Change styling of input and display upload button.
+          record.upload.style.display = 'block';
+          element.classList.add('changed');
+      
+        } else {
+      
+          // Delete newValue if it is the same as the entry value.
+          delete entry.newValue;
+      
+          // Change styling of input.
+          element.classList.remove('changed');
+      
+          // Hide upload button if no other field in the infoj has a newValue.
+          if (!record.location.infoj.some(field => field.newValue)) record.upload.style.display = 'none';
+        }
+
+
+
         //valChange(element, record, entry); 
       }
     },
@@ -96,4 +120,3 @@ export function translateDatePicker(container, bottom){
   bottom ? instances.forEach(instance => {instance.style.top = (yPosition - 150) + 'px';}) : instances.forEach(instance => {instance.style.top = yPosition + 'px';});
 
 }
-
