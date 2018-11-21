@@ -24,6 +24,7 @@ export default function(){
     locale: _xyz.locale,
     layer: layer.key,
     table: layer.table,
+    cat: layer.style.theme && layer.style.theme.field,
     filter: JSON.stringify(filter),
     west: bounds.getWest(),
     south: bounds.getSouth(),
@@ -38,10 +39,13 @@ export default function(){
     if (e.target.status !== 200 || !layer.display || locale !== _xyz.locale) return;
       
     // Create feature collection for vector features.
-    let features = JSON.parse(e.target.responseText);
+    const features = JSON.parse(e.target.responseText);
 
     // Check for existing layer and remove from map.
     if (layer.L) _xyz.map.removeLayer(layer.L);
+
+    // Create cat array for graduated theme.
+    if (layer.style.theme) layer.style.theme.cat_arr = Object.entries(layer.style.theme.cat);
 
     // Add geoJSON feature collection to the map.
     layer.L = L.geoJSON(features, {
@@ -68,7 +72,7 @@ export default function(){
         e.layer.setStyle(layer.style.highlight);
       })
       .on('mouseout', function(e){
-        e.layer.setStyle(layer.style.default);
+        e.layer.setStyle(applyLayerStyle(e.layer.feature));
       })
       .addTo(_xyz.map);
 
@@ -82,28 +86,40 @@ export default function(){
   xhr.send();
 
     
+  function applyLayerStyle(feature){
 
-  function applyLayerStyle(geojsonFeature){
-    if (layer.style && layer.style.theme && layer.style.theme.type === 'categorized'){
+    // Return default style if no theme is set on layer.
+    if (!layer.style.theme) return layer.style.default;
 
-      let val = geojsonFeature.properties[layer.style.theme.field] || null;
+    const theme = layer.style.theme;
 
-      if(val) return layer.style.theme.cat[val].style;
+    // Categorized theme.
+    if (theme.type === 'categorized') {
 
+      return Object.assign({}, layer.style.default, theme.cat[feature.properties.cat] || {});
+    
     }
 
-    if (layer.style && layer.style.theme && layer.style.theme.type === 'graduated') {
+    // Graduated theme.
+    if (theme.type === 'graduated') {
 
-      let style = layer.style.theme.cat[0].style;
-
-      let val = geojsonFeature.properties[layer.style.theme.field] || null;
-
-      for (let i = 0; i < layer.style.theme.cat.length; i++) {
-        if (val && val < layer.style.theme.cat[i].val) break;
-        style = layer.style.theme.cat[i].style;
+      theme.cat_style = {};
+    
+      // Iterate through cat array.
+      for (let i = 0; i < theme.cat_arr.length; i++) {
+    
+        // Break iteration is cat value is below current cat array value.
+        if (parseFloat(feature.properties.cat) < parseFloat(theme.cat_arr[i][0])) break;
+    
+        // Set cat_style to current cat style after value check.
+        theme.cat_style = theme.cat_arr[i][1];
+    
       }
-      return style;
+    
+      // Assign style from base & cat_style.
+      return Object.assign({}, layer.style.default, theme.cat_style);
+    
     }
-    return layer.style.default;
+    
   }
 }

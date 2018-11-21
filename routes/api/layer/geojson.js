@@ -25,8 +25,7 @@ module.exports = fastify => {
       let
         geom = layer.geom,
         id = layer.qID,
-        properties = layer.properties ? layer.properties : '',
-        geomj = layer.geomj ? layer.geomj : `ST_asGeoJson(${geom})`,
+        cat = req.query.cat || null,
         filter = req.query.filter && JSON.parse(req.query.filter),
         west = parseFloat(req.query.west),
         south = parseFloat(req.query.south),
@@ -34,7 +33,7 @@ module.exports = fastify => {
         north = parseFloat(req.query.north);
 
       // Check whether string params are found in the settings to prevent SQL injections.
-      if ([table, properties]
+      if ([table]
         .some(val => (typeof val === 'string' && global.workspace[token.access].values.indexOf(val) < 0))) {
         return res.code(406).send('Invalid parameter.');
       }
@@ -44,41 +43,39 @@ module.exports = fastify => {
       const filter_sql = filter && await require(global.appRoot + '/mod/pg/sql_filter')(filter) || '';
 
 
-      if (properties) properties = `${properties},`;
-
       var q = `
       SELECT
-          ${id} AS id,
-          ${properties}
-          ${geomj} AS geomj
+        ${id} AS id,
+        ${cat} AS cat,
+        ST_asGeoJson(${geom}) AS geomj
+
       FROM ${req.query.table}
       WHERE
-          ST_DWithin(
-              ST_MakeEnvelope(${west}, ${south}, ${east}, ${north}, 4326),
-              ${geom}, 0.000001);`;
+        ST_DWithin(
+          ST_MakeEnvelope(
+            ${west},
+            ${south},
+            ${east},
+            ${north},
+            4326
+          ),
+          ${geom},
+          0.000001
+        )
+        ${filter_sql};`;
 
       var rows = await global.pg.dbs[layer.dbs](q);
 
-      if (rows.err) return res.code(500).send('soz. it\'s not you. it\'s me.');
+      if (rows.err) return res.code(500).send('Failed to query PostGIS table.');
 
-      res.code(200).send(Object.keys(rows).map(row => {
-        let props = {};
-
-        Object.keys(rows[row]).map(function (key) {
-          if (key !== 'geomj') {
-            props[key] = rows[row][key];
-          }
-        });
-
-        return {
-          type: 'Feature',
-          geometry: JSON.parse(rows[row].geomj),
-          properties: props || {
-            id: rows[row].id
-          }
-        };
-      }));
-
+      res.code(200).send(rows.map(row => ({
+        type: 'Feature',
+        geometry: JSON.parse(row.geomj),
+        properties: {
+          id: row.id,
+          cat: row.cat
+        }
+      })));
 
     }
   });

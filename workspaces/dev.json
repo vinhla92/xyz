@@ -33,9 +33,10 @@
                     "format": "mvt",
                     "dbs": "XYZ",
                     "tables": {
-                        "14": "dev_oa"
+                        "12": "dev_oa"
                     },
                     "qID": "id",
+                    "mvt_cache": true,
                     "mvt_fields": [
                         "pop_11"
                     ],

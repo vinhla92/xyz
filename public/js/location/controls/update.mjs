@@ -40,20 +40,7 @@ export default record => {
           record.location.infoj = JSON.parse(e.target.response);
 
           // Update the record.
-          record.update();
-
-
-          // // Remove changed class from all changed entries.
-          // record.drawer.querySelectorAll('.changed').forEach(el => el.classList.remove('changed'));
-
-          // record.location.infoj.forEach(entry => {
-          //   if (entry.newValue) {
-          //     entry.value = entry.newValue;
-          //     delete entry.newValue;
-          //   }
-          // });
-
-          
+          record.update();       
 
           // try {
           //     let pof = pointOnFeature(record.location.L.toGeoJSON());

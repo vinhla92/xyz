@@ -114,8 +114,10 @@ module.exports = fastify => {
       WHERE
         ST_DWithin(
           ST_MakeEnvelope(${west}, ${south}, ${east}, ${north}, 4326),
-          ${geom}, 0.00001)
-        ${filter_sql}`;
+          ${geom},
+          0.00001
+        )
+        ${filter_sql};`;
 
       const dbscan_sql = `
       SELECT
