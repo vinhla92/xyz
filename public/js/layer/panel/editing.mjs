@@ -93,12 +93,6 @@ export default layer => {
   }
   
   if(layer.edit.catchment){
-    
-    // set these for now
-    layer.edit.catchment = {
-      polygons: true,
-      profile: 'driving' // or "mapbox/driving"?
-    };
 
     // add minute slider // add mode of transport
     let block = _xyz.utils.createElement({

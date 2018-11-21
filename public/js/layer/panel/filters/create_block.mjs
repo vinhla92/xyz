@@ -1,9 +1,8 @@
 import _xyz from '../../../_xyz.mjs';
-import { createElement } from '../../../utils/createElement.mjs';
 
 export default (layer, filter_entry) => {
     
-  const block = createElement({
+  const block = _xyz.utils.createElement({
     tag: 'div',
     options: {
       classList: 'block'
@@ -11,7 +10,7 @@ export default (layer, filter_entry) => {
     appendTo: layer.filter.list
   });
 
-  createElement({
+  _xyz.utils.createElement({
     tag: 'div',
     options: {
       textContent: filter_entry.label,
@@ -20,7 +19,7 @@ export default (layer, filter_entry) => {
     appendTo: block
   });
 
-  createElement({
+  _xyz.utils.createElement({
     tag: 'i',
     options: {
       textContent: 'clear',

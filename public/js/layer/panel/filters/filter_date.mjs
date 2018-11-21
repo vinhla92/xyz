@@ -1,16 +1,12 @@
 import _xyz from '../../../_xyz.mjs';
-
-import create_block from './create_block.mjs';
-import { createElement } from '../../../utils/createElement.mjs';
-import { paramString } from '../../../utils/paramString.mjs';
 import { pickDate, meltDateStr, translateDatePicker } from '../../../location/info/edit/date.mjs';
 
 export default (layer, filter_entry) => {
 
-  const block = create_block(layer, filter_entry);
+  const block = _xyz.utils.create_block(layer, filter_entry);
 
   // Label for min / greater then control.
-  createElement({
+  _xyz.utils.createElement({
     tag: 'div',
     options: {
       classList: 'range-label',
@@ -19,7 +15,7 @@ export default (layer, filter_entry) => {
     appendTo: block
   });
 
-  const input_min = createElement({
+  const input_min = _xyz.utils.createElement({
     tag: 'input',
     options: {
       classList: 'range-input',
@@ -32,7 +28,7 @@ export default (layer, filter_entry) => {
     }
   });
 
-  createElement({ // separator container
+  _xyz.utils.createElement({ // separator container
     tag: 'div',
     appendTo: block,
     style: {
@@ -41,7 +37,7 @@ export default (layer, filter_entry) => {
     }
   });
 
-  createElement({
+  _xyz.utils.createElement({
     tag: 'div',
     options: {
       classList: 'range-label',
@@ -50,7 +46,7 @@ export default (layer, filter_entry) => {
     appendTo: block
   });
 
-  const input_max = createElement({
+  const input_max = _xyz.utils.createElement({
     tag: 'input',
     options: {
       classList: 'range-input',
