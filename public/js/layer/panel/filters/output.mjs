@@ -1,6 +1,6 @@
 import _xyz from '../../../_xyz.mjs';
 
-export default (panel) => _xyz.utils.createElement({
+export default (panel, layer) => _xyz.utils.createElement({
   tag: 'div',
   options: {
     className: 'btn_wide cursor noselect',
@@ -15,26 +15,31 @@ export default (panel) => _xyz.utils.createElement({
     funct: () => {
     
       const xhr = new XMLHttpRequest();
+
+      // Create filter from legend and current filter.
+      const filter = Object.assign({},layer.filter.current,layer.filter.legend);
     
-      xhr.open('GET', _xyz.host + '/api/location/aggregate?' + _xyz.utils.paramString({
+      xhr.open('GET', _xyz.host + '/api/location/new/aggregate?' + _xyz.utils.paramString({
         locale: _xyz.locale,
         layer: layer.key,
         token: _xyz.token,
-        filter: JSON.stringify(layer.filter.current) || ''
+        filter: JSON.stringify(filter)
       }));
     
       xhr.onload = e => {
-        if (e.target.status === 200) {
-          let json = JSON.parse(e.target.response);
+
+        if (e.target.status !== 200) return;
+
+        let json = JSON.parse(e.target.response);
     
-          _xyz.locations.select({
-            layer: layer.aggregate_layer,
-            table: _xyz.layers.list[layer.aggregate_layer].table,
-            id: json.id,
-            marker: [json.lng, json.lat],
-            filter: JSON.stringify(layer.filter.current) || ''
-          });
-        }
+        _xyz.locations.select({
+          layer: layer.filter.output.layer,
+          table: _xyz.layers.list[layer.filter.output.layer].table,
+          id: json.id,
+          marker: [json.lng, json.lat]
+          //filter: JSON.stringify(layer.filter.current) || ''
+        });
+
       };
     
       xhr.send();

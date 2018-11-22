@@ -12,8 +12,6 @@ import log from './log.mjs';
 
 import edit from './edit/_edit.mjs';
 
-import { formatDate, formatDateTime } from './edit/date.mjs';
-
 export default record => {
 
   // Add table element to record drawer.
@@ -147,8 +145,8 @@ export default record => {
       entry.val.textContent =
       entry.type === 'numeric' ? parseFloat(entry.value).toLocaleString('en-GB', { maximumFractionDigits: 2 }) :
         entry.type === 'integer' ? parseInt(entry.value).toLocaleString('en-GB', { maximumFractionDigits: 0 }) :
-          entry.type === 'date' ? formatDate(entry.value) :
-            entry.type === 'datetime' ? formatDateTime(entry.value) :
+          entry.type === 'date' ? _xyz.utils.formatDate(entry.value) :
+            entry.type === 'datetime' ? _xyz.utils.formatDateTime(entry.value) :
               entry.value;
 
     });
