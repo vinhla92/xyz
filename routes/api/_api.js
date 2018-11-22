@@ -32,6 +32,8 @@ module.exports = fastify => {
 
   require('./location/edit/catchment_create')(fastify);
 
+  require('./location/edit/catchment_delete')(fastify);
+
   require('./location/edit/new')(fastify);
 
   require('./location/edit/update')(fastify);

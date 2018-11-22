@@ -29,21 +29,18 @@ module.exports = fastify => {
         id = req.body.id,
         infoj = layer.infoj,
         field = req.body.field,
-        params = req.body.params,
-        geom = layer.geom;
+        geom = layer.geom,
+        params = req.body.params;
 
       // Check whether string params are found in the settings to prevent SQL injections.
       if ([table, field]
         .some(val => (typeof val === 'string' && val.length > 0 && global.workspace[token.access].values.indexOf(val) < 0))) {
         return res.code(406).send('Invalid parameter.');
       }
-      //res.code(200).send({features: 'hello'});
         
       const mapbox_isochrones = await require(global.appRoot + '/mod/mapbox_isochrones')(params);
 
       if(mapbox_isochrones.features){
-
-        //console.log(JSON.stringify(mapbox_isochrones.features[0].geometry));
 
         var q = `UPDATE ${table} SET ${field} = ST_SetSRID(ST_GeomFromGeoJSON('${JSON.stringify(mapbox_isochrones.features[0].geometry)}'), 4326) WHERE ${qID} = $1;`;
 
@@ -55,15 +52,15 @@ module.exports = fastify => {
         infoj = JSON.parse(JSON.stringify(layer.infoj));
 
         // The fields array stores all fields to be queried for the location info.
-        fields = await require(global.appRoot + '/mod/pg/sql_fields')([], infoj, locale, table, layer);
+        fields = await require(global.appRoot + '/mod/pg/sql_fields')([], infoj, locale, table, geom);
 
         q =
         `SELECT ${fields.join()}`
         + `\n FROM ${table}`
         + `\n WHERE ${qID} = $1;`;
 
-        console.log(q);
-        console.log(id);
+        // console.log(q);
+        //console.log(id);
 
         var rows = await global.pg.dbs[layer.dbs](q, [id]);
 
@@ -78,7 +75,7 @@ module.exports = fastify => {
         res.code(200).send(infoj);
 
       } else {
-        return res.code(406).send('No catchment found withing this time frame.');
+        return res.code(406).send('No catchment found within this time frame.');
       }
     }
   });

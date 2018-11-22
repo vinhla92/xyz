@@ -13,7 +13,7 @@ export default () => {
   _xyz.map.getPane('gazetteer').style.zIndex = 550;
 
   _xyz.panes.list.push(_xyz.map.createPane('select_display'));
-  _xyz.map.getPane('select_display').style.zIndex = 501;
+  _xyz.map.getPane('select_display').style.zIndex = 599;
 
   _xyz.panes.list.push(_xyz.map.createPane('select'));
   _xyz.map.getPane('select').style.zIndex = 600;
