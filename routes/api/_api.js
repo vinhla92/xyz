@@ -30,7 +30,7 @@ module.exports = fastify => {
 
   require('./location/edit/new_catchment')(fastify);
 
-  require('./location/edit/catchment_location')(fastify);
+  require('./location/edit/catchment_create')(fastify);
 
   require('./location/edit/new')(fastify);
 

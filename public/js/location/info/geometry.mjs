@@ -5,7 +5,7 @@ import catchment from './catchment.mjs';
 export default (record, entry) => {
 
   // 
-  if (entry.edit.catchment) return catchment(record, entry);
+  if (entry.edit.catchment) catchment(record, entry);
 
   if (!entry.value) return;
 

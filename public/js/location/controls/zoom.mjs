@@ -19,7 +19,7 @@ export default record => {
 
         e.stopPropagation();
 
-        _xyz.map.flyToBounds(record.location.L.getBounds());
+        _xyz.map.flyToBounds(record.location.Layer.getBounds());
 
       }
     }

@@ -117,7 +117,7 @@ module.exports = fastify => {
           ${geom},
           0.00001
         )
-        ${filter_sql};`;
+        ${filter_sql}`;
 
       const dbscan_sql = `
       SELECT

@@ -29,7 +29,7 @@ module.exports = fastify => {
         return res.code(406).send('Invalid parameter.');
       }
 
-      let fields = await processInfoj(infoj);
+      let fields = await require(global.appRoot + '/mod/pg/sql_infoj')(infoj);
 
       // const d = new Date();
 
@@ -80,24 +80,3 @@ module.exports = fastify => {
     }
   });
 };
-
-async function processInfoj(infoj) {
-
-  let fields = '';
-
-  await infoj.forEach(entry => {
-
-    if (!entry.field) return;
-
-    if (fields.length > 0) fields += ', ';
-
-    // if (entry.type === 'integer') return fields += `${entry.field} = ${entry.newValue},`;
-
-    if (entry.type === 'date') return fields += `${entry.field} = ${entry.newValue}`;
-
-    fields += `${entry.field} = '${entry.newValue.replace(/'/g, '\'\'')}'`;
-
-  });
-
-  return fields;
-}

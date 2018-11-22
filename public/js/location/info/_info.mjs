@@ -90,7 +90,7 @@ export default record => {
       });
 
       // Finish entry creation if entry has not type.
-      if (!entry.type) return;
+      if(entry.type === 'label') return;
 
       // Create streetview control.
       if (entry.type === 'streetview') return streetview(record, entry);
