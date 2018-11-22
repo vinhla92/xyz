@@ -13,12 +13,6 @@ export default (record, entry) => {
       type: 'text'
     },
     appendTo: entry.val,
-    // eventListener: {
-    //   event: 'focus',
-    //   funct: e => { 
-    //     _xyz.utils.translateDatePicker(e.target, true); 
-    //   }
-    // }
   });
 
   _xyz.utils.datePicker(input, record, entry);

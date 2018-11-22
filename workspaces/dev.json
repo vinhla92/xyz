@@ -360,6 +360,11 @@
                     "dbs": "XYZ",
                     "qID": "id",
                     "table": "dev_retailpoints",
+                    "filter": {
+                        "output": {
+                            "layer": "retail_points_output"
+                        }
+                    },
                     "style": {
                         "themes": {
                             "Retailer": {
@@ -589,6 +594,16 @@
                             }
                         }
                     ]
+                },
+                "retail_points_output": {
+                    "name": "RP Output",
+                    "format": "geojson",
+                    "dbs": "XYZ",
+                    "table": "dev_retailpoints_output",
+                    "qID": "id",
+                    "edit": {
+                        "delete": true
+                    }
                 },
                 "grid": {
                     "name": "Grid",

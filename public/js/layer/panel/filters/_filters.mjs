@@ -117,6 +117,6 @@ export default layer => {
     appendTo: panel,
   });
 
-  layer.filter.run_output = output(panel);
+  layer.filter.run_output = output(panel, layer);
 
 };

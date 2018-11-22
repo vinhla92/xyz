@@ -1,7 +1,7 @@
 module.exports = fastify => {
   fastify.route({
     method: 'GET',
-    url: '/api/location/delete',
+    url: '/api/location/edit/delete',
     beforeHandler: fastify.auth([fastify.authAPI]),
     handler: async (req, res) => {
 

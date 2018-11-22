@@ -47,7 +47,7 @@ export default function(){
     // Data is returned and the layer is still current.
     if (e.target.status !== 200 || !layer.display || locale !== _xyz.locale) return _xyz.layers.check(layer);
     
-    const cluster = JSON.parse(e.target.responseText);
+    const cluster = JSON.parse(e.target.response);
 
     const param = {
       max_size: cluster.reduce((max_size, f) => Math.max(max_size, f.properties.size), 0)
