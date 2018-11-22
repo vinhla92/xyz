@@ -31,122 +31,130 @@ export default record => {
     appendTo: record.drawer
   });
 
-  // Adds layer to beginning of infoj array.
-  record.location.infoj.unshift({
-    'label': 'Layer',
-    'value': _xyz.layers.list[record.location.layer].name,
-    'type': 'text',
-    'inline': true
-  });
+  record.update = () => {
 
-  // Adds layer group to beginning of infoj array.
-  if (_xyz.layers.list[record.location.layer].group) record.location.infoj.unshift({
-    'label': 'Group',
-    'value': _xyz.layers.list[record.location.layer].group,
-    'type': 'text',
-    'inline': true
-  });
+    record.table.innerHTML = '';
 
-  // Assign location object to hold info groups.
-  record.location.infogroups = {};
+    // Adds layer to beginning of infoj array.
+    record.location.infoj.unshift({
+      'label': 'Layer',
+      'value': _xyz.layers.list[record.location.layer].name,
+      'type': 'text',
+      'inline': true
+    });
 
-  // Iterate through info fields and add to info table.
-  Object.values(record.location.infoj).forEach(entry => {
+    // Adds layer group to beginning of infoj array.
+    if (_xyz.layers.list[record.location.layer].group) record.location.infoj.unshift({
+      'label': 'Group',
+      'value': _xyz.layers.list[record.location.layer].group,
+      'type': 'text',
+      'inline': true
+    });
+
+    // Assign location object to hold info groups.
+    record.location.infogroups = {};
+
+    // Iterate through info fields and add to info table.
+    Object.values(record.location.infoj).forEach(entry => {
 
     // Create a new table row for the entry.
-    if (!entry.group) entry.row = _xyz.utils.createElement({
-      tag: 'tr',
-      options: {
-        className: 'lv-' + (entry.level || 0)
-      },
-      appendTo: record.table
-    });
-
-    // Create a new info group.
-    if (entry.type === 'group') return group(record, entry);
-
-    // Create entry.row inside previously created group.
-    if (entry.group) entry.row = _xyz.utils.createElement({
-      tag: 'tr',
-      options: {
-        className: 'lv-' + (entry.level || 0)
-      },
-      appendTo: record.location.infogroups[entry.group].table
-    });
-
-    // Create new table cell for the entry label and append to table.
-    if (entry.label) _xyz.utils.createElement({
-      tag: 'td',
-      options: {
-        className: 'label lv-' + (entry.level || 0),
-        textContent: entry.label,
-        title: entry.title || null
-      },
-      appendTo: entry.row
-    });
-
-    // Finish entry creation if entry has not type.
-    if (!entry.type) return;
-
-    // Create streetview control.
-    if (entry.type === 'streetview') return streetview(record, entry);
-
-    // If input is images create image control and return from object.map function.
-    if (entry.type === 'images') return images(record, entry);
-
-    // Create log control.
-    if (entry.type === 'log') return log(record, entry);
-
-    // Create geometry control.
-    if (entry.type === 'geometry') return geometry(record, entry);    
-
-    // Remove empty row which is not editable.
-    if (!entry.edit && !entry.value) return entry.row.remove();
-
-    // Create val table cell in a new line.
-    if (!entry.inline && !(entry.type === 'integer' ^ entry.type === 'numeric' ^ entry.type === 'date')) {
-
-      // Create new row and append to table.
-      entry.row = _xyz.utils.createElement({
+      if (!entry.group) entry.row = _xyz.utils.createElement({
         tag: 'tr',
+        options: {
+          className: 'lv-' + (entry.level || 0)
+        },
         appendTo: record.table
       });
 
-      // Create val table cell with colSpan 2 in the new row to span full width.
-      entry.val = _xyz.utils.createElement({
+      // Create a new info group.
+      if (entry.type === 'group') return group(record, entry);
+
+      // Create entry.row inside previously created group.
+      if (entry.group) entry.row = _xyz.utils.createElement({
+        tag: 'tr',
+        options: {
+          className: 'lv-' + (entry.level || 0)
+        },
+        appendTo: record.location.infogroups[entry.group].table
+      });
+
+      // Create new table cell for the entry label and append to table.
+      if (entry.label) _xyz.utils.createElement({
         tag: 'td',
         options: {
-          className: 'val',
-          colSpan: '2'
+          className: 'label lv-' + (entry.level || 0),
+          textContent: entry.label,
+          title: entry.title || null
         },
         appendTo: entry.row
       });
 
-    // Else create val table cell inline.
-    } else {
+      // Finish entry creation if entry has not type.
+      if (!entry.type) return;
+
+      // Create streetview control.
+      if (entry.type === 'streetview') return streetview(record, entry);
+
+      // If input is images create image control and return from object.map function.
+      if (entry.type === 'images') return images(record, entry);
+
+      // Create log control.
+      if (entry.type === 'log') return log(record, entry);
+
+      // Create geometry control.
+      if (entry.type === 'geometry') return geometry(record, entry);    
+
+      // Remove empty row which is not editable.
+      if (!entry.edit && !entry.value) return entry.row.remove();
+
+      // Create val table cell in a new line.
+      if (!entry.inline && !(entry.type === 'integer' ^ entry.type === 'numeric' ^ entry.type === 'date')) {
+
+      // Create new row and append to table.
+        entry.row = _xyz.utils.createElement({
+          tag: 'tr',
+          appendTo: record.table
+        });
+
+        // Create val table cell with colSpan 2 in the new row to span full width.
+        entry.val = _xyz.utils.createElement({
+          tag: 'td',
+          options: {
+            className: 'val',
+            colSpan: '2'
+          },
+          appendTo: entry.row
+        });
+
+        // Else create val table cell inline.
+      } else {
 
       // Append val table cell to the same row as the label table cell.
-      entry.val = _xyz.utils.createElement({
-        tag: 'td',
-        options: {
-          className: 'val num'
-        },
-        appendTo: entry.row
-      });
+        entry.val = _xyz.utils.createElement({
+          tag: 'td',
+          options: {
+            className: 'val num'
+          },
+          appendTo: entry.row
+        });
 
-    }
+      }
 
-    // Create controls for editable fields.
-    if (entry.edit && !entry.fieldfx) return edit(record, entry);
+      // Create controls for editable fields.
+      if (entry.edit && !entry.fieldfx) return edit(record, entry);
 
-    // Set field value.
-    entry.val.textContent =
+      // Set field value.
+      entry.val.textContent =
       entry.type === 'numeric' ? parseFloat(entry.value).toLocaleString('en-GB', { maximumFractionDigits: 2 }) :
         entry.type === 'integer' ? parseInt(entry.value).toLocaleString('en-GB', { maximumFractionDigits: 0 }) :
           entry.type === 'date' ? formatDate(entry.value) :
             entry.type === 'datetime' ? formatDateTime(entry.value) :
               entry.value;
 
-  });
+    });
+
+  };
+
+  record.update();
   
 };

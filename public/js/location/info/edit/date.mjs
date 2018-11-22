@@ -5,6 +5,7 @@ import datepicker from 'js-datepicker';
 export default (record, entry) => {
 
   if(entry.type === 'datetime') entry.value = formatDateTime(entry.value);
+
   if(entry.type === 'date') entry.value = formatDate(entry.value);
 
   let input = _xyz.utils.createElement({
@@ -21,6 +22,7 @@ export default (record, entry) => {
       }
     }
   });
+
   pickDate(input, record, entry);
 };
 
@@ -28,14 +30,17 @@ export function formatDate(unix_timestamp){
 
   if(isNaN(parseInt(unix_timestamp))) return '(empty)';
 
-  let months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+  let
+    months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
     days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
 
-  let d = new Date(unix_timestamp*1000),
+  let
+    d = new Date(unix_timestamp*1000),
     year = d.getFullYear(),
     month = months[d.getMonth()],
     day = d.getDate(),
     weekday = days[d.getDay()];
+
   return `${weekday} ${day} ${month} ${year}`;
 }
 
@@ -43,10 +48,12 @@ export function formatDateTime(unix_timestamp){
 
   if(isNaN(parseInt(unix_timestamp))) return '(empty)';
   
-  let dateStr = formatDate(unix_timestamp),
+  let
+    dateStr = formatDate(unix_timestamp),
     d = new Date(unix_timestamp*1000);
 
-  let h = d.getHours(),
+  let
+    h = d.getHours(),
     min = '0' + d.getMinutes(),
     sec = '0' + d.getSeconds();
 
@@ -64,7 +71,9 @@ export function pickDate(element, record, entry, callback){
     position: 'c',
     formatter: function(el, date, instance) {
         
-      let _d = meltDateStr(new Date(date)), dateStr;
+      let
+        _d = meltDateStr(new Date(date)),
+        dateStr;
         
       if(entry.type === 'date') dateStr = formatDate(_d);
       if(entry.type === 'datetime') dateStr = formatDateTime(_d);
@@ -72,6 +81,7 @@ export function pickDate(element, record, entry, callback){
       el.value = dateStr;
     },
     onSelect: function(el, date, instance){
+
       if(callback){
         callback();
       } else {

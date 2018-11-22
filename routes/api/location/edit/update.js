@@ -7,7 +7,12 @@ module.exports = fastify => {
 
       const token = req.query.token ? fastify.jwt.decode(req.query.token) : { access: 'public' };
 
-      const layer = global.workspace[token.access].config.locales[req.body.locale].layers[req.body.layer];
+      const locale = global.workspace[token.access].config.locales[req.body.locale];
+
+      // Return 406 if locale is not found in workspace.
+      if (!locale) return res.code(406).send('Invalid locale.');
+
+      const layer = locale.layers[req.body.layer];
 
       if (!layer) return res.code(500).send('Layer not found.');
 
@@ -17,7 +22,6 @@ module.exports = fastify => {
         id = req.body.id,
         infoj = req.body.infoj,
         geom = layer.geom;
-        //geometry = req.body.geometry && JSON.stringify(req.body.geometry);
 
       // Check whether string params are found in the settings to prevent SQL injections.
       if ([table, geom, qID]
@@ -25,7 +29,7 @@ module.exports = fastify => {
         return res.code(406).send('Invalid parameter.');
       }
 
-      const fields = await processInfoj(infoj);
+      let fields = await processInfoj(infoj);
 
       // const d = new Date();
 
@@ -36,17 +40,42 @@ module.exports = fastify => {
       // Write into logtable if logging is enabled.
       // if (layer.log && layer.log.table) await writeLog(layer, id);
 
-      // const q_geom = geometry ?
-      //   `${geom} = ST_SetSRID(ST_GeomFromGeoJSON('${geometry}'), 4326)`
-      //   : '';
-
       var q = `UPDATE ${table} SET ${fields} WHERE ${qID} = $1;`;
 
       var rows = await global.pg.dbs[layer.dbs](q, [id]);
 
       if (rows.err) return res.code(500).send('PostgreSQL query error - please check backend logs.');
 
-      res.code(200).send('Location update successful');
+
+      // Query field for updated infoj
+      infoj = JSON.parse(JSON.stringify(layer.infoj));
+
+      geom = layer.geom ?
+        `${table}.${layer.geom}`
+        : `(ST_Transform(ST_SetSRID(${table}.${layer.geom_3857}, 3857), 4326))`;
+
+      // The fields array stores all fields to be queried for the location info.
+      fields = await require(global.appRoot + '/mod/pg/sql_fields')([], infoj, locale, table, geom);
+
+      // Push JSON geometry field into fields array.
+      //fields.push(`\n   ST_asGeoJson(${geom}) AS geomj`);
+
+      var q =
+      `SELECT ${fields.join()}`
+      + `\n FROM ${table}`
+      + `\n WHERE ${qID} = $1;`;
+
+      var rows = await global.pg.dbs[layer.dbs](q, [id]);
+
+      if (rows.err) return res.code(500).send('Failed to query PostGIS table.');
+
+      // Iterate through infoj entries and assign values returned from query.
+      infoj.forEach(entry =>  {
+        if (rows[0][entry.field]) entry.value = rows[0][entry.field];
+      });
+    
+      // Send the infoj object with values back to the client.
+      res.code(200).send(infoj);
 
     }
   });
@@ -57,8 +86,6 @@ async function processInfoj(infoj) {
   let fields = '';
 
   await infoj.forEach(entry => {
-
-    console.log(entry);
 
     if (!entry.field) return;
 

@@ -105,9 +105,9 @@ export default function(){
     const theme = layer.style.theme;
 
     // Categorized theme.
-    if (theme.type === 'categorized' && theme.cat[properties[theme.field]]) {
+    if (theme.type === 'categorized') {
 
-      return Object.assign({}, layer.style.default, theme.cat[properties[theme.field]]);
+      return Object.assign({}, layer.style.default, theme.cat[properties[theme.field]] || {});
 
     }
 

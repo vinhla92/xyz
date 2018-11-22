@@ -1,6 +1,6 @@
 import _xyz from '../../_xyz.mjs';
 
-import pointOnFeature from '@turf/point-on-feature';
+// import pointOnFeature from '@turf/point-on-feature';
 
 export default record => {
 
@@ -28,22 +28,19 @@ export default record => {
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.onload = e => {
 
-          if (e.target.status !== 200) return;
+          if (e.target.status !== 200) return console.log(e.target.response);
 
           // Hide upload symbol.
           record.upload.style.display = 'none';
 
-          // Remove changed class from all changed entries.
-          record.drawer.querySelectorAll('.changed').forEach(el => el.classList.remove('changed'));
-
-          record.location.infoj.forEach(entry => {
-            if (entry.newValue) {
-              entry.value = entry.newValue;
-              delete entry.newValue;
-            }
-          });
-
+          // Reload layer.
           _xyz.layers.list[record.location.layer].get();
+
+          // Reset location infoj with response.
+          record.location.infoj = JSON.parse(e.target.response);
+
+          // Update the record.
+          record.update();       
 
           // try {
           //     let pof = pointOnFeature(record.location.L.toGeoJSON());
@@ -72,11 +69,10 @@ export default record => {
 
         xhr.send(JSON.stringify({
           locale: _xyz.locale,
-          layer: _xyz.layers.list[record.location.layer].key,
+          layer: record.location.layer,
           table: record.location.table,
           id: record.location.id,
-          infoj: infoj_newValues,
-          //geometry: record.location.L.toGeoJSON().features[0].geometry
+          infoj: infoj_newValues
         }));
 
       }

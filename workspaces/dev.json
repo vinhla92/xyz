@@ -33,9 +33,10 @@
                     "format": "mvt",
                     "dbs": "XYZ",
                     "tables": {
-                        "14": "dev_oa"
+                        "12": "dev_oa"
                     },
                     "qID": "id",
+                    "mvt_cache": true,
                     "mvt_fields": [
                         "pop_11"
                     ],
@@ -253,11 +254,17 @@
                             "inline": true
                         },
                         {
-                            "label": "Some Date",
+                            "label": "Date edit",
                             "field": "dev_date",
                             "type": "date",
                             "edit": "true",
                             "filter": "date"
+                        },
+                        {
+                            "label": "Date",
+                            "field": "dev_date_",
+                            "fieldfx": "dev_date",
+                            "type": "date"
                         },
                         {
                             "label": "RP Type",
