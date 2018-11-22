@@ -1,6 +1,4 @@
 module.exports = async params => {
-
-  console.log(params);
     
   if (!params.coordinates) return res.code(406).send('Invalid coordinates.');
     

@@ -36,9 +36,6 @@ module.exports = fastify => {
 
       var q = `UPDATE ${table} SET ${field} = NULL WHERE ${qID} = $1;`;
 
-      console.log(q);
-      console.log(id);
-
       var rows = await global.pg.dbs[layer.dbs](q, [id]);
 
       if (rows.err) return res.code(500).send('PostgreSQL query error - please check backend logs.');
@@ -52,8 +49,6 @@ module.exports = fastify => {
       q = `SELECT ${fields.join()}`
                 + `\n FROM ${table}`
                 + `\n WHERE ${qID} = $1;`;
-
-      console.log(q);
 
       var rows = await global.pg.dbs[layer.dbs](q, [id]);
 

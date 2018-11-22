@@ -59,9 +59,6 @@ module.exports = fastify => {
         + `\n FROM ${table}`
         + `\n WHERE ${qID} = $1;`;
 
-        // console.log(q);
-        //console.log(id);
-
         var rows = await global.pg.dbs[layer.dbs](q, [id]);
 
         if (rows.err) return res.code(500).send('Failed to query PostGIS table.');
