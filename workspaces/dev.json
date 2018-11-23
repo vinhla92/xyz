@@ -116,6 +116,17 @@
                         "rp_type",
                         "pop__11"
                     ],
+                    "filter": {
+                        "infoj":[
+                            {
+                                "label": "ID count",
+                                "field": "id_count",
+                                "type": "integer",
+                                "inline": true,
+                                "fieldfx": "count(id)"
+                            }
+                        ]
+                    },
                     "style": {
                         "themes": {
                             "Retail Place type": {
@@ -364,7 +375,7 @@
                         "infoj":[
                             {
                                 "label": "ID count",
-                                "field": "retailpoint_id",
+                                "field": "id_count",
                                 "type": "integer",
                                 "inline": true,
                                 "fieldfx": "count(retailpoint_id)"

@@ -18,7 +18,7 @@ export default function(){
   const bounds = _xyz.map.getBounds();     
   
   // Create filter from legend and current filter.
-  const filter = Object.assign({},layer.filter.current,layer.filter.legend);
+  const filter = Object.assign({},layer.filter.legend, layer.filter.current);
     
   xhr.open('GET', _xyz.host + '/api/layer/geojson?' + _xyz.utils.paramString({
     locale: _xyz.locale,

@@ -22,7 +22,7 @@ export default (layer, filter_entry) => {
 
         // Reload layer.
         layer.get();
-        layer.filter.run_output.style.display = 'block';
+        if (layer.filter.infoj) layer.filter.run_output.style.display = 'block';
 
 
       }

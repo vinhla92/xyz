@@ -2,14 +2,10 @@ import _xyz from '../_xyz.mjs';
 
 export default location => {
 
-  // Find free records in locations array.
-  let freeRecords = _xyz.locations.list.filter(record => !record.location);
+  const record = _xyz.locations.getFreeRecord();
 
-  // Return from selection if no free record is available.
-  if (freeRecords.length === 0) return;
+  if (!record) return;
 
-  // Assign location to the first free record.
-  const record = freeRecords[0];
   record.location = {};
 
   // Get layer from where the location should be selected.

@@ -45,15 +45,13 @@ export default record => {
 
           _xyz.hooks.filter('select', record.location.layer + '!' + record.location.table + '!' + record.location.id + '!' + record.location.marker[0] + ';' + record.location.marker[1]);
 
+          // Clear geometries and delete location to free up record.
           record.location.geometries.forEach(geom => _xyz.map.removeLayer(geom));
-          record.location = {};
-          record.location.geometries = [];
+          delete record.location;
 
-          // Find free records in locations array.
+          // Run locations init when all records are free.
           let freeRecords = _xyz.locations.list.filter(record => record.location);
-
-          // Return from selection if no free record is available.
-          if (freeRecords.length === 0) _xyz.locations.init();
+          if (freeRecords.length === _xyz.locations.list.length) _xyz.locations.init();
 
         };
         xhr.send();

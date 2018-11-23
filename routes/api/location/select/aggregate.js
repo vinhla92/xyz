@@ -22,11 +22,16 @@ module.exports = fastify => {
 
       const filter = JSON.parse(req.query.filter);
 
-      const geom = layer.geom;
-      
+      const geom_extent = layer.geom ?
+        `ST_Extent(${layer.geom})` :
+        layer.geom_3857 ?
+          `ST_Transform(ST_SetSRID(ST_Extent(${layer.geom_3857}), 3857), 4326)`:
+          null;
+    
       
       // let access_filter = layer.access_filter && token.email && layer.access_filter[token.email.toLowerCase()] ?
       //   layer.access_filter[token.email] : null;
+      
       
       // SQL filter
       const filter_sql = filter && await require(global.appRoot + '/mod/pg/sql_filter')(filter) || '';
@@ -45,7 +50,7 @@ module.exports = fastify => {
                 ST_Buffer(
                     ST_Transform(
                         ST_SetSRID(
-                            ST_Extent(${geom}),
+                            ${geom_extent},
                             4326
                         ),
                         3857
@@ -54,8 +59,8 @@ module.exports = fastify => {
                         ST_Transform(
                             ST_SetSRID(
                                 ST_Point(
-                                    ST_XMin(ST_Envelope(ST_Extent(${geom}))),
-                                    ST_YMin(ST_Envelope(ST_Extent(${geom})))
+                                    ST_XMin(ST_Envelope(${geom_extent})),
+                                    ST_YMin(ST_Envelope(${geom_extent}))
                                 ),
                                 4326
                             ),
@@ -64,8 +69,8 @@ module.exports = fastify => {
                         ST_Transform(
                             ST_SetSRID(
                                 ST_Point(
-                                    ST_XMax(ST_Envelope(ST_Extent(${geom}))),
-                                    ST_Ymin(ST_Envelope(ST_Extent(${geom})))
+                                    ST_XMax(ST_Envelope(${geom_extent})),
+                                    ST_Ymin(ST_Envelope(${geom_extent}))
                                 ),
                                 4326
                             ),

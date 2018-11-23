@@ -15,7 +15,7 @@ export default function(){
   if (!layer.table || !layer.display) return _xyz.layers.check(layer);
 
   // Create filter from legend and current filter.
-  const filter = Object.assign({},layer.filter.current,layer.filter.legend);
+  const filter = Object.assign({}, layer.filter.legend, layer.filter.current);
 
   let url = _xyz.host + '/api/layer/mvt/{z}/{x}/{y}?' + _xyz.utils.paramString({
       locale: _xyz.locale,

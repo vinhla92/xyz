@@ -11,6 +11,18 @@ _xyz.locations.add = add;
 
 _xyz.locations.dom = document.getElementById('locations');
 
+_xyz.locations.getFreeRecord = () => {
+
+  // Find free records in locations array.
+  const freeRecords = _xyz.locations.list.filter(record => !record.location);
+
+  // Return from selection if no free record is available.
+  if (freeRecords.length === 0) return null;
+  
+  // Return the free record.
+  return freeRecords[0];
+};
+
 export default () => {
 
   // Make select tab active on mobile device.

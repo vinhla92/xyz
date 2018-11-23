@@ -1,5 +1,7 @@
 import _xyz from '../../../_xyz.mjs';
 
+import pointOnFeature from '@turf/point-on-feature';
+
 export default (panel, layer) => _xyz.utils.createElement({
   tag: 'div',
   options: {
@@ -33,19 +35,17 @@ export default (panel, layer) => _xyz.utils.createElement({
 
         const json = JSON.parse(e.target.response);
     
-        // Find free records in locations array.
-        let freeRecords = _xyz.locations.list.filter(record => !record.location);
+        const record = _xyz.locations.getFreeRecord();
 
-        // Return from selection if no free record is available.
-        if (freeRecords.length === 0) return;
+        if (!record) return;
 
-        // Assign location to the first free record.
-        const record = freeRecords[0];
+        let pof = pointOnFeature(JSON.parse(json.geomj));
 
         record.location = {
           geometry: JSON.parse(json.geomj),
           infoj: json.infoj,
-          layer: layer.key
+          layer: layer.key,
+          marker: pof.geometry.coordinates
         };
 
         // Draw the record to the map.

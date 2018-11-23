@@ -21,7 +21,7 @@ export default function(){
   const bounds = _xyz.map.getBounds();
 
   // Create filter from legend and current filter.
-  const filter = Object.assign({},layer.filter.current,layer.filter.legend);
+  const filter = Object.assign({},layer.filter.legend, layer.filter.current);
         
   // Build XHR request.
   xhr.open('GET', _xyz.host + '/api/layer/cluster?' + _xyz.utils.paramString({

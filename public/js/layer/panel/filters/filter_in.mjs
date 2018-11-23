@@ -34,6 +34,8 @@ export default (layer, filter_entry) => {
         // Reload layer.
         layer.get();
 
+        if (layer.filter.infoj) layer.filter.run_output.style.display = 'block';
+
       }
     });
 
