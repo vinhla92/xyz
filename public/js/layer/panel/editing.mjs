@@ -94,6 +94,8 @@ export default layer => {
   
   if(layer.edit.catchment){
 
+    layer.edit.catchment = {};
+
     // add minute slider // add mode of transport
     let block = _xyz.utils.createElement({
       tag: 'div',

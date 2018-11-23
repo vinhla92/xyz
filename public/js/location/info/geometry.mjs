@@ -4,8 +4,7 @@ import catchment from './catchment.mjs';
 
 export default (record, entry) => {
 
-  // 
-  if (entry.edit.catchment) return catchment(record, entry);
+  if (entry.edit.catchment) catchment(record, entry);
 
   if (!entry.value) return;
 
@@ -17,7 +16,8 @@ export default (record, entry) => {
     fillOpacity: 0.3
   };
 
-  const geometry = L.geoJson(
+  //const geometry = L.geoJson(
+  entry.edit.catchment.geometry = L.geoJson(
     {
       type: 'Feature',
       geometry: JSON.parse(entry.value)
@@ -27,6 +27,6 @@ export default (record, entry) => {
       style: style
     }).addTo(_xyz.map);
 
-  record.location.geometries.push(geometry);
+  record.location.geometries.push(entry.edit.catchment.geometry);
 
 };
