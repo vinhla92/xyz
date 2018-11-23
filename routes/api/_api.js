@@ -26,8 +26,6 @@ module.exports = fastify => {
 
   require('./location/edit/image_upload')(fastify);
 
-  require('./location/edit/new_aggregate')(fastify);
-
   require('./location/edit/new_catchment')(fastify);
 
   require('./location/edit/new')(fastify);
@@ -45,6 +43,8 @@ module.exports = fastify => {
   require('./location/select/latlng_nnearest')(fastify);
 
   require('./location/select/latlng_contains')(fastify);
+
+  require('./location/select/aggregate')(fastify);
 
   require('./location/field_range')(fastify);
 

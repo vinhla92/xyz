@@ -361,9 +361,15 @@
                     "qID": "id",
                     "table": "dev_retailpoints",
                     "filter": {
-                        "output": {
-                            "layer": "retail_points_output"
-                        }
+                        "infoj":[
+                            {
+                                "label": "ID count",
+                                "field": "retailpoint_id",
+                                "type": "integer",
+                                "inline": true,
+                                "fieldfx": "count(retailpoint_id)"
+                            }
+                        ]
                     },
                     "style": {
                         "themes": {
@@ -594,16 +600,6 @@
                             }
                         }
                     ]
-                },
-                "retail_points_output": {
-                    "name": "RP Output",
-                    "format": "geojson",
-                    "dbs": "XYZ",
-                    "table": "dev_retailpoints_output",
-                    "qID": "id",
-                    "edit": {
-                        "delete": true
-                    }
                 },
                 "grid": {
                     "name": "Grid",

@@ -23,8 +23,10 @@ export default record => {
 
         if (_xyz.state && _xyz.state != 'select') _xyz.switchState(record.location.layer, _xyz.state);
 
-        _xyz.hooks.filter('select', record.location.layer + '!' + record.location.table + '!' + record.location.id + '!' + record.location.marker[0] + ';' + record.location.marker[1]);
-
+        if (record.location.id) {
+          _xyz.hooks.filter('select', record.location.layer + '!' + record.location.table + '!' + record.location.id + '!' + record.location.marker[0] + ';' + record.location.marker[1]);
+        }
+        
         record.location.geometries.forEach(geom => _xyz.map.removeLayer(geom));
         record.location = {};
         record.location.geometries = [];

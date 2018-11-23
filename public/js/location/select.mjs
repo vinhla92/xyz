@@ -18,17 +18,6 @@ export default location => {
   // Prevent crash for select from hook when layer is no accessible to user.
   if (!layer) return;
 
-  // Iterate through the layer infoj to find whether field require reference layer
-  layer.infoj.forEach(entry => {
-    if (typeof entry.layer === 'string') {
-      entry.layer = {
-        table: _xyz.layers.list[entry.layer].table,
-        geom: _xyz.layers.list[entry.layer].geom || 'geom',
-        filter: _xyz.layers.list[entry.layer].filter || {}
-      };
-    }
-  });
-
   const xhr = new XMLHttpRequest();
 
   xhr.open('GET', _xyz.host + '/api/location/select/id?' + _xyz.utils.paramString({

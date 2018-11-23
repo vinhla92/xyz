@@ -1,4 +1,4 @@
-module.exports = { newRecord, newAggregate, setIndices };
+module.exports = { newRecord, newAggregate };
 
 async function newRecord(req, res, fastify) {
 
@@ -25,16 +25,16 @@ async function newRecord(req, res, fastify) {
     INSERT INTO ${table} (${geom} ${geom_3857 ? `, ${geom_3857}` : ''} ${layer.log ? `, ${layer.log.field || 'log'}` : ''})
         SELECT ST_SetSRID(ST_GeomFromGeoJSON('${geometry}'), 4326)
         ${geom_3857 ? `, ST_Transform(ST_SetSRID(ST_GeomFromGeoJSON('${geometry}'), 4326), 3857)` : ''}
-        ${layer.log && layer.log.table ? `,'{ "user": "${token.email}", "op": "new", "time": "${Date.now()}"}'`: ''}
+        ${layer.log && layer.log.table ? `,'{ "user": "${token.email}", "op": "new", "time": "${Date.now()}"}'` : ''}
         RETURNING ${qID} AS id;`;
 
   var rows = await global.pg.dbs[layer.dbs](q);
 
-  if (rows.err) return res.code(500).send('soz. it\'s not you. it\'s me.');
+  if (rows.err) return res.code(500).send('Failed to query PostGIS table.');
 
   if (layer.log && layer.log.table) await writeLog(layer, rows[0].id);
 
-  if(layer.mvt_cache) await updateMvtCache(fastify, layer, rows[0].id);
+  if (layer.mvt_cache) await updateMvtCache(fastify, layer, rows[0].id);
 
   res.code(200).send(rows[0].id.toString());
 }
@@ -51,10 +51,11 @@ async function writeLog(layer, id) {
 
   var rows = await global.pg.dbs[layer.dbs](q, [id]);
 
-  if (rows.err) return res.code(500).send('soz. it\'s not you. it\'s me.');
+  if (rows.err) return res.code(500).send('Failed to query PostGIS table.');
 }
 
-async function updateMvtCache(fastify, layer, id){
+
+async function updateMvtCache(fastify, layer, id) {
 
   var q = `
       DELETE FROM ${layer.mvt_cache} 
@@ -64,53 +65,6 @@ async function updateMvtCache(fastify, layer, id){
 
   var rows = await global.pg.dbs[layer.dbs](q, [id]);
 
-  if (rows.err) return res.code(500).send('soz. it\'s not you. it\'s me.');
-
-}
-
-async function setIndices(req, res, fastify){
-  
-  const del = '__'; // column alias delimiter
-
-  const token = req.query.token ?
-    fastify.jwt.decode(req.query.token) : { access: 'public' };
-
-  let
-    params = req.body,
-    idx = params.idx;
-
-  let layer = global.workspace[token.access].config.locales[params.locale].layers[params.layer];
-
-  let fields = [];
-  Object.keys(idx).map(key => {
-    let row = `MAX(${key}) as ${key}${del}max, MIN(${key}) as ${key}${del}min, AVG(${key}) as ${key}${del}avg`;
-    fields.push(row);
-  });
-
-  let q = `SELECT ${fields.join(',')} FROM ${params.table}`;
-    
-  var rows = await global.pg.dbs[layer.dbs](q);
-
-  if (rows.err) return res.code(500).send('soz. it\'s not you. it\'s me.');
-
-
-  Object.keys(rows[0]).forEach(key => {
-    let _k = key.split(del);
-        
-    if(!_k.length || _k.length < 2) return;
-        
-    if(_k.length === 2){
-      idx[_k[0]][_k[1]] = rows[0][key];
-    } else {
-      let _fn = _k[_k.length-1];
-      let _f = _k.slice(0, _k.length-1);
-      _f = _f.join(del);
-
-      idx[_f][_fn] = rows[0][key];
-    }
-  });
-
-  //console.log(idx);
-  res.code(200).send(idx);
+  if (rows.err) return res.code(500).send('Failed to query PostGIS table.');
 
 }

@@ -19,26 +19,40 @@ export default (panel, layer) => _xyz.utils.createElement({
       // Create filter from legend and current filter.
       const filter = Object.assign({},layer.filter.current,layer.filter.legend);
     
-      xhr.open('GET', _xyz.host + '/api/location/new/aggregate?' + _xyz.utils.paramString({
+      xhr.open('GET', _xyz.host + '/api/location/select/aggregate?' + _xyz.utils.paramString({
         locale: _xyz.locale,
         layer: layer.key,
-        token: _xyz.token,
-        filter: JSON.stringify(filter)
+        table: layer.table,
+        filter: JSON.stringify(filter),
+        token: _xyz.token
       }));
     
       xhr.onload = e => {
 
         if (e.target.status !== 200) return;
 
-        let json = JSON.parse(e.target.response);
+        const json = JSON.parse(e.target.response);
     
-        _xyz.locations.select({
-          layer: layer.filter.output.layer,
-          table: _xyz.layers.list[layer.filter.output.layer].table,
-          id: json.id,
-          marker: [json.lng, json.lat]
-          //filter: JSON.stringify(layer.filter.current) || ''
-        });
+        // Find free records in locations array.
+        let freeRecords = _xyz.locations.list.filter(record => !record.location);
+
+        // Return from selection if no free record is available.
+        if (freeRecords.length === 0) return;
+
+        // Assign location to the first free record.
+        const record = freeRecords[0];
+
+        record.location = {
+          geometry: JSON.parse(json.geomj),
+          infoj: json.infoj,
+          layer: layer.key
+        };
+
+        // Draw the record to the map.
+        _xyz.locations.draw(record);
+
+        // List the record
+        _xyz.locations.add(record);
 
       };
     
