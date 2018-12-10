@@ -90,17 +90,22 @@ export default (record, group) => {
       event: 'click',
       funct: e => {
         e.stopPropagation();
-        if(e.target.textContent === chartIcon(group)) {
-          group.fields = record.location.infoj.filter(entry => entry.group === group.label);
-          group.div.appendChild(chart(group));
-          group.table.style.display = 'none';
-          e.target.textContent = 'view_list';
-          e.target.title = 'Show table';
-        } else if(e.target.textContent === 'view_list'){
-          e.target.textContent = chartIcon(group);
-          e.target.title = 'Show chart';
-          group.table.style.display = 'table';
-          group.div.removeChild(group.div.lastChild);
+        if(!group.div.classList.contains('expanded')){
+          group.div.classList.add('expanded'); 
+          return;
+        } else {
+          if(e.target.textContent === chartIcon(group)) {
+            group.fields = record.location.infoj.filter(entry => entry.group === group.label);
+            group.div.appendChild(chart(group));
+            group.table.style.display = 'none';
+            e.target.textContent = 'view_list';
+            e.target.title = 'Show table';
+          } else if(e.target.textContent === 'view_list'){
+            e.target.textContent = chartIcon(group);
+            e.target.title = 'Show chart';
+            group.table.style.display = 'table';
+            group.div.removeChild(group.div.lastChild);
+          }
         }
       }
     }
@@ -112,7 +117,7 @@ export default (record, group) => {
       cellPadding: '0',
       cellSpacing: '0',
       width: '95%',
-      position: 'relative' // required for responsive chart
+      position: 'relative'
     },
     appendTo: group.div
   });
@@ -122,10 +127,10 @@ export default (record, group) => {
 function chartIcon(group){
   let _icon;
   switch(group.chart.type){
-  case 'bar': _icon = 'insert_chart_outlined'; break;
+  case 'bar': _icon = 'bar_chart'; break;
   case 'pie' : _icon = 'pie_chart'; break;
   case 'doughnut': _icon = 'donut_small'; break;
-  case 'horizontalBar': _icon = 'notes'; break;
+  case 'horizontalBar': _icon = 'bar_chart'; break;
   case 'bubble': _icon = 'bubble_chart'; break;
   case 'scatter': _icon = 'scatter_plot'; break;
   default: 'show_chart';
