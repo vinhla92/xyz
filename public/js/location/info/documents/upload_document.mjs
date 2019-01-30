@@ -1,12 +1,12 @@
-import delete_image from './delete_image.mjs';
+import delete_document from './delete_document.mjs';
 
-export default (_xyz, record, entry, img, dataURL) => {
+export default (_xyz, record, entry, doc, dataURL) => {
 
   const blob = _xyz.utils.dataURLToBlob(dataURL);
 
   const xhr = new XMLHttpRequest();
 
-  xhr.open('POST', _xyz.host + '/api/location/edit/images/upload?' + _xyz.utils.paramString({
+  xhr.open('POST', _xyz.host + '/api/location/edit/documents/upload?' + _xyz.utils.paramString({
     dbs: record.location.dbs,
     table: record.location.table,
     field: entry.field,
@@ -18,21 +18,20 @@ export default (_xyz, record, entry, img, dataURL) => {
   xhr.setRequestHeader('Content-Type', 'application/octet-stream');
 
   xhr.onload = e => {
-
-    if (e.target.status !== 200) return console.log('image_upload failed');
+    if (e.target.status !== 200) return console.log('document_upload failed');
 
     const json = JSON.parse(e.target.responseText);
 
-    img.style.opacity = 1;
-    img.style.border = '3px solid #eee';
-    img.id = json.image_id;
-    img.src = json.image_url;
+    doc.style.opacity = 1;
+    doc.style.border = '3px solid #eee';
+    doc.id = json.doc_id;
+    doc.src = json.doc_url;
 
     // add delete button / control
     _xyz.utils.createElement({
       tag: 'button',
       options: {
-        title: 'Delete image',
+        title: 'Delete document',
         className: 'btn_del',
         innerHTML: '<i class="material-icons">delete_forever</i>'
       },
@@ -41,20 +40,11 @@ export default (_xyz, record, entry, img, dataURL) => {
         event: 'click',
         funct: e => {
           e.target.remove();
-          delete_image(_xyz, record, entry, img);
+          delete_document(_xyz, record, entry, doc);
         }
       }
     });
 
   };
 
-  img.style.opacity = '0';
-
-  xhr.onprogress = e => {
-    if (e.lengthComputable) {
-      img.style.opacity = e.loaded / e.total;
-    }
-  };
-
-  xhr.send(blob);
 };

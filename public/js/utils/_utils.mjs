@@ -30,4 +30,6 @@ export {datePicker, formatDate, formatDateTime, meltDateStr} from './datePicker.
 
 export {setStrokeWeight} from './setStrokeWeight.mjs';
 
+export {dataURLToBlob} from './dataURLToBlob.mjs';
+
 export const compose = (...fns) => () => fns.forEach(f=>f());
