@@ -4,7 +4,7 @@ import delete_image from './delete_image.mjs';
 
 export default (_xyz, record, entry) => {
 
-  const images = entry.value.reverse() || [];
+  const images = entry.value ? entry.value.reverse() : [];
 
   if (!images.length && !entry.edit) return entry.row.remove();
 
