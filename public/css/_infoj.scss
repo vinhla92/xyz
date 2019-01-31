@@ -47,11 +47,11 @@
     .num {
         text-align: right;
     }
-    .addImageCell {
+    .addImageCell, .addDocCell {
         vertical-align: middle;
         height: 170px;
         i {
-            color: #090;
+            color: $glxgreen;
             font-size: 70px;
             padding: 20px;
             text-shadow: 2px 2px 1px #777;

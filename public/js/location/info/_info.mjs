@@ -4,6 +4,8 @@ import streetview from './streetview.mjs';
 
 import images from './images/_images.mjs';
 
+import documents from './documents/_documents.mjs';
+
 import geometry from './geometry.mjs';
 
 import log from './log.mjs';
@@ -119,6 +121,9 @@ export default (_xyz, record) => {
 
       // If input is images create image control and return from object.map function.
       if (entry.type === 'images') return images(_xyz, record, entry);
+
+      // If input is documents add doc control
+      if (entry.type === 'documents') return documents(_xyz, record, entry);
 
       // Create log control.
       if (entry.type === 'log') return log(_xyz, record, entry);
