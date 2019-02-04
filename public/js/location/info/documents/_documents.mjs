@@ -43,52 +43,51 @@ export default (_xyz, record, entry) => {
     appendTo: entry.val
   });
 
-	 // Create a table row to hold document array.
-	 documentControl.row = _xyz.utils.createElement({
-	 	tag: 'tr',
-	 	appendTo: documentControl.container
-	 });
+  // Create a table row to hold document array.
+  documentControl.row = _xyz.utils.createElement({
+  	tag: 'tr',
+  	appendTo: documentControl.container
+  });
 
-	 if (entry.edit) add_document(_xyz, documentControl, entry);
+  if (entry.edit) add_document(_xyz, documentControl, entry);
 
-	   // add images if there are any
-	   for (let doc of docs) {
+  // add images if there are any
+  for (let doc of docs) {
+  	
+  	const docCell = _xyz.utils.createElement({
+  		tag: 'td',
+  		appendTo: documentControl.row
+  	});
 
-	   	const docCell = _xyz.utils.createElement({
-	   		tag: 'td',
-	   		appendTo: documentControl.row
-	   	});
+  	const _doc = _xyz.utils.createElement({
+	   	tag: 'div', // what tag?
+	   	options: {
+	   		id: doc.replace(/.*\//, '').replace(/\.([\w-]{3})/, ''),
+	   		src: doc
+	   	},
+	   	style: {
+	   		border: '3px solid #EEE'
+	   	},
+	   	appendTo: docCell
+    });
 
-	   	const _doc = _xyz.utils.createElement({
-	   		tag: 'img', // what tag?
-	   		options: {
-	   			id: doc.replace(/.*\//, '').replace(/\.([\w-]{3})/, ''),
-	   			src: doc
-	   		},
-	   		style: {
-	   			border: '3px solid #EEE'
-	   		},
-	   		appendTo: docCell
-	   	});
-
-	   	// Add delete button if doc entry is editable.
-	   	if (entry.edit) _xyz.utils.createElement({
-	   		tag: 'button',
-	   		options: {
-	   			title: 'Delete document',
-	   			className: 'btn_del',
-	   			innerHTML: '<i class="material-icons">delete_forever</i>'
-	   		},
-	   		appendTo: docCell,
-	   		eventListener: {
-	   			event: 'click',
-	   			funct: e => {
-	   				e.target.remove();
-	   				delete_document(_xyz, record, entry, _doc);
-	   			}
-	   		}
-	   	});
-
-	   }
+    // Add delete button if doc entry is editable.
+    if (entry.edit) _xyz.utils.createElement({
+      tag: 'button',
+      options: {
+        title: 'Delete document',
+        className: 'btn_del',
+        innerHTML: '<i class="material-icons">delete_forever</i>'
+      },
+      appendTo: docCell,
+      eventListener: {
+        event: 'click',
+        funct: e => {
+          e.target.remove();
+          delete_document(_xyz, record, entry, _doc);
+        }
+      }
+    });
+  }
 
 };

@@ -42,7 +42,7 @@ export default (_xyz, imageControl, entry) => {
   });
 
   // empty the file input value
-  imageControl.add_img_input.addEventListener('click', () => imageControl.add_img_input.value);
+  imageControl.add_img_input.addEventListener('click', () => imageControl.add_img_input.value = '');
 
   // add change event 
   imageControl.add_img_input.addEventListener('change', function () {

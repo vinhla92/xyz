@@ -1,8 +1,6 @@
 import delete_document from './delete_document.mjs';
 
-export default (_xyz, record, entry, doc, dataURL) => {
-
-  const blob = _xyz.utils.dataURLToBlob(dataURL);
+export default (_xyz, record, entry, doc, formData) => {
 
   const xhr = new XMLHttpRequest();
 
@@ -13,9 +11,9 @@ export default (_xyz, record, entry, doc, dataURL) => {
     qID: record.location.qID,
     id: record.location.id,
     token: _xyz.token
-  }));
+  }), true);
 
-  xhr.setRequestHeader('Content-Type', 'application/octet-stream');
+  //xhr.setRequestHeader('Content-Type', 'application/octet-stream');
 
   xhr.onload = e => {
     if (e.target.status !== 200) return console.log('document_upload failed');
@@ -46,5 +44,8 @@ export default (_xyz, record, entry, doc, dataURL) => {
     });
 
   };
+
+  xhr.send(formData);
+  return false;
 
 };

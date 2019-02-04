@@ -44,65 +44,85 @@ export default (_xyz, documentControl, entry) => {
   });
 
   // empty the file input value
-  documentControl.add_doc_input.addEventListener('click', () => documentControl.add_doc_input.value);
+  documentControl.add_doc_input.addEventListener('click', () => {
+    documentControl.add_doc_input.value = '';
+  });
+
 
   // add change event 
-  documentControl.add_doc_input.addEventListener('change', function (){
-
-    console.log(this);
-    //if ('files' in x) {}
+  documentControl.add_doc_input.addEventListener('change', function (e){
 
     const newDoc = document.createElement('td');
-    const reader = new FileReader();
 
-    reader.onload = function (readerOnload) {
+    let file = this.files[0];
+    let formData = new FormData();
+    formData.append('file', file);
 
-      const doc = new File();
+    //console.log('formData');
+    //console.log(formData); // print this to see content, if name and extension can be accessed
 
-      doc.onload = function(){
+    let file_meta = _xyz.utils.createElement({
+      tag: 'div',
+      appendTo: newDoc
+    });
 
-        // do something here to display added file
-        // Add control to delete image which is not uploaded yet.
-        const btn_del = _xyz.utils.createElement({
-          tag: 'button',
-          options: {
-            title: 'Delete document',
-            className: 'btn_del',
-            innerHTML: '<i class="material-icons">delete_forever</i>'
-          },
-          appendTo: newImage,
-          eventListener: {
-            event: 'click',
-            funct: () => {
-              newDoc.remove();
-            }
-          }
-        });
+    let file_name = _xyz.utils.createElement({
+      tag: 'div',
+      options: {
+        textContent: file.name
+      },
+      appendTo: file_meta
+    });
 
-        // Add control to upload image.
-        const btn_save = _xyz.utils.createElement({
-          tag: 'button',
-          options: {
-            title: 'Save document',
-            className: 'btn_save',
-            innerHTML: '<i class="material-icons">cloud_upload</i>'
-          },
-          appendTo: newImage,
-          eventListener: {
-            event: 'click',
-            funct: () => {
-              btn_del.remove();
-              btn_save.remove();
-              upload_document(_xyz, documentControl.record, entry, doc, dataURL);
-            }
-          }
-        });
+    /*let file_size = _xyz.utils.createElement({
+      tag: 'div',
+      options: {
+        textContent: file.size
+      },
+      appendTo: file_meta
+    });*/
 
-      };
+    // Add control to delete document which is not uploaded yet.
+    const btn_del = _xyz.utils.createElement({
+      tag: 'button',
+      options: {
+        title: 'Delete document',
+        className: 'btn_del',
+        innerHTML: '<i class="material-icons">delete_forever</i>'
+      },
+      appendTo: newDoc,
+      eventListener: {
+        event: 'click',
+        funct: () => {
+          newDoc.remove();
+          e.target.value = '';
+        }
+      }
+    });
 
-    };
+    // Add control to upload document
+    const btn_save = _xyz.utils.createElement({
+      tag: 'button',
+      options: {
+        title: 'Save document',
+        className: 'btn_save',
+        innerHTML: '<i class="material-icons">cloud_upload</i>'
+      },
+      appendTo: newDoc,
+      eventListener: {
+        event: 'click',
+        funct: () => {
+          btn_del.remove();
+          btn_save.remove();
+          e.target.value = '';
+          //upload_document(...); 
+        }
+      }
+    });
 
-
+    //console.log(documentControl.row);
+    // insert new image before last image
+    documentControl.row.insertBefore(newDoc, documentControl.row.childNodes[1]);
 
   });
 
