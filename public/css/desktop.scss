@@ -34,6 +34,8 @@ $onyx: #383836;
 @import 'leaflet';
 @import 'location';
 @import 'attribution';
+@import 'tableview';
+@import 'tabulator_simple';
 *,
 *::after,
 *::before {
@@ -102,4 +104,8 @@ i,
     font-family: ffmark_black;
     padding-top: 30%;
     text-shadow: 2px 2px #cf9;
+}
+
+.leaflet-left .leaflet-control-scale {
+    margin-left: 63px;
 }
