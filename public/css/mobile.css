@@ -277,7 +277,7 @@ input[type=range]::-moz-range-thumb {
 
 .doc-container {
   overflow-x: scroll;
-  position: absolute;
+  /*position: absolute;*/
   bottom: 0;
   width: 100%; }
   .doc-container td {
@@ -285,8 +285,8 @@ input[type=range]::-moz-range-thumb {
     padding: 5px; }
     .doc-container td i {
       color: #079e00;
-      font-size: 16px;
-      vertical-align: bottom; }
+      font-size: 20px;
+      vertical-align: middle; }
     .doc-container td button {
       display: block;
       background: none;
@@ -640,13 +640,13 @@ input[type=range]::-moz-range-thumb {
       display: none; }
   .infojTable .addDocCell {
     /*vertical-align: middle;
-    height: 30px;
-    i {
-        color: $glxgreen;
-        font-size: 20px;
-        padding: 10px;
-        text-shadow: 2px 2px 1px #777;
-    }*/ }
+    height: 30px;*/
+    text-align: center; }
+    .infojTable .addDocCell i {
+      color: #079e00;
+      font-size: 40px;
+      padding: 5px;
+      text-shadow: 2px 2px 6px #888; }
     .infojTable .addDocCell input {
       display: none; }
   .infojTable .table-section {

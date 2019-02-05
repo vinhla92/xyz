@@ -25,20 +25,20 @@ export default (_xyz, record, entry, doc, public_id, blob) => {
     const json = JSON.parse(e.target.responseText);
 
     doc.style.opacity = 1;
-    doc.style.border = '3px solid #eee';
+    //doc.style.border = '3px solid #eee';
     doc.childNodes[0].id = json.doc_id;
     //doc.childNodes[0].download = json.doc_url;
     doc.childNodes[0].href = json.doc_url;
 
     // add delete button / control
     _xyz.utils.createElement({
-      tag: 'button',
+      tag: 'span',//'button',
       options: {
         title: 'Delete document',
         className: 'btn_del',
         innerHTML: '<i class="material-icons">clear</i>'
       },
-      appendTo: doc.parentElement,
+      appendTo: doc,
       eventListener: {
         event: 'click',
         funct: e => {

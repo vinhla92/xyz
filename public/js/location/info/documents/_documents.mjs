@@ -24,8 +24,9 @@ export default (_xyz, record, entry) => {
       colSpan: '2'
     },
     style: {
-      position: 'relative',
-      height: '80px'
+      /*position: 'relative',
+      height: '180px',
+      display: 'block'*/
     },
     appendTo: entry.row
   });
@@ -73,7 +74,7 @@ export default (_xyz, record, entry) => {
 	   		target: '_blank'
 	   	},
 	   	style: {
-	   		border: '3px solid #EEE'
+	   		//border: '3px solid #EEE'
 	   	},
 	   	appendTo: docCell
     });

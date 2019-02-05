@@ -8,6 +8,7 @@ export default (_xyz, documentControl, record, entry) => {
       classList: 'addDocCell'
     },
     style: {
+      display: 'block'
       // position: 'absolute',
       // height: '100px',
       // width: '100%'
@@ -36,14 +37,14 @@ export default (_xyz, documentControl, record, entry) => {
   });
 
   // Add doc upload icon to label.
-  /*_xyz.utils.createElement({
+  _xyz.utils.createElement({
     tag: 'i',
     options: {
       className: 'material-icons cursor noselect',
-      textContent: 'attachment'
+      textContent: 'add_circle_outline'
     },
     appendTo: documentControl.add_doc_label
-  });*/
+  });
 
   // Add doc input.
   documentControl.add_doc_input = _xyz.utils.createElement({
@@ -57,17 +58,6 @@ export default (_xyz, documentControl, record, entry) => {
     appendTo: documentControl.add_doc
   });
 
-  _xyz.utils.createElement({
-    tag: 'div',
-    options: {
-      className: 'btn_state btn_wide cursor noselect',
-      textContent: 'Add document'
-    },
-    style: {
-      //float: 'right'
-    },
-    appendTo: documentControl.add_doc
-  });
 
   // empty the file input value
   documentControl.add_doc_input.addEventListener('click', () => {
@@ -78,7 +68,13 @@ export default (_xyz, documentControl, record, entry) => {
   // add change event 
   documentControl.add_doc_input.addEventListener('change', function (e){
 
-    const newDoc = document.createElement('td');
+    const newDoc = document.createElement('tr');
+    //const newDoc = document.createElement('tr');
+    
+    let newDoc_td = _xyz.utils.createElement({
+      tag: 'td',
+      appendTo: newDoc
+    });
 
     const reader = new FileReader();
 
@@ -105,7 +101,7 @@ export default (_xyz, documentControl, record, entry) => {
         textContent: file.name,
         target: '_blank'
       },
-      appendTo: newDoc
+      appendTo: newDoc_td//newDoc
     });
 
     /*let file_size = _xyz.utils.createElement({
@@ -117,14 +113,31 @@ export default (_xyz, documentControl, record, entry) => {
     });*/
 
     // Add control to delete document which is not uploaded yet.
-    const btn_del = _xyz.utils.createElement({
+    
+    /*const btn_del = _xyz.utils.createElement({
       tag: 'button',
       options: {
         title: 'Delete document',
         className: 'btn_del',
         innerHTML: '<i class="material-icons">clear</i>'
       },
-      appendTo: newDoc,
+      appendTo: newDoc_td,//newDoc,
+      eventListener: {
+        event: 'click',
+        funct: () => {
+          newDoc.remove();
+        }
+      }
+    });*/
+
+    const btn_del = _xyz.utils.createElement({
+      tag: 'span',
+      options: {
+        title: 'Delete document',
+        className: 'btn_del',
+        innerHTML: '<i class="material-icons">clear</i>'
+      },
+      appendTo: newDoc_td,//newDoc,
       eventListener: {
         event: 'click',
         funct: () => {
@@ -134,14 +147,14 @@ export default (_xyz, documentControl, record, entry) => {
     });
 
     // Add control to upload document
-    const btn_save = _xyz.utils.createElement({
+    /*const btn_save = _xyz.utils.createElement({
       tag: 'button',
       options: {
         title: 'Save document',
         className: 'btn_save',
         innerHTML: '<i class="material-icons">cloud_upload</i>'
       },
-      appendTo: newDoc,
+      appendTo: newDoc_td,//newDoc,
       eventListener: {
         event: 'click',
         funct: () => {
@@ -150,10 +163,30 @@ export default (_xyz, documentControl, record, entry) => {
           upload_document(_xyz, record, entry, newDoc, public_id, documentControl.blob); 
         }
       }
+    });*/
+
+    // Add control to upload document
+    const btn_save = _xyz.utils.createElement({
+      tag: 'span',
+      options: {
+        title: 'Save document',
+        className: 'btn_save',
+        innerHTML: '<i class="material-icons">cloud_upload</i>'
+      },
+      appendTo: newDoc_td,//newDoc,
+      eventListener: {
+        event: 'click',
+        funct: () => {
+          btn_del.remove();
+          btn_save.remove();
+          upload_document(_xyz, record, entry, newDoc_td, public_id, documentControl.blob); 
+        }
+      }
     });
 
     // insert new image before last image
-    documentControl.row.insertBefore(newDoc, documentControl.row.childNodes[1]);
+    //documentControl.row.insertBefore(newDoc, documentControl.row.childNodes[0]);
+    documentControl.row.appendChild(newDoc);
 
   });
 
