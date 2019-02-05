@@ -6,15 +6,13 @@
     td {
         position: relative;
         padding: 5px;
-        img {
-            height: 160px;
-            box-shadow: 2px 2px 1px #777;
-            border-radius: 10px;
-            -webkit-transition: opacity 0.2s linear;
-            -moz-transition: opacity 0.2s linear;
-            -o-transition: opacity 0.2s linear;
-            transition: opacity 0.2s linear;
+        
+        i {
+            color: $glxgreen;
+            font-size: 16px;
+            vertical-align: bottom;
         }
+        
         button {
             display: block;
             background: none;

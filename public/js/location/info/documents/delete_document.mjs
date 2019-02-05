@@ -9,7 +9,7 @@ export default (_xyz, record, entry, doc) => {
     field: entry.field,
     id: record.location.id,
     doc_id: doc.id,
-    doc_src: encodeURIComponent(doc.src),
+    doc_src: encodeURIComponent(doc.href),
     token: _xyz.token
   }));
 

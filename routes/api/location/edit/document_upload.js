@@ -6,7 +6,7 @@ module.exports = fastify => {
     handler: (req, res) => {
 			
       const cloudinary = process.env.CLOUDINARY ? process.env.CLOUDINARY.split(' ') : [];
-			
+
       var data = [];
 
       req.req.on('data', chunk => data.push(chunk));
@@ -17,12 +17,16 @@ module.exports = fastify => {
 
         let 
           ts = Date.now(),
-          sig = require('crypto').createHash('sha1').update(`folder=${cloudinary[3]}&timestamp=${ts}${cloudinary[1]}`).digest('hex');
-
+          sig = require('crypto').createHash('sha1')
+            .update(`folder=${cloudinary[3]}&public_id=${req.query.public_id}&timestamp=${ts}${cloudinary[1]}`)
+            .digest('hex');
+        
         require('request').post({
-          url: `https://api.cloudinary.com/v1_1/${cloudinary[2]}/image/upload`,
+          url: `https://api.cloudinary.com/v1_1/${cloudinary[2]}/auto/upload`,
           body: {
-            'file': `data:image/jpeg;base64,${req.body.toString('base64')}`,
+            'file': (req.query.type + req.body.toString('base64')),
+            'public_id': `${req.query.public_id}`,
+            'resource_type': 'auto',
             'api_key': cloudinary[0],
             'folder': cloudinary[3],
             'timestamp': ts,
@@ -32,6 +36,8 @@ module.exports = fastify => {
         }, async (err, response, body) => {
 
           if (err) return console.error(err);
+
+          console.log(body);
 
           const token = req.query.token ?
             fastify.jwt.decode(req.query.token) : { access: 'public' };
@@ -50,6 +56,9 @@ module.exports = fastify => {
 
           var q = `UPDATE ${table} SET ${field} = array_append(${field}, '${body.secure_url}')
                      WHERE ${qID} = $1;`;
+
+          console.log(q);
+          console.log(id);
 
           // add filename to documents field
           await global.pg.dbs[req.query.dbs](q, [id]);

@@ -26,6 +26,10 @@ module.exports = fastify => {
 
   require('./location/edit/image_upload')(fastify);
 
+  require('./location/edit/document_delete')(fastify);
+
+  require('./location/edit/document_upload')(fastify);
+
   // Mapbox Isochrones
 
   require('./location/edit/catchment_create')(fastify);

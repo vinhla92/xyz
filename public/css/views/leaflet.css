@@ -303,15 +303,26 @@
       color: #090; }
   .infojTable .num {
     text-align: right; }
-  .infojTable .addImageCell, .infojTable .addDocCell {
+  .infojTable .addImageCell {
     vertical-align: middle;
     height: 170px; }
-    .infojTable .addImageCell i, .infojTable .addDocCell i {
+    .infojTable .addImageCell i {
       color: #090;
       font-size: 70px;
       padding: 20px;
       text-shadow: 2px 2px 1px #777; }
-    .infojTable .addImageCell input, .infojTable .addDocCell input {
+    .infojTable .addImageCell input {
+      display: none; }
+  .infojTable .addDocCell {
+    /*vertical-align: middle;
+    height: 30px;
+    i {
+        color: $glxgreen;
+        font-size: 20px;
+        padding: 10px;
+        text-shadow: 2px 2px 1px #777;
+    }*/ }
+    .infojTable .addDocCell input {
       display: none; }
   .infojTable .table-section {
     margin-top: 10px; }

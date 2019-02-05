@@ -16,7 +16,7 @@ export default (_xyz, record, entry) => {
     appendTo: record.table
   });
 
-  // Create a table cell for image control.
+  // Create a table cell for document control.
   entry.val = _xyz.utils.createElement({
     tag: 'td',
     options: {
@@ -25,7 +25,7 @@ export default (_xyz, record, entry) => {
     },
     style: {
       position: 'relative',
-      height: '180px'
+      height: '80px'
     },
     appendTo: entry.row
   });
@@ -49,21 +49,28 @@ export default (_xyz, record, entry) => {
   	appendTo: documentControl.container
   });
 
-  if (entry.edit) add_document(_xyz, documentControl, entry);
+  if (entry.edit) add_document(_xyz, documentControl, record, entry);
 
   // add images if there are any
   for (let doc of docs) {
+
+  	const docRow = _xyz.utils.createElement({
+  		tag: 'tr',
+  		appendTo: documentControl.row
+  	});
   	
   	const docCell = _xyz.utils.createElement({
   		tag: 'td',
-  		appendTo: documentControl.row
+  		appendTo: docRow//documentControl.row
   	});
 
   	const _doc = _xyz.utils.createElement({
-	   	tag: 'div', // what tag?
+	   	tag: 'a', // what tag?
 	   	options: {
 	   		id: doc.replace(/.*\//, '').replace(/\.([\w-]{3})/, ''),
-	   		src: doc
+	   		href: doc,
+	   		textContent: doc.split('/').pop(),
+	   		target: '_blank'
 	   	},
 	   	style: {
 	   		border: '3px solid #EEE'
@@ -73,11 +80,11 @@ export default (_xyz, record, entry) => {
 
     // Add delete button if doc entry is editable.
     if (entry.edit) _xyz.utils.createElement({
-      tag: 'button',
+      tag: 'span',
       options: {
         title: 'Delete document',
         className: 'btn_del',
-        innerHTML: '<i class="material-icons">delete_forever</i>'
+        innerHTML: '<i class="material-icons">clear</i>'
       },
       appendTo: docCell,
       eventListener: {

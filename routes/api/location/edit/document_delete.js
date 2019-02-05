@@ -9,10 +9,12 @@ module.exports = fastify => {
 
       let
         ts = Date.now(),
-        sig = require('crypto').createHash('sha1').update(`public_id=${req.query.image_id}&timestamp=${ts}${cloudinary[1]}`).digest('hex');
+        sig = require('crypto').createHash('sha1')
+          .update(`public_id=${req.query.doc_id}&timestamp=${ts}${cloudinary[1]}`)
+          .digest('hex');
 
       require('request').post({
-        url: `https://api.cloudinary.com/v1_1/${cloudinary[2]}/image/destroy`,
+        url: `https://api.cloudinary.com/v1_1/${cloudinary[2]}/raw/destroy`,
         body: {
           'api_key': cloudinary[0],
           'public_id': req.query.doc_id,
@@ -24,6 +26,8 @@ module.exports = fastify => {
 
         if (err) return console.error(err);
 
+        console.log(body);
+
         const token = req.query.token ?
           fastify.jwt.decode(req.query.token) : { access: 'public' };
 
@@ -33,7 +37,7 @@ module.exports = fastify => {
           field = req.query.field,
           qID = layer.qID ? layer.qID : 'id',
           id = req.query.id,
-          image_src = decodeURIComponent(req.query.doc_src);
+          doc_src = decodeURIComponent(req.query.doc_src);
 
         // Check whether string params are found in the settings to prevent SQL injections.
         if ([table, qID]
@@ -44,6 +48,9 @@ module.exports = fastify => {
         var q = `
         UPDATE ${table} SET ${field} = array_remove(${field}, '${doc_src}')
         WHERE ${qID} = $1;`;
+
+        console.log(q);
+        console.log(id);
 
         await global.pg.dbs[layer.dbs](q, [id]);
 
