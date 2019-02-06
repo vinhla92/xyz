@@ -25,14 +25,14 @@ export default (_xyz, record, entry, doc, public_id, blob) => {
     const json = JSON.parse(e.target.responseText);
 
     doc.style.opacity = 1;
-    //doc.style.border = '3px solid #eee';
     doc.childNodes[0].id = json.doc_id;
-    //doc.childNodes[0].download = json.doc_url;
+    //doc.childNodes[0].textContent = decodeURIComponent(json.doc_id.split('/').pop());
+    doc.childNodes[0].textContent = json.doc_id;
     doc.childNodes[0].href = json.doc_url;
 
-    // add delete button / control
+    // add delete control
     _xyz.utils.createElement({
-      tag: 'span',//'button',
+      tag: 'span',
       options: {
         title: 'Delete document',
         className: 'btn_del',
@@ -51,6 +51,5 @@ export default (_xyz, record, entry, doc, public_id, blob) => {
   };
 
   xhr.send(blob);
-  //return false;
 
 };

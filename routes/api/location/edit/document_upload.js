@@ -17,16 +17,22 @@ module.exports = fastify => {
 
         let 
           ts = Date.now(),
-          sig = require('crypto').createHash('sha1')
-            .update(`folder=${cloudinary[3]}&public_id=${req.query.public_id}&timestamp=${ts}${cloudinary[1]}`)
-            .digest('hex');
+          public_id_arr = decodeURIComponent(req.query.public_id).split('.');
+        ext = public_id_arr.pop();
+        public_id = `${public_id_arr}_${ts}.${ext}`;
+        sig = require('crypto').createHash('sha1')
+          .update(`folder=${cloudinary[3]}&public_id=${encodeURIComponent(public_id)}&timestamp=${ts}${cloudinary[1]}`)
+          .digest('hex');
+
+        console.log(req.query.type);
+
         
         require('request').post({
-          url: `https://api.cloudinary.com/v1_1/${cloudinary[2]}/auto/upload`,
+          url: `https://api.cloudinary.com/v1_1/${cloudinary[2]}/raw/upload`,
           body: {
-            'file': (req.query.type + req.body.toString('base64')),
-            'public_id': `${req.query.public_id}`,
-            'resource_type': 'auto',
+            'file': req.query.type + req.body.toString('base64'),
+            'public_id': encodeURIComponent(public_id),
+            'resource_type': 'raw',
             'api_key': cloudinary[0],
             'folder': cloudinary[3],
             'timestamp': ts,

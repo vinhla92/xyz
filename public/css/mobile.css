@@ -282,7 +282,18 @@ input[type=range]::-moz-range-thumb {
   width: 100%; }
   .doc-container td {
     position: relative;
-    padding: 5px; }
+    padding: 5px;
+    /* wrap long text without spaces */
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+    /* Firefox */
+    white-space: -pre-wrap;
+    /* Opera <7 */
+    white-space: -o-pre-wrap;
+    /* Opera 7 */
+    word-wrap: break-word;
+    /* IE */
+    word-break: break-all; }
     .doc-container td i {
       color: #079e00;
       font-size: 20px;

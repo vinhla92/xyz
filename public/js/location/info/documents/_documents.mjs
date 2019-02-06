@@ -23,11 +23,6 @@ export default (_xyz, record, entry) => {
       className: 'val',
       colSpan: '2'
     },
-    style: {
-      /*position: 'relative',
-      height: '180px',
-      display: 'block'*/
-    },
     appendTo: entry.row
   });
 
@@ -70,11 +65,8 @@ export default (_xyz, record, entry) => {
 	   	options: {
 	   		id: doc.replace(/.*\//, '').replace(/\.([\w-]{3})/, ''),
 	   		href: doc,
-	   		textContent: doc.split('/').pop(),
+	   		textContent: decodeURIComponent(decodeURIComponent(doc.split('/').pop())),
 	   		target: '_blank'
-	   	},
-	   	style: {
-	   		//border: '3px solid #EEE'
 	   	},
 	   	appendTo: docCell
     });
