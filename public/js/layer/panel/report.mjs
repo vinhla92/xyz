@@ -46,7 +46,7 @@ export default (_xyz, layer) => {
 
 		layer.report[_r.name].addEventListener('click', () => {
 			console.log('create ' + _r.name + ' in a new tab with ' + _r.template);
-			//window.open(_xyz.host + '/layer/report?layer=' + entry.location.layer  + '&id=' + entry.location.id + '&locale=' + _xyz.workspace.locale.key + '&token=' + _xyz.token + '&template=' + template + '&layers=' + _xyz.hooks.current.layers, '_blank');
+			window.open(_xyz.host + '/layer/report?layer=' + entry.location.layer  + '&locale=' + _xyz.workspace.locale.key + '&token=' + _xyz.token + '&template=' + template + '&layers=' + _xyz.hooks.current.layers, '_blank');
 		});
 	});
 }
