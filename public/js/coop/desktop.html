@@ -11,79 +11,216 @@
 
     <script src="{{:dir}}/js/build/xyz_control_bundle.js" defer></script>
 
-    <!-- Original github source disabled -->
-    <!--<script type="application/javascript" src="{{:dir}}/proxy/cdn?uri=https://raw.githubusercontent.com/GEOLYTIX/coop/master/desktop.js&type=application/javascript" defer></script>-->
+    <!-- Original github source -->
+    <script type="application/javascript" src="{{:dir}}/proxy/cdn?uri=https://raw.githubusercontent.com/GEOLYTIX/coop/master/desktop.js&type=application/javascript" defer></script>
 
-    <!-- Stored locally for development purpose -->
-    <script type="application/javascript" src="{{:dir}}/js/coop/desktop.js" defer></script>
+    <!-- Stored locally for development purpose 
+    <script type="application/javascript" src="{{:dir}}/js/coop/desktop.js" defer></script>-->
 
     <style>
         
         * {
-            font-family: arial;
-        }
+        font-family: arial;
+    }
 
-        .viewport {
-            margin: 30px;
-            -webkit-box-shadow: 2px -2px 7px 2px rgba(187,187,187,1);
-            -moz-box-shadow: 2px -2px 7px 2px rgba(187,187,187,1);
-            box-shadow: 2px -2px 7px 2px rgba(187,187,187,1);
-        }
+    .viewport {
+        margin: 30px;
+    }
 
-        .grid {
-            display: grid;
-            grid-gap: 5mm;
-            margin: 30px;
-        }
+    .shaded {
+        -webkit-box-shadow: 2px -2px 7px 2px rgba(187, 187, 187, 1);
+        -moz-box-shadow: 2px -2px 7px 2px rgba(187, 187, 187, 1);
+        box-shadow: 2px -2px 7px 2px rgba(187, 187, 187, 1);
+        border-radius: 3px;
+    }
 
-        .grid-container {
-            display: grid;
-            grid-gap: 5mm;
-        }
+    .grid {
+        display: grid;
+        grid-gap: 5mm;
+        margin: 30px;
+    }
 
-        /* map */
-        #_map {
-            height: 600px;
-            grid-row: 1;
-            grid-column: 2;
-        }
+    .grid-container {
+        display: grid;
+        grid-gap: 5mm;
+    }
 
-        #_map>._attribution {
-            z-index: 999;
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            text-overflow: ellipsis;
-            overflow: hidden;
-            text-align: right;
-            white-space: nowrap;
-            background-color: #fff;
-            opacity: 0.9;
-            padding: 5px;
-            font-size: 10px;
-            font-weight: bold;
-        }
+    .hide_it {
+        display: none !important;
+    }
 
-        #layer_dropdown, #core_layer_themes_dropdown {
-            border-top: solid 2px;
-        }
+    /* dropdown colours */
+    .ul-drop>ul>li:hover {
+        background-color: #D6DBB2;
+    }
 
-        #layer_dropdown {
-            grid-row: 1;
-            grid-column: 1;
-            z-index: 1005;
-        }
+    .ul-drop>ul>li.selected {
+        background-color: #C9ADA1;
+    }
 
-        #core_layer_themes_dropdown {
-            grid-row: 1;
-            grid-column: 3;
-            z-index: 1005;
-            align-content: right;
-            /*width: 350px;
-            position: relative;
-            top: 0;
-            left: calc(100% - 350px);*/
-        }
+    .ul-drop>ul>li.selected:hover {
+        background-color: #B98B82;
+    }
+
+    .leaflet-container a.leaflet-popup-close-button {
+        font-size: 20px;
+        padding: 4px;
+        font-family: arial;
+        color: #9FA6AD;
+    }
+
+    /* map */
+    #_map {
+        height: 600px;
+        grid-row: 1;
+        grid-column: 2;
+        border-radius: 3px;
+    }
+
+    #_map>._attribution {
+        z-index: 999;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        text-align: right;
+        white-space: nowrap;
+        background-color: #fff;
+        opacity: 0.9;
+        padding: 5px;
+        font-size: 10px;
+        font-weight: bold;
+        border-radius: 3px 0 0 3px;
+    }
+
+    #xyz_legend {
+        grid-row: 1;
+        grid-column: 1;
+        padding: 12px;
+    }
+
+    .tabulator-col-title,
+    .tabulator-cell {
+        overflow: initial !important;
+    }
+
+    #layer_dropdown,
+    #core_layer_themes_dropdown {
+        border-top: solid 2px;
+    }
+
+    #core_layer_themes_dropdown {
+        grid-row: 1;
+        grid-column: 3;
+        z-index: 1005;
+        align-content: right;
+    }
+
+    #layer_search {
+        grid-row: 1;
+        grid-column: 1;
+        z-index: 1004;
+        margin: 10px;
+        font-size: 16px;
+    }
+
+    #current_area {
+        grid-row: 2;
+        grid-column: 1;
+        padding: 12px;
+    }
+
+    .gazetteer input {
+        font-size: 16px;
+    }
+
+    .gazetteer .bar {
+        display: none;
+    }
+
+    .gazetteer ul li {
+        margin-left: 4px;
+        padding: 4px;
+    }
+
+    .gazetteer ul li:hover {
+        cursor: pointer;
+        background: #AED1E6;
+    }
+
+    .headers {
+        display: none;
+        margin: 10px;
+        border-radius: 3px;
+        background-opacity: 0.7;
+        padding: 4px;
+        color: white;
+    }
+
+    #xyz_wellbeing_index_header {
+        grid-row: 1;
+        grid-column: 1;
+        margin: 10px;
+        background: #c51b8a;
+    }
+
+    #xyz_wellbeing_index {
+        grid-row: 2;
+        grid-column: 1;
+        margin: 10px;
+    }
+
+    #xyz_people_index_header {
+        grid-row: 3;
+        grid-column: 1;
+        margin: 10px;
+        background: #2b8cbe;
+        border-radius: 3px;
+        background-opacity: 0.7;
+        padding: 4px;
+        color: white;
+    }
+
+    #xyz_people_index {
+        grid-row: 4;
+        grid-column: 1;
+        margin: 10px;
+    }
+
+    #xyz_place_index_header {
+        grid-row: 5;
+        grid-column: 1;
+        margin: 10px;
+        background: #31a354;
+        border-radius: 3px;
+        background-opacity: 0.7;
+        padding: 4px;
+        color: white;
+    }
+
+    #xyz_place_index {
+        grid-row: 6;
+        grid-column: 1;
+        margin: 10px;
+    }
+
+    #xyz_relationships_index_header {
+        grid-row: 7;
+        grid-column: 1;
+        margin: 10px;
+        background: #fd8d3c;
+        border-radius: 3px;
+        background-opacity: 0.7;
+        padding: 4px;
+        color: white;
+    }
+
+    #xyz_relationships_index {
+        grid-row: 8;
+        grid-column: 1;
+        margin: 10px;
+    }
 
     </style>
 
@@ -91,31 +228,44 @@
 
 <body>
 
-    <div class="viewport">
-
-    <div class="grid-container" style="grid-template-columns: 1fr 1fr 1fr;">
-
-        <div id="layer_dropdown"></div>
-        <div id="core_layer_themes_dropdown"></div>
-    
-    </div>
-
-    <div class="grid" style="grid-template-columns: 1fr 2fr;">
-        
-       <!--<div id="layer_dropdown"></div>
-       <div id="core_layer_themes_dropdown"></div>-->
-
-        <div id="_map">
-            <div class="_attribution">
-                <a target="_blank" href="https://github.com/geolytix/xyz">GEOLYTIX XYZ</a>;
-                <a target="_blank" href="https://leafletjs.com/">Leaflet</a>;
-                <a target="_blank" href="https://www.mapbox.com">© Mapbox</a>;
-                <a target="_blank" href="https://www.openstreetmap.org/copyright">© OpenStreetMap</a>
-            </div>
+   <div class="viewport">
+       
+       <div class="grid-container shaded" style="grid-template-columns: 1fr 1fr 1fr;">
+            <div id="layer_search"></div>
+            <div id="core_layer_themes_dropdown"></div>
         </div>
 
-    </div>
-    </div>
+        <div class="grid" style="grid-template-columns: 1fr 2fr;">
+            
+            <div class="grid" style="grid-template-columns: 1fr;">
+                <div id="xyz_legend" class="shaded"></div>
+                <div id="current_area"></div>
+            </div>
+            
+            <div id="_map">
+                <div class="_attribution">
+                    <a target="_blank" href="https://github.com/geolytix/xyz">GEOLYTIX XYZ</a>;
+                    <a target="_blank" href="https://leafletjs.com/">Leaflet</a>;
+                    <a target="_blank" href="https://www.mapbox.com">© Mapbox</a>;
+                    <a target="_blank" href="https://www.openstreetmap.org/copyright">© OpenStreetMap</a>
+                </div>
+            </div>
+        
+        </div>
+
+        <div class="grid tables" style="grid-template-columns: 1fr">
+            <div id="xyz_wellbeing_index_header" class="headers">Wellbeing Index</div>
+            <div id="xyz_wellbeing_index"></div>
+            <div id="xyz_people_index_header" class="headers">People</div>
+            <div id="xyz_people_index"></div>
+            <div id="xyz_place_index_header" class="headers">Place</div>
+            <div id="xyz_place_index"></div>
+            <div id="xyz_relationships_index_header" class="headers">Relationships</div>
+            <div id="xyz_relationships_index"></div>
+        </div>
+
+
+   </div>
 
 </body>
 
