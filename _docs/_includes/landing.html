@@ -3,7 +3,7 @@ layout: root.html
 ---
 <ul style="grid-column: 1; list-style-type: none;">
     {% for post in collections.root %}
-    <li{% if page.url == post.url %} class="active" {% endif %}><a class="{{ post.data.level }}" href="{{post.url}}">{{ post.data.title }}</a></li>
+    <li{% if page.url == post.url %} class="active" {% endif %}><a class="{{ post.data.level }}" href="/xyz/{{post.url}}">{{ post.data.title }}</a></li>
     {% endfor %}
   </ul>
   {{ doc }}
