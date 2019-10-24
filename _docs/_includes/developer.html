@@ -5,7 +5,7 @@ layout: root.html
     <li><a style="font-weight: bold" href="/"><---</a></li>
     {% for post in collections.posts %}
     {% if post.data.tags contains "developer" %}
-    <li{% if page.url == post.url %} class="active" {% endif %}><a class="{{ post.data.level }}" href="/xyz{{post.url}}">{{ post.data.title }}</a></li>
+    <li{% if page.url == post.url %} class="active" {% endif %}><a class="{{ post.data.level }}" href="/xyz/docs{{post.url}}">{{ post.data.title }}</a></li>
     {% endif %}
     {% endfor %}
   </ul>
