@@ -1,15 +1,4 @@
 module.exports = function (eleventyConfig) {
-  return {
-    templateFormats: [
-      "html",
-      "md",
-      "css",
-      "png"
-    ]
-  };
-};
-
-module.exports = function (eleventyConfig) {
 
   eleventyConfig.addCollection("posts", (collection) => {
     var _collection = collection.getFilteredByGlob("**/*.md").sort((a, b) => {
@@ -23,6 +12,6 @@ module.exports = function (eleventyConfig) {
     _collection.forEach(entry => entry.data.tag = entry.data.tags[0])
 
     return _collection;
-  }
-  );
+  });
+
 };
