@@ -259,9 +259,9 @@ export default (_xyz, layer) => {
             featureProjection:'EPSG:' + _xyz.mapview.srid
           });
 
-          _xyz.mapview.interaction.draw.sourceVector.clear();
+          _xyz.mapview.interaction.draw.Source.clear();
 
-          _xyz.mapview.interaction.draw.sourceVector.addFeature(feature);
+          _xyz.mapview.interaction.draw.Source.addFeature(feature);
                                     
         };
     
