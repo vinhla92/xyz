@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Strategy</title>
+  <style>
+    .active {
+      font-weight: bold;
+    }
+    a {
+      text-decoration: none;
+      color: #333;
+    }
+
+    a._1 {
+      margin-left: 0px;
+    }
+
+    a._2 {
+      margin-left: 0px;
+    }
+
+    a._3 {
+      margin-left: 0px;
+    }
+
+    a._4 {
+      margin-left: 0px;
+    }
+
+    a._5 {
+      margin-left: 20px;
+    }
+
+    a._6 {
+      margin-left: 40px;
+    }
+  </style>
+</head>
+
+<body style="display:grid;">
+    <ul style="grid-column: 1; list-style-type: none;">
+    <li><a style="font-weight: bold" href="/"><---</a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <li><a class="_4" href="/infrastructure/0-introduction/">Infrastructure</a></li>
+    
+    
+    
+    <li><a class="_4" href="/infrastructure/client/">Client</a></li>
+    
+    
+    
+    
+    
+    <li><a class="_5" href="/infrastructure/dependencies/sass/">Sass</a></li>
+    
+    
+    
+    <li><a class="_5" href="/infrastructure/dependencies/web-pack/">Webpack</a></li>
+    
+    
+    
+    <li><a class="_5" href="/infrastructure/deployments/aws/">AWS Deployments</a></li>
+    
+    
+    
+    <li><a class="_5" href="/infrastructure/deployments/now/">Now Deployments</a></li>
+    
+    
+    
+    <li><a class="_5" href="/infrastructure/deployments/ubuntu/">Ubuntu Deployments</a></li>
+    
+    
+    
+    <li><a class="_5" href="/infrastructure/security/introduction/">Introduction</a></li>
+    
+    
+    
+    <li><a class="_5" href="/infrastructure/security/jwt-token/">JWT Token</a></li>
+    
+    
+    
+    <li><a class="_5" href="/infrastructure/security/sql-injections/">SQL injections</a></li>
+    
+    
+    
+    <li class="active" ><a class="_5" href="/infrastructure/security/strategy/">Strategy</a></li>
+    
+    
+    
+    <li><a class="_4" href="/infrastructure/server/">Server</a></li>
+    
+    
+    
+    
+  </ul>
+  
+  <div  style="grid-column: 2;">
+    <p>__<a href="https://github.com/fastify/fastify-auth"><em>fastify-auth</em></a> which is used to decorate XYZ routes does not provide an authentication strategy. The strategy applied by the XYZ authToken module will detailed here.</p>
+<p>Public endpoints are immediately resolved.</p>
+<p>Private endpoints with a missing token will resolve in a <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401">401</a> or redirect to the login form.</p>
+<p>Thereafter the signiture of the token will be verified. Failing to verify signature will resolve in a 401 or redirect.</p>
+<p>Missing an email field in the decoded token with resolve in a 401 or redirect.</p>
+<p>API token (which do not expire) are checked against the ACL. The token must match the token stored with the user account in the ACL. Failing to do so reolves in a 401 (no redirect).</p>
+<p>Valid API token are internally replaced with a PRIVATE access token which expires in 10 seconds.</p>
+<p>Admin level token are checked last. Routes which require administrative access will resolve in a 401 or redirect if the token has insufficient access privileges.</p>
+<ol>
+<li>
+<p><strong>decode token</strong></p>
+<p>If exists a user token will be decoded from the request cookie or request parameter (in case the request is generated without the capability to assign cookies).</p>
+</li>
+<li>
+<p><strong>no token</strong></p>
+<p>Fail. <em>No user token found in request.</em> Authentication will fail if no decoded token exists at this stage. An anonymous user token and a session token with the request URL as redirect will be signed to the response.</p>
+</li>
+<li>
+<p><strong>token timeout</strong></p>
+<p>Fail. <em>Session timeout.</em> The time from when the token was issued at (iat) is compared to the current time to establish the token's age. The authentication will fail if the token's age exceeds the timeout limit.</p>
+</li>
+<li>
+<p><strong>no admin</strong></p>
+<p>Fail. <em>Admin authorization required for the requested route.</em> This stage is only checked for requests to endpoints which require admin level authorization. Authorization will fail if the user token does not carry admin privileges.</p>
+</li>
+<li>
+<p><strong>no email</strong></p>
+<p>Fail. <em>Email not defined in token.</em> Authorization will fail at this stage if the user token does not carry an email field in the payload.</p>
+</li>
+<li>
+<p><strong>user not verified</strong></p>
+<p>Fail. <em>User email not verified.</em> Authorization will fail if the user token does not carry information that the account email has been verified.</p>
+</li>
+<li>
+<p><strong>user not approved</strong></p>
+<p>Fail. <em>User email not approved by administrator.</em> Authorization will fail at this stage if the user token does not carry the <em>approved</em> field.</p>
+</li>
+<li>
+<p><strong>issue new token</strong></p>
+<p>Success. Authorization has completed and the user token's issue at value (iat) is updated with the current time, signed to the response, and finally passed on to the <em>done()</em> callback.</p>
+</li>
+</ol>
+
+  </div>
+</body>
+
+</html>
