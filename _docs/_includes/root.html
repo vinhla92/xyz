@@ -6,65 +6,178 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ title }}</title>
   <style>
+
+    .grid {
+      display: block;
+      margin: 20px;
+      font-family: system-ui;
+      display:grid;
+      grid-column-gap: 15px;
+      grid-template-columns: 1fr 5fr;
+    }
+
+    .grid > .toggle {
+        display: none;
+        border-right: 2px solid #000;
+        padding: 5px;
+    }
+
+    .grid > .toggle > .burger {
+      border-top: 2px solid #eee;
+      margin-top: 5px;
+      box-shadow: 1px 1px 1px #999;
+    }
+
+    .grid > .toggle:hover {
+      cursor: pointer;
+    }
+
+    @media only screen and (max-width: 900px) {
+      .grid {
+        grid-template-columns: 30px 5fr;
+      }
+
+      .grid > .nav {
+        display: none;
+      }
+
+      .grid > .toggle {
+        display: block;
+      }
+    }
+
+    ._grid {
+      grid-template-columns: 1fr 5fr;
+    }
+
+    ._grid > .nav {
+      display: block;
+    }
+
+    ._grid > .toggle {
+      display: none;
+    }
+
+    .grid > .nav {
+      grid-column: 1;
+      padding-inline-start: 0px;
+      list-style-type: none;
+    }
+
+    .grid > .content {
+      grid-column: 2/4;
+    }
+
     .active {
       font-weight: bold;
     }
 
     a {
       text-decoration: none;
+      white-space: nowrap;
       color: #333;
     }
 
-    a._1 {
-      margin-left: 0px;
+    li {
+      line-height: 1.5;
     }
 
-    a._2 {
-      margin-left: 0px;
+    li._1 {
+      padding-left: 0px;
     }
 
-    a._3 {
-      margin-left: 0px;
+    li._2 {
+      padding-left: 0px;
     }
 
-    a._4 {
-      margin-left: 0px;
+    li._3 {
+      padding-left: 0px;
     }
 
-    a._5 {
-      margin-left: 20px;
+    li._4 {
+      padding-left: 0px;
     }
 
-    a._6 {
-      margin-left: 40px;
+    li._5 {
+      padding-left: 20px;
+    }
+
+    li._6 {
+      padding-left: 40px;
+    }
+
+    li.first {
+      padding-left: 0px;
+      margin-top: 10px;
+    }
+
+    li.second {
+      padding-left: 20px;
+    }
+
+    pre {
+      display: block;
+      font-family: monospace;
+      white-space: pre;
+      margin: 1em 0px;
+      padding: 20px;
+      box-shadow: 0px 0px 2px #555;
+      border-radius: 5px;
+      overflow-x: scroll;
+    }
+
+    pre > code {
+      font-family: monospace;
+    }
+
+    .content a {
+      color: #090;
+    }
+
+    .content img {
+      max-width: 100%;
     }
   </style>
+
 </head>
 
-<body style="display:grid;">
+<body>
 
-  <ul style="grid-column: 1; list-style-type: none;">
+  <div class="grid">
 
-    {% if level >= 4 %}
-    <li>
-      <a style="font-weight: bold" href="/xyz/docs"><---</a>
-    </li>
-    {% endif %}
-    
-    {% for post in collections.posts %}
-    {% if post.data.tags contains tag %}
-    <li{% if page.url == post.url %} class="active" {% endif %}>
-      <a class="_{{ post.data.level }}" href="/xyz/docs{{post.url}}">{{ post.data.title }}</a>
-    </li>
-    {% endif %}
-    {% endfor %}
+    <div id="toggle" class="toggle"><div class="burger"></div><div class="burger"></div><div class="burger"></div></div>
 
-  </ul>
+    <ul class="nav">
 
-  <div style="grid-column: 2;">
-    {{ content | safe }}
+      {% if level >= 4 %}
+      <li>
+        <a style="font-weight: bold; font-size: 30px;" href="/xyz/docs"><---</a>
+      </li>
+      {% endif %}
+      
+      {% for post in collections.posts %}
+      {% if post.data.tags contains tag %}
+      <li class="_{{ post.data.level }} {{ post.data.class }} {% if page.url == post.url %}active{% endif %}">
+        <a href="/xyz/docs{{post.url}}">{{ post.data.title }}</a>
+      </li>
+      {% endif %}
+      {% endfor %}
+
+    </ul>
+
+    <div class="content">
+      <h2>{{ subtitle }}</h2>
+      {{ content | safe }}
+    </div>
+
   </div>
 
 </body>
+
+<script>
+    const toggle = document.getElementById('toggle');
+
+    toggle.onclick = e => { e.target.parentElement.classList.add('_grid'); };
+</script>
 
 </html>

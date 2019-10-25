@@ -8,6 +8,8 @@ module.exports = function (eleventyConfig) {
     linkify: true
   }));
 
+  eleventyConfig.addPassthroughCopy('**/*.png');
+
   eleventyConfig.addCollection('posts', collection => {
 
     const _collection = collection.getFilteredByGlob('**/*.md').sort((a, b) => {
