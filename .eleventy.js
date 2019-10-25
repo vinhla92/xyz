@@ -8,7 +8,7 @@ module.exports = function (eleventyConfig) {
     linkify: true
   }));
 
-  eleventyConfig.addPassthroughCopy('**/*.png');
+  eleventyConfig.addPassthroughCopy('/_docs/**/*.png');
 
   eleventyConfig.addCollection('posts', collection => {
 
