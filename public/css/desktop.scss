@@ -20,10 +20,16 @@ body {
         padding: 10px 0;
     }
 
-    #localeDropdown .ul-drop .head span {
-        padding: 4px;
-        border-radius: 2px;
-        background-color: $glxlightgreen;
+    #localeDropdown {
+
+        margin-bottom: 4px;
+
+        .ul-drop .head span {
+
+            padding: 4px;
+            border-radius: 2px;
+            background-color: $glxlightgreen;
+        }
     }
 
 }

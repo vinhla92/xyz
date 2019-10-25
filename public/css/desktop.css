@@ -2089,8 +2089,11 @@ button {
 
 .listview .title {
   font-family: ffmark_bold, sans-serif;
-  font-size: 18px;
+  font-size: 15px;
   margin-bottom: 10px;
+  background-color: #DEF6CA;
+  padding: 4px;
+  border-radius: 2px;
 }
 .listview .drawer {
   margin-top: 4px;
@@ -2578,6 +2581,9 @@ body {
 }
 .listviews .listview {
   padding: 10px 0;
+}
+.listviews #localeDropdown {
+  margin-bottom: 4px;
 }
 .listviews #localeDropdown .ul-drop .head span {
   padding: 4px;

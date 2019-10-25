@@ -2089,8 +2089,11 @@ button {
 
 .listview .title {
   font-family: ffmark_bold, sans-serif;
-  font-size: 18px;
+  font-size: 15px;
   margin-bottom: 10px;
+  background-color: #DEF6CA;
+  padding: 4px;
+  border-radius: 2px;
 }
 .listview .drawer {
   margin-top: 4px;

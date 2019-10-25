@@ -27,10 +27,21 @@ body {
     box-shadow: 0 0 10px slategrey;
     z-index: 1000;
 
-    #localeDropdown .ul-drop .head span {
+    /*#localeDropdown .ul-drop .head span {
         padding: 4px;
         border-radius: 4px;
         background-color: $glxlightgreen;
+    }*/
+    #localeDropdown {
+
+        margin-bottom: 4px;
+
+        .ul-drop .head span {
+
+            padding: 4px;
+            border-radius: 2px;
+            background-color: $glxlightgreen;
+        }
     }
 
     .listview {

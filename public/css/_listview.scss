@@ -2,8 +2,11 @@
 
     .title {
         font-family: ffmark_bold, sans-serif;
-        font-size: 18px;
+        font-size: 15px;
         margin-bottom: 10px;
+        background-color: $glxlightgreen;
+        padding: 4px;
+        border-radius: 2px;
     }
     .drawer {
         margin-top: 4px;
