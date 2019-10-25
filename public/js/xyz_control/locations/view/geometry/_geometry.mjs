@@ -28,27 +28,33 @@ export default _xyz => entry => {
   let td = _xyz.utils.wire()`<td style="padding-top: 5px; position: relative;" colSpan=2>`;
 
   entry.row.appendChild(td);
- 
-  entry.ctrl.geometry = entry.value && _xyz.mapview.geoJSON({
-    geometry: JSON.parse(entry.value),
-    dataProjection: '4326',
-    style: new _xyz.mapview.lib.style.Style({
-      stroke: entry.style.strokeColor && new _xyz.mapview.lib.style.Stroke({
-        color: _xyz.utils.Chroma(entry.style.color || entry.style.strokeColor).alpha(1),
-        width: entry.style.strokeWidth || 1
-      }),
-      fill: new _xyz.mapview.lib.style.Fill({
-        color: _xyz.utils.Chroma(entry.style.fillColor || entry.style.strokeColor).alpha(parseFloat(entry.style.fillOpacity) ? entry.style.fillOpacity : 0).rgba()
-      })
-    })
-  });
 
-  entry.ctrl.geometry && entry.location.geometries.push(entry.ctrl.geometry);
+  loadFixedGeom(entry);
 
   if (entry.edit && entry.edit.isoline_mapbox) entry.ctrl.showGeom = entry.ctrl.isoline_mapbox;
 
   if (entry.edit && entry.edit.isoline_here) entry.ctrl.showGeom = entry.ctrl.isoline_here;
 
+  if(!entry.ctrl.showGeom) entry.ctrl.showGeom = loadFixedGeom;
+
+  function loadFixedGeom(entry){
+
+    entry.ctrl.geometry = entry.display && entry.value && _xyz.mapview.geoJSON({
+      geometry: JSON.parse(entry.value),
+      dataProjection: '4326',
+      style: new _xyz.mapview.lib.style.Style({
+        stroke: entry.style.strokeColor && new _xyz.mapview.lib.style.Stroke({
+          color: _xyz.utils.Chroma(entry.style.color || entry.style.strokeColor).alpha(1),
+          width: entry.style.strokeWidth || 1
+        }),
+        fill: new _xyz.mapview.lib.style.Fill({
+          color: _xyz.utils.Chroma(entry.style.fillColor || entry.style.strokeColor).alpha(parseFloat(entry.style.fillOpacity) ? entry.style.fillOpacity : 0).rgba()
+        })
+      })
+    });
+
+    entry.ctrl.geometry && entry.location.geometries.push(entry.ctrl.geometry);
+  }
 
   entry.ctrl.hideGeom = () => {
 
@@ -63,7 +69,7 @@ export default _xyz => entry => {
 
   if (entry.edit) entry.ctrl.hideGeom = entry.ctrl.deleteGeom;
 
-  if (entry.value) entry.display = true;
+  //if (entry.value) entry.display = true;
 
   if (entry.display && entry.edit && !entry.value) entry.ctrl.showGeom(entry); // allow isoline to be automatically created
 
