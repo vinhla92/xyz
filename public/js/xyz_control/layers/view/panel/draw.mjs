@@ -185,7 +185,7 @@ export default (_xyz, layer) => {
 
     _container.appendChild(_xyz.utils.wire()`
       <div class="btn_subtext cursor noselect pretty"
-      style="text-align: left; font-style: italic; font-size: small;"
+      style="text-align: left; font-size: small;"
       onclick=${
         e => {
           if (e) e.stopPropagation();
@@ -294,7 +294,7 @@ export default (_xyz, layer) => {
     _container.appendChild(_xyz.utils.wire()`
       <div
       class="btn_subtext cursor noselect pretty"
-      style="text-align: left; font-style: italic; font-size: small;"
+      style="text-align: left; font-size: small;"
       onclick=${
         e => {
           if (e) e.stopPropagation();
