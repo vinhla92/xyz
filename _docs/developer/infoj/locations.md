@@ -1,9 +1,9 @@
 ---
 title: Locations
 subtitle: Locations
-
+tag: developer
 tags: [developer]
-layout: developer.html
+layout: root.html
 ---
 
 # Locations

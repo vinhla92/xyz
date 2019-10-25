@@ -3,7 +3,7 @@ title: Filter
 subtitle: Filter
 
 tags: [developer]
-layout: developer.html
+layout: root.html
 ---
 
 Layers which support locations can be filtered. Filter which are defined for entries in the layer's infoj array can be selected from a dropdown in the layers filter panel.

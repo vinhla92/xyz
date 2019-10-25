@@ -1,9 +1,9 @@
 ---
 title: Isolines
 subtitle: Introduction to isolines
-
+tag: developer
 tags: [developer]
-layout: developer.html
+layout: root.html
 ---
 
 The framework supports creation of isolines based on travel time or distance and selected location.

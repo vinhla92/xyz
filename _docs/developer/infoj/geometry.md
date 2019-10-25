@@ -1,9 +1,9 @@
 ---
 title: Geometry
 subtitle: Geometry
-
+tag: developer
 tags: [developer]
-layout: developer.html
+layout: root.html
 ---
 It is possible to assign geometry fields as infoj entries.
 

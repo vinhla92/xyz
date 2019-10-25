@@ -1,9 +1,9 @@
 ---
 title: Groups
 subtitle: Groups
-
+tag: developer
 tags: [developer]
-layout: developer.html
+layout: root.html
 ---
 
 `infoj` entries can be grouped for a more structured visual display in the location's info drawer.

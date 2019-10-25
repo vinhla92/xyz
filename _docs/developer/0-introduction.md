@@ -1,7 +1,7 @@
 ---
 title: Developer
 tags: [developer, root]
-layout: developer.html
+layout: root.html
 ---
 
 A [Node.js](https://nodejs.org/) framework to develop web applications and APIs for spatial data.

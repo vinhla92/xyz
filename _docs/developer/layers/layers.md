@@ -1,9 +1,9 @@
 ---
 title: Layers
 subtitle: Introduction of Layers
-
+tag: developer
 tags: [developer]
-layout: developer.html
+layout: root.html
 ---
 
 Layers are a sub setting of a locale. Each layer object has a set of parameters which depend on the type of layer, whether the layer is interactive or editable and how the data should be styled in the map window. 

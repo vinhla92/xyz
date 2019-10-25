@@ -1,9 +1,9 @@
 ---
 title: 3rd Party API Keys
 subtitle: 3rd Party API Keys
-
+tag: developer
 tags: [developer]
-layout: developer.html
+layout: root.html
 ---
 
 Keys for 3rd party service provider can be stored in the environment. The client will send all requests to the XYZ server. Here the requests are decorated with the key and proxied to the provider. This allows the use of 3rd party providers without ever exposing the key to the client side.

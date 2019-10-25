@@ -1,9 +1,9 @@
 ---
 title: Title
 subtitle: Title
-
+tag: developer
 tags: [developer]
-layout: developer.html
+layout: root.html
 
 ---
 

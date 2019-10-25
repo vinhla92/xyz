@@ -9,6 +9,7 @@
     .active {
       font-weight: bold;
     }
+
     a {
       text-decoration: none;
       color: #333;
@@ -41,9 +42,13 @@
 </head>
 
 <body style="display:grid;">
-    <ul style="grid-column: 1; list-style-type: none;">
-    <li><a style="font-weight: bold" href="/xyz/docs"><---</a></li>
+
+  <ul style="grid-column: 1; list-style-type: none;">
+
     
+    <li>
+      <a style="font-weight: bold" href="/xyz/docs"><---</a>
+    </li>
     
     
     
@@ -141,60 +146,88 @@
     
     
     
-    <li><a class="_4" href="/xyz/docs/infrastructure/0-introduction/">Infrastructure</a></li>
     
     
     
-    <li class="active" ><a class="_4" href="/xyz/docs/infrastructure/client/">Client</a></li>
+    <li>
+      <a class="_4" href="/xyz/docs/infrastructure/0-introduction/">Infrastructure</a>
+    </li>
     
     
     
+    <li class="active" >
+      <a class="_4" href="/xyz/docs/infrastructure/client/">Client</a>
+    </li>
     
     
-    <li><a class="_5" href="/xyz/docs/infrastructure/dependencies/sass/">Sass</a></li>
     
     
     
-    <li><a class="_5" href="/xyz/docs/infrastructure/dependencies/web-pack/">Webpack</a></li>
+    <li>
+      <a class="_5" href="/xyz/docs/infrastructure/dependencies/sass/">Sass</a>
+    </li>
     
     
     
-    <li><a class="_5" href="/xyz/docs/infrastructure/deployments/aws/">AWS Deployments</a></li>
+    <li>
+      <a class="_5" href="/xyz/docs/infrastructure/dependencies/web-pack/">Webpack</a>
+    </li>
     
     
     
-    <li><a class="_5" href="/xyz/docs/infrastructure/deployments/now/">Now Deployments</a></li>
+    <li>
+      <a class="_5" href="/xyz/docs/infrastructure/deployments/aws/">AWS Deployments</a>
+    </li>
     
     
     
-    <li><a class="_5" href="/xyz/docs/infrastructure/deployments/ubuntu/">Ubuntu Deployments</a></li>
+    <li>
+      <a class="_5" href="/xyz/docs/infrastructure/deployments/now/">Now Deployments</a>
+    </li>
     
     
     
-    <li><a class="_5" href="/xyz/docs/infrastructure/security/introduction/">Introduction</a></li>
+    <li>
+      <a class="_5" href="/xyz/docs/infrastructure/deployments/ubuntu/">Ubuntu Deployments</a>
+    </li>
     
     
     
-    <li><a class="_5" href="/xyz/docs/infrastructure/security/jwt-token/">JWT Token</a></li>
+    <li>
+      <a class="_5" href="/xyz/docs/infrastructure/security/introduction/">Introduction</a>
+    </li>
     
     
     
-    <li><a class="_5" href="/xyz/docs/infrastructure/security/sql-injections/">SQL injections</a></li>
+    <li>
+      <a class="_5" href="/xyz/docs/infrastructure/security/jwt-token/">JWT Token</a>
+    </li>
     
     
     
-    <li><a class="_5" href="/xyz/docs/infrastructure/security/strategy/">Strategy</a></li>
+    <li>
+      <a class="_5" href="/xyz/docs/infrastructure/security/sql-injections/">SQL injections</a>
+    </li>
     
     
     
-    <li><a class="_4" href="/xyz/docs/infrastructure/server/">Server</a></li>
+    <li>
+      <a class="_5" href="/xyz/docs/infrastructure/security/strategy/">Strategy</a>
+    </li>
     
     
     
+    <li>
+      <a class="_4" href="/xyz/docs/infrastructure/server/">Server</a>
+    </li>
     
+    
+    
+    
+
   </ul>
-  
-  <div  style="grid-column: 2;">
+
+  <div style="grid-column: 2;">
     <p>The <a href="../routes/root.md"><strong>/ root</strong></a> route will check whether incoming requests come from a mobile platform using the <a href="https://github.com/hgoebl/mobile-detect.js">mobile-detect</a> node module. If provided with an access token (required for private applications), the backend will assemble a website template (<a href="https://github.com/GEOLYTIX/xyz/blob/master/views/desktop.html">desktop</a> or <a href="https://github.com/GEOLYTIX/xyz/blob/master/views/mobile.html">mobile</a>) and script bundle.</p>
 <p>The client interface consists of two containers. The control container which is on the left (desktop) or a slider at the bottom (mobile) and the map container.</p>
 <p>The control container has a section for layers and (selected) locations. Layers and locations are displayed as expandable drawers. The map control contains data attribution and a button array.</p>
@@ -215,6 +248,7 @@
 </ol>
 
   </div>
+
 </body>
 
 </html>

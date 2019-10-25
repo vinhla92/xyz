@@ -1,9 +1,9 @@
 ---
 title: Workspace Connections
 subtitle: Workspace Connections
-
+tag: developer
 tags: [developer]
-layout: developer.html
+layout: root.html
 ---
 
 A [**workspace**](../../workspaces/workspaces/) and associated database connections must be defined in the environment settings.

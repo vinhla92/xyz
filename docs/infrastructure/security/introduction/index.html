@@ -9,6 +9,7 @@
     .active {
       font-weight: bold;
     }
+
     a {
       text-decoration: none;
       color: #333;
@@ -41,9 +42,13 @@
 </head>
 
 <body style="display:grid;">
-    <ul style="grid-column: 1; list-style-type: none;">
-    <li><a style="font-weight: bold" href="/xyz/docs"><---</a></li>
+
+  <ul style="grid-column: 1; list-style-type: none;">
+
     
+    <li>
+      <a style="font-weight: bold" href="/xyz/docs"><---</a>
+    </li>
     
     
     
@@ -141,60 +146,88 @@
     
     
     
-    <li><a class="_4" href="/xyz/docs/infrastructure/0-introduction/">Infrastructure</a></li>
     
     
     
-    <li><a class="_4" href="/xyz/docs/infrastructure/client/">Client</a></li>
+    <li>
+      <a class="_4" href="/xyz/docs/infrastructure/0-introduction/">Infrastructure</a>
+    </li>
     
     
     
+    <li>
+      <a class="_4" href="/xyz/docs/infrastructure/client/">Client</a>
+    </li>
     
     
-    <li><a class="_5" href="/xyz/docs/infrastructure/dependencies/sass/">Sass</a></li>
     
     
     
-    <li><a class="_5" href="/xyz/docs/infrastructure/dependencies/web-pack/">Webpack</a></li>
+    <li>
+      <a class="_5" href="/xyz/docs/infrastructure/dependencies/sass/">Sass</a>
+    </li>
     
     
     
-    <li><a class="_5" href="/xyz/docs/infrastructure/deployments/aws/">AWS Deployments</a></li>
+    <li>
+      <a class="_5" href="/xyz/docs/infrastructure/dependencies/web-pack/">Webpack</a>
+    </li>
     
     
     
-    <li><a class="_5" href="/xyz/docs/infrastructure/deployments/now/">Now Deployments</a></li>
+    <li>
+      <a class="_5" href="/xyz/docs/infrastructure/deployments/aws/">AWS Deployments</a>
+    </li>
     
     
     
-    <li><a class="_5" href="/xyz/docs/infrastructure/deployments/ubuntu/">Ubuntu Deployments</a></li>
+    <li>
+      <a class="_5" href="/xyz/docs/infrastructure/deployments/now/">Now Deployments</a>
+    </li>
     
     
     
-    <li class="active" ><a class="_5" href="/xyz/docs/infrastructure/security/introduction/">Introduction</a></li>
+    <li>
+      <a class="_5" href="/xyz/docs/infrastructure/deployments/ubuntu/">Ubuntu Deployments</a>
+    </li>
     
     
     
-    <li><a class="_5" href="/xyz/docs/infrastructure/security/jwt-token/">JWT Token</a></li>
+    <li class="active" >
+      <a class="_5" href="/xyz/docs/infrastructure/security/introduction/">Introduction</a>
+    </li>
     
     
     
-    <li><a class="_5" href="/xyz/docs/infrastructure/security/sql-injections/">SQL injections</a></li>
+    <li>
+      <a class="_5" href="/xyz/docs/infrastructure/security/jwt-token/">JWT Token</a>
+    </li>
     
     
     
-    <li><a class="_5" href="/xyz/docs/infrastructure/security/strategy/">Strategy</a></li>
+    <li>
+      <a class="_5" href="/xyz/docs/infrastructure/security/sql-injections/">SQL injections</a>
+    </li>
     
     
     
-    <li><a class="_4" href="/xyz/docs/infrastructure/server/">Server</a></li>
+    <li>
+      <a class="_5" href="/xyz/docs/infrastructure/security/strategy/">Strategy</a>
+    </li>
     
     
     
+    <li>
+      <a class="_4" href="/xyz/docs/infrastructure/server/">Server</a>
+    </li>
     
+    
+    
+    
+
   </ul>
-  
-  <div  style="grid-column: 2;">
+
+  <div style="grid-column: 2;">
     <p>We are using the <a href="https://github.com/fastify/fastify-auth">fastify-auth</a> module for authentication in XYZ. All authentication is handled by the <a href="https://github.com/GEOLYTIX/xyz/blob/master/auth.js">auth.js</a> module.</p>
 <p>By setting the access key (PUBLIC or PRIVATE) in the <a href="../../environment-settings/"><strong>environmental settings</strong></a> with a PostgreSQL connection string (plus a table name separated by a | pipe) it is possible to restrict access. The access control list (ACL) table must be stored in a PostgreSQL database.</p>
 <p>If set to PRIVATE a login is required to open the application or access any endpoint. If set to public login is optional for routes which are not restricted for administrator. Admin routes are not available if no ACL is provided. Without the admin route all changes to the settings need to be done in the code repository or database.</p>
@@ -217,6 +250,7 @@
 <p>We are using a javascript implementation of the OpenBDS <a href="https://en.wikipedia.org/wiki/Blowfish_%28cipher%29">Blowfish (cipher)</a> to encrypt passwords at rest in the ACL. The <a href="https://github.com/GEOLYTIX/xyz/blob/master/views/login.html">login</a> and <a href="https://github.com/GEOLYTIX/xyz/blob/master/views/register.html">register</a> views use <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/email#Validation">input form validation</a> for the email (max 50 character) and password (min 8 character). These are also validated on the backend.</p>
 
   </div>
+
 </body>
 
 </html>

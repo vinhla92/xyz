@@ -1,9 +1,9 @@
 ---
 title: Workspaces
 subtitle: This document covers the Introduction of Workspaces
-
+tag: developer
 tags: [developer]
-layout: developer.html
+layout: root.html
 
 ---
 

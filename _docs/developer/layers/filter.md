@@ -1,9 +1,9 @@
 ---
 title: Filter
 subtitle: Filter
-
+tag: developer
 tags: [developer]
-layout: developer.html
+layout: root.html
 ---
 
 Available filter for a layer are defined by filter definition in [**location infoj**](../../infoj/infoj/) array.

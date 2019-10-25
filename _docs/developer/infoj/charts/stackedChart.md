@@ -2,8 +2,9 @@
 title: Stacked charts
 subtitle: Stacked bar, horizontal bar, line...
 author: agata
+tag: developer
 tags: [developer]
-layout: developer.html
+layout: root.html
 ---
 
 

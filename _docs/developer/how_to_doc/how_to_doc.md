@@ -3,7 +3,7 @@ title: How to Document
 subtitle: This document covers the Introduction of Creating Documentation
 author: rob
 tags: [Documentation]
-layout: developer.html
+layout: root.html
 ---
 
 ## Pre-Requirements

@@ -1,8 +1,9 @@
 ---
 title: Server
 subtitle: Infrastructure
+tag: infrastructure
 tags: [infrastructure]
-layout: infrastructure.html
+layout: root.html
 
 ---
 

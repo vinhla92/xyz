@@ -2,7 +2,7 @@
 title: Introduction
 subtitle: Dependencies
 tags: [setup]
-layout: infrastructure.html
+layout: root.html
 
 ---
 

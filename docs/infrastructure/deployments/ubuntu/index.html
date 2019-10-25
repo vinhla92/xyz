@@ -9,6 +9,7 @@
     .active {
       font-weight: bold;
     }
+
     a {
       text-decoration: none;
       color: #333;
@@ -41,9 +42,13 @@
 </head>
 
 <body style="display:grid;">
-    <ul style="grid-column: 1; list-style-type: none;">
-    <li><a style="font-weight: bold" href="/xyz/docs"><---</a></li>
+
+  <ul style="grid-column: 1; list-style-type: none;">
+
     
+    <li>
+      <a style="font-weight: bold" href="/xyz/docs"><---</a>
+    </li>
     
     
     
@@ -141,66 +146,95 @@
     
     
     
-    <li><a class="_4" href="/xyz/docs/infrastructure/0-introduction/">Infrastructure</a></li>
     
     
     
-    <li><a class="_4" href="/xyz/docs/infrastructure/client/">Client</a></li>
+    <li>
+      <a class="_4" href="/xyz/docs/infrastructure/0-introduction/">Infrastructure</a>
+    </li>
     
     
     
+    <li>
+      <a class="_4" href="/xyz/docs/infrastructure/client/">Client</a>
+    </li>
     
     
-    <li><a class="_5" href="/xyz/docs/infrastructure/dependencies/sass/">Sass</a></li>
     
     
     
-    <li><a class="_5" href="/xyz/docs/infrastructure/dependencies/web-pack/">Webpack</a></li>
+    <li>
+      <a class="_5" href="/xyz/docs/infrastructure/dependencies/sass/">Sass</a>
+    </li>
     
     
     
-    <li><a class="_5" href="/xyz/docs/infrastructure/deployments/aws/">AWS Deployments</a></li>
+    <li>
+      <a class="_5" href="/xyz/docs/infrastructure/dependencies/web-pack/">Webpack</a>
+    </li>
     
     
     
-    <li><a class="_5" href="/xyz/docs/infrastructure/deployments/now/">Now Deployments</a></li>
+    <li>
+      <a class="_5" href="/xyz/docs/infrastructure/deployments/aws/">AWS Deployments</a>
+    </li>
     
     
     
-    <li class="active" ><a class="_5" href="/xyz/docs/infrastructure/deployments/ubuntu/">Ubuntu Deployments</a></li>
+    <li>
+      <a class="_5" href="/xyz/docs/infrastructure/deployments/now/">Now Deployments</a>
+    </li>
     
     
     
-    <li><a class="_5" href="/xyz/docs/infrastructure/security/introduction/">Introduction</a></li>
+    <li class="active" >
+      <a class="_5" href="/xyz/docs/infrastructure/deployments/ubuntu/">Ubuntu Deployments</a>
+    </li>
     
     
     
-    <li><a class="_5" href="/xyz/docs/infrastructure/security/jwt-token/">JWT Token</a></li>
+    <li>
+      <a class="_5" href="/xyz/docs/infrastructure/security/introduction/">Introduction</a>
+    </li>
     
     
     
-    <li><a class="_5" href="/xyz/docs/infrastructure/security/sql-injections/">SQL injections</a></li>
+    <li>
+      <a class="_5" href="/xyz/docs/infrastructure/security/jwt-token/">JWT Token</a>
+    </li>
     
     
     
-    <li><a class="_5" href="/xyz/docs/infrastructure/security/strategy/">Strategy</a></li>
+    <li>
+      <a class="_5" href="/xyz/docs/infrastructure/security/sql-injections/">SQL injections</a>
+    </li>
     
     
     
-    <li><a class="_4" href="/xyz/docs/infrastructure/server/">Server</a></li>
+    <li>
+      <a class="_5" href="/xyz/docs/infrastructure/security/strategy/">Strategy</a>
+    </li>
     
     
     
+    <li>
+      <a class="_4" href="/xyz/docs/infrastructure/server/">Server</a>
+    </li>
     
+    
+    
+    
+
   </ul>
-  
-  <div  style="grid-column: 2;">
+
+  <div style="grid-column: 2;">
     <h2>Deploying on a Ubuntu server</h2>
 <p>For deployments on Ubuntu we use the <a href="https://github.com/Unitech/pm2">PM2</a> process manager to run multiple instances of the framework on different ports on the same server. Environment settings for PM2 instances can be provided from a JSON document.</p>
 <pre><code class="language-bash">pm2 start myapplication.json
 ``</code></pre>
 
   </div>
+
 </body>
 
 </html>

@@ -1,9 +1,9 @@
 ---
 title: Environment Settings
 subtitle: Intro to Environment Settings
-
+tag: developer
 tags: [developer]
-layout: developer.html
+layout: root.html
 ---
 
 The process environment contains sensitive information such as connection strings for data sources, security information and API keys. These should never be made public and are not contained in this repository.

@@ -1,9 +1,9 @@
 ---
 title: PostGIS Data Layer
 subtitle: PostGIS Data Layer
-
+tag: developer
 tags: [developer]
-layout: developer.html
+layout: root.html
 ---
 
 Data layers from PostGIS tables require additional connection parameter.

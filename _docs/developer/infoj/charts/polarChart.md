@@ -2,8 +2,9 @@
 title: Polar charts
 subtitle: Polar area
 author: agata
+tag: developer
 tags: [developer]
-layout: developer.html
+layout: root.html
 ---
 
 

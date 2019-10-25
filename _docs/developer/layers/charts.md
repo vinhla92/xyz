@@ -1,9 +1,9 @@
 ---
 title: Charts
 subtitle: Charts for layers
-
+tag: developer
 tags: [developer]
-layout: developer.html
+layout: root.html
 ---
 
 Layer data can be displayed in a scatterplot and bubble chart. These chart types are meant for presenting long series of x, y pairs (scatterplot) or x, y, r tripples (bubble chart) therefore as of now they are better suited for layer data.

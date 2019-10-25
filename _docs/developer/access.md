@@ -1,8 +1,9 @@
 ---
 title: Access
 subtitle: Introduction to Access
+tag: developer
 tags: [developer]
-layout: developer.html 
+layout: root.html 
 ---
 
 The client application can be accessed in most modern browser.

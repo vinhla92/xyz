@@ -1,8 +1,9 @@
 ---
 title: Password Reset
 subtitle: Password Reset
+tag: developer
 tags: [developer]
-layout: developer.html
+layout: root.html
 ---
 
 The [**user registration endpoint**]() can be used to reset a users password.

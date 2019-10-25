@@ -1,8 +1,8 @@
 ---
 title: Webpack
-subtitle: 
+tag: infrastructure
 tags: [infrastructure]
-layout: infrastructure.html
+layout: root.html
 
 ---
 

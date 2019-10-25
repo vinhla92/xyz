@@ -1,8 +1,9 @@
 ---
 title: Failed Login attempts
 subtitle: Failed Login attempts
+tag: developer
 tags: [developer]
-layout: developer.html
+layout: root.html
 ---
 
 Failed logins are recorded when the provided password for a registered user account does not match the password stored in the ACL.

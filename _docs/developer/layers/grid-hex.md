@@ -1,9 +1,9 @@
 ---
 title: Grid (Hex) Layer
 subtitle: Grid (Hex) Layer
-
+tag: developer
 tags: [developer]
-layout: developer.html
+layout: root.html
 ---
 
 Hex grid layers need to be prepared in a PostGIS database. It is recommended to create a series of grid layer for different zoom level. Grid layers are styled with a special bi-variate theme. The grid panel allows to control which field should be used to define the size of a grid cell and a second field is applied to colour grid cells.

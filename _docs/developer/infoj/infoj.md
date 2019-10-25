@@ -1,9 +1,9 @@
 ---
 title: InfoJ
 subtitle: This document covers the Introduction of InfoJ
-
+tag: developer
 tags: [developer]
-layout: developer.html
+layout: root.html
 ---
 
 `infoj` is a JSON array \[of Objects\] which describes the properties of a location.

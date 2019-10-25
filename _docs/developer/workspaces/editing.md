@@ -1,9 +1,9 @@
 ---
 title: Editing
 subtitle: Editing Workspace
-
+tag: developer
 tags: [developer]
-layout: developer.html
+layout: root.html
 
 ---
 Locations and their properties can be edited by enabling editing capabilities in the layer and `infoj` definitions.

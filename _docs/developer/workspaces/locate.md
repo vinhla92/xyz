@@ -1,9 +1,9 @@
 ---
 title: Locate
 subtitle: Locate
-
+tag: developer
 tags: [developer]
-layout: developer.html
+layout: root.html
 
 ---
 

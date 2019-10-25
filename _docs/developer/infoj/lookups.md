@@ -1,9 +1,9 @@
 ---
 title: Lookups
 subtitle: Lookups
-
+tag: developer
 tags: [developer]
-layout: developer.html
+layout: root.html
 ---
 
 Lookups can be used to create aggregate values based on geometry checks.

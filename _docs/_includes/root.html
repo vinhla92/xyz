@@ -9,6 +9,7 @@
     .active {
       font-weight: bold;
     }
+
     a {
       text-decoration: none;
       color: #333;
@@ -41,7 +42,29 @@
 </head>
 
 <body style="display:grid;">
+
+  <ul style="grid-column: 1; list-style-type: none;">
+
+    {% if level >= 4 %}
+    <li>
+      <a style="font-weight: bold" href="/xyz/docs"><---</a>
+    </li>
+    {% endif %}
+    
+    {% for post in collections.posts %}
+    {% if post.data.tags contains tag %}
+    <li{% if page.url == post.url %} class="active" {% endif %}>
+      <a class="_{{ post.data.level }}" href="/xyz/docs{{post.url}}">{{ post.data.title }}</a>
+    </li>
+    {% endif %}
+    {% endfor %}
+
+  </ul>
+
+  <div style="grid-column: 2;">
     {{ content | safe }}
+  </div>
+
 </body>
 
 </html>

@@ -1,9 +1,9 @@
 ---
 title: User Account Registration
 subtitle: User Account Registration
-
+tag: developer
 tags: [developer]
-layout: developer.html
+layout: root.html
 ---
 
 New accounts consist of an email address and password.

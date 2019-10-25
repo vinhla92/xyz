@@ -3,7 +3,7 @@ title: Simple charts
 subtitle: Line, bars...
 author: agata
 tags: [developer]
-layout: developer.html
+layout: root.html
 ---
 
 

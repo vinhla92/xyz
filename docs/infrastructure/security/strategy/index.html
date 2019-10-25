@@ -9,6 +9,7 @@
     .active {
       font-weight: bold;
     }
+
     a {
       text-decoration: none;
       color: #333;
@@ -41,9 +42,13 @@
 </head>
 
 <body style="display:grid;">
-    <ul style="grid-column: 1; list-style-type: none;">
-    <li><a style="font-weight: bold" href="/xyz/docs"><---</a></li>
+
+  <ul style="grid-column: 1; list-style-type: none;">
+
     
+    <li>
+      <a style="font-weight: bold" href="/xyz/docs"><---</a>
+    </li>
     
     
     
@@ -141,60 +146,88 @@
     
     
     
-    <li><a class="_4" href="/xyz/docs/infrastructure/0-introduction/">Infrastructure</a></li>
     
     
     
-    <li><a class="_4" href="/xyz/docs/infrastructure/client/">Client</a></li>
+    <li>
+      <a class="_4" href="/xyz/docs/infrastructure/0-introduction/">Infrastructure</a>
+    </li>
     
     
     
+    <li>
+      <a class="_4" href="/xyz/docs/infrastructure/client/">Client</a>
+    </li>
     
     
-    <li><a class="_5" href="/xyz/docs/infrastructure/dependencies/sass/">Sass</a></li>
     
     
     
-    <li><a class="_5" href="/xyz/docs/infrastructure/dependencies/web-pack/">Webpack</a></li>
+    <li>
+      <a class="_5" href="/xyz/docs/infrastructure/dependencies/sass/">Sass</a>
+    </li>
     
     
     
-    <li><a class="_5" href="/xyz/docs/infrastructure/deployments/aws/">AWS Deployments</a></li>
+    <li>
+      <a class="_5" href="/xyz/docs/infrastructure/dependencies/web-pack/">Webpack</a>
+    </li>
     
     
     
-    <li><a class="_5" href="/xyz/docs/infrastructure/deployments/now/">Now Deployments</a></li>
+    <li>
+      <a class="_5" href="/xyz/docs/infrastructure/deployments/aws/">AWS Deployments</a>
+    </li>
     
     
     
-    <li><a class="_5" href="/xyz/docs/infrastructure/deployments/ubuntu/">Ubuntu Deployments</a></li>
+    <li>
+      <a class="_5" href="/xyz/docs/infrastructure/deployments/now/">Now Deployments</a>
+    </li>
     
     
     
-    <li><a class="_5" href="/xyz/docs/infrastructure/security/introduction/">Introduction</a></li>
+    <li>
+      <a class="_5" href="/xyz/docs/infrastructure/deployments/ubuntu/">Ubuntu Deployments</a>
+    </li>
     
     
     
-    <li><a class="_5" href="/xyz/docs/infrastructure/security/jwt-token/">JWT Token</a></li>
+    <li>
+      <a class="_5" href="/xyz/docs/infrastructure/security/introduction/">Introduction</a>
+    </li>
     
     
     
-    <li><a class="_5" href="/xyz/docs/infrastructure/security/sql-injections/">SQL injections</a></li>
+    <li>
+      <a class="_5" href="/xyz/docs/infrastructure/security/jwt-token/">JWT Token</a>
+    </li>
     
     
     
-    <li class="active" ><a class="_5" href="/xyz/docs/infrastructure/security/strategy/">Strategy</a></li>
+    <li>
+      <a class="_5" href="/xyz/docs/infrastructure/security/sql-injections/">SQL injections</a>
+    </li>
     
     
     
-    <li><a class="_4" href="/xyz/docs/infrastructure/server/">Server</a></li>
+    <li class="active" >
+      <a class="_5" href="/xyz/docs/infrastructure/security/strategy/">Strategy</a>
+    </li>
     
     
     
+    <li>
+      <a class="_4" href="/xyz/docs/infrastructure/server/">Server</a>
+    </li>
     
+    
+    
+    
+
   </ul>
-  
-  <div  style="grid-column: 2;">
+
+  <div style="grid-column: 2;">
     <p>__<a href="https://github.com/fastify/fastify-auth"><em>fastify-auth</em></a> which is used to decorate XYZ routes does not provide an authentication strategy. The strategy applied by the XYZ authToken module will detailed here.</p>
 <p>Public endpoints are immediately resolved.</p>
 <p>Private endpoints with a missing token will resolve in a <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401">401</a> or redirect to the login form.</p>
@@ -239,6 +272,7 @@
 </ol>
 
   </div>
+
 </body>
 
 </html>

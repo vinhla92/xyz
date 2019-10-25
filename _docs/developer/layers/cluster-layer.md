@@ -1,9 +1,9 @@
 ---
 title: Cluster Layer
 subtitle: Cluster Layer
-
+tag: developer
 tags: [developer]
-layout: developer.html
+layout: root.html
 ---
 
 Cluster layer are point layers. [A combination of PostGIS cluster algorithm](https://medium.com/@goldrydigital/cluster-f-x-nesting-postgresql-kmeans-in-dbscan-for-responsive-maps-9ed99590a439) are applied by the XYZ backend in order to display aggregate cluster for large point location datasets in the map control.

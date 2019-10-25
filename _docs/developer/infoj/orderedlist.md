@@ -1,9 +1,9 @@
 ---
 title: Ordered List
 subtitle: Ordered List
-
+tag: developer
 tags: [developer]
-layout: developer.html
+layout: root.html
 ---
 
 ```javascript

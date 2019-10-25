@@ -1,9 +1,9 @@
 ---
 title: License
 subtitle: This document covers the License
-
+tag: developer
 tags: [developer]
-layout: developer.html
+layout: root.html
 ---
 
 Free use of the XYZ code is allowed through a [MIT licence](https://github.com/GEOLYTIX/xyz/blob/master/LICENSE).

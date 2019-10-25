@@ -1,9 +1,9 @@
 ---
 title: With Select
 subtitle: With Select
-
+tag: developer
 tags: [developer]
-layout: developer.html
+layout: root.html
 ---
 
 This property allows returning values calculated on the fly from other `infoj` entries. 

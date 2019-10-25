@@ -1,7 +1,7 @@
 ---
 title: Infrastructure
 tags: [infrastructure, root]
-layout: infrastructure.html
+layout: root.html
 
 ---
 

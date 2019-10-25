@@ -2,7 +2,7 @@
 title: Testing
 subtitle: Infrastructure
 tags: [setup]
-layout: infrastructure.html
+layout: root.html
 
 ---
 

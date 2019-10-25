@@ -3,7 +3,7 @@ title: Introduction
 subtitle: Charts
 author: agata
 tags: [developer]
-layout: developer.html
+layout: root.html
 ---
 
 ## Charts

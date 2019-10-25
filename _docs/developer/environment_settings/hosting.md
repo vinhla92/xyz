@@ -1,9 +1,9 @@
 ---
 title: Hosting
 subtitle: Hosting
-
+tag: developer
 tags: [developer]
-layout: developer.html
+layout: root.html
 ---
 
 The XYZ node.js backend must be hosted on a server or in a serverless environment. Following environment keys are recognised to define the hosting environment.

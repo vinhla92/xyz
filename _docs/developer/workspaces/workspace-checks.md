@@ -1,9 +1,9 @@
 ---
 title: Workspace Checks
 subtitle: Workspace Checks
-
+tag: developer
 tags: [developer]
-layout: developer.html
+layout: root.html
 
 ---
 

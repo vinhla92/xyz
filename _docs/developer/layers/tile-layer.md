@@ -1,9 +1,9 @@
 ---
 title: Tile Layer
 subtitle: Tile Layer
-
+tag: developer
 tags: [developer]
-layout: developer.html
+layout: root.html
 ---
 
 Base layer are raster tile layers which are primarily consumed from 3rd party mapping providers.

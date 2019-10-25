@@ -1,9 +1,9 @@
 ---
 title: Access Control
 subtitle: Access Control
-
+tag: developer
 tags: [developer]
-layout: developer.html
+layout: root.html
 ---
 
 Access control entries in the environment settings define the connection details for the ACL table and which access level are given to the Client Interface and API.

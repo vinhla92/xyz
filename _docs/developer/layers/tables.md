@@ -1,9 +1,9 @@
 ---
 title: Tables
 subtitle: Tables for layers
-
+tag: developer
 tags: [developer]
-layout: developer.html
+layout: root.html
 ---
 
 Layer data can be displayed in tables. Tables are defined inside `layer.tableview: {}` object:

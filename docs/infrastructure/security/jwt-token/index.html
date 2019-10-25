@@ -9,6 +9,7 @@
     .active {
       font-weight: bold;
     }
+
     a {
       text-decoration: none;
       color: #333;
@@ -41,9 +42,13 @@
 </head>
 
 <body style="display:grid;">
-    <ul style="grid-column: 1; list-style-type: none;">
-    <li><a style="font-weight: bold" href="/xyz/docs"><---</a></li>
+
+  <ul style="grid-column: 1; list-style-type: none;">
+
     
+    <li>
+      <a style="font-weight: bold" href="/xyz/docs"><---</a>
+    </li>
     
     
     
@@ -141,60 +146,88 @@
     
     
     
-    <li><a class="_4" href="/xyz/docs/infrastructure/0-introduction/">Infrastructure</a></li>
     
     
     
-    <li><a class="_4" href="/xyz/docs/infrastructure/client/">Client</a></li>
+    <li>
+      <a class="_4" href="/xyz/docs/infrastructure/0-introduction/">Infrastructure</a>
+    </li>
     
     
     
+    <li>
+      <a class="_4" href="/xyz/docs/infrastructure/client/">Client</a>
+    </li>
     
     
-    <li><a class="_5" href="/xyz/docs/infrastructure/dependencies/sass/">Sass</a></li>
     
     
     
-    <li><a class="_5" href="/xyz/docs/infrastructure/dependencies/web-pack/">Webpack</a></li>
+    <li>
+      <a class="_5" href="/xyz/docs/infrastructure/dependencies/sass/">Sass</a>
+    </li>
     
     
     
-    <li><a class="_5" href="/xyz/docs/infrastructure/deployments/aws/">AWS Deployments</a></li>
+    <li>
+      <a class="_5" href="/xyz/docs/infrastructure/dependencies/web-pack/">Webpack</a>
+    </li>
     
     
     
-    <li><a class="_5" href="/xyz/docs/infrastructure/deployments/now/">Now Deployments</a></li>
+    <li>
+      <a class="_5" href="/xyz/docs/infrastructure/deployments/aws/">AWS Deployments</a>
+    </li>
     
     
     
-    <li><a class="_5" href="/xyz/docs/infrastructure/deployments/ubuntu/">Ubuntu Deployments</a></li>
+    <li>
+      <a class="_5" href="/xyz/docs/infrastructure/deployments/now/">Now Deployments</a>
+    </li>
     
     
     
-    <li><a class="_5" href="/xyz/docs/infrastructure/security/introduction/">Introduction</a></li>
+    <li>
+      <a class="_5" href="/xyz/docs/infrastructure/deployments/ubuntu/">Ubuntu Deployments</a>
+    </li>
     
     
     
-    <li class="active" ><a class="_5" href="/xyz/docs/infrastructure/security/jwt-token/">JWT Token</a></li>
+    <li>
+      <a class="_5" href="/xyz/docs/infrastructure/security/introduction/">Introduction</a>
+    </li>
     
     
     
-    <li><a class="_5" href="/xyz/docs/infrastructure/security/sql-injections/">SQL injections</a></li>
+    <li class="active" >
+      <a class="_5" href="/xyz/docs/infrastructure/security/jwt-token/">JWT Token</a>
+    </li>
     
     
     
-    <li><a class="_5" href="/xyz/docs/infrastructure/security/strategy/">Strategy</a></li>
+    <li>
+      <a class="_5" href="/xyz/docs/infrastructure/security/sql-injections/">SQL injections</a>
+    </li>
     
     
     
-    <li><a class="_4" href="/xyz/docs/infrastructure/server/">Server</a></li>
+    <li>
+      <a class="_5" href="/xyz/docs/infrastructure/security/strategy/">Strategy</a>
+    </li>
     
     
     
+    <li>
+      <a class="_4" href="/xyz/docs/infrastructure/server/">Server</a>
+    </li>
     
+    
+    
+    
+
   </ul>
-  
-  <div  style="grid-column: 2;">
+
+  <div style="grid-column: 2;">
     <p><a href="https://jwt.io/">JSON Web Token (JWT)</a> are used as access token for private instances and admin endpoints. Token decode as follows.</p>
 <pre><code class="language-text">{
   alg: &quot;HS256&quot;,
@@ -211,6 +244,7 @@
 <p>The signature is created with the <a href="../../environment-settings/access-control.md"><strong>SECRET defined in the environment settings</strong></a>. The email field is used to lookup a user account in the ACL and determine its access level.</p>
 
   </div>
+
 </body>
 
 </html>

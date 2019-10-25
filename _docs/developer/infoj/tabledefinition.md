@@ -1,9 +1,9 @@
 ---
 title: Table Definition
 subtitle: Filter
-
+tag: developer
 tags: [developer]
-layout: developer.html
+layout: root.html
 ---
 
 Location may have its own table view presenting relevant data when selected. Location table visibility can be toggled on and off from selection:

@@ -1,9 +1,9 @@
 ---
 title: Locales
 subtitle: This document covers the Introduction of Locales
-
+tag: developer
 tags: [developer]
-layout: developer.html
+layout: root.html
 ---
 
 # Locales

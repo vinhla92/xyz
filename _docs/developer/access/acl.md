@@ -1,9 +1,10 @@
 ---
 title: Access Control List (ACL)
 subtitle: ACL
+tag: developer
 tags: [developer]
 class: first
-layout: developer.html
+layout: root.html
 ---
 
 The Access Control List \(ACL\) is a PostgreSQL table which stores all private and admin user accounts.

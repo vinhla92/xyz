@@ -1,8 +1,9 @@
 ---
 title: Ubuntu Deployments
 subtitle: Ubuntu Server
+tag: infrastructure
 tags: [infrastructure]
-layout: infrastructure.html
+layout: root.html
 
 ---
 
