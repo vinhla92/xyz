@@ -30,6 +30,7 @@ export default _xyz => entry => {
     entry.location.infoj = JSON.parse(e.target.response);
 
     // Update the location view.
+    entry.display = false;
     entry.location.view.update();
 
   };

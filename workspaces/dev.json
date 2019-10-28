@@ -1764,8 +1764,8 @@
                             "field": "isoline_5min",
                             "fieldfx": "ST_asGeoJson(isoline_5min)",
                             "type": "geometry",
-                            "class": "_report",
                             "display": true,
+                            "class": "_report",
                             "level": 2,
                             "edit": {
                                 "isoline_here": {
@@ -1944,7 +1944,6 @@
                                 "datalabels": {
                                     "align": "right",
                                     "anchor": "middle"
-
                                 },
                                 "backgroundColor": [
                                     "#FBDBB6",
@@ -3420,6 +3419,12 @@
                           {
                             "type": "streetview",
                             "class": "_report"
+                          },
+                          {
+                            "type": "geometry",
+                            "field": "fixed_geom",
+                            "fieldfx": "ST_asGeoJson(fixed_geom)",
+                            "display": true
                           }
                     ],
                     "style": {
