@@ -35,7 +35,9 @@ export default _xyz => {
 
         // Add group meta to group container.
         if (layer.groupmeta) {
-          _xyz.layers.listview.groups[layer.group].meta.appendChild(_xyz.utils.wire()`<div class="meta">${layer.groupmeta}`);
+          const groupmeta = _xyz.utils.wire()`<div class="meta">`;
+          groupmeta.innerHTML = layer.groupmeta;
+          _xyz.layers.listview.groups[layer.group].meta.appendChild(groupmeta);
         }
 
         // Append the layer to the listview group.
