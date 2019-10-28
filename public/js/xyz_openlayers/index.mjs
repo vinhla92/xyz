@@ -83,7 +83,7 @@ async function _xyz(params) {
 
   // Get workspace from XYZ host.
   // Proceed with init from callback.
-  if (_xyz.callback) return _xyz.workspace.setWS();
+  if (params.callback) return _xyz.workspace.setWS(params.callback);
 
   // Fetch workspace if no callback is provided.
   await _xyz.workspace.fetchWS();

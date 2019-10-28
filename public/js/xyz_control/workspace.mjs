@@ -22,7 +22,7 @@ export default _xyz => {
     _xyz.workspace.locales = workspace.locales;
   };
 
-  function setWS() {
+  function setWS(callback) {
 
     // XHR to retrieve workspace from host backend.
     const xhr = new XMLHttpRequest();
@@ -40,7 +40,7 @@ export default _xyz => {
 
       if (_xyz.locale) loadLocale();
 
-      if (_xyz.callback) _xyz.callback(_xyz);
+      callback && callback(_xyz);
     };
 
     xhr.send();
@@ -145,17 +145,14 @@ export default _xyz => {
 
             _xyz.hooks.removeAll();
 
-            setWS({
-              locale: locale,
-              callback: () => {
-                _xyz.hooks.removeAll();
+            setWS(() => {
+              _xyz.hooks.removeAll();
 
-                _xyz.hooks.set({ locale: locale });
+              _xyz.hooks.set({ locale: locale });
 
-                _xyz.workspace.loadLocale({ locale: locale });
+              _xyz.workspace.loadLocale({ locale: locale });
 
-                mask.remove();
-              }
+              mask.remove();
             });
 
             mask.remove();

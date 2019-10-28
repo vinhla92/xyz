@@ -10,8 +10,7 @@ const mobile = {
 if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 
 //move map up on document scroll
-document.addEventListener('scroll',
-  () => document.getElementById('Map').style['marginTop'] = -parseInt(window.pageYOffset / 2) + 'px');
+document.addEventListener('scroll', () => document.getElementById('Map').style['marginTop'] = -parseInt(window.pageYOffset / 2) + 'px');
   
 mobile.modLayers.addEventListener('scroll', e => checkOverlap(e.target));
 
@@ -34,11 +33,13 @@ mobile.tabLayers.addEventListener('click', () => activateTab(mobile.tabLayers, m
 mobile.tabLocations.addEventListener('click', () => activateTab(mobile.tabLocations, mobile.modLocations));
 
 mobile.tabLocations.addEventListener('click', () => activateTab(mobile.tabLocations, mobile.modLocations));
+
 function activateTab(target, mod) {
-  Object.values(target.parentNode.children).forEach(el =>
-    el.classList.remove('active'))  
-  Object.values(target.parentNode.children).forEach(el =>
-      el.classList.add('filter')) 
+
+  Object.values(target.parentNode.children).forEach(el => el.classList.remove('active'));
+
+  Object.values(target.parentNode.children).forEach(el => el.classList.add('filter'));
+  
   target.classList.add('active');
   target.classList.remove('filter'); 
   mobile.listviews.forEach(m => m.classList.add('displaynone'));
