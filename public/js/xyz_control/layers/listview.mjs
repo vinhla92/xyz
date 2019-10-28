@@ -35,7 +35,9 @@ export default _xyz => {
 
         // Add group meta to group container.
         if (layer.groupmeta) {
-          _xyz.layers.listview.groups[layer.group].meta.appendChild(_xyz.utils.wire()`<div class="meta">${layer.groupmeta}`);
+          const groupmeta = _xyz.utils.wire()`<div class="meta">`;
+          groupmeta.innerHTML = layer.groupmeta;
+          _xyz.layers.listview.groups[layer.group].meta.appendChild(groupmeta);
         }
 
         // Append the layer to the listview group.
@@ -102,8 +104,8 @@ export default _xyz => {
 
     // Create hide all group layers button.
     group.visible = _xyz.utils.wire()`
-    <i class="material-icons cursor noselect btn_header hide-group"
-    title="Hide layers from group">edit_attributes`;
+    <button class="icons-edit-attribute xyz-icon cursor noselect btn_header hide-group"
+    title="Hide layers from group">`;
    
     group.visible.onclick = e => {
       e.stopPropagation();
@@ -119,7 +121,7 @@ export default _xyz => {
 
     // Create group expander button.
     const expander = _xyz.utils.wire()`
-    <i class="material-icons cursor noselect btn_header expander-group"
+    <button class="icon-expander xyz-icon cursor noselect btn_header expander-group"
     title="Toggle group panel">`;
 
     expander.onclick = e => {

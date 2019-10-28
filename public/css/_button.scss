@@ -8,6 +8,7 @@ button {
     font-size: 14px;
     color: $glxgreen;
     height: 25px;
+    background-color:inherit;
 }
 
 .btn_subtext {
@@ -76,6 +77,10 @@ button {
         &:hover:enabled {
             cursor: pointer;
         }
+        &.mobile-box-shadow {
+            box-shadow: 1px 1px 3px 0 rgba(0, 0, 0, 0.2);
+            border-radius: 50%;
+        }
     }
 }
 
@@ -87,6 +92,7 @@ button {
     &.active {
         text-shadow: 2px 2px 2px $glxlightgreen;
     }
+    width:30px;
 }
 
 .btn_small {
