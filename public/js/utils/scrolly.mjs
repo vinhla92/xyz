@@ -1,8 +1,16 @@
 // Method to apply a left hand scroll bar to a container element.
 export function scrolly(el) {
 
-  const track = el.querySelector('.scrolly_track');
-  const bar = el.querySelector('.scrolly_bar');
+  //const track = el.querySelector('.scrolly_track');
+
+  const track = document.createElement('div');
+  track.classList = 'scrolly_track';
+  el.insertBefore(track, el.firstChild);
+
+  //const bar = el.querySelector('.scrolly_bar');
+  const bar = document.createElement('div');
+  bar.classList = 'scrolly_bar';
+  track.appendChild(bar);
 
   const setHeight = (function _setHeight() {
     bar.style.height = track.clientHeight * el.clientHeight / el.scrollHeight + 'px';
@@ -10,7 +18,7 @@ export function scrolly(el) {
     return _setHeight;
  })();
 
-  el.addEventListener('scrolly',setHeight);
+  el.addEventListener('scrolly', setHeight);
 
   //let timer;
   el.addEventListener('scroll', () => {

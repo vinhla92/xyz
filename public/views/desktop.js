@@ -7,7 +7,11 @@ const desktop = {
 }
 
 // Reset scrolly height after window resize.
-window.addEventListener('resize',() => desktop.listviews.dispatchEvent(new CustomEvent('scrolly')));
+window.addEventListener('resize', () => {
+  desktop.map.dispatchEvent(new CustomEvent('updatesize'));
+  desktop.dataview.dispatchEvent(new CustomEvent('updatesize'));
+  desktop.listviews.querySelector('.scrolly').dispatchEvent(new CustomEvent('scrolly'));
+});
 
 // Resize dataview while holding mousedown on resize_bar.
 desktop.vertDivider.addEventListener('mousedown', e => {
@@ -78,12 +82,12 @@ function resize_y(e) {
 
 // Remove eventListener after resize event.
 function stopResize_y() {
-  desktop.map.dispatchEvent(new CustomEvent('updatesize'));
   document.body.style.cursor = 'auto';
   window.removeEventListener('mousemove', resize_y);
   window.removeEventListener('touchmove', resize_y);
   window.removeEventListener('mouseup', stopResize_y);
   window.removeEventListener('touchend', stopResize_y);
+  desktop.map.dispatchEvent(new CustomEvent('updatesize'));
   desktop.dataview.dispatchEvent(new CustomEvent('updatesize'));
 }
 
