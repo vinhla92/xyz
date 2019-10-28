@@ -29,17 +29,8 @@ export default _xyz => entry => {
 
   entry.row.appendChild(td);
 
-  loadFixedGeom(entry);
-
-  if (entry.edit && entry.edit.isoline_mapbox) entry.ctrl.showGeom = entry.ctrl.isoline_mapbox;
-
-  if (entry.edit && entry.edit.isoline_here) entry.ctrl.showGeom = entry.ctrl.isoline_here;
-
-  if(!entry.ctrl.showGeom) entry.ctrl.showGeom = loadFixedGeom;
-
-  function loadFixedGeom(entry){
-
-    entry.ctrl.geometry = entry.display && entry.value && _xyz.mapview.geoJSON({
+  entry.ctrl.showExistingGeom = () => {
+    entry.ctrl.geometry = entry.value && _xyz.mapview.geoJSON({
       geometry: JSON.parse(entry.value),
       dataProjection: '4326',
       style: new _xyz.mapview.lib.style.Style({
@@ -52,9 +43,14 @@ export default _xyz => entry => {
         })
       })
     });
-
     entry.ctrl.geometry && entry.location.geometries.push(entry.ctrl.geometry);
+    entry.display = true;
   }
+ 
+  if (entry.edit && entry.edit.isoline_mapbox) entry.ctrl.showGeom = entry.ctrl.isoline_mapbox;
+
+  if (entry.edit && entry.edit.isoline_here) entry.ctrl.showGeom = entry.ctrl.isoline_here;
+
 
   entry.ctrl.hideGeom = () => {
 
@@ -65,13 +61,15 @@ export default _xyz => entry => {
 
     _xyz.map.removeLayer(entry.ctrl.geometry);
 
+    entry.display = false;
+
   };
 
-  if (entry.edit) entry.ctrl.hideGeom = entry.ctrl.deleteGeom;
+  if ((entry.display || entry.edit) && entry.value) entry.ctrl.showExistingGeom(entry);
 
-  //if (entry.value) entry.display = true;
+  if (entry.display && entry.edit && !entry.value) entry.ctrl.showGeom(entry);
 
-  if (entry.display && entry.edit && !entry.value) entry.ctrl.showGeom(entry); // allow isoline to be automatically created
+  //if (entry.edit) entry.ctrl.hideGeom = entry.ctrl.deleteGeom;
 
   td.appendChild(_xyz.utils.wire()`
   <td style="padding-top: 5px;" colSpan=2>
@@ -80,9 +78,13 @@ export default _xyz => entry => {
     checked=${!!entry.display}
     onchange=${e => {
     entry.display = e.target.checked;
-    entry.display ?
+    if (entry.display && entry.edit) entry.ctrl.showGeom(entry);
+    if (entry.display && !entry.edit) entry.ctrl.showExistingGeom(entry);
+    if (!entry.display && entry.edit) entry.ctrl.deleteGeom(entry);
+    if (!entry.display && !entry.edit) entry.ctrl.hideGeom(entry);
+    /*entry.display ?
       entry.ctrl.showGeom(entry) :
-      entry.ctrl.hideGeom(entry);
+      entry.ctrl.hideGeom(entry);*/
   }}></input><span>${entry.name || 'Additional geometries'}`);
 
   td.appendChild(_xyz.utils.wire()`
@@ -104,7 +106,7 @@ export default _xyz => entry => {
 
     entry.edit.container.appendChild(_xyz.utils.wire()`
       <div class="btn_subtext cursor noselect pretty"
-      style="text-align: left; font-size: small;"
+      style="text-align: left; font-style: italic; font-size: small;"
       onclick=${
         e => {
           if (e) e.stopPropagation();
