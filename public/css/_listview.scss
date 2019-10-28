@@ -71,6 +71,7 @@
             }
             &.expanded-group {
                 max-height: 2500px;
+                overflow: visible;
                 .icon-expander {
                     -webkit-mask-image: url("../icons/icons-keyboard-arrow-up.svg");
                     mask-image: url("../icons/icons-keyboard-arrow-up.svg");
