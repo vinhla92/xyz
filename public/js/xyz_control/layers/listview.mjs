@@ -81,12 +81,11 @@ export default _xyz => {
         expandable: e.target.parentNode,
         expandedTag: 'expanded-group',
         expandableTag: 'expandable-group',
-        accordeon: true,
+        accordeon: true
       });
     };
 
     group.container.appendChild(group.header);
-
 
     // Create group meta container
     group.meta = _xyz.utils.wire()`<div>`;
@@ -121,7 +120,7 @@ export default _xyz => {
 
     // Create group expander button.
     const expander = _xyz.utils.wire()`
-    <button class="icon-expander xyz-icon cursor noselect btn_header expander-group"
+    <button class="icon-group-expander xyz-icon cursor noselect btn_header expander-group"
     title="Toggle group panel">`;
 
     expander.onclick = e => {
@@ -129,7 +128,7 @@ export default _xyz => {
       _xyz.utils.toggleExpanderParent({
         expandable: group.container,
         expandedTag: 'expanded-group',
-        expandableTag: 'expandable-group',
+        expandableTag: 'expandable-group'
       });
     };
 

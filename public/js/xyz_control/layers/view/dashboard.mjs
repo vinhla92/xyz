@@ -48,7 +48,7 @@ export default (_xyz, layer) => {
     e.stopPropagation();
     _xyz.utils.toggleExpanderParent({
       expandable: layer.view.drawer,
-      accordeon: true,
+      accordeon: true
     });
   };
 
@@ -62,7 +62,7 @@ export default (_xyz, layer) => {
   expander.onclick = e => {
     e.stopPropagation();
     _xyz.utils.toggleExpanderParent({
-      expandable: layer.view.drawer,
+      expandable: layer.view.drawer
     });
   };
 

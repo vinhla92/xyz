@@ -2152,7 +2152,7 @@ button {
   overflow: hidden;
   transition: max-height 0.3s ease-out;
 }
-.listview .drawer.drawer-group.expandable-group .icon-expander {
+.listview .drawer.drawer-group.expandable-group .icon-group-expander {
   -webkit-mask-image: url("../icons/icons-keyboard-arrow-down.svg");
   mask-image: url("../icons/icons-keyboard-arrow-down.svg");
 }
@@ -2160,7 +2160,7 @@ button {
   max-height: 2500px;
   overflow: visible;
 }
-.listview .drawer.drawer-group.expanded-group .icon-expander {
+.listview .drawer.drawer-group.expanded-group .icon-group-expander {
   -webkit-mask-image: url("../icons/icons-keyboard-arrow-up.svg");
   mask-image: url("../icons/icons-keyboard-arrow-up.svg");
 }
