@@ -2617,19 +2617,19 @@ button {
 .icons-add-photo {
   -webkit-mask-image: url("../icons/icons-add-photo.svg");
   mask-image: url("../icons/icons-add-photo.svg");
-  -webkit-mask-size: 70px;
+  -webkit-mask-size: 30px;
   -webkit-mask-position: center;
   -webkit-mask-repeat: no-repeat;
-  mask-size: 70px;
+  mask-size: 30px;
   mask-position: center;
   mask-repeat: no-repeat;
   background-color: #1f964d;
-  height: 70px;
+  height: 30px;
 }
 
 .image-container {
-  width: 70px;
-  height: 70px;
+  /*width: 30px;
+  height: 30px;*/
   background-size: 100%;
   -webkit-filter: drop-shadow(1px 1px 4px rgba(0, 0, 0, 0.25));
   -moz-filter: drop-shadow(1px 1px 4px rgba(0, 0, 0, 0.25));
