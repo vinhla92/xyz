@@ -12,7 +12,6 @@ export default _xyz => group => {
   if(group.expanded) group.div.classList.add('expanded');
   group.td.appendChild(group.div);
 
-
   group.header = _xyz.utils.wire()`
   <div class="btn_subtext cursor noselect"
   style="text-align: left;"
@@ -35,7 +34,6 @@ export default _xyz => group => {
   <table style="width: 100%; cell-padding: 0; cell-spacing: 0; padding-left: 20px; border-left: 2px solid #B4B4B4;">`;
 
   group.div.appendChild(group.table);
-
 
   // If chart option specified
   if (group.chart) {
@@ -79,8 +77,7 @@ export default _xyz => group => {
         e.stopPropagation();
         group.viewToggler.classList.toggle(group.chartIcon);
         group.viewToggler.classList.toggle('icons-view-list');
-        group.div.classList.toggle('chart');
-        group.div.classList.contains('chart') ? group.showChart() : group.showTable();
+        group.div.classList.contains('chart') ? group.showTable() : group.showChart();
       }
     }>`;
 
@@ -92,6 +89,8 @@ export default _xyz => group => {
 
       group.table.style.display = 'none';
       group.chartElem.style.display = 'block';
+
+      group.div.classList.add('chart');
   
       group.viewToggler.classList.remove(group.chartIcon);
       group.viewToggler.classList.add('icons-view-list');
@@ -103,6 +102,8 @@ export default _xyz => group => {
       group.table.style.display = 'table';
       group.chartElem.style.display = 'none';
 
+      group.div.classList.remove('chart');
+
       group.viewToggler.classList.remove('icons-view-list');
       group.viewToggler.classList.add(group.chartIcon);
 
@@ -111,6 +112,7 @@ export default _xyz => group => {
 
     // Use the appropriate toggle function to initialise
     if (group.chart.active) {
+
       group.showChart();
     // if explicitly specified
     } else {
