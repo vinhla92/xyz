@@ -48,6 +48,12 @@
      mask-image: url("../icons/icons-remove.svg");
 }
 
+.icons-show-chart {
+    -webkit-mask-image: url("../icons/icons-show-chart.svg");
+    mask-image: url("../icons/icons-show-chart.svg");
+    height: 30px;
+}
+
 .icons-school-mobile {
     background: url("../icons/icons-school.svg");
 }

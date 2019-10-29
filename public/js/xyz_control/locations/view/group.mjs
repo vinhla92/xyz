@@ -53,7 +53,7 @@ export default _xyz => group => {
 
 
     const chartIcon = {
-      'line':  'icons-bar-chart',
+      'line':  'icons-show-chart',
       'bar':  'icons-bar-chart',
       'pie':  'pie_chart',
       'doughnut':  'donut_small',
@@ -66,7 +66,7 @@ export default _xyz => group => {
       'stackedBar':  'icons-bar-chart',
    }
 
-   group.chartIcon = group.chart.type && chartIcon[group.chart.type] || 'icons-bar-chart';
+   group.chartIcon = group.chart.type && chartIcon[group.chart.type] || 'icons-show-chart';
 
     // Add chart control to group header for toggling
     group.viewToggler = _xyz.utils.wire()`
@@ -77,12 +77,10 @@ export default _xyz => group => {
     onclick=${
       e => {
         e.stopPropagation();
-
-        e.target.classList.toggle(group.chartIcon);
-        e.target.classList.toggle('icons-view-list');
+        group.viewToggler.classList.toggle(group.chartIcon);
+        group.viewToggler.classList.toggle('icons-view-list');
         group.div.classList.toggle('chart');
-        //console.log('switch view');
-        group.div.classList.contains('chart') ? group.showTable() : group.showChart();
+        group.div.classList.contains('chart') ? group.showChart() : group.showTable();
       }
     }>`;
 
@@ -95,7 +93,7 @@ export default _xyz => group => {
       group.table.style.display = 'none';
       group.chartElem.style.display = 'block';
   
-      group.viewToggler.classList.remove('icons-bar-chart');
+      group.viewToggler.classList.remove(group.chartIcon);
       group.viewToggler.classList.add('icons-view-list');
       
       if (!group.div.classList.contains('expanded')) group.div.classList.add('expanded');
@@ -106,7 +104,7 @@ export default _xyz => group => {
       group.chartElem.style.display = 'none';
 
       group.viewToggler.classList.remove('icons-view-list');
-      group.viewToggler.classList.add('icons-bar-chart');
+      group.viewToggler.classList.add(group.chartIcon);
 
       if (!group.div.classList.contains('expanded')) group.div.classList.add('expanded');
     };

@@ -120,17 +120,6 @@
 .locationview .num {
   text-align: right;
 }
-.locationview .table-section {
-  /*&.chart {
-      table { display: inline-table};
-      .chart { display: none};
-  }
-
-  &:not(.chart) {
-      table { display: none};
-      .chart { display: block};
-  }*/
-}
 .locationview .table-section .t-expander {
   vertical-align: bottom;
   float: right;
@@ -2475,6 +2464,12 @@ button {
 .icons-remove {
   -webkit-mask-image: url("../icons/icons-remove.svg");
   mask-image: url("../icons/icons-remove.svg");
+}
+
+.icons-show-chart {
+  -webkit-mask-image: url("../icons/icons-show-chart.svg");
+  mask-image: url("../icons/icons-show-chart.svg");
+  height: 30px;
 }
 
 .icons-school-mobile {
