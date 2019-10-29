@@ -11,7 +11,7 @@
     .drawer {
         margin-top: 10px;
         &.expandable {
-            max-height: 40px;
+            max-height: 38px;
             overflow: hidden;
             transition: max-height 0.3s ease-out;
             .icon-expander {
@@ -30,7 +30,6 @@
         &.drawer-group {
 
                 .header {
-                    font-style: italic;
                     font-size: 13px;
                     margin-left: 12px;
                     border-bottom: 1px solid #bbb;

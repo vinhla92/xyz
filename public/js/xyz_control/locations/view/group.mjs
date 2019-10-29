@@ -15,7 +15,7 @@ export default _xyz => group => {
 
   group.header = _xyz.utils.wire()`
   <div class="btn_subtext cursor noselect"
-  style="text-align: left; font-style: italic;"
+  style="text-align: left;"
   onclick=${ e => {
 
     _xyz.utils.toggleExpanderParent({

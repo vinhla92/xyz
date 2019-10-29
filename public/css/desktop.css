@@ -199,7 +199,6 @@
   content: "expand_less";
 }
 .popup .drawer.drawer-group .header {
-  font-style: italic;
   font-size: 13px;
   margin-left: 12px;
   border-bottom: 1px solid #bbb;
@@ -2107,7 +2106,7 @@ button {
   margin-top: 10px;
 }
 .listview .drawer.expandable {
-  max-height: 40px;
+  max-height: 38px;
   overflow: hidden;
   transition: max-height 0.3s ease-out;
 }
@@ -2124,7 +2123,6 @@ button {
   mask-image: url("../icons/icons-keyboard-arrow-up.svg");
 }
 .listview .drawer.drawer-group .header {
-  font-style: italic;
   font-size: 13px;
   margin-left: 12px;
   border-bottom: 1px solid #bbb;
