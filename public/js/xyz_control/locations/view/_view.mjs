@@ -211,7 +211,7 @@ class = "icons-location-tick cursor noselect btn_header xyz-icon"
   <button
   style = "${'background-color: ' + location.style.strokeColor}"
   title = "Remove feature from selection"
-  class = "icons-fullscreen cursor noselect btn_header xyz-icon"
+  class = "icons-clear cursor noselect btn_header xyz-icon"
   onclick = ${e => {
     e.stopPropagation();
     location.remove();
