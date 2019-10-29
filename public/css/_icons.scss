@@ -241,26 +241,26 @@
 }
 //NON SVG PROPERTIES//
 .xyz-icon {
-    background-size: 32px 50px;    
+    background-size: 28px 44px;    
     background-repeat: no-repeat;
     background-position: center;   
     background-color: inherit;    
         
 //SVG Mask properties//
-    -webkit-mask-size: 32px 50px;
+    -webkit-mask-size: 28px 44px;
     -webkit-mask-position: center;
     -webkit-mask-repeat: no-repeat;
-     mask-size: 32px 50px;
+     mask-size: 28px 44px;
      mask-position: center;
      mask-repeat: no-repeat;
      background-color: #1f964d;
     }
 
 .xyz-toggle {
-    -webkit-mask-size: 32px 50px;
+    -webkit-mask-size: 28px 44px;
     -webkit-mask-position: center;
     -webkit-mask-repeat: no-repeat;
-     mask-size: 32px 50px;
+     mask-size: 28px 44px;
      mask-position: center;
      mask-repeat: no-repeat;
 }
@@ -275,7 +275,7 @@
 }
 
 .xyz-icon3 {
-    background-size: 32px 50px;    
+    background-size: 28px 44px;    
     background-repeat: no-repeat;
     background-position: center; 
     &.BG{
