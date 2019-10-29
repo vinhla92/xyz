@@ -1212,14 +1212,7 @@
                         },
                         {
                             "label": "Population",
-                            "type": "group",
-                            "chart": {
-                                "x": "label x",
-                                "y": "label y",
-                                "active": true,
-                                "title": true
-                            },
-                            "expanded": true
+                            "type": "group"
                         },
                         {
                             "group": "Population",

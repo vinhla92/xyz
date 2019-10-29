@@ -73,16 +73,6 @@
                 content: "expand_less"
             }
         }
-
-        &.chart {
-            table { display: inline-table};
-            .chart { display: none};
-        }
-
-        &:not(.chart) {
-            table { display: none};
-            .chart { display: block};
-        }
     }
     .td_images {
         text-align: center;

@@ -120,6 +120,17 @@
 .locationview .num {
   text-align: right;
 }
+.locationview .table-section {
+  /*&.chart {
+      table { display: inline-table};
+      .chart { display: none};
+  }
+
+  &:not(.chart) {
+      table { display: none};
+      .chart { display: block};
+  }*/
+}
 .locationview .table-section .t-expander {
   vertical-align: bottom;
   float: right;
@@ -141,18 +152,6 @@
 }
 .locationview .table-section.expanded .t-expander::before {
   content: "expand_less";
-}
-.locationview .table-section.chart table {
-  display: inline-table;
-}
-.locationview .table-section.chart .chart {
-  display: none;
-}
-.locationview .table-section:not(.chart) table {
-  display: none;
-}
-.locationview .table-section:not(.chart) .chart {
-  display: block;
 }
 .locationview .td_images {
   text-align: center;

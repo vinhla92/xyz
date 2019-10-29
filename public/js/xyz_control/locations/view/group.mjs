@@ -9,6 +9,7 @@ export default _xyz => group => {
    <div class="table">`);*/
 
   group.div = _xyz.utils.wire()`<div class="table-section expandable">`;
+  if(group.expanded) group.div.classList.add('expanded');
   group.td.appendChild(group.div);
 
 
@@ -47,8 +48,6 @@ export default _xyz => group => {
     // Create chart element
     group.chartElem = _xyz.charts.create(group);
 
-    group.chartElem.classList.add('chart');
-
     // Add chart
     group.div.appendChild(group.chartElem);
 
@@ -82,7 +81,8 @@ export default _xyz => group => {
         e.target.classList.toggle(group.chartIcon);
         e.target.classList.toggle('icons-view-list');
         group.div.classList.toggle('chart');
-
+        //console.log('switch view');
+        group.div.classList.contains('chart') ? group.showTable() : group.showChart();
       }
     }>`;
 
@@ -91,13 +91,19 @@ export default _xyz => group => {
 
     //// Functions for toggeling between table view and chart view ////
     group.showChart = () => {
+
+      group.table.style.display = 'none';
+      group.chartElem.style.display = 'block';
   
       group.viewToggler.classList.remove('icons-bar-chart');
       group.viewToggler.classList.add('icons-view-list');
       
       if (!group.div.classList.contains('expanded')) group.div.classList.add('expanded');
     };
-    group.showTable = (e) => {
+    group.showTable = e => {
+
+      group.table.style.display = 'table';
+      group.chartElem.style.display = 'none';
 
       group.viewToggler.classList.remove('icons-view-list');
       group.viewToggler.classList.add('icons-bar-chart');
