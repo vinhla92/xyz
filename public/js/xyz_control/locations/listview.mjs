@@ -50,8 +50,6 @@ export default _xyz => {
   function add(location) {
 
     if(!_xyz.locations.listview.node) return;
-
-    _xyz.locations.listview.node.parentElement.style.display = 'block';
   
     Object.values(_xyz.locations.listview.node.children).forEach(el => el.classList.remove('expanded'));
      

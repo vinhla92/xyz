@@ -1,13 +1,8 @@
 @import 'control';
+
 body {
     overflow-y: scroll;
     overflow-x: hidden;
-}
-
-.tab_btn {
-    i {
-        font-size: 40px;
-    }
 }
 
 .spacer_mobile {
@@ -20,6 +15,7 @@ body {
 }
 
 .listviews {
+    display: inline-flex;
     position: absolute;
     background-color: white;
     width: 100%;
@@ -27,20 +23,30 @@ body {
     box-shadow: 0 0 10px slategrey;
     z-index: 1000;
 
-    /*#localeDropdown .ul-drop .head span {
-        padding: 4px;
-        border-radius: 4px;
-        background-color: $glxlightgreen;
-    }*/
-    #localeDropdown {
+    .tab {
+        padding: 10px;
+        flex-grow: 1;
+        text-align: center;
+        height: 50px;
+        border-bottom: 1px solid #090;
+    }
 
-        margin-bottom: 4px;
+    .icon-layers-mobile {
+        background-image: url("../icons/icons-layers.svg");
+    }
 
-        .ul-drop .head span {
+    .icon-location-mobile {
+        background-image: url("../icons/icons-room.svg");
+    }
 
-            padding: 4px;
-            border-radius: 2px;
-            background-color: $glxlightgreen;
+    .tab.active {
+        background-color: #1F964D;
+    }
+
+    .tab:not(.active)>* {
+        display: none;
+        &.xyz-icon3 {
+            filter: invert(45%) sepia(55%) saturate(608%) hue-rotate(90deg) brightness(93%) contrast(90%);
         }
     }
 
@@ -48,29 +54,51 @@ body {
         padding: 20px;
         overflow-y: scroll;
         height: calc(100% - 50px);
-    }
-    .tab_bar {
+        position: absolute;
         width: 100%;
-        color: $glxgreen;
-        border-bottom: 1px solid $glxgreen;
-        text-align: center;
-        table-layout: fixed;
-        height: 50px; // box-shadow: 0 3px 3px -3px #000;
-        .xyz-icon3 {
-            &.icon-layers-mobile {
-                background-image: url("../icons/icons-layers.svg");
-            }
-            &.icon-location-mobile {
-                background-image: url("../icons/icons-room.svg");
-            }
-            &.active {
-                background-image: url("../icons/icons-touch-app.svg");
-                background-color: #1F964D;
-            }
-            &.filter {
-                filter: invert(45%) sepia(55%) saturate(608%) hue-rotate(90deg) brightness(93%) contrast(90%);
-            }
-        }
+        left: 0;
+        top: 50px;
+    }
+
+    .listview.shadow {
+        box-shadow: inset 0px 4px 4px -4px #777;
+    }
+
+    // .tab_bar {
+    //     width: 100%;
+    //     color: $glxgreen;
+    //     border-bottom: 1px solid $glxgreen;
+    //     text-align: center;
+    //     table-layout: fixed;
+    //     height: 50px;
+    //     box-shadow: 0 3px 3px -3px #000;
+    //     .xyz-icon3 {
+    //         &.icon-layers-mobile {
+    //             background-image: url("../icons/icons-layers.svg");
+    //         }
+    //         &.icon-location-mobile {
+    //             background-image: url("../icons/icons-room.svg");
+    //         }
+    //         &.active {
+    //             background-image: url("../icons/icons-touch-app.svg");
+    //             background-color: #1F964D;
+    //         }
+    //         &.filter {
+    //             filter: invert(45%) sepia(55%) saturate(608%) hue-rotate(90deg) brightness(93%) contrast(90%);
+    //         }
+    //     }
+    // }
+}
+
+#localeDropdown {
+
+    margin-bottom: 4px;
+
+    .ul-drop .head span {
+
+        padding: 4px;
+        border-radius: 2px;
+        background-color: $glxlightgreen;
     }
 }
 

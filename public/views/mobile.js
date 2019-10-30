@@ -1,6 +1,6 @@
 const mobile = {
   listviews: document.querySelectorAll('.listview'),
-  tabs: document.querySelector('.tab_bar'),
+  // tabs: document.querySelector('.tab_bar'),
   tabLayers: document.getElementById('tabLayers'),
   tabLocations: document.getElementById('tabLocations'),
   modLayers: document.getElementById('modLayers'),
@@ -11,40 +11,28 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 
 //move map up on document scroll
 document.addEventListener('scroll', () => document.getElementById('Map').style['marginTop'] = -parseInt(window.pageYOffset / 2) + 'px');
+
+
+const tabs = document.querySelectorAll('.tab');
+
+tabs.forEach(tab => {
+  tab.onclick = e => {
+    e.preventDefault();
+    Object.values(e.target.parentNode.children).forEach(
+    	el => el.classList.remove('active')
+    );
+    e.target.classList.add('active');
+  }
+});
+
   
 mobile.modLayers.addEventListener('scroll', e => checkOverlap(e.target));
 
 mobile.modLocations.addEventListener('scroll', e => checkOverlap(e.target));
 
 function checkOverlap(target) {
-  if (target.scrollTop > 0) return mobile.tabs.classList.add('pane_shadow');
-  mobile.tabs.classList.remove('pane_shadow');
-}
-
-mobile.activateLayersTab = () => activateTab(mobile.tabLayers, mobile.modLayers);
-
-mobile.activateLocationsTab = () => {
-  mobile.tabLocations.classList.remove('displaynone');
-  activateTab(mobile.tabLocations, mobile.modLocations);
-};
-
-mobile.tabLayers.addEventListener('click', () => activateTab(mobile.tabLayers, mobile.modLayers));
-
-mobile.tabLocations.addEventListener('click', () => activateTab(mobile.tabLocations, mobile.modLocations));
-
-mobile.tabLocations.addEventListener('click', () => activateTab(mobile.tabLocations, mobile.modLocations));
-
-function activateTab(target, mod) {
-
-  Object.values(target.parentNode.children).forEach(el => el.classList.remove('active'));
-
-  Object.values(target.parentNode.children).forEach(el => el.classList.add('filter'));
-  
-  target.classList.add('active');
-  target.classList.remove('filter'); 
-  mobile.listviews.forEach(m => m.classList.add('displaynone'));
-  mod.classList.remove('displaynone');
-  checkOverlap(mod);
+  if (target.scrollTop > 0) return target.classList.add('shadow');
+  target.classList.remove('shadow');
 }
 
 
@@ -141,11 +129,11 @@ function createMap(_xyz) {
     target: document.getElementById('locations'),
     callbackInit: () => {
       mobile.tabLocations.classList.add('displaynone');
-      mobile.activateLayersTab();
+      mobile.tabLayers.click();
     },
     callbackAdd: () => {
-      mobile.tabLocations.classList.add('displaynone');
-      mobile.activateLocationsTab();
+      mobile.tabLocations.classList.remove('displaynone');
+      mobile.tabLocations.click();
     }
   });
 

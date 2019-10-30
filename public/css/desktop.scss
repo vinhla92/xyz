@@ -5,6 +5,10 @@ body {
     min-width: 666px;
 }
 
+.map {
+    box-shadow: inset 4px 0px 4px -4px #777;
+}
+
 .listviews {
     grid-column: 1;
     grid-row: 1/4;
