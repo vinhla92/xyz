@@ -1968,6 +1968,12 @@ button {
       background-color: ghostwhite;
       cursor: pointer; }
 
+.icon-layers {
+  background-image: url("../icons/icons-layers.svg"); }
+
+.icon-location {
+  background-image: url("../icons/icons-room.svg"); }
+
 .icons-search-mask {
   mask-image: url("../icons/icons-search.svg");
   -webkit-mask-image: url("../icons/icons-search.svg"); }
@@ -2192,11 +2198,8 @@ button {
   mask-repeat: no-repeat; }
 
 .xyz-icon3 {
-  background-size: 28px 44px;
   background-repeat: no-repeat;
   background-position: center; }
-  .xyz-icon3.BG {
-    background-color: #dddddd; }
 
 .filter {
   filter: invert(45%) sepia(55%) saturate(608%) hue-rotate(90deg) brightness(93%) contrast(90%); }
@@ -2267,14 +2270,14 @@ body {
   overflow-y: scroll;
   overflow-x: hidden; }
 
-.spacer_mobile {
-  height: calc(100% - 50px); }
-
 .mapview {
   position: fixed;
   height: calc(100% - 50px); }
 
-.listviews {
+#spacer {
+  height: calc(100% - 50px); }
+
+#ctrls {
   display: inline-flex;
   position: absolute;
   background-color: white;
@@ -2282,23 +2285,22 @@ body {
   height: 100%;
   box-shadow: 0 0 10px slategrey;
   z-index: 1000; }
-  .listviews .tab {
-    padding: 10px;
+  #ctrls .tab {
     flex-grow: 1;
     text-align: center;
     height: 50px;
-    border-bottom: 1px solid #090; }
-  .listviews .icon-layers-mobile {
-    background-image: url("../icons/icons-layers.svg"); }
-  .listviews .icon-location-mobile {
-    background-image: url("../icons/icons-room.svg"); }
-  .listviews .tab.active {
-    background-color: #1F964D; }
-  .listviews .tab:not(.active) > * {
-    display: none; }
-    .listviews .tab:not(.active) > *.xyz-icon3 {
+    border-bottom: 1px solid #1F964D; }
+    #ctrls .tab .xyz-icon3 {
+      width: 100%;
+      height: 100%;
       filter: invert(45%) sepia(55%) saturate(608%) hue-rotate(90deg) brightness(93%) contrast(90%); }
-  .listviews .listview {
+  #ctrls .tab.active {
+    background-color: #1F964D; }
+    #ctrls .tab.active .xyz-icon3 {
+      filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(56deg) brightness(100%) contrast(105%); }
+  #ctrls .tab:not(.active) > .listview {
+    display: none; }
+  #ctrls .listview {
     padding: 20px;
     overflow-y: scroll;
     height: calc(100% - 50px);
@@ -2306,7 +2308,7 @@ body {
     width: 100%;
     left: 0;
     top: 50px; }
-  .listviews .listview.shadow {
+  #ctrls .listview.shadow {
     box-shadow: inset 0px 4px 4px -4px #777; }
 
 #localeDropdown {

@@ -1,4 +1,11 @@
-//Mapview left column icons//
+.icon-layers {
+    background-image: url("../icons/icons-layers.svg");
+}
+
+.icon-location {
+    background-image: url("../icons/icons-room.svg");
+}
+
 .icons-search-mask {
     mask-image: url("../icons/icons-search.svg");
     -webkit-mask-image: url("../icons/icons-search.svg");
@@ -239,6 +246,8 @@
     -webkit-mask-image: url("../icons/icons-location-tick.svg");
     mask-image: url("../icons/icons-location-tick.svg");
 }
+
+
 //NON SVG PROPERTIES//
 .xyz-icon {
     background-size: 28px 44px;    
@@ -275,12 +284,13 @@
 }
 
 .xyz-icon3 {
-    background-size: 28px 44px;    
+    //background-size: 28px 44px;    
     background-repeat: no-repeat;
     background-position: center; 
-    &.BG{
-        background-color: #dddddd;
-    }
+
+    // &.BG{
+    //     background-color: #dddddd;
+    // }
 }
 
 //Geolytix green//

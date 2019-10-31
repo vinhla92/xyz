@@ -1968,6 +1968,12 @@ button {
       background-color: ghostwhite;
       cursor: pointer; }
 
+.icon-layers {
+  background-image: url("../icons/icons-layers.svg"); }
+
+.icon-location {
+  background-image: url("../icons/icons-room.svg"); }
+
 .icons-search-mask {
   mask-image: url("../icons/icons-search.svg");
   -webkit-mask-image: url("../icons/icons-search.svg"); }
@@ -2192,11 +2198,8 @@ button {
   mask-repeat: no-repeat; }
 
 .xyz-icon3 {
-  background-size: 28px 44px;
   background-repeat: no-repeat;
   background-position: center; }
-  .xyz-icon3.BG {
-    background-color: #dddddd; }
 
 .filter {
   filter: invert(45%) sepia(55%) saturate(608%) hue-rotate(90deg) brightness(93%) contrast(90%); }

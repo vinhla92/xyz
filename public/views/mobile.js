@@ -1,40 +1,23 @@
-const mobile = {
-  listviews: document.querySelectorAll('.listview'),
-  // tabs: document.querySelector('.tab_bar'),
-  tabLayers: document.getElementById('tabLayers'),
-  tabLocations: document.getElementById('tabLocations'),
-  modLayers: document.getElementById('modLayers'),
-  modLocations: document.getElementById('modLocations'),
-};
-
 if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 
 //move map up on document scroll
 document.addEventListener('scroll', () => document.getElementById('Map').style['marginTop'] = -parseInt(window.pageYOffset / 2) + 'px');
 
-
 const tabs = document.querySelectorAll('.tab');
 
 tabs.forEach(tab => {
-  tab.onclick = e => {
+  tab.querySelector('.listview').addEventListener('scroll',
+    e => {
+      if (e.target.scrollTop > 0) return e.target.classList.add('shadow');
+      e.target.classList.remove('shadow');
+    });
+
+  tab.querySelector('.xyz-icon3').onclick = e => {
     e.preventDefault();
-    Object.values(e.target.parentNode.children).forEach(
-    	el => el.classList.remove('active')
-    );
-    e.target.classList.add('active');
+    tabs.forEach(el => el.classList.remove('active'));
+    e.target.parentElement.classList.add('active');
   }
 });
-
-  
-mobile.modLayers.addEventListener('scroll', e => checkOverlap(e.target));
-
-mobile.modLocations.addEventListener('scroll', e => checkOverlap(e.target));
-
-function checkOverlap(target) {
-  if (target.scrollTop > 0) return target.classList.add('shadow');
-  target.classList.remove('shadow');
-}
-
 
 
 _xyz({
@@ -62,8 +45,7 @@ function init(_xyz) {
     document.getElementById('localeDropdown').parentNode.insertBefore(_xyz.utils.wire()`<div class="title">Locales</div>`, document.getElementById('localeDropdown'));
 
     document.getElementById('localeDropdown').appendChild(_xyz.utils.wire()`
-      <div class="pretty"><small>Show layers for the following locale
-      `);
+      <div class="pretty"><small>Show layers for the following locale`);
 
     document.getElementById('localeDropdown').appendChild(
       _xyz.utils.dropdownCustom({
@@ -128,12 +110,12 @@ function createMap(_xyz) {
   _xyz.locations.listview.init({
     target: document.getElementById('locations'),
     callbackInit: () => {
-      mobile.tabLocations.classList.add('displaynone');
-      mobile.tabLayers.click();
+      document.getElementById('tabLocations').style.display = 'none';
+      document.getElementById('tabLayers').querySelector('.xyz-icon3').click();
     },
     callbackAdd: () => {
-      mobile.tabLocations.classList.remove('displaynone');
-      mobile.tabLocations.click();
+      document.getElementById('tabLocations').style.display = 'block';
+      document.getElementById('tabLocations').querySelector('.xyz-icon3').click();
     }
   });
 
