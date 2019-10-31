@@ -53,9 +53,9 @@ export default _xyz => group => {
     const chartIcon = {
       'line':  'icons-show-chart',
       'bar':  'icons-bar-chart',
-      'pie':  'pie_chart',
-      'doughnut':  'donut_small',
-      'horizontalBar':  'notes',
+      'pie':  'icons-pie-chart',
+      'doughnut':  'icons-donut-small',
+      'horizontalBar':  'icons-notes',
       'bubble':  'bubble_chart',
       'scatter':  'scatter_plot',
       'radar':  'multiline_chart',

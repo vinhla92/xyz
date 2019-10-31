@@ -39,7 +39,7 @@ export default _xyz => entry => {
     		datasets: datasets  		
     	},
     	options: {
-    		cutoutPercentage: entry.chart.cutoutPercentage || 50,
+    		cutoutPercentage: entry.chart.type === 'doughnut' ? (entry.chart.cutoutPercentage || 50) : null,
     		title: {
     			display: entry.chart.title || false,
     			position: 'bottom',
