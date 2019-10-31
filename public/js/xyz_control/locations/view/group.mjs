@@ -56,11 +56,11 @@ export default _xyz => group => {
       'pie':  'icons-pie-chart',
       'doughnut':  'icons-donut-small',
       'horizontalBar':  'icons-notes',
-      'bubble':  'bubble_chart',
-      'scatter':  'scatter_plot',
-      'radar':  'multiline_chart',
-      'polarArea':  'multiline_chart',
-      'mixed':  'multiline_chart',
+      'bubble':  'icons-bubble-chart',
+      'scatter':  'icons-scatter-plot',
+      'radar':  'icons-multiline-chart',
+      'polarArea':  'icons-multiline-chart',
+      'mixed':  'icons-multiline-chart',
       'stackedBar':  'icons-bar-chart',
    }
 

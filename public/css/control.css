@@ -2639,6 +2639,24 @@ button {
   height: 30px;
 }
 
+.icons-scatter-plot {
+  -webkit-mask-image: url("../icons/icons-scatter-plot.svg");
+  mask-image: url("../icons/icons-scatter-plot.svg");
+  height: 30px;
+}
+
+.icons-bubble-chart {
+  -webkit-mask-image: url("../icons/icons-bubble-chart.svg");
+  mask-image: url("../icons/icons-bubble-chart.svg");
+  height: 30px;
+}
+
+.icons-multiline-chart {
+  -webkit-mask-image: url("../icons/icons-multiline-chart.svg");
+  mask-image: url("../icons/icons-multiline-chart.svg");
+  height: 30px;
+}
+
 .icons-location-tick {
   -webkit-mask-image: url("../icons/icons-location-tick.svg");
   mask-image: url("../icons/icons-location-tick.svg");
