@@ -14,8 +14,8 @@ export function toggleExpanderParent(params) {
   if (params.expandable.classList.contains(params.expandedTag)) {
 
     // Remove expanded class.
-    params.expandable.classList.remove(params.expandedTag);
-    return;
+    return params.expandable.classList.remove(params.expandedTag);
+
   }
 
   // Accordion: Collapse the parents siblings which are expanded.
@@ -26,8 +26,7 @@ export function toggleExpanderParent(params) {
   }
 
   // Add expanded class to expandable element.
-  if (params.expandable.classList.contains(params.expandableTag)) {
-    params.expandable.classList.add(params.expandedTag);
-  }
+  params.expandable.classList.contains(params.expandableTag)
+    && params.expandable.classList.add(params.expandedTag);
 
 }

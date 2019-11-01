@@ -8,7 +8,7 @@ button {
     font-size: 14px;
     color: $glxgreen;
     height: 25px;
-    background-color:inherit;
+    background-color: inherit;
 }
 
 .btn_subtext {
@@ -22,9 +22,11 @@ button {
     &.lv0 {
         box-shadow: inset 2px 0 4px -4px #777;
     }
+
     &.lv1 {
         box-shadow: inset 5px 0 4px -4px #777;
     }
+
     &.desktop {
         // position: absolute;
         z-index: 999;
@@ -33,20 +35,21 @@ button {
         padding: 4px;
         opacity: 0.8;
     }
+
     &.mobile {
         position: fixed;
         left: 10px;
-        button,
-        >div {
+
+        >button,
+        >div,
+        >a {
             box-shadow: 1px 1px 3px 0 rgba(0, 0, 0, 0.2);
             border-radius: 50%;
         }
     }
-    // top: 0;
+
     z-index: 999;
-    // div:hover {
-    //     cursor: pointer;
-    // }
+
     button,
     >div,
     >a {
@@ -58,41 +61,46 @@ button {
         width: 50px;
         padding: 0;
         color: $glxgreen;
-                                        // background: #fff;
+        background-color: #fff;
         text-align: center;
         cursor: default;
         border: none;
         outline: none;
+
         a {
             color: $glxgreen;
         }
+
         i {
             font-size: 30px;
             line-height: 1.7;
         }
+
         &:disabled {
             opacity: 0.3;
             cursor: default;
         }
-        &:hover:enabled {
-            cursor: pointer;
-        }
+
         &.mobile-box-shadow {
             box-shadow: 1px 1px 3px 0 rgba(0, 0, 0, 0.2);
             border-radius: 50%;
+        }
+
+        .xyz-icon {
+            width: 100%;
+            height: 100%;
         }
     }
 }
 
 .btn_header {
-    font-size: 28px;
     margin-left: 5px;
-    // float: right;
-    color: $glxgreen;
-    &.active {
-        text-shadow: 2px 2px 2px $glxlightgreen;
-    }
-    width:30px;
+    width: 30px;
+    background: none;
+}
+
+.btn_header:disabled {
+    opacity: 0.5;
 }
 
 .btn_small {
@@ -114,14 +122,17 @@ button {
     box-shadow: 1px 1px 2px #999999;
     margin: 5px 2px 5px 1px;
     width: calc(100% - 5px);
+
     &.disabled {
         opacity: 0.3;
         cursor: default;
     }
+
     &:disabled {
         opacity: 0.3;
         cursor: default;
     }
+
     &:hover:enabled {
         cursor: pointer;
     }
@@ -129,6 +140,7 @@ button {
 
 .btn_state {
     color: $glxgreen;
+
     &.active {
         color: #000;
         box-shadow: none;
@@ -149,26 +161,19 @@ button {
     box-shadow: 1px 1px 3px #666;
     margin: 6px 3px 12px 3px;
     cursor: pointer;
+
     &:active {
         box-shadow: 2px 2px 3px $glxgreen;
     }
+
     span {
         position: absolute;
         top: 0;
         left: 0
     }
+
     i {
         font-size: 14px;
         vertical-align: text-bottom;
     }
-}
-
-.pretty:after {
-    content: "";
-    display: block;
-    height: 1px;
-    bottom: 0;
-    background: linear-gradient(left, #999 0%, white 90%);
-    background: -webkit-linear-gradient(left, #999 0%, white 90%);
-    background: -moz-linear-gradient(left, #999 0%, white 90%);
 }

@@ -70,6 +70,8 @@ export default _xyz => function () {
   // Create drawer element to contain the header with controls and the infoj table with inputs.
   location.view.drawer = _xyz.utils.wire()`<div class="drawer expandable expanded">`;
 
+  // Create colorfilter for icons.
+  const colorFilter = _xyz.utils.colorFilter(location.style.strokeColor || '#000');
 
   // Create the header element to contain the control elements
   location.view.header = _xyz.utils.wire()`
@@ -92,25 +94,25 @@ export default _xyz => function () {
 
   // Expander icon.
   location.infoj && location.view.header.appendChild(_xyz.utils.wire()`
- <button
-  style = "${'background-color: ' + location.style.strokeColor}" 
-  title = "Toggle location view drawer."
-  class = "cursor noselect btn_header expander xyz-icon icon-expander"
-  onclick = ${e => {
-    e.stopPropagation();
-    
-    _xyz.utils.toggleExpanderParent({
-      expandable: location.view.drawer,
-    });
-  }}>`);
+  <button
+    style = "${'filter: ' + colorFilter}"
+    title = "Toggle location view drawer."
+    class = "btn_header xyz-icon icon-expander "
+    onclick = ${e => {
+      e.stopPropagation();
+      
+      _xyz.utils.toggleExpanderParent({
+        expandable: location.view.drawer,
+      });
+    }}>`);
 
 
   // Zoom to location bounds.
   location.view.header.appendChild(_xyz.utils.wire()`
-    <button
-    style = "${'background-color: ' + location.style.strokeColor}" 
+  <button
+    style = "${'filter: ' + colorFilter}"
     title = "Zoom map to feature bounds"
-    class = "icons-search-mask cursor noselect btn_header xyz-icon"
+    class = "btn_header xyz-icon icon-search"
     onclick = ${e => {
       e.stopPropagation();
       location.flyTo();
@@ -119,103 +121,84 @@ export default _xyz => function () {
   // Update icon.
   location.view.upload = _xyz.utils.wire()`
   <button
-  style = "${'display: none; padding-left: 40px; background-color: ' + location.style.strokeColor}"
-  title = "Save changes to cloud."
-  class = "icons-cloud-upload cursor noselect btn_header xyz-icon"
-  onclick = ${e => {
-    e.stopPropagation();
-    
-    location.update();
-
-  }}>`;
+    style = "${'filter: ' + colorFilter}"
+    title = "Save changes to cloud."
+    class = "btn_header xyz-icon icon-cloud-upload"
+    onclick = ${e => {
+      e.stopPropagation();
+      
+      location.update();
+    }}>`;
 
   location.view.header.appendChild(location.view.upload);
 
-  if (location.layer.edit) {
-
-    location.view.editor = _xyz.utils.wire()`
-    <button
-    style = "${'background-color: ' + location.style.strokeColor}"
+  location.view.editor = _xyz.utils.wire()`
+  <button
+    style = "${'filter: ' + colorFilter}"
     title = "Edit the locations geometry."
-    class = "icons-build xyz-icon cursor noselect btn_header"
+    class = "btn_header xyz-icon icon-build"
     onclick = ${e => {
-    e.stopPropagation();
+      e.stopPropagation();
 
-    if (location.view.header.classList.contains('edited')) return _xyz.mapview.interaction.edit.finish();
+      if (location.view.header.classList.contains('edited')) return _xyz.mapview.interaction.edit.finish();
 
-    location.view.header.classList.add('edited');
+      location.view.header.classList.add('edited');
 
-    _xyz.mapview.interaction.edit.begin({
-      location: location,
-      type: 'LineString',
-      callback: () => {
-        location.view.header.classList.remove('edited');
-      }
-    });
+      _xyz.mapview.interaction.edit.begin({
+        location: location,
+        type: 'LineString',
+        callback: () => {
+          location.view.header.classList.remove('edited');
+        }
+      });
+    }}>`;
 
-  }}>`;
-
-    location.view.header.appendChild(location.view.editor);
-    
-  }
+  location.layer.edit && location.view.header.appendChild(location.view.editor);
  
 
   // Trash icon.
   location.view.trash = _xyz.utils.wire()`
   <button
-  style = "${'background-color: ' + location.style.strokeColor}"
-  title = "Delete location."
-  class = "icons-trash cursor noselect btn_header xyz-icon"
-  onclick = ${e => {
-    e.stopPropagation();
-    location.trash();
-  }}>`;
+    style = "${'filter: ' + colorFilter}"
+    title = "Delete location."
+    class = "btn_header xyz-icon icon-trash"
+    onclick = ${e => {
+      e.stopPropagation();
+      location.trash();
+    }}>`;
 
   location.editable && location.view.header.appendChild(location.view.trash);
 
-
-  // Copy to clipboard. *** aga: disabled as overrriden by report functionality
-  /*location.view.header.appendChild(_xyz.utils.wire()`
-  <i
-  style = "${'color: ' + location.style.strokeColor}"
-  title = "Copy to clipboard"
-  class = "material-icons cursor noselect btn_header"
-  onclick = ${e => {
-    e.stopPropagation();
-    location.clipboard();
-  }}>file_copy`);*/
-
-
   // Toggle marker.
   location.view.header.appendChild(_xyz.utils.wire()`
-<button
-style = "${'background-color: ' + location.style.strokeColor}"
-title = "Hide marker"
-class = "icons-location-tick cursor noselect btn_header xyz-icon" 
-  onclick = ${e => {
-    e.stopPropagation();
-    if(e.target.classList.contains('icons-location')){
-      e.target.classList.remove('icons-location')
-      e.target.classList.add('icons-location-tick')
-      _xyz.map.addLayer(location.Marker);
-    } else {
-      e.target.classList.remove('icons-location-tick');
-      e.target.classList.add('icons-location');
-      _xyz.map.removeLayer(location.Marker);
-    }  
-  }}>`);
+  <button
+    style = "${'filter: ' + colorFilter}"
+    title = "Hide marker"
+    class = "btn_header xyz-icon icon-location-tick" 
+    onclick = ${e => {
+      e.stopPropagation();
+      if(e.target.classList.contains('icon-location')){
+        e.target.classList.remove('icon-location')
+        e.target.classList.add('icon-location-tick')
+        _xyz.map.addLayer(location.Marker);
+      } else {
+        e.target.classList.remove('icon-location-tick');
+        e.target.classList.add('icon-location');
+        _xyz.map.removeLayer(location.Marker);
+      }
+    }}>`);
   
 
   // Clear selection.
   location.view.header.appendChild(_xyz.utils.wire()`
   <button
-  style = "${'background-color: ' + location.style.strokeColor}"
-  title = "Remove feature from selection"
-  class = "icons-clear cursor noselect btn_header xyz-icon"
-  onclick = ${e => {
-    e.stopPropagation();
-    location.remove();
-  }}>`);
+    style = "${'filter: ' + colorFilter}"
+    title = "Remove feature from selection"
+    class = "btn_header xyz-icon icon-clear"
+    onclick = ${e => {
+      e.stopPropagation();
+      location.remove();
+    }}>`);
   
 
   // Add location view to drawer.

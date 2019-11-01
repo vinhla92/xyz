@@ -1,7 +1,7 @@
 export default (_xyz, layer) => {
 
   const header = _xyz.utils.wire()`
-    <div class="header"><div>${layer.name || layer.key}`;
+    <div class="header enabled"><div>${layer.name || layer.key}`;
 
   // Add symbol to layer header.
   if (layer.format === 'cluster' && layer.style.marker) {
@@ -15,7 +15,7 @@ export default (_xyz, layer) => {
   header.zoomToExtent = _xyz.utils.wire()`
   <button
   title="Zoom to filtered layer extent"
-  class="cursor noselect btn_header xyz-icon icons-fullscreen">
+  class="cursor noselect btn_header xyz-icon icon-fullscreen">
   `;
 
 header.appendChild(header.zoomToExtent);
@@ -27,8 +27,8 @@ header.zoomToExtent.onclick = e => {
    
 header.toggleDisplay = _xyz.utils.wire()`
   <button
-  title="Toggle visibility"
-  class="${'cursor noselect btn_header xyz-toggle icons-toggle ' + (layer.display && 'on')}">`;
+    title="Toggle visibility"
+    class="${'btn_header xyz-icon icon-toggle ' + (layer.display && 'on')}">`;
 
   header.appendChild(header.toggleDisplay);
 

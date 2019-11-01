@@ -51,20 +51,20 @@ export default _xyz => group => {
 
 
     const chartIcon = {
-      'line':  'icons-show-chart',
-      'bar':  'icons-bar-chart',
-      'pie':  'icons-pie-chart',
-      'doughnut':  'icons-donut-small',
-      'horizontalBar':  'icons-notes',
-      'bubble':  'icons-bubble-chart',
-      'scatter':  'icons-scatter-plot',
-      'radar':  'icons-multiline-chart',
-      'polarArea':  'icons-multiline-chart',
-      'mixed':  'icons-multiline-chart',
-      'stackedBar':  'icons-bar-chart',
+      'line':  'icon-show-chart',
+      'bar':  'icon-bar-chart',
+      'pie':  'icon-pie-chart',
+      'doughnut':  'icon-donut-small',
+      'horizontalBar':  'icon-notes',
+      'bubble':  'icon-bubble-chart',
+      'scatter':  'icon-scatter-plot',
+      'radar':  'icon-multiline-chart',
+      'polarArea':  'icon-multiline-chart',
+      'mixed':  'icon-multiline-chart',
+      'stackedBar':  'icon-bar-chart',
    }
 
-   group.chartIcon = group.chart.type && chartIcon[group.chart.type] || 'icons-show-chart';
+   group.chartIcon = group.chart.type && chartIcon[group.chart.type] || 'icon-show-chart';
 
     // Add chart control to group header for toggling
     group.viewToggler = _xyz.utils.wire()`
@@ -76,7 +76,7 @@ export default _xyz => group => {
       e => {
         e.stopPropagation();
         group.viewToggler.classList.toggle(group.chartIcon);
-        group.viewToggler.classList.toggle('icons-view-list');
+        group.viewToggler.classList.toggle('icon-view-list');
         group.div.classList.contains('chart') ? group.showTable() : group.showChart();
       }
     }>`;
@@ -93,7 +93,7 @@ export default _xyz => group => {
       group.div.classList.add('chart');
   
       group.viewToggler.classList.remove(group.chartIcon);
-      group.viewToggler.classList.add('icons-view-list');
+      group.viewToggler.classList.add('icon-view-list');
       
       if (!group.div.classList.contains('expanded')) group.div.classList.add('expanded');
     };
@@ -104,7 +104,7 @@ export default _xyz => group => {
 
       group.div.classList.remove('chart');
 
-      group.viewToggler.classList.remove('icons-view-list');
+      group.viewToggler.classList.remove('icon-view-list');
       group.viewToggler.classList.add(group.chartIcon);
 
       if (!group.div.classList.contains('expanded')) group.div.classList.add('expanded');

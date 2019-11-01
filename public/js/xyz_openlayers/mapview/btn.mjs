@@ -54,7 +54,7 @@ export default _xyz => {
 
     target.onclick = () => {
       _xyz.mapview.locate.toggle();
-      target.classList.toggle('icons-gps-not-fixed-toggle');
+      target.classList.toggle('enabled');
     };
 
     if (_xyz.workspace.locale.locate && _xyz.workspace.locale.locate.default) target.click();

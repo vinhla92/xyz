@@ -15,16 +15,14 @@
             overflow: hidden;
             transition: max-height 0.3s ease-out;
             .icon-expander {
-                -webkit-mask-image: url("../icons/icons-keyboard-arrow-down.svg");
-                mask-image: url("../icons/icons-keyboard-arrow-down.svg");
+                background-image: url("../icons/icon-keyboard-arrow-down.svg");
             }
         }
         &.expanded {
             overflow: visible;
             max-height: 2500px;
             .icon-expander {
-                -webkit-mask-image: url("../icons/icons-keyboard-arrow-up.svg");
-                mask-image: url("../icons/icons-keyboard-arrow-up.svg");
+                background-image: url("../icons/icon-keyboard-arrow-up.svg");
             }
         }
         &.drawer-group {
@@ -63,17 +61,15 @@
                 max-height: 30px;
                 overflow: hidden;
                 transition: max-height 0.3s ease-out;
-                .icon-group-expander {
-                    -webkit-mask-image: url("../icons/icons-keyboard-arrow-down.svg");
-                    mask-image: url("../icons/icons-keyboard-arrow-down.svg");
+                .icon-expander {
+                    background-image: url("../icons/icon-keyboard-arrow-down.svg");
                 }
             }
             &.expanded-group {
                 max-height: 2500px;
                 overflow: visible;
-                .icon-group-expander {
-                    -webkit-mask-image: url("../icons/icons-keyboard-arrow-up.svg");
-                    mask-image: url("../icons/icons-keyboard-arrow-up.svg");
+                .icon-expander {
+                    background-image: url("../icons/icon-keyboard-arrow-up.svg");
                 }
             }
         }
@@ -137,15 +133,9 @@
                     max-height: 30px;
                     overflow: hidden;
                     transition: max-height 0.3s ease-out;
-                    .expander::before {
-                        content: "expand_more"
-                    }
                 }
                 &.expanded {
                     max-height: 2500px !important;
-                    .expander::before {
-                        content: "expand_less"
-                    }
                 }
             }
             .block-title {

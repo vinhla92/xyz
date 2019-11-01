@@ -127,15 +127,9 @@
             max-height: 40px;
             overflow: hidden;
             transition: max-height 0.3s ease-out;
-            .expander::before {
-                content: "expand_more"
-            }
         }
         &.expanded {
             max-height: 2500px;
-            .expander::before {
-                content: "expand_less"
-            }
         }
         &.drawer-group {
     
@@ -173,15 +167,9 @@
                 max-height: 30px;
                 overflow: hidden;
                 transition: max-height 0.3s ease-out;
-                .expander-group::before {
-                    content: "expand_more"
-                }
             }
             &.expanded-group {
                 max-height: 2500px;
-                .expander-group::before {
-                    content: "expand_less"
-                }
             }
         }
         .header {

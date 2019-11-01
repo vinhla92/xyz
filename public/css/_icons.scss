@@ -1,335 +1,189 @@
+.xyz-icon {
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.enabled > .xyz-icon{
+    filter: invert(45%) sepia(55%) saturate(608%) hue-rotate(90deg) brightness(93%) contrast(90%);
+}
+
+// .xyz-documents {
+//     -webkit-mask-size: 20px 20px;
+//     -webkit-mask-position: center;
+//     -webkit-mask-repeat: no-repeat;
+//      mask-size: 20px 20px;
+//      mask-position: center;
+//      mask-repeat: no-repeat;
+// }
+
+// //.Shadow effect on photo add icon// 
+// .image-container {
+//     /*width: 30px;
+//     height: 30px;*/
+//     background-size: 100%;
+//     -webkit-filter: drop-shadow(1px 1px 4px rgba(0,0,0,0.25));
+//     -moz-filter: drop-shadow(1px 1px 4px rgba(0,0,0,0.25));
+//     -ms-filter: drop-shadow(1px 1px 4px rgba(0,0,0,0.25));
+//     -o-filter: drop-shadow(1px 1px 4px rgba(0,0,0,0.25));
+// }
+
 .icon-layers {
-    background-image: url("../icons/icons-layers.svg");
+    background-image: url("../icons/icon-layers.svg");
 }
 
 .icon-location {
-    background-image: url("../icons/icons-room.svg");
+    background-image: url("../icons/icon-room.svg");
 }
 
-.icons-search-mask {
-    mask-image: url("../icons/icons-search.svg");
-    -webkit-mask-image: url("../icons/icons-search.svg");
+.icon-search {
+    background-image: url("../icons/icon-search.svg");
 }
 
-.icons-search-mobile {
-    background: url("../icons/icons-search.svg"); 
-}
-
-.icons-search {
-    background-image: url("../icons/icons-search.svg");
-    background-color: #ffffff;
-}
-.icons-search-toggle {
-    background-image: url("../icons/icons-search-toggle.svg");
-    background-color: #1F964D;
-}
-
-.icons-gps-not-fixed-mobile {
-    background: url("../icons/icons-gps_not_fixed.svg");
-}
-
-.icons-gps-not-fixed {
-    background-image: url("../icons/icons-gps_not_fixed.svg");
-    background-color: #ffffff;
-}
-
-.icons-gps-not-fixed-toggle {
-    background-image: url("../icons/icons-gps_not_fixed-toggle.svg");
-    background-color:#1F964D;
-}
-.icons-add {
-    -webkit-mask-image: url("../icons/icons-add.svg");
-     mask-image: url("../icons/icons-add.svg");
-}
-
-.icons-add-mobile {
-    background: url("../icons/icons-add.svg");
-}
-
-.icons-remove-mobile {
-    background: url("../icons/icons-remove.svg");
-}
-
-.icons-remove {
-    -webkit-mask-image: url("../icons/icons-remove.svg");
-     mask-image: url("../icons/icons-remove.svg");
-}
-
-.icons-show-chart {
-    -webkit-mask-image: url("../icons/icons-show-chart.svg");
-    mask-image: url("../icons/icons-show-chart.svg");
-    height: 30px;
-}
-
-.icons-school-mobile {
-    background: url("../icons/icons-school.svg");
-}
-
-.icons-school {
-    -webkit-mask-image: url("../icons/icons-school.svg");
-     mask-image: url("../icons/icons-school.svg");
-}
-
-.icons-lock-open-mobile {
-    background: url("../icons/icons-lock-open.svg");
-}
-
-.icons-lock-open {
-    -webkit-mask-image: url("../icons/icons-lock-open.svg");
-     mask-image: url("../icons/icons-lock-open.svg");
-}
-
-.icons-supervisor-account {
-    -webkit-mask-image: url("../icons/icons-supervisor-account.svg");
-     mask-image: url("../icons/icons-supervisor-account.svg");
-}
-.icons-settings {
-    -webkit-mask-image: url("../icons/icons-settings.svg");
-     mask-image: url("../icons/icons-settings.svg");
-}
-
-.icons-bug-report-mobile {
-    background: url("../icons/icons-bug-report.svg");
-}
-
-.icons-bug-report {
-    -webkit-mask-image: url("../icons/icons-bug-report.svg");
-     mask-image: url("../icons/icons-bug-report.svg");
-}
-
-//ID dataview icons//
-
-.icons-vertical-align-top {
-    -webkit-mask-image: url("../icons/icons-vertical-align-top.svg");
-    mask-image: url("../icons/icons-vertical-align-top.svg");
-}
-
-.icons-vertical-align-bottom {
-    -webkit-mask-image: url("../icons/icons-vertical-align-bottom.svg");
-    mask-image: url("../icons/icons-vertical-align-bottom.svg");;
-}
-
-.icons-fullscreen {
-    -webkit-mask-image: url("../icons/icons-fullscreen.svg"); 
-     mask-image: url("../icons/icons-fullscreen.svg"); 
-}
-
-//ID workspace icons//
-
-.icons-close {
-    background-image: url("../icons/icons-close.svg");
-}
-
-.icons-backup {
-    background-image: url("../icons/icons-backup.svg");
-}
-
-.icons-description {
-    background-image: url("../icons/icons-description.svg");
-}
-
-.icons-touch-app {
-    background-image: url("../icons/icons-touch-app.svg");
-}
-
-.icons-layers-mobile {
-    background-image: url("../icons/icons-layers.svg");
-}
-
-.icons-layers {
-    -webkit-mask-image: url("../icons/icons-layers.svg");
-    mask-image: url("../icons/icons-layers.svg");
-}
-
-.icons-location-mobile {
-    background-image: url("../icons/icons-room.svg");
-}
-
-.icons-location {
-    -webkit-mask-image: url("../icons/icons-room.svg");
-    mask-image: url("../icons/icons-room.svg");
-}
-
-.icons-toggle {
-    -webkit-mask-image: url("../icons/icons-toggle-off.svg");
-    mask-image:  url("../icons/icons-toggle-off.svg");
-    background-color: #dddddd;
-}
-
-.icons-toggle.on {
-    -webkit-mask-image: url("../icons/icons-toggle-on.svg");
-    mask-image: url("../icons/icons-toggle-on.svg"); 
-    background-color:#1f964d;
-}
-
-.icons-cloud-upload {
-    -webkit-mask-image: url("../icons/icons-cloud-upload.svg");
-    mask-image: url("../icons/icons-cloud-upload.svg");
-    background-color: #1F964D;
-}
-
-.icons-keyboard-arrow-up {
-    background-image: url("../icons/icons-keyboard-arrow-up.svg");
-}
-.icons-keyboard-arrow-down {
-    background-image: url("../icons/icons-keyboard-arrow-down.svg");
-}
-.icons-trash {
-    -webkit-mask-image: url("../icons/icons-trash.svg");
-     mask-image: url("../icons/icons-trash.svg");
-}
-
-.icons-edit-attribute {
-    -webkit-mask-image: url("../icons/icons-edit-attribute.svg");
-    mask-image: url("../icons/icons-edit-attribute.svg");     
-}
-
-.icons-clear {
-    -webkit-mask-image: url("../icons/icons-clear.svg");
-    mask-image: url("../icons/icons-clear.svg"); 
-    background-color: #1F964D;
-}
-
-.icons-event-note {
-    background-image: url("../icons/icons-event-note.svg");
-    background-repeat:no-repeat;
-    background-size:15px;
-}
-
-.icons-build {
-    -webkit-mask-image: url("../icons/icons-build.svg");
-     mask-image: url("../icons/icons-build.svg");
-}
-
-.icons-add-document {
-    -webkit-mask-image: url("../icons/icons-add-document.svg");
-    mask-image: url("../icons/icons-add-document.svg");
-}
-
-.icons-add-photo {
-    -webkit-mask-image: url("../icons/icons-add-photo.svg");
-     mask-image: url("../icons/icons-add-photo.svg");
-    -webkit-mask-size: 30px;
-    -webkit-mask-position: center;
-    -webkit-mask-repeat: no-repeat;
-     mask-size: 30px;
-     mask-position: center;
-     mask-repeat: no-repeat;
-     background-color: #1f964d;
-     height: 30px;            
-}
-
-//.Shadow effect on photo add icon// 
-.image-container {
-    /*width: 30px;
-    height: 30px;*/
-    background-size: 100%;
-    -webkit-filter: drop-shadow(1px 1px 4px rgba(0,0,0,0.25));
-    -moz-filter: drop-shadow(1px 1px 4px rgba(0,0,0,0.25));
-    -ms-filter: drop-shadow(1px 1px 4px rgba(0,0,0,0.25));
-    -o-filter: drop-shadow(1px 1px 4px rgba(0,0,0,0.25));
-}
-
-.icons-view-list {
-    -webkit-mask-image: url("../icons/icons-view-list.svg");
-    mask-image: url("../icons/icons-view-list.svg");
-    height:30px;
-}
-
-.icons-bar-chart {
-    -webkit-mask-image: url("../icons/icons-bar-chart.svg");
-    mask-image: url("../icons/icons-bar-chart.svg");
-    height:30px;
-}
-
-.icons-pie-chart {
-    -webkit-mask-image: url("../icons/icons-pie-chart.svg");
-    mask-image: url("../icons/icons-pie-chart.svg");
-    height:30px;
-}
-
-.icons-donut-small {
-    -webkit-mask-image: url("../icons/icons-donut-small.svg");
-    mask-image: url("../icons/icons-donut-small.svg");
-    height:30px;
-}
-
-.icons-notes {
-    -webkit-mask-image: url("../icons/icons-notes.svg");
-    mask-image: url("../icons/icons-notes.svg");
-    height:30px;
-}
-
-.icons-scatter-plot {
-    -webkit-mask-image: url("../icons/icons-scatter-plot.svg");
-    mask-image: url("../icons/icons-scatter-plot.svg");
-    height:30px;
-}
-
-.icons-bubble-chart {
-    -webkit-mask-image: url("../icons/icons-bubble-chart.svg");
-    mask-image: url("../icons/icons-bubble-chart.svg");
-    height:30px;
-}
-
-.icons-multiline-chart {
-    -webkit-mask-image: url("../icons/icons-multiline-chart.svg");
-    mask-image: url("../icons/icons-multiline-chart.svg");
-    height:30px;
-}
-
-.icons-location-tick {
-    -webkit-mask-image: url("../icons/icons-location-tick.svg");
-    mask-image: url("../icons/icons-location-tick.svg");
+.icon-gps-not-fixed {
+    background-image: url("../icons/icon-gps_not_fixed.svg");
 }
 
 
-//NON SVG PROPERTIES//
-.xyz-icon {
-    background-size: 28px 44px;    
-    background-repeat: no-repeat;
-    background-position: center;   
-    background-color: inherit;    
-        
-//SVG Mask properties//
-    -webkit-mask-size: 28px 44px;
-    -webkit-mask-position: center;
-    -webkit-mask-repeat: no-repeat;
-     mask-size: 28px 44px;
-     mask-position: center;
-     mask-repeat: no-repeat;
-     background-color: #1f964d;
-    }
-
-.xyz-toggle {
-    -webkit-mask-size: 28px 44px;
-    -webkit-mask-position: center;
-    -webkit-mask-repeat: no-repeat;
-     mask-size: 28px 44px;
-     mask-position: center;
-     mask-repeat: no-repeat;
+.icon-add {
+    background-image: url("../icons/icon-add.svg");
 }
 
-.xyz-documents {
-    -webkit-mask-size: 20px 20px;
-    -webkit-mask-position: center;
-    -webkit-mask-repeat: no-repeat;
-     mask-size: 20px 20px;
-     mask-position: center;
-     mask-repeat: no-repeat;
+.icon-remove {
+    background-image: url("../icons/icon-remove.svg");
 }
 
-.xyz-icon3 {
-    //background-size: 28px 44px;    
-    background-repeat: no-repeat;
-    background-position: center; 
-
-    // &.BG{
-    //     background-color: #dddddd;
-    // }
+.icon-show-chart {
+    background-image: url("../icons/icon-show-chart.svg");
 }
 
-//Geolytix green//
-.filter {
-    filter: invert(45%) sepia(55%) saturate(608%) hue-rotate(90deg) brightness(93%) contrast(90%);
+.icon-school {
+    background-image: url("../icons/icon-school.svg");
+}
+
+.icon-lock-open {
+    background-image: url("../icons/icon-lock-open.svg");
+}
+
+.icon-supervisor-account {
+    background-image: url("../icons/icon-supervisor-account.svg");
+}
+
+.icon-settings {
+    background-image: url("../icons/icon-settings.svg");
+}
+
+.icon-bug-report {
+    background-image: url("../icons/icon-bug-report.svg");
+}
+
+.icon-vertical-align-top {
+    background-image: url("../icons/icon-vertical-align-top.svg");
+}
+
+.icon-vertical-align-bottom {
+    background-image: url("../icons/icon-vertical-align-bottom.svg");
+}
+
+.icon-fullscreen {
+    background-image: url("../icons/icon-fullscreen.svg"); 
+}
+
+.icon-close {
+    background-image: url("../icons/icon-close.svg");
+}
+
+.icon-backup {
+    background-image: url("../icons/icon-backup.svg");
+}
+
+.icon-description {
+    background-image: url("../icons/icon-description.svg");
+}
+
+.icon-touch-app {
+    background-image: url("../icons/icon-touch-app.svg");
+}
+
+.icon-toggle {
+    background-image: url("../icons/icon-toggle-off.svg");
+}
+
+.icon-toggle:not(.on) {
+    filter: invert(52%) sepia(6%) saturate(10%) hue-rotate(323deg) brightness(88%) contrast(85%);
+}
+
+.icon-toggle.on {
+    background-image: url("../icons/icon-toggle-on.svg");
+}
+
+.icon-cloud-upload {
+    background-image: url("../icons/icon-cloud-upload.svg");
+}
+
+.icon-keyboard-arrow-up {
+    background-image: url("../icons/icon-keyboard-arrow-up.svg");
+}
+
+.icon-keyboard-arrow-down {
+    background-image: url("../icons/icon-keyboard-arrow-down.svg");
+}
+
+.icon-trash {
+    background-image: url("../icons/icon-trash.svg");
+}
+
+.icon-clear {
+    background-image: url("../icons/icon-clear.svg");
+}
+
+.icon-event-note {
+    background-image: url("../icons/icon-event-note.svg");
+}
+
+.icon-build {
+    background-image: url("../icons/icon-build.svg");
+}
+
+.icon-add-document {
+    background-image: url("../icons/icon-add-document.svg");
+}
+
+.icon-add-photo {
+    background-image: url("../icons/icon-add-photo.svg");           
+}
+
+.icon-view-list {
+    background-image: url("../icons/icon-view-list.svg");
+}
+
+.icon-bar-chart {
+    background-image: url("../icons/icon-bar-chart.svg");
+}
+
+.icon-pie-chart {
+    background-image: url("../icons/icon-pie-chart.svg");
+}
+
+.icon-donut-small {
+    background-image: url("../icons/icon-donut-small.svg");
+}
+
+.icon-notes {
+    background-image: url("../icons/icon-notes.svg");
+}
+
+.icon-scatter-plot {
+    background-image: url("../icons/icon-scatter-plot.svg");
+}
+
+.icon-bubble-chart {
+    background-image: url("../icons/icon-bubble-chart.svg");
+}
+
+.icon-multiline-chart {
+    background-image: url("../icons/icon-multiline-chart.svg");
+}
+
+.icon-location-tick {
+    background-image: url("../icons/icon-location-tick.svg");
 }

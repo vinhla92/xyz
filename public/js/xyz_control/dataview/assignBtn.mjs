@@ -31,9 +31,9 @@ export default (_xyz, params) => {
 
     params.btn.toggleDataview.onclick = () => {
   
-      if (params.btn.toggleDataview.classList.contains('icons-vertical-align-bottom')) {
+      if (params.btn.toggleDataview.classList.contains('icon-vertical-align-bottom')) {
 
-        params.btn.toggleDataview.className = 'icons-vertical-align-top xyz-icon';
+        params.btn.toggleDataview.className = 'xyz-icon icon-vertical-align-top';
         document.body.style.gridTemplateRows = 'minmax(0, 1fr) 40px';
         _xyz.map.updateSize();
         return;
@@ -41,7 +41,7 @@ export default (_xyz, params) => {
       }
   
 
-      params.btn.toggleDataview.className = 'icons-vertical-align-bottom xyz-icon';
+      params.btn.toggleDataview.className = 'xyz-icon icon-vertical-align-bottom';
 
       document.body.style.gridTemplateRows = `minmax(0, 1fr) ${window.innerHeight}px`;
 

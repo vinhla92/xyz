@@ -15,20 +15,23 @@ export default (_xyz, layer) => {
 
   // Drawing panel header.
   const header = _xyz.utils.wire()`
-    <div onclick=${e => {
+    <div
+    class="btn_text cursor noselect"
+    onclick=${e => {
     e.stopPropagation();
     _xyz.utils.toggleExpanderParent({
       expandable: layer.edit.panel,
       accordeon: true,
     });
-  }}
-    class="btn_text cursor noselect">Add new features`;
+  }}>Add new features`;
     
   layer.edit.panel.appendChild(header);
 
 
   layer.edit.point && layer.edit.panel.appendChild(_xyz.utils.wire()`
-  <div onclick=${e => {
+  <div
+  class="btn_state btn_wide cursor noselect"
+  onclick=${e => {
 
     e.stopPropagation();
     const btn = e.target;
@@ -47,12 +50,13 @@ export default (_xyz, layer) => {
       }
     });
 
-  }}
-  class="btn_state btn_wide cursor noselect">Point`);
+  }}>Point`);
   
 
   layer.edit.polygon && layer.edit.panel.appendChild(_xyz.utils.wire()`
-  <div onclick=${e => {
+  <div
+  class="btn_state btn_wide cursor noselect"
+  onclick=${e => {
 
     e.stopPropagation();
     const btn = e.target;
@@ -71,12 +75,13 @@ export default (_xyz, layer) => {
       }
     });
 
-  }}
-  class="btn_state btn_wide cursor noselect">Polygon`);
+  }}>Polygon`);
   
 
   layer.edit.rectangle && layer.edit.panel.appendChild(_xyz.utils.wire()`
-  <div onclick=${e => {
+  <div
+  class="btn_state btn_wide cursor noselect"
+  onclick=${e => {
 
     e.stopPropagation();
     const btn = e.target;
@@ -96,12 +101,13 @@ export default (_xyz, layer) => {
       }
     });
 
-  }}
-  class="btn_state btn_wide cursor noselect">Rectangle`);
+  }}>Rectangle`);
   
 
   layer.edit.circle && layer.edit.panel.appendChild(_xyz.utils.wire()`
-  <div onclick=${e => {
+  <div
+  class="btn_state btn_wide cursor noselect"
+  onclick=${e => {
 
     e.stopPropagation();
     const btn = e.target;
@@ -120,12 +126,13 @@ export default (_xyz, layer) => {
       }
     });
 
-  }}
-  class="btn_state btn_wide cursor noselect">Circle`);
+  }}>Circle`);
 
 
   layer.edit.line && layer.edit.panel.appendChild(_xyz.utils.wire()`
-  <div onclick=${e => {
+  <div
+  class="btn_state btn_wide cursor noselect"
+  onclick=${e => {
 
     e.stopPropagation();
     const btn = e.target;
@@ -144,12 +151,13 @@ export default (_xyz, layer) => {
       }
     });
 
-  }}
-  class="btn_state btn_wide cursor noselect">Line`);
+  }}>Line`);
 
 
   layer.edit.freehand && layer.edit.panel.appendChild(_xyz.utils.wire()`
-  <div onclick=${e => {
+  <div
+  class="btn_state btn_wide cursor noselect"
+  onclick=${e => {
 
     e.stopPropagation();
     const btn = e.target;
@@ -169,8 +177,7 @@ export default (_xyz, layer) => {
       }
     });
 
-  }}
-  class="btn_state btn_wide cursor noselect">Freehand`);  
+  }}>Freehand`);  
 
  
   if(layer.edit.isoline_mapbox){
@@ -180,11 +187,11 @@ export default (_xyz, layer) => {
     let _container = _xyz.utils.wire()`
     <div class="drawer expandable">
     <table><tr><td>
-    <div style="padding: 4px;" class="table-section">
-    `;
+    <div style="padding: 4px;" class="table-section">`;
 
     _container.appendChild(_xyz.utils.wire()`
-      <div class="btn_subtext cursor noselect pretty"
+      <div
+      class="btn_subtext cursor noselect"
       style="text-align: left; font-size: small;"
       onclick=${
         e => {
@@ -205,7 +212,9 @@ export default (_xyz, layer) => {
     });
 
     layer.edit.panel.appendChild(_xyz.utils.wire()`
-    <div onclick=${e => {
+    <div
+    class="btn_state btn_wide cursor noselect"
+    onclick=${e => {
   
     e.stopPropagation();
     const btn = e.target;
@@ -275,8 +284,7 @@ export default (_xyz, layer) => {
       }
     });
   
-  }}
-    class="btn_state btn_wide cursor noselect">Isoline Mapbox`);
+  }}>Isoline Mapbox`);
 
   }
 
@@ -288,23 +296,19 @@ export default (_xyz, layer) => {
     let _container = _xyz.utils.wire()`
     <div class="drawer expandable">
     <table><tr><td>
-    <div style="padding: 4px;" class="table-section">
-    `;
+    <div style="padding: 4px;" class="table-section">`;
 
     _container.appendChild(_xyz.utils.wire()`
       <div
-      class="btn_subtext cursor noselect pretty"
-      style="text-align: left; font-size: small;"
-      onclick=${
-        e => {
-          if (e) e.stopPropagation();
+        class="btn_subtext cursor noselect"
+        style="text-align: left; font-size: small;"
+        onclick=${e => {
+          e && e.stopPropagation();
           _xyz.utils.toggleExpanderParent({
             expandable: _container,
             accordeon: true
           });
-        }
-      }
-      >Here Isoline settings`);
+        }}>Here Isoline settings`);
 
     layer.edit.panel.appendChild(_container);
 
@@ -314,7 +318,9 @@ export default (_xyz, layer) => {
     });
 
     layer.edit.panel.appendChild(_xyz.utils.wire()`
-    <div onclick=${e => {
+    <div
+    class="btn_state btn_wide cursor noselect"
+    onclick=${e => {
   
     e.stopPropagation();
     const btn = e.target;
@@ -387,8 +393,7 @@ export default (_xyz, layer) => {
       }
     });
   
-  }}
-    class="btn_state btn_wide cursor noselect">Isoline Here`);
+  }}>Isoline Here`);
 
   }
 

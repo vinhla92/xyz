@@ -5,9 +5,11 @@ export default _xyz => param => {
     param.documentControl.container.appendChild(param.documentControl.add_doc);
 
     // Add label and doc upload icon.
-    param.documentControl.add_doc_label = _xyz.utils.wire()`<label class="icons-add-document cursor noselect xyz-icon" title="Add Document"
-    style="cursor: pointer; display:block; height:50px;margin:auto;"
-    >`;
+    param.documentControl.add_doc_label = _xyz.utils.wire()`
+    <label
+        title="Add Document"
+        class="xyz-icon icon-add-document cursor noselect"
+        style="cursor: pointer; display:block; height:50px; margin:auto;">`;
 
     param.documentControl.add_doc_label.htmlFor = `addDoc_${param.entry.location.layer.key}_${param.entry.location.id}`;
 
@@ -57,20 +59,17 @@ export default _xyz => param => {
         let btn_del = _xyz.utils.wire()`
         <span
         title="Delete document"
-        class="btn_del icons-clear xyz-documents"
+        class="btn_del icon-clear xyz-documents"
         style="cursor: pointer; display: inline-block; height: 20px; width:20px; vertical-align:middle;"
-        onclick=${
-            () => {
-                newDoc.remove();
-            }
-        }
-        >`; 
+        onclick=${() => {
+            newDoc.remove();
+        }}>`; 
 
         newDoc.appendChild(btn_del);
 
         // Add control to upload document
         const btn_save = _xyz.utils.wire()`
-        <span class="btn_save icons-cloud-upload xyz-documents"
+        <span class="btn_save icon-cloud-upload xyz-documents"
         title="Save document"
         style="cursor: pointer; display: inline-block; height: 20px; width:20px; vertical-align:middle; background-position: center; padding-left:30px;"
         onclick=${

@@ -61,19 +61,15 @@ export default _xyz => entry => {
 
 	   	// Add delete button if doc entry is editable.
 	   	if(entry.edit) docCell.appendChild(_xyz.utils.wire()`
-	   			<button class="btn_del icons-clear"
+	   	<button class="btn_del icon-clear"
 	   		title="Delete document"
-	   		onclick=${
-	   			e => {
-	   				e.target.remove();
-
-	   				entry.ctrl.delete_document({
-	   					entry: entry,
-	   					doc: _doc
-	   				});
-	   			}
-	   		}
-	   		>`);
+	   		onclick=${e => {
+				e.target.remove();
+				entry.ctrl.delete_document({
+	   				entry: entry,
+	   				doc: _doc
+	   			});
+	   		}}>`);
 	}
 
 }

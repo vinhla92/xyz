@@ -12,7 +12,7 @@ tabs.forEach(tab => {
       e.target.classList.remove('shadow');
     });
 
-  tab.querySelector('.xyz-icon3').onclick = e => {
+  tab.querySelector('.xyz-icon').onclick = e => {
     e.preventDefault();
     tabs.forEach(el => el.classList.remove('active'));
     e.target.parentElement.classList.add('active');
@@ -42,10 +42,11 @@ function init(_xyz) {
       entries.push(locale.key);
     });
 
-    document.getElementById('localeDropdown').parentNode.insertBefore(_xyz.utils.wire()`<div class="title">Locales</div>`, document.getElementById('localeDropdown'));
+    document.getElementById('localeDropdown').parentNode.insertBefore(_xyz.utils.wire()`
+      <div class="title">Locales</div>`, document.getElementById('localeDropdown'));
 
     document.getElementById('localeDropdown').appendChild(_xyz.utils.wire()`
-      <div class="pretty"><small>Show layers for the following locale`);
+      <div><small>Show layers for the following locale`);
 
     document.getElementById('localeDropdown').appendChild(
       _xyz.utils.dropdownCustom({
@@ -111,11 +112,11 @@ function createMap(_xyz) {
     target: document.getElementById('locations'),
     callbackInit: () => {
       document.getElementById('tabLocations').style.display = 'none';
-      document.getElementById('tabLayers').querySelector('.xyz-icon3').click();
+      document.getElementById('tabLayers').querySelector('.xyz-icon').click();
     },
     callbackAdd: () => {
       document.getElementById('tabLocations').style.display = 'block';
-      document.getElementById('tabLocations').querySelector('.xyz-icon3').click();
+      document.getElementById('tabLocations').querySelector('.xyz-icon').click();
     }
   });
 

@@ -51,7 +51,6 @@ export default _xyz => entry => {
 
   if (entry.edit && entry.edit.isoline_here) entry.ctrl.showGeom = entry.ctrl.isoline_here;
 
-
   entry.ctrl.hideGeom = () => {
 
     entry.location.geometries.splice(
@@ -105,19 +104,16 @@ export default _xyz => entry => {
     <div class="table-section expandable">`;
 
     entry.edit.container.appendChild(_xyz.utils.wire()`
-      <div class="btn_subtext cursor noselect pretty"
-      style="text-align: left; font-style: italic; font-size: small;"
-      onclick=${
-        e => {
-          if (e) e.stopPropagation();
+      <div
+        class="btn_subtext cursor noselect"
+        style="text-align: left; font-style: italic; font-size: small;"
+        onclick=${e => {
+          e && e.stopPropagation();
           _xyz.utils.toggleExpanderParent({
             expandable: entry.edit.container,
             accordeon: true,
           });
-        }
-      }
-      >Isoline settings
-    `);
+        }}>Isoline settings`);
 
 
     if (entry.edit.isoline_here && entry.edit.isoline_here.slider) {

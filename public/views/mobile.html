@@ -27,19 +27,33 @@
 
     <div class="btn_column noselect mobile">
 
-        <button id="btnGazetteer" class="icons-search-mobile xyz-icon3"{{:btnSearch}}></button>
+        <button id="btnGazetteer" {{:btnSearch}}>
+            <div class="xyz-icon icon-search"></div>
+        </button>
 
-        <button id="btnLocate" title="Current location" class="icons-gps-not-fixed-mobile xyz-icon3" {{:btnLocate}}></button>
+        <button id="btnLocate" title="Current location" {{:btnLocate}}>
+            <div class="xyz-icon icon-gps-not-fixed"></div>
+        </button>
 
-        <button id="btnZoomIn" class="icons-add-mobile xyz-icon3"></button>
+        <button id="btnZoomIn" class="enabled">
+            <div class="xyz-icon icon-add"></div>
+        </button>
 
-        <button id="btnZoomOut" class="icons-remove-mobile xyz-icon3"></button>
+        <button id="btnZoomOut" class="enabled">
+            <div class="xyz-icon icon-remove"></div>
+        </button>
 
-        <a id="btnDocumentation" title="Open Documentation" {{:btnDocumentation}} class="icons-school-mobile xyz-icon3 mobile-box-shadow" href="{{:hrefDocumentation}}"></a>
+        <a id="btnDocumentation" title="Open Documentation" {{:btnDocumentation}} href="{{:hrefDocumentation}}" class="enabled">
+            <div class="xyz-icon icon-school"></div>
+        </a>
         
-        <a id="btnLogin" title="{{:btnLogin_text}}" {{:btnLogin}} class="icons-lock-open-mobile xyz-icon3 mobile-box-shadow" href="{{:dir}}{{:btnLogin_path}}"></a>
+        <a id="btnLogin" title="{{:btnLogin_text}}" {{:btnLogin}} href="{{:dir}}{{:btnLogin_path}}" class="enabled">
+            <div class="xyz-icon icon-lock-open"></div>
+        </a>
 
-        <button id="btnLogRocket" title="Start a Log Rocket session to record possible bugs." class="icons-bug-report-mobile xyz-icon3 mobile-box-shadow"{{:btnLogRocket}}></button>
+        <button id="btnLogRocket" title="Start a Log Rocket session to record possible bugs." {{:btnLogRocket}} class="enabled">
+            <div class="xyz-icon icon-bug-report"></div>
+        </button>
 
     </div>
 
@@ -48,7 +62,7 @@
     <div id="ctrls">
 
         <div id="tabLayers" class="tab active">
-            <div class="xyz-icon3 icon-layers"></div>
+            <div class="xyz-icon icon-layers"></div>
             <div class="listview">
                 <div id="localeDropdown"></div>
                 <div class="title">Layers</div>
@@ -57,7 +71,7 @@
         </div>
 
         <div id="tabLocations" class="tab" style="display: none;">
-            <div class="xyz-icon3 icon-location"></div>
+            <div class="xyz-icon icon-location"></div>
             <div class="listview">
                 <div class="title">Locations</div>
                 <button id="clear_locations" class="btn_text cursor">Clear all locations.</button>

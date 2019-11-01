@@ -8,6 +8,8 @@ export {scrolly} from './scrolly.mjs';
 
 export {copyToClipboard} from './copyToClipboard.mjs';
 
+export {colorFilter} from './colorFilter.mjs';
+
 export {createElement} from './createElement.mjs';
 
 export {dropdown} from './dropdown.mjs';
