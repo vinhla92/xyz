@@ -20,7 +20,7 @@ export default (_xyz, layer) => {
     <div class="block">
     <div class="title">${filter_entry.label}</div>
     <button
-      class="icon-clear cancel-btn filter"
+      class="icon-close cancel-btn filter"
       onclick=${e=>{
 
         e.target.parentNode.remove();

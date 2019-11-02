@@ -195,7 +195,7 @@ export default _xyz => function () {
   <button
     style = "${'filter: ' + colorFilter}"
     title = "Remove feature from selection"
-    class = "btn_header xyz-icon icon-clear"
+    class = "btn_header xyz-icon icon-close"
     onclick = ${e => {
       e.stopPropagation();
       location.remove();
