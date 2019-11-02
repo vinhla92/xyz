@@ -4,7 +4,7 @@ import streetview from './streetview.mjs';
 
 import images from './images/_images.mjs';
 
-import documents from './documents/_documents.mjs';
+import documents from './documents.mjs';
 
 import geometry from './geometry/_geometry.mjs';
 
@@ -124,6 +124,7 @@ export default _xyz => function () {
     style = "${'filter: ' + colorFilter}"
     title = "Save changes to cloud."
     class = "btn_header xyz-icon icon-cloud-upload"
+    disabled
     onclick = ${e => {
       e.stopPropagation();
       

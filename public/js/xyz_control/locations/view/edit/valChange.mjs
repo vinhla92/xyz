@@ -34,9 +34,9 @@ export default (param) => {
 
     // Hide upload button if no other field in the infoj has a newValue.
     if (!param.entry.location.infoj.some(field => field.newValue)) {
-      param.entry.location.view.upload.style.display = 'none';
+      param.entry.location.view.upload.disabled = true;
     } else {
-      param.entry.location.view.upload.style.display = 'block';
+      param.entry.location.view.upload.disabled = false;
     }
 
   }

@@ -1,6 +1,15 @@
 button {
     border: none;
     outline: none;
+    background: none;
+
+    &:hover:enabled {
+        cursor: pointer;
+    }
+
+    &:disabled {
+        opacity: 0.2;
+    }
 }
 
 .btn_text {
@@ -76,11 +85,6 @@ button {
             line-height: 1.7;
         }
 
-        &:disabled {
-            opacity: 0.3;
-            cursor: default;
-        }
-
         &.mobile-box-shadow {
             box-shadow: 1px 1px 3px 0 rgba(0, 0, 0, 0.2);
             border-radius: 50%;
@@ -97,10 +101,6 @@ button {
     margin-left: 5px;
     width: 30px;
     background: none;
-}
-
-.btn_header:disabled {
-    opacity: 0.5;
 }
 
 .btn_small {

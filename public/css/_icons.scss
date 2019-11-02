@@ -7,26 +7,6 @@
     filter: invert(45%) sepia(55%) saturate(608%) hue-rotate(90deg) brightness(93%) contrast(90%);
 }
 
-// .xyz-documents {
-//     -webkit-mask-size: 20px 20px;
-//     -webkit-mask-position: center;
-//     -webkit-mask-repeat: no-repeat;
-//      mask-size: 20px 20px;
-//      mask-position: center;
-//      mask-repeat: no-repeat;
-// }
-
-// //.Shadow effect on photo add icon// 
-// .image-container {
-//     /*width: 30px;
-//     height: 30px;*/
-//     background-size: 100%;
-//     -webkit-filter: drop-shadow(1px 1px 4px rgba(0,0,0,0.25));
-//     -moz-filter: drop-shadow(1px 1px 4px rgba(0,0,0,0.25));
-//     -ms-filter: drop-shadow(1px 1px 4px rgba(0,0,0,0.25));
-//     -o-filter: drop-shadow(1px 1px 4px rgba(0,0,0,0.25));
-// }
-
 .icon-layers {
     background-image: url("../icons/icon-layers.svg");
 }
@@ -42,7 +22,6 @@
 .icon-gps-not-fixed {
     background-image: url("../icons/icon-gps_not_fixed.svg");
 }
-
 
 .icon-add {
     background-image: url("../icons/icon-add.svg");

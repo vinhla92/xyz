@@ -28,7 +28,7 @@ export default _xyz => function (callback) {
     location.view.update();
 
 
-    if (location.view.upload) location.view.upload.style.display = 'none';
+    if (location.view.upload) location.view.upload.disabled = true;
 
 
     // Reload layer.
