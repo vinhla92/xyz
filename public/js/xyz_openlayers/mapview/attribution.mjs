@@ -29,8 +29,10 @@ export default _xyz => {
     _xyz.mapview.node.appendChild(attribution.container);
 
     attribution.container.appendChild(
-      _xyz.utils.wire()`
-      <a class="logo" target="_blank" href="https://geolytix.co.uk">GEOLYTIX</a>`);
+      _xyz.utils.wire()`<a
+      class="logo"
+      target="_blank"
+      href="https://geolytix.co.uk">`);
 
     attribution.container.appendChild(attribution.links);
 
