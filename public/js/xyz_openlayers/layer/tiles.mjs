@@ -29,7 +29,10 @@ export default _xyz => layer => {
   // Hide loading indicator if it exists.
   source.on('tileloadend', () => {
     tilesLoading--;
-    if (layer.view.loader && tilesLoading === 0) layer.view.loader.style.display = 'none';
+    layer.view.timeout && clearTimeout(layer.view.timeout);
+    layer.view.timeout = setTimeout(()=>{
+      if (layer.tilesLoading === 0) layer.view.loader.style.display = 'none';
+    }, 1000);
   });
 
   layer.L = new _xyz.mapview.lib.layer.Tile({
