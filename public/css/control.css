@@ -72,14 +72,14 @@
   padding: 10px 0 10px 10px;
 }
 .locationview .lv-0 {
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 700;
 }
 .locationview .lv-1 {
-  font-size: 13px;
+  font-size: 11px;
 }
 .locationview .lv-2 {
-  font-size: 12px;
+  font-size: 11px;
   padding-left: 10px;
 }
 .locationview .val {
@@ -98,7 +98,7 @@
 .locationview .table-section .t-expander {
   vertical-align: bottom;
   float: right;
-  font-size: 15px;
+  font-size: 13px;
   padding-right: 5px;
 }
 .locationview .table-section.expandable {
