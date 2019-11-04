@@ -2098,23 +2098,13 @@ button:disabled {
   max-height: 30px;
   overflow: hidden;
   transition: max-height 0.3s ease-out;
-  /*.icon-expander {
-      background-image: url("../icons/icon-keyboard-arrow-down.svg");
-  }*/
 }
 .listview .drawer.drawer-group.expandable-group .icon-group-expander {
   background-image: url("../icons/icon-keyboard-arrow-down.svg");
-  /*-webkit-mask-image: url("../icons/icons-keyboard-arrow-down.svg");
-  mask-image: url("../icons/icons-keyboard-arrow-down.svg");*/
 }
 .listview .drawer.drawer-group.expanded-group {
   max-height: 2500px;
   overflow: visible;
-  /*.icon-group-expander {
-      /*-webkit-mask-image: url("../icons/icons-keyboard-arrow-up.svg");
-      mask-image: url("../icons/icons-keyboard-arrow-up.svg");*/
-  /*background-image: url("../icons/icon-keyboard-arrow-up.svg");
-  }*/
 }
 .listview .drawer.drawer-group.expanded-group .icon-group-expander {
   background-image: url("../icons/icon-keyboard-arrow-up.svg");
@@ -2179,6 +2169,7 @@ button:disabled {
 }
 .listview .drawer .dashboard .panel.expanded {
   max-height: 2500px !important;
+  overflow: visible;
 }
 .listview .drawer .dashboard .block-title {
   width: 100%;

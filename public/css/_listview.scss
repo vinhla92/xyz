@@ -69,7 +69,7 @@
             &.expanded-group {
                 max-height: 2500px;
                 overflow: visible;
-                
+
                 .icon-group-expander {
                     background-image: url("../icons/icon-keyboard-arrow-up.svg");
                 }
@@ -138,6 +138,7 @@
                 }
                 &.expanded {
                     max-height: 2500px !important;
+                    overflow: visible;
                 }
             }
             .block-title {
