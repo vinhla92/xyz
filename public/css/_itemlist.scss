@@ -29,13 +29,18 @@
               background-size: contain;
           }
 
+          .loader {
+            height: 40px;
+            background-image: url("../icons/icon-loading-bubbles.svg");
+          }
+
           .link-remove {
               height: 25px;
               width: 25px;
               vertical-align: middle;
           }
 
-          .list-item .img-remove {
+          .img-remove {
               position: absolute;
               top: 5px;
               left: 5px;

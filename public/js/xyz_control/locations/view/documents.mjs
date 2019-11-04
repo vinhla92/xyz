@@ -23,13 +23,13 @@ export default _xyz => entry => {
 
 		_td.appendChild(_xyz.utils.wire()`
 		<div class="item">
+		${(entry.edit) && _xyz.utils.wire()`
 		<button
-			style="${'display:' + (!entry.edit ? 'none' : 'inline-block')}"
 			class="xyz-icon icon-trash link-remove"
 			data-name=${doc.replace(/^.*[\\\/]/, '')}
 			data-href=${doc}
 			onclick=${e => removeDocument(e)}>
-		</button>
+		</button>`}		
 		<a href=${doc}>${decodeURIComponent(decodeURIComponent(doc.split('/').pop()))}`)
 
 	}
@@ -50,19 +50,24 @@ export default _xyz => entry => {
 
 		if (!file) return;
 
-        reader.onload = blob => {
+		const placeholder = _xyz.utils.wire()`<div class="item"><div class="xyz-icon loader">`;
+
+		_td.insertBefore(placeholder, _td.childNodes[_td.childNodes.length - 1]); 
+
+        reader.onload = readerOnload => {
 			
 			const xhr = new XMLHttpRequest();
 
-			xhr.open('POST', _xyz.host + '/api/location/edit/documents/upload?' + _xyz.utils.paramString({
-			  locale: _xyz.workspace.locale.key,
-			  layer: entry.location.layer.key,
-			  table: entry.location.table,
-			  field: entry.field,
-			  qID: entry.location.qID,
-			  id: entry.location.id,
-			  public_id: file.name,
-			  token: _xyz.token
+			xhr.open('POST', _xyz.host +
+				'/api/location/edit/documents/upload?' + _xyz.utils.paramString({
+				locale: _xyz.workspace.locale.key,
+				layer: entry.location.layer.key,
+				table: entry.location.table,
+				field: entry.field,
+				qID: entry.location.qID,
+				id: entry.location.id,
+				public_id: file.name,
+				token: _xyz.token
 			}));
 		  
 			xhr.setRequestHeader('Content-Type', 'application/octet-stream');
@@ -73,25 +78,25 @@ export default _xyz => entry => {
 
 				const json = JSON.parse(e.target.responseText);
 
-				_td.insertBefore(_xyz.utils.wire()`
+				_xyz.utils.bind(placeholder)`
 				<div class="item">
+				${(entry.edit) && _xyz.utils.wire()`
 				<button
 					class="xyz-icon icon-trash link-remove"
 					data-name=${json.doc_id.replace(/^.*[\\\/]/, '')}
 					data-href=${json.doc_url}
 					onclick=${e => removeDocument(e)}>
-				</button>
-				<a href=${json.doc_url}>${json.doc_id.split('/').pop()}`,
-				_td.childNodes[_td.childNodes.length - 1]); 
+				</button>`}
+				<a href=${json.doc_url}>${json.doc_id.split('/').pop()}`
 		  
 			};
 		  
-			xhr.send(blob.target.result);
+			xhr.send(readerOnload.target.result);
         };
 
 		reader.readAsDataURL(file);
 		
-		_input.value = '';
+		e.target.value = '';
 	}}>`)
 
 	function removeDocument(e) {
@@ -102,7 +107,8 @@ export default _xyz => entry => {
 
 		const xhr = new XMLHttpRequest();
 
-		xhr.open('GET', _xyz.host + '/api/location/edit/documents/delete?' + _xyz.utils.paramString({
+		xhr.open('GET', _xyz.host +
+			'/api/location/edit/documents/delete?' + _xyz.utils.paramString({
 			locale: _xyz.workspace.locale.key,
 			layer: entry.location.layer.key,
 			table: entry.location.table,
