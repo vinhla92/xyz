@@ -160,37 +160,3 @@ export default _xyz => entry => {
 	}
 
 };
-
-
-
-
-// const xhr = new XMLHttpRequest();
-
-// xhr.open('POST', _xyz.host + '/api/location/edit/documents/upload?' + _xyz.utils.paramString({
-//   locale: _xyz.workspace.locale.key,
-//   layer: entry.location.layer.key,
-//   table: entry.location.table,
-//   field: entry.field,
-//   qID: entry.location.qID,
-//   id: entry.location.id,
-//   public_id: file.name,
-//   token: _xyz.token
-// }));
-
-// xhr.setRequestHeader('Content-Type', 'application/octet-stream');
-
-// xhr.onload = e => {
-  
-//   if (e.target.status !== 200) return console.log('document_upload failed');
-
-//   const json = JSON.parse(e.target.responseText);
-
-//   _td.insertBefore(_xyz.utils.wire()`
-//   <div class="item">
-
-//   <img id=${image.replace(/.*\//, '').replace(/\.([\w-]{3})/, '')} src=${image}>`,
-//   _td.childNodes[_td.childNodes.length - 1]); 
-
-// };
-
-// xhr.send(readerOnload.target.result);
