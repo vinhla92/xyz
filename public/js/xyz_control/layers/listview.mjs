@@ -122,19 +122,19 @@ export default _xyz => {
 
     // Create group expander button.
     group.header.appendChild(_xyz.utils.wire()`
-    <button
-      class="btn_header xyz-icon icon-expander"
+      <button 
+      class="icon-group-expander xyz-icon cursor noselect btn_header expander-group"
       title="Toggle group panel"
-      onclick=${e=>{
+      onclick=${ e => {
         e.stopPropagation();
         _xyz.utils.toggleExpanderParent({
           expandable: group.node,
           expandedTag: 'expanded-group',
           expandableTag: 'expandable-group'
         });
-      }}>`
-    );
-    
+      }
+    }
+      >`);
   }
 
 };

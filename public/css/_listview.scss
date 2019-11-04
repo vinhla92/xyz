@@ -61,14 +61,16 @@
                 max-height: 30px;
                 overflow: hidden;
                 transition: max-height 0.3s ease-out;
-                .icon-expander {
+
+                .icon-group-expander {
                     background-image: url("../icons/icon-keyboard-arrow-down.svg");
                 }
             }
             &.expanded-group {
                 max-height: 2500px;
                 overflow: visible;
-                .icon-expander {
+                
+                .icon-group-expander {
                     background-image: url("../icons/icon-keyboard-arrow-up.svg");
                 }
             }
