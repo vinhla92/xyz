@@ -38,7 +38,7 @@ export default _xyz => {
 
         // Add group meta to group node.
         if (layer.groupmeta) {
-          const groupmeta = _xyz.utils.wire()`<div class="meta">`;
+          const groupmeta = _xyz.utils.wire()`<div class="meta primary-colour">`;
           groupmeta.innerHTML = layer.groupmeta;
           _xyz.layers.listview.groups[layer.group].meta.appendChild(groupmeta);
         }

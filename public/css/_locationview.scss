@@ -3,15 +3,13 @@
     width: 100%;
     /*font-size: 12px;*/
     table-layout: fixed;
-    .changed {
-        color: $glxgreen;
-    }
+
     .label {
         padding-top: 5px;
     }
-    a {
+    /*a {
         color: $glxgreen;
-    }
+    }*/
     textarea {
         resize: none;
         width: 100%;
@@ -78,43 +76,7 @@
             }
         }
     }
-    .td_images {
-        text-align: center;
-        >div {
-            padding: 3px 0;
-            position: relative;
-        }
-        .addImage {
-            i {
-                color: $glxgreen;
-                /*font-size: 30px;*/
-                font-size: 214%;
-                text-shadow: 2px 2px 2px #999;
-            }
-            input {
-                display: none;
-            }
-        }
-        img {
-            width: 100%;
-            -webkit-transition: opacity 0.2s linear;
-            -moz-transition: opacity 0.2s linear;
-            -o-transition: opacity 0.2s linear;
-            transition: opacity 0.2s linear;
-        }
-        button {
-            background: rgba(255, 255, 255, 0.8);
-            position: absolute;
-            width: 100%;
-            /*font-size: 20px;
-            font-family: ffmark_bold;*/
-            font-weight: bold;
-            text-align: right;
-            top: 0;
-            right: 0;
-            color: $glxgreen;
-        }
-    }
+
     .sample-circle {
         width: 24px;
         height: 24px;
@@ -205,7 +167,7 @@
             }
             &.edited {
                 // background-image: linear-gradient(white, $glxlightgreen);
-                background-color: $glxlightgreen;
+                /*background-color: $glxlightgreen;*/
                 font-weight: bold;
             }
     
@@ -216,7 +178,7 @@
         .meta {
             margin-top: 5px;
             a {
-                color: $glxgreen;
+                /*color: $glxgreen;*/
                 font-weight: 600;
             }
         }
@@ -263,7 +225,7 @@
                     width: 100%;
                 }
                 .cancel-btn {
-                    color: $glxgreen;
+                    /*color: $glxgreen;*/
                     font-size: 20px;
                     top: 2px;
                     right: -4px;
@@ -295,9 +257,7 @@
                     right: 2px;
                     top: 0;
                 }
-                .colour-label {
-                    color: $glxgreen;
-                }
+                
                 .colour-swatch {
                     width: 100%;
                     margin-bottom: 10px;

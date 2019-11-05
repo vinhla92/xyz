@@ -6,7 +6,7 @@
         font-size: 107%;
         /*font-size: 15px;*/
         margin-bottom: 10px;
-        background-color: $glxlightgreen;
+        /*background-color: $glxlightgreen;*/
         padding: 4px;
         border-radius: 2px;
     }
@@ -107,8 +107,8 @@
                 cursor: pointer;
             }
             &.edited {
-                // background-image: linear-gradient(white, $glxlightgreen);
-                background-color: $glxlightgreen;
+                /* background-image: linear-gradient(white, $glxlightgreen);*/
+                /*background-color: $glxlightgreen;*/
                 font-weight: bold;
             }
 
@@ -119,7 +119,7 @@
         .meta {
             margin-top: 10px;
             a {
-                color: $glxgreen;
+                /*color: $glxgreen;*/
                 font-weight: 600;
             }
         }
@@ -164,7 +164,7 @@
                     width: 100%;
                 }
                 .cancel-btn {
-                    color: $glxgreen;
+                    /*color: $glxgreen;*/
                     /*font-size: 20px;*/
                     font-size: 143%;
                     top: 2px;
@@ -196,9 +196,6 @@
                     position: absolute;
                     right: 2px;
                     top: 0;
-                }
-                .colour-label {
-                    color: $glxgreen;
                 }
                 .colour-swatch {
                     width: 100%;
