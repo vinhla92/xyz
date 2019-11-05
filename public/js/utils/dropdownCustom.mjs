@@ -33,10 +33,11 @@ export function dropdownCustom(param) {
 
       if(param.singleSelect){
         for(let i =0; i < menu.children.length; i++){
-          menu.children[i].classList.remove('selected');
+          menu.children[i].classList.remove('selected', 'secondary-colour-bg');
         }
       }
       e.target.classList.toggle('selected');
+      e.target.classList.toggle('secondary-colour-bg');
       node.classList.toggle('active');
       if (param.callback) param.callback(e);
     }
@@ -45,7 +46,7 @@ export function dropdownCustom(param) {
 
   if(!isNaN(param.selectedIndex)){
     node.querySelector('.head span').textContent = menu.children[param.selectedIndex].textContent;
-    menu.children[param.selectedIndex].classList.add('selected');
+    menu.children[param.selectedIndex].classList.add('selected', 'secondary-colour-bg');
   }
 
   return node;

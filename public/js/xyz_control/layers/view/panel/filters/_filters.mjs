@@ -114,7 +114,7 @@ export default (_xyz, layer) => {
       layer.filter.list.innerHTML = null;
   
       // Enable all options in _xyz.utils.dropdown.
-      layer.filter.select.querySelectorAll('ul li').forEach(li =>  li.classList.remove('selected'));
+      layer.filter.select.querySelectorAll('ul li').forEach(li =>  li.classList.remove('selected', 'secondary-colour-bg'));
   
       // Reset layer filter object.
       layer.filter.current = {};
