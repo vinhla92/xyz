@@ -66,17 +66,14 @@ async function view(req, res, token = { access: 'public' }) {
     nanoid: nanoid(6),
     token: req.query.token || token.signed || '""',
     log: env.logs || '""',
-    btnDocumentation: env.workspace.documentation ? '' : 'style="display: none;"',
-    hrefDocumentation: env.workspace.documentation ? env.workspace.documentation : '',
     btnLogin: env.acl_connection ? '' : 'style="display: none;"',
     btnLogin_style: token.email ? 'face' : 'lock_open',
     btnLogin_path: token.email ? '' : '/login',
     btnLogin_text: token.email || 'anonymous (public)',
     btnAdmin: token.admin_user ? '' : 'style="display: none;"',
     btnEditor: token.admin_workspace ? '' : 'style="display: none;"',
-    logrocket: env.logrocket || '""',
     btnLogRocket: env.logrocket ? '' : 'style="display: none;"',
-    engine: req.query.engine === 'leaflet' ? 'leaflet' : 'openlayers'
+    logrocket: env.logrocket || '""',
   }));
 
 };

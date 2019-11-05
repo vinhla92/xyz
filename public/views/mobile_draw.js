@@ -19,8 +19,7 @@ function init(_xyz) {
       lng: _xyz.hooks.current.lng,
       z: _xyz.hooks.current.z || 2
     },
-    scrollWheelZoom: true,
-    showScaleBar: 'never'
+    scrollWheelZoom: true
   });
 
   _xyz.layers.list['Mapbox Base'].show();

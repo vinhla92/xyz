@@ -22,6 +22,10 @@ export default _xyz => {
 
     _xyz.mapview.node.appendChild(attribution.container);
 
+    attribution.scalebar = _xyz.utils.wire()`<div id="ol-scale">`;
+
+    attribution.container.appendChild(attribution.scalebar);
+
     params.logo && attribution.container.appendChild(params.logo);
 
     attribution.links = _xyz.utils.wire()`
