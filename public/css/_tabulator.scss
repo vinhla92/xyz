@@ -4,7 +4,8 @@
     position: relative;
     background-color: #fff;
     overflow: hidden;
-    font-size: 12px;
+    /*font-size: 12px;*/
+    font-size: 90%;
     text-align: left;
     -ms-transform: translatez(0);
     transform: translatez(0);
@@ -69,8 +70,9 @@
 .tabulator .tabulator-header .tabulator-col .tabulator-col-content .tabulator-col-title {
     box-sizing: border-box;
     width: 100%;
-    font-family: ffmark_bold;
+    /*font-family: ffmark_bold;*/
     /*white-space: nowrap;*/
+    font-weight: bold;
     white-space: normal;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -268,7 +270,7 @@
     margin: 0 auto;
     padding: 10px;
     font-weight: bold;
-    font-size: 13px;
+    /*font-size: 13px;*/
     color: orange;
 }
 
@@ -404,7 +406,7 @@
     border-radius: 10px;
     background: #fff;
     font-weight: bold;
-    font-size: 16px;
+    /*font-size: 16px;*/
 }
 
 .tabulator .tabulator-loader .tabulator-loader-msg.tabulator-loading {
@@ -496,7 +498,7 @@
 }
 
 .tabulator-row .tabulator-responsive-collapse table {
-    font-size: 14px;
+    /*font-size: 14px;*/
 }
 
 .tabulator-row .tabulator-responsive-collapse table tr td {
@@ -663,7 +665,7 @@
     background: #666;
     color: #fff;
     font-weight: bold;
-    font-size: 1.1em;
+    /*font-size: 1.1em;*/
 }
 
 .tabulator-row .tabulator-cell .tabulator-responsive-collapse-toggle:hover {
@@ -751,7 +753,7 @@
     max-height: 200px;
     background: #fff;
     border: 1px solid #ddd;
-    font-size: 14px;
+    /*font-size: 14px;*/
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     z-index: 10000;

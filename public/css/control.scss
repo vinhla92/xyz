@@ -14,6 +14,14 @@ $onyx: #383836;
 
 @import 'pt_mono';
 
+@import url('https://fonts.googleapis.com/css?family=Ubuntu|Ubuntu:300,400,500,700');
+
+@import url('https://fonts.googleapis.com/css?family=Lato|Lato:300,400,500,700');
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans|Open+Sans:300,400,500,700');
+
+@import url('https://fonts.googleapis.com/css?family=Sintony|Sintony:300,400,500,700');
+
 
 @import 'locationview';
 @import 'dataview';
@@ -53,11 +61,13 @@ $onyx: #383836;
 }
 
 body {
-    font-family: ffmark, sans-serif;
+    /*font-family: ffmark, sans-serif;*/
+    font-family: 'Open Sans', sans-serif;
     position: absolute;
     width: 100%;
     height: 100%;
     color: $onyx;
+    font-size: 13px;
 }
 
 a {
@@ -86,7 +96,7 @@ select {
 }
 
 .bold {
-    font-weight: 800;
+    font-weight: 700;
 }
 
 .pane_shadow {

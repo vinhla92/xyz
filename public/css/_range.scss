@@ -38,5 +38,6 @@ input[type=range]::-moz-range-thumb {
 }
 
 .range_label {
-    font-family: ffmark_bold;
+    /*font-family: ffmark_bold;*/
+    font-weight: bold;
 }

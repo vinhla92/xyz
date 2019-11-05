@@ -6,8 +6,12 @@
     position: absolute;
     z-index: 999;
     text-align: right;
+    /*font-family: ffmark_bold, sans-serif;*/
     font-weight: bold;
-    font-size: 18px;
+    /*font-size: 18px;*/
+    font-size: 130%;
+    text-shadow: 1px 1px 1px $glxlightgreen;
+
     pointer-events: none;
 
     * {

@@ -101,8 +101,10 @@ body {
     z-index: 9999;
 
     .msg {
-        font-family: ffmark_bold;
-        font-size: 30px;
+        font-weight: 600;
+        font-size: 214%;
+        /*font-family: ffmark_bold;
+        font-size: 30px;*/
         color: $glxgreen;
         top: 50%;
         transform: perspective(1px) translateY(-50%);
