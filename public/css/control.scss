@@ -2,27 +2,12 @@ $glxgreen: #1F964D;
 $glxlightgreen: #DEF6CA;
 $onyx: #383836;
 
-<<<<<<< HEAD
 .off-white {color:ghostwhite}
 .off-black {color:#383836}
 .primary-colour {color:#1F964D};
 .secondary-colour {color:#DEF6CA};
 .tertiary-colour {color:hotpink};
 
-@font-face {
-    font-family: ffmark;
-    src: url(../fonts/MarkWebPro.woff) format("woff");
-}
-
-@font-face {
-    font-family: ffmark_bold;
-    src: url(../fonts/MarkWebPro-Bold.woff) format("woff");
-}
-
-@import 'pt_mono';
-
-=======
->>>>>>> 780f3ebf90460ad20dba2dbc52e57fa3edb79b06
 @import url('https://fonts.googleapis.com/css?family=Ubuntu|Ubuntu:300,400,500,700');
 
 @import url('https://fonts.googleapis.com/css?family=Lato|Lato:300,400,500,700');
