@@ -867,63 +867,7 @@ input[type=range]::-moz-range-thumb {
   background: orange;
 }
 
-.doc-container {
-  overflow-x: scroll;
-  /*position: absolute;*/
-  bottom: 0;
-  width: 100%;
-}
-.doc-container td, .doc-container div {
-  position: relative;
-  padding: 5px;
-  /* wrap long text without spaces */
-  white-space: pre-wrap;
-  white-space: -moz-pre-wrap;
-  /* Firefox */
-  white-space: -pre-wrap;
-  /* Opera <7 */
-  white-space: -o-pre-wrap;
-  /* Opera 7 */
-  word-wrap: break-word;
-  /* IE */
-  word-break: break-all;
-}
-.doc-container td i, .doc-container div i {
-  color: #1F964D;
-  font-size: 20px;
-  vertical-align: middle;
-}
-.doc-container td button, .doc-container div button {
-  display: block;
-  background: none;
-  position: absolute;
-  border: none;
-}
-.doc-container td button.btn_del, .doc-container div button.btn_del {
-  right: 6px;
-  top: 10px;
-}
-.doc-container td button.btn_save, .doc-container div button.btn_save {
-  left: 5px;
-  bottom: 14px;
-}
-.doc-container td button :hover, .doc-container div button :hover {
-  cursor: pointer;
-}
-.doc-container td button i, .doc-container div button i {
-  padding: 1px;
-  width: 30px;
-  height: 30px;
-  font-size: 28px;
-  color: #1F964D;
-  align-content: center;
-  border-radius: 5px;
-  background-color: #fff;
-  opacity: 0.9;
-  border: 1px solid #cf7;
-  box-shadow: 2px 2px 1px #cf7;
-}
-
+/*@import 'documents';*/
 .checkbox {
   display: block;
 }
