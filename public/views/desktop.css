@@ -34,7 +34,6 @@ body {
     border-radius: 2px;
 }
 
-
 #vertDivider {
     grid-column: 2;
     grid-row: 1/4;

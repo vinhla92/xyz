@@ -71,9 +71,7 @@ async function view(req, res, token = { access: 'public' }) {
     btnLogin_path: token.email ? '' : '/login',
     btnLogin_text: token.email || 'anonymous (public)',
     btnAdmin: token.admin_user ? '' : 'style="display: none;"',
-    btnEditor: token.admin_workspace ? '' : 'style="display: none;"',
-    btnLogRocket: env.logrocket ? '' : 'style="display: none;"',
-    logrocket: env.logrocket || '""',
+    btnEditor: token.admin_workspace ? '' : 'style="display: none;"'
   }));
 
 };

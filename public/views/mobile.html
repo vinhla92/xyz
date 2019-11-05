@@ -7,6 +7,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <!-- <script src="https://cdn.logrocket.com/LogRocket.min.js"></script> -->
+
     <link rel="stylesheet" href="{{:dir}}/css/openlayers.css" />
     <link rel="stylesheet" href="{{:dir}}/css/control.css" />
     <link rel="stylesheet" href="{{:dir}}/views/mobile.css" />
@@ -19,7 +21,6 @@
     data-nanoid={{:nanoid}} 
     data-log={{:log}} 
     data-user={{:user}} 
-    data-logrocket={{:logrocket}}
     data-token={{:token}}>
 
     <div id="Map" class="mapview map" style="margin-top: 0;"></div>
@@ -52,9 +53,9 @@
             <div class="xyz-icon icon-lock-open"></div>
         </a>
 
-        <button id="btnLogRocket" title="Start a Log Rocket session to record possible bugs." {{:btnLogRocket}} class="enabled">
+        <!-- <button id="btnLogRocket" title="Start a Log Rocket session to record possible bugs." class="enabled">
             <div class="xyz-icon icon-bug-report"></div>
-        </button>
+        </button> -->
 
     </div>
 
