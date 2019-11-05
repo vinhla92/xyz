@@ -2,18 +2,6 @@ $glxgreen: #1F964D;
 $glxlightgreen: #DEF6CA;
 $onyx: #383836;
 
-@font-face {
-    font-family: ffmark;
-    src: url(../fonts/MarkWebPro.woff) format("woff");
-}
-
-@font-face {
-    font-family: ffmark_bold;
-    src: url(../fonts/MarkWebPro-Bold.woff) format("woff");
-}
-
-@import 'pt_mono';
-
 @import url('https://fonts.googleapis.com/css?family=Ubuntu|Ubuntu:300,400,500,700');
 
 @import url('https://fonts.googleapis.com/css?family=Lato|Lato:300,400,500,700');
