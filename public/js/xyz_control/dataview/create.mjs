@@ -18,8 +18,8 @@ export default _xyz => params => {
    
   // Load locale if defined in params or if no locale is yet loaded.
   if (!_xyz.workspace.locale || params.locale) _xyz.workspace.loadLocale(params);
-                
-      
+
+  
   _xyz.dataview.nav_bar = _xyz.dataview.node.querySelector('.nav_bar > ul.nav_bar-nav');
   _xyz.dataview.nav_dropdown = _xyz.dataview.node.querySelector('.nav_bar .tab-dropdown-content ul'); 
   _xyz.dataview.nav_dropdown_content = _xyz.dataview.node.querySelector('.nav_bar .tab-dropdown-content');
@@ -28,7 +28,6 @@ export default _xyz => params => {
   _xyz.dataview.nav_bar.innerHTML = '';
 
   _xyz.dataview.btn = assignBtn(_xyz, params);
-
 
   if (_xyz.mapview.node) {
 
@@ -39,7 +38,6 @@ export default _xyz => params => {
     });
 
   }
-
 
   // Show or hide dropdown with collapsed tabs
   _xyz.dataview.nav_dropdown_btn.addEventListener('click', e => {

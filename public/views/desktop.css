@@ -1,6 +1,8 @@
 body {
     display: grid;
     min-width: 666px;
+    grid-template-columns: 333px 10px auto;
+    grid-template-rows: minmax(0, 1fr) 0;
 }
 
 .map {
