@@ -23,9 +23,6 @@ module.exports = {
   // Set the maximum number of failed login attempts before an account will be locked.
   failed_attempts: parseInt(process.env.FAILED_ATTEMPTS) || 3,
 
-  // Assign logrocket key.
-  logrocket: process.env.LOG_ROCKET,
-
   // Additional logs will be written to console if env.logs is true.
   logs: process.env.LOG_LEVEL,
 
