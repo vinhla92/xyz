@@ -59,14 +59,16 @@ export default _xyz => params => {
     _xyz.map.addControl(new _xyz.mapview.lib.control.Zoom());
   }
 
-
-  // Add scalebar.
-  if (params.showScaleBar !== 'never' && (params.showScaleBar || _xyz.workspace.locale.showScaleBar)) {
-    _xyz.map.addControl(new _xyz.mapview.lib.control.ScaleLine());
-  }
-
   // Create attribution in map DOM.
   params.attribution && _xyz.mapview.attribution.create(params.attribution);
+
+  // Add scalebar.
+  if (params.showScaleBar || _xyz.workspace.locale.showScaleBar) {
+      _xyz.map.addControl(new _xyz.mapview.lib.control.ScaleLine({
+        // bar: true,
+          target: 'ol-scale'
+      }));
+  }
 
 
   if(params.maskBounds || _xyz.workspace.locale.maskBounds) {
