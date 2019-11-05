@@ -652,7 +652,6 @@ input[type=range]::-moz-range-thumb {
 .qs-datepicker {
   white-space: normal;
   color: black;
-  /*font-family: sans-serif;*/
   position: fixed;
   left: 75px;
   top: -10000px;
@@ -674,12 +673,8 @@ input[type=range]::-moz-range-thumb {
 }
 .qs-datepicker.qs-centered {
   position: fixed;
-  /*stop: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);*/
 }
 .qs-datepicker.qs-hidden {
-  /*display: none;*/
   top: -10000px;
 }
 .qs-datepicker .qs-overlay {
@@ -1129,7 +1124,7 @@ button:disabled {
   z-index: 999;
   text-align: right;
   font-weight: bold;
-  font-size: 130%;
+  font-size: 100%;
   pointer-events: none;
 }
 .attribution > * {
@@ -1144,8 +1139,8 @@ button:disabled {
   pointer-events: auto;
 }
 .attribution .logo {
-  width: 300px;
-  height: 40px;
+  width: 250px;
+  height: 30px;
   background-repeat: no-repeat;
   background-position: right;
   background-size: contain;
