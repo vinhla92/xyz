@@ -14,7 +14,7 @@ export default _xyz => table => {
   // Remove current from all tabs.
   Object
     .values(_xyz.dataview.nav_bar.children)
-    .forEach(tab => tab.classList.remove('tab-current'));
+    .forEach(tab => tab.classList.remove('tab-current', 'primary-colour-bb'));
 
   if(table.tab) table.tab.remove();
 
@@ -33,7 +33,7 @@ export default _xyz => table => {
   onclick=${e => {
     Object
       .values(_xyz.dataview.nav_bar.children)
-      .forEach(tab => tab.classList.remove('tab-current'));
+      .forEach(tab => tab.classList.remove('tab-current', 'primary-colour-bb'));
 
     if(e.target.classList.contains('folded')){
     // put last tab in the dropdown
@@ -44,7 +44,7 @@ export default _xyz => table => {
       e.target.classList.remove('folded');
       _xyz.dataview.nav_bar.appendChild(e.target);
     } 
-    e.target.classList.add('tab-current');
+    e.target.classList.add('tab-current', 'primary-colour-bb');
 
     table.activate();
 
@@ -66,9 +66,9 @@ export default _xyz => table => {
   
   // activate only tab from navbar
   if(!table.tab.classList.contains('folded')) {
-    table.tab.classList.add('tab-current');
+    table.tab.classList.add('tab-current', 'primary-colour-bb');
   } else {
-    _xyz.dataview.nav_bar.lastChild.classList.add('tab-current');
+    _xyz.dataview.nav_bar.lastChild.classList.add('tab-current', 'primary-colour-bb');
   }
   
   if(count2 > 0) _xyz.dataview.nav_dropdown_btn.style.display = 'inline-flex';

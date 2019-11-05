@@ -11,8 +11,6 @@ $qs_arrow: 25px;
 
   color: black;
 
-  /*font-family: sans-serif;*/
-
   position: fixed;
   left: 75px;
   top: -10000px;
@@ -36,13 +34,9 @@ $qs_arrow: 25px;
 
   &.qs-centered {
     position: fixed;
-    /*stop: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);*/
   }
 
   &.qs-hidden {
-    /*display: none;*/
     top: -10000px;
   }
 

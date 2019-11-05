@@ -22,11 +22,11 @@ export default _xyz => table => {
 
     Object
       .values(_xyz.dataview.nav_bar.children)
-      .forEach(tab => tab.classList.remove('tab-current'));
+      .forEach(tab => tab.classList.remove('tab-current', 'primary-colour-bb'));
       
     const nodes = document.querySelectorAll('#dataview ul.nav_bar-nav li');
 
-    nodes[nodes.length-1].classList.add('tab-current');
+    nodes[nodes.length-1].classList.add('tab-current', 'primary-colour-bb');
 
     return _xyz.dataview.tables[nodes.length-1].activate();
 
