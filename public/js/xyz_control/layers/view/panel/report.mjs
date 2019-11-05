@@ -21,9 +21,10 @@ export default (_xyz, layer) => {
     layer.view.dashboard.appendChild(
       _xyz.utils.wire()`
       <a
-      style="margin-top: 10px; display: block; vertical-align: bottom;  font-size: 14px; padding-left: 15px;"
-      target="_blank" href="${href}"
-      class="icon-event-note">${entry[1].name || entry[0]}`
+      target="_blank"
+      href="${href}"
+      class="link-with-img">
+        <img class="icon-event-note"><span>${entry[1].name || entry[0]}`
     );
 
   });

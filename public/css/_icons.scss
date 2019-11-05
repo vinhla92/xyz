@@ -111,10 +111,6 @@
     background-image: url("../icons/icon-trash.svg");
 }
 
-.icon-event-note {
-    background-image: url("../icons/icon-event-note.svg");
-}
-
 .icon-build {
     background-image: url("../icons/icon-build.svg");
 }
@@ -145,6 +141,18 @@
 
 .icon-notes {
     background-image: url("../icons/icon-notes.svg");
+}
+
+img.icon-notes {
+    content: url("../icons/icon-notes.svg");
+}
+
+.icon-event-note {
+    background-image: url("../icons/icon-event-note.svg");
+}
+
+img.icon-event-note {
+    content: url("../icons/icon-event-note.svg");
 }
 
 .icon-scatter-plot {

@@ -214,5 +214,13 @@
                 }
             }
         }
+
+        .link-with-img {
+            display: block;
+            margin-top: 5px;
+            >* {
+                vertical-align: middle;
+            }
+        }
     }
 }
