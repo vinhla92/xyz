@@ -45,11 +45,11 @@
     "nanoid": "^1.2.3",
     "node-fetch": "^2.2.1",
     "nodemailer": "^4.6.8",
-    "ol": "^6.0.1",
+    "ol": "^6.1.1",
     "pg": "^7.5.0",
     "pino-pretty": "^2.5.0",
     "request": "^2.88.0",
-    "tabulator-tables": "^4.1.5"
+    "tabulator-tables": "^4.4.3"
   },
   "devDependencies": {
     "eslint": "^4.19.1",

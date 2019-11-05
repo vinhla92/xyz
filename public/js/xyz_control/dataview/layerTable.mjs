@@ -92,6 +92,7 @@ export default _xyz => table => {
     table.Tabulator = new _xyz.utils.Tabulator(
       table.target,
       {
+        invalidOptionWarnings: false,
         placeholder: 'No Data Available',
         tooltipsHeader: true,
         columnVertAlign: 'center',

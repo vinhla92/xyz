@@ -88,7 +88,9 @@ export default _xyz => (table, callback) => {
     columns = columns.filter(col => { return !col.aspatial; });
 
     table.Tabulator = new _xyz.utils.Tabulator(
-      table.target, {
+      table.target,
+      {
+        invalidOptionWarnings: false,
         placeholder: 'No Data Available',
         tooltipsHeader: true,
         columnVertAlign: 'center',
