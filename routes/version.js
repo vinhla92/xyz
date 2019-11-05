@@ -1,4 +1,4 @@
-const pjson = require('/package.json');
+const version = require('../package.json').version;
 
 module.exports = fastify => {
   fastify.route({
@@ -6,7 +6,7 @@ module.exports = fastify => {
     url: '/version',
     handler: async (req, res) => {
 
-        res.send(pjson.version);
+        res.send(version);
 
     }
   });

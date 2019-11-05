@@ -1,5 +1,7 @@
 const path = require('path');
 
+const webpack = require('webpack');
+
 module.exports = {
   entry: {
     xyz_openlayers: ['./public/js/xyz_openlayers/index.mjs']
@@ -21,6 +23,11 @@ module.exports = {
   optimization: {
     concatenateModules: true
   },
+  plugins: [
+    new webpack.DefinePlugin({
+        XYZ_VERSION: JSON.stringify(require('./package.json').version)
+    })
+  ]
   //stats: 'verbose'
   // stats: {
   //   optimizationBailout: true,
