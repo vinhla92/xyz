@@ -1,13 +1,12 @@
 .gazetteer {
     background-color: #fff;
 
-    .clear {
+    /*.clear {
         position: absolute;
         top: 0;
         right: 0;
         font-size: 33px;
-        color: $glxgreen;
-    }
+    }*/
 
     .clear-mask {
         position: absolute;
@@ -22,7 +21,7 @@
 
     input {
         width: 100%;
-        font-size: 20px;
+        font-size: 120%;
         box-shadow: 0 3px 3px -3px #000;
     }
 
@@ -43,6 +42,5 @@
         padding: 0 6px 0 0;
         z-index: 999;
         box-shadow: 0 3px 3px -3px #000;
-        /*width: 100%;*/
     }
 }
