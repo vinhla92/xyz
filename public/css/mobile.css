@@ -1,7 +1,9 @@
-@import url("https://fonts.googleapis.com/css?family=Ubuntu|Ubuntu:300,400,500,700");
-@import url("https://fonts.googleapis.com/css?family=Lato|Lato:300,400,500,700");
 @import url("https://fonts.googleapis.com/css?family=Open+Sans|Open+Sans:300,400,500,700");
-@import url("https://fonts.googleapis.com/css?family=Sintony|Sintony:300,400,500,700");
+/*@import url('https://fonts.googleapis.com/css?family=Ubuntu|Ubuntu:300,400,500,700'); // fonts to review
+
+@import url('https://fonts.googleapis.com/css?family=Lato|Lato:300,400,500,700');
+
+@import url('https://fonts.googleapis.com/css?family=Sintony|Sintony:300,400,500,700');*/
 /* Color scheme */
 .off-white {
   color: ghostwhite;
@@ -598,7 +600,7 @@ input[type=range]::-moz-range-thumb {
   background: -moz-linear-gradient(left, #999 0%, white 90%);
 }
 .ul-drop > ul > li.selected {
-  background-color: #DEF6CA;
+  /*background-color: #DEF6CA;*/
 }
 .ul-drop > ul > li.selected:hover {
   /*background-color: #DEF6CA;*/
@@ -951,7 +953,7 @@ button:disabled {
 .btn_small {
   /*font-family: sans-serif;*/
   /*font-size: 11px;*/
-  font-size: 78%;
+  font-size: 88%;
   /*color: $glxgreen;*/
   height: 14px;
   display: none;
