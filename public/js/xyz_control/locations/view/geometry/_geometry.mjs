@@ -105,7 +105,7 @@ export default _xyz => entry => {
 
     entry.edit.container.appendChild(_xyz.utils.wire()`
       <div
-        class="btn_subtext cursor noselect"
+        class="btn_subtext cursor noselect primary-colour"
         style="text-align: left; font-style: italic; font-size: small;"
         onclick=${e => {
           e && e.stopPropagation();

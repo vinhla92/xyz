@@ -78,16 +78,6 @@ export default _xyz => entry => {
 
     if (fields.length && fields.some(field => field.displayValue)) {
 
-      // entry.chart.node.appendChild(_xyz.utils.wire()`<div
-      //   class="btn_subtext cursor noselect"
-      //   style="text-align: left; font-style: italic;">
-      //   <span>${entry.title}`);
-
-      /*entry.chart.node.appendChild(_xyz.utils.chart({
-        label: entry.title,
-        fields: fields,
-        chart: entry.chart
-      }));*/
       entry.chart.node.appendChild(_xyz.charts.create({
         label: entry.title,
         fields: fields,

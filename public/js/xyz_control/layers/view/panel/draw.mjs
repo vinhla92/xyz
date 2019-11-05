@@ -16,7 +16,7 @@ export default (_xyz, layer) => {
   // Drawing panel header.
   const header = _xyz.utils.wire()`
     <div
-    class="btn_text cursor noselect"
+    class="btn_text cursor noselect primary-colour"
     onclick=${e => {
     e.stopPropagation();
     _xyz.utils.toggleExpanderParent({
@@ -30,7 +30,7 @@ export default (_xyz, layer) => {
 
   layer.edit.point && layer.edit.panel.appendChild(_xyz.utils.wire()`
   <div
-  class="btn_state btn_wide cursor noselect"
+  class="btn_state btn_wide cursor noselect primary-colour"
   onclick=${e => {
 
     e.stopPropagation();
@@ -55,7 +55,7 @@ export default (_xyz, layer) => {
 
   layer.edit.polygon && layer.edit.panel.appendChild(_xyz.utils.wire()`
   <div
-  class="btn_state btn_wide cursor noselect"
+  class="btn_state btn_wide cursor noselect primary-colour"
   onclick=${e => {
 
     e.stopPropagation();
@@ -80,7 +80,7 @@ export default (_xyz, layer) => {
 
   layer.edit.rectangle && layer.edit.panel.appendChild(_xyz.utils.wire()`
   <div
-  class="btn_state btn_wide cursor noselect"
+  class="btn_state btn_wide cursor noselect primary-colour"
   onclick=${e => {
 
     e.stopPropagation();
@@ -106,7 +106,7 @@ export default (_xyz, layer) => {
 
   layer.edit.circle && layer.edit.panel.appendChild(_xyz.utils.wire()`
   <div
-  class="btn_state btn_wide cursor noselect"
+  class="btn_state btn_wide cursor noselect primary-colour"
   onclick=${e => {
 
     e.stopPropagation();
@@ -131,7 +131,7 @@ export default (_xyz, layer) => {
 
   layer.edit.line && layer.edit.panel.appendChild(_xyz.utils.wire()`
   <div
-  class="btn_state btn_wide cursor noselect"
+  class="btn_state btn_wide cursor noselect primary-colour"
   onclick=${e => {
 
     e.stopPropagation();
@@ -156,7 +156,7 @@ export default (_xyz, layer) => {
 
   layer.edit.freehand && layer.edit.panel.appendChild(_xyz.utils.wire()`
   <div
-  class="btn_state btn_wide cursor noselect"
+  class="btn_state btn_wide cursor noselect primary-colour"
   onclick=${e => {
 
     e.stopPropagation();
@@ -191,7 +191,7 @@ export default (_xyz, layer) => {
 
     _container.appendChild(_xyz.utils.wire()`
       <div
-      class="btn_subtext cursor noselect"
+      class="btn_subtext cursor noselect primary-colour"
       style="text-align: left; font-size: small;"
       onclick=${
         e => {
@@ -213,7 +213,7 @@ export default (_xyz, layer) => {
 
     layer.edit.panel.appendChild(_xyz.utils.wire()`
     <div
-    class="btn_state btn_wide cursor noselect"
+    class="btn_state btn_wide cursor noselect primary-colour"
     onclick=${e => {
   
     e.stopPropagation();
@@ -300,7 +300,7 @@ export default (_xyz, layer) => {
 
     _container.appendChild(_xyz.utils.wire()`
       <div
-        class="btn_subtext cursor noselect"
+        class="btn_subtext cursor noselect primary-colour"
         style="text-align: left; font-size: small;"
         onclick=${e => {
           e && e.stopPropagation();
@@ -319,7 +319,7 @@ export default (_xyz, layer) => {
 
     layer.edit.panel.appendChild(_xyz.utils.wire()`
     <div
-    class="btn_state btn_wide cursor noselect"
+    class="btn_state btn_wide cursor noselect primary-colour"
     onclick=${e => {
   
     e.stopPropagation();

@@ -13,7 +13,7 @@ export default _xyz => group => {
   group.td.appendChild(group.div);
 
   group.header = _xyz.utils.wire()`
-  <div class="btn_subtext cursor noselect"
+  <div class="btn_subtext cursor noselect primary-colour"
   style="text-align: left;"
   onclick=${ e => {
 

@@ -60,7 +60,7 @@ export default (_xyz, layer) => {
   // Style panel header.
   const header = _xyz.utils.wire()`
     <div
-    class="btn_text cursor noselect"
+    class="btn_text cursor noselect primary-colour"
     onclick=${e => {
       e.stopPropagation();
         _xyz.utils.toggleExpanderParent({
@@ -104,7 +104,7 @@ export default (_xyz, layer) => {
 
   layer.filter.clear_all = _xyz.utils.wire()`
   <div
-    class="btn_small cursor noselect"
+    class="btn_small cursor noselect primary-colour"
     style="margin: 4px;"
     onclick=${e=>{
 
@@ -139,7 +139,7 @@ export default (_xyz, layer) => {
 
   layer.filter.run_output = _xyz.utils.wire()`
   <button
-    class="btn_wide noselect"
+    class="btn_wide noselect primary-colour"
     onclick=${()=>{
 
       const filter = Object.assign({}, layer.filter.legend, layer.filter.current);
