@@ -154,18 +154,17 @@ function init(_xyz) {
 
 function createMap(_xyz) {
 
-  document.body.style.gridTemplateRows = 'minmax(0, 1fr) 0';
-
-  const attribution = {};
-
-  attribution[_xyz.version] = _xyz.release;
-
-  attribution['Openlayers'] = 'https://openlayers.org';
-
   // Create mapview control.
   _xyz.mapview.create({
     target: document.getElementById('Map'),
-    attribution: attribution,
+    attribution: {
+      logo: _xyz.utils.wire()`
+        <a
+          class="logo"
+          target="_blank"
+          href="https://geolytix.co.uk"
+          style="background-image: url('https://cdn.jsdelivr.net/gh/GEOLYTIX/geolytix@master/public/geolytix.svg');">`
+    },
     view: {
       lat: _xyz.hooks.current.lat,
       lng: _xyz.hooks.current.lng,

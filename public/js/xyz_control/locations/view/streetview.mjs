@@ -20,9 +20,7 @@ export default _xyz => entry => {
         <a
         target="_blank" 
         href="${'https://www.google.com/maps?cbll=' + lnglat[1] + ',' + lnglat[0] + '&layer=c'}">
-          <img
-          class="img_streetview"
-          src="${src}">`
+          <img src="${src}">`
   );
   
 };

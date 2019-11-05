@@ -10,45 +10,30 @@ export default _xyz => {
 
     remove: remove,
 
-    layer: {},
-
-    links: _xyz.utils.wire()`<div></div>`
-
   };
 
   return attribution;
 
-  function create(mapAttribution) {
+  function create(params) {
 
-    if (!mapAttribution) return;
-
-    if (attribution.container) attribution.container.remove();
+    attribution.container && attribution.container.remove();
    
-    attribution.container = _xyz.utils.wire()`<div class="attribution"></div>`;
+    attribution.container = _xyz.utils.wire()`<div class="attribution">`;
 
     _xyz.mapview.node.appendChild(attribution.container);
 
-    attribution.container.appendChild(
-      _xyz.utils.wire()`<a
-      class="logo"
-      target="_blank"
-      href="https://geolytix.co.uk">`);
+    params.logo && attribution.container.appendChild(params.logo);
+
+    attribution.links = _xyz.utils.wire()`
+    <div>
+      <a target="_blank" href="https://openlayers.org">Openlayers`;
 
     attribution.container.appendChild(attribution.links);
-
-    attribution.links.innerHTML = '';
-
-    if (typeof mapAttribution === 'object') {
-      Object.entries(mapAttribution).forEach(entry => {
-        attribution.links.appendChild(_xyz.utils.wire()`
-        <a target="_blank" href="${entry[1]}">${entry[0]}</a>`);
-      });
-    }
-
+    
     if (_xyz.workspace.locale.attribution) {
       Object.entries(_xyz.workspace.locale.attribution).forEach(entry => {
         attribution.links.appendChild(_xyz.utils.wire()`
-        <a target="_blank" href="${entry[1]}">${entry[0]}</a>`);
+        <a target="_blank" href="${entry[1]}">${entry[0]}`);
       });
     };
     

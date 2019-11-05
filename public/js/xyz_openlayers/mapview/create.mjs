@@ -66,7 +66,7 @@ export default _xyz => params => {
   }
 
   // Create attribution in map DOM.
-  _xyz.mapview.attribution.create(params.attribution);
+  params.attribution && _xyz.mapview.attribution.create(params.attribution);
 
 
   if(params.maskBounds || _xyz.workspace.locale.maskBounds) {
