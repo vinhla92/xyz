@@ -12,7 +12,7 @@ export default (_xyz, layer) => {
   // Table panel header.
   const header = _xyz.utils.wire()`
     <div
-    class="btn_text cursor noselect"
+    class="btn_text cursor noselect primary-colour"
     onclick=${e => {
     e.stopPropagation();
     _xyz.utils.toggleExpanderParent({

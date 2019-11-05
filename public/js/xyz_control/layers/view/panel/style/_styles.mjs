@@ -26,7 +26,7 @@ export default (_xyz, layer) => {
       accordeon: true,
     });
   }}
-  class="btn_text cursor noselect">Style`;
+  class="btn_text cursor noselect primary-colour">Style`;
 
   panel.appendChild(header);
 

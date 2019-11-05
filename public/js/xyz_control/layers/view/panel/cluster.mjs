@@ -17,7 +17,7 @@ export default (_xyz, layer) => {
       accordeon: true,
     });
   }}
-  class="btn_text cursor noselect">Cluster`;
+  class="btn_text cursor noselect primary-colour">Cluster`;
   
   layer.dataview.panel.appendChild(header);
 

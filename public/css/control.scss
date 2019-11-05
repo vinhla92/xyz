@@ -10,7 +10,7 @@ $onyx: #383836;
 
 @import url('https://fonts.googleapis.com/css?family=Sintony|Sintony:300,400,500,700');
 
-
+@import 'colour_scheme';
 @import 'locationview';
 @import 'dataview';
 @import 'input';
@@ -33,7 +33,6 @@ $onyx: #383836;
 @import 'contextmenu';
 @import 'icons';
 @import 'itemlist';
-
 
 *,
 *::after,

@@ -2,6 +2,46 @@
 @import url("https://fonts.googleapis.com/css?family=Lato|Lato:300,400,500,700");
 @import url("https://fonts.googleapis.com/css?family=Open+Sans|Open+Sans:300,400,500,700");
 @import url("https://fonts.googleapis.com/css?family=Sintony|Sintony:300,400,500,700");
+/* Color scheme */
+.off-white {
+  color: ghostwhite;
+}
+
+.off-black {
+  color: #383836;
+}
+
+/* Primary colour properties */
+.primary-colour {
+  color: #1F964D;
+}
+
+.primary-colour-bg {
+  background-color: #1F964D;
+}
+
+/* Secondary colour properties */
+.secondary-colour {
+  color: #DEF6CA;
+}
+
+.secondary-colour-bg {
+  background-color: #DEF6CA;
+}
+
+.secondary-colour-shadow {
+  text-shadow: 1px 1px 1px #DEF6CA;
+}
+
+/* Tertiary colour properties */
+.tertiary-colour {
+  color: hotpink;
+}
+
+.tertiary-colour-bg {
+  background-color: hotpink;
+}
+
 .locationview {
   text-align: left;
   width: 100%;
@@ -966,7 +1006,7 @@ button:disabled {
   /*font-family: ffmark_bold;
   font-size: 14px;*/
   font-weight: bold;
-  color: #1F964D;
+  /*color: $glxgreen;*/
   height: 25px;
   background-color: inherit;
 }
@@ -975,7 +1015,7 @@ button:disabled {
   /*font-family: ffmark;
   font-size: 13px;*/
   font-size: 93%;
-  color: #1F964D;
+  /*color: $glxgreen;*/
   padding: 8px 0px 8px 0px;
 }
 
@@ -1014,17 +1054,15 @@ button:disabled {
   height: 50px;
   width: 50px;
   padding: 0;
-  color: #1F964D;
+  /*color: $glxgreen;*/
   background-color: #fff;
   text-align: center;
   cursor: default;
   border: none;
   outline: none;
-}
-.btn_column button a,
-.btn_column > div a,
-.btn_column > a a {
-  color: #1F964D;
+  /*a {
+      color: $glxgreen;
+  }*/
 }
 .btn_column button i,
 .btn_column > div i,
@@ -1055,7 +1093,7 @@ button:disabled {
   /*font-family: sans-serif;*/
   /*font-size: 11px;*/
   font-size: 78%;
-  color: #1F964D;
+  /*color: $glxgreen;*/
   height: 14px;
   display: none;
   margin-bottom: 4px;
@@ -1068,7 +1106,7 @@ button:disabled {
   line-height: 2;
   text-align: center;
   font-weight: 600;
-  color: #1F964D;
+  /*color: $glxgreen;*/
   box-shadow: 1px 1px 2px #999999;
   margin: 5px 2px 5px 1px;
   width: calc(100% - 5px);
@@ -1085,41 +1123,10 @@ button:disabled {
   cursor: pointer;
 }
 
-.btn_state {
-  color: #1F964D;
-}
 .btn_state.active {
   color: #000;
   box-shadow: none;
   border: 1px solid #ddd;
-}
-
-.btn_inline {
-  display: inline-block;
-  position: relative;
-  width: 130px;
-  /*font-size: 12px;*/
-  font-size: 85%;
-  font-weight: 600;
-  border-radius: 2px;
-  line-height: 2;
-  text-align: center;
-  color: #1F964D;
-  box-shadow: 1px 1px 3px #666;
-  margin: 6px 3px 12px 3px;
-  cursor: pointer;
-}
-.btn_inline:active {
-  box-shadow: 2px 2px 3px #1F964D;
-}
-.btn_inline span {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-.btn_inline i {
-  font-size: 14px;
-  vertical-align: text-bottom;
 }
 
 .scrolly {
@@ -1163,7 +1170,7 @@ button:disabled {
   font-weight: bold;
   /*font-size: 18px;*/
   font-size: 130%;
-  text-shadow: 1px 1px 1px #DEF6CA;
+  /*text-shadow: 1px 1px 1px $glxlightgreen;*/
   pointer-events: none;
 }
 .attribution * {

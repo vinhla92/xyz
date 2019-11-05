@@ -9,7 +9,7 @@ export default (_xyz, layer) => {
 
   // Panel title / expander.
   layer.dataview.panel.appendChild(_xyz.utils.wire()`
-    <div class="btn_text cursor noselect"
+    <div class="btn_text cursor noselect primary-colour"
     onclick=${e => {
       e.stopPropagation();
       _xyz.utils.toggleExpanderParent({
