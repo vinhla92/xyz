@@ -6,7 +6,7 @@ module.exports = fastify => {
 
   require('./mobile').route(fastify);
 
-  require('./iframe').route(fastify);  
+  require('./version')(fastify);  
 
   fastify.login.route(fastify);
   

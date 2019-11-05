@@ -25,7 +25,7 @@ import dataview from '../xyz_control/dataview/_dataview.mjs';
 async function _xyz(params) {
 
   const _xyz = Object.assign({
-    version: 'XYZ v2.0.x',
+    version: '2.0.0',
     defaults: {
       colours: [
         { hex: '#c62828', name: 'Fire Engine Red' },
