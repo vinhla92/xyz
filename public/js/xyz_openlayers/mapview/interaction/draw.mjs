@@ -170,7 +170,7 @@ export default _xyz => {
       _xyz.mapview.interaction.draw.interaction.removeLastPoint();
       _xyz.mapview.interaction.draw.vertices.pop();
       _xyz.mapview.popup.node && _xyz.mapview.popup.node.remove();
-    }}>Remove last vertice</li>`);
+    }}>Remove last vertex</li>`);
 
     menu.appendChild(_xyz.utils.wire()`<li onclick=${finish}>Cancel</li>`);
 

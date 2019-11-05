@@ -82,14 +82,14 @@ export default _xyz => () => {
   function activateTab(){
     Object
       .values(_xyz.dataview.nav_bar.children)
-      .forEach(tab => tab.classList.remove('tab-current'));
+      .forEach(tab => tab.classList.remove('tab-current', 'primary-colour-bb'));
           
     // activate last tab
     /*_xyz.dataview.nav_bar.lastChild.classList.add('tab-current');
         _xyz.dataview.tables[_xyz.dataview.max_tabs-1].activate();*/
     // activate first tab
     if(_xyz.dataview.nav_bar && _xyz.dataview.nav_bar.firstChild) {
-      _xyz.dataview.nav_bar.firstChild.classList.add('tab-current');
+      _xyz.dataview.nav_bar.firstChild.classList.add('tab-current', 'primary-colour-bb');
       _xyz.dataview.tables[0].activate();
     }
   }
