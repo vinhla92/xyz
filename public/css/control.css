@@ -1849,7 +1849,7 @@ button:disabled {
   line-height: 1.5;
 }
 .scroll-list > li:hover {
-  background-color: #DEF6CA;
+  /*background-color: $glxlightgreen;*/
   cursor: pointer;
 }
 
