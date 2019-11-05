@@ -5,12 +5,12 @@ export default (param) => {
     if(!!param.entry.value !== !!param.input.checked){
       
       param.entry.newValue = param.value || param.input.checked || 'false';
-      param.input.parentNode.classList.add('changed');
+      param.input.parentNode.classList.add('primary-colour');
      
     } else {
       
       delete param.entry.newValue;
-      param.input.parentNode.classList.remove('changed');
+      param.input.parentNode.classList.remove('primary-colour');
     }
   
   } else {
@@ -20,13 +20,13 @@ export default (param) => {
     if (param.entry.value.toString() !== param.input.value) {
 
       param.entry.newValue = param.value || param.input.value || '';
-      param.input.classList.add('changed');
+      param.input.classList.add('primary-colour');
 
     } else {
       delete param.entry.newValue;
 
       // Change styling of input.
-      param.input.classList.remove('changed');
+      param.input.classList.remove('primary-colour');
     }
   }
 
