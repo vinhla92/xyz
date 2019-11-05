@@ -143,13 +143,13 @@ export default _xyz => function () {
 
       if (location.view.header.classList.contains('edited')) return _xyz.mapview.interaction.edit.finish();
 
-      location.view.header.classList.add('edited');
+      location.view.header.classList.add('edited', 'secondary-colour-bg');
 
       _xyz.mapview.interaction.edit.begin({
         location: location,
         type: 'LineString',
         callback: () => {
-          location.view.header.classList.remove('edited');
+          location.view.header.classList.remove('edited', 'secondary-colour-bg');
         }
       });
     }}>`;

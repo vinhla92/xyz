@@ -114,7 +114,7 @@ function init(_xyz) {
       entries.push(locale.key);
     });
 
-    document.getElementById('localeDropdown').parentNode.insertBefore(_xyz.utils.wire()`<div class="title">Locales</div>`, document.getElementById('localeDropdown'));
+    document.getElementById('localeDropdown').parentNode.insertBefore(_xyz.utils.wire()`<div class="title secondary-colour-bg">Locales</div>`, document.getElementById('localeDropdown'));
 
     document.getElementById('localeDropdown').appendChild(_xyz.utils.wire()`
       <div style="font-size: 95%;">Show layers for the following locale`);

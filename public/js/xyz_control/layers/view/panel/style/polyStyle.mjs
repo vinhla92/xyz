@@ -1,7 +1,7 @@
 export default (_xyz, layer, style, title) => {
 
   title && layer.style.legend.appendChild(_xyz.utils.wire()`
-  <div class="title">${title}`);
+  <div class="title primary-colour">${title}`);
 
   const block = {};
 
@@ -15,7 +15,7 @@ export default (_xyz, layer, style, title) => {
   block._.appendChild(block.stroke_color);
 
   block.strokeColor = _xyz.utils.wire()`
-  <span class="cursor colour-label"
+  <span class="cursor primary-colour"
   onclick=${e=>{
     block.colorSelect = 'strokeColor';  
     block.colour_swatch.style.display = 'table';
@@ -29,7 +29,7 @@ export default (_xyz, layer, style, title) => {
   block._.appendChild(block.fill_colour);
 
   block.fillColor = _xyz.utils.wire()`
-  <span class="cursor colour-label"
+  <span class="cursor primary-colour"
   onclick=${e=>{
     block.colorSelect = 'fillColor';  
     block.colour_swatch.style.display = 'table';

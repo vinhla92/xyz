@@ -39,13 +39,13 @@ export default (_xyz, layer) => {
     if (btn.classList.contains('active')) return _xyz.mapview.interaction.draw.finish();
 
     btn.classList.add('active');
-    layer.view.header.classList.add('edited');
+    layer.view.header.classList.add('edited', 'secondary-colour-bg');
    
     _xyz.mapview.interaction.draw.begin({
       layer: layer,
       type: 'Point',
       callback: () => {
-        layer.view.header.classList.remove('edited');
+        layer.view.header.classList.remove('edited', 'secondary-colour-bg');
         btn.classList.remove('active');
       }
     });
@@ -64,13 +64,13 @@ export default (_xyz, layer) => {
     if (btn.classList.contains('active')) return _xyz.mapview.interaction.draw.finish();
 
     btn.classList.add('active');
-    layer.view.header.classList.add('edited');
+    layer.view.header.classList.add('edited', 'secondary-colour-bg');
 
     _xyz.mapview.interaction.draw.begin({
       layer: layer,
       type: 'Polygon',
       callback: () => {
-        layer.view.header.classList.remove('edited');
+        layer.view.header.classList.remove('edited', 'secondary-colour-bg');
         btn.classList.remove('active');
       }
     });
@@ -89,14 +89,14 @@ export default (_xyz, layer) => {
     if (btn.classList.contains('active')) return _xyz.mapview.interaction.draw.finish();
 
     btn.classList.add('active');
-    layer.view.header.classList.add('edited');
+    layer.view.header.classList.add('edited', 'secondary-colour-bg');
 
     _xyz.mapview.interaction.draw.begin({
       layer: layer,
       type: 'Circle',
       geometryFunction: _xyz.mapview.lib.draw.createBox(),
       callback: () => {
-        layer.view.header.classList.remove('edited');
+        layer.view.header.classList.remove('edited', 'secondary-colour-bg');
         btn.classList.remove('active');
       }
     });
@@ -115,13 +115,13 @@ export default (_xyz, layer) => {
     if (btn.classList.contains('active')) return _xyz.mapview.interaction.draw.finish();
 
     btn.classList.add('active');
-    layer.view.header.classList.add('edited');
+    layer.view.header.classList.add('edited', 'secondary-colour-bg');
 
     _xyz.mapview.interaction.draw.begin({
       layer: layer,
       type: 'Circle',
       callback: () => {
-        layer.view.header.classList.remove('edited');
+        layer.view.header.classList.remove('edited', 'secondary-colour-bg');
         btn.classList.remove('active');
       }
     });
@@ -140,13 +140,13 @@ export default (_xyz, layer) => {
     if (btn.classList.contains('active')) return _xyz.mapview.interaction.draw.finish();
 
     btn.classList.add('active');
-    layer.view.header.classList.add('edited');
+    layer.view.header.classList.add('edited', 'secondary-colour-bg');
 
     _xyz.mapview.interaction.draw.begin({
       layer: layer,
       type: 'LineString',
       callback: () => {
-        layer.view.header.classList.remove('edited');
+        layer.view.header.classList.remove('edited', 'secondary-colour-bg');
         btn.classList.remove('active');
       }
     });
@@ -165,14 +165,14 @@ export default (_xyz, layer) => {
     if (btn.classList.contains('active')) return _xyz.mapview.interaction.draw.finish();
 
     btn.classList.add('active');
-    layer.view.header.classList.add('edited');
+    layer.view.header.classList.add('edited', 'secondary-colour-bg');
 
     _xyz.mapview.interaction.draw.begin({
       layer: layer,
       type: 'LineString',
       freehand: true,
       callback: () => {
-        layer.view.header.classList.remove('edited');
+        layer.view.header.classList.remove('edited', 'secondary-colour-bg');
         btn.classList.remove('active');
       }
     });
@@ -222,7 +222,7 @@ export default (_xyz, layer) => {
     if (btn.classList.contains('active')) return _xyz.mapview.interaction.draw.finish();
 
     btn.classList.add('active');
-    layer.view.header.classList.add('edited');
+    layer.view.header.classList.add('edited', 'secondary-colour-bg');
   
     _xyz.mapview.interaction.draw.begin({
       layer: layer,
@@ -279,7 +279,7 @@ export default (_xyz, layer) => {
         return geometry;
       },
       callback: () => {
-        layer.view.header.classList.remove('edited');
+        layer.view.header.classList.remove('edited', 'secondary-colour-bg');
         btn.classList.remove('active');
       }
     });
@@ -328,7 +328,7 @@ export default (_xyz, layer) => {
     if (btn.classList.contains('active')) return _xyz.mapview.interaction.draw.finish();
 
     btn.classList.add('active');
-    layer.view.header.classList.add('edited');
+    layer.view.header.classList.add('edited', 'secondary-colour-bg');
   
     _xyz.mapview.interaction.draw.begin({
       layer: layer,
@@ -388,7 +388,7 @@ export default (_xyz, layer) => {
         return geometry;
       },
       callback: () => {
-        layer.view.header.classList.remove('edited');
+        layer.view.header.classList.remove('edited', 'secondary-colour-bg');
         btn.classList.remove('active');
       }
     });

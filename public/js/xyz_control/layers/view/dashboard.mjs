@@ -20,7 +20,7 @@ export default (_xyz, layer) => {
 
   // Create layer meta.
   if (layer.meta) {
-    const meta = _xyz.utils.wire()`<p class="meta">`;
+    const meta = _xyz.utils.wire()`<p class="meta primary-colour">`;
     meta.innerHTML = layer.meta;
     dashboard.appendChild(meta);
   }

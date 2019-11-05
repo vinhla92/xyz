@@ -18,9 +18,9 @@ export default (_xyz, layer) => {
 
     const block = _xyz.utils.wire()`
     <div class="block">
-    <div class="title">${filter_entry.label}</div>
+    <div class="title primary-colour">${filter_entry.label}</div>
     <button
-      class="icon-close cancel-btn filter"
+      class="icon-close cancel-btn filter primary-colour"
       onclick=${e=>{
 
         e.target.parentNode.remove();
