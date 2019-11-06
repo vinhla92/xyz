@@ -1895,6 +1895,7 @@ button:disabled {
   max-height: 30px;
   overflow: hidden;
   transition: max-height 0.3s ease-out;
+  box-shadow: 1px 1px 1px 0 rgba(0, 0, 0, 0.1);
 }
 .listview .drawer.drawer-group.expandable-group .icon-group-expander {
   background-image: url("../icons/icon-keyboard-arrow-down.svg");
