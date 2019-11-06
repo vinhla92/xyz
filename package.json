@@ -1,7 +1,7 @@
 {
     "name": "xyz",
     "version": "2.0.0",
-    "hash": "2d304850655b82bf845bb9d008a6258c1baeab74",
+    "hash": "de9e2bf546e56dc6169b668f47675c04a42ca93c",
     "repository": {
         "type": "git",
         "url": "https://github.com/geolytix/xyz"
