@@ -6,8 +6,8 @@ module.exports = fastify => {
 
   require('./mobile').route(fastify);
 
-  require('./version')(fastify);  
-
+  require('./version')(fastify);
+  
   fastify.login.route(fastify);
   
   require('./register')(fastify);

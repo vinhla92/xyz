@@ -26,6 +26,7 @@ async function _xyz(params) {
 
   const _xyz = Object.assign({
     version: XYZ_VERSION,
+    commit: XYZ_COMMIT,
     defaults: {
       colours: [
         { hex: '#c62828', name: 'Fire Engine Red' },

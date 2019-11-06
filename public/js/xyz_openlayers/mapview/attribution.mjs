@@ -31,6 +31,7 @@ export default _xyz => {
     attribution.links = _xyz.utils.wire()`
     <div>
       <a target="_blank" href="https://geolytix.github.io/xyz">XYZ v${_xyz.version}</a>
+      <a target="_blank" >#${_xyz.commit}</a>
       <a target="_blank" href="https://openlayers.org">Openlayers</a>`;
 
     attribution.container.appendChild(attribution.links);
