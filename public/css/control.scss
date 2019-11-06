@@ -45,9 +45,8 @@ $onyx: #383836;
 }
 
 body {
-    /*font-family: ffmark, sans-serif;*/
-    font-family: 'Open Sans', sans-serif;
-    position: absolute;
+    font-family: 'Open Sans', sans-serif; /* set global font family here */
+    position: absolute; 
     width: 100%;
     height: 100%;
     color: $onyx;
@@ -62,8 +61,8 @@ a {
 
 select {
     width: 100%;
+    font-family: inherit;
     margin: 5px 0;
-    font-family: 'PT Mono', monospace;
     background: #fff;
 }
 
