@@ -61,7 +61,7 @@ export default _xyz => ({
           //   url: _xyz.utils.svg_symbols({
           //     type: 'circle',
           //     style: {
-          //       color: '#090'
+          //       color: '#1F964D'
           //     }
           //   }),
           //   size: 40
