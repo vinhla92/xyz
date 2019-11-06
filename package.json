@@ -23,7 +23,7 @@
     },
     "husky": {
         "hooks": {
-            "pre-commit": "node commit.js"
+            "post-commit": "node commit.js"
         }
     },
     "dependencies": {
