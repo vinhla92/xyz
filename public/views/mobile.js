@@ -53,6 +53,7 @@ function init(_xyz) {
         singleSelect: true,
         entries: entries,
         selectedIndex: entries.indexOf(_xyz.workspace.locale.key),
+        highlight: true,
         callback: e => {
           _xyz.hooks.removeAll();
           _xyz.hooks.set({ locale: e.target.dataset.field });

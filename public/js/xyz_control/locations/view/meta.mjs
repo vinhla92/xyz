@@ -14,7 +14,7 @@ export default _xyz => entry => {
 
    let table = _xyz.utils.wire()`<table
    style="width: 100%; padding: 6px; margin-top: 2px; 
-   font-size: small; color: #666; border-radius: 4px; background-color: linen;"
+   color: #666; border-radius: 4px; background-color: linen;"
    >`;
    div.appendChild(table);
 

@@ -192,7 +192,7 @@ export default (_xyz, layer) => {
     _container.appendChild(_xyz.utils.wire()`
       <div
       class="btn_subtext cursor noselect primary-colour"
-      style="text-align: left; font-size: small;"
+      style="text-align: left;"
       onclick=${
         e => {
           if (e) e.stopPropagation();
@@ -301,7 +301,7 @@ export default (_xyz, layer) => {
     _container.appendChild(_xyz.utils.wire()`
       <div
         class="btn_subtext cursor noselect primary-colour"
-        style="text-align: left; font-size: small;"
+        style="text-align: left;"
         onclick=${e => {
           e && e.stopPropagation();
           _xyz.utils.toggleExpanderParent({

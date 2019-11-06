@@ -62,7 +62,7 @@ export default (_xyz, location) => () => {
 
         let
           dataset_row = _xyz.utils.wire()`<tr class=${'lv-' + (entry.level || 0) + ' ' + (entry.class || '')}>`,
-          dataset_label = _xyz.utils.wire()`<td class="label" colspan=2 style="color: #777; font-size: small;">`;
+          dataset_label = _xyz.utils.wire()`<td class="label" colspan=2 style="color: #777;">`;
 
         if(entry.dataset && entry.dataset !== dataset){
           dataset_label.textContent = entry.dataset;

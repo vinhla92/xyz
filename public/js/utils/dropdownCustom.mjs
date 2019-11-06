@@ -7,7 +7,7 @@ export function dropdownCustom(param) {
   node.appendChild(wire()`
   <div
     class="head"
-    onclick=${toggleMenu}><span class="secondary-colour-bg">
+    onclick=${toggleMenu}><span class="${param.highlight ? `secondary-colour-bg` : ``}">
       ${param.placeholder || 'Select...'}`);
 
   function toggleMenu(e) {
