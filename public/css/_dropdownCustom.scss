@@ -1,7 +1,6 @@
 .ul-drop {
     position: relative;
     cursor: pointer;
-    /*font-size: small;*/
 
     >.head {
         padding: 10px;
@@ -17,7 +16,6 @@
 
     &.active>.head:after {
         border-color: transparent transparent #000 transparent;
-        font-size: smaller;
     }
 
     >ul {

@@ -1,16 +1,16 @@
 export default (_xyz, layer, style, title) => {
 
   title && layer.style.legend.appendChild(_xyz.utils.wire()`
-  <div class="title primary-colour">${title}`);
+  <div class="title secondary-colour-bg">${title}`);
 
   const block = {};
 
-  block._ = _xyz.utils.wire()`<div class="block" style="font-size:13px;">`;
+  block._ = _xyz.utils.wire()`<div class="block">`;
 
   layer.style.legend.appendChild(block._);
 
 
-  block.stroke_color = _xyz.utils.wire()`<div style="padding-bottom: 10px;">Stroke Colour `;
+  block.stroke_color = _xyz.utils.wire()`<div>Stroke Colour `;
 
   block._.appendChild(block.stroke_color);
 
@@ -24,7 +24,7 @@ export default (_xyz, layer, style, title) => {
   block.stroke_color.appendChild(block.strokeColor);
   
   
-  block.fill_colour = _xyz.utils.wire()`<div style="padding-bottom: 10px;">Fill Colour `;
+  block.fill_colour = _xyz.utils.wire()`<div>Fill Colour `;
 
   block._.appendChild(block.fill_colour);
 

@@ -166,7 +166,7 @@ input[type=range]::-moz-range-thumb {
   max-height: 2500px;
 }
 .popup .drawer.drawer-group .header {
-  font-size: 13px;
+  font-size: 93%;
   margin-left: 12px;
   border-bottom: 1px solid #bbb;
 }
@@ -174,7 +174,7 @@ input[type=range]::-moz-range-thumb {
   margin-left: 12px;
 }
 .popup .drawer.drawer-group .header-group {
-  font-size: 14px;
+  font-size: 100%;
   line-height: 2;
   display: flex;
 }
@@ -198,7 +198,7 @@ input[type=range]::-moz-range-thumb {
   max-height: 2500px;
 }
 .popup .drawer .header {
-  font-size: 14px;
+  font-size: 96%;
   line-height: 2;
   border-bottom: 1px solid #333;
   display: flex;
@@ -233,10 +233,10 @@ input[type=range]::-moz-range-thumb {
 }
 .popup .drawer .dashboard {
   border-bottom: 1px solid #333;
-  font-size: 14px;
+  font-size: 93%;
 }
 .popup .drawer .dashboard .title {
-  font-size: 14px;
+  font-size: 100%;
   margin-bottom: 7px;
 }
 .popup .drawer .dashboard .legend > svg {
@@ -275,7 +275,7 @@ input[type=range]::-moz-range-thumb {
   width: 100%;
 }
 .popup .drawer .dashboard .block .cancel-btn {
-  font-size: 20px;
+  font-size: 143%;
   top: 2px;
   right: -4px;
   position: absolute;
@@ -532,7 +532,6 @@ input[type=range]::-moz-range-thumb {
 .ul-drop {
   position: relative;
   cursor: pointer;
-  /*font-size: small;*/
 }
 .ul-drop > .head {
   padding: 10px;
@@ -546,7 +545,6 @@ input[type=range]::-moz-range-thumb {
 }
 .ul-drop.active > .head:after {
   border-color: transparent transparent #000 transparent;
-  font-size: smaller;
 }
 .ul-drop > ul {
   display: none;
@@ -2045,12 +2043,6 @@ button:disabled {
 
 .gazetteer {
   background-color: #fff;
-  /*.clear {
-      position: absolute;
-      top: 0;
-      right: 0;
-      font-size: 33px;
-  }*/
 }
 .gazetteer .clear-mask {
   position: absolute;
@@ -2116,7 +2108,6 @@ button:disabled {
   max-width: 180px;
   padding: 2px;
   z-index: 1001;
-  /*font-size: 13px;*/
 }
 .contextmenu ul {
   list-style: none;

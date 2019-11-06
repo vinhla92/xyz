@@ -92,7 +92,7 @@
         &.drawer-group {
     
                 .header {
-                    font-size: 13px;
+                    font-size: 93%;
                     margin-left: 12px;
                     border-bottom: 1px solid #bbb;
                 }
@@ -102,7 +102,7 @@
                 }
     
             .header-group {
-                font-size: 14px;
+                font-size: 100%;
                 line-height: 2;
                 display: flex;
     
@@ -130,7 +130,7 @@
             }
         }
         .header {
-            font-size: 14px;
+            font-size: 96%;
             line-height: 2;
             border-bottom: 1px solid #333;
             display: flex;
@@ -169,9 +169,9 @@
         }
         .dashboard {
             border-bottom: 1px solid #333;
-            font-size: 14px;
+            font-size: 93%;
             .title {
-                font-size: 14px;
+                font-size: 100%;
                 margin-bottom: 7px;
             }
             .legend>svg {
@@ -209,7 +209,7 @@
                     width: 100%;
                 }
                 .cancel-btn {
-                    font-size: 20px;
+                    font-size: 143%;
                     top: 2px;
                     right: -4px;
                     position: absolute;

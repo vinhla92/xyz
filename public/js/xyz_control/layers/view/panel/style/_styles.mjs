@@ -92,7 +92,7 @@ export default (_xyz, layer) => {
   
       if (layer.style.marker) clusterStyle(_xyz, layer, layer.style.marker, 'Marker');
   
-      if (layer.style.markerMulti) clusterStyle(_xyz, layer, layer.style.markerMulti, 'Marker (multi)');
+      if (layer.style.markerMulti) clusterStyle(_xyz, layer, layer.style.markerMulti, 'MultiMarker');
   
       if (layer.style.default) polyStyle(_xyz, layer, layer.style.default, 'Polygon');
   
