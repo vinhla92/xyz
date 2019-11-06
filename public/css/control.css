@@ -4,6 +4,19 @@
 @import url('https://fonts.googleapis.com/css?family=Lato|Lato:300,400,500,700');
 
 @import url('https://fonts.googleapis.com/css?family=Sintony|Sintony:300,400,500,700');*/
+/*$primary_colour:  #1F964D;
+$secondary_colour: #DEF6CA;
+$tertiary_colour: hotpink;
+$off_white: ghostwhite;
+$off_black: #383836;*/
+body {
+  color: #383836;
+}
+
+a {
+  color: #383836;
+}
+
 /* Color scheme */
 .off-white {
   color: ghostwhite;
@@ -27,6 +40,14 @@
   border-bottom: 3px solid #1F964D;
 }
 
+input[type=range]::-webkit-slider-thumb {
+  background: #1F964D;
+}
+
+input[type=range]::-moz-range-thumb {
+  background: #1F964D;
+}
+
 /* Secondary colour properties */
 .secondary-colour {
   color: #DEF6CA;
@@ -34,10 +55,15 @@
 
 .secondary-colour-bg {
   background-color: #DEF6CA;
+  background: #DEF6CA;
 }
 
 .secondary-colour-shadow {
   text-shadow: 1px 1px 1px #DEF6CA;
+}
+
+.contextmenu ul li:hover {
+  background-color: #DEF6CA;
 }
 
 /* Tertiary colour properties */
@@ -47,6 +73,11 @@
 
 .tertiary-colour-bg {
   background-color: hotpink;
+}
+
+/* off-white peoperties */
+.context li:hover {
+  background-color: ghostwhite;
 }
 
 .locationview {
@@ -462,7 +493,6 @@
 
 input[type=range] {
   width: 100%;
-  background: #DEF6CA;
   -webkit-appearance: none;
   appearance: none;
   height: 5px;
@@ -476,7 +506,6 @@ input[type=range]::-webkit-slider-thumb {
   width: 25px;
   height: 25px;
   border-radius: 50%;
-  background: #1F964D;
   cursor: pointer;
 }
 
@@ -485,7 +514,6 @@ input[type=range]::-moz-range-thumb {
   height: 25px;
   border: 0;
   border-radius: 50%;
-  background: #1F964D;
   cursor: pointer;
 }
 
@@ -540,10 +568,10 @@ input[type=range]::-moz-range-thumb {
   background: -moz-linear-gradient(left, #999 0%, white 90%);
 }
 .ul-drop > ul > li.selected {
-  /*background-color: $secondary_colour;*/
+  /*background-color: <secondary_colour>*/
 }
 .ul-drop > ul > li.selected:hover {
-  /*background-color: $secondary_colour;*/
+  /*background-color: <secondary_colour?>*/
 }
 .ul-drop.active > ul {
   display: block;
@@ -854,12 +882,6 @@ button:disabled {
   cursor: default;
   border: none;
   outline: none;
-}
-.btn_column button i,
-.btn_column > div i,
-.btn_column > a i {
-  font-size: 30px;
-  line-height: 1.7;
 }
 .btn_column button.mobile-box-shadow,
 .btn_column > div.mobile-box-shadow,
@@ -2090,7 +2112,7 @@ button:disabled {
   max-width: 180px;
   padding: 2px;
   z-index: 1001;
-  font-size: 13px;
+  /*font-size: 13px;*/
 }
 .contextmenu ul {
   list-style: none;
@@ -2107,7 +2129,6 @@ button:disabled {
   }*/
 }
 .contextmenu ul li:hover {
-  background-color: #DEF6CA;
   border-bottom: 1px solid rgba(0, 0, 0, 0);
   cursor: pointer;
 }
@@ -2120,7 +2141,6 @@ button:disabled {
   padding: 5px;
 }
 .context li:hover {
-  background-color: ghostwhite;
   cursor: pointer;
 }
 
@@ -2314,7 +2334,6 @@ img.icon-event-note {
 }
 .list > .item a {
   text-decoration: none;
-  color: #1F964D;
   vertical-align: middle;
 }
 .list > .item img {
@@ -2381,12 +2400,10 @@ body {
   position: absolute;
   width: 100%;
   height: 100%;
-  color: #383836;
   font-size: 13px;
 }
 
 a {
-  color: #383836;
   text-decoration: none;
   background-color: transparent;
 }

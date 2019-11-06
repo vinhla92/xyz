@@ -6,6 +6,7 @@ export default _xyz => entry => {
   <span class="bold">${entry.value}</span>
   <div class="range">
   <input
+    class="secondary-colour-bg"
     type="range"
     min=${entry.edit.range.min}
     value=${entry.value}

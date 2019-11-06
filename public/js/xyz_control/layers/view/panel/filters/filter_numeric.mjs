@@ -60,6 +60,7 @@ export default (_xyz, layer, filter_entry) => {
     const slider_min = _xyz.utils.wire()`
     <input
       type="range"
+      class="secondary-colour-bg"
       min=${field_range.min}
       value=${field_range.min}
       max=${field_range.max}
@@ -93,6 +94,7 @@ export default (_xyz, layer, filter_entry) => {
     const slider_max = _xyz.utils.wire()`
     <input
       type="range"
+      class="secondary-colour-bg"
       min=${field_range.min}
       value=${field_range.max}
       max=${field_range.max}

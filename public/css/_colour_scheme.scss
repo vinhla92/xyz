@@ -1,55 +1,81 @@
-$primary_colour:  #1F964D;
+/*$primary_colour:  #1F964D;
 $secondary_colour: #DEF6CA;
 $tertiary_colour: hotpink;
 $off_white: ghostwhite;
-$off_black: #383836;
+$off_black: #383836;*/
 
+body {
+    color: #383836;
+}
+
+a {
+    color: #383836;;
+}
 
 /* Color scheme */
 
 .off-white {
-    color: $off_white;
+    color: ghostwhite;
 }
 
 .off-black {
-    color: $off_black;
+    color: #383836;
 }
 
 /* Primary colour properties */
 
 .primary-colour {
-    color: $primary_colour;
+    color: #1F964D;
 }
 
 .primary-colour-bg {
 
-    background-color: $primary_colour;
+    background-color: #1F964D;
 }
 
 .primary-colour-bb { /* border bottom for the active tab */
-	border-bottom: 3px solid $primary_colour;
+	border-bottom: 3px solid #1F964D;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    background: #1F964D;
+}
+
+input[type=range]::-moz-range-thumb {
+    background: #1F964D;
 }
 
 /* Secondary colour properties */
 
 .secondary-colour {
-    color: $secondary_colour;
+    color: #DEF6CA;
 }
 
 .secondary-colour-bg {
-    background-color: $secondary_colour;
+    background-color: #DEF6CA;
+    background: #DEF6CA;
 }
 
 .secondary-colour-shadow {
-	text-shadow: 1px 1px 1px $secondary_colour;
+	text-shadow: 1px 1px 1px #DEF6CA;
+}
+
+.contextmenu ul li:hover {
+    background-color: #DEF6CA;
 }
 
 /* Tertiary colour properties */
 
 .tertiary-colour {
-    color: $tertiary_colour;
+    color: hotpink;
 }
 
 .tertiary-colour-bg {
-    background-color: $tertiary_colour;
+    background-color: hotpink;
+}
+
+/* off-white peoperties */
+
+.context li:hover {
+    background-color: ghostwhite;
 }

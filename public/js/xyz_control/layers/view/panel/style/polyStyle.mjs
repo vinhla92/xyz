@@ -81,6 +81,7 @@ export default (_xyz, layer, style, title) => {
   <div class="range" style="display: inline-block; width: 65%;">
   <input
     type="range"
+    class="secondary-colour-bg"
     min=1
     value=${style.strokeWidth || 1}
     max=5
@@ -109,6 +110,7 @@ export default (_xyz, layer, style, title) => {
   <div class="range" style="display: inline-block; width: 65%;">
   <input
     type="range"
+    class="secondary-colour-bg"
     min=0.1
     value=${style.fillOpacity || 1}
     max=1
