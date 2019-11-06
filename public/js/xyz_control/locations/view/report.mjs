@@ -17,7 +17,7 @@ export default _xyz => entry => {
 
   entry.row.appendChild(_xyz.utils.wire()`
     <td style="padding: 10px 0;" colSpan=2>
-    <a target="_blank" href="${href}">${entry.report.name || 'Location Report'}</a>
+    <a class="primary-colour" target="_blank" href="${href}">${entry.report.name || 'Location Report'}</a>
     </td>`);
 
 };
