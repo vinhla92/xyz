@@ -31,7 +31,6 @@ export default (_xyz, layer) => {
   <span class="bold">${layer.cluster_kmeans}</span>
   <div class="range">
   <input
-    class="secondary-colour-bg"
     type="range"
     min=1
     value=${parseInt(layer.cluster_kmeans * 100)}
@@ -56,7 +55,6 @@ export default (_xyz, layer) => {
   <span class="bold">${layer.cluster_dbscan}</span>
   <div class="range">
   <input
-    class="secondary-colour-bg"
     type="range"
     min=1
     value=${parseInt(layer.cluster_dbscan * 100)}

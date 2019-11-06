@@ -6,11 +6,11 @@
 
 input[type=range] {
     width: 100%;
+    background: $secondary_colour;
     -webkit-appearance: none;
     appearance: none;
     height: 5px;
     border-radius: 5px;
-    /*background: $glxlightgreen;*/
     outline: none;
 }
 
@@ -20,7 +20,7 @@ input[type=range]::-webkit-slider-thumb {
     width: 25px;
     height: 25px;
     border-radius: 50%;
-    background: $glxgreen;
+    background: $primary_colour;
     cursor: pointer;
 }
 
@@ -29,7 +29,7 @@ input[type=range]::-moz-range-thumb {
     height: 25px;
     border: 0;
     border-radius: 50%;
-    background: $glxgreen;
+    background: $primary_colour;
     cursor: pointer;
 }
 
@@ -38,6 +38,5 @@ input[type=range]::-moz-range-thumb {
 }
 
 .range_label {
-    /*font-family: ffmark_bold;*/
     font-weight: bold;
 }

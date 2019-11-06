@@ -34,7 +34,6 @@
 
 .secondary-colour-bg {
   background-color: #DEF6CA;
-  background: #DEF6CA;
 }
 
 .secondary-colour-shadow {
@@ -480,11 +479,11 @@
 
 input[type=range] {
   width: 100%;
+  background: #DEF6CA;
   -webkit-appearance: none;
   appearance: none;
   height: 5px;
   border-radius: 5px;
-  /*background: $glxlightgreen;*/
   outline: none;
 }
 
@@ -512,7 +511,6 @@ input[type=range]::-moz-range-thumb {
 }
 
 .range_label {
-  /*font-family: ffmark_bold;*/
   font-weight: bold;
 }
 

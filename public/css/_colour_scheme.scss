@@ -1,48 +1,55 @@
+$primary_colour:  #1F964D;
+$secondary_colour: #DEF6CA;
+$tertiary_colour: hotpink;
+$off_white: ghostwhite;
+$off_black: #383836;
+
+
 /* Color scheme */
 
 .off-white {
-    color: ghostwhite;
+    color: $off_white;
 }
 
 .off-black {
-    color: #383836;
+    color: $off_black;
 }
 
 /* Primary colour properties */
 
 .primary-colour {
-    color: #1F964D;
+    color: $primary_colour;
 }
 
 .primary-colour-bg {
-    background-color: #1F964D;
+
+    background-color: $primary_colour;
 }
 
 .primary-colour-bb { /* border bottom for the active tab */
-	border-bottom: 3px solid #1F964D;
+	border-bottom: 3px solid $primary_colour;
 }
 
 /* Secondary colour properties */
 
 .secondary-colour {
-    color: #DEF6CA;
+    color: $secondary_colour;
 }
 
 .secondary-colour-bg {
-    background-color: #DEF6CA;
-    background: #DEF6CA;
+    background-color: $secondary_colour;
 }
 
 .secondary-colour-shadow {
-	text-shadow: 1px 1px 1px #DEF6CA;
+	text-shadow: 1px 1px 1px $secondary_colour;
 }
 
 /* Tertiary colour properties */
 
 .tertiary-colour {
-    color: hotpink;
+    color: $tertiary_colour;
 }
 
 .tertiary-colour-bg {
-    background-color: hotpink;
+    background-color: $tertiary_colour;
 }
