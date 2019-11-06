@@ -1,7 +1,7 @@
 {
     "name": "xyz",
     "version": "2.0.0",
-    "hash": "1b7e4638da9d8b684ab81d21d17187fb3e630b20",
+    "hash": "05670e7dcabc3424bda19ed8200fb7dcdaba0ee7",
     "repository": {
         "type": "git",
         "url": "https://github.com/geolytix/xyz"
@@ -23,7 +23,8 @@
     },
     "husky": {
         "hooks": {
-            "pre-commit": "node commit.js git add ."
+            "pre-commit": "node commit.js",
+            "post-commit": "git add ."
         }
     },
     "dependencies": {
