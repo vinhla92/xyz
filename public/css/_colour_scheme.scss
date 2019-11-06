@@ -60,7 +60,11 @@ input[type=range]::-moz-range-thumb {
 	text-shadow: 1px 1px 1px #DEF6CA;
 }
 
-.contextmenu ul li:hover {
+.contextmenu li:hover {
+    background-color: #DEF6CA;
+}
+
+.scroll-list li:hover {
     background-color: #DEF6CA;
 }
 

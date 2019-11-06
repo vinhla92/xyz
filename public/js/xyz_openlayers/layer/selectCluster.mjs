@@ -36,7 +36,7 @@ export default _xyz => function(feature) {
 
     if (cluster.length > 1) {
 
-      const ul = _xyz.utils.wire()`<ul class="scroll-list secondary-colour-bg">`;
+      const ul = _xyz.utils.wire()`<ul class="scroll-list">`;
 
       cluster.forEach(li => {
 
