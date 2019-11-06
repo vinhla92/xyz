@@ -1547,6 +1547,7 @@ button {
   padding: 4px;
   border-radius: 2px; }
 .listview .drawer {
+<<<<<<< HEAD
   margin-top: 4px; }
   .listview .drawer.expandable {
     max-height: 37px;
@@ -1692,6 +1693,200 @@ button {
     margin-top: 5px; }
     .listview .drawer .link-with-img > * {
       vertical-align: middle; }
+=======
+  margin-top: 4px;
+}
+.listview .drawer.expandable {
+  max-height: 37px;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+}
+.listview .drawer.expandable .icon-expander {
+  background-image: url("../icons/icon-keyboard-arrow-down.svg");
+}
+.listview .drawer.expanded {
+  overflow: visible;
+  max-height: 2500px;
+}
+.listview .drawer.expanded .icon-expander {
+  background-image: url("../icons/icon-keyboard-arrow-up.svg");
+}
+.listview .drawer.drawer-group .header {
+  font-size: 93%;
+  margin-left: 12px;
+  border-bottom: 1px solid #bbb;
+}
+.listview .drawer.drawer-group .dashboard {
+  margin-left: 12px;
+}
+.listview .drawer.drawer-group .header-group {
+  font-weight: bold !important;
+  font-size: 100%;
+  line-height: 2;
+  display: flex;
+}
+.listview .drawer.drawer-group .header-group > :nth-child(1) {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.listview .drawer.drawer-group .header-group > :nth-child(2) {
+  margin-left: auto;
+}
+.listview .drawer.drawer-group .header-group:hover {
+  cursor: pointer;
+}
+.listview .drawer.drawer-group.expandable-group {
+  max-height: 30px;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+  box-shadow: 1px 1px 1px 0 rgba(0, 0, 0, 0.1);
+}
+.listview .drawer.drawer-group.expandable-group .icon-group-expander {
+  background-image: url("../icons/icon-keyboard-arrow-down.svg");
+}
+.listview .drawer.drawer-group.expanded-group {
+  max-height: 2500px;
+  overflow: visible;
+}
+.listview .drawer.drawer-group.expanded-group .icon-group-expander {
+  background-image: url("../icons/icon-keyboard-arrow-up.svg");
+}
+.listview .drawer .header {
+  font-size: 96%;
+  line-height: 2;
+  border-bottom: 1px solid #333;
+  display: flex;
+  padding: 4px 0;
+}
+.listview .drawer .header > :nth-child(1) {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.listview .drawer .header > :nth-child(2) {
+  margin-left: auto;
+}
+.listview .drawer .header img {
+  max-width: 20px;
+  margin-left: 5px;
+}
+.listview .drawer .header:hover {
+  cursor: pointer;
+}
+.listview .drawer .header.edited {
+  font-weight: bold;
+}
+.listview .drawer .header i.inactive {
+  color: #849483;
+}
+.listview .drawer .meta {
+  margin-top: 10px;
+}
+.listview .drawer .meta a {
+  font-weight: 600;
+}
+.listview .drawer .dashboard {
+  border-bottom: 1px solid #333;
+  font-size: 93%;
+}
+.listview .drawer .dashboard .title {
+  font-weight: bold;
+  font-size: 100%;
+  margin-bottom: 7px;
+}
+.listview .drawer .dashboard .legend > svg {
+  width: 100%;
+}
+.listview .drawer .dashboard .panel {
+  padding: 10px 0;
+  border-bottom: 1px solid #555;
+}
+.listview .drawer .dashboard .panel.expandable {
+  max-height: 30px;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+}
+.listview .drawer .dashboard .panel.expanded {
+  max-height: 2500px !important;
+  overflow: visible;
+}
+.listview .drawer .dashboard .block-title {
+  width: 100%;
+  border-bottom: 1px solid #ccc;
+  line-height: 1.5;
+  padding-top: 5px;
+  margin-bottom: 6px;
+}
+.listview .drawer .dashboard .block {
+  padding: 5px 0;
+  position: relative;
+}
+.listview .drawer .dashboard .block input {
+  width: 100%;
+}
+.listview .drawer .dashboard .block .cancel-btn {
+  font-size: 143%;
+  top: 2px;
+  right: -4px;
+  position: absolute;
+}
+.listview .drawer .dashboard .block .range-label {
+  display: inline;
+  line-height: 1.7;
+}
+.listview .drawer .dashboard .block .range-input {
+  float: right;
+  width: 60%;
+}
+.listview .drawer .dashboard .block .sample-poly {
+  width: 30%;
+  height: 32px;
+  border-radius: 2px;
+  box-shadow: 2px 2px 2px #999;
+  position: absolute;
+  right: 2px;
+  top: 5px;
+}
+.listview .drawer .dashboard .block .sample-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  box-shadow: 2px 2px 2px #999;
+  position: absolute;
+  right: 2px;
+  top: 0;
+}
+.listview .drawer .dashboard .block .colour-swatch {
+  width: 100%;
+  margin-bottom: 10px;
+}
+.listview .drawer .dashboard .block .colour-td {
+  height: 20px;
+}
+.listview .drawer .dashboard .half {
+  width: 48%;
+  display: inline-block;
+}
+.listview .drawer .dashboard .half.right {
+  float: right;
+}
+.listview .drawer .dashboard .third {
+  width: 15%;
+  display: inline-block;
+  margin: 1px;
+}
+.listview .drawer .dashboard .third.right {
+  float: right;
+}
+.listview .drawer .link-with-img {
+  display: block;
+  margin-top: 5px;
+}
+.listview .drawer .link-with-img > * {
+  vertical-align: middle;
+}
+>>>>>>> ef1e65f89d580c6beba086c5338d4f8ce3bbca8c
 
 .gazetteer {
   background-color: #fff; }
