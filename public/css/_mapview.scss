@@ -14,7 +14,6 @@
     transition-delay: 0.2s;
     opacity: 0;
     z-index: 998;
-    /*font-size: 13px;*/
     font-size: 93%;
 }
 
@@ -50,14 +49,12 @@
     list-style-type: none;
     text-align: left;
     overflow-x: hidden;
-    /*font-family: 'PT Mono', monospace;*/
     >li {
         padding-left: 15px;
         white-space: nowrap;
         line-height: 1.5;
     }
     >li:hover {
-        /*background-color: $glxlightgreen;*/
         cursor: pointer;
     }
 }

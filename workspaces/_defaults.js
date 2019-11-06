@@ -35,9 +35,9 @@ module.exports = {
           fillOpacity: 0.1,
         },
         highlight: {
-          strokeColor: '#009900',
+          strokeColor: '#1F964D',
           strokeWidth: 2,
-          fillColor: '#ccff99',
+          fillColor: '#DEF6CA',
           fillOpacity: 0.2,
         },
         themes: {},
@@ -54,8 +54,8 @@ module.exports = {
         },
         highlight: {
           strokeWidth: 2,
-          strokeColor: '#009900',
-          fillColor: '#ccff99',
+          strokeColor: '#1F964D',
+          fillColor: '#DEF6CA',
           fillOpacity: 0.2,
         },
         themes: {},
@@ -75,12 +75,12 @@ module.exports = {
         },
         markerMulti: {
           type: 'target',
-          fillColor: '#333333',
+          fillolor: '#333333',
           scale: 0.05,
         },
         highlight: {
           type: 'target',
-          fillColor: '#ccff99',
+          fillColor: '#DEF6CA',
           scale: 0.05,
         },
         themes: {},

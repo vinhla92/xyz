@@ -1,12 +1,9 @@
 .listview {
 
     .title {
-        /*font-family: ffmark_bold, sans-serif;*/
         font-weight: bold;
         font-size: 107%;
-        /*font-size: 15px;*/
         margin-bottom: 10px;
-        /*background-color: $glxlightgreen;*/
         padding: 4px;
         border-radius: 2px;
     }
@@ -30,7 +27,6 @@
         &.drawer-group {
 
                 .header {
-                    /*font-size: 13px;*/
                     font-size: 93%;
                     margin-left: 12px;
                     border-bottom: 1px solid #bbb;
@@ -41,9 +37,7 @@
                 }
 
             .header-group {
-                /*font-family: ffmark_bold, sans-serif !important;*/
                 font-weight: bold !important;
-                /*font-size: 14px;*/
                 font-size: 100%;
                 line-height: 2;
                 display: flex;
@@ -81,10 +75,8 @@
             }
         }
         .header {
-            /*font-size: 13.5px;*/
             font-size: 96%;
             line-height: 2;
-            /*font-family: ffmark, sans-serif;*/
             border-bottom: 1px solid #333;
             display: flex;
             padding: 4px 0;
@@ -107,8 +99,6 @@
                 cursor: pointer;
             }
             &.edited {
-                /* background-image: linear-gradient(white, $glxlightgreen);*/
-                /*background-color: $glxlightgreen;*/
                 font-weight: bold;
             }
 
@@ -119,18 +109,14 @@
         .meta {
             margin-top: 10px;
             a {
-                /*color: $glxgreen;*/
                 font-weight: 600;
             }
         }
         .dashboard {
             border-bottom: 1px solid #333;
-            /*font-size: 13px;*/
             font-size: 93%;
             .title {
-                /*font-family: ffmark_bold, sans-serif;*/
                 font-weight: bold;
-                /*font-size: 14px;*/
                 font-size: 100%;
                 margin-bottom: 7px;
             }
@@ -164,8 +150,6 @@
                     width: 100%;
                 }
                 .cancel-btn {
-                    /*color: $glxgreen;*/
-                    /*font-size: 20px;*/
                     font-size: 143%;
                     top: 2px;
                     right: -4px;

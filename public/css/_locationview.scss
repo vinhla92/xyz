@@ -1,15 +1,11 @@
 .locationview {
     text-align: left;
     width: 100%;
-    /*font-size: 12px;*/
     table-layout: fixed;
 
     .label {
         padding-top: 5px;
     }
-    /*a {
-        color: $glxgreen;
-    }*/
     textarea {
         resize: none;
         width: 100%;
@@ -17,7 +13,6 @@
     input {
         width: 100%;
         font-family: inherit;
-        /*font-family: 'PT Mono', monospace;*/
         margin: 5px 0 7px 0;
         box-sizing: border-box;
         padding-left: 3px;
@@ -26,23 +21,18 @@
         padding: 10px 0 10px 10px;
     }
     .lv-0 {
-        /*font-size: 12px;*/
         font-size: 97%;
         font-weight: 700;
     }
     .lv-1 {
-        /*font-size: 11px;*/
         font-size: 96%;
     }
     .lv-2 {
-        /*font-size: 11px;*/
         font-size: 95%;
         padding-left: 10px;
     }
     .val {
-        /*font-family: 'PT Mono', monospace; // padding-left: 10px;*/
         font-weight: 400;
-        /*font-size: 12px;*/
         white-space: pre-wrap;
     }
 
@@ -57,7 +47,6 @@
         .t-expander {
             vertical-align: bottom;
             float: right;
-            /*font-size: 13px;*/
             padding-right: 5px;
         }
         &.expandable {
@@ -113,7 +102,6 @@
                 }
     
             .header-group {
-                font-family: ffmark_bold, sans-serif !important;
                 font-size: 14px;
                 line-height: 2;
                 display: flex;
@@ -144,7 +132,6 @@
         .header {
             font-size: 14px;
             line-height: 2;
-            font-family: ffmark, sans-serif;
             border-bottom: 1px solid #333;
             display: flex;
             padding: 4px 0;
@@ -167,8 +154,6 @@
                 cursor: pointer;
             }
             &.edited {
-                // background-image: linear-gradient(white, $glxlightgreen);
-                /*background-color: $glxlightgreen;*/
                 font-weight: bold;
             }
     
@@ -179,7 +164,6 @@
         .meta {
             margin-top: 5px;
             a {
-                /*color: $glxgreen;*/
                 font-weight: 600;
             }
         }
@@ -187,7 +171,6 @@
             border-bottom: 1px solid #333;
             font-size: 14px;
             .title {
-                font-family: ffmark_bold, sans-serif;
                 font-size: 14px;
                 margin-bottom: 7px;
             }
@@ -226,7 +209,6 @@
                     width: 100%;
                 }
                 .cancel-btn {
-                    /*color: $glxgreen;*/
                     font-size: 20px;
                     top: 2px;
                     right: -4px;

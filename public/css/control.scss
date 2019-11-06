@@ -1,7 +1,3 @@
-$glxgreen: #1F964D;
-$glxlightgreen: #DEF6CA;
-$onyx: #383836;
-
 @import url('https://fonts.googleapis.com/css?family=Open+Sans|Open+Sans:300,400,500,700');
 
 /*@import url('https://fonts.googleapis.com/css?family=Ubuntu|Ubuntu:300,400,500,700'); // fonts to review
@@ -49,12 +45,12 @@ body {
     position: absolute; 
     width: 100%;
     height: 100%;
-    color: $onyx;
+    color: $off_black;
     font-size: 13px;
 }
 
 a {
-    color: $onyx;
+    color: $off_black;
     text-decoration: none;
     background-color: transparent;
 }
