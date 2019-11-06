@@ -71,34 +71,69 @@ export default (_xyz, layer) => {
   
   panel.appendChild(header);
 
-  let filter_entries = [];
+  let filter_entries = {};
 
-  Object.values(infoj).map(el => {
-    if(el.field) filter_entries.push({[el.field]: (el.label || el.field)})
+  Object.values(infoj).forEach(el => {
+    if(el.field) filter_entries[el.field] = el.label || el.field
   });
 
-  layer.filter.select = _xyz.utils.dropdownCustom({
-    entries: filter_entries,
-    placeholder: 'Select filter from list.',
-    callback: e => {
+  layer.filter.select = _xyz.utils.wire()`
+    <button class="ul-drop">
+    <div
+      class="head"
+      onclick=${e => {
+        e.preventDefault();
+        e.target.parentElement.classList.toggle('active');
+      }}>
+      <span class="ul-title">Select filter from list.</span>
+      <div class="icon"></div>
+    </div>
+    <ul>
+      ${Object.entries(filter_entries).map(
+        keyVal => _xyz.utils.wire()`
+          <li onclick=${e=>{
+            const drop = e.target.closest('.ul-drop');
+            drop.classList.toggle('active');
 
-      const entry = infoj.find(entry => entry.field === e.target.dataset.field);
+            const entry = infoj.find(entry => entry.field === keyVal[0]);
 
-      // Display clear all button.
-      layer.filter.clear_all.style.display = 'block';
+            // Display clear all button.
+            layer.filter.clear_all.style.display = 'block';
+      
+            if (entry.filter == 'date') return filter_date(_xyz, layer, entry);
+      
+            if (entry.filter === 'numeric') return filter_numeric(_xyz, layer, entry);
+      
+            if (entry.filter === 'like' || entry.filter === 'match') return filter_text(_xyz, layer, entry);
+      
+            if (entry.filter.in) return filter_in(_xyz, layer, entry);
+      
+            if (entry.filter === 'boolean') return filter_boolean(_xyz, layer, entry);
 
-      if (entry.filter == 'date') return filter_date(_xyz, layer, entry);
+          }}>${keyVal[1]}`)}`
 
-      if (entry.filter === 'numeric') return filter_numeric(_xyz, layer, entry);
+  // layer.filter.select = _xyz.utils.dropdownCustom({
+  //   entries: filter_entries,
+  //   placeholder: 'Select filter from list.',
+  //   callback: e => {
 
-      if (entry.filter === 'like' || entry.filter === 'match') return filter_text(_xyz, layer, entry);
+  //     const entry = infoj.find(entry => entry.field === e.target.dataset.field);
 
-      if (entry.filter.in) return filter_in(_xyz, layer, entry);
+  //     // Display clear all button.
+  //     layer.filter.clear_all.style.display = 'block';
 
-      if (entry.filter === 'boolean') return filter_boolean(_xyz, layer, entry);
+  //     if (entry.filter == 'date') return filter_date(_xyz, layer, entry);
 
-    }
-  });
+  //     if (entry.filter === 'numeric') return filter_numeric(_xyz, layer, entry);
+
+  //     if (entry.filter === 'like' || entry.filter === 'match') return filter_text(_xyz, layer, entry);
+
+  //     if (entry.filter.in) return filter_in(_xyz, layer, entry);
+
+  //     if (entry.filter === 'boolean') return filter_boolean(_xyz, layer, entry);
+
+  //   }
+  // });
 
   panel.appendChild(layer.filter.select);
 

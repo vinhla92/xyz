@@ -1602,11 +1602,7 @@
                         "Population 2001": "pop__01",
                         "Population 2011": "pop__11",
                         "Female population": "gen_female__11",
-                        "Male population": "gen_male__11",
-                        "Population 2001 2": "pop__01",
-                        "Population 2011 2": "pop__11",
-                        "Female population 2": "gen_female__11",
-                        "Male population 2": "gen_male__11"
+                        "Male population": "gen_male__11"
                     }
                 },
                 "PPD": {

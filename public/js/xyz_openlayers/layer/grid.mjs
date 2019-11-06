@@ -1,17 +1,12 @@
 export default _xyz => layer => {
 
-  layer.grid_size = layer.grid_size || Object.values(layer.grid_fields)[0];
+  layer.grid_size = Object.values(layer.grid_fields)[0];
 
-  layer.grid_color = layer.grid_color || Object.values(layer.grid_fields)[0];
+  layer.grid_color = Object.values(layer.grid_fields)[1];
 
-  layer.grid_ratio = layer.grid_ratio || false;
+  layer.grid_ratio = false;
 
-  layer.reload = () => {
-
-    source.refresh();
-
-  };
-
+  layer.reload = () => source.refresh();
 
   const source = new _xyz.mapview.lib.source.Vector({ 
     loader: function (extent, resolution, projection) {

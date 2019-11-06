@@ -14,28 +14,29 @@
         opacity: 0.4;
     }
 
-    &>.head {
+    >.head {
         padding: 5px;
         display: flex;
         border: 1px solid #ccc;
         align-items: center;
 
-        &.ul-title {
+        .ul-title {
             pointer-events: none;
             overflow: hidden;
             white-space: nowrap;
             text-overflow: ellipsis;
         }
 
-        &>.icon {
+        >.icon {
             pointer-events: none;
             margin-left: auto;
+            height: 20px;
             width: 20px;
-            content: url("data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%20100%20100%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpolyline%20points%3D%2215%2033%2050%2066%2085%2033%22%20fill%3D%22%23222%22%20stroke%3D%22%23222%22%2F%3E%3C%2Fsvg%3E");
+            content: url("../icons/icon-drop-down.svg");
         }
     }
 
-    &>ul {
+    >ul {
         display: none;
         position: absolute;
         list-style-type: none;
@@ -53,7 +54,7 @@
         background-color: white;
         z-index: 1;
 
-        &>li {
+        >li {
             padding: 10px 5px;
 
             a {
@@ -64,26 +65,26 @@
             }
         }
 
-        &>li:hover {
+        >li:hover {
             background-color: #eee;
         }
 
-        &>li.selected {
+        >li.selected {
             background-color: #DEF6CA;
         }
     }
 
     &.active {
-        &>.head {
+        >.head {
             border-bottom: 1px solid #fff;
         }
 
-        &>ul {
+        >ul {
             display: block;
         }
 
-        &>.head>.icon {
-            content: url("data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%20100%20100%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpolyline%20points%3D%2215%2066%2050%2033%2085%2066%22%20fill%3D%22%23222%22%20stroke%3D%22%23222%22%2F%3E%3C%2Fsvg%3E");
+        >.head>.icon {
+            content: url("../icons/icon-drop-up.svg");
         }
     }
 }

@@ -120,7 +120,7 @@ function init(_xyz) {
           e.target.parentElement.classList.toggle('active');
         }}>
         <span class="ul-title">${_xyz.workspace.locale.key}</span>
-        <img class="icon">
+        <div class="icon"></div>
       </div>
       <ul>
         ${

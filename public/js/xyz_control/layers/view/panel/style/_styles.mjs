@@ -62,19 +62,21 @@ export default (_xyz, layer) => {
         e.target.parentElement.classList.toggle('active');
       }}>
       <span class="ul-title">${Object.keys(themes)[0]}</span>
-      <img class="icon">
+      <div class="icon"></div>
     </div>
     <ul>
       ${Object.keys(themes).map(
-          key => _xyz.utils.wire()`
-            <li onclick=${e=>{
-              const drop = e.target.closest('.ul-drop');
-              drop.querySelector('.ul-title').textContent = key;
-              layer.style.theme = themes[key];
-              applyTheme(layer);
-              layer.reload();
-              drop.classList.toggle('active');
-            }}>${key}`)}`);} 
+        key => _xyz.utils.wire()`
+          <li onclick=${e=>{
+            const drop = e.target.closest('.ul-drop');
+            drop.querySelector('.ul-title').textContent = key;
+            drop.classList.toggle('active');
+            layer.style.theme = themes[key];
+            applyTheme(layer);
+            layer.reload();
+          }}>${key}`)}`);
+          
+  } 
   
   // Apply the current theme.
   applyTheme(layer); 

@@ -1,39 +1,63 @@
 export default _xyz => layer => {
 
   // Create grid_size dropdown.
-  layer.style.legend.appendChild(_xyz.utils.wire()`<div style="margin-top: 5px;">Select size variable.`);
+  layer.style.legend.appendChild(_xyz.utils.wire()`
+  <div style="margin-top: 5px;">Select size variable.`);
 
-  layer.style.legend.appendChild(_xyz.utils.dropdownCustom({
-    entries: Object.keys(layer.grid_fields),
-    singleSelect: true,
-    selectedIndex: 0,
-    callback: e => {
+  layer.style.legend.appendChild(_xyz.utils.wire()`
+  <button class="ul-drop">
+  <div
+    class="head"
+    onclick=${e => {
+      e.preventDefault();
+      e.target.parentElement.classList.toggle('active');
+    }}>
+    <span class="ul-title">${Object.keys(layer.grid_fields)[0]}</span>
+    <div class="icon"></div>
+  </div>
+  <ul>
+    ${Object.entries(layer.grid_fields).map(
+      keyVal => _xyz.utils.wire()`
+        <li onclick=${e=>{
+          const drop = e.target.closest('.ul-drop');
+          drop.classList.toggle('active');
+          drop.querySelector('.ul-title').textContent = keyVal[0];
 
-      e.target.parentNode.previousSibling.firstChild.textContent = e.target.dataset.field;
-      layer.grid_size = layer.grid_fields[e.target.dataset.field];
-      layer.reload();
-    }
-  }));
+          layer.grid_size = layer.grid_fields[keyVal[1]];
+          layer.reload();
+
+        }}>${keyVal[0]}`)}`);
 
   // Create grid_color dropdown.
-  layer.style.legend.appendChild(_xyz.utils.wire()`<div style="margin-top: 5px; margin-bottom: 8px;">Select colour variable.`);
+  layer.style.legend.appendChild(_xyz.utils.wire()`
+  <div style="margin-top: 5px; margin-bottom: 8px;">Select colour variable.`);
 
-  layer.style.legend.appendChild(_xyz.utils.dropdownCustom({
-    entries: Object.keys(layer.grid_fields),
-    singleSelect: true,
-    selectedIndex: 0,
-    callback: e => {
+  layer.style.legend.appendChild(_xyz.utils.wire()`
+  <button class="ul-drop">
+  <div
+    class="head"
+    onclick=${e => {
+      e.preventDefault();
+      e.target.parentElement.classList.toggle('active');
+    }}>
+    <span class="ul-title">${Object.keys(layer.grid_fields)[1]}</span>
+    <div class="icon"></div>
+  </div>
+  <ul>
+    ${Object.entries(layer.grid_fields).map(
+      keyVal => _xyz.utils.wire()`
+      <li onclick=${e=>{
+        const drop = e.target.closest('.ul-drop');
+        drop.classList.toggle('active');
+        drop.querySelector('.ul-title').textContent = keyVal[0];
 
-      e.target.parentNode.previousSibling.firstChild.textContent = e.target.dataset.field;
-      layer.grid_color = layer.grid_fields[e.target.value];
-      layer.reload();
-    }
-  }));
+        layer.grid_color = layer.grid_fields[keyVal[1]];
+        layer.reload();
 
-  const legend = layer.style.legend.appendChild(_xyz.utils.wire()
-  `<svg 
-  xmlns='http://www.w3.org/2000/svg'
-  >`);
+      }}>${keyVal[0]}`)}`);
+
+  const legend = layer.style.legend.appendChild(_xyz.utils.wire()`
+  <svg xmlns='http://www.w3.org/2000/svg'>`);
     
   // Create SVG grid legend
   let
@@ -47,10 +71,8 @@ export default _xyz => layer => {
       r = (i + 2) * 10 / n,
       x = i * w;
 
-    let circle1 = _xyz.utils.wire(null, 'svg')
-    `<circle
-    fill='#777'
-    >`; 
+    let circle1 = _xyz.utils.wire(null, 'svg')`
+    <circle fill='#777'>`; 
 
     circle1.setAttribute('cx', x + w / 2 + 1 + '%');
     circle1.setAttribute('cy', yTrack + 1);
@@ -58,10 +80,8 @@ export default _xyz => layer => {
 
     legend.appendChild(circle1);
 
-    let circle2 = _xyz.utils.wire(null, 'svg')
-    `<circle
-    fill='#999'
-    >`;
+    let circle2 = _xyz.utils.wire(null, 'svg')`
+    <circle fill='#999'>`;
 
     circle2.setAttribute('cx', x + w / 2 + '%');
     circle2.setAttribute('cy', yTrack);
@@ -71,12 +91,10 @@ export default _xyz => layer => {
 
     if (i === 0) {
 
-      layer.style.legend.size_min = _xyz.utils.wire(null, 'svg')
-      `<text
-      style='font-size:12px; text-anchor: start; 
-      font-family: "PT Mono", monospace;'
-      >min
-      </text>`;
+      layer.style.legend.size_min = _xyz.utils.wire(null, 'svg')`
+      <text
+        style='font-size:12px; text-anchor: start; 
+        font-family: "PT Mono", monospace;'>min`;
 
       layer.style.legend.size_min.setAttribute("x", x  + '%');
       layer.style.legend.size_min.setAttribute("y", yTrack - 20);
@@ -86,12 +104,10 @@ export default _xyz => layer => {
 
     if (i === (n / 2 % 1 != 0 && Math.round(n / 2) - 1)) {
 
-      layer.style.legend.size_avg = _xyz.utils.wire(null, 'svg')
-      `<text
-      style='font-size:12px; text-anchor: middle; 
-      font-family: "PT Mono", monospace;'
-      >avg
-      </text>`;
+      layer.style.legend.size_avg = _xyz.utils.wire(null, 'svg')`
+      <text
+        style='font-size:12px; text-anchor: middle; 
+        font-family: "PT Mono", monospace;'>avg`;
 
       layer.style.legend.size_avg.setAttribute("x", x + w / 2 + '%');
       layer.style.legend.size_avg.setAttribute("y", yTrack - 20);
@@ -102,12 +118,10 @@ export default _xyz => layer => {
 
     if (i === n - 1) {
 
-      layer.style.legend.size_max = _xyz.utils.wire(null, 'svg')
-      `<text
-      style='font-size:12px; text-anchor: end; 
-      font-family: "PT Mono", monospace;'
-      >max
-      </text>`;
+      layer.style.legend.size_max = _xyz.utils.wire(null, 'svg')`
+      <text
+        style='font-size:12px; text-anchor: end; 
+        font-family: "PT Mono", monospace;'>max`;
 
       layer.style.legend.size_max.setAttribute("x", x + w + '%');
       layer.style.legend.size_max.setAttribute("y", yTrack - 20);
@@ -124,11 +138,10 @@ export default _xyz => layer => {
 
     let x = i * w;
 
-    let rect = _xyz.utils.wire(null, 'svg')
-    `<rect
-    height=20
-    fill=${layer.style.range[i]}
-    >`;
+    let rect = _xyz.utils.wire(null, 'svg')`
+    <rect
+      height=20
+      fill=${layer.style.range[i]}>`;
 
     rect.setAttribute("x", x  + '%');
     rect.setAttribute("y", yTrack);
@@ -138,12 +151,10 @@ export default _xyz => layer => {
 
     if (i === 0) {
 
-      layer.style.legend.color_min = _xyz.utils.wire(null, 'svg')
-      `<text
-      style='font-size:12px; text-anchor: start; 
-      font-family: "PT Mono", monospace;'
-      >min
-      </text>`;
+      layer.style.legend.color_min = _xyz.utils.wire(null, 'svg')`
+      <text
+        style='font-size:12px; text-anchor: start; 
+        font-family: "PT Mono", monospace;'>min`;
 
       layer.style.legend.color_min.setAttribute("x", x  + '%');
       layer.style.legend.color_min.setAttribute("y", yTrack + 40);
@@ -153,12 +164,10 @@ export default _xyz => layer => {
 
     if (i === (n / 2 % 1 != 0 && Math.round(n / 2) - 1)) {
 
-      layer.style.legend.color_avg = _xyz.utils.wire(null, 'svg')
-      `<text id="grid_legend_color__avg"
-      style='font-size:12px; text-anchor: middle; 
-      font-family: "PT Mono", monospace;'
-      >avg
-      </text>`;
+      layer.style.legend.color_avg = _xyz.utils.wire(null, 'svg')`
+      <text id="grid_legend_color__avg"
+        style='font-size:12px; text-anchor: middle; 
+        font-family: "PT Mono", monospace;'>avg`;
 
       layer.style.legend.color_avg.setAttribute("x", x + w / 2 + '%');
       layer.style.legend.color_avg.setAttribute("y", yTrack + 40);
@@ -168,12 +177,10 @@ export default _xyz => layer => {
 
     if (i === n - 1) {
 
-      layer.style.legend.color_max = _xyz.utils.wire(null, 'svg')
-      `<text id="grid_legend_color__max"
-      style='font-size:12px; text-anchor: end; 
-      font-family: "PT Mono", monospace;'
-      >max
-      </text>`;
+      layer.style.legend.color_max = _xyz.utils.wire(null, 'svg')`
+      <text id="grid_legend_color__max"
+        style='font-size:12px; text-anchor: end; 
+        font-family: "PT Mono", monospace;'>max`;
 
       layer.style.legend.color_max.setAttribute("x", x + w + '%')
       layer.style.legend.color_max.setAttribute("y", yTrack + 40);
@@ -189,10 +196,10 @@ export default _xyz => layer => {
   <td style="padding-top: 5px;" colSpan=2>
   <label class="checkbox">
   <input type="checkbox"
-    checked=${layer.grid_ratio}
+    checked=false
     onchange=${e => {
-    layer.grid_ratio = e.target.checked;
-    layer.reload();
-  }}></input><span>Display colour values as a ratio to the size value.`);
+      layer.grid_ratio = e.target.checked;
+      layer.reload();
+    }}></input><span>Display colour values as a ratio to the size value.`);
 
 };
