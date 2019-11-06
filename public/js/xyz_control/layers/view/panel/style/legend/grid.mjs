@@ -23,7 +23,7 @@ export default _xyz => layer => {
           drop.classList.toggle('active');
           drop.querySelector('.ul-title').textContent = keyVal[0];
 
-          layer.grid_size = layer.grid_fields[keyVal[1]];
+          layer.grid_size = keyVal[1];
           layer.reload();
 
         }}>${keyVal[0]}`)}`);
@@ -51,7 +51,7 @@ export default _xyz => layer => {
         drop.classList.toggle('active');
         drop.querySelector('.ul-title').textContent = keyVal[0];
 
-        layer.grid_color = layer.grid_fields[keyVal[1]];
+        layer.grid_color = keyVal[1];
         layer.reload();
 
       }}>${keyVal[0]}`)}`);
@@ -196,7 +196,6 @@ export default _xyz => layer => {
   <td style="padding-top: 5px;" colSpan=2>
   <label class="checkbox">
   <input type="checkbox"
-    checked=false
     onchange=${e => {
       layer.grid_ratio = e.target.checked;
       layer.reload();
