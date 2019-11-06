@@ -53,24 +53,30 @@ export default (_xyz, layer) => {
     // Create theme drop down
     panel.appendChild(_xyz.utils.wire()`<div>Select thematic style.`);
 
-    panel.appendChild(_xyz.utils.dropdownCustom({
-      entries: Object.keys(themes),
-      singleSelect: true,
-      selectedIndex: Object.keys(themes).length > 1 ? 1 : 0,
-      callback: e => {
-        
-        e.target.parentNode.previousSibling.firstChild.textContent = e.target.dataset.field;
-
-        layer.style.theme = themes[e.target.dataset.field];
-      
-        applyTheme(layer);
-    
-        layer.reload();
-      }
-
-    }));
-  } 
-    // Apply the current theme.
+    panel.appendChild(_xyz.utils.wire()`
+    <button class="ul-drop">
+    <div
+      class="head"
+      onclick=${e => {
+        e.preventDefault();
+        e.target.parentElement.classList.toggle('active');
+      }}>
+      <span class="ul-title">${Object.keys(themes)[0]}</span>
+      <img class="icon">
+    </div>
+    <ul>
+      ${Object.keys(themes).map(
+          key => _xyz.utils.wire()`
+            <li onclick=${e=>{
+              const drop = e.target.closest('.ul-drop');
+              drop.querySelector('.ul-title').textContent = key;
+              layer.style.theme = themes[key];
+              applyTheme(layer);
+              layer.reload();
+              drop.classList.toggle('active');
+            }}>${key}`)}`);} 
+  
+  // Apply the current theme.
   applyTheme(layer); 
 
   panel.appendChild(layer.style.legend);

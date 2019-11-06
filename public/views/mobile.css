@@ -61,15 +61,6 @@ body {
     box-shadow: inset 0px 4px 4px -4px #777;
 }
 
-#localeDropdown {
-    margin-bottom: 4px;
-}
-
-#localeDropdown .ul-drop .head span {
-    padding: 4px;
-    border-radius: 2px;
-}
-
 .gazetteer {
     position: fixed;
     left: 0;

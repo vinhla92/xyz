@@ -27,15 +27,6 @@ body {
     padding: 10px 0;
 }
 
-#localeDropdown {
-    margin-bottom: 4px;
-}
-
-#localeDropdown .ul-drop .head span {
-    padding: 4px;
-    border-radius: 2px;
-}
-
 #vertDivider {
     grid-column: 2;
     grid-row: 1/4;

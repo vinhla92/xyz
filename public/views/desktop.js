@@ -108,31 +108,26 @@ function init(_xyz) {
   // Create locales dropdown if length of locales array is > 1.
   if (Object.keys(_xyz.workspace.locales).length > 1) {
 
-    let entries = [];
-
-    Object.values(_xyz.workspace.locales).map(locale => {
-      entries.push(locale.key);
-    });
-
-    document.getElementById('localeDropdown').parentNode.insertBefore(_xyz.utils.wire()`<div class="title secondary-colour-bg">Locales</div>`, document.getElementById('localeDropdown'));
+    document.getElementById('localeDropdown').appendChild(_xyz.utils.wire()`
+    <div>Show layers for the following locale`);
 
     document.getElementById('localeDropdown').appendChild(_xyz.utils.wire()`
-      <div style="font-size: 95%;">Show layers for the following locale`);
+      <button class="ul-drop">
+      <div
+        class="head"
+        onclick=${e => {
+          e.preventDefault();
+          e.target.parentElement.classList.toggle('active');
+        }}>
+        <span class="ul-title">${_xyz.workspace.locale.key}</span>
+        <img class="icon">
+      </div>
+      <ul>
+        ${
+          Object.values(_xyz.workspace.locales).map(
+            locale => _xyz.utils.wire()`<li><a href="${_xyz.host + '?locale=' + locale.key}">${locale.key}`)
+        }`);
 
-    document.getElementById('localeDropdown').appendChild(
-      _xyz.utils.dropdownCustom({
-        singleSelect: true,
-        entries: entries,
-        selectedIndex: entries.indexOf(_xyz.workspace.locale.key),
-        highlight: true,
-        callback: e => {
-          _xyz.hooks.removeAll();
-          _xyz.hooks.set({ locale: e.target.dataset.field });
-          _xyz.workspace.loadLocale({ locale: _xyz.hooks.current.locale });
-          document.getElementById('localeDropdown').querySelector('.head span').textContent = e.target.dataset.field;
-          createMap(_xyz);
-        }
-      }));
   }
 
   document.getElementById('btnWorkspace').onclick = () => _xyz.workspace.admin();

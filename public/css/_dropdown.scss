@@ -1,0 +1,89 @@
+.ul-drop {
+    position: relative;
+    cursor: pointer;
+    width: 100%;
+    background-color: white;
+    border: none;
+    padding: 0;
+    outline: 0;
+    box-shadow: 1px 1px 3px 0 #ddd;
+    margin: 5px 0;
+
+    &:disabled {
+        pointer-events: none;
+        opacity: 0.4;
+    }
+
+    &>.head {
+        padding: 5px;
+        display: flex;
+        border: 1px solid #ccc;
+        align-items: center;
+
+        &.ul-title {
+            pointer-events: none;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        &>.icon {
+            pointer-events: none;
+            margin-left: auto;
+            width: 20px;
+            content: url("data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%20100%20100%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpolyline%20points%3D%2215%2033%2050%2066%2085%2033%22%20fill%3D%22%23222%22%20stroke%3D%22%23222%22%2F%3E%3C%2Fsvg%3E");
+        }
+    }
+
+    &>ul {
+        display: none;
+        position: absolute;
+        list-style-type: none;
+        width: inherit;
+        box-sizing: border-box;
+        box-shadow: 1px 1px 3px 0 #ddd;
+        max-height: 500px;
+        overflow-y: auto;
+        overflow-x: hidden;
+        padding: 0;
+        margin: 0;
+        border: 1px solid #ccc;
+        border-top: none;
+        text-align: left;
+        background-color: white;
+        z-index: 1;
+
+        &>li {
+            padding: 10px 5px;
+
+            a {
+                margin: 0px;
+                display: block;
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        &>li:hover {
+            background-color: #eee;
+        }
+
+        &>li.selected {
+            background-color: #DEF6CA;
+        }
+    }
+
+    &.active {
+        &>.head {
+            border-bottom: 1px solid #fff;
+        }
+
+        &>ul {
+            display: block;
+        }
+
+        &>.head>.icon {
+            content: url("data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%20100%20100%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpolyline%20points%3D%2215%2066%2050%2033%2085%2066%22%20fill%3D%22%23222%22%20stroke%3D%22%23222%22%2F%3E%3C%2Fsvg%3E");
+        }
+    }
+}
