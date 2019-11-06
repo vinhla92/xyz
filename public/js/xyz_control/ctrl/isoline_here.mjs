@@ -83,6 +83,7 @@ export default _xyz => param => {
   <span class="bold">${param.entry.edit.isoline_here.minutes}</span>
   <div class="range">
   <input
+    class="secondary-colour-bg"
     type="range"
     min=5
     value=${param.entry.edit.isoline_here.minutes}

@@ -1,0 +1,63 @@
+Searching 342 files for "type="range""
+
+/Users/agatabrok/Github/xyz/public/js/xyz_control/ctrl/isoline_here.mjs:
+   85    <input
+   86      class="secondary-colour-bg"
+   87:     type="range"
+   88      min=5
+   89      value=${param.entry.edit.isoline_here.minutes}
+
+/Users/agatabrok/Github/xyz/public/js/xyz_control/ctrl/isoline_mapbox.mjs:
+   33    <input
+   34      class="secondary-colour-bg"
+   35:     type="range"
+   36      min=5
+   37      value=${param.entry.edit.isoline_mapbox.minutes}
+
+/Users/agatabrok/Github/xyz/public/js/xyz_control/layers/view/panel/cluster.mjs:
+   33    <input
+   34      class="secondary-colour-bg"
+   35:     type="range"
+   36      min=1
+   37      value=${parseInt(layer.cluster_kmeans * 100)}
+   ..
+   57    <div class="range">
+   58    <input
+   59:     type="range"
+   60      min=1
+   61      value=${parseInt(layer.cluster_dbscan * 100)}
+
+/Users/agatabrok/Github/xyz/public/js/xyz_control/layers/view/panel/filters/filter_numeric.mjs:
+   61      <input
+   62        class="secondary-colour-bg"
+   63:       type="range"
+   64        min=${field_range.min}
+   65        value=${field_range.min}
+   ..
+   95      <input
+   96        class="secondary-colour-bg"
+   97:       type="range"
+   98        min=${field_range.min}
+   99        value=${field_range.max}
+
+/Users/agatabrok/Github/xyz/public/js/xyz_control/layers/view/panel/style/polyStyle.mjs:
+   82    <input
+   83      class="secondary-colour-bg"
+   84:     type="range"
+   85      min=1
+   86      value=${style.strokeWidth || 1}
+   ..
+  111    <input
+  112      class="secondary-colour-bg"
+  113:     type="range"
+  114      min=0.1
+  115      value=${style.fillOpacity || 1}
+
+/Users/agatabrok/Github/xyz/public/js/xyz_control/locations/view/edit/range.mjs:
+    8    <input
+    9      class="secondary-colour-bg"
+   10:     type="range"
+   11      min=${entry.edit.range.min}
+   12      value=${entry.value}
+
+9 matches across 6 files

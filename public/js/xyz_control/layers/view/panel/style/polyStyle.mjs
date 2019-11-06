@@ -80,6 +80,7 @@ export default (_xyz, layer, style, title) => {
   block._.appendChild(_xyz.utils.wire()`
   <div class="range" style="display: inline-block; width: 65%;">
   <input
+    class="secondary-colour-bg"
     type="range"
     min=1
     value=${style.strokeWidth || 1}
@@ -108,6 +109,7 @@ export default (_xyz, layer, style, title) => {
   block._.appendChild(_xyz.utils.wire()`
   <div class="range" style="display: inline-block; width: 65%;">
   <input
+    class="secondary-colour-bg"
     type="range"
     min=0.1
     value=${style.fillOpacity || 1}
