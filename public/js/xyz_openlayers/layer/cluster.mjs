@@ -30,10 +30,7 @@ export default _xyz => layer => {
       const tableZ = layer.tableCurrent();
 
       if (!tableZ) return;
-  
-      // Show loader.
-      if (layer.view.loader) layer.view.loader.style.display = 'block';
-  
+
       layer.xhr = new XMLHttpRequest();   
   
       layer.xhr.open(
@@ -64,9 +61,7 @@ export default _xyz => layer => {
   
       // Draw layer on load event.
       layer.xhr.onload = e => {
-  
-        if (layer.view.loader) layer.view.loader.style.display = 'none';
-  
+    
         if (e.target.status !== 200) return;
 
         const cluster = e.target.response;

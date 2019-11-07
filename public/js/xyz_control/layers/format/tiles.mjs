@@ -22,12 +22,6 @@ export default _xyz => layer => () => {
   layer.L = L.tileLayer(decodeURIComponent(uri), {
     updateWhenIdle: true,
     pane: layer.key
-  })
-    .on('load', () => {
-      
-      if (layer.view.loader)  layer.view.loader.style.display = 'none';
-
-    })
-    .addTo(_xyz.map);
+  }).addTo(_xyz.map);
 
 };

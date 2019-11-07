@@ -10,8 +10,6 @@ export default _xyz => layer => {
 
   layer.view.drawer.appendChild(layer.view.header);
        
-  layer.view.drawer.appendChild(layer.view.loader);
-
   dashboard(_xyz, layer);
 
   // Make the layer view opaque if no table is available for the current zoom level.

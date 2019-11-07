@@ -21,9 +21,6 @@ export default _xyz => layer => {
 
       if (!tableZ) return;
 
-      // Show loader.
-      if (layer.view.loader) layer.view.loader.style.display = 'block';
-
       layer.xhr = new XMLHttpRequest();   
 
       layer.xhr.open('GET', _xyz.host + '/api/layer/grid?' + _xyz.utils.paramString({
@@ -44,8 +41,6 @@ export default _xyz => layer => {
 
       // Draw layer on load event.
       layer.xhr.onload = e => {
-
-        if (layer.view.loader) layer.view.loader.style.display = 'none';
 
         if (e.target.status !== 200) return;
 

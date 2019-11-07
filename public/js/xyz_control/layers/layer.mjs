@@ -29,11 +29,7 @@ export default _xyz => layer => {
 
   layer.count = count(_xyz);
 
-  layer.view = {
-
-    loader: _xyz.utils.wire()`<div class="loader" style="display: none">`
-
-  };
+  layer.view = {};
 
   // Set the first theme from themes array.
   if (layer.style && layer.style.themes) layer.style.theme = layer.style.themes[Object.keys(layer.style.themes)[0]];
