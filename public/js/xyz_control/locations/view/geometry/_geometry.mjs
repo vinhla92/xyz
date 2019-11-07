@@ -76,15 +76,14 @@ export default _xyz => entry => {
   <input type="checkbox"
     checked=${!!entry.display}
     onchange=${e => {
-    entry.display = e.target.checked;
-    if (entry.display && entry.edit) entry.ctrl.showGeom(entry);
-    if (entry.display && !entry.edit) entry.ctrl.showExistingGeom(entry);
-    if (!entry.display && entry.edit) entry.ctrl.deleteGeom(entry);
-    if (!entry.display && !entry.edit) entry.ctrl.hideGeom(entry);
-    /*entry.display ?
-      entry.ctrl.showGeom(entry) :
-      entry.ctrl.hideGeom(entry);*/
-  }}></input><span>${entry.name || 'Additional geometries'}`);
+      entry.display = e.target.checked;
+      if (entry.display && entry.edit) entry.ctrl.showGeom(entry);
+      if (entry.display && !entry.edit) entry.ctrl.showExistingGeom(entry);
+      if (!entry.display && entry.edit) entry.ctrl.deleteGeom(entry);
+      if (!entry.display && !entry.edit) entry.ctrl.hideGeom(entry);
+    }}>
+  </input>
+  <div></div><span>${entry.name || 'Additional geometries'}`);
 
   td.appendChild(_xyz.utils.wire()`
   <div class="sample-circle"

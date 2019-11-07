@@ -35,11 +35,13 @@ export default (_xyz, layer) => {
     panel.appendChild(_xyz.utils.wire()`
     <label class="checkbox" style="margin-bottom: 10px;">
     <input type="checkbox"
-    checked=${!!layer.style.label.display}
-    onchange=${e => {
-      layer.style.label.display = e.target.checked;
-      layer.show();
-    }}></input><span>Display Labels.`);
+      checked=${!!layer.style.label.display}
+      onchange=${e => {
+        layer.style.label.display = e.target.checked;
+        layer.show();
+      }}>
+    </input>
+    <div></div><span>Display Labels.`);
   }
 
 

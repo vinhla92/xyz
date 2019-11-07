@@ -80,10 +80,12 @@ export default (_xyz, layer) => {
   panel.appendChild(_xyz.utils.wire()`
   <label class="checkbox">
   <input type="checkbox"
-    checked=${layer.cluster_logscale ? true : false} 
+    checked=${!!layer.cluster_logscale} 
     onchange=${e => {
-    layer.cluster_logscale = e.target.checked;
-    layer.reload();
-  }}></input><span>Log scale cluster size.`);
+      layer.cluster_logscale = e.target.checked;
+      layer.reload();
+    }}>
+  </input>
+  <div></div><span>Log scale cluster size.`);
 
 };

@@ -21,10 +21,10 @@ export default (_xyz, layer) => {
     layer.view.dashboard.appendChild(
       _xyz.utils.wire()`
       <a
-      target="_blank"
-      href="${href}"
-      class="link-with-img">
-        <img class="icon-event-note"><span>${entry[1].name || entry[0]}`
+        target="_blank"
+        href="${href}"
+        class="link-with-img">
+        <div class="xyz-icon icon-event-note"></div><span>${entry[1].name || entry[0]}`
     );
 
   });

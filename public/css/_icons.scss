@@ -1,6 +1,7 @@
 .xyz-icon {
     background-repeat: no-repeat;
     background-position: center;
+    background-size: contain;
 }
 
 .enabled > .xyz-icon{
@@ -143,16 +144,8 @@
     background-image: url("../icons/icon-notes.svg");
 }
 
-img.icon-notes {
-    content: url("../icons/icon-notes.svg");
-}
-
 .icon-event-note {
     background-image: url("../icons/icon-event-note.svg");
-}
-
-img.icon-event-note {
-    content: url("../icons/icon-event-note.svg");
 }
 
 .icon-scatter-plot {

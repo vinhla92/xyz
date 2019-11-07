@@ -49,7 +49,9 @@ export default (_xyz, layer, filter_entry) => {
       
         })
 
-      }}></input><span>${val}`);
+      }}>
+    </input>
+    <div></div><span>${val}`);
   
   });
   

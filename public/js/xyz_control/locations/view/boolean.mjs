@@ -7,11 +7,14 @@ export default _xyz => entry => {
         <input type="checkbox"
           disabled=${!entry.edit}
           checked=${!!entry.value}
-          onchange=${e => entry.location.view.valChange({
-          input: e.target,
-          entry: entry,
-          value: e.target.checked
-        })}></input>
-        <span>${entry.name || entry.field}`);
+          onchange=${e => {
+            entry.location.view.valChange({
+              input: e.target,
+              entry: entry,
+              value: e.target.checked
+            })
+          }}>
+        </input>
+        <div></div><span>${entry.name || entry.field}`);
         
 };

@@ -199,6 +199,8 @@ export default _xyz => layer => {
     onchange=${e => {
       layer.grid_ratio = e.target.checked;
       layer.reload();
-    }}></input><span>Display colour values as a ratio to the size value.`);
+    }}>
+  </input>
+  <div></div><span>Display colour values as a ratio to the size value.`);
 
 };

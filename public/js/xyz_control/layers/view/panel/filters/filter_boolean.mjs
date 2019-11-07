@@ -41,8 +41,9 @@ export default (_xyz, layer, filter_entry) => {
         if (filter_entry.filterZoom && n > 1) layer.zoomToExtent();
     
       })
-
-    }}></input><span>${filter_entry.name || 'True'}`);
+    }}>
+  </input>
+  <div></div><span>${filter_entry.name || 'True'}`);
 
   layer.reload();
 

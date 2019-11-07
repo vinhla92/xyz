@@ -46,7 +46,10 @@ export default (_xyz, layer) => {
           onchange=${e => {
             table.display = e.target.checked;
             if (table.display) return layer.show();
-            table.remove();}}></input><span>${table.title}`);
+            table.remove();
+          }}>
+        </input>
+        <div></div><span>${table.title}`);
 
       if (table.display && layer.display) table.show();
     });
@@ -77,7 +80,10 @@ export default (_xyz, layer) => {
           onchange=${e => {
             chart.display = e.target.checked;
             if (chart.display) return layer.show();
-            chart.remove();}}></input><span>${chart.title}`);
+            chart.remove();
+          }}>
+        </input>
+        <div></div><span>${chart.title}`);
 
       if (chart.display && layer.display) chart.show();
     });

@@ -43,14 +43,15 @@ export default (_xyz, layer) => {
 
       // Create checkbox to toggle whether table is in tabs list.
       layer.dataview.panel.appendChild(_xyz.utils.wire()`
-        <label class="checkbox"
-        onchecked=${!!table.display}
-        onchange=${e => {
-          table.display = e.target.checked;
-          return table.display ? layer.show() : table.remove();
-        }}
-        >${table.title}
-      `);
+        <label class="checkbox">
+        <input type="checkbox"
+          checked=${!!table.display}
+          onchange=${e => {
+            table.display = e.target.checked;
+            return table.display ? layer.show() : table.remove();
+          }}>
+        </input>
+        <div></div><span>${table.title}`);
 
       if (table.display && layer.display) table.show();
     });

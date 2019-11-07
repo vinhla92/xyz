@@ -8,11 +8,11 @@ export default _xyz => entry => {
   <input type="checkbox"
     checked=${!!entry.display}
     onchange=${e => {
-    entry.display = e.target.checked;
-    entry.display ?
-      showTab() :
-      removeTab();
-  }}></input><span>${entry.title || 'Show table'}`);
+      entry.display = e.target.checked;
+      entry.display ? showTab() : removeTab();
+    }}>
+  </input>
+  <div></div><span>${entry.title || 'Show table'}`);
 
   if (entry.display) showTab();
 

@@ -138,16 +138,20 @@
             vertical-align: middle;
         }
 
-        .checkbox>span:before {
+        .checkbox>div {
             display: inline-block;
             vertical-align: middle;
             width: 20px;
+            height: 20px;
             margin-right: 5px;
-            content: url("../icons/icon-checkbox-unchecked.svg");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            background-image: url("../icons/icon-checkbox-unchecked.svg");
         }
 
-        input:checked+span:before {
-            content: url("../icons/icon-checkbox-checked.svg");
+        input:checked+div {
+            background-image: url("../icons/icon-checkbox-checked.svg");
         }
 
         #btnRegister {
@@ -204,6 +208,7 @@
 
         <label class="checkbox">
             <input id="privacy_agreement" type="checkbox">
+            <div></div>
             <span>I agree</span>
         </label>
 
