@@ -110,6 +110,8 @@ function init(_xyz) {
 
     document.getElementById('localeDropdown').parentNode.insertBefore(_xyz.utils.wire()`<div class="title secondary-colour-bg">Locales</div>`, document.getElementById('localeDropdown'));
 
+    document.getElementById('localeDropdown').style.marginBottom = '5px';
+
     document.getElementById('localeDropdown').appendChild(_xyz.utils.wire()`
     <div>Show layers for the following locale`);
 
