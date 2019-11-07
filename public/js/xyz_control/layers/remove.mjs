@@ -18,10 +18,6 @@ export default _xyz => function () {
   
   _xyz.mapview.attribution.check();
 
-
-  // Set layer display to false, hide the loader element and change the toggle icon.
-  if (layer.view.loader) layer.view.loader.style.display = 'none';
-
   // //if (layer.view.header) layer.view.header.toggleDisplay.textContent = 'layers_clear';
   // if (layer.view.header) {
   //   layer.view.header.toggleDisplay.textContent = 'toggle_off';

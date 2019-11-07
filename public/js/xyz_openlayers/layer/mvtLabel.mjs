@@ -15,9 +15,6 @@ export default (_xyz, layer) => {
 
       if (!tableZ) return;
 
-      // Show loader.
-      if (layer.view.loader) layer.view.loader.style.display = 'block';
-
       layer.xhr = new XMLHttpRequest();
 
       layer.xhr.open(

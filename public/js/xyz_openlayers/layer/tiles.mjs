@@ -19,19 +19,15 @@ export default _xyz => layer => {
   let tilesLoading = 0;
 
   // Increase the number of tiles loading at load start event.
-  // Display loading indicator if it exists.
   source.on('tileloadstart', () => {
     tilesLoading++;
-    if (layer.view.loader) layer.view.loader.style.display = 'block';
   });
   
   // Decrease the number of tiles loading at load end event.
-  // Hide loading indicator if it exists.
   source.on('tileloadend', () => {
     tilesLoading--;
     layer.view.timeout && clearTimeout(layer.view.timeout);
     layer.view.timeout = setTimeout(()=>{
-      if (layer.tilesLoading === 0) layer.view.loader.style.display = 'none';
     }, 1000);
   });
 

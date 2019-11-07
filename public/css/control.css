@@ -356,6 +356,7 @@ input[type=range]::-moz-range-thumb {
   .input_group input:focus ~ .bar:before, .input_group input:focus ~ .bar:after {
     width: 50%; }
 
+<<<<<<< HEAD
 .loader {
   height: 2px;
   margin-top: -2px;
@@ -387,6 +388,8 @@ input[type=range]::-moz-range-thumb {
     left: 120%; }
   to {
     left: 100%; } }
+=======
+>>>>>>> 7d9479e1ebb63d4afbf6d69b7fc5d2d2c2560e92
 .range {
   width: 100%;
   width: calc(100% - 5px);
