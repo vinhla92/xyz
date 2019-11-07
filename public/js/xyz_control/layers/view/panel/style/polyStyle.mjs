@@ -78,7 +78,7 @@ export default (_xyz, layer, style, title) => {
   block._.appendChild(_xyz.utils.wire()`<div style="display: inline-block; width: 35%;">Stroke Weight`);
 
   block._.appendChild(_xyz.utils.wire()`
-  <div class="range" style="display: inline-block; width: 65%;">
+  <div class="range" style="display: inline-block; width: 65%; padding-top:10px; padding-bottom:6px;">
   <input
     type="range"
     class="secondary-colour-bg"
@@ -107,7 +107,7 @@ export default (_xyz, layer, style, title) => {
   block._.appendChild(_xyz.utils.wire()`<div style="display: inline-block; width: 35%;">Fill Opacity `);
 
   block._.appendChild(_xyz.utils.wire()`
-  <div class="range" style="display: inline-block; width: 65%;">
+  <div class="range" style="display: inline-block; width: 65%; padding-top:10px; padding-bottom:6px;">
   <input
     type="range"
     class="secondary-colour-bg"
