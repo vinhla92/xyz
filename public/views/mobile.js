@@ -36,6 +36,8 @@ function init(_xyz) {
   // Create locales dropdown if length of locales array is > 1.
   if (Object.keys(_xyz.workspace.locales).length > 1) {
 
+    document.getElementById('localeDropdown').parentNode.insertBefore(_xyz.utils.wire()`<div class="title secondary-colour-bg">Locales</div>`, document.getElementById('localeDropdown'));
+
     document.getElementById('localeDropdown').appendChild(_xyz.utils.wire()`
     <div>Show layers for the following locale`);
 
