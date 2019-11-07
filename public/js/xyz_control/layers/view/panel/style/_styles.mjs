@@ -85,6 +85,8 @@ export default (_xyz, layer) => {
 
   panel.appendChild(layer.style.legend);
 
+  layer.foo = "bar";
+
   if (layer.format === 'grid') legends.grid(layer);
 
 

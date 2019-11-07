@@ -4,6 +4,9 @@ export default _xyz => layer => {
   layer.style.legend.appendChild(_xyz.utils.wire()`
   <div style="margin-top: 5px;">Select size variable.`);
 
+
+  layer.something = "else";
+
   layer.style.legend.appendChild(_xyz.utils.wire()`
   <button class="ul-drop">
   <div
@@ -22,6 +25,9 @@ export default _xyz => layer => {
           const drop = e.target.closest('.ul-drop');
           drop.classList.toggle('active');
           drop.querySelector('.ul-title').textContent = keyVal[0];
+
+
+          layer.something = "wrong";
 
           layer.grid_size = keyVal[1];
           layer.reload();
@@ -201,6 +207,6 @@ export default _xyz => layer => {
       layer.reload();
     }}>
   </input>
-  <div></div><span>Display colour values as a ratio to the size value.`);
+  <div></div><span>Display colour as a ratio to the size.`);
 
 };
