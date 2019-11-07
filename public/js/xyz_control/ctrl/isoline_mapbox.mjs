@@ -14,9 +14,9 @@ export default _xyz => param => {
   mode_container.appendChild(setting_container);
 
   const modes = [
-    {Driving : 'driving'},
-    {Walking: 'walking'},
-    {Cycling: 'cycling'}
+    { Driving : 'driving' },
+    { Walking: 'walking' },
+    { Cycling: 'cycling' },
   ]
 
   param.entry.edit.isoline_mapbox.profile = 'driving';

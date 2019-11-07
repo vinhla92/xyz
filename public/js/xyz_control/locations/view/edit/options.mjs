@@ -1,16 +1,10 @@
 export default _xyz => entry => {
+  
+  const chk = entry.edit.options.find(
+    option => typeof option === 'object' && Object.values(option)[0] === entry.value || option === entry.value
+  ) || entry.value
 
-  // Map first level options and keys to the options object.
-  const options = entry.edit.options.map(option => {
-
-    // Return the first key when there are suboptions.
-    if (typeof option === 'object') return Object.keys(option)[0];
-
-    // Return the option text when there are no suboptions.
-    return option;
-  });
-
-  //options.push(' ');
+  entry.displayValue = typeof chk === 'object' && Object.keys(chk)[0] || chk || entry.value;
 
   entry.val.appendChild(_xyz.utils.wire()`
   <button class="ul-drop">
@@ -20,17 +14,27 @@ export default _xyz => entry => {
       e.preventDefault();
       e.target.parentElement.classList.toggle('active');
     }}>
-    <span class="ul-title">${entry.value}</span>
+    <span class="ul-title">${entry.displayValue}</span>
     <div class="icon"></div>
   </div>
   <ul>
-    ${options.map(
-      key => _xyz.utils.wire()`
+    ${entry.edit.options.map(
+      option => {
+
+        let key = option;
+        let value = option;
+
+        if (typeof option === 'object') {
+          key = Object.keys(option)[0];
+          value = Object.values(option)[0];
+        }
+        
+        return _xyz.utils.wire()`
         <li onclick=${e=>{
           const drop = e.target.closest('.ul-drop');
           drop.classList.toggle('active');
           drop.querySelector('.ul-title').textContent = key;
-          drop.querySelector('.ul-title').value = key;
+          drop.querySelector('.ul-title').value = value;
 
           // Set newValue and compare with current value.
           entry.location.view.valChange({
@@ -41,7 +45,8 @@ export default _xyz => entry => {
           //if (entry.select_other) entry.select_other.remove();
           //entry.ctrl.optionsTextInput(entry);
 
-        }}>${key}`)}`);
+        }}>${key}`
+    })}`);
 
   //entry.ctrl.optionsTextInput(entry);
 

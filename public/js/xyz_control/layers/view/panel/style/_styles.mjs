@@ -78,24 +78,24 @@ export default (_xyz, layer) => {
             layer.reload();
           }}>${key}`)}`);
           
-  } 
+  }
+
+  layer.foo = "bar";
   
   // Apply the current theme.
   applyTheme(layer); 
 
   panel.appendChild(layer.style.legend);
 
-  layer.foo = "bar";
-
-  if (layer.format === 'grid') legends.grid(layer);
-
-
   function applyTheme(layer) {
 
     // Empty legend.
     layer.style.legend.innerHTML = '';
 
-    if(!layer.filter) layer.filter = {};
+    if (layer.format === 'grid') return legends.grid(layer);
+
+    layer.filter = layer.filter || {};
+
     // Create / empty legend filter when theme is applied.
     layer.filter.legend = {};
   

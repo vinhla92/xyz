@@ -718,11 +718,9 @@
                             "inline": true,
                             "edit": {
                                 "options": [
-                                    "Open",
-                                    "Closed",
-                                    {
-                                        "Other": "text"
-                                    }
+                                    {"Open" : "1"},
+                                    {"Closed": "2"},
+                                    "Other"
                                 ]
                             }
                         }
@@ -1732,6 +1730,7 @@
                                 ]
                             }
                         },
+
                         {
                             "label": "Available Dashboards",
                             "type": "label",
