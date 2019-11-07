@@ -31,6 +31,9 @@ export default _xyz => location => {
   // Set record style to location.
   location.style = record.style;
 
+  // Set record colorFilter to location.
+  location.colorFilter = record.colorFilter;
+
   // Assign location to record.
   record.location = location;
 

@@ -25,7 +25,10 @@ export default _xyz => ({
   selectCallback: selectCallback(_xyz),
 
   list: [
-    {style: {strokeColor: '#9c27b0'}}
+    {
+      style: {strokeColor: '#9c27b0'},
+      colorFilter: 'invert(22%) sepia(80%) saturate(1933%) hue-rotate(272deg) brightness(97%) contrast(104%)'
+    }
   ],
 
   listview: listview(_xyz),

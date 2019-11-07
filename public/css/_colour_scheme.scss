@@ -51,6 +51,11 @@ input[type=range]::-moz-range-thumb {
     color: #DEF6CA;
 }
 
+.secondary-color-filter{
+    filter: invert(90%) sepia(21%) saturate(301%) hue-rotate(48deg) brightness(104%) contrast(93%);
+}
+
+
 .secondary-colour-bg {
     background-color: #DEF6CA;
     background: #DEF6CA;

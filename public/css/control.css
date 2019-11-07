@@ -43,6 +43,9 @@ input[type=range]::-moz-range-thumb {
 .secondary-colour {
   color: #DEF6CA; }
 
+.secondary-color-filter {
+  filter: invert(90%) sepia(21%) saturate(301%) hue-rotate(48deg) brightness(104%) contrast(93%); }
+
 .secondary-colour-bg {
   background-color: #DEF6CA;
   background: #DEF6CA; }
@@ -70,7 +73,8 @@ input[type=range]::-moz-range-thumb {
 .locationview {
   text-align: left;
   width: 100%;
-  table-layout: fixed; }
+  table-layout: fixed;
+  margin: 5px 0; }
   .locationview .label {
     padding-top: 5px; }
   .locationview textarea {
