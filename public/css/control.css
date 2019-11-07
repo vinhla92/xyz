@@ -1921,7 +1921,7 @@ button:disabled {
   cursor: pointer;
 }
 .listview .drawer.drawer-group.expandable-group {
-  max-height: 30px;
+  max-height: 37px;
   overflow: hidden;
   transition: max-height 0.3s ease-out;
   border-bottom: solid 1px #bbb;
