@@ -43,6 +43,7 @@
                 line-height: 2;
                 display: flex;
                 margin-left: 4px;
+                max-height: 37px;
 
                 >:nth-child(1){
                     overflow: hidden;
@@ -86,6 +87,7 @@
             display: flex;
             padding: 4px 0;
             margin-left: 4px;
+            max-height: 37px;
 
             >:nth-child(1){
                 overflow: hidden;
