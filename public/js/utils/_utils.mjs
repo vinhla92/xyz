@@ -12,10 +12,6 @@ export {colorFilter} from './colorFilter.mjs';
 
 export {createElement} from './createElement.mjs';
 
-export {dropdown} from './dropdown.mjs';
-
-export {dropdownCustom} from './dropdownCustom.mjs';
-
 export {dataURLtoBlob} from './dataURLtoBlob.mjs';
 
 export {getCircularReplacer} from './getCircularReplacer.mjs';

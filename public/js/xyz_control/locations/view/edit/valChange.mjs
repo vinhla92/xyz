@@ -15,7 +15,7 @@ export default (param) => {
   
   } else {
 
-    if(!param.entry.value) param.entry.value = '';
+    param.entry.value = param.entry.value || '';
 
     if (param.entry.value.toString() !== param.input.value) {
 
@@ -33,7 +33,7 @@ export default (param) => {
   if (param.entry.location.view.upload) {
 
     // Hide upload button if no other field in the infoj has a newValue.
-    if (!param.entry.location.infoj.some(field => field.newValue)) {
+    if (!param.entry.location.infoj.some(field => typeof field.newValue)) {
       param.entry.location.view.upload.disabled = true;
     } else {
       param.entry.location.view.upload.disabled = false;

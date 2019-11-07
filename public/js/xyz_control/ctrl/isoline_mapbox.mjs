@@ -13,17 +13,37 @@ export default _xyz => param => {
 
   mode_container.appendChild(setting_container);
 
-  setting_container.appendChild(_xyz.utils.dropdownCustom({
-    entries: [ {"driving": "Driving"},
-    {"walking": "Walking"},
-    {"cycling": "Cycling" }],
-    singleSelect: true,
-    selectedIndex: 0,
-    callback: e => {
-      param.entry.edit.isoline_mapbox.profile = e.target.dataset.field;
-      e.target.parentNode.previousSibling.textContent = e.target.textContent;
-    }
-  }));
+  const modes = [
+    {Driving : 'driving'},
+    {Walking: 'walking'},
+    {Cycling: 'cycling'}
+  ]
+
+  param.entry.edit.isoline_mapbox.profile = 'driving';
+
+  setting_container.appendChild(_xyz.utils.wire()`
+  <button class="ul-drop">
+  <div
+    class="head"
+    onclick=${e => {
+      e.preventDefault();
+      e.target.parentElement.classList.toggle('active');
+    }}>
+    <span class="ul-title">Driving</span>
+    <div class="icon"></div>
+  </div>
+  <ul>
+    ${modes.map(
+      keyVal => _xyz.utils.wire()`
+        <li onclick=${e=>{
+          const drop = e.target.closest('.ul-drop');
+          drop.classList.toggle('active');
+          drop.querySelector('.ul-title').textContent = Object.keys(keyVal)[0];
+
+          param.entry.edit.isoline_mapbox.profile = Object.values(keyVal)[0];
+
+        }}>${Object.keys(keyVal)[0]}`)}`);
+
 
   param.container.appendChild(_xyz.utils.wire()`
   <div style="margin-top: 12px;">

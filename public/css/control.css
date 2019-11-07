@@ -97,8 +97,7 @@ input[type=range]::-moz-range-thumb {
     font-size: 95%;
     padding-left: 10px; }
   .locationview .val {
-    font-weight: 400;
-    white-space: pre-wrap; }
+    font-weight: 400; }
   .locationview img {
     width: 100%; }
   .locationview .num {
@@ -356,40 +355,6 @@ input[type=range]::-moz-range-thumb {
   .input_group input:focus ~ .bar:before, .input_group input:focus ~ .bar:after {
     width: 50%; }
 
-<<<<<<< HEAD
-.loader {
-  height: 2px;
-  margin-top: -2px;
-  width: 100%;
-  position: relative;
-  overflow: hidden; }
-
-.loader:before {
-  display: block;
-  position: absolute;
-  content: "";
-  left: -200px;
-  width: 200px;
-  height: 2px;
-  background-color: #fff;
-  animation: loading 2s linear infinite; }
-
-@keyframes loading {
-  from {
-    left: -200px;
-    width: 30%; }
-  50% {
-    width: 30%; }
-  70% {
-    width: 70%; }
-  80% {
-    left: 50%; }
-  95% {
-    left: 120%; }
-  to {
-    left: 100%; } }
-=======
->>>>>>> 7d9479e1ebb63d4afbf6d69b7fc5d2d2c2560e92
 .range {
   width: 100%;
   width: calc(100% - 5px);

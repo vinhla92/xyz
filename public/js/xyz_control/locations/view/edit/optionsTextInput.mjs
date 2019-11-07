@@ -6,12 +6,9 @@ export default _xyz => entry => {
     || Object.values(entry.edit.options[entry.select.selectedIndex])[0] !== 'text') return;
 
     entry.select_other = _xyz.utils.wire()`
-  <input type="text"
-  onkeyup=${
-    e => {
-      entry.location.view.valChange({input: e.target, entry: entry})
-    }
-  }>`;
+  <input type="text" onkeyup=${ e => {
+    entry.location.view.valChange({input: e.target, entry: entry})
+  }}>`;
 
   entry.select_other.value = Object.keys(entry.edit.options[entry.select.selectedIndex])[0];
 

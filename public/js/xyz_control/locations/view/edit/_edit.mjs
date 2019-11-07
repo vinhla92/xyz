@@ -18,9 +18,9 @@ export default _xyz => entry => {
 
     options: options(_xyz),
 
-    suboptions: suboptions(_xyz),
+    //suboptions: suboptions(_xyz),
 
-    optionsTextInput: optionsTextInput(_xyz),
+    //optionsTextInput: optionsTextInput(_xyz),
 
   };
 
@@ -36,7 +36,7 @@ export default _xyz => entry => {
   if (entry.edit.options) return entry.ctrl.options(entry);
 
   // Create select input for asscoiated options.
-  if (entry.edit.options_field) return entry.ctrl.suboptions(entry);
+  //if (entry.edit.options_field) return entry.ctrl.suboptions(entry);
 
   // Create a 3 line textarea for textarea type entry.
   if (entry.type === 'textarea') {

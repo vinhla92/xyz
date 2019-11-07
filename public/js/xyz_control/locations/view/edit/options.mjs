@@ -10,29 +10,39 @@ export default _xyz => entry => {
     return option;
   });
 
-  // Unshift the entry value if not in options array.
-  options.indexOf(entry.value) < 0
-    && options.unshift(entry.value)
-    && entry.edit.options.unshift(entry.value);
+  //options.push(' ');
 
-  // Pass options object to the dropdown factory.
-  entry.select = _xyz.utils.dropdown({
-    appendTo: entry.val,
-    entries: options,
-    selected: entry.value,
-    onchange: e => {
+  entry.val.appendChild(_xyz.utils.wire()`
+  <button class="ul-drop">
+  <div
+    class="head"
+    onclick=${e => {
+      e.preventDefault();
+      e.target.parentElement.classList.toggle('active');
+    }}>
+    <span class="ul-title">${entry.value}</span>
+    <div class="icon"></div>
+  </div>
+  <ul>
+    ${options.map(
+      key => _xyz.utils.wire()`
+        <li onclick=${e=>{
+          const drop = e.target.closest('.ul-drop');
+          drop.classList.toggle('active');
+          drop.querySelector('.ul-title').textContent = key;
+          drop.querySelector('.ul-title').value = key;
 
-      // Set newValue and compare with current value.
-      entry.location.view.valChange({input: e.target, entry: entry});
+          // Set newValue and compare with current value.
+          entry.location.view.valChange({
+            input: drop.querySelector('.ul-title'),
+            entry: entry
+          });
 
-      // Remove the custom text input.
-      if (entry.select_other) entry.select_other.remove();
+          //if (entry.select_other) entry.select_other.remove();
+          //entry.ctrl.optionsTextInput(entry);
 
-      entry.ctrl.optionsTextInput(entry);
+        }}>${key}`)}`);
 
-    }
-  });
-
-  entry.ctrl.optionsTextInput(entry);
+  //entry.ctrl.optionsTextInput(entry);
 
 };

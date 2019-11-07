@@ -10,19 +10,37 @@ export default _xyz => param => {
 
   mode_container.appendChild(setting_container);
 
-  setting_container.appendChild(_xyz.utils.dropdownCustom({
-    entries: [
-    { "car": "Driving"},
-    { "pedestrian": "Walking"},
-    { "truck": "Cargo"},
-    { "carHOV": "HOV lane"} ],
-    singleSelect: true,
-    selectedIndex: 0,
-    callback: e => {
-      param.entry.edit.isoline_here.mode = e.target.dataset.field;
-      e.target.parentNode.previousSibling.textContent = e.target.textContent;
-    }
-  }));
+  const modes = [
+    {Driving : 'car'},
+    {Walking: 'pedestrian'},
+    {Cargo: 'truck'},
+    {'HOV lane': 'carHOV'}
+  ];
+
+  param.entry.edit.isoline_here.mode = 'car';
+
+  setting_container.appendChild(_xyz.utils.wire()`
+  <button class="ul-drop">
+  <div
+    class="head"
+    onclick=${e => {
+      e.preventDefault();
+      e.target.parentElement.classList.toggle('active');
+    }}>
+    <span class="ul-title">Driving</span>
+    <div class="icon"></div>
+  </div>
+  <ul>
+    ${modes.map(
+      keyVal => _xyz.utils.wire()`
+        <li onclick=${e=>{
+          const drop = e.target.closest('.ul-drop');
+          drop.classList.toggle('active');
+          drop.querySelector('.ul-title').textContent = Object.keys(keyVal)[0];
+
+          param.entry.edit.isoline_here.mode = Object.values(keyVal)[0];
+
+        }}>${Object.keys(keyVal)[0]}`)}`);
 
   let range_container = _xyz.utils.wire()`<div style="margin-top: 8px;">`;
 
@@ -34,44 +52,64 @@ export default _xyz => param => {
 
   range_container.appendChild(range_setting_container);
 
-  range_setting_container.appendChild(_xyz.utils.dropdownCustom({
-    entries: [{time: "Time (min)"}, { distance: "Distance (km)"}],
-    singleSelect: true,
-    selectedIndex: 0,
-    callback: e => {
-      param.entry.edit.isoline_here.rangetype = e.target.dataset.field;
-      e.target.parentNode.previousSibling.textContent = e.target.textContent;
+  const ranges = [
+    { time: "Time (min)" },
+    { distance: "Distance (km)" }
+  ]
 
-      const input = slider_here_range.querySelector('input');
+  param.entry.edit.isoline_here.rangetype = 'time';
 
-      if(param.entry.edit.isoline_here.rangetype === 'time') {
 
-        slider_here_range.querySelector('span').textContent = 'Travel time in minutes: ';
+  range_setting_container.appendChild(_xyz.utils.wire()`
+  <button class="ul-drop">
+  <div
+    class="head"
+    onclick=${e => {
+      e.preventDefault();
+      e.target.parentElement.classList.toggle('active');
+    }}>
+    <span class="ul-title">Time (min)</span>
+    <div class="icon"></div>
+  </div>
+  <ul>
+    ${ranges.map(
+      keyVal => _xyz.utils.wire()`
+        <li onclick=${e=>{
+          const drop = e.target.closest('.ul-drop');
+          drop.classList.toggle('active');
+          drop.querySelector('.ul-title').textContent = Object.values(keyVal)[0];
 
-        input.oninput = e => {
-          param.entry.edit.isoline_here.minutes = parseInt(e.target.value);
-          e.target.parentNode.previousElementSibling.textContent = param.entry.edit.isoline_here.minutes;
-        };
+          param.entry.edit.isoline_here.rangetype = Object.keys(keyVal)[0];
 
-        input.value = param.entry.edit.isoline_here.minutes;
-        input.parentNode.previousElementSibling.textContent = param.entry.edit.isoline_here.minutes;
-      
-      }
+          const input = slider_here_range.querySelector('input');
 
-      if(param.entry.edit.isoline_here.rangetype === 'distance') {
+          if(param.entry.edit.isoline_here.rangetype === 'time') {
+    
+            slider_here_range.querySelector('span').textContent = 'Travel time in minutes: ';
+    
+            input.oninput = e => {
+              param.entry.edit.isoline_here.minutes = parseInt(e.target.value);
+              e.target.parentNode.previousElementSibling.textContent = param.entry.edit.isoline_here.minutes;
+            };
+    
+            input.value = param.entry.edit.isoline_here.minutes;
+            input.parentNode.previousElementSibling.textContent = param.entry.edit.isoline_here.minutes;
+          
+          }
+    
+          if(param.entry.edit.isoline_here.rangetype === 'distance') {
+    
+            slider_here_range.querySelector('span').textContent = 'Travel distance in kilometer: ';
+    
+            input.oninput = e => {
+              param.entry.edit.isoline_here.distance = parseInt(e.target.value);
+              e.target.parentNode.previousElementSibling.textContent = param.entry.edit.isoline_here.distance;
+            };
+            input.value = param.entry.edit.isoline_here.distance;
+            input.parentNode.previousElementSibling.textContent = param.entry.edit.isoline_here.distance;
+          }
 
-        slider_here_range.querySelector('span').textContent = 'Travel distance in kilometer: ';
-
-        input.oninput = e => {
-          param.entry.edit.isoline_here.distance = parseInt(e.target.value);
-          e.target.parentNode.previousElementSibling.textContent = param.entry.edit.isoline_here.distance;
-        };
-        input.value = param.entry.edit.isoline_here.distance;
-        input.parentNode.previousElementSibling.textContent = param.entry.edit.isoline_here.distance;
-      }
-
-    }
-  }));
+        }}>${Object.values(keyVal)[0]}`)}`);
 
   param.entry.edit.isoline_here.minutes = param.entry.edit.isoline_here.minutes || 10;
 

@@ -112,29 +112,6 @@ export default (_xyz, layer) => {
 
           }}>${keyVal[1]}`)}`
 
-  // layer.filter.select = _xyz.utils.dropdownCustom({
-  //   entries: filter_entries,
-  //   placeholder: 'Select filter from list.',
-  //   callback: e => {
-
-  //     const entry = infoj.find(entry => entry.field === e.target.dataset.field);
-
-  //     // Display clear all button.
-  //     layer.filter.clear_all.style.display = 'block';
-
-  //     if (entry.filter == 'date') return filter_date(_xyz, layer, entry);
-
-  //     if (entry.filter === 'numeric') return filter_numeric(_xyz, layer, entry);
-
-  //     if (entry.filter === 'like' || entry.filter === 'match') return filter_text(_xyz, layer, entry);
-
-  //     if (entry.filter.in) return filter_in(_xyz, layer, entry);
-
-  //     if (entry.filter === 'boolean') return filter_boolean(_xyz, layer, entry);
-
-  //   }
-  // });
-
   panel.appendChild(layer.filter.select);
 
   layer.filter.clear_all = _xyz.utils.wire()`
@@ -148,8 +125,8 @@ export default (_xyz, layer) => {
       // Remove all filter blocks.
       layer.filter.list.innerHTML = null;
   
-      // Enable all options in _xyz.utils.dropdown.
-      layer.filter.select.querySelectorAll('ul li').forEach(li =>  li.classList.remove('selected', 'secondary-colour-bg'));
+      // Enable all options.
+      //layer.filter.select.querySelectorAll('ul li').forEach(li =>  li.classList.remove('selected', 'secondary-colour-bg'));
   
       // Reset layer filter object.
       layer.filter.current = {};

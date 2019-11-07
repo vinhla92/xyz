@@ -10,20 +10,16 @@ export default _xyz => layer => {
 
   Object.entries(layer.style.theme.cat).forEach(cat => {
 
-    let image = _xyz.utils.wire(null, 'svg')
-    `<image
-      x=0
-      width=20
-      height=20
-    >`;
+    let image = _xyz.utils.wire(null, 'svg')`
+    <image x=0 width=20 height=20>`;
 
     image.setAttribute('y', y);
     image.setAttribute('href', _xyz.utils.svg_symbols(Object.assign({}, layer.style.marker, cat[1].style || cat[1])));
 
     legend.appendChild(image);
 
-    let text = _xyz.utils.wire(null, 'svg')
-    `<text x=25 style='font-size:12px; alignment-baseline:central; cursor:pointer;'>${cat[1].label || cat[0]}`;
+    let text = _xyz.utils.wire(null, 'svg')`
+    <text x=25 style='font-size:12px; alignment-baseline:central; cursor:pointer;'>${cat[1].label || cat[0]}`;
 
     text.setAttribute('y', y + 13);
 
