@@ -1933,6 +1933,7 @@ button:disabled {
 .listview .drawer.drawer-group.expanded-group {
   max-height: 2500px;
   overflow: visible;
+  border-bottom: none;
 }
 .listview .drawer.drawer-group.expanded-group .icon-group-expander {
   background-image: url("../icons/icon-keyboard-arrow-up.svg");

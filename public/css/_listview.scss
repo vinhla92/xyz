@@ -72,6 +72,7 @@
             &.expanded-group {
                 max-height: 2500px;
                 overflow: visible;
+                border-bottom: none;
 
                 .icon-group-expander {
                     background-image: url("../icons/icon-keyboard-arrow-up.svg");
