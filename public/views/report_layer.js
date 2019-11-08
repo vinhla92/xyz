@@ -21,8 +21,6 @@ function init(_xyz) {
 
   const layer = _xyz.layers.list[params.layer];
 
-  layer.view();
-
   layer.show();
 
   if (layer.style.theme) {

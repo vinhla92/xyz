@@ -2,12 +2,6 @@ export default _xyz => layer => {
 
   // Create grid_size dropdown.
   layer.style.legend.appendChild(_xyz.utils.wire()`
-  <div style="margin-top: 5px;">Select size variable.`);
-
-
-  layer.something = "else";
-
-  layer.style.legend.appendChild(_xyz.utils.wire()`
   <button class="ul-drop">
   <div
     class="head"
@@ -25,19 +19,16 @@ export default _xyz => layer => {
           const drop = e.target.closest('.ul-drop');
           drop.classList.toggle('active');
           drop.querySelector('.ul-title').textContent = keyVal[0];
-
-
-          layer.something = "wrong";
-
           layer.grid_size = keyVal[1];
           layer.reload();
 
         }}>${keyVal[0]}`)}`);
 
-  // Create grid_color dropdown.
-  layer.style.legend.appendChild(_xyz.utils.wire()`
-  <div style="margin-top: 5px; margin-bottom: 8px;">Select colour variable.`);
+  // Grid SVG legend.
+  const legend = layer.style.legend.appendChild(_xyz.utils.wire()`
+  <svg xmlns='http://www.w3.org/2000/svg'>`);
 
+  // Create grid_size dropdown.
   layer.style.legend.appendChild(_xyz.utils.wire()`
   <button class="ul-drop">
   <div
@@ -62,10 +53,8 @@ export default _xyz => layer => {
 
       }}>${keyVal[0]}`)}`);
 
-  const legend = layer.style.legend.appendChild(_xyz.utils.wire()`
-  <svg xmlns='http://www.w3.org/2000/svg'>`);
-    
-  // Create SVG grid legend
+
+  // Populate SVG grid legend
   let
     yTrack = 35,
     n = layer.style.range.length,
@@ -208,5 +197,7 @@ export default _xyz => layer => {
     }}>
   </input>
   <div></div><span>Display colour as a ratio to the size.`);
+
+  return layer.style.legend;
 
 };

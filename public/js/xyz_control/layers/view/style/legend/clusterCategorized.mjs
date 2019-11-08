@@ -1,7 +1,8 @@
 export default _xyz => layer => {
 
-  const legend = layer.style.legend.appendChild(_xyz.utils.wire()
-  `<svg xmlns='http://www.w3.org/2000/svg'>`);
+  const legend = _xyz.utils.wire()`<svg>`;
+
+  layer.style.legend = legend;
        
   let y = 10;
 
@@ -19,7 +20,9 @@ export default _xyz => layer => {
     legend.appendChild(image);
 
     let text = _xyz.utils.wire(null, 'svg')`
-    <text x=25 style='font-size:12px; alignment-baseline:central; cursor:pointer;'>${cat[1].label || cat[0]}`;
+    <text
+      style='font-size:12px; alignment-baseline:central; cursor:pointer;'
+      x=25 >${cat[1].label || cat[0]}`;
 
     text.setAttribute('y', y + 13);
 
@@ -59,24 +62,18 @@ export default _xyz => layer => {
   // Attach box for other/default categories.
   if (layer.style.theme.other) {
 
-    let image = _xyz.utils.wire(null, 'svg')
-    `<image
-      x=0
-      width=20
-      height=20
-      />`;
+    let image = _xyz.utils.wire(null, 'svg')`
+    <image x=0 width=20 height=20 />`;
 
     image.setAttribute('y', y);
     image.setAttribute('href', _xyz.utils.svg_symbols(layer.style.marker));
 
     legend.appendChild(image);
 
-    let text = _xyz.utils.wire(null, 'svg')
-    `<text
-    x=25
-    style='font-size:12px; alignment-baseline:central; cursor:pointer;'
-    >other
-    </text>`;
+    let text = _xyz.utils.wire(null, 'svg')`
+    <text
+      style='font-size:12px; alignment-baseline:central; cursor:pointer;'
+      x=25>other</text>`;
 
     text.setAttribute('y', y + 13);
 
@@ -92,6 +89,7 @@ export default _xyz => layer => {
         layer.filter.legend[layer.style.theme.field].in = [];
       
       } else {
+
         e.target.style.textDecoration = 'line-through';
         e.target.style.opacity = 0.8;
         e.target.style.fillOpacity = 0.8;
@@ -115,28 +113,23 @@ export default _xyz => layer => {
 
   }
 
-  let imageMulti = _xyz.utils.wire(null, 'svg')
-  `<image
-  x=0
-  width=40
-  height=40
-  />`;
+  let imageMulti = _xyz.utils.wire(null, 'svg')`
+  <image x=0 width=40 height=40 />`;
 
   imageMulti.setAttribute('y', y + 5);
   imageMulti.setAttribute('href', _xyz.utils.svg_symbols(layer.style.markerMulti));
 
   legend.appendChild(imageMulti);
 
-  let textMulti = _xyz.utils.wire(null, 'svg')
-  `<text
-    x=44
+  let textMulti = _xyz.utils.wire(null, 'svg')`
+  <text
     style='font-size:12px; alignment-baseline:central; cursor:pointer;'
-    >Multiple Locations
-    </text>`;
+    x=44>Multiple Locations</text>`;
 
   textMulti.setAttribute('y', y + 27);
   legend.appendChild(textMulti);
       
   legend.style.height = `${y + 50}px`;
 
+  return legend;
 };

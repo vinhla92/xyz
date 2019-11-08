@@ -1,20 +1,25 @@
-import header from './header.mjs';
+import create from './create.mjs'
 
-import dashboard from './dashboard.mjs';
+import style from './style/_styles.mjs';
 
-export default _xyz => layer => {
+import filter from './filter/_filter.mjs';
 
-  layer.view.drawer = _xyz.utils.wire()`<div class="drawer">`;
-  
-  layer.view.header = header(_xyz, layer);
+import draw from './draw.mjs';
 
-  layer.view.drawer.appendChild(layer.view.header);
-       
-  dashboard(_xyz, layer);
+import cluster from './cluster.mjs';
 
-  // Make the layer view opaque if no table is available for the current zoom level.
-  if (layer.tables) _xyz.mapview.node.addEventListener('changeEnd', () => {
-    layer.view.drawer.style.opacity = !layer.tableCurrent() ? 0.4 : 1;
-  });
-    
-};
+import table from './table.mjs';
+
+import report from './report.mjs';
+
+export default _xyz => ({
+
+  create: create(_xyz),
+
+  style: style(_xyz),
+
+  filter: filter(_xyz),
+
+  draw: draw(_xyz),
+
+});

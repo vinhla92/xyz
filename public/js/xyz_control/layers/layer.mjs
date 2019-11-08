@@ -15,27 +15,32 @@ import count from './count.mjs';
 
 export default _xyz => layer => {
 
-  layer.tableCurrent = tableCurrent(_xyz);
+  const _layer = Object.assign(
+    {
+      tableCurrent: tableCurrent(_xyz),
     
-  layer.tableMin = tableMin(_xyz);
-  
-  layer.tableMax = tableMax(_xyz);
-
-  layer.zoomToExtent = zoomToExtent(_xyz);
-  
-  layer.show = show(_xyz);
-  
-  layer.remove = remove(_xyz);
-
-  layer.count = count(_xyz);
-
-  layer.view = {};
+      tableMin: tableMin(_xyz),
+      
+      tableMax: tableMax(_xyz),
+    
+      zoomToExtent: zoomToExtent(_xyz),
+      
+      show: show(_xyz),
+      
+      remove: remove(_xyz),
+    
+      count: count(_xyz),
+    
+    },
+    layer
+  )
 
   // Set the first theme from themes array.
-  if (layer.style && layer.style.themes) layer.style.theme = layer.style.themes[Object.keys(layer.style.themes)[0]];
+  if (_layer.style && _layer.style.themes) _layer.style.theme = _layer.style.themes[Object.keys(_layer.style.themes)[0]];
 
-  _xyz.layers.format[layer.format](layer);
+  // Initialise Openlayers source and layer.
+  _xyz.layers.format[layer.format](_layer);
 
-  return layer;
+  return _layer;
 
 };

@@ -1,9 +1,8 @@
 export default _xyz => layer => {
 
-  const legend = layer.style.legend.appendChild(_xyz.utils.wire()
-  `<svg 
-  xmlns='http://www.w3.org/2000/svg'
-  >`);
+  const legend = _xyz.utils.wire()`<svg>`;
+
+  layer.style.legend = legend;
   
   let y = 10;
 
@@ -21,13 +20,12 @@ export default _xyz => layer => {
 
     if(cat_style.fillOpacity === undefined) {
 
-      let line = _xyz.utils.wire(null, 'svg')
-      `<line
-      x1=4
-      x2=18
-      stroke=${cat_style.color}
-      stroke-width=${cat_style.weight || 1}
-      >`;
+      let line = _xyz.utils.wire(null, 'svg')`
+      <line
+        x1=4
+        x2=18
+        stroke=${cat_style.color}
+        stroke-width=${cat_style.weight || 1}>`;
 
       line.setAttribute("y1", y + 10);
       line.setAttribute("y2", y + 10);
@@ -36,16 +34,15 @@ export default _xyz => layer => {
   
     } else {
 
-      let rect = _xyz.utils.wire(null, 'svg')
-      `<rect
-      x=4
-      width=14
-      height=14
-      fill=${cat_style.fillColor || '#FFF'}
-      fill-opacity=${cat_style.fillOpacity}
-      stroke=${cat_style.strokeColor}
-      stroke-width=${cat_style.weight || 1}
-      >`;
+      let rect = _xyz.utils.wire(null, 'svg')`
+      <rect
+        x=4
+        width=14
+        height=14
+        fill=${cat_style.fillColor || '#FFF'}
+        fill-opacity=${cat_style.fillOpacity}
+        stroke=${cat_style.strokeColor}
+        stroke-width=${cat_style.weight || 1}>`;
 
       rect.setAttribute("y", y + 3);
 
@@ -53,12 +50,10 @@ export default _xyz => layer => {
       
     } 
 
-    let text = _xyz.utils.wire(null, 'svg')
-    `<text
-    x=25
-    style='font-size:12px; alignment-baseline:central; cursor:pointer;'
-    >${cat[1].label || cat[0]}
-    </text>`;
+    let text = _xyz.utils.wire(null, 'svg')`
+    <text
+      style='font-size:12px; alignment-baseline:central; cursor:pointer;'
+      x=25>${cat[1].label || cat[0]}</text>`;
 
     text.setAttribute("y", y + 11);
 
@@ -92,13 +87,12 @@ export default _xyz => layer => {
 
     if(layer.style.default.fillOpacity === undefined) {
 
-      let line = _xyz.utils.wire(null, 'svg')
-      `<line
-      x1=4
-      x2=18
-      stroke=${layer.style.default.color}
-      stroke-width=${layer.style.default.weight || 1}
-      >`;
+      let line = _xyz.utils.wire(null, 'svg')`
+      <line
+        x1=4
+        x2=18
+        stroke=${layer.style.default.color}
+        stroke-width=${layer.style.default.weight || 1}>`;
 
       line.setAttribute("y1", y + 10);
       line.setAttribute("y2", y + 10);
@@ -106,28 +100,25 @@ export default _xyz => layer => {
   
     } else {
 
-      let rect = _xyz.utils.wire(null, 'svg')
-      `<rect
-      x=4
-      width=14
-      height=14
-      fill=${layer.style.default.fillColor || '#FFF'}
-      fill-opacity=${layer.style.default.fillOpacity}
-      stroke=${layer.style.default.strokeColor}
-      stroke-width=${layer.style.default.weight || 1}
-      >`;
+      let rect = _xyz.utils.wire(null, 'svg')`
+      <rect
+        x=4
+        width=14
+        height=14
+        fill=${layer.style.default.fillColor || '#FFF'}
+        fill-opacity=${layer.style.default.fillOpacity}
+        stroke=${layer.style.default.strokeColor}
+        stroke-width=${layer.style.default.weight || 1}>`;
 
       rect.setAttribute("y", y + 3);
       legend.appendChild(rect);
     }
 
     // Attach text with filter on click for the other/default category.
-    let text = _xyz.utils.wire(null, 'svg')
-    `<text
-    x=25
-    style='font-size:12px; alignment-baseline:central; cursor:pointer;'
-    >other
-    </text>`;
+    let text = _xyz.utils.wire(null, 'svg')`
+    <text
+      style='font-size:12px; alignment-baseline:central; cursor:pointer;'
+      x=25>other</text>`;
 
     text.setAttribute("y", y + 11);
 
@@ -144,6 +135,7 @@ export default _xyz => layer => {
         e.target.style.textDecoration = 'line-through';
         e.target.style.opacity = 0.8;
         e.target.style.fillOpacity = 0.8;
+
         // Assign all cat keys to IN filter.
         layer.filter.legend[layer.style.theme.field].in = Object.keys(layer.style.theme.cat);
       }
@@ -158,6 +150,7 @@ export default _xyz => layer => {
   }
 
   // Set height of the svg element.
-  legend.style.height = `${y}px`;
-      
+  // legend.style.height = `${y}px`;
+
+  return legend;
 };

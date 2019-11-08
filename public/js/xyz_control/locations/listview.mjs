@@ -55,6 +55,12 @@ export default _xyz => {
     Object.values(_xyz.locations.listview.node.children).forEach(el => el.classList.remove('expanded'));
      
     _xyz.locations.listview.node.insertBefore(location.view.drawer, _xyz.locations.listview.node.firstChild);
+
+    setTimeout(
+      () => {
+      const scrolly = _xyz.locations.listview.node.closest('.scrolly');
+      scrolly && scrolly.dispatchEvent(new CustomEvent('scrolly'));
+      }, 500);
   
     _xyz.locations.listview.callbackAdd && _xyz.locations.listview.callbackAdd();
 

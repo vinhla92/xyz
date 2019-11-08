@@ -56,14 +56,11 @@ export default _xyz => {
     // Assigne workspace locales from locales list and input params.
     _xyz.workspace.locale = Object.assign({ key: locale }, _xyz.workspace.locales[locale]);
 
-    // Create layers list.
-    _xyz.layers.list = {};
-
     // Load layers.
     Object.keys(_xyz.workspace.locale.layers)
       .filter(key => key.indexOf('__') === -1)
       .forEach(key => {
-        _xyz.layers.list[key] = Object.assign({}, _xyz.layers.layer(_xyz.workspace.locale.layers[key]));
+        _xyz.layers.list[key] = _xyz.layers.layer(_xyz.workspace.locale.layers[key]);
       });
 
   };

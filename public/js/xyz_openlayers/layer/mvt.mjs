@@ -16,12 +16,9 @@ export default _xyz => layer => {
 
     //source.tileCache.expireCache();
     //source.tileCache.clear();
-    layer.tilesLoading = 0;
     source.clear();
     source.refresh({force: true});
   };
-
-  layer.tilesLoading = 0;
 
   // Define source for mvt layer.
   const source = new _xyz.mapview.lib.source.VectorTile({
@@ -49,19 +46,6 @@ export default _xyz => layer => {
       return url;
       
     }
-  });
-
-  // Increase the number of tiles loading at load start event.
-  source.on('tileloadstart', () => {
-    layer.tilesLoading++;
-  });
-  
-  // Decrease the number of tiles loading at load end event.
-  source.on('tileloadend', () => {
-    layer.tilesLoading--;
-    layer.view.timeout && clearTimeout(layer.view.timeout);
-    layer.view.timeout = setTimeout(()=>{
-    }, 1000);
   });
 
   layer.L = new _xyz.mapview.lib.layer.VectorTile({

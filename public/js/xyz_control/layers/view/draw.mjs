@@ -1,34 +1,27 @@
-export default (_xyz, layer) => {
+export default _xyz => layer => {
 
   if (!layer.edit) return;
 
-  if(layer.edit.properties && Object.keys(layer.edit).length === 1) return;
+  if (layer.edit.properties && Object.keys(layer.edit).length === 1) return;
 
-  if(layer.edit.properties && layer.edit.delete && Object.keys(layer.edit).length === 2) return;
+  if (layer.edit.properties && layer.edit.delete && Object.keys(layer.edit).length === 2) return;
 
+  const panel = _xyz.utils.wire()`<div class="panel expandable">`;
 
-  // Create cluster panel and add to layer dashboard.
-  layer.edit.panel = _xyz.utils.wire()`<div class="panel expandable">`;
-
-  layer.view.dashboard.appendChild(layer.edit.panel);
-    
-
-  // Drawing panel header.
-  const header = _xyz.utils.wire()`
-    <div
+  // Panel header
+  panel.appendChild(_xyz.utils.wire()`
+  <div
     class="btn_text cursor noselect primary-colour"
     onclick=${e => {
-    e.stopPropagation();
-    _xyz.utils.toggleExpanderParent({
-      expandable: layer.edit.panel,
-      accordeon: true,
-    });
-  }}>Add new features`;
-    
-  layer.edit.panel.appendChild(header);
+      e.stopPropagation();
+      _xyz.utils.toggleExpanderParent({
+        expandable: panel,
+        accordeon: true,
+      });
+    }}>Add new Locations`);
 
 
-  layer.edit.point && layer.edit.panel.appendChild(_xyz.utils.wire()`
+  layer.edit.point && panel.appendChild(_xyz.utils.wire()`
   <div
   class="btn_state btn_wide cursor noselect primary-colour"
   onclick=${e => {
@@ -39,13 +32,13 @@ export default (_xyz, layer) => {
     if (btn.classList.contains('active')) return _xyz.mapview.interaction.draw.finish();
 
     btn.classList.add('active');
-    layer.view.header.classList.add('edited', 'secondary-colour-bg');
+    layer.view.querySelector('.header').classList.add('edited', 'secondary-colour-bg');
    
     _xyz.mapview.interaction.draw.begin({
       layer: layer,
       type: 'Point',
       callback: () => {
-        layer.view.header.classList.remove('edited', 'secondary-colour-bg');
+        layer.view.querySelector('.header').classList.remove('edited', 'secondary-colour-bg');
         btn.classList.remove('active');
       }
     });
@@ -53,7 +46,7 @@ export default (_xyz, layer) => {
   }}>Point`);
   
 
-  layer.edit.polygon && layer.edit.panel.appendChild(_xyz.utils.wire()`
+  layer.edit.polygon && panel.appendChild(_xyz.utils.wire()`
   <div
   class="btn_state btn_wide cursor noselect primary-colour"
   onclick=${e => {
@@ -64,13 +57,13 @@ export default (_xyz, layer) => {
     if (btn.classList.contains('active')) return _xyz.mapview.interaction.draw.finish();
 
     btn.classList.add('active');
-    layer.view.header.classList.add('edited', 'secondary-colour-bg');
+    layer.view.querySelector('.header').classList.add('edited', 'secondary-colour-bg');
 
     _xyz.mapview.interaction.draw.begin({
       layer: layer,
       type: 'Polygon',
       callback: () => {
-        layer.view.header.classList.remove('edited', 'secondary-colour-bg');
+        layer.view.querySelector('.header').classList.remove('edited', 'secondary-colour-bg');
         btn.classList.remove('active');
       }
     });
@@ -78,7 +71,7 @@ export default (_xyz, layer) => {
   }}>Polygon`);
   
 
-  layer.edit.rectangle && layer.edit.panel.appendChild(_xyz.utils.wire()`
+  layer.edit.rectangle && panel.appendChild(_xyz.utils.wire()`
   <div
   class="btn_state btn_wide cursor noselect primary-colour"
   onclick=${e => {
@@ -89,14 +82,14 @@ export default (_xyz, layer) => {
     if (btn.classList.contains('active')) return _xyz.mapview.interaction.draw.finish();
 
     btn.classList.add('active');
-    layer.view.header.classList.add('edited', 'secondary-colour-bg');
+    layer.view.querySelector('.header').classList.add('edited', 'secondary-colour-bg');
 
     _xyz.mapview.interaction.draw.begin({
       layer: layer,
       type: 'Circle',
       geometryFunction: _xyz.mapview.lib.draw.createBox(),
       callback: () => {
-        layer.view.header.classList.remove('edited', 'secondary-colour-bg');
+        layer.view.querySelector('.header').classList.remove('edited', 'secondary-colour-bg');
         btn.classList.remove('active');
       }
     });
@@ -104,7 +97,7 @@ export default (_xyz, layer) => {
   }}>Rectangle`);
   
 
-  layer.edit.circle && layer.edit.panel.appendChild(_xyz.utils.wire()`
+  layer.edit.circle && panel.appendChild(_xyz.utils.wire()`
   <div
   class="btn_state btn_wide cursor noselect primary-colour"
   onclick=${e => {
@@ -115,13 +108,13 @@ export default (_xyz, layer) => {
     if (btn.classList.contains('active')) return _xyz.mapview.interaction.draw.finish();
 
     btn.classList.add('active');
-    layer.view.header.classList.add('edited', 'secondary-colour-bg');
+    layer.view.querySelector('.header').classList.add('edited', 'secondary-colour-bg');
 
     _xyz.mapview.interaction.draw.begin({
       layer: layer,
       type: 'Circle',
       callback: () => {
-        layer.view.header.classList.remove('edited', 'secondary-colour-bg');
+        layer.view.querySelector('.header').classList.remove('edited', 'secondary-colour-bg');
         btn.classList.remove('active');
       }
     });
@@ -129,7 +122,7 @@ export default (_xyz, layer) => {
   }}>Circle`);
 
 
-  layer.edit.line && layer.edit.panel.appendChild(_xyz.utils.wire()`
+  layer.edit.line && panel.appendChild(_xyz.utils.wire()`
   <div
   class="btn_state btn_wide cursor noselect primary-colour"
   onclick=${e => {
@@ -140,13 +133,13 @@ export default (_xyz, layer) => {
     if (btn.classList.contains('active')) return _xyz.mapview.interaction.draw.finish();
 
     btn.classList.add('active');
-    layer.view.header.classList.add('edited', 'secondary-colour-bg');
+    layer.view.querySelector('.header').classList.add('edited', 'secondary-colour-bg');
 
     _xyz.mapview.interaction.draw.begin({
       layer: layer,
       type: 'LineString',
       callback: () => {
-        layer.view.header.classList.remove('edited', 'secondary-colour-bg');
+        layer.view.querySelector('.header').classList.remove('edited', 'secondary-colour-bg');
         btn.classList.remove('active');
       }
     });
@@ -154,7 +147,7 @@ export default (_xyz, layer) => {
   }}>Line`);
 
 
-  layer.edit.freehand && layer.edit.panel.appendChild(_xyz.utils.wire()`
+  layer.edit.freehand && panel.appendChild(_xyz.utils.wire()`
   <div
   class="btn_state btn_wide cursor noselect primary-colour"
   onclick=${e => {
@@ -165,14 +158,14 @@ export default (_xyz, layer) => {
     if (btn.classList.contains('active')) return _xyz.mapview.interaction.draw.finish();
 
     btn.classList.add('active');
-    layer.view.header.classList.add('edited', 'secondary-colour-bg');
+    layer.view.querySelector('.header').classList.add('edited', 'secondary-colour-bg');
 
     _xyz.mapview.interaction.draw.begin({
       layer: layer,
       type: 'LineString',
       freehand: true,
       callback: () => {
-        layer.view.header.classList.remove('edited', 'secondary-colour-bg');
+        layer.view.querySelector('.header').classList.remove('edited', 'secondary-colour-bg');
         btn.classList.remove('active');
       }
     });
@@ -204,14 +197,14 @@ export default (_xyz, layer) => {
       }
       >Mapbox Isoline settings`);
 
-    layer.edit.panel.appendChild(_container);
+    panel.appendChild(_container);
 
     _xyz.ctrl.isoline_mapbox({
       entry: layer,
       container: _container
     });
 
-    layer.edit.panel.appendChild(_xyz.utils.wire()`
+    panel.appendChild(_xyz.utils.wire()`
     <div
     class="btn_state btn_wide cursor noselect primary-colour"
     onclick=${e => {
@@ -222,7 +215,7 @@ export default (_xyz, layer) => {
     if (btn.classList.contains('active')) return _xyz.mapview.interaction.draw.finish();
 
     btn.classList.add('active');
-    layer.view.header.classList.add('edited', 'secondary-colour-bg');
+    layer.view.querySelector('.header').classList.add('edited', 'secondary-colour-bg');
   
     _xyz.mapview.interaction.draw.begin({
       layer: layer,
@@ -279,7 +272,7 @@ export default (_xyz, layer) => {
         return geometry;
       },
       callback: () => {
-        layer.view.header.classList.remove('edited', 'secondary-colour-bg');
+        layer.view.querySelector('.header').classList.remove('edited', 'secondary-colour-bg');
         btn.classList.remove('active');
       }
     });
@@ -310,14 +303,14 @@ export default (_xyz, layer) => {
           });
         }}>Here Isoline settings`);
 
-    layer.edit.panel.appendChild(_container);
+    panel.appendChild(_container);
 
     _xyz.ctrl.isoline_here({
       entry: layer,
       container: _container
     });
 
-    layer.edit.panel.appendChild(_xyz.utils.wire()`
+    panel.appendChild(_xyz.utils.wire()`
     <div
     class="btn_state btn_wide cursor noselect primary-colour"
     onclick=${e => {
@@ -328,7 +321,7 @@ export default (_xyz, layer) => {
     if (btn.classList.contains('active')) return _xyz.mapview.interaction.draw.finish();
 
     btn.classList.add('active');
-    layer.view.header.classList.add('edited', 'secondary-colour-bg');
+    layer.view.querySelector('.header').classList.add('edited', 'secondary-colour-bg');
   
     _xyz.mapview.interaction.draw.begin({
       layer: layer,
@@ -388,7 +381,7 @@ export default (_xyz, layer) => {
         return geometry;
       },
       callback: () => {
-        layer.view.header.classList.remove('edited', 'secondary-colour-bg');
+        layer.view.querySelector('.header').classList.remove('edited', 'secondary-colour-bg');
         btn.classList.remove('active');
       }
     });
@@ -396,5 +389,7 @@ export default (_xyz, layer) => {
   }}>Isoline Here`);
 
   }
+
+  return panel;
 
 };

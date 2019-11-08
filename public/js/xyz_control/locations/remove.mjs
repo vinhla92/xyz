@@ -8,6 +8,12 @@ export default _xyz => function() {
 
   if (location.view.drawer) location.view.drawer.remove();
 
+  _xyz.locations.listview.node && setTimeout(
+    () => {
+    const scrolly = _xyz.locations.listview.node.closest('.scrolly');
+    scrolly && scrolly.dispatchEvent(new CustomEvent('scrolly'));
+    }, 500);
+
   if (_xyz.locations.listview.node
     && _xyz.locations.listview.node.childElementCount === 0) {
     _xyz.locations.listview.init()

@@ -1,17 +1,14 @@
-import filter_reset from './filter_reset.mjs';
-
-export default (_xyz, layer, filter_entry) => {
+export default _xyz => (layer, filter_entry) => {
 
   // Reset deselected filter
-  if(filter_entry.el && filter_entry.el.parentNode) return filter_reset(layer, filter_entry);
+  if(filter_entry.el && filter_entry.el.parentNode) return layer.filter.reset(filter_entry);
 
   const xhr = new XMLHttpRequest();
 
   const filter = layer.filter && Object.assign({}, layer.filter.legend, layer.filter.current);
 
-  xhr.open(
-    'GET',
-    _xyz.host + '/api/location/field/range?' +
+  xhr.open('GET', _xyz.host +
+    '/api/location/field/range?' +
     _xyz.utils.paramString({
       locale: _xyz.workspace.locale.key,
       layer: layer.key,
@@ -54,7 +51,7 @@ export default (_xyz, layer, filter_entry) => {
 
     block.appendChild(input_min);
 
-    var div_min = _xyz.utils.wire()`<div class="range">`;
+    const div_min = _xyz.utils.wire()`<div class="range">`;
     block.appendChild(div_min);
 
     const slider_min = _xyz.utils.wire()`
@@ -67,7 +64,8 @@ export default (_xyz, layer, filter_entry) => {
       step=${step}
       oninput=${e=>{
         input_min.value = e.target.value;
-        applyFilter();}}>`;
+        applyFilter();
+      }}>`;
 
     div_min.appendChild(slider_min);
   
@@ -84,7 +82,8 @@ export default (_xyz, layer, filter_entry) => {
       step=${step}
       onkeyup=${e=>{
         slider_max.value = e.target.value;
-        applyFilter();}}>`;
+        applyFilter();
+      }}>`;
 
     block.appendChild(input_max);
 
@@ -101,10 +100,10 @@ export default (_xyz, layer, filter_entry) => {
       step=${step}
       oninput=${e=>{
         input_max.value = e.target.value;
-        applyFilter();}}>`;
+        applyFilter();
+      }}>`;
 
     div_max.appendChild(slider_max);
-
 
     // Use timeout to debounce applyFilter from multiple and slider inputs.
     let timeout;

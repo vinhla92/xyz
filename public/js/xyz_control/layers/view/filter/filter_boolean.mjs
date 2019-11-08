@@ -1,9 +1,7 @@
-import filter_reset from './filter_reset.mjs';
-
-export default (_xyz, layer, filter_entry) => {
+export default _xyz => (layer, filter_entry) => {
 
   // Reset deselected filter
-  if(filter_entry.el && filter_entry.el.parentNode) return filter_reset(layer, filter_entry);
+  if(filter_entry.el && filter_entry.el.parentNode) return layer.filter.reset(filter_entry);
 
   const block = layer.filter.block(filter_entry);
 

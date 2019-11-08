@@ -21,39 +21,25 @@ export default _xyz => {
     Object.values(_xyz.layers.list).forEach(layer => {
 
       // Create the layer view.
-      _xyz.layers.view(layer);
+      _xyz.layers.view.create(layer);
 
-      if (layer.group) {
+      if (!layer.group) return _xyz.layers.listview.node.appendChild(layer.view);
 
-        if (!_xyz.layers.listview.groups[layer.group]) {
+      // Create new layer group if group does not exist yet.
+      if (!_xyz.layers.listview.groups[layer.group]) createGroup(layer);
 
-          // Create new layer group if group does not exist yet.
-          createGroup(layer);
+      // Check for visible layer in exisiting layer group.
+      _xyz.layers.listview.groups[layer.group].chkVisibleLayer();
 
-        } else {
-
-          // Check for visible layer in exisiting layer group.
-          _xyz.layers.listview.groups[layer.group].chkVisibleLayer();
-        }
-
-        // Add group meta to group node.
-        if (layer.groupmeta) {
-          const groupmeta = _xyz.utils.wire()`<div class="meta primary-colour">`;
-          groupmeta.innerHTML = layer.groupmeta;
-          _xyz.layers.listview.groups[layer.group].meta.appendChild(groupmeta);
-        }
-
-        // Append the layer to the listview layer group.
-        _xyz.layers.listview.groups[layer.group].node.appendChild(layer.view.drawer);
-
-      } else {
-
-        // Append the layer to the listview node.
-        _xyz.layers.listview.node.appendChild(layer.view.drawer);
+      // Add group meta to group node.
+      if (layer.groupmeta) {
+        const groupmeta = _xyz.utils.wire()`<div class="meta primary-colour">`;
+        groupmeta.innerHTML = layer.groupmeta;
+        _xyz.layers.listview.groups[layer.group].meta.appendChild(groupmeta);
       }
 
-      // Show layer, if display is true.
-      if (layer.display) layer.show();
+      // Append the layer to the listview layer group.
+      _xyz.layers.listview.groups[layer.group].node.appendChild(layer.view);
 
     });
 
@@ -94,15 +80,14 @@ export default _xyz => {
     // Check whether some layers group are visible and toggle visible button display accordingly.
     group.chkVisibleLayer = () => {
 
-      let someVisible = Object.values(_xyz.layers.list).some(_layer => (_layer.display && _layer.group === layer.group));
-
-      if (someVisible) {
+      if (Object.values(_xyz.layers.list).some(_layer => _layer.display && _layer.group === layer.group)) {
         group.visible.classList.add('on');
         group.visible.disabled = false;
       } else {
         group.visible.classList.remove('on');
         group.visible.disabled = true;
       }
+
     };
 
     // Create hide all group layers button.
@@ -114,15 +99,17 @@ export default _xyz => {
         e.stopPropagation();
 
         // Iterate through all layers and remove layer if layer is in group.
-        Object.values(_xyz.layers.list).forEach(_layer => {
-          if (_layer.group === layer.group && _layer.display) _layer.view.header.toggleDisplay.click();
-        });
+        Object.values(_xyz.layers.list)
+          .filter(_layer => _layer.group === layer.group && _layer.display)
+          .forEach(_layer => _layer.remove())
+
       }}>`;
+
     group.header.appendChild(group.visible);
 
     // Create group expander button.
     group.header.appendChild(_xyz.utils.wire()`
-      <button 
+    <button 
       class="icon-group-expander xyz-icon cursor noselect btn_header expander-group"
       title="Toggle group panel"
       onclick=${ e => {
@@ -132,9 +119,8 @@ export default _xyz => {
           expandedTag: 'expanded-group',
           expandableTag: 'expandable-group'
         });
-      }
-    }
-      >`);
+      }}>`);
+
   }
 
 };

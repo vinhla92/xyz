@@ -4,7 +4,7 @@ export default _xyz => layer => {
 
   const legend = _xyz.utils.wire()`<svg>`;
 
-  layer.style.legend.appendChild(legend);
+  layer.style.legend = legend;
 
   let y = 10;
 
@@ -12,8 +12,7 @@ export default _xyz => layer => {
            
     let cat_style = Object.assign({}, layer.style.default, cat.style);
 
-    legend.appendChild(
-      _xyz.utils.wire(null, 'svg')`
+    legend.appendChild(_xyz.utils.wire(null, 'svg')`
       <rect
         x=4
         y=${y+3}
@@ -21,22 +20,20 @@ export default _xyz => layer => {
         height=14
         fill=${cat_style.fillColor}
         fill-opacity=${cat_style.fillOpacity}
-        stroke=${cat_style.color}/>`
-    );
+        stroke=${cat_style.color}/>`);
 
-    legend.appendChild(
-      _xyz.utils.wire(null, 'svg')`
+    legend.appendChild(_xyz.utils.wire(null, 'svg')`
       <text
         x=25
         y=${y+11}
         style="font-size: 12px; dominant-baseline: central">
-          ${cat.label || cat.value}`
-    );
+          ${cat.label || cat.value}`);
 
     y += 20;
   });
       
   // Set height of the svg element.
-  //legend.setAttribute('height', y);
+  // legend.setAttribute('height', y);
 
+  return legend;
 };
