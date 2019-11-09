@@ -59,6 +59,7 @@ export default _xyz => layer => {
         dashboard.appendChild(meta);
     }
 
+
     // Create & add Style panel.
     const style_panel = _xyz.layers.view.style.panel(layer);
     style_panel && dashboard.appendChild(style_panel);
@@ -67,9 +68,17 @@ export default _xyz => layer => {
     const filter_panel = _xyz.layers.view.filter.panel(layer);
     filter_panel && dashboard.appendChild(filter_panel);
 
-    // Create & add Filter panel.
-    const draw_panel = _xyz.layers.view.draw(layer);
+    // Create & add Data panel.
+    const data_panel = _xyz.layers.view.data.panel(layer);
+    data_panel && dashboard.appendChild(data_panel);
+
+    // Create & add Draw panel.
+    const draw_panel = _xyz.layers.view.draw.panel(layer);
     draw_panel && dashboard.appendChild(draw_panel);
+        
+    // Create & add Reports panel.
+    const report_panel = _xyz.layers.view.report.panel(layer);
+    report_panel && dashboard.appendChild(report_panel);
 
     if (!dashboard.children.length) return;
 
@@ -100,6 +109,6 @@ export default _xyz => layer => {
     let panels = dashboard.querySelectorAll('.panel');
 
     // Expand first panel;
-    panels && panels[0].classList.add('expanded');
+    panels.length && panels[0].classList.add('expanded');
 
 }

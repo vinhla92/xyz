@@ -7,6 +7,7 @@
             "layers": {
                 "OSM": {
                     "group": "Base Layer",
+                    "meta": "<p>Test paragraph for meta in group</p>",
                     "format": "tiles",
                     "attribution": {
                         "© OpenStreetMap": "http://www.openstreetmap.org/copyright"

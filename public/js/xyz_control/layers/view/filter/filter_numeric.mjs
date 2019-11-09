@@ -1,7 +1,7 @@
 export default _xyz => (layer, filter_entry) => {
 
   // Reset deselected filter
-  if(filter_entry.el && filter_entry.el.parentNode) return layer.filter.reset(filter_entry);
+  if(filter_entry.el && filter_entry.el.parentNode) return _xyz.layers.view.filter.reset(layer, filter_entry);
 
   const xhr = new XMLHttpRequest();
 
@@ -24,7 +24,7 @@ export default _xyz => (layer, filter_entry) => {
 
     const field_range = e.target.response;
 
-    const block = layer.filter.block(filter_entry);
+    const block = _xyz.layers.view.filter.block(layer, filter_entry);
 
     // identify element with filter field
     block.dataset.field = filter_entry.field;

@@ -8,14 +8,13 @@ export function toggleExpanderParent(params) {
     }, 500);
 
   if (!params.expandedTag) params.expandedTag = 'expanded';
+
   if (!params.expandableTag) params.expandableTag = 'expandable';
 
   // Check whether parent is expanded.
   if (params.expandable.classList.contains(params.expandedTag)) {
-
-    // Remove expanded class.
-    return params.expandable.classList.remove(params.expandedTag);
-
+    params.expandable.classList.remove(params.expandedTag);
+    return
   }
 
   // Accordion: Collapse the parents siblings which are expanded.
@@ -26,7 +25,10 @@ export function toggleExpanderParent(params) {
   }
 
   // Add expanded class to expandable element.
-  params.expandable.classList.contains(params.expandableTag)
-    && params.expandable.classList.add(params.expandedTag);
+  if (params.expandable.classList.contains(params.expandableTag)) {
+
+    params.expandable.classList.add(params.expandedTag);
+
+  }
 
 }

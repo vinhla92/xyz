@@ -2,11 +2,9 @@ export default _xyz => function () {
 
   const layer = this;
 
-  layer.display = true;
+  !layer.display && layer.view && layer.view.dispatchEvent(new CustomEvent('toggleDisplay'));
 
-  // _xyz.map.getLayers().forEach(l => {
-  //   if(l === layer.L) _xyz.map.removeLayer(layer.L);
-  // });
+  layer.display = true;
 
   layer.L && _xyz.map.removeLayer(layer.L);
 
@@ -23,8 +21,6 @@ export default _xyz => function () {
 
   _xyz.mapview.attribution.check();
 
-  layer.view && layer.view.dispatchEvent(new CustomEvent('toggleDisplay'));
-
   // Push the layer into the layers hook array.
   _xyz.hooks && _xyz.hooks.push('layers', layer.key);
 
@@ -32,18 +28,18 @@ export default _xyz => function () {
   if (layer.group && _xyz.layers.listview.groups && _xyz.layers.listview.groups[layer.group]) _xyz.layers.listview.groups[layer.group].chkVisibleLayer();
 
   // Iterate through tables and charts to check whether table should be shown.
-  // if (layer.dataview && _xyz.dataview.node){
+  if (layer.dataview && _xyz.dataview.node){
 
-  //   if(layer.dataview.tables) Object.keys(layer.dataview.tables).forEach(key => {
-  //     const table = layer.dataview.tables[key];
-  //     if (table.display) table.show();
-  //   });
+    if(layer.dataview.tables) Object.keys(layer.dataview.tables).forEach(key => {
+      const table = layer.dataview.tables[key];
+      if (table.display) table.show();
+    });
 
-  //   if(layer.dataview.charts) Object.keys(layer.dataview.charts).forEach(key => {
-  //     const chart = layer.dataview.charts[key];
-  //     if (chart.display) chart.show();
-  //   });
+    if(layer.dataview.charts) Object.keys(layer.dataview.charts).forEach(key => {
+      const chart = layer.dataview.charts[key];
+      if (chart.display) chart.show();
+    });
   
-  // }
+  }
 
 };

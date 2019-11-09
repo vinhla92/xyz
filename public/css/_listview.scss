@@ -19,7 +19,7 @@
         }
         &.expanded {
             overflow: visible;
-            max-height: 2500px;
+            max-height: none !important;
             .icon-expander {
                 background-image: url("../icons/icon-keyboard-arrow-up.svg");
             }
@@ -42,7 +42,6 @@
                 font-size: 100%;
                 line-height: 2;
                 display: flex;
-                margin-left: 4px;
                 max-height: 37px;
 
                 >:nth-child(1){
@@ -64,14 +63,13 @@
                 overflow: hidden;
                 transition: max-height 0.3s ease-out;
                 border-bottom: solid 1px #bbb;
-                padding: 2px 0 14px 2px;
 
                 .icon-group-expander {
                     background-image: url("../icons/icon-keyboard-arrow-down.svg");
                 }
             }
             &.expanded-group {
-                max-height: 2500px;
+                max-height: none !important;
                 overflow: visible;
                 border-bottom: none;
 
@@ -142,63 +140,11 @@
                     transition: max-height 0.3s ease-out;
                 }
                 &.expanded {
-                    max-height: 2500px !important;
+                    max-height: none !important;
                     overflow: visible;
                 }
             }
-            .block-title {
-                width: 100%;
-                border-bottom: 1px solid #ccc;
-                line-height: 1.5;
-                padding-top: 5px;
-                margin-bottom: 6px;
-            }
-            .block {
-                padding: 5px 0;
-                position: relative;
-                input {
-                    width: 100%;
-                }
-                .cancel-btn {
-                    font-size: 143%;
-                    top: 2px;
-                    right: -4px;
-                    position: absolute;
-                }
-                .range-label {
-                    display: inline;
-                    line-height: 1.7;
-                }
-                .range-input {
-                    float: right;
-                    width: 60%;
-                } 
-                .sample-poly {
-                    width: 30%;
-                    height: 32px;
-                    border-radius: 2px;
-                    box-shadow: 2px 2px 2px #999;
-                    position: absolute;
-                    right: 2px;
-                    top: 5px;
-                }
-                .sample-circle {
-                    width: 32px;
-                    height: 32px;
-                    border-radius: 50%;
-                    box-shadow: 2px 2px 2px #999;
-                    position: absolute;
-                    right: 2px;
-                    top: 0;
-                }
-                .colour-swatch {
-                    width: 100%;
-                    margin-bottom: 10px;
-                }
-                .colour-td {
-                    height: 20px;
-                }
-            }
+
             .half {
                 width: 48%;
                 display: inline-block;
@@ -206,6 +152,7 @@
                     float: right;
                 }
             }
+
             .third {
                 width: 15%;
                 display: inline-block;

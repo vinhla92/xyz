@@ -12,11 +12,11 @@ import remove from './remove.mjs';
 
 import count from './count.mjs';
 
-
 export default _xyz => layer => {
 
   const _layer = Object.assign(
     {
+      
       tableCurrent: tableCurrent(_xyz),
     
       tableMin: tableMin(_xyz),

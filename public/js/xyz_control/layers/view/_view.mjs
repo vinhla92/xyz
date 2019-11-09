@@ -4,11 +4,9 @@ import style from './style/_styles.mjs';
 
 import filter from './filter/_filter.mjs';
 
-import draw from './draw.mjs';
+import draw from './draw/_draw.mjs';
 
-import cluster from './cluster.mjs';
-
-import table from './table.mjs';
+import data from './data.mjs';
 
 import report from './report.mjs';
 
@@ -21,5 +19,9 @@ export default _xyz => ({
   filter: filter(_xyz),
 
   draw: draw(_xyz),
+
+  report: report(_xyz),
+
+  data: data(_xyz),
 
 });

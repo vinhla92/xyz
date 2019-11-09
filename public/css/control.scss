@@ -25,6 +25,7 @@
 @import 'contextmenu';
 @import 'icons';
 @import 'itemlist';
+@import 'block';
 
 *,
 *::after,
@@ -87,6 +88,10 @@ input[type=number]::-webkit-outer-spin-button {
 
 input[type=number] {
     -moz-appearance:textfield; /* Firefox */
+}
+
+input[type=text] {
+    border: 1px solid #999;
 }
 
 input:hover {
