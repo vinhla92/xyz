@@ -9,9 +9,8 @@ export default _xyz => entry => {
     if(entry.edit.isoline_mapbox && entry.edit.isoline_mapbox.meta) meta = entry.edit.isoline_mapbox.meta;
   }
 
-  xhr.open(
-    'GET',
-    _xyz.host + '/api/location/edit/field/setnull?' +
+  xhr.open('GET', _xyz.host +
+    '/api/location/edit/field/setnull?' +
     _xyz.utils.paramString({
       locale: _xyz.workspace.locale.key,
       layer: entry.location.layer.key,
@@ -29,10 +28,7 @@ export default _xyz => entry => {
 
     entry.location.infoj = JSON.parse(e.target.response);
 
-    // Update the location view.
-    entry.display = false;
-    entry.location.view.update();
-
+    entry.location.view.drawer.appendChild(_xyz.locations.view.update(entry.location));
   };
 
   xhr.send();

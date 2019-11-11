@@ -16,7 +16,6 @@ export default _xyz => entry => {
 
   if (entry.display) showTab();
 
-
   function showTab() {
 
     entry.location.tables.push(entry);
@@ -24,7 +23,6 @@ export default _xyz => entry => {
     entry.target = _xyz.dataview.node && _xyz.dataview.node.querySelector('.tab-content') || document.getElementById(entry.target_id);
 
     if (entry.target) _xyz.dataview.dashboard(entry);
-
   }
 
   function removeTab() {
@@ -37,4 +35,5 @@ export default _xyz => entry => {
 
     _xyz.dataview.removeTab(entry);
   }
+
 };

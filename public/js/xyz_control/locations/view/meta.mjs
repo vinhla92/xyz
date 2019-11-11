@@ -12,10 +12,11 @@ export default _xyz => entry => {
    let div = _xyz.utils.wire()`<div>`;
    outer_td.appendChild(div);
 
-   let table = _xyz.utils.wire()`<table
+   let table = _xyz.utils.wire()`
+   <table
    style="width: 100%; padding: 6px; margin-top: 2px; 
-   color: #666; border-radius: 4px; background-color: linen;"
-   >`;
+   color: #666; border-radius: 4px; background-color: linen;">`;
+   
    div.appendChild(table);
 
    Object.entries(entry.value).map(a => {

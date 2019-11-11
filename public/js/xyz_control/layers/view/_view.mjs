@@ -1,5 +1,3 @@
-import create from './create.mjs'
-
 import style from './style/_styles.mjs';
 
 import filter from './filter/_filter.mjs';
@@ -10,18 +8,140 @@ import data from './data.mjs';
 
 import report from './report.mjs';
 
-export default _xyz => ({
+export default _xyz => {
 
-  create: create(_xyz),
+  const view = {
 
-  style: style(_xyz),
+    create: create,
 
-  filter: filter(_xyz),
+    style: style(_xyz),
 
-  draw: draw(_xyz),
+    filter: filter(_xyz),
 
-  report: report(_xyz),
+    draw: draw(_xyz),
 
-  data: data(_xyz),
+    report: report(_xyz),
 
-});
+    data: data(_xyz),
+
+  };
+
+  return view;
+
+  
+  function create(layer) {
+
+    layer.view = _xyz.utils.wire()`<div class="drawer">`;
+
+    // Make the layer view opaque if no table is available for the current zoom level.
+    if (layer.tables) _xyz.mapview.node.addEventListener('changeEnd', () => {
+        layer.view.style.opacity = !layer.tableCurrent() ? 0.4 : 1;
+    });
+    
+    const header = _xyz.utils.wire()`
+    <div class="header enabled"><div>${layer.name || layer.key}`;
+  
+    // Add symbol to layer header.
+    if (layer.format === 'cluster' && layer.style.marker) {
+    
+      header.appendChild(_xyz.utils.wire()`
+      <img title="Default icon"
+        style="float: right; cursor: help;"
+        src="${_xyz.utils.svg_symbols(layer.style.marker)}">`);
+    }
+  
+    header.appendChild(_xyz.utils.wire()`
+    <button
+      title="Zoom to filtered layer extent"
+      class="cursor noselect btn_header xyz-icon icon-fullscreen"
+      onclick=${e=>{
+        e.stopPropagation();
+        layer.zoomToExtent();
+      }}>`);
+   
+    header.toggleDisplay = _xyz.utils.wire()`
+    <button
+      title="Toggle visibility"
+      class="${'btn_header xyz-icon icon-toggle ' + (layer.display && 'on')}"
+      onclick=${e=>{
+        e.stopPropagation();
+             
+        layer.display?
+            layer.remove():
+            layer.show();
+      
+      }}>`;
+  
+    header.appendChild(header.toggleDisplay);
+
+    layer.view.addEventListener('toggleDisplay', 
+        ()=>header.toggleDisplay.classList.toggle('on'));
+  
+    layer.view.appendChild(header);
+
+    const dashboard = _xyz.utils.wire()`<div class="dashboard">`;
+  
+    layer.view.appendChild(dashboard);
+
+    // Create layer meta.
+    if (layer.meta) {
+        const meta = _xyz.utils.wire()`<p class="meta">`;
+        meta.innerHTML = layer.meta;
+        dashboard.appendChild(meta);
+    }
+
+
+    // Create & add Style panel.
+    const style_panel = view.style.panel(layer);
+    style_panel && dashboard.appendChild(style_panel);
+
+    // Create & add Filter panel.
+    const filter_panel = view.filter.panel(layer);
+    filter_panel && dashboard.appendChild(filter_panel);
+
+    // Create & add Data panel.
+    const data_panel = view.data.panel(layer);
+    data_panel && dashboard.appendChild(data_panel);
+
+    // Create & add Draw panel.
+    const draw_panel = view.draw.panel(layer);
+    draw_panel && dashboard.appendChild(draw_panel);
+        
+    // Create & add Reports panel.
+    const report_panel = view.report.panel(layer);
+    report_panel && dashboard.appendChild(report_panel);
+
+    if (!dashboard.children.length) return;
+
+    // Assign methods to layer views with panels and or meta data.
+    header.classList.add('pane_shadow');
+    layer.view.classList.add('expandable');
+
+    // Expander control for layer drawer.
+    header.onclick = e => {
+        e.stopPropagation();
+        _xyz.utils.toggleExpanderParent({
+            expandable: layer.view,
+            accordeon: true
+        });
+    };
+
+    header.appendChild(_xyz.utils.wire()`
+    <button
+      title="Toggle layer dashboard"
+      class="cursor noselect btn_header expander xyz-icon icon-expander"
+      onclick=${e=>{
+        e.stopPropagation();
+        _xyz.utils.toggleExpanderParent({
+            expandable: layer.view
+        });
+      }}>`);
+
+    let panels = dashboard.querySelectorAll('.panel');
+
+    // Expand first panel;
+    panels.length && panels[0].classList.add('expanded');
+
+  }
+
+}

@@ -1,7 +1,5 @@
 import * as utils from '../utils/_utils.mjs';
 
-import ctrl from '../xyz_control/ctrl/_ctrl.mjs';
-
 import workspace from '../xyz_control/workspace.mjs';
 
 import hooks from '../xyz_control/hooks.mjs';
@@ -56,8 +54,6 @@ async function _xyz(params) {
   //if (!_xyz.host) return console.error('XYZ host not defined!');
 
   _xyz.utils = utils;
-
-  _xyz.ctrl = ctrl(_xyz);
 
   _xyz.workspace = workspace(_xyz);
 

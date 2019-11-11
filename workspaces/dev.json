@@ -702,6 +702,12 @@
                             "custom": "foo"
                         },
                         {
+                            "name": "something",
+                            "field": "chk",
+                            "type": "boolean",
+                            "edit": true
+                        },
+                        {
                             "label": "Images",
                             "field": "images",
                             "type": "images",

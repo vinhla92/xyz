@@ -1,7 +1,7 @@
 export default _xyz => location => {
 
   // Create location view.
-  location.view();
+  _xyz.locations.view.create(location);
 
   location.draw();
 

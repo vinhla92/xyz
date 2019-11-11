@@ -44,8 +44,10 @@ module.exports = fastify => {
         id = req.query.id,
         field = req.query.field;
   
-      var q = `UPDATE ${table} SET ${field} = null 
-      ${req.query.meta ? `, ${req.query.meta} = null` : ``}
+      var q = `
+      UPDATE ${table}
+        SET ${field} = null 
+        ${req.query.meta ? `, ${req.query.meta} = null` : ``}
       WHERE ${qID} = $1;`;
   
       var rows = await env.dbs[layer.dbs](q, [id]);

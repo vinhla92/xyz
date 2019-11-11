@@ -33,7 +33,7 @@ function init(_xyz) {
       // Required for streetview fields.
       location.marker = _xyz.utils.turf.pointOnFeature(location.geometry).geometry.coordinates;
 
-      location.view();
+      _xyz.locations.view.create(location);
 
       location.draw();
 

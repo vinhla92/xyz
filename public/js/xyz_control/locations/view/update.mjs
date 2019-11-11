@@ -1,4 +1,4 @@
-export default (_xyz, location) => () => {
+export default _xyz => location => {
 
   location.geometries.forEach(geom => _xyz.map.removeLayer(geom));
     
@@ -8,15 +8,9 @@ export default (_xyz, location) => () => {
     
   location.tables = [];
 
+  location.view.node && location.view.node.remove();
 
-  // Wire up locationview table to view node.
-  if (location.view.node) while (location.view.node.lastChild) {
-    location.view.node.removeChild(location.view.node.lastChild);
-
-  } else {
-
-    location.view.node = _xyz.utils.wire()`<table class="locationview">`;
-  }
+  location.view.node = _xyz.utils.wire()`<table class="locationview">`;
 
   // Create object to hold view groups.
   location.view.groups = {};
@@ -36,13 +30,14 @@ export default (_xyz, location) => () => {
           entry.type === 'date' ? _xyz.utils.formatDate(entry.value) :
             entry.type === 'datetime' ? _xyz.utils.formatDateTime(entry.value) :
               entry.value;
-    
+
     // Add pre- or suffix if specified
-    if(entry.prefix)  entry.displayValue = entry.prefix + entry.displayValue;
+    if(entry.prefix) entry.displayValue = entry.prefix + entry.displayValue;
     if(entry.suffix) entry.displayValue = entry.displayValue + entry.suffix;
   });
-    
-  let dataset; // watch for group/chart data series and stacks
+
+  // watch for group/chart data series and stacks
+  let dataset;
 
   // Iterate through info fields and add to info table.
   location.infoj && Object.values(location.infoj).forEach(entry => {
@@ -53,7 +48,7 @@ export default (_xyz, location) => () => {
     if (!entry.group) location.view.node.appendChild(entry.row);
 
     // Create a new info group.
-    if (entry.type === 'group') return location.view.group(entry);
+    if (entry.type === 'group') return _xyz.locations.view.group(entry);
 
     // Create entry.row inside previously created group.
     if (entry.group && location.view.groups[entry.group]){ 
@@ -79,20 +74,22 @@ export default (_xyz, location) => () => {
         }
 
       }
-      
+
       location.view.groups[entry.group].table.appendChild(entry.row); 
     }
-    
+
 
     // Create new table cell for the entry label and append to table.
     if (entry.label) {
       entry.label_td = _xyz.utils.wire()`
-      <td class="${'label lv-' + (entry.level || 0)}"
-      title="${entry.title || null}">${entry.label}`;
+      <td
+        class="${'label lv-' + (entry.level || 0)}"
+        title="${entry.title || null}">${entry.label}`;
 
       entry.row.appendChild(entry.label_td);
     }
-    
+
+
     // display layer name in location view
     if(entry.type === 'key') {
      
@@ -105,47 +102,51 @@ export default (_xyz, location) => () => {
 
     }
 
-    // Finish entry creation if entry has not type.
+
     if (entry.type === 'label') return entry.label_td.colSpan = '2';
 
-    // Create streetview control.
-    if (entry.type === 'streetview') return location.view.streetview(entry);
 
-    // Create report control.
-    if (entry.type === 'report') return location.view.report(entry);
+    if (entry.type === 'streetview') return _xyz.locations.view.streetview(entry);
+
+
+    if (entry.type === 'report') return _xyz.locations.view.report(entry);
+
 
     // If input is images create image control and return from object.map function.
-    if (entry.type === 'images') return location.view.images(entry);
+    if (entry.type === 'images') return _xyz.locations.view.images(entry);
 
-    // Custom methods
-    if (entry.custom) {
-      _xyz.locations.custom[entry.custom] && _xyz.locations.custom[entry.custom](entry);
-      return;
-    }
 
-    // If input is documents create document control and return from object.map function.
-    if (entry.type === 'documents') return location.view.documents(entry);
+    if (entry.custom && _xyz.locations.custom[entry.custom]) return _xyz.locations.custom[entry.custom](entry);
 
-    // Create geometry control.
-    if (entry.type === 'geometry') return location.view.geometry(entry);
 
-    // Create metadata entry
-    if (entry.type === 'meta') return location.view.meta(entry);
+    if (entry.type === 'documents') return _xyz.locations.view.documents(entry);
 
-    // Create boolean control.
-    if (entry.type === 'boolean') return location.view.boolean(entry);    
 
-    if (entry.type === 'tableDefinition') return location.view.tableDefinition(entry);
+    if (entry.type === 'geometry') return _xyz.locations.view.geometry(entry);
 
-    if (entry.type === 'orderedList') return location.view.orderedList(entry);  
 
-    if (entry.type === 'dashboard') return location.view.dashboard(entry);
+    if (entry.type === 'meta') return _xyz.locations.view.meta(entry);
+
+
+    if (entry.type === 'boolean') return _xyz.locations.view.boolean(entry);    
+
+
+    if (entry.type === 'tableDefinition') return _xyz.locations.view.tableDefinition(entry);
+
+
+    if (entry.type === 'orderedList') return _xyz.locations.view.orderedList(entry);  
+
+
+    if (entry.type === 'dashboard') return _xyz.locations.view.dashboard(entry);
+
 
     // prevent clusterArea from firing if layer is not cluster
     if(entry.clusterArea && location.layer.format !== 'cluster') return;
 
+
     // Remove empty row which is not editable.
     if (!entry.edit && !entry.value) return entry.row.remove();
+
 
     // Create val table cell in a new line.
     if (!entry.inline && !(entry.type === 'integer' ^ entry.type === 'numeric' ^ entry.type === 'date')) {
@@ -156,9 +157,7 @@ export default (_xyz, location) => () => {
       //entry.row = _xyz.utils.wire()`<tr>`;
       entry.row = _xyz.utils.wire()`<tr class=${'lv-' + (entry.level || 0) + ' ' + (entry.class || '')}>`;
 
-
       location.view.node.appendChild(entry.row);
-      
 
       // Create val table cell with colSpan 2 in the new row to span full width.
       entry.val = _xyz.utils.wire()`<td class="val" colspan=2>`;
@@ -175,7 +174,7 @@ export default (_xyz, location) => () => {
     }
 
     // Create controls for editable fields.
-    if (entry.edit && !entry.fieldfx) return location.view.edit(entry);
+    if (entry.edit && !entry.fieldfx) return _xyz.locations.view.edit.input(entry);
 
     if (entry.type === 'html') {
 
@@ -194,13 +193,15 @@ export default (_xyz, location) => () => {
   location.infoj && Object.values(location.infoj).map(entry => {
 
     if(!entry.group) return;
-      
+
     if(location.view.groups[entry.group]
       && location.view.groups[entry.group].table
       && !location.view.groups[entry.group].table.innerHTML) {
       location.view.groups[entry.group].table.parentNode.style.display = 'none';
     }
-      
+
   });
+
+  return location.view.node;
 
 };

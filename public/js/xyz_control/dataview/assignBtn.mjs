@@ -28,7 +28,6 @@ export default (_xyz, params) => {
 
     if (!params.btn.toggleDataview) return;
   
-
     params.btn.toggleDataview.onclick = () => {
   
       if (params.btn.toggleDataview.classList.contains('icon-vertical-align-bottom')) {
@@ -40,14 +39,11 @@ export default (_xyz, params) => {
   
       }
   
-
       params.btn.toggleDataview.className = 'xyz-icon icon-vertical-align-bottom';
 
       document.body.style.gridTemplateRows = `minmax(0, 1fr) ${window.innerHeight}px`;
 
       if(_xyz.dataview.current_table.Tabulator) _xyz.dataview.current_table.Tabulator.redraw(true);
-  
-
 
       _xyz.map.updateSize();
 

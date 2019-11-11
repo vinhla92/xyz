@@ -11,10 +11,10 @@ export default _xyz => entry => {
             entry.location.view.valChange({
               input: e.target,
               entry: entry,
-              value: e.target.checked
+              newValue: !!e.target.checked,
             })
           }}>
         </input>
         <div></div><span>${entry.name || entry.field}`);
-        
+
 };

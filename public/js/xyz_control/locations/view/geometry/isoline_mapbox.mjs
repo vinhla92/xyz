@@ -1,53 +1,138 @@
-export default _xyz => entry => {
+export default _xyz => {
 
-  const origin = entry.location.geometry.coordinates;
+  return {
 
-  const xhr = new XMLHttpRequest();
+    create: create,
 
-  xhr.open(
-    'GET',
-    _xyz.host +
-    '/api/location/edit/isoline/mapbox/info?' +
-    _xyz.utils.paramString({
-      locale: _xyz.workspace.locale.key,
-      layer: entry.location.layer.key,
-      table: entry.location.table,
-      coordinates: origin.join(','),
-      minutes: entry.edit.isoline_mapbox.minutes,
-      profile: entry.edit.isoline_mapbox.profile,
-      id: entry.location.id,
-      field: entry.field,
-      meta: entry.edit.isoline_mapbox.meta || null,
-      token: _xyz.token
-    }));
+    settings: settings,
 
-  xhr.setRequestHeader('Content-Type', 'application/json');
-  xhr.responseType = 'json';
+  }
 
-  xhr.onload = e => {
+  function settings(entry) {
 
-    if (e.target.status === 406) {
-      //entry.location.view.update();
-      return alert(e.target.responseText);
-    }
+    if (typeof(entry.edit.isoline_mapbox) !== 'object') entry.edit.isoline_mapbox = {};   
+    
+    const group = _xyz.utils.wire()`
+    <div
+      style="max-height: 30px;"
+      class="drawer expandable">`;
 
-    if (e.target.status !== 200) {
-      console.log(e.target.response);
-      //entry.location.view.update();
-      return alert('No route found. Try a longer travel time.');
-    }
+    group.appendChild(_xyz.utils.wire()`
+    <div
+      class="btn_subtext cursor noselect primary-colour"
+      style="text-align: left;"
+      onclick=${e => {
+        if (e) e.stopPropagation();
+        _xyz.utils.toggleExpanderParent({
+          expandable: group
+        });
+      }}>Mapbox Isoline settings`);
 
-    entry.location.infoj = e.target.response;
+    entry.edit.isoline_mapbox.profile = entry.edit.isoline_mapbox.profile || 'driving';
+    entry.edit.isoline_mapbox.minutes = entry.edit.isoline_mapbox.minutes || 10;
 
-    //console.log(entry.location.infoj);
+    const modes = [
+      { Driving : 'driving' },
+      { Walking: 'walking' },
+      { Cycling: 'cycling' },
+    ]
 
-    // Update the location view.
-    entry.location.view.update();
+    entry.edit.isoline_mapbox.profile = 'driving';  
 
-    //entry.location.flyTo();
+    group.appendChild(_xyz.utils.wire()`
+    <div
+      style="margin-top: 8px; display: grid; grid-template-columns: 50px 1fr; align-items: center;">
+        <span style="grid-column: 1;">Mode</span>
+        <div style="grid-column: 2;">
+        <button class="ul-drop">
+            <div
+                class="head"
+                onclick=${e => {
+                    e.preventDefault();
+                    e.target.parentElement.classList.toggle('active');
+                }}>
+                <span class="ul-title">Driving</span>
+                <div class="icon"></div>
+            </div>
+            <ul>
+                ${modes.map(
+                keyVal => _xyz.utils.wire()`
+                <li onclick=${e=>{
+                    const drop = e.target.closest('.ul-drop');
+                    drop.classList.toggle('active');
+                    drop.querySelector('.ul-title').textContent = Object.keys(keyVal)[0];
+        
+                    entry.edit.isoline_mapbox.profile = Object.values(keyVal)[0];
+        
+                }}>${Object.keys(keyVal)[0]}`)}`);
+    
+    group.appendChild(_xyz.utils.wire()`
+    <div style="margin-top: 12px;">
+      <span>Travel time in minutes: </span>
+      <span class="bold">${entry.edit.isoline_mapbox.minutes}</span>
+      <div class="range">
+      <input
+        class="secondary-colour-bg"
+        type="range"
+        min=5
+        value=${entry.edit.isoline_mapbox.minutes}
+        max=60
+        step=1
+        oninput=${e=>{
+          entry.edit.isoline_mapbox.minutes = parseInt(e.target.value);
+          e.target.parentNode.previousElementSibling.textContent = entry.edit.isoline_mapbox.minutes;
+        }}>`);
+
+
+    return group;
+  }
+
+  function create(entry) {
+
+    const origin = entry.location.geometry.coordinates;
+
+    const xhr = new XMLHttpRequest();
+
+    xhr.open('GET', _xyz.host +
+      '/api/location/edit/isoline/mapbox/info?' +
+      _xyz.utils.paramString({
+        locale: _xyz.workspace.locale.key,
+        layer: entry.location.layer.key,
+        table: entry.location.table,
+        coordinates: origin.join(','),
+        minutes: entry.edit.isoline_mapbox.minutes,
+        profile: entry.edit.isoline_mapbox.profile,
+        id: entry.location.id,
+        field: entry.field,
+        meta: entry.edit.isoline_mapbox.meta || null,
+        token: _xyz.token
+      }));
+
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.responseType = 'json';
+
+    xhr.onload = e => {
+
+      if (e.target.status === 406) {
+        return alert(e.target.responseText);
+      }
+
+      if (e.target.status !== 200) {
+        console.log(e.target.response);
+        return alert('No route found. Try a longer travel time.');
+      }
+
+      entry.location.infoj = e.target.response;
+
+      // Update the location view.
+      entry.location.view.drawer.appendChild(_xyz.locations.view.update(entry.location));
+
+      //entry.location.flyTo();
+
+    };
+
+    xhr.send();
 
   };
 
-  xhr.send();
-
-};
+}

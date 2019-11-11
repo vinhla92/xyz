@@ -3,25 +3,23 @@ export default _xyz => group => {
   group.location.view.groups[group.label] = group;
 
   group.td = _xyz.utils.wire()`<td colSpan=2>`;
+
   group.row.appendChild(group.td);
 
-  /*if(_xyz.dataview.node) _xyz.dataview.node.querySelector('.tab-content').appendChild(_xyz.utils.wire()`
-   <div class="table">`);*/
-
   group.div = _xyz.utils.wire()`<div class="table-section expandable">`;
+
   if(group.expanded) group.div.classList.add('expanded');
+
   group.td.appendChild(group.div);
 
   group.header = _xyz.utils.wire()`
   <div class="btn_subtext cursor noselect primary-colour"
   style="text-align: left;"
   onclick=${ e => {
-
     _xyz.utils.toggleExpanderParent({
       expandable: group.div,
       accordeon: true,
     });
-    
   }}>`;
 
   group.div.appendChild(group.header);
@@ -49,7 +47,6 @@ export default _xyz => group => {
     // Add chart
     group.div.appendChild(group.chartElem);
 
-
     const chartIcon = {
       'line':  'icon-show-chart',
       'bar':  'icon-bar-chart',
@@ -69,22 +66,17 @@ export default _xyz => group => {
     // Add chart control to group header for toggling
     group.viewToggler = _xyz.utils.wire()`
     <button
-    class="xyz-icon cursor noselect btn_header"
-    
-    style="margin: -6px 6px 0 0; float: right;"
-    onclick=${
-      e => {
+      class="xyz-icon cursor noselect btn_header"
+      style="margin: -6px 6px 0 0; float: right;"
+      onclick=${e => {
         e.stopPropagation();
         group.viewToggler.classList.toggle(group.chartIcon);
         group.viewToggler.classList.toggle('icon-view-list');
         group.div.classList.contains('chart') ? group.showTable() : group.showChart();
-      }
-    }>`;
+      }}>`;
 
     group.header.appendChild(group.viewToggler);
 
-
-    //// Functions for toggeling between table view and chart view ////
     group.showChart = () => {
 
       group.table.style.display = 'none';
@@ -97,6 +89,7 @@ export default _xyz => group => {
       
       if (!group.div.classList.contains('expanded')) group.div.classList.add('expanded');
     };
+
     group.showTable = e => {
 
       group.table.style.display = 'table';
@@ -114,9 +107,9 @@ export default _xyz => group => {
     if (group.chart.active) {
 
       group.showChart();
-    // if explicitly specified
     } else {
-      group.showTable();  // default
+
+      group.showTable();
     }
   }
 

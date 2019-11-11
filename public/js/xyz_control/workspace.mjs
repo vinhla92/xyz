@@ -60,7 +60,7 @@ export default _xyz => {
     Object.keys(_xyz.workspace.locale.layers)
       .filter(key => key.indexOf('__') === -1)
       .forEach(key => {
-        _xyz.layers.list[key] = _xyz.layers.layer(_xyz.workspace.locale.layers[key]);
+        _xyz.layers.list[key] = _xyz.layers.decorate(_xyz.workspace.locale.layers[key]);
       });
 
   };
