@@ -36,18 +36,12 @@ export default _xyz => entry => {
           drop.querySelector('.ul-title').textContent = key;
           drop.querySelector('.ul-title').value = value;
 
-          // Set newValue and compare with current value.
-          entry.location.view.valChange({
-            input: drop.querySelector('.ul-title'),
-            entry: entry
-          });
-
-          //if (entry.select_other) entry.select_other.remove();
-          //entry.ctrl.optionsTextInput(entry);
-
+          entry.location.view.dispatchEvent(
+            new CustomEvent('valChange', {detail:{
+              input: drop.querySelector('.ul-title'),
+              entry: entry
+            }}))
         }}>${key}`
     })}`);
-
-  //entry.ctrl.optionsTextInput(entry);
 
 };

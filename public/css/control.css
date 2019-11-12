@@ -1494,6 +1494,9 @@ button {
     max-height: none !important; }
     .listview .drawer.expanded .icon-expander {
       background-image: url("../icons/icon-keyboard-arrow-up.svg"); }
+  .listview .drawer.disabled {
+    opacity: 0.3;
+    pointer-events: none; }
   .listview .drawer.drawer-group .header {
     font-size: 93%;
     margin-left: 12px;

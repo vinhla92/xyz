@@ -1,6 +1,6 @@
 export default _xyz => entry => {
 
-  entry.location.view.node.appendChild(_xyz.utils.wire()`
+  entry.listview.appendChild(_xyz.utils.wire()`
   <tr>
     <td style="padding-top: 5px;" colSpan=2>
       <label class="checkbox">
@@ -8,11 +8,12 @@ export default _xyz => entry => {
           disabled=${!entry.edit}
           checked=${!!entry.value}
           onchange=${e => {
-            entry.location.view.valChange({
-              input: e.target,
-              entry: entry,
-              newValue: !!e.target.checked,
-            })
+            entry.location.view.dispatchEvent(
+              new CustomEvent('valChange', {detail:{
+                input: e.target,
+                entry: entry,
+                newValue: !!e.target.checked,
+              }}))
           }}>
         </input>
         <div></div><span>${entry.name || entry.field}`);

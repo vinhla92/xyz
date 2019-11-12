@@ -12,6 +12,9 @@ export default _xyz => function (callback) {
 
   if (!newValues.length) return;
 
+
+  location.view && location.view.classList.add('disabled');
+
   const xhr = new XMLHttpRequest();
 
   xhr.open('POST', _xyz.host + 
@@ -33,10 +36,8 @@ export default _xyz => function (callback) {
     // Reset location infoj with response.
     location.infoj = JSON.parse(e.target.response);
 
-    // Update the record.
-    location.view.drawer.appendChild(_xyz.locations.view.update(location));
-
-    //if (location.view.upload) location.view.upload.disabled = true;
+    // Recreate existing location view.
+    location.view && _xyz.locations.view.create(location);
 
     // Reload layer.
     location.layer.reload();

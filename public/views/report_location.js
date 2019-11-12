@@ -60,7 +60,7 @@ function init(_xyz) {
           featureProjection: _xyz.mapview.srid
       });
 
-      document.getElementById('report_left').appendChild(location.view.node);
+      document.getElementById('report_left').appendChild(location.view);
     }
   });
 

@@ -1,23 +1,23 @@
 export default _xyz => location => {
 
-  location.geometries.forEach(geom => _xyz.map.removeLayer(geom));
+  location.geometries = location.geometries.filter(geom => {
+    _xyz.map.removeLayer(geom)
+  });
     
-  location.geometries = [];
+  location.tables = location.tables.filter(table => {
+    _xyz.dataview.removeTab(table)
+  });
 
-  location.tables.forEach(table => _xyz.dataview.removeTab(table));
-    
-  location.tables = [];
-
-  location.view.node && location.view.node.remove();
-
-  location.view.node = _xyz.utils.wire()`<table class="locationview">`;
+  const listview = _xyz.utils.wire()`<table class="locationview">`;
 
   // Create object to hold view groups.
-  location.view.groups = {};
+  const groups = {};
 
   // Iterate through info fields to fill displayValue property
   // This must come before the adding-to-table loop so displayValues for all group members are already existent when groups are created!
   location.infoj && Object.values(location.infoj).forEach(entry => {
+
+    entry.listview = listview;
 
     if (document.body.dataset.viewmode === 'report') entry.edit = null;
 
@@ -45,13 +45,18 @@ export default _xyz => location => {
     entry.row = _xyz.utils.wire()`<tr class=${'lv-' + (entry.level || 0) + ' ' + (entry.class || '')}>`;
 
     // Create a new table row for the entry.
-    if (!entry.group) location.view.node.appendChild(entry.row);
+    if (!entry.group) listview.appendChild(entry.row);
 
     // Create a new info group.
-    if (entry.type === 'group') return _xyz.locations.view.group(entry);
+    if (entry.type === 'group') {
+      const group = _xyz.locations.view.group(entry);
+      if (!group) return;
+      groups[group.label] = group;
+      return listview.appendChild(group.row);
+    }
 
     // Create entry.row inside previously created group.
-    if (entry.group && location.view.groups[entry.group]){ 
+    if (entry.group && groups[entry.group]){ 
 
       if(entry.dataset || entry.stack){
 
@@ -62,20 +67,20 @@ export default _xyz => location => {
         if(entry.dataset && entry.dataset !== dataset){
           dataset_label.textContent = entry.dataset;
           dataset_row.appendChild(dataset_label);
-          location.view.groups[entry.group].table.appendChild(dataset_row);
+          groups[entry.group].table.appendChild(dataset_row);
           dataset = entry.dataset;
         }
 
         if(entry.stack && entry.stack !== dataset){
           dataset_label.textContent = entry.stack;
           dataset_row.appendChild(dataset_label);
-          location.view.groups[entry.group].table.appendChild(dataset_row);
+          groups[entry.group].table.appendChild(dataset_row);
           dataset = entry.stack;
         }
 
       }
 
-      location.view.groups[entry.group].table.appendChild(entry.row); 
+      groups[entry.group].table.appendChild(entry.row); 
     }
 
 
@@ -93,7 +98,7 @@ export default _xyz => location => {
     // display layer name in location view
     if(entry.type === 'key') {
      
-      return location.view.node.appendChild(_xyz.utils.wire()`
+      return listview.appendChild(_xyz.utils.wire()`
       <tr>
       <td class="${'label lv-0 ' + (entry.class || '')}" colspan=2 style="padding: 10px 0;">
       <span title="Source layer"
@@ -157,7 +162,7 @@ export default _xyz => location => {
       //entry.row = _xyz.utils.wire()`<tr>`;
       entry.row = _xyz.utils.wire()`<tr class=${'lv-' + (entry.level || 0) + ' ' + (entry.class || '')}>`;
 
-      location.view.node.appendChild(entry.row);
+      listview.appendChild(entry.row);
 
       // Create val table cell with colSpan 2 in the new row to span full width.
       entry.val = _xyz.utils.wire()`<td class="val" colspan=2>`;
@@ -190,18 +195,18 @@ export default _xyz => location => {
   });
 
   // Hide group if empty
-  location.infoj && Object.values(location.infoj).map(entry => {
+  // location.infoj && Object.values(location.infoj).map(entry => {
 
-    if(!entry.group) return;
+  //   if(!entry.group) return;
 
-    if(location.view.groups[entry.group]
-      && location.view.groups[entry.group].table
-      && !location.view.groups[entry.group].table.innerHTML) {
-      location.view.groups[entry.group].table.parentNode.style.display = 'none';
-    }
+  //   if(groups[entry.group]
+  //     && groups[entry.group].table
+  //     && !groups[entry.group].table.innerHTML) {
+  //     groups[entry.group].table.parentNode.style.display = 'none';
+  //   }
 
-  });
+  // });
 
-  return location.view.node;
+  return listview;
 
 };

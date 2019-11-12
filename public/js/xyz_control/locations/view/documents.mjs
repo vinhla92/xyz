@@ -12,7 +12,7 @@ export default _xyz => entry => {
 
 	let _tr = _xyz.utils.wire()`<tr colSpan=2>`;
 
-	entry.location.view.node.appendChild(_tr);
+	entry.listview.appendChild(_tr);
 
 	let _td = _xyz.utils.wire()`<td colSpan=2 class="list">`;
 

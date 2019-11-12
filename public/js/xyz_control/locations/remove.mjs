@@ -6,7 +6,7 @@ export default _xyz => function() {
 
   _xyz.mapview.interaction.edit.finish && _xyz.mapview.interaction.edit.finish();
 
-  if (location.view.drawer) location.view.drawer.remove();
+  if (location.view) location.view.remove();
 
   _xyz.locations.listview.node && setTimeout(
     () => {

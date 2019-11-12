@@ -19,12 +19,12 @@ export default _xyz => entry => {
         _xyz.utils.formatDateTime(meltDateStr) :
         _xyz.utils.formatDate(meltDateStr);
 
-      entry.location.view.valChange({
-        input: input,
-        entry: entry,
-        newValue: meltDateStr,
-      })
-
+      entry.location.view.dispatchEvent(
+        new CustomEvent('valChange', {detail:{
+          input: input,
+          entry: entry,
+          newValue: meltDateStr,
+        }}))  
     },
     onSelect: (instance, date) => {},
     onShow: instance => {}

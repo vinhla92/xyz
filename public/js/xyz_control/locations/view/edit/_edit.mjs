@@ -38,10 +38,11 @@ export default _xyz => {
       let textArea = _xyz.utils.wire()`
       <textarea value=${entry.value || ''} rows=3
         onkeyup=${e => {
-          entry.location.view.valChange({
-            input: e.target,
-            entry: entry,
-          });
+          entry.location.view.dispatchEvent(
+            new CustomEvent('valChange', {detail:{
+              input: e.target,
+              entry: entry,
+            }}))
         }}>`;
 
       entry.val.appendChild(textArea);
@@ -53,10 +54,11 @@ export default _xyz => {
     entry.val.appendChild(_xyz.utils.wire()`
     <input type="text" value="${entry.value || ''}"
       onkeyup=${e => {
-        entry.location.view.valChange({
-          input: e.target,
-          entry: entry
-        });
+        entry.location.view.dispatchEvent(
+          new CustomEvent('valChange', {detail:{
+            input: e.target,
+            entry: entry,
+          }}))
       }}>`);
 
   }

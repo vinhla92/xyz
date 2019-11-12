@@ -27,7 +27,7 @@ export default _xyz => entry => {
 
     td.appendChild(entry.chart.node);
 
-    entry.location.view.node.appendChild(tr);
+    entry.listview.appendChild(tr);
   }
 
   if (entry.display) showTab();

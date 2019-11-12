@@ -4,7 +4,7 @@ export default _xyz => entry => {
    
    // Create new row and append to table.
    entry.row = _xyz.utils.wire()`<tr>`;
-   entry.location.view.node.appendChild(entry.row);
+   entry.listview.appendChild(entry.row);
 
    let outer_td = _xyz.utils.wire()`<td colSpan=2>`;
    entry.row.appendChild(outer_td);

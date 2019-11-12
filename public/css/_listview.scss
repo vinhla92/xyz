@@ -24,6 +24,10 @@
                 background-image: url("../icons/icon-keyboard-arrow-up.svg");
             }
         }
+        &.disabled {
+            opacity: 0.3;
+            pointer-events: none;
+        }
         &.drawer-group {
 
                 .header {

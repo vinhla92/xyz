@@ -196,7 +196,7 @@ export default _xyz => {
       entry.location.infoj = e.target.response;
 
       // Update the location view.
-      entry.location.view.drawer.appendChild(_xyz.locations.view.update(entry.location));
+      _xyz.locations.view.create(entry.location);
 
       //entry.location.flyTo();
 

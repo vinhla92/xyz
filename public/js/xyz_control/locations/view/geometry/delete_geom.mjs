@@ -28,7 +28,7 @@ export default _xyz => entry => {
 
     entry.location.infoj = JSON.parse(e.target.response);
 
-    entry.location.view.drawer.appendChild(_xyz.locations.view.update(entry.location));
+    _xyz.locations.view.create(entry.location);
   };
 
   xhr.send();

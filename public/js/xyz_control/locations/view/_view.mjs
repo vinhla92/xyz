@@ -1,4 +1,4 @@
-import update from './update.mjs';
+import infoj from './infoj.mjs';
 
 import group from './group.mjs';
 
@@ -30,7 +30,7 @@ export default _xyz => {
 
     create: create,
 
-    update: update(_xyz),
+    infoj: infoj(_xyz),
 
     streetview: streetview(_xyz),
 
@@ -63,14 +63,38 @@ export default _xyz => {
 
   function create(location){
 
-    location.view = {};
-
-
     // Create drawer element to contain the header with controls and the infoj table with inputs.
-    location.view.drawer = _xyz.utils.wire()`
-    <div class="drawer expandable expanded">`;
+    if (location.view) {
+      location.view.innerHTML = '';
+      location.view.classList.remove('disabled');
+    } else {
+      location.view = _xyz.utils.wire()`<div class="drawer expandable expanded">`;
 
+      location.view.addEventListener('valChange', e => {
+        const newValue = typeof e.detail.newValue === 'undefined' ? e.detail.input.value : e.detail.newValue;
+  
+        if (e.detail.entry.value != newValue) {
+  
+          e.detail.entry.newValue = newValue;
+          e.detail.input.classList.add('primary-colour');
+        } else {
+  
+          delete e.detail.entry.newValue;
+          e.detail.input.classList.remove('primary-colour');
+        }
+  
+        // Hide upload button if no other field in the infoj has a newValue.
+        if (!e.detail.entry.location.infoj.some(field => typeof field.newValue !== 'undefined')) {
+  
+          upload.style.display = 'none';
+        } else {
+  
+          upload.style.display = 'inline-block';
+        }
+      });
+    }
 
+    
     // Create the header element to contain the control elements
     const header = _xyz.utils.wire()`
     <div
@@ -85,7 +109,7 @@ export default _xyz => {
       }}>
       <div>${String.fromCharCode(64 + _xyz.locations.list.length - _xyz.locations.list.indexOf(location.record))}`;
 
-    location.view.drawer.appendChild(header);
+    location.view.appendChild(header);
 
 
     // Expander icon.
@@ -97,7 +121,7 @@ export default _xyz => {
       onclick = ${e => {
         e.stopPropagation();
         _xyz.utils.toggleExpanderParent({
-          expandable: location.view.drawer,
+          expandable: location.view,
         });
       }}>`);
 
@@ -115,44 +139,17 @@ export default _xyz => {
 
 
     // Update icon.
-    location.view.upload = _xyz.utils.wire()`
+    const upload = _xyz.utils.wire()`
     <button
-      style = "${'filter: ' + location.colorFilter}"
+      style = "${'display: none; filter: ' + location.colorFilter}"
       title = "Save changes to cloud."
       class = "btn_header xyz-icon icon-cloud-upload"
-      disabled
       onclick = ${e => {
         e.stopPropagation();
         location.update();
       }}>`;
 
-    header.appendChild(location.view.upload);
-
-
-    location.view.valChange = (param) => {
-
-      if (typeof param.newValue === 'undefined') param.newValue = param.input.value;
-
-      if (param.entry.value != param.newValue) {
-
-        param.entry.newValue = param.newValue;
-        param.input.classList.add('primary-colour');
-      } else {
-
-        delete param.entry.newValue;
-        param.input.classList.remove('primary-colour');
-      }
-
-      // Hide upload button if no other field in the infoj has a newValue.
-      if (!param.entry.location.infoj.some(field => typeof field.newValue !== 'undefined')) {
-
-        param.entry.location.view.upload.disabled = true;
-      } else {
-
-        param.entry.location.view.upload.disabled = false;
-      }
-
-    };
+    header.appendChild(upload);
 
 
     // Edit geometry icon
@@ -222,7 +219,7 @@ export default _xyz => {
       }}>`);
 
 
-    location.infoj && location.view.drawer.appendChild(view.update(location));
+    location.infoj && location.view.appendChild(view.infoj(location));
 
   };
 

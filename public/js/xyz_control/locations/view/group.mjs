@@ -1,6 +1,6 @@
 export default _xyz => group => {
 
-  group.location.view.groups[group.label] = group;
+  if (!group.label) return;
 
   group.td = _xyz.utils.wire()`<td colSpan=2>`;
 
@@ -8,25 +8,26 @@ export default _xyz => group => {
 
   group.div = _xyz.utils.wire()`<div class="table-section expandable">`;
 
-  if(group.expanded) group.div.classList.add('expanded');
+  if (group.expanded) group.div.classList.add('expanded');
 
   group.td.appendChild(group.div);
 
   group.header = _xyz.utils.wire()`
-  <div class="btn_subtext cursor noselect primary-colour"
-  style="text-align: left;"
-  onclick=${ e => {
-    _xyz.utils.toggleExpanderParent({
-      expandable: group.div,
-      accordeon: true,
-    });
-  }}>`;
+  <div
+    class="btn_subtext cursor noselect primary-colour"
+    style="text-align: left;"
+    onclick=${ e => {
+      _xyz.utils.toggleExpanderParent({
+        expandable: group.div,
+        accordeon: true,
+      });
+    }}>`;
 
   group.div.appendChild(group.header);
 
   // Add label to group header.
   group.header.appendChild(_xyz.utils.wire()`<span>${group.label}`);
-  
+
   // Add table
   group.table = _xyz.utils.wire()`
   <table style="width: 100%; cell-padding: 0; cell-spacing: 0; padding-left: 20px; border-left: 2px solid #B4B4B4;">`;
@@ -35,9 +36,9 @@ export default _xyz => group => {
 
   // If chart option specified
   if (group.chart) {
-    
-    if(group.dashboard || group.chart.class) return;
-    
+
+    if (group.dashboard || group.chart.class) return group;
+
     // Set up
     group.fields = group.location.infoj.filter(entry => entry.group === group.label);
 
@@ -48,20 +49,20 @@ export default _xyz => group => {
     group.div.appendChild(group.chartElem);
 
     const chartIcon = {
-      'line':  'icon-show-chart',
-      'bar':  'icon-bar-chart',
-      'pie':  'icon-pie-chart',
-      'doughnut':  'icon-donut-small',
-      'horizontalBar':  'icon-notes',
-      'bubble':  'icon-bubble-chart',
-      'scatter':  'icon-scatter-plot',
-      'radar':  'icon-multiline-chart',
-      'polarArea':  'icon-multiline-chart',
-      'mixed':  'icon-multiline-chart',
-      'stackedBar':  'icon-bar-chart',
-   }
+      'line': 'icon-show-chart',
+      'bar': 'icon-bar-chart',
+      'pie': 'icon-pie-chart',
+      'doughnut': 'icon-donut-small',
+      'horizontalBar': 'icon-notes',
+      'bubble': 'icon-bubble-chart',
+      'scatter': 'icon-scatter-plot',
+      'radar': 'icon-multiline-chart',
+      'polarArea': 'icon-multiline-chart',
+      'mixed': 'icon-multiline-chart',
+      'stackedBar': 'icon-bar-chart',
+    }
 
-   group.chartIcon = group.chart.type && chartIcon[group.chart.type] || 'icon-show-chart';
+    group.chartIcon = group.chart.type && chartIcon[group.chart.type] || 'icon-show-chart';
 
     // Add chart control to group header for toggling
     group.viewToggler = _xyz.utils.wire()`
@@ -83,10 +84,10 @@ export default _xyz => group => {
       group.chartElem.style.display = 'block';
 
       group.div.classList.add('chart');
-  
+
       group.viewToggler.classList.remove(group.chartIcon);
       group.viewToggler.classList.add('icon-view-list');
-      
+
       if (!group.div.classList.contains('expanded')) group.div.classList.add('expanded');
     };
 
@@ -112,5 +113,7 @@ export default _xyz => group => {
       group.showTable();
     }
   }
+
+  return group;
 
 };

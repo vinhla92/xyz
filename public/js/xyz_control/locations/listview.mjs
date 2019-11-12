@@ -54,7 +54,7 @@ export default _xyz => {
   
     Object.values(_xyz.locations.listview.node.children).forEach(el => el.classList.remove('expanded'));
      
-    _xyz.locations.listview.node.insertBefore(location.view.drawer, _xyz.locations.listview.node.firstChild);
+    _xyz.locations.listview.node.insertBefore(location.view, _xyz.locations.listview.node.firstChild);
 
     setTimeout(
       () => {

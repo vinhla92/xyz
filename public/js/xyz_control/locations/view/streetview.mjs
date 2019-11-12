@@ -13,7 +13,7 @@ export default _xyz => entry => {
 
   const src = `${_xyz.host}/proxy/request?uri=https://maps.googleapis.com/maps/api/streetview?location=${lnglat[1]},${lnglat[0]}&size=300x230&provider=GOOGLE&token=${_xyz.token || ''}`;
 
-  entry.location.view.node.appendChild(
+  entry.listview.appendChild(
     _xyz.utils.wire()`
     <tr class="${entry.class || ''}">
       <td colspan=2>

@@ -70,7 +70,7 @@ export default _xyz => location => {
   // Create mapview popup with the locations view node.
   _xyz.mapview.popup.create({
     coords: location.marker,
-    content: location.view.drawer
+    content: location.view
   });
 
 };
