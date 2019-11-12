@@ -5,19 +5,15 @@ export default _xyz => layer => {
     const container = _xyz.utils.wire()`<div>`;
 
     const group = _xyz.utils.wire()`
-    <div
-        style="max-height: 30px;"
-        class="drawer expandable">`;
+    <div class="drawer panel expandable">`;
 
     group.appendChild(_xyz.utils.wire()`
     <div
-        class="btn_subtext cursor noselect primary-colour"
+        class="header btn_subtext cursor noselect primary-colour"
         style="text-align: left;"
         onclick=${e => {
             if (e) e.stopPropagation();
-            _xyz.utils.toggleExpanderParent({
-                expandable: group
-            });
+            _xyz.utils.toggleExpanderParent(e.target);
         }}>Here Isoline settings`);
 
     layer.edit.isoline_here.minutes = layer.edit.isoline_here.minutes || 10;

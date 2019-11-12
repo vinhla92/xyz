@@ -1,0 +1,116 @@
+.drawer.layer-group,
+.drawer.layer-view {
+    max-height: 37px;
+
+    >.header {
+        padding: 5px 0;
+
+        >img {
+            width: 20px;
+        }
+    }
+}
+
+.drawer.layer-group {
+
+    >.header {
+        font-weight: bold;
+    }
+}
+
+
+
+.layer-view {
+
+    .title {
+        font-weight: bold;
+        font-size: 107%;
+        margin-bottom: 10px;
+        padding: 4px;
+        border-radius: 2px;
+    }
+
+    .meta {
+        margin-top: 10px;
+
+        a {
+            font-weight: 600;
+        }
+    }
+
+    .dashboard {
+        margin-left: 4px;
+        border-bottom: 1px solid rgba(200, 200, 200, 0.1);
+        font-size: 93%;
+
+        .title {
+            font-weight: bold;
+            font-size: 100%;
+            margin-bottom: 7px;
+        }
+
+        .legend>svg {
+            width: 100%;
+        }
+
+    }
+
+    input {
+        width: 100%;
+    }
+
+    .range-label {
+        display: inline;
+        line-height: 1.7;
+    }
+
+    .range-input {
+        float: right;
+        width: 60%;
+    }
+
+    .sample-poly {
+        width: 30%;
+        height: 32px;
+        border-radius: 2px;
+        box-shadow: 2px 2px 2px #999;
+        position: absolute;
+        display: none;
+        // right: 2px;
+        // top: 5px;
+    }
+
+    .sample-circle {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        box-shadow: 2px 2px 2px #999;
+        position: absolute;
+        right: 2px;
+        top: 0;
+    }
+
+    .colour-swatch {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .colour-td {
+        height: 20px;
+    }
+
+    .link-with-img {
+        display: block;
+        margin-top: 5px;
+
+        .xyz-icon {
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+        }
+
+        >* {
+            vertical-align: middle;
+        }
+    }
+}

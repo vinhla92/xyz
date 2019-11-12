@@ -34,8 +34,8 @@ export default _xyz => {
 
   function block(layer, filter_entry) {
     const block = _xyz.utils.wire()`
-    <div class="block">
-    <div class="header-group">
+    <div class="drawer panel">
+    <div class="header">
     <div>${filter_entry.label}</div>
     <button
       class="btn_header xyz-icon icon-close primary-color-filter"
@@ -78,18 +78,16 @@ export default _xyz => {
     // Add select info to infoj array of filter entries.
     infoj.unshift('Select filter from list.');
   
-    const panel = _xyz.utils.wire()`<div class="panel expandable">`;
+    const panel = _xyz.utils.wire()`
+    <div class="drawer panel expandable">`;
 
     // Panel header
     panel.appendChild(_xyz.utils.wire()`
     <div
-      class="btn_text cursor noselect primary-colour"
+      class="header btn_text cursor noselect primary-colour"
       onclick=${e => {
         e.stopPropagation();
-        _xyz.utils.toggleExpanderParent({
-          expandable: panel,
-          accordeon: true,
-        });
+        _xyz.utils.toggleExpanderParent(e.target, true);
       }}>Filter`);
   
     let filter_entries = {};

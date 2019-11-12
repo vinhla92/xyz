@@ -463,6 +463,7 @@
                 },
                 "OS Zoomstack": {
                     "group": "Base Layer",
+                    "meta": "<p>Test paragraph for meta in group</p>",
                     "attribution": {
                         "© Ordanance Survey": "https://ordnancesurvey.co.uk"
                     },
@@ -480,6 +481,7 @@
                     "URI": "https://api.mapbox.com/styles/v1/dbauszus/ciozrimi3002bdsm8bjtn2v1y/tiles/256/{z}/{x}/{y}?&provider=MAPBOX"
                 },
                 "Cluster Catchments": {
+                    "group": "Cluster",
                     "format": "cluster",
                     "dbs": "XYZ",
                     "table": "dev.cluster_catchments",
@@ -1264,6 +1266,7 @@
                     ]
                 },
                 "Retail Points": {
+                    "group": "Cluster",
                     "display": false,
                     "format": "cluster",
                     "cluster_label": "store",
@@ -1611,6 +1614,7 @@
                     }
                 },
                 "PPD": {
+                    "group": "Cluster",
                     "format": "cluster",
                     "dbs": "XYZ",
                     "table": "dev.london_hpp",
@@ -1692,6 +1696,7 @@
                     "URI": "https://api.mapbox.com/styles/v1/dbauszus/cj9puo8pr5o0c2sovhdwhkc7z/tiles/256/{z}/{x}/{y}?&provider=MAPBOX"
                 },
                 "sites": {
+                    "group": "Cluster",
                     "display": false,
                     "edit": {
                         "properties": true,

@@ -6,7 +6,8 @@ export default _xyz => group => {
 
   group.row.appendChild(group.td);
 
-  group.div = _xyz.utils.wire()`<div class="table-section expandable">`;
+  group.div = _xyz.utils.wire()`
+  <div class="drawer group expandable">`;
 
   if (group.expanded) group.div.classList.add('expanded');
 
@@ -14,13 +15,10 @@ export default _xyz => group => {
 
   group.header = _xyz.utils.wire()`
   <div
-    class="btn_subtext cursor noselect primary-colour"
+    class="btn_subtext primary-colour"
     style="text-align: left;"
     onclick=${ e => {
-      _xyz.utils.toggleExpanderParent({
-        expandable: group.div,
-        accordeon: true,
-      });
+      _xyz.utils.toggleExpanderParent(e.target, true);
     }}>`;
 
   group.div.appendChild(group.header);

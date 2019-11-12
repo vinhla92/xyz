@@ -13,19 +13,15 @@ export default _xyz => {
     if (typeof(entry.edit.isoline_mapbox) !== 'object') entry.edit.isoline_mapbox = {};   
     
     const group = _xyz.utils.wire()`
-    <div
-      style="max-height: 30px;"
-      class="drawer expandable">`;
+    <div class="drawer panel expandable">`;
 
     group.appendChild(_xyz.utils.wire()`
     <div
-      class="btn_subtext cursor noselect primary-colour"
+      class="header btn_subtext cursor noselect primary-colour"
       style="text-align: left;"
       onclick=${e => {
         if (e) e.stopPropagation();
-        _xyz.utils.toggleExpanderParent({
-          expandable: group
-        });
+        _xyz.utils.toggleExpanderParent(e.target);
       }}>Mapbox Isoline settings`);
 
     entry.edit.isoline_mapbox.profile = entry.edit.isoline_mapbox.profile || 'driving';

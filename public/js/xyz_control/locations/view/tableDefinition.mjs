@@ -23,7 +23,7 @@ export default _xyz => entry => {
 
     tr.appendChild(td);
 
-    entry.chart.node = _xyz.utils.wire()`<div class="table-section">`;
+    entry.chart.node = _xyz.utils.wire()`<div>`;
 
     td.appendChild(entry.chart.node);
 

@@ -30,3 +30,18 @@
         opacity: 0.5;
     }
 }
+
+.link-with-img {
+    display: block;
+    margin-top: 5px;
+
+    .xyz-icon {
+        width: 20px;
+        height: 20px;
+        display: inline-block;
+    }
+
+    >* {
+        vertical-align: middle;
+    }
+}

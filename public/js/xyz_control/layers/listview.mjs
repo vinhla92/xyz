@@ -55,20 +55,17 @@ export default _xyz => {
     _xyz.layers.listview.groups[layer.group] = group;
 
     // Create layer group node and append to listview node.
-    group.node = _xyz.utils.wire()`<div class="drawer drawer-group expandable-group">`;
+    group.node = _xyz.utils.wire()`
+    <div class="drawer layer-group expandable">`;
+
     _xyz.layers.listview.node.appendChild(group.node);
 
     // Create layer group header.
-    group.header = _xyz.utils.wire()`<div class="header-group enabled"><div>${layer.group}`;
+    group.header = _xyz.utils.wire()`<div class="header enabled"><div>${layer.group}`;
     
     group.header.onclick = e => {
       e.stopPropagation();
-      _xyz.utils.toggleExpanderParent({
-        expandable: e.target.parentNode,
-        expandedTag: 'expanded-group',
-        expandableTag: 'expandable-group',
-        accordeon: true
-      });
+      _xyz.utils.toggleExpanderParent(e.target, true);
     };
 
     group.node.appendChild(group.header);
@@ -110,15 +107,11 @@ export default _xyz => {
     // Create group expander button.
     group.header.appendChild(_xyz.utils.wire()`
     <button 
-      class="icon-group-expander xyz-icon cursor noselect btn_header expander-group"
+      class="xyz-icon btn_header icon-expander"
       title="Toggle group panel"
       onclick=${ e => {
         e.stopPropagation();
-        _xyz.utils.toggleExpanderParent({
-          expandable: group.node,
-          expandedTag: 'expanded-group',
-          expandableTag: 'expandable-group'
-        });
+        _xyz.utils.toggleExpanderParent(e.target);
       }}>`);
 
   }

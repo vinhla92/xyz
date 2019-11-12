@@ -31,7 +31,7 @@ export default _xyz => {
   
   function create(layer) {
 
-    layer.view = _xyz.utils.wire()`<div class="drawer">`;
+    layer.view = _xyz.utils.wire()`<div class="drawer layer-view">`;
 
     // Make the layer view opaque if no table is available for the current zoom level.
     if (layer.tables) _xyz.mapview.node.addEventListener('changeEnd', () => {
@@ -45,7 +45,9 @@ export default _xyz => {
     if (layer.format === 'cluster' && layer.style.marker) {
     
       header.appendChild(_xyz.utils.wire()`
-      <img title="Default icon"
+      <img
+        class="btn_header"
+        title="Default icon"
         style="float: right; cursor: help;"
         src="${_xyz.utils.svg_symbols(layer.style.marker)}">`);
     }
@@ -115,15 +117,13 @@ export default _xyz => {
 
     // Assign methods to layer views with panels and or meta data.
     header.classList.add('pane_shadow');
+
     layer.view.classList.add('expandable');
 
     // Expander control for layer drawer.
     header.onclick = e => {
         e.stopPropagation();
-        _xyz.utils.toggleExpanderParent({
-            expandable: layer.view,
-            accordeon: true
-        });
+        _xyz.utils.toggleExpanderParent(e.target, true);
     };
 
     header.appendChild(_xyz.utils.wire()`
@@ -132,9 +132,7 @@ export default _xyz => {
       class="cursor noselect btn_header expander xyz-icon icon-expander"
       onclick=${e=>{
         e.stopPropagation();
-        _xyz.utils.toggleExpanderParent({
-            expandable: layer.view
-        });
+        _xyz.utils.toggleExpanderParent(e.target);
       }}>`);
 
     let panels = dashboard.querySelectorAll('.panel');

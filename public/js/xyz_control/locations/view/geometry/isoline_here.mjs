@@ -13,19 +13,15 @@ export default _xyz => {
     if (typeof(entry.edit.isoline_here) !== 'object') entry.edit.isoline_here = {};   
     
     const group = _xyz.utils.wire()`
-    <div
-      style="max-height: 30px;"
-      class="drawer expandable">`;
+    <div class="drawer panel expandable">`;
 
     group.appendChild(_xyz.utils.wire()`
     <div
-      class="btn_subtext cursor noselect primary-colour"
+      class="header btn_subtext cursor noselect primary-colour"
       style="text-align: left;"
       onclick=${e => {
         if (e) e.stopPropagation();
-        _xyz.utils.toggleExpanderParent({
-            expandable: group
-        });
+        _xyz.utils.toggleExpanderParent(e.target);
       }}>Here Isoline settings`);
 
     entry.edit.isoline_here.minutes = entry.edit.isoline_here.minutes || 10;

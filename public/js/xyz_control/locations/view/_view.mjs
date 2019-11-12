@@ -68,7 +68,7 @@ export default _xyz => {
       location.view.innerHTML = '';
       location.view.classList.remove('disabled');
     } else {
-      location.view = _xyz.utils.wire()`<div class="drawer expandable expanded">`;
+      location.view = _xyz.utils.wire()`<div class="drawer location-view expandable expanded">`;
 
       location.view.addEventListener('valChange', e => {
         const newValue = typeof e.detail.newValue === 'undefined' ? e.detail.input.value : e.detail.newValue;
@@ -102,10 +102,7 @@ export default _xyz => {
       style = "${'border-bottom: 2px solid ' + location.style.strokeColor}"
       onclick = ${e => {
         e.preventDefault();
-        _xyz.utils.toggleExpanderParent({
-          expandable: e.target.parentElement,
-          accordeon: true,
-        });
+        _xyz.utils.toggleExpanderParent(e.target, true);
       }}>
       <div>${String.fromCharCode(64 + _xyz.locations.list.length - _xyz.locations.list.indexOf(location.record))}`;
 
@@ -120,9 +117,7 @@ export default _xyz => {
       class = "btn_header xyz-icon icon-expander "
       onclick = ${e => {
         e.stopPropagation();
-        _xyz.utils.toggleExpanderParent({
-          expandable: location.view,
-        });
+        _xyz.utils.toggleExpanderParent(e.target);
       }}>`);
 
 

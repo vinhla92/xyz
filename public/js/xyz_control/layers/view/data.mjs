@@ -15,18 +15,16 @@ export default _xyz => {
 
     if (!layer.dataview.tables && !layer.dataview.charts) return;
 
-    const panel = _xyz.utils.wire()`<div class="panel expandable">`;
+    const panel = _xyz.utils.wire()`
+    <div class="drawer panel expandable">`;
   
     // Panel header
     panel.appendChild(_xyz.utils.wire()`
     <div
-      class="btn_text cursor noselect primary-colour"
+      class="header btn_text cursor noselect primary-colour"
       onclick=${e => {
         e.stopPropagation();
-        _xyz.utils.toggleExpanderParent({
-          expandable: panel,
-          accordeon: true,
-        });
+        _xyz.utils.toggleExpanderParent(e.target, true);
       }}>Data Views`);
 
     if (layer.dataview.tables) {
