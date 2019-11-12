@@ -1,5 +1,4 @@
 const env = require('../../../mod/env');
-const nodefetch = require('node-fetch');
 
 module.exports = fastify => {
 

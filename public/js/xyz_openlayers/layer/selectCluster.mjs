@@ -36,19 +36,19 @@ export default _xyz => function(feature) {
 
     if (cluster.length > 1) {
 
-      const ul = _xyz.utils.wire()`<ul class="scroll-list">`;
-
-      cluster.forEach(li => {
-
-        ul.appendChild(_xyz.utils.wire()`<li onclick=${() => _xyz.locations.select({
-          locale: _xyz.workspace.locale.key,
-          layer: layer,
-          table: layer.table,
-          id: li.id,
-          marker: li.coords,
-        })}>${li.label}`);
-
-      });
+      const ul = _xyz.utils.wire()`
+      <ul class="scroll-list">
+      ${cluster.map(
+        li => _xyz.utils.wire()`
+        <li onclick=${
+          () => _xyz.locations.select({
+            locale: _xyz.workspace.locale.key,
+            layer: layer,
+            table: layer.table,
+            id: li.id,
+            marker: li.coords,
+          })
+        }>${li.label || '"' + layer.cluster_label + '"'}`)}`;
 
       _xyz.mapview.popup.create({
         coords: _xyz.mapview.lib.proj.transform(
