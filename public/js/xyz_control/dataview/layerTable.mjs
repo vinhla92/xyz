@@ -3,8 +3,8 @@ export default _xyz => table => {
   if (!table) return;
 
   if (table.key) {
-    if (!table.layer.dataview.tables[table.key]) return;
-    Object.assign(table, table.layer.dataview.tables[table.key]);
+    if (!table.layer.dataview[table.key]) return;
+    Object.assign(table, table.layer.dataview[table.key]);
   }
 
   if (_xyz.dataview.node) {

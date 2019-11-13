@@ -13,8 +13,6 @@ export default _xyz => {
 
     if (!layer.dataview || !_xyz.dataview.node) return;
 
-    if (!layer.dataview.tables && !layer.dataview.charts) return;
-
     const panel = _xyz.utils.wire()`
     <div class="drawer panel expandable">`;
   
@@ -27,73 +25,35 @@ export default _xyz => {
         _xyz.utils.toggleExpanderParent(e.target, true);
       }}>Data Views`);
 
-    if (layer.dataview.tables) {
+      Object.keys(layer.dataview).forEach(key => {
 
-      Object.keys(layer.dataview.tables).forEach(key => {
+        const tab = layer.dataview[key];
 
-        const table = layer.dataview.tables[key];
+        tab.key = key;
+        tab.layer = layer;
+        tab.title = tab.title || key;
 
-        table.key = key;
-        table.layer = layer;
-        table.title = table.title || key;
+        tab.target = _xyz.dataview.node.querySelector('.table') || _xyz.dataview.tableContainer();
 
-        table.target = _xyz.dataview.node.querySelector('.table') || _xyz.dataview.tableContainer();
-
-        table.show = () => _xyz.dataview.layerTable(table);
-        table.remove = () => _xyz.dataview.removeTab(table);
+        tab.show = () => tab.chart ? _xyz.dataview.layerDashboard(tab) : _xyz.dataview.layerTable(tab);
+        tab.remove = () => tab.chart ? _xyz.dataview.removeTab(tab) : _xyz.dataview.removeTab(tab);
 
         // Create checkbox to toggle whether table is in tabs list.
         panel.appendChild(_xyz.utils.wire()`
         <label class="checkbox">
         <input
           type="checkbox"
-          checked=${!!table.display}
+          checked=${!!tab.display}
           onchange=${e => {
-            table.display = e.target.checked;
-            if (table.display) return layer.show();
-            table.remove();
+            tab.display = e.target.checked;
+            if (tab.display) return layer.show();
+            tab.remove();
           }}>
         </input>
-        <div></div><span>${table.title}`);
+        <div></div><span>${tab.title}`);
 
-        if (table.display && layer.display) table.show();
+        if (tab.display && layer.display) tab.show();
       });
-
-    }
-
-    if (layer.dataview.charts) {
-
-      Object.keys(layer.dataview.charts).forEach(key => {
-
-        const chart = layer.dataview.charts[key];
-
-        chart.key = key;
-        chart.layer = layer;
-        chart.title = chart.title || key;
-
-        chart.target = _xyz.dataview.node.querySelector('.table') || _xyz.dataview.tableContainer();
-
-        chart.show = () => _xyz.dataview.layerDashboard(chart);
-        chart.remove = () => _xyz.dataview.removeTab(chart);
-
-        // Create checkbox to toggle whether table is in tabs list.
-        panel.appendChild(_xyz.utils.wire()`
-        <label class="checkbox">
-        <input
-          type="checkbox"
-          checked=${!!chart.display}
-          onchange=${e => {
-            chart.display = e.target.checked;
-            if (chart.display) return layer.show();
-            chart.remove();
-          }}>
-        </input>
-        <div></div><span>${chart.title}`);
-
-        if (chart.display && layer.display) chart.show();
-      });
-
-    }
 
     return panel;
 
