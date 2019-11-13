@@ -121,7 +121,7 @@ export default _xyz => {
     header.appendChild(_xyz.utils.wire()`
     <button
       title="Toggle layer dashboard"
-      class="cursor noselect btn_header expander xyz-icon icon-expander"
+      class="btn_header xyz-icon icon-expander"
       onclick=${e=>{
         e.stopPropagation();
         _xyz.utils.toggleExpanderParent(e.target);

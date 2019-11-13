@@ -1,34 +1,69 @@
 .drawer.layer-group,
 .drawer.layer-view {
 
+    margin: 5px 0;
+    border-left: 1px solid #fff;
+    padding: 0 0 5px 5px;
+
     >.header {
+
         padding: 5px 0;
 
         >img {
             width: 20px;
         }
     }
+
+    &.expanded {
+        border-left: 1px solid #ccc;
+
+        >.header {
+            font-weight: bold;
+        }
+    }
 }
 
 .drawer.layer-group {
+    background-color: ghostwhite;
+}
 
-    >.header {
-        font-weight: bold;
+.drawer.layer-group>.drawer.layer-view {
+    padding: 0 0 5px 5px;
+
+    &.expanded {
+        border-left: 1px solid #999;
     }
 }
+
+.drawer.layer-view {
+
+    &.expanded {
+        padding-bottom: 5px;
+        background-color: white;
+    }
+
+    >.expanded {
+        border-left: 1px solid #ccc;
+    }
+
+    >:not(.header) {
+        padding-left: 5px;
+    }
+}
+
 
 .layer-view {
 
     .title {
         font-weight: bold;
-        font-size: 107%;
+        font-size: 110%;
         margin-bottom: 10px;
         padding: 4px;
         border-radius: 2px;
     }
 
     .meta {
-        margin-top: 10px;
+        // margin-top: 10px;
 
         a {
             font-weight: 600;

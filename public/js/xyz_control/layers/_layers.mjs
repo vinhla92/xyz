@@ -60,6 +60,9 @@ export default _xyz => {
     // Set the first theme from themes array.
     if (_layer.style && _layer.style.themes) _layer.style.theme = _layer.style.themes[Object.keys(_layer.style.themes)[0]];
 
+    // Set the first theme from themes array.
+    if (_layer.style && _layer.style.themes) _layer.style.themes[Object.keys(_layer.style.themes)[0]];
+
     // Initialise Openlayers source and layer.
     _xyz.layers.format[layer.format](_layer);
 

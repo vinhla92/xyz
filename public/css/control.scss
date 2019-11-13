@@ -56,13 +56,6 @@ a {
     background-color: transparent;
 }
 
-select {
-    width: 100%;
-    font-family: inherit;
-    margin: 5px 0;
-    background: #fff;
-}
-
 .noselect {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -77,38 +70,4 @@ select {
 
 .bold {
     font-weight: 700;
-}
-
-.pane_shadow {
-    box-shadow: 0 1px 3px -3px #000;
-}
-
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button { 
-    -webkit-appearance: none; /* Chrome */
-    margin: 0;
-}
-
-input[type=number] {
-    -moz-appearance:textfield; /* Firefox */
-}
-
-input[type=text] {
-    border: 1px solid #999;
-}
-
-input:hover {
-    cursor: pointer;
-}
-
-:focus {
-    outline:none;
-}
-
-::-moz-focus-inner {
-    border:0;
-}
-
-::-moz-focus-outer {
-    border: 0;
 }
