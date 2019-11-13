@@ -23,7 +23,11 @@ export default _xyz => {
       // Create the layer view.
       _xyz.layers.view.create(layer);
 
-      if (!layer.group) return _xyz.layers.listview.node.appendChild(layer.view);
+      if (!layer.group) {
+        _xyz.layers.listview.node.appendChild(layer.view);
+        layer.view.style.maxHeight = layer.view.querySelector('.header').clientHeight + 'px';
+        return
+      }
 
       // Create new layer group if group does not exist yet.
       if (!_xyz.layers.listview.groups[layer.group]) createGroup(layer);
@@ -40,6 +44,7 @@ export default _xyz => {
 
       // Append the layer to the listview layer group.
       _xyz.layers.listview.groups[layer.group].node.appendChild(layer.view);
+      layer.view.style.maxHeight = layer.view.querySelector('.header').clientHeight + 'px';
 
     });
 
@@ -61,14 +66,16 @@ export default _xyz => {
     _xyz.layers.listview.node.appendChild(group.node);
 
     // Create layer group header.
-    group.header = _xyz.utils.wire()`<div class="header enabled"><div>${layer.group}`;
+    const header = _xyz.utils.wire()`<div class="header enabled"><div>${layer.group}`;
     
-    group.header.onclick = e => {
+    header.onclick = e => {
       e.stopPropagation();
       _xyz.utils.toggleExpanderParent(e.target, true);
     };
 
-    group.node.appendChild(group.header);
+    group.node.appendChild(header);
+
+    group.node.style.maxHeight = header.clientHeight + 'px';
 
     // Create layer group meta element.
     group.meta = _xyz.utils.wire()`<div>`;
@@ -102,10 +109,10 @@ export default _xyz => {
 
       }}>`;
 
-    group.header.appendChild(group.visible);
+    header.appendChild(group.visible);
 
     // Create group expander button.
-    group.header.appendChild(_xyz.utils.wire()`
+    header.appendChild(_xyz.utils.wire()`
     <button 
       class="xyz-icon btn_header icon-expander"
       title="Toggle group panel"

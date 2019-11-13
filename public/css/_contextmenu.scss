@@ -11,7 +11,6 @@
 		list-style: none;
 
 		li {
-
 			margin: 2px 0;
 			border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 
@@ -19,20 +18,13 @@
 				border-bottom: 1px solid rgba(0, 0, 0, 0);
 				cursor: pointer;
 			}
-
-			/*&:after {
-				content: "";
-				display: block;
-				height: 1px;
-				background: #000;
-				opacity: 0.2;
-			}*/
 		}
 	}
 }
 
 .context {
 	list-style-type: none;
+	
 	li {
 		white-space: nowrap;
 		padding: 5px;

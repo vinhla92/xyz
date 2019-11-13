@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans|Open+Sans:300,400,500,700');
 
+// @import url('https://cdn.jsdelivr.net/gh/tonsky/FiraCode@1.207/distr/fira_code.css');
+
 // @import url('https://fonts.googleapis.com/css?family=Ubuntu|Ubuntu:300,400,500,700');
 
 // @import url('https://fonts.googleapis.com/css?family=Lato|Lato:300,400,500,700');
@@ -12,8 +14,8 @@
 @import 'dataview';
 @import 'inputs';
 @import 'range';
-@import 'panel';
 @import 'dropdown';
+@import 'itemlist';
 @import 'datepicker';
 @import 'chkbox';
 @import 'button';
@@ -26,7 +28,6 @@
 @import 'workspace';
 @import 'contextmenu';
 @import 'icons';
-@import 'itemlist';
 @import 'drawer';
 
 *,

@@ -2,8 +2,6 @@ import select from './selectCluster.mjs';
 
 import infotip from './infotip.mjs';
 
-import label from './clusterLabel.mjs';
-
 export default _xyz => layer => {
 
   layer.highlight = true;
@@ -193,6 +191,6 @@ export default _xyz => layer => {
     }
   });
 
-  layer.label = label(_xyz, layer);
+  layer.label = _xyz.layers.format.clusterLabel(layer);
 
 };

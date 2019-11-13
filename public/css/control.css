@@ -68,15 +68,12 @@ input[type=range]::-moz-range-thumb {
 .context li:hover {
   background-color: ghostwhite; }
 
-.drawer.layer-group,
-.drawer.layer-view {
-  max-height: 37px; }
-  .drawer.layer-group > .header,
-  .drawer.layer-view > .header {
-    padding: 5px 0; }
-    .drawer.layer-group > .header > img,
-    .drawer.layer-view > .header > img {
-      width: 20px; }
+.drawer.layer-group > .header,
+.drawer.layer-view > .header {
+  padding: 10px 0; }
+  .drawer.layer-group > .header > img,
+  .drawer.layer-view > .header > img {
+    width: 20px; }
 
 .drawer.layer-group > .header {
   font-weight: bold; }
