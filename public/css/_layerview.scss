@@ -1,10 +1,8 @@
 .drawer.layer-group,
 .drawer.layer-view {
-    // max-height: 37px;
 
     >.header {
-        // font-size: 200%;
-        padding: 10px 0;
+        padding: 5px 0;
 
         >img {
             width: 20px;
@@ -19,17 +17,7 @@
     }
 }
 
-
-
 .layer-view {
-
-    .drawer.panel {
-        max-height: 37px;
-    
-        >.header {
-            padding: 5px 0;
-        }
-    }
 
     .title {
         font-weight: bold;
@@ -62,6 +50,14 @@
             width: 100%;
         }
 
+        .drawer.panel {
+
+            max-height: 30px;
+    
+            >.header {
+                padding: 5px 0;
+            }
+        }
     }
 
     input {

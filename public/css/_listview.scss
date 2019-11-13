@@ -1,18 +1,11 @@
 .listview {
 
-    .title {
+    >.title {
         font-weight: bold;
-        font-size: 107%;
+        font-size: 110%;
         margin-bottom: 10px;
         padding: 4px;
         border-radius: 2px;
     }
 
-    .meta {
-        margin-top: 10px;
-
-        a {
-            font-weight: 600;
-        }
-    }
 }

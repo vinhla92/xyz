@@ -81,42 +81,34 @@ export default _xyz => {
   
     layer.view.appendChild(header);
 
-    const dashboard = _xyz.utils.wire()`<div class="dashboard">`;
-  
-    layer.view.appendChild(dashboard);
-
     // Create layer meta.
     if (layer.meta) {
         const meta = _xyz.utils.wire()`<p class="meta">`;
         meta.innerHTML = layer.meta;
-        dashboard.appendChild(meta);
+        layer.view.appendChild(meta);
     }
-
 
     // Create & add Style panel.
     const style_panel = view.style.panel(layer);
-    style_panel && dashboard.appendChild(style_panel);
+    style_panel && layer.view.appendChild(style_panel);
 
     // Create & add Filter panel.
     const filter_panel = view.filter.panel(layer);
-    filter_panel && dashboard.appendChild(filter_panel);
+    filter_panel && layer.view.appendChild(filter_panel);
 
     // Create & add Data panel.
     const data_panel = view.data.panel(layer);
-    data_panel && dashboard.appendChild(data_panel);
+    data_panel && layer.view.appendChild(data_panel);
 
     // Create & add Draw panel.
     const draw_panel = view.draw.panel(layer);
-    draw_panel && dashboard.appendChild(draw_panel);
+    draw_panel && layer.view.appendChild(draw_panel);
         
     // Create & add Reports panel.
     const report_panel = view.report.panel(layer);
-    report_panel && dashboard.appendChild(report_panel);
+    report_panel && layer.view.appendChild(report_panel);
 
-    if (!dashboard.children.length) return;
-
-    // Assign methods to layer views with panels and or meta data.
-    header.classList.add('pane_shadow');
+    if (layer.view.children.length <= 1) return;
 
     layer.view.classList.add('expandable');
 
@@ -135,10 +127,9 @@ export default _xyz => {
         _xyz.utils.toggleExpanderParent(e.target);
       }}>`);
 
-    let panels = dashboard.querySelectorAll('.panel');
+    const firstPanel = layer.view.querySelector('.panel');
 
-    // Expand first panel;
-    panels.length && panels[0].classList.add('expanded');
+    firstPanel && firstPanel.classList.add('expanded');
 
   }
 

@@ -25,6 +25,11 @@ export default _xyz => {
 
       if (!layer.group) {
         _xyz.layers.listview.node.appendChild(layer.view);
+
+        layer.view.querySelectorAll('.panel').forEach(panel => {
+          panel.style.maxHeight = panel.querySelector('.header').offsetHeight + 'px'
+        });
+
         layer.view.style.maxHeight = layer.view.querySelector('.header').clientHeight + 'px';
         return
       }
@@ -32,20 +37,9 @@ export default _xyz => {
       // Create new layer group if group does not exist yet.
       if (!_xyz.layers.listview.groups[layer.group]) createGroup(layer);
 
-      // Check for visible layer in exisiting layer group.
-      _xyz.layers.listview.groups[layer.group].chkVisibleLayer();
-
-      // Add group meta to group node.
-      if (layer.groupmeta) {
-        const groupmeta = _xyz.utils.wire()`<div class="meta primary-colour">`;
-        groupmeta.innerHTML = layer.groupmeta;
-        _xyz.layers.listview.groups[layer.group].meta.appendChild(groupmeta);
-      }
-
-      // Append the layer to the listview layer group.
-      _xyz.layers.listview.groups[layer.group].node.appendChild(layer.view);
-      layer.view.style.maxHeight = layer.view.querySelector('.header').clientHeight + 'px';
-
+      // Add layer to group.
+      _xyz.layers.listview.groups[layer.group].addLayer(layer);
+    
     });
 
   }
@@ -54,62 +48,82 @@ export default _xyz => {
   function createGroup (layer){
 
     // Create group object.
-    const group = {};
+    const group = {
+      list: []
+    };
 
     // Assign layer group to listview object.
     _xyz.layers.listview.groups[layer.group] = group;
 
     // Create layer group node and append to listview node.
-    group.node = _xyz.utils.wire()`
+    const drawer = _xyz.utils.wire()`
     <div class="drawer layer-group expandable">`;
 
-    _xyz.layers.listview.node.appendChild(group.node);
+    _xyz.layers.listview.node.appendChild(drawer);
 
     // Create layer group header.
-    const header = _xyz.utils.wire()`<div class="header enabled"><div>${layer.group}`;
-    
-    header.onclick = e => {
-      e.stopPropagation();
-      _xyz.utils.toggleExpanderParent(e.target, true);
-    };
+    const header = _xyz.utils.wire()`
+    <div
+      class="header enabled"
+      onclick=${e=>{
+        e.stopPropagation();
+        _xyz.utils.toggleExpanderParent(e.target, true);
+      }}>
+      <div>${layer.group}`;
 
-    group.node.appendChild(header);
+    drawer.appendChild(header);
 
-    group.node.style.maxHeight = header.clientHeight + 'px';
+    drawer.style.maxHeight = header.clientHeight + 'px';
 
     // Create layer group meta element.
-    group.meta = _xyz.utils.wire()`<div>`;
-    group.node.appendChild(group.meta);
+    const meta = _xyz.utils.wire()`<div class="meta">`;
+    drawer.appendChild(meta);
 
     // Check whether some layers group are visible and toggle visible button display accordingly.
     group.chkVisibleLayer = () => {
 
-      if (Object.values(_xyz.layers.list).some(_layer => _layer.display && _layer.group === layer.group)) {
-        group.visible.classList.add('on');
-        group.visible.disabled = false;
+      if (group.list.some(layer => layer.display)) {
+        hideLayers.classList.add('on');
+        hideLayers.disabled = false;
       } else {
-        group.visible.classList.remove('on');
-        group.visible.disabled = true;
+        hideLayers.classList.remove('on');
+        hideLayers.disabled = true;
       }
-
     };
 
+    group.addLayer = layer => {
+
+      if (layer.groupmeta) {
+        const groupmeta = _xyz.utils.wire()`<div>`;
+        groupmeta.innerHTML = layer.groupmeta;
+        meta.appendChild(groupmeta);
+      }
+
+      group.list.push(layer);
+      drawer.appendChild(layer.view);
+      layer.view.maxHeight = layer.view.querySelector('.header').clientHeight + 'px';
+
+      layer.view.querySelectorAll('.panel').forEach(panel => {
+        panel.style.maxHeight = panel.querySelector('.header').offsetHeight + 'px'
+      });
+
+      group.chkVisibleLayer();
+    }
+
     // Create hide all group layers button.
-    group.visible = _xyz.utils.wire()`
+    const hideLayers = _xyz.utils.wire()`
     <button
       class="btn_header xyz-icon icon-toggle"
       title="Hide layers from group"
       onclick=${e=>{
         e.stopPropagation();
-
-        // Iterate through all layers and remove layer if layer is in group.
-        Object.values(_xyz.layers.list)
-          .filter(_layer => _layer.group === layer.group && _layer.display)
-          .forEach(_layer => _layer.remove())
+        group.list
+          .filter(layer => layer.display)
+          .forEach(layer => layer.remove())
 
       }}>`;
 
-    header.appendChild(group.visible);
+    header.appendChild(hideLayers);
 
     // Create group expander button.
     header.appendChild(_xyz.utils.wire()`
