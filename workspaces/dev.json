@@ -38,50 +38,49 @@
                     "geom": "geom_3857",
                     "srid": "3857",
                     "dataview": {
-                        "tables": {
-                            "table1": {
-                                "title": "Population / GDP",
-                                "from": "dev.natural_earth_countries",
-                                "columns": [
-                                    {
-                                        "field": "name"
-                                    },
-                                    {
-                                        "title": "Population Est",
-                                        "field": "pop_est"
-                                    },
-                                    {
-                                        "field": "gdp_md_est"
+                        "table1": {
+                            "title": "Population / GDP",
+                            "type": "table",
+                            "from": "dev.natural_earth_countries",
+                            "columns": [
+                                {
+                                    "field": "name"
+                                },
+                                {
+                                    "title": "Population Est",
+                                    "field": "pop_est"
+                                },
+                                {
+                                    "field": "gdp_md_est"
+                                }
+                            ]
+                        },
+                        "GDP / Population": {
+                            "display": true,
+                            "from": "dev.natural_earth_countries",
+                            "columns": [
+                                {
+                                    "field": "name"
+                                },
+                                {
+                                    "field": "gdp_md_est",
+                                    "formatter": "money",
+                                    "formatterParams": {
+                                        "symbol": " dollars",
+                                        "symbolAfter": true,
+                                        "precision": false 
                                     }
-                                ]
-                            },
-                            "GDP / Population": {
-                                "display": true,
-                                "from": "dev.natural_earth_countries",
-                                "columns": [
-                                    {
-                                        "field": "name"
-                                    },
-                                    {
-                                        "field": "gdp_md_est",
-                                        "formatter": "money",
-                                        "formatterParams": {
-                                            "symbol": " dollars",
-                                            "symbolAfter": true,
-                                            "precision": false 
-                                        }
-                                    },
-                                    {
-                                        "title": "Population Est",
-                                        "field": "pop_est",
-                                        "formatter": "money",
-                                        "align": "right",
-                                        "formatterParams": {
-                                            "precision": false 
-                                        }
+                                },
+                                {
+                                    "title": "Population Est",
+                                    "field": "pop_est",
+                                    "formatter": "money",
+                                    "align": "right",
+                                    "formatterParams": {
+                                        "precision": false 
                                     }
-                                ]
-                            }
+                                }
+                            ]
                         }
                     },
                     "qID": "id",
@@ -872,12 +871,11 @@
                         }
                     },
                     "dataview": {
-                        "tables": {
-                            "Retail Places": {
-                                "viewport": true,
-                                "from": "dev.retailplaces",
-                                "layout": "fitColumns",
-                                "columns": [
+                        "Retail Places": {
+                            "viewport": true,
+                            "from": "dev.retailplaces",
+                            "layout": "fitColumns",
+                            "columns": [
                                     {
                                         "title": "ID",
                                         "field": "id"
@@ -903,17 +901,15 @@
                                         "title": "Estimate brands",
                                         "group": "Characteristics"
                                     }
-                                ]
-                            }
+                            ]
                         },
-                        "charts": {
-                            "Retail strength": {
-                                "display": false,
-                                "chart": {
-                                    "type": "bubble"
-                                },
-                                "from": "dev.retailplaces",
-                                "columns": [
+                        "Retail strength": {
+                            "display": false,
+                            "chart": {
+                                "type": "bubble"
+                            },
+                            "from": "dev.retailplaces",
+                            "columns": [
                                     {
                                         "title": "Units",
                                         "field": "est_units",
@@ -934,33 +930,32 @@
                                         "title": "Name",
                                         "field": "rp_name"
                                     }
-                                ]
+                            ]
+                        },
+                        "Services share": {
+                            "display": false,
+                            "chart": {
+                            "type": "scatter",
+                                "pointStyle": "triangle",
+                                "radius": 10
                             },
-                            "Services share": {
-                                "display": false,
-                                "chart": {
-                                    "type": "scatter",
-                                    "pointStyle": "triangle",
-                                    "radius": 10
+                            "from": "dev.retailplaces",
+                            "columns": [
+                                {
+                                    "field": "fbl",
+                                    "title": "Food / Beverage / Leaisure",
+                                    "type": "numeric"
                                 },
-                                "from": "dev.retailplaces",
-                                "columns": [
-                                    {
-                                        "field": "fbl",
-                                        "title": "Food / Beverage / Leaisure",
-                                        "type": "numeric"
-                                    },
-                                    {
-                                        "field": "services",
-                                        "title": "Services",
-                                        "type": "numeric"
-                                    },
-                                    {
-                                        "title": "Name",
-                                        "field": "rp_name"
-                                    }
-                                ]
-                            }
+                                {
+                                    "field": "services",
+                                    "title": "Services",
+                                    "type": "numeric"
+                                },
+                                {
+                                    "title": "Name",
+                                    "field": "rp_name"
+                                }
+                            ]
                         }
                     },
                     "mvt_cache": "dev.retailplaces__mvts",
@@ -1281,25 +1276,23 @@
                         "field": "store"
                     },
                     "dataview": {
-                        "tables": {
-                            "Retail Points": {
-                                "display": true,
-                                "from": "dev.retailpoints",
-                                "columns": [
-                                    {
-                                        "title": "ID",
-                                        "field": "retailpoint_id"
-                                    },
-                                    {
-                                        "title": "Retailer",
-                                        "field": "retailer"
-                                    },
-                                    {
-                                        "title": "Fascia",
-                                        "field": "fascia"
-                                    }
-                                ]
-                            }
+                        "Retail Points": {
+                            "display": true,
+                            "from": "dev.retailpoints",
+                            "columns": [
+                                {
+                                    "title": "ID",
+                                    "field": "retailpoint_id"
+                                },
+                                {
+                                    "title": "Retailer",
+                                    "field": "retailer"
+                                },
+                                {
+                                    "title": "Fascia",
+                                    "field": "fascia"
+                                }
+                            ]
                         }
                     },
                     "filter": {

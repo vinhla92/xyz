@@ -30,14 +30,10 @@ export default _xyz => function () {
   // Iterate through tables and charts to check whether table should be shown.
   if (layer.dataview && _xyz.dataview.node){
 
-    if(layer.dataview.tables) Object.keys(layer.dataview.tables).forEach(key => {
-      const table = layer.dataview.tables[key];
-      if (table.display) table.show();
-    });
+    Object.keys(layer.dataview).forEach(key => {
 
-    if(layer.dataview.charts) Object.keys(layer.dataview.charts).forEach(key => {
-      const chart = layer.dataview.charts[key];
-      if (chart.display) chart.show();
+      if(layer.dataview[key].display) layer.dataview[key].show();
+
     });
   
   }
