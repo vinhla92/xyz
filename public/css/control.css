@@ -120,7 +120,7 @@ input[type=range]::-moz-range-thumb {
 }
 .drawer.layer-group > .header {
   /*font-weight: bold;*/
-  font-weight: normal;
+  font-weight: 400;
   background-color: #fff;
 }
 .drawer.layer-group > .drawer.layer-view {
@@ -2206,6 +2206,7 @@ body {
   width: 100%;
   height: 100%;
   font-size: 13px;
+  font-weight: 400;
 }
 
 a {
