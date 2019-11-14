@@ -12,7 +12,7 @@ export default _xyz => (layer, filter_entry) => {
   filter_entry.el = block;
 
   block.appendChild(_xyz.utils.wire()`
-  <input placeholder="Search" onkeyup=${e=>{
+  <input type="text" placeholder="Search" onkeyup=${e=>{
 
     layer.filter.current[filter_entry.field] = {};
     layer.filter.current[filter_entry.field][filter_entry.filter] = e.target.value;

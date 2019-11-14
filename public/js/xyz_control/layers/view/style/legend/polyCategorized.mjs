@@ -150,7 +150,7 @@ export default _xyz => layer => {
   }
 
   // Set height of the svg element.
-  // legend.style.height = `${y}px`;
+  legend.style.height = `${y}px`;
 
   return legend;
 };

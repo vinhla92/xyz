@@ -77,8 +77,7 @@ input[type=range]::-moz-range-thumb {
   background-color: #fff; }
   .drawer.layer-group > *,
   .drawer.layer-view > * {
-    padding-left: 5px;
-    padding-right: 5px; }
+    padding-left: 5px; }
   .drawer.layer-group > .header,
   .drawer.layer-view > .header {
     padding-top: 5px;
@@ -87,20 +86,14 @@ input[type=range]::-moz-range-thumb {
     .drawer.layer-group > .header > img,
     .drawer.layer-view > .header > img {
       width: 20px; }
-  .drawer.layer-group.expanded > .header,
-  .drawer.layer-view.expanded > .header {
-    /*font-weight: bold;*/ }
 
 .drawer.layer-group {
   background-color: #f0f0f0; }
   .drawer.layer-group > .header {
-    /*font-weight: bold;*/
     font-weight: 400;
     background-color: #fff; }
   .drawer.layer-group > .drawer.layer-view {
     padding-left: 10px; }
-    .drawer.layer-group > .drawer.layer-view > .header {
-      margin-right: -5px; }
 
 .drawer.layer-view > .header {
   font-weight: bold; }
@@ -110,7 +103,6 @@ input[type=range]::-moz-range-thumb {
   padding-bottom: 5px; }
 
 .layer-view .title {
-  /*font-weight: bold;*/
   margin-bottom: 10px;
   padding: 5px 0;
   border-radius: 2px; }
@@ -119,7 +111,9 @@ input[type=range]::-moz-range-thumb {
 .layer-view .legend > svg {
   width: 100%; }
 .layer-view .drawer.panel {
-  border-top: 1px solid #f0f0f0; }
+  border-top: 1px solid #f0f0f0;
+  padding-bottom: 5px;
+  padding-right: 5px; }
   .layer-view .drawer.panel > .header {
     padding: 5px 0;
     margin-right: -5px; }
@@ -778,14 +772,13 @@ button {
   margin-bottom: 4px; }
 
 .btn_wide {
-  /*font-size: 93%;*/
   border-radius: 2px;
   line-height: 2;
   text-align: center;
   font-weight: 600;
-  box-shadow: 1px 1px 2px #999999;
-  margin: 5px 2px 5px 1px;
-  width: calc(100% - 5px); }
+  box-shadow: 1px 1px 1px 1px #ccc;
+  margin: 5px 0;
+  width: calc(100% - 1px); }
   .btn_wide.disabled {
     opacity: 0.3;
     cursor: default; }
@@ -1794,7 +1787,7 @@ button {
   .drawer.expanded > .header > .icon-expander {
     background-image: url("../icons/icon-keyboard-arrow-up.svg"); }
 .drawer.disabled {
-  opacity: 0.3;
+  opacity: 0.4;
   pointer-events: none; }
 
 *,

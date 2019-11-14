@@ -35,7 +35,7 @@ export default _xyz => {
 
     // Make the layer view opaque if no table is available for the current zoom level.
     if (layer.tables) _xyz.mapview.node.addEventListener('changeEnd', () => {
-        layer.view.style.opacity = !layer.tableCurrent() ? 0.4 : 1;
+        !layer.tableCurrent() ? layer.view.classList.add('disabled') : layer.view.classList.remove('disabled');
     });
     
     const header = _xyz.utils.wire()`
