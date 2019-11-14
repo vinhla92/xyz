@@ -54,7 +54,7 @@ function panel(layer) {
     // Panel header
     panel.appendChild(_xyz.utils.wire()`
     <div
-      class="header btn_text cursor noselect"
+      class="header btn_text cursor noselect primary-colour"
       onclick=${e => {
         e.stopPropagation();
         _xyz.utils.toggleExpanderParent(e.target, true);
