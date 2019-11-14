@@ -115,8 +115,8 @@ export default _xyz => {
         scale: scale,
         units: units,
         fallbackStyle: {
-        	borderColor: '#079e00',
-        	backgroundColor: '#DEF6CA'
+        	borderColor: '#1F964D',
+        	backgroundColor: '#cae0b8'
         }
     }
 };

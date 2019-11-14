@@ -1,5 +1,5 @@
 /*$primary_colour:  #1F964D;
-$secondary_colour: #DEF6CA;
+$secondary_colour: #DEF6CA; //#cae0b8;
 $tertiary_colour: hotpink;
 $off_white: ghostwhite;
 $off_black: #383836;*/
@@ -48,7 +48,7 @@ input[type=range]::-moz-range-thumb {
 /* Secondary colour properties */
 
 .secondary-colour {
-    color: #DEF6CA;
+    color: #cae0b8;
 }
 
 .primary-color-filter {
@@ -64,16 +64,20 @@ input[type=range]::-moz-range-thumb {
     background-color: #cae0b8;
 }
 
+.secondary-colour-bb {
+    border-bottom: solid 1px #cae0b8;
+}
+
 .secondary-colour-shadow {
-	text-shadow: 1px 1px 1px #DEF6CA;
+	text-shadow: 1px 1px 1px #cae0b8;
 }
 
 .contextmenu li:hover {
-    background-color: #DEF6CA;
+    background-color: #cae0b8;
 }
 
 .scroll-list li:hover {
-    background-color: #DEF6CA;
+    background-color: #cae0b8;
 }
 
 /* Tertiary colour properties */

@@ -27,7 +27,7 @@ export default _xyz => {
     style: {
       strokeColor: '#1F964D',
       strokeWidth: 2,
-      fillColor: '#DEF6CA',
+      fillColor: '#cae0b8',
       fillOpacity: 0.2,
     }
 
