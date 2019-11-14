@@ -142,79 +142,79 @@ container.appendChild(group);
 
 // Add state button to init drawing.
 container.appendChild(_xyz.utils.wire()`
-<div
-    class="btn_state btn_wide primary-colour"
-    onclick=${e => {
+    <button
+        class="btn_state btn_wide primary-colour"
+        onclick=${e => {
 
-    e.stopPropagation();
-    const btn = e.target;
+            e.stopPropagation();
+            const btn = e.target;
 
-    if (btn.classList.contains('active')) return _xyz.mapview.interaction.draw.finish();
+            if (btn.classList.contains('active')) return _xyz.mapview.interaction.draw.finish();
 
-    btn.classList.add('active');
-    layer.show();
-    layer.view.querySelector('.header').classList.add('edited', 'secondary-colour-bg');
+            btn.classList.add('active');
+            layer.show();
+            layer.view.querySelector('.header').classList.add('edited', 'secondary-colour-bg');
 
-    _xyz.mapview.interaction.draw.begin({
-        layer: layer,
-        type: 'Point',
-        geometryFunction: function(coordinates, geometry) {
+            _xyz.mapview.interaction.draw.begin({
+                layer: layer,
+                type: 'Point',
+                geometryFunction: function(coordinates, geometry) {
 
-            geometry = new _xyz.mapview.lib.geom.Circle(coordinates, layer.edit.isoline_here.minutes * 1000);
-            
-            //var feature = new _xyz.mapview.lib.Feature({ geometry: geometry });
+                    geometry = new _xyz.mapview.lib.geom.Circle(coordinates, layer.edit.isoline_here.minutes * 1000);
+                    
+                    //var feature = new _xyz.mapview.lib.Feature({ geometry: geometry });
 
-            const origin = _xyz.mapview.lib.proj.transform(coordinates, `EPSG:${_xyz.mapview.srid}`, 'EPSG:4326');
+                    const origin = _xyz.mapview.lib.proj.transform(coordinates, `EPSG:${_xyz.mapview.srid}`, 'EPSG:4326');
 
-            const xhr = new XMLHttpRequest();
+                    const xhr = new XMLHttpRequest();
 
-            xhr.open('GET', _xyz.host +
-                '/api/location/edit/isoline/here?' +
-                _xyz.utils.paramString({
-                    locale: _xyz.workspace.locale.key,
-                    coordinates: origin.reverse().join(','),
-                    mode: layer.edit.isoline_here.mode,
-                    type: layer.edit.isoline_here.type,
-                    rangetype: layer.edit.isoline_here.rangetype,
-                    minutes: layer.edit.isoline_here.minutes,
-                    distance: layer.edit.isoline_here.distance,
-                    token: _xyz.token
-                }));
+                    xhr.open('GET', _xyz.host +
+                        '/api/location/edit/isoline/here?' +
+                        _xyz.utils.paramString({
+                            locale: _xyz.workspace.locale.key,
+                            coordinates: origin.reverse().join(','),
+                            mode: layer.edit.isoline_here.mode,
+                            type: layer.edit.isoline_here.type,
+                            rangetype: layer.edit.isoline_here.rangetype,
+                            minutes: layer.edit.isoline_here.minutes,
+                            distance: layer.edit.isoline_here.distance,
+                            token: _xyz.token
+                        }));
 
-            xhr.setRequestHeader('Content-Type', 'application/json');
-            xhr.responseType = 'json';
+                    xhr.setRequestHeader('Content-Type', 'application/json');
+                    xhr.responseType = 'json';
 
-            xhr.onload = e => {
-            
-                if (e.target.status !== 200) return alert('No route found. Try a longer travel time or alternative setup.');
+                    xhr.onload = e => {
+                    
+                        if (e.target.status !== 200) return alert('No route found. Try a longer travel time or alternative setup.');
 
-                const geoJSON = new _xyz.mapview.lib.format.GeoJSON();
+                        const geoJSON = new _xyz.mapview.lib.format.GeoJSON();
 
-                const feature = geoJSON.readFeature({
-                    type: 'Feature',
-                    geometry: e.target.response
-                },{ 
-                    dataProjection: 'EPSG:4326',
-                    featureProjection:'EPSG:' + _xyz.mapview.srid
-                });
+                        const feature = geoJSON.readFeature({
+                            type: 'Feature',
+                            geometry: e.target.response
+                        },{ 
+                            dataProjection: 'EPSG:4326',
+                            featureProjection:'EPSG:' + _xyz.mapview.srid
+                        });
 
-                _xyz.mapview.interaction.draw.Source.clear();
+                        _xyz.mapview.interaction.draw.Source.clear();
 
-                _xyz.mapview.interaction.draw.Source.addFeature(feature);
-                                        
-            };
+                        _xyz.mapview.interaction.draw.Source.addFeature(feature);
+                                                
+                    };
 
-            xhr.send();
+                    xhr.send();
 
-            return geometry;
-        },
-        callback: () => {
-            layer.view.querySelector('.header').classList.remove('edited', 'secondary-colour-bg');
-            btn.classList.remove('active');
-        }
-    });
+                    return geometry;
+                },
+                callback: () => {
+                    layer.view.querySelector('.header').classList.remove('edited', 'secondary-colour-bg');
+                    btn.classList.remove('active');
+                }
+            });
 
-    }}>Isoline Here`);
+        }}>Isoline Here`);
 
     return container;
 

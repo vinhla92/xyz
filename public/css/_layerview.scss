@@ -1,7 +1,6 @@
 .drawer.layer-group,
 .drawer.layer-view {
-
-    margin: 3px 0;
+    border-top: 3px solid #f0f0f0;
     background-color: #fff;
 
     >* {
@@ -9,7 +8,6 @@
     }
 
     >.header {
-
         padding-top: 5px;
         padding-bottom: 5px;
         padding-right: 0;
@@ -18,16 +16,12 @@
             width: 20px;
         }
     }
-
 }
 
 .drawer.layer-group {
 
-    background-color: #f0f0f0;
-
     >.header {
         font-weight: 400;
-        background-color: #fff;
     }
 
     >.drawer.layer-view {

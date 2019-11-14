@@ -1,8 +1,7 @@
 export default _xyz => layer => _xyz.utils.wire()`
-    <div
+  <button
     class="btn_state btn_wide primary-colour"
     onclick=${e => {
-  
       e.stopPropagation();
       const btn = e.target;
   
@@ -21,5 +20,4 @@ export default _xyz => layer => _xyz.utils.wire()`
           btn.classList.remove('active');
         }
       });
-  
     }}>Freehand`

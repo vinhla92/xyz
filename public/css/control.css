@@ -73,7 +73,7 @@ input[type=range]::-moz-range-thumb {
 
 .drawer.layer-group,
 .drawer.layer-view {
-  margin: 3px 0;
+  border-top: 3px solid #f0f0f0;
   background-color: #fff; }
   .drawer.layer-group > *,
   .drawer.layer-view > * {
@@ -87,13 +87,10 @@ input[type=range]::-moz-range-thumb {
     .drawer.layer-view > .header > img {
       width: 20px; }
 
-.drawer.layer-group {
-  background-color: #f0f0f0; }
-  .drawer.layer-group > .header {
-    font-weight: 400;
-    background-color: #fff; }
-  .drawer.layer-group > .drawer.layer-view {
-    padding-left: 10px; }
+.drawer.layer-group > .header {
+  font-weight: 400; }
+.drawer.layer-group > .drawer.layer-view {
+  padding-left: 10px; }
 
 .drawer.layer-view > .header {
   font-weight: bold; }
