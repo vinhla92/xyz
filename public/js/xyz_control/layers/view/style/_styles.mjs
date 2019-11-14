@@ -30,7 +30,11 @@ export default _xyz => {
     // Panel header
     panel.appendChild(_xyz.utils.wire()`
     <div
+<<<<<<< HEAD
       class="header btn_text"
+=======
+      class="header btn_text cursor noselect primary-colour"
+>>>>>>> 8d0b17be6fd51eac0e56f1595672e3cb7f9b2701
       onclick=${e => {
         e.stopPropagation();
         _xyz.utils.toggleExpanderParent(e.target, true);
