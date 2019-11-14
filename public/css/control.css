@@ -72,7 +72,7 @@ input[type=range]::-moz-range-thumb {
 .drawer.layer-view {
   margin: 5px 0;
   border-left: 1px solid #fff;
-  padding: 0 0 5px 5px; }
+  padding-left: 5px; }
   .drawer.layer-group > .header,
   .drawer.layer-view > .header {
     padding: 5px 0; }
@@ -86,21 +86,8 @@ input[type=range]::-moz-range-thumb {
     .drawer.layer-view.expanded > .header {
       font-weight: bold; }
 
-.drawer.layer-group {
-  background-color: ghostwhite; }
-
-.drawer.layer-group > .drawer.layer-view {
-  padding: 0 0 5px 5px; }
-  .drawer.layer-group > .drawer.layer-view.expanded {
-    border-left: 1px solid #999; }
-
-.drawer.layer-view.expanded {
-  padding-bottom: 5px;
-  background-color: white; }
-.drawer.layer-view > .expanded {
-  border-left: 1px solid #ccc; }
-.drawer.layer-view > :not(.header) {
-  padding-left: 5px; }
+.drawer.layer-view > *:last-child {
+  padding-bottom: 5px; }
 
 .layer-view .title {
   font-weight: bold;
@@ -1565,7 +1552,7 @@ button {
   font-weight: bold;
   font-size: 110%;
   margin-bottom: 10px;
-  padding: 4px;
+  padding: 6px;
   border-radius: 2px; }
 
 .gazetteer {
