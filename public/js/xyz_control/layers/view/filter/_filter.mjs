@@ -84,7 +84,7 @@ export default _xyz => {
     // Panel header
     panel.appendChild(_xyz.utils.wire()`
     <div
-      class="header btn_text cursor noselect"
+      class="header btn_text"
       onclick=${e => {
         e.stopPropagation();
         _xyz.utils.toggleExpanderParent(e.target, true);
@@ -136,7 +136,7 @@ export default _xyz => {
   
     layer.filter.clear_all = _xyz.utils.wire()`
     <div
-      class="btn_small cursor noselect primary-colour"
+      class="btn_small primary-colour"
       onclick=${e=>{
   
         e.target.style.display = 'none';

@@ -1822,9 +1822,6 @@ a {
   -ms-user-select: none;
   user-select: none; }
 
-.cursor:hover {
-  cursor: pointer; }
-
 .bold {
   font-weight: 700; }
 

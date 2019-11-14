@@ -27,10 +27,11 @@ export default _xyz => table => {
     count2 = _xyz.dataview.nav_dropdown.children.length || 0,
     total_count = count1 + count2;
 
-  table.tab = _xyz.utils.wire()`<li
-  class="Tab cursor noselect"
-  style="${style}"
-  onclick=${e => {
+  table.tab = _xyz.utils.wire()`
+  <li
+    class="Tab"
+    style="${style}"
+    onclick=${e => {
     Object
       .values(_xyz.dataview.nav_bar.children)
       .forEach(tab => tab.classList.remove('tab-current', 'primary-colour-bb'));

@@ -1,6 +1,6 @@
 export default _xyz => layer => _xyz.utils.wire()`
 <div
-class="btn_state btn_wide cursor noselect primary-colour"
+class="btn_state btn_wide primary-colour"
 onclick=${e => {
 
   e.stopPropagation();

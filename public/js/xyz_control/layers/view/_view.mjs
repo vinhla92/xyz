@@ -55,7 +55,7 @@ export default _xyz => {
     header.appendChild(_xyz.utils.wire()`
     <button
       title="Zoom to filtered layer extent"
-      class="cursor noselect btn_header xyz-icon icon-fullscreen"
+      class="btn_header xyz-icon icon-fullscreen"
       onclick=${e=>{
         e.stopPropagation();
         layer.zoomToExtent();
