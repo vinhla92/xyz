@@ -25,7 +25,7 @@ export default _xyz => {
     if (!layer.style) return;
   
     const panel = _xyz.utils.wire()`
-    <div class="drawer panel expandable ${layer.style.theme ? 'expanded' : ''}">`;
+    <div class="drawer panel expandable ${layer.style.theme || layer.format === 'grid' ? 'expanded' : ''}">`;
   
     // Panel header
     panel.appendChild(_xyz.utils.wire()`
