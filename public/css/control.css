@@ -484,6 +484,62 @@ input[type=range]::-moz-range-thumb {
   outline: 0;
   box-shadow: 1px 1px 3px 0 #ddd;
   margin: 5px 0;
+<<<<<<< HEAD
+  font-family: inherit; }
+  .ul-drop:disabled {
+    pointer-events: none;
+    opacity: 0.4; }
+  .ul-drop > .head {
+    padding: 5px;
+    display: flex;
+    border: 1px solid #ccc;
+    align-items: center; }
+    .ul-drop > .head .ul-title {
+      pointer-events: none;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis; }
+    .ul-drop > .head > .icon {
+      pointer-events: none;
+      margin-left: auto;
+      height: 20px;
+      width: 20px;
+      content: url("../icons/icon-drop-down.svg"); }
+  .ul-drop > ul {
+    display: none;
+    position: absolute;
+    list-style-type: none;
+    width: inherit;
+    box-sizing: border-box;
+    box-shadow: 1px 1px 3px 0 #ddd;
+    max-height: 500px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 0;
+    margin: 0;
+    border: 1px solid #ccc;
+    border-top: none;
+    text-align: left;
+    background-color: white;
+    z-index: 1; }
+    .ul-drop > ul > li {
+      padding: 10px 5px; }
+      .ul-drop > ul > li a {
+        margin: 0px;
+        display: block;
+        width: 100%;
+        height: 100%; }
+    .ul-drop > ul > li:hover {
+      background-color: #eee; }
+    .ul-drop > ul > li.selected {
+      background-color: #DEF6CA; }
+  .ul-drop.active > .head {
+    border-bottom: 1px solid #eee; }
+  .ul-drop.active > ul {
+    display: block; }
+  .ul-drop.active > .head > .icon {
+    content: url("../icons/icon-drop-up.svg"); }
+=======
   font-family: inherit;
 }
 .ul-drop:disabled {
@@ -551,6 +607,7 @@ input[type=range]::-moz-range-thumb {
 .ul-drop.active > .head > .icon {
   content: url("../icons/icon-drop-up.svg");
 }
+>>>>>>> a99bcb442e31002b7192dac4f27bad4ce08dd312
 
 .list {
   width: 100%;
