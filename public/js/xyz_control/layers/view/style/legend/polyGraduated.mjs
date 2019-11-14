@@ -33,7 +33,7 @@ export default _xyz => layer => {
   });
       
   // Set height of the svg element.
-  // legend.setAttribute('height', y);
+  legend.setAttribute('height', y);
 
   return legend;
 };
