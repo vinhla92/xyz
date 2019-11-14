@@ -57,7 +57,7 @@ export default _xyz => {
 
 
     // Group
-    gazetteer.group = _xyz.utils.wire()`<div class="gazetteer input_group">`;
+    gazetteer.group = _xyz.utils.wire()`<div class="gazetteer">`;
     gazetteer.target.appendChild(gazetteer.group);
 
 
