@@ -9,7 +9,7 @@ export default _xyz => (layer, style, title) => {
 
   layer.style.legend.appendChild(block.node);
 
-  block.fill_colour = _xyz.utils.wire()`<div>Fill Colour `;
+  block.fill_colour = _xyz.utils.wire()`<div style="display: inline-block; width: 85%;">Fill Colour `;
 
   block.node.appendChild(block.fill_colour);
 
@@ -23,11 +23,18 @@ export default _xyz => (layer, style, title) => {
 
   block.fill_colour.appendChild(block.fillColor);
 
+  block.sample_wrapper = _xyz.utils.wire()`<div style="display: inline-block; padding-bottom: 5px;">`;
+
+  block.node.appendChild(block.sample_wrapper);
+
   block.sample = _xyz.utils.wire()`<div class="sample-circle">`;
 
   block.sample.style.backgroundColor = style.fillColor && _xyz.utils.Chroma(style.fillColor).alpha(1).hex();
 
-  block.node.appendChild(block.sample);
+  block.sample_wrapper.appendChild(block.sample);
+
+  //block.node.appendChild(block.sample);
+  block.node.appendChild(block.sample_wrapper);
 
   block.node.appendChild(_xyz.utils.wire()`<br>`);
 

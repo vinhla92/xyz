@@ -9,9 +9,14 @@ export default _xyz => (layer, style, title) => {
 
   layer.style.legend.appendChild(block.node);
 
+  block.wrapper = _xyz.utils.wire()`<div style="display: inline-block; width: 65%;">`;
+
+  block.node.appendChild(block.wrapper);
+
   block.stroke_color = _xyz.utils.wire()`<div>Stroke Colour `;
 
-  block.node.appendChild(block.stroke_color);
+  //block.node.appendChild(block.stroke_color);
+  block.wrapper.appendChild(block.stroke_color);
 
   block.strokeColor = _xyz.utils.wire()`
   <span
@@ -25,7 +30,8 @@ export default _xyz => (layer, style, title) => {
     
   block.fill_colour = _xyz.utils.wire()`<div>Fill Colour `;
 
-  block.node.appendChild(block.fill_colour);
+  //block.node.appendChild(block.fill_colour);
+  block.wrapper.appendChild(block.fill_colour);
 
   block.fillColor = _xyz.utils.wire()`
   <span
@@ -40,7 +46,7 @@ export default _xyz => (layer, style, title) => {
   block.sample_poly = _xyz.utils.wire()`
   <div
     class="sample-poly"
-    style="${'border:' + (style.strokeWidth || 1) + 'px solid ' + (style.strokeColor || '#ffffff')}">`;
+    style="display: inline-block; ${'border:' + (style.strokeWidth || 1) + 'px solid ' + (style.strokeColor || '#ffffff')}">`;
 
   block.sample_poly.style.backgroundColor = style.fillColor;
 
