@@ -21,7 +21,7 @@ export default _xyz => {
     // Panel header
     panel.appendChild(_xyz.utils.wire()`
     <div
-      class="header"
+      class="header primary-colour"
       onclick=${e => {
         e.stopPropagation();
         _xyz.utils.toggleExpanderParent(e.target, true);
