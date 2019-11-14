@@ -3,8 +3,8 @@
 
     margin: 5px 0;
     border-left: 1px solid #fff;
-    padding: 0 0 5px 5px;
-
+    padding-left: 5px;
+    
     >.header {
 
         padding: 5px 0;
@@ -23,31 +23,10 @@
     }
 }
 
-.drawer.layer-group {
-    background-color: ghostwhite;
-}
-
-.drawer.layer-group>.drawer.layer-view {
-    padding: 0 0 5px 5px;
-
-    &.expanded {
-        border-left: 1px solid #999;
-    }
-}
-
 .drawer.layer-view {
 
-    &.expanded {
+    >*:last-child {
         padding-bottom: 5px;
-        background-color: white;
-    }
-
-    >.expanded {
-        border-left: 1px solid #ccc;
-    }
-
-    >:not(.header) {
-        padding-left: 5px;
     }
 }
 
