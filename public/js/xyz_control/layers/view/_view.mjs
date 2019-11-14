@@ -129,7 +129,7 @@ export default _xyz => {
 
     const firstPanel = layer.view.querySelector('.panel');
 
-    firstPanel && firstPanel.classList.add('expanded');
+    //firstPanel && firstPanel.classList.add('expanded');
 
   }
 
