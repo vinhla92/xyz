@@ -30,11 +30,12 @@ export default _xyz => {
     // Panel header
     panel.appendChild(_xyz.utils.wire()`
     <div
-      class="header btn_text cursor noselect primary-colour"
+      class="header btn_text cursor noselect"
       onclick=${e => {
         e.stopPropagation();
         _xyz.utils.toggleExpanderParent(e.target, true);
-      }}>Style`);
+      }}><div>Style</div><button
+      class="btn_header xyz-icon icon-expander primary-color-filter">`);
   
   
     // Add toggle for label layer.

@@ -54,11 +54,12 @@ function panel(layer) {
     // Panel header
     panel.appendChild(_xyz.utils.wire()`
     <div
-      class="header btn_text cursor noselect primary-colour"
+      class="header btn_text cursor noselect"
       onclick=${e => {
         e.stopPropagation();
         _xyz.utils.toggleExpanderParent(e.target, true);
-      }}>Add new Locations`);
+      }}><div>Add new Locations</div><button
+      class="btn_header xyz-icon icon-expander primary-color-filter">`);
   
   
     layer.edit.point && panel.appendChild(draw.point(layer));

@@ -19,11 +19,12 @@ export default _xyz => {
     // Panel header
     panel.appendChild(_xyz.utils.wire()`
     <div
-      class="header btn_text cursor noselect primary-colour"
+      class="header btn_text cursor noselect"
       onclick=${e => {
         e.stopPropagation();
         _xyz.utils.toggleExpanderParent(e.target, true);
-      }}>Data Views`);
+      }}><div>Data Views</div><button
+      class="btn_header xyz-icon icon-expander primary-color-filter">`);
 
       Object.keys(layer.dataview).forEach(key => {
 
