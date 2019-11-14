@@ -37,7 +37,7 @@ module.exports = {
         highlight: {
           strokeColor: '#1F964D',
           strokeWidth: 2,
-          fillColor: '#DEF6CA',
+          fillColor: '#cae0b8',
           fillOpacity: 0.2,
         },
         themes: {},
@@ -55,7 +55,7 @@ module.exports = {
         highlight: {
           strokeWidth: 2,
           strokeColor: '#1F964D',
-          fillColor: '#DEF6CA',
+          fillColor: '#cae0b8',
           fillOpacity: 0.2,
         },
         themes: {},
@@ -80,7 +80,7 @@ module.exports = {
         },
         highlight: {
           type: 'target',
-          fillColor: '#DEF6CA',
+          fillColor: '#cae0b8',
           scale: 0.05,
         },
         themes: {},
