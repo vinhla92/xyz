@@ -1,7 +1,7 @@
 export default _xyz => (layer, style, title) => {
 
   title && layer.style.legend.appendChild(_xyz.utils.wire()`
-  <div class="title secondary-colour-bg">${title}`);
+  <div class="title secondary-colour-bb">${title}`);
 
   const block = {};
 
