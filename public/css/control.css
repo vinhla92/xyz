@@ -108,10 +108,12 @@ input[type=range]::-moz-range-thumb {
 .layer-view .legend > svg {
   width: 100%; }
 .layer-view .drawer.panel {
-  max-height: 30px;
   border-top: 1px solid #f0f0f0; }
   .layer-view .drawer.panel > .header {
     padding: 5px 0; }
+  .layer-view .drawer.panel > :not(.header) {
+    padding-right: 5px;
+    padding-bottom: 5px; }
 
 input {
   width: 100%; }
