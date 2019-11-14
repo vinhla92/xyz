@@ -26,7 +26,7 @@ export default _xyz => {
       if (!layer.group) {
         _xyz.layers.listview.node.appendChild(layer.view);
 
-        layer.view.style.maxHeight = layer.view.querySelector('.header').clientHeight + 'px';
+        layer.view.style.maxHeight = layer.view.querySelector('.header').offsetHeight + 'px';
 
         layer.view.querySelectorAll('.panel').forEach(panel => {
           panel.style.maxHeight = panel.querySelector('.header').offsetHeight + 'px'
@@ -73,7 +73,7 @@ export default _xyz => {
 
     drawer.appendChild(header);
 
-    drawer.style.maxHeight = header.clientHeight + 'px';
+    drawer.style.maxHeight = header.offsetHeight + 'px';
 
     // Create layer group meta element.
     const meta = _xyz.utils.wire()`<div class="meta">`;
@@ -101,7 +101,7 @@ export default _xyz => {
 
       group.list.push(layer);
       drawer.appendChild(layer.view);
-      layer.view.style.maxHeight = layer.view.querySelector('.header').clientHeight + 'px';
+      layer.view.style.maxHeight = layer.view.querySelector('.header').offsetHeight + 'px';
 
       layer.view.querySelectorAll('.panel').forEach(panel => {
         panel.style.maxHeight = panel.querySelector('.header').offsetHeight + 'px'

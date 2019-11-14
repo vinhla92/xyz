@@ -1,8 +1,6 @@
 // Method to apply a left hand scroll bar to a container element.
 export function scrolly(el) {
 
-  //const track = el.querySelector('.scrolly_track');
-
   const track = document.createElement('div');
   track.classList = 'scrolly_track';
   el.insertBefore(track, el.firstChild);

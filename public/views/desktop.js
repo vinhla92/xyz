@@ -195,12 +195,12 @@ function createMap(_xyz) {
   _xyz.locations.listview.init({
     target: document.getElementById('locations'),
     callbackInit: () => {
-      //_xyz.locations.listview.node.parentElement.style.display = 'none';
+      _xyz.locations.listview.node.parentElement.style.display = 'none';
     },
     callbackAdd: () => {
-      //_xyz.locations.listview.node.parentElement.style.display = 'block';
+      _xyz.locations.listview.node.parentElement.style.display = 'block';
       setTimeout(() => {
-        desktop.listviews.scrollTop = desktop.listviews.clientHeight;
+        desktop.listviews.scrollTop = desktop.listviews.offsetHeight;
       }, 500);
     }
   });
