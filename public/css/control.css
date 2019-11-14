@@ -82,7 +82,8 @@ input[type=range]::-moz-range-thumb {
   .drawer.layer-group > .header,
   .drawer.layer-view > .header {
     padding-top: 5px;
-    padding-bottom: 5px; }
+    padding-bottom: 5px;
+    padding-right: 0; }
     .drawer.layer-group > .header > img,
     .drawer.layer-view > .header > img {
       width: 20px; }
@@ -97,6 +98,8 @@ input[type=range]::-moz-range-thumb {
     background-color: #fff; }
   .drawer.layer-group > .drawer.layer-view {
     padding-left: 10px; }
+    .drawer.layer-group > .drawer.layer-view > .header {
+      margin-right: -5px; }
 
 .drawer.layer-view > :not(.header) {
   font-size: 80%; }
@@ -115,7 +118,8 @@ input[type=range]::-moz-range-thumb {
 .layer-view .drawer.panel {
   border-top: 1px solid #f0f0f0; }
   .layer-view .drawer.panel > .header {
-    padding: 5px 0; }
+    padding: 5px 0;
+    margin-right: -5px; }
 
 input {
   width: 100%; }
@@ -769,7 +773,7 @@ button {
   margin-left: 5px;
   width: 25px;
   height: 20px;
-  background-position: right; }
+  background-position: center; }
 
 .btn_small {
   font-size: 88%;
