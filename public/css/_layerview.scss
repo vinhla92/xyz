@@ -100,10 +100,10 @@ input {
     height: 32px;
     border-radius: 2px;
     box-shadow: 2px 2px 2px #999;
-    position: absolute;
-    display: none;
-    // right: 2px;
-    // top: 5px;
+        /*position: absolute;
+        display: none;
+        // right: 2px;
+        // top: 5px;*/
 }
 
 .sample-circle {
@@ -111,9 +111,11 @@ input {
     height: 32px;
     border-radius: 50%;
     box-shadow: 2px 2px 2px #999;
-    position: absolute;
+    vertical-align: middle;
+    display: inline-block;
+    /*position: absolute;
     right: 2px;
-    top: 0;
+    top: 0;*/
 }
 
 .colour-swatch {
