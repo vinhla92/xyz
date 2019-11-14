@@ -77,7 +77,8 @@ input[type=range]::-moz-range-thumb {
   background-color: #fff; }
   .drawer.layer-group > *,
   .drawer.layer-view > * {
-    padding-left: 5px; }
+    padding-left: 5px;
+    padding-right: 5px; }
   .drawer.layer-group > .header,
   .drawer.layer-view > .header {
     padding-top: 5px;
@@ -115,9 +116,6 @@ input[type=range]::-moz-range-thumb {
   border-top: 1px solid #f0f0f0; }
   .layer-view .drawer.panel > .header {
     padding: 5px 0; }
-  .layer-view .drawer.panel > :not(.header) {
-    padding-right: 5px;
-    padding-bottom: 5px; }
 
 input {
   width: 100%; }
@@ -304,28 +302,29 @@ input[type=number] {
   -moz-appearance: textfield;
   /* Firefox */ }
 
-input[type=text] {
-  border: 1px solid #999; }
+input[type=text],
+input[type=number] {
+  border: 1px solid #ccc; }
 
 input:hover {
   cursor: pointer; }
 
-.input_group {
+.input-group {
   width: 100%; }
-  .input_group input {
+  .input-group input {
     width: 100%;
     border: none;
     border-bottom: 1px solid #999;
     /* active state */ }
-    .input_group input:focus {
+    .input-group input:focus {
       outline: none; }
-    .input_group input:focus ~ label, .input_group input:valid ~ label {
+    .input-group input:focus ~ label, .input-group input:valid ~ label {
       top: -10px; }
-  .input_group .bar {
+  .input-group .bar {
     position: relative;
     display: block;
     width: 100%; }
-    .input_group .bar:before, .input_group .bar:after {
+    .input-group .bar:before, .input-group .bar:after {
       content: '';
       height: 2px;
       width: 0;
@@ -335,16 +334,15 @@ input:hover {
       transition: 0.2s ease all;
       -moz-transition: 0.2s ease all;
       -webkit-transition: 0.2s ease all; }
-    .input_group .bar:before {
+    .input-group .bar:before {
       left: 50%; }
-    .input_group .bar:after {
+    .input-group .bar:after {
       right: 50%; }
-  .input_group input:focus ~ .bar:before, .input_group input:focus ~ .bar:after {
+  .input-group input:focus ~ .bar:before, .input-group input:focus ~ .bar:after {
     width: 50%; }
 
 .range {
   width: 100%;
-  width: calc(100% - 5px);
   padding: 10px 0; }
 
 input[type=range] {
@@ -1775,7 +1773,8 @@ button {
   background-image: url("../icons/icon-location-tick.svg"); }
 
 .drawer > .header {
-  display: flex; }
+  display: flex;
+  align-items: center; }
   .drawer > .header > :nth-child(1) {
     overflow: hidden;
     white-space: nowrap;
