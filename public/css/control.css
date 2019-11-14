@@ -959,7 +959,7 @@ button:disabled {
 }
 
 .btn_wide {
-  font-size: 93%;
+  /*font-size: 93%;*/
   border-radius: 2px;
   line-height: 2;
   text-align: center;
