@@ -111,12 +111,24 @@ input[type=range]::-moz-range-thumb {
 .layer-view .legend > svg {
   width: 100%; }
 .layer-view .drawer.panel {
+<<<<<<< HEAD
   border-top: 1px solid #f0f0f0; }
   .layer-view .drawer.panel > .header {
     padding: 5px 0; }
   .layer-view .drawer.panel > :not(.header) {
     padding-right: 5px;
     padding-bottom: 5px; }
+=======
+  border-top: 1px solid #f0f0f0;
+}
+.layer-view .drawer.panel > .header {
+  padding: 5px 0;
+}
+.layer-view .drawer.panel > :not(.header) {
+  padding-right: 5px;
+  padding-bottom: 5px;
+}
+>>>>>>> 9227be06bed2d6e7d8d9cec55bb06094b3ac9fe9
 
 input {
   width: 100%; }
