@@ -22,7 +22,7 @@
 
     &.expanded {
         >.header {
-            font-weight: bold;
+            /*font-weight: bold;*/
         }
     }
 }
@@ -32,7 +32,8 @@
     background-color: #f0f0f0;
 
     >.header {
-        font-weight: bold;
+        /*font-weight: bold;*/
+        font-weight: 400;
         background-color: #fff;
     }
 
@@ -46,8 +47,12 @@
 
 .drawer.layer-view {
 
+    >.header {
+        font-weight: bold;
+    }
+
     >:not(.header) {
-        font-size: 80%;
+        font-size: 85%;
     }
 
     >*:last-child {
@@ -59,7 +64,7 @@
 .layer-view {
 
     .title {
-        font-weight: bold;
+        /*font-weight: bold;*/
         margin-bottom: 10px;
         padding: 5px 0;
         border-radius: 2px;
@@ -105,10 +110,6 @@ input {
     height: 32px;
     border-radius: 2px;
     box-shadow: 2px 2px 2px #999;
-        /*position: absolute;
-        display: none;
-        // right: 2px;
-        // top: 5px;*/
 }
 
 .sample-circle {
@@ -118,9 +119,6 @@ input {
     box-shadow: 2px 2px 2px #999;
     vertical-align: middle;
     display: inline-block;
-    /*position: absolute;
-    right: 2px;
-    top: 0;*/
 }
 
 .colour-swatch {
