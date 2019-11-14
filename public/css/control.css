@@ -131,7 +131,7 @@ input[type=range]::-moz-range-thumb {
   font-weight: bold;
 }
 .drawer.layer-view > :not(.header) {
-  font-size: 80%;
+  font-size: 85%;
 }
 .drawer.layer-view > *:last-child {
   padding-bottom: 5px;
