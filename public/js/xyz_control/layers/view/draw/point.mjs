@@ -1,6 +1,6 @@
 export default _xyz => layer => _xyz.utils.wire()`
     <button
-      class="btn_wide primary-colour"
+      class="btn-wide primary-colour"
       onclick=${e => {
     
         e.stopPropagation();

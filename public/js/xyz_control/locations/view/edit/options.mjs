@@ -7,14 +7,14 @@ export default _xyz => entry => {
   entry.displayValue = typeof chk === 'object' && Object.keys(chk)[0] || chk || entry.value;
 
   entry.val.appendChild(_xyz.utils.wire()`
-  <button class="ul-drop">
+  <button class="btn-drop">
   <div
     class="head"
     onclick=${e => {
       e.preventDefault();
       e.target.parentElement.classList.toggle('active');
     }}>
-    <span class="ul-title">${entry.displayValue}</span>
+    <span>${entry.displayValue}</span>
     <div class="icon"></div>
   </div>
   <ul>
@@ -31,14 +31,14 @@ export default _xyz => entry => {
         
         return _xyz.utils.wire()`
         <li onclick=${e=>{
-          const drop = e.target.closest('.ul-drop');
+          const drop = e.target.closest('.btn-drop');
           drop.classList.toggle('active');
-          drop.querySelector('.ul-title').textContent = key;
-          drop.querySelector('.ul-title').value = value;
+          drop.querySelector(':first-child').textContent = key;
+          drop.querySelector(':first-child').value = value;
 
           entry.location.view.dispatchEvent(
             new CustomEvent('valChange', {detail:{
-              input: drop.querySelector('.ul-title'),
+              input: drop.querySelector(':first-child'),
               entry: entry
             }}))
         }}>${key}`

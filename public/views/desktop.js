@@ -118,14 +118,14 @@ function init(_xyz) {
     <div>Show layers for the following locale`);
 
     localeDropdown.appendChild(_xyz.utils.wire()`
-      <button class="ul-drop">
+      <button class="btn-drop">
       <div
         class="head"
         onclick=${e => {
           e.preventDefault();
           e.target.parentElement.classList.toggle('active');
         }}>
-        <span class="ul-title">${_xyz.workspace.locale.key}</span>
+        <span>${_xyz.workspace.locale.key}</span>
         <div class="icon"></div>
       </div>
       <ul>

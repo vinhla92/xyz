@@ -65,7 +65,7 @@ export default _xyz => group => {
     // Add chart control to group header for toggling
     group.viewToggler = _xyz.utils.wire()`
     <button
-      class="xyz-icon btn_header"
+      class="xyz-icon btn-header"
       style="margin: -6px 6px 0 0; float: right;"
       onclick=${e => {
         e.stopPropagation();

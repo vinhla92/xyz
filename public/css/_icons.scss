@@ -165,3 +165,19 @@
 .icon-location-tick {
     background-image: url("../icons/icon-location-tick.svg");
 }
+
+.sample-poly {
+    width: 30%;
+    height: 32px;
+    border-radius: 2px;
+    box-shadow: 2px 2px 2px #999;
+}
+
+.sample-circle {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    box-shadow: 2px 2px 2px #999;
+    vertical-align: middle;
+    display: inline-block;
+}

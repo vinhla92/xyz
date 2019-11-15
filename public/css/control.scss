@@ -14,7 +14,6 @@
 @import 'dataview';
 @import 'inputs';
 @import 'range';
-@import 'dropdown';
 @import 'itemlist';
 @import 'datepicker';
 @import 'chkbox';
@@ -44,7 +43,7 @@
 }
 
 body {
-    font-family: 'Open Sans', sans-serif; /* set global font family here */
+    font-family: 'Open Sans', sans-serif;
     position: absolute; 
     width: 100%;
     height: 100%;

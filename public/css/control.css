@@ -99,8 +99,8 @@ input[type=range]::-moz-range-thumb {
   margin-bottom: 10px;
   padding: 5px 0;
   border-radius: 2px; }
-.layer-view .meta a {
-  font-weight: 600; }
+.layer-view .meta {
+  font-size: 90%; }
 .layer-view .legend > svg {
   width: 100%; }
 .layer-view .drawer.panel {
@@ -114,37 +114,6 @@ input[type=range]::-moz-range-thumb {
     font-weight: bold;
     padding: 5px 0;
     margin-right: -5px; }
-
-.sample-poly {
-  width: 30%;
-  height: 32px;
-  border-radius: 2px;
-  box-shadow: 2px 2px 2px #999; }
-
-.sample-circle {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  box-shadow: 2px 2px 2px #999;
-  vertical-align: middle;
-  display: inline-block; }
-
-.colour-swatch {
-  width: 100%;
-  margin-bottom: 10px; }
-
-.colour-td {
-  height: 20px; }
-
-.link-with-img {
-  display: block;
-  margin-top: 5px; }
-  .link-with-img .xyz-icon {
-    width: 20px;
-    height: 20px;
-    display: inline-block; }
-  .link-with-img > * {
-    vertical-align: middle; }
 
 .location-view {
   margin: 5px 0; }
@@ -189,13 +158,6 @@ input[type=range]::-moz-range-thumb {
     vertical-align: bottom;
     float: right;
     padding-right: 5px; }
-  .location-view .sample-circle {
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    box-shadow: 2px 2px 2px #999;
-    float: right;
-    margin-right: 10px; }
 
 .dataview {
   overflow: hidden;
@@ -208,7 +170,7 @@ input[type=range]::-moz-range-thumb {
   /* to hide static labels outside map */
   background-color: white;
   /* to hide static labels outside map*/ }
-  .dataview .btn_column {
+  .dataview .btn-column {
     grid-row: 2/4; }
   .dataview .nav_bar {
     height: 36px;
@@ -362,71 +324,6 @@ input[type=range]::-moz-range-thumb {
 
 .range_label {
   font-weight: bold; }
-
-.ul-drop {
-  position: relative;
-  cursor: pointer;
-  width: 100%;
-  background-color: white;
-  border: none;
-  padding: 0;
-  outline: 0;
-  box-shadow: 1px 1px 3px 0 #ddd;
-  margin: 5px 0;
-  font-family: inherit; }
-  .ul-drop:disabled {
-    pointer-events: none;
-    opacity: 0.4; }
-  .ul-drop > .head {
-    padding: 5px;
-    display: flex;
-    border: 1px solid #ccc;
-    align-items: center; }
-    .ul-drop > .head .ul-title {
-      pointer-events: none;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis; }
-    .ul-drop > .head > .icon {
-      pointer-events: none;
-      margin-left: auto;
-      height: 20px;
-      width: 20px;
-      content: url("../icons/icon-drop-down.svg"); }
-  .ul-drop > ul {
-    display: none;
-    position: absolute;
-    list-style-type: none;
-    width: inherit;
-    box-sizing: border-box;
-    box-shadow: 1px 1px 3px 0 #ddd;
-    max-height: 500px;
-    overflow-y: auto;
-    overflow-x: hidden;
-    padding: 0;
-    margin: 0;
-    border: 1px solid #ccc;
-    border-top: none;
-    text-align: left;
-    background-color: white;
-    z-index: 1; }
-    .ul-drop > ul > li {
-      padding: 10px 5px; }
-      .ul-drop > ul > li a {
-        margin: 0px;
-        display: block;
-        width: 100%;
-        height: 100%; }
-    .ul-drop > ul > li:hover {
-      background-color: #eee; }
-    .ul-drop > ul > li.selected {
-      background-color: #cae0b8; }
-  .ul-drop.active > .head {
-    border-bottom: 1px solid #eee; }
-  .ul-drop.active > ul {
-    display: block; }
-  .ul-drop.active > .head > .icon {
-    content: url("../icons/icon-drop-up.svg"); }
 
 .list {
   width: 100%;
@@ -703,26 +600,26 @@ button {
   button:disabled {
     opacity: 0.2; }
 
-.btn_column {
+.btn-column {
   z-index: 999; }
-  .btn_column.lv0 {
+  .btn-column.lv0 {
     box-shadow: inset 2px 0 4px -4px #777; }
-  .btn_column.lv1 {
+  .btn-column.lv1 {
     box-shadow: inset 5px 0 4px -4px #777; }
-  .btn_column.desktop {
+  .btn-column.desktop {
     padding: 4px;
     background-color: #fff;
     opacity: 0.8; }
-  .btn_column.mobile {
+  .btn-column.mobile {
     position: fixed;
     left: 10px; }
-    .btn_column.mobile > button,
-    .btn_column.mobile > div,
-    .btn_column.mobile > a {
+    .btn-column.mobile > button,
+    .btn-column.mobile > div,
+    .btn-column.mobile > a {
       box-shadow: 1px 1px 3px 0 rgba(0, 0, 0, 0.2);
       border-radius: 50%; }
-  .btn_column button,
-  .btn_column > a {
+  .btn-column button,
+  .btn-column > a {
     margin-top: 10px;
     border-radius: 10px;
     padding: 10px;
@@ -733,22 +630,22 @@ button {
     background-color: #fff;
     text-align: center;
     cursor: default; }
-    .btn_column button.mobile-box-shadow,
-    .btn_column > a.mobile-box-shadow {
+    .btn-column button.mobile-box-shadow,
+    .btn-column > a.mobile-box-shadow {
       box-shadow: 1px 1px 3px 0 rgba(0, 0, 0, 0.2);
       border-radius: 50%; }
-    .btn_column button .xyz-icon,
-    .btn_column > a .xyz-icon {
+    .btn-column button .xyz-icon,
+    .btn-column > a .xyz-icon {
       width: 100%;
       height: 100%; }
 
-.btn_header {
+.btn-header {
   margin-left: 5px;
   width: 25px;
   height: 20px;
   background-position: center; }
 
-.btn_wide {
+.btn-wide {
   border-radius: 2px;
   line-height: 2;
   text-align: center;
@@ -756,18 +653,83 @@ button {
   box-shadow: 1px 1px 1px #ccc;
   margin: 5px 0;
   width: calc(100% - 1px); }
-  .btn_wide.disabled {
+  .btn-wide.disabled {
     opacity: 0.3;
     cursor: default; }
-  .btn_wide:disabled {
+  .btn-wide:disabled {
     opacity: 0.3;
     cursor: default; }
-  .btn_wide:hover:enabled {
+  .btn-wide:hover:enabled {
     cursor: pointer; }
-  .btn_wide.active {
+  .btn-wide.active {
     color: #000;
     box-shadow: none;
     border: 1px solid #ddd; }
+
+.btn-drop {
+  position: relative;
+  cursor: pointer;
+  width: 100%;
+  background-color: white;
+  border: none;
+  padding: 0;
+  outline: 0;
+  box-shadow: 1px 1px 3px 0 #ddd;
+  margin: 5px 0;
+  font-family: inherit; }
+  .btn-drop:disabled {
+    pointer-events: none;
+    opacity: 0.4; }
+  .btn-drop > .head {
+    padding: 5px;
+    display: flex;
+    border: 1px solid #ccc;
+    align-items: center; }
+    .btn-drop > .head > :first-child {
+      pointer-events: none;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis; }
+    .btn-drop > .head > .icon {
+      pointer-events: none;
+      margin-left: auto;
+      height: 20px;
+      width: 20px;
+      content: url("../icons/icon-drop-down.svg"); }
+  .btn-drop > ul {
+    display: none;
+    position: absolute;
+    list-style-type: none;
+    width: inherit;
+    box-sizing: border-box;
+    box-shadow: 1px 1px 3px 0 #ddd;
+    max-height: 500px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 0;
+    margin: 0;
+    border: 1px solid #ccc;
+    border-top: none;
+    text-align: left;
+    background-color: white;
+    z-index: 1; }
+    .btn-drop > ul > li {
+      padding: 10px 5px; }
+      .btn-drop > ul > li a {
+        margin: 0px;
+        display: block;
+        width: 100%;
+        height: 100%; }
+    .btn-drop > ul > li:hover {
+      background-color: #eee; }
+    .btn-drop > ul > li.selected {
+      background-color: #cae0b8; }
+  .btn-drop.active > .head {
+    border-bottom: 1px solid #eee; }
+  .btn-drop.active > ul {
+    display: block; }
+  .btn-drop.active > .head > .icon {
+    content: url("../icons/icon-drop-up.svg"); }
 
 .scrolly {
   overflow-y: scroll;
@@ -1581,7 +1543,7 @@ button {
   grid-column: 3;
   grid-row: 1;
   overflow-y: scroll; }
-  .workspace .btn_column {
+  .workspace .btn-column {
     position: fixed;
     height: 100%;
     padding: 4px;
@@ -1744,6 +1706,20 @@ button {
 .icon-location-tick {
   background-image: url("../icons/icon-location-tick.svg"); }
 
+.sample-poly {
+  width: 30%;
+  height: 32px;
+  border-radius: 2px;
+  box-shadow: 2px 2px 2px #999; }
+
+.sample-circle {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  box-shadow: 2px 2px 2px #999;
+  vertical-align: middle;
+  display: inline-block; }
+
 .drawer > .header {
   display: flex;
   align-items: center; }
@@ -1783,7 +1759,6 @@ button {
 
 body {
   font-family: 'Open Sans', sans-serif;
-  /* set global font family here */
   position: absolute;
   width: 100%;
   height: 100%;

@@ -113,7 +113,7 @@ export default _xyz => {
     // Create hide all group layers button.
     const hideLayers = _xyz.utils.wire()`
     <button
-      class="btn_header xyz-icon icon-toggle"
+      class="btn-header xyz-icon icon-toggle"
       title="Hide layers from group"
       onclick=${e=>{
         e.stopPropagation();
@@ -128,7 +128,7 @@ export default _xyz => {
     // Create group expander button.
     header.appendChild(_xyz.utils.wire()`
     <button 
-      class="xyz-icon btn_header icon-expander"
+      class="xyz-icon btn-header icon-expander"
       title="Toggle group panel"
       onclick=${ e => {
         e.stopPropagation();

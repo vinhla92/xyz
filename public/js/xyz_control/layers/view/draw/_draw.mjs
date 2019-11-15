@@ -59,7 +59,7 @@ function panel(layer) {
         e.stopPropagation();
         _xyz.utils.toggleExpanderParent(e.target, true);
       }}><span>Add new Locations</span><button
-      class="btn_header xyz-icon icon-expander primary-color-filter">`);
+      class="btn-header xyz-icon icon-expander primary-color-filter">`);
   
   
     layer.edit.point && panel.appendChild(draw.point(layer));

@@ -35,7 +35,7 @@ export default _xyz => {
         e.stopPropagation();
         _xyz.utils.toggleExpanderParent(e.target, true);
       }}><span>Style</span><button
-      class="btn_header xyz-icon icon-expander primary-color-filter">`);
+      class="btn-header xyz-icon icon-expander primary-color-filter">`);
   
   
     // Add toggle for label layer.
@@ -59,22 +59,22 @@ export default _xyz => {
       panel.appendChild(_xyz.utils.wire()`<div>Select thematic style.`);
   
       panel.appendChild(_xyz.utils.wire()`
-      <button class="ul-drop">
+      <button class="btn-drop">
       <div
         class="head"
         onclick=${e => {
           e.preventDefault();
           e.target.parentElement.classList.toggle('active');
         }}>
-        <span class="ul-title">${Object.keys(themes)[1]}</span>
+        <span>${Object.keys(themes)[1]}</span>
         <div class="icon"></div>
       </div>
       <ul>
         ${Object.keys(themes).map(
           key => _xyz.utils.wire()`
           <li onclick=${e=>{
-            const drop = e.target.closest('.ul-drop');
-            drop.querySelector('.ul-title').textContent = key;
+            const drop = e.target.closest('.btn-drop');
+            drop.querySelector(':first-child').textContent = key;
             drop.classList.toggle('active');
             layer.style.theme = themes[key];
             applyTheme(layer);

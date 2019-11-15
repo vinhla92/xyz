@@ -1,7 +1,7 @@
 export default _xyz => (layer, style, title) => {
 
   title && layer.style.legend.appendChild(_xyz.utils.wire()`
-  <div class="title secondary-colour-bb">${title}`);
+  <div class="title bold off-black secondary-colour-bb">${title}`);
 
   const block = {};
 
@@ -40,17 +40,16 @@ export default _xyz => (layer, style, title) => {
 
   block.colour_swatch = _xyz.utils.wire()`
   <tr
-    class="colour-swatch"
-    style="display: none;">`;
+    style="width: 100%; margin-bottom: 10px; display: none;">`;
 
   block.node.appendChild(block.colour_swatch);
 
   _xyz.defaults.colours.forEach(colour => {
 
     block.colour_swatch.appendChild(_xyz.utils.wire()`
-    <td class="colour-td"
+    <td
       title="${colour.name}"
-      style="${'background-color:'+colour.hex}"
+      style="${'height: 20px; background-color:'+colour.hex}"
       onclick=${e => {
 
         block[block.colorSelect].textContent = colour.hex;

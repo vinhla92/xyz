@@ -38,7 +38,7 @@ export default _xyz => {
     <div class="header bold">
     <span>${filter_entry.label}</span>
     <button
-      class="btn_header xyz-icon icon-close primary-color-filter"
+      class="btn-header xyz-icon icon-close primary-color-filter"
       onclick=${e=>{
       
         delete layer.filter.current[filter_entry.field];
@@ -89,7 +89,7 @@ export default _xyz => {
         e.stopPropagation();
         _xyz.utils.toggleExpanderParent(e.target, true);
       }}><span>Filter</span><button
-      class="btn_header xyz-icon icon-expander primary-color-filter">`);
+      class="btn-header xyz-icon icon-expander primary-color-filter">`);
   
     let filter_entries = {};
   
@@ -98,21 +98,21 @@ export default _xyz => {
     });
   
     layer.filter.select = _xyz.utils.wire()`
-      <button class="ul-drop">
+      <button class="btn-drop">
       <div
         class="head"
         onclick=${e => {
           e.preventDefault();
           e.target.parentElement.classList.toggle('active');
         }}>
-        <span class="ul-title">Select filter from list.</span>
+        <span>Select filter from list.</span>
         <div class="icon"></div>
       </div>
       <ul>
         ${Object.entries(filter_entries).map(
           keyVal => _xyz.utils.wire()`
             <li onclick=${e=>{
-              const drop = e.target.closest('.ul-drop');
+              const drop = e.target.closest('.btn-drop');
               drop.classList.toggle('active');
   
               const entry = infoj.find(entry => entry.field === keyVal[0]);
@@ -167,7 +167,7 @@ export default _xyz => {
   
     layer.filter.run_output = _xyz.utils.wire()`
     <button
-      class="btn_wide noselect primary-colour"
+      class="btn-wide primary-colour"
       onclick=${()=>{
   
         const filter = Object.assign({}, layer.filter.legend, layer.filter.current);

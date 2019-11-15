@@ -2,23 +2,23 @@ export default _xyz => layer => {
 
   // Create grid_size dropdown.
   layer.style.legend.appendChild(_xyz.utils.wire()`
-  <button class="ul-drop">
+  <button class="btn-drop">
   <div
     class="head"
     onclick=${e => {
       e.preventDefault();
       e.target.parentElement.classList.toggle('active');
     }}>
-    <span class="ul-title">${Object.keys(layer.grid_fields)[0]}</span>
+    <span>${Object.keys(layer.grid_fields)[0]}</span>
     <div class="icon"></div>
   </div>
   <ul>
     ${Object.entries(layer.grid_fields).map(
       keyVal => _xyz.utils.wire()`
         <li onclick=${e=>{
-          const drop = e.target.closest('.ul-drop');
+          const drop = e.target.closest('.btn-drop');
           drop.classList.toggle('active');
-          drop.querySelector('.ul-title').textContent = keyVal[0];
+          drop.querySelector(':first-child').textContent = keyVal[0];
           layer.grid_size = keyVal[1];
           layer.reload();
 
@@ -30,23 +30,23 @@ export default _xyz => layer => {
 
   // Create grid_size dropdown.
   layer.style.legend.appendChild(_xyz.utils.wire()`
-  <button class="ul-drop">
+  <button class="btn-drop">
   <div
     class="head"
     onclick=${e => {
       e.preventDefault();
       e.target.parentElement.classList.toggle('active');
     }}>
-    <span class="ul-title">${Object.keys(layer.grid_fields)[1]}</span>
+    <span>${Object.keys(layer.grid_fields)[1]}</span>
     <div class="icon"></div>
   </div>
   <ul>
     ${Object.entries(layer.grid_fields).map(
       keyVal => _xyz.utils.wire()`
       <li onclick=${e=>{
-        const drop = e.target.closest('.ul-drop');
+        const drop = e.target.closest('.btn-drop');
         drop.classList.toggle('active');
-        drop.querySelector('.ul-title').textContent = keyVal[0];
+        drop.querySelector(':first-child').textContent = keyVal[0];
 
         layer.grid_color = keyVal[1];
         layer.reload();

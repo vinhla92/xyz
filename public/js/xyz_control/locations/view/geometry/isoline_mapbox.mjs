@@ -40,23 +40,23 @@ export default _xyz => {
       style="margin-top: 8px; display: grid; grid-template-columns: 50px 1fr; align-items: center;">
         <span style="grid-column: 1;">Mode</span>
         <div style="grid-column: 2;">
-        <button class="ul-drop">
+        <button class="btn-drop">
             <div
                 class="head"
                 onclick=${e => {
                     e.preventDefault();
                     e.target.parentElement.classList.toggle('active');
                 }}>
-                <span class="ul-title">Driving</span>
+                <span>Driving</span>
                 <div class="icon"></div>
             </div>
             <ul>
                 ${modes.map(
                 keyVal => _xyz.utils.wire()`
                 <li onclick=${e=>{
-                    const drop = e.target.closest('.ul-drop');
+                    const drop = e.target.closest('.btn-drop');
                     drop.classList.toggle('active');
-                    drop.querySelector('.ul-title').textContent = Object.keys(keyVal)[0];
+                    drop.querySelector(':first-child').textContent = Object.keys(keyVal)[0];
         
                     entry.edit.isoline_mapbox.profile = Object.values(keyVal)[0];
         

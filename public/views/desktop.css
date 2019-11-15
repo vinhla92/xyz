@@ -54,7 +54,7 @@ body {
     position: relative;
 }
 
-.mapview .btn_column {
+.mapview .btn-column {
     left: 0;
     position: absolute;
     height: 100%;

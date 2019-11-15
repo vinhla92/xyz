@@ -46,7 +46,7 @@ export default _xyz => {
     
       header.appendChild(_xyz.utils.wire()`
       <img
-        class="btn_header"
+        class="btn-header"
         title="Default icon"
         style="float: right; cursor: help;"
         src="${_xyz.utils.svg_symbols(layer.style.marker)}">`);
@@ -55,7 +55,7 @@ export default _xyz => {
     header.appendChild(_xyz.utils.wire()`
     <button
       title="Zoom to filtered layer extent"
-      class="btn_header xyz-icon icon-fullscreen"
+      class="btn-header xyz-icon icon-fullscreen"
       onclick=${e=>{
         e.stopPropagation();
         layer.zoomToExtent();
@@ -64,7 +64,7 @@ export default _xyz => {
     header.toggleDisplay = _xyz.utils.wire()`
     <button
       title="Toggle visibility"
-      class="${'btn_header xyz-icon icon-toggle ' + (layer.display && 'on')}"
+      class="${'btn-header xyz-icon icon-toggle ' + (layer.display && 'on')}"
       onclick=${e=>{
         e.stopPropagation();
              
@@ -121,7 +121,7 @@ export default _xyz => {
     header.appendChild(_xyz.utils.wire()`
     <button
       title="Toggle layer dashboard"
-      class="btn_header xyz-icon icon-expander"
+      class="btn-header xyz-icon icon-expander"
       onclick=${e=>{
         e.stopPropagation();
         _xyz.utils.toggleExpanderParent(e.target);

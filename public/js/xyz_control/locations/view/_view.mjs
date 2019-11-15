@@ -113,7 +113,7 @@ export default _xyz => {
     <button
       style = "${'filter: ' + location.colorFilter}"
       title = "Toggle location view drawer."
-      class = "btn_header xyz-icon icon-expander "
+      class = "btn-header xyz-icon icon-expander "
       onclick = ${e => {
         e.stopPropagation();
         _xyz.utils.toggleExpanderParent(e.target);
@@ -125,7 +125,7 @@ export default _xyz => {
     <button
       style = "${'filter: ' + location.colorFilter}"
       title = "Zoom map to feature bounds"
-      class = "btn_header xyz-icon icon-search"
+      class = "btn-header xyz-icon icon-search"
       onclick = ${e => {
         e.stopPropagation();
         location.flyTo();
@@ -137,7 +137,7 @@ export default _xyz => {
     <button
       style = "${'display: none; filter: ' + location.colorFilter}"
       title = "Save changes to cloud."
-      class = "btn_header xyz-icon icon-cloud-upload"
+      class = "btn-header xyz-icon icon-cloud-upload"
       onclick = ${e => {
         e.stopPropagation();
         location.update();
@@ -151,7 +151,7 @@ export default _xyz => {
     <button
       style = "${'filter: ' + location.colorFilter}"
       title = "Edit the locations geometry."
-      class = "btn_header xyz-icon icon-build"
+      class = "btn-header xyz-icon icon-build"
       onclick = ${e => {
         e.stopPropagation();
 
@@ -174,7 +174,7 @@ export default _xyz => {
     <button
       style = "${'filter: ' + location.colorFilter}"
       title = "Delete location."
-      class = "btn_header xyz-icon icon-trash"
+      class = "btn-header xyz-icon icon-trash"
       onclick = ${e => {
         e.stopPropagation();
         location.trash();
@@ -186,7 +186,7 @@ export default _xyz => {
     <button
       style = "${'filter: ' + location.colorFilter}"
       title = "Hide marker"
-      class = "btn_header xyz-icon icon-location-tick" 
+      class = "btn-header xyz-icon icon-location-tick" 
       onclick = ${e => {
         e.stopPropagation();
         if(e.target.classList.contains('icon-location')){
@@ -206,7 +206,7 @@ export default _xyz => {
     <button
       style = "${'filter: ' + location.colorFilter}"
       title = "Remove feature from selection"
-      class = "btn_header xyz-icon icon-close"
+      class = "btn-header xyz-icon icon-close"
       onclick = ${e => {
         e.stopPropagation();
         location.remove();
