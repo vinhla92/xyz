@@ -63,37 +63,35 @@ export default _xyz => {
 
   function create(location){
 
-    // Create drawer element to contain the header with controls and the infoj table with inputs.
-    if (location.view) {
-      location.view.innerHTML = '';
-      location.view.classList.remove('disabled');
-      
-    } else {
+    if (!location.view) {
       location.view = _xyz.utils.wire()`<div class="drawer location-view expandable expanded">`;
-
-      location.view.addEventListener('valChange', e => {
-        const newValue = typeof e.detail.newValue === 'undefined' ? e.detail.input.value : e.detail.newValue;
-  
-        if (e.detail.entry.value != newValue) {
-  
-          e.detail.entry.newValue = newValue;
-          e.detail.input.classList.add('primary-colour');
-        } else {
-  
-          delete e.detail.entry.newValue;
-          e.detail.input.classList.remove('primary-colour');
-        }
-  
-        // Hide upload button if no other field in the infoj has a newValue.
-        if (!e.detail.entry.location.infoj.some(field => typeof field.newValue !== 'undefined')) {
-  
-          upload.style.display = 'none';
-        } else {
-  
-          upload.style.display = 'inline-block';
-        }
-      });
     }
+
+    location.view.innerHTML = '';
+    location.view.classList.remove('disabled');
+
+    location.view.addEventListener('valChange', e => {
+      const newValue = typeof e.detail.newValue === 'undefined' ? e.detail.input.value : e.detail.newValue;
+  
+      if (e.detail.entry.value != newValue) {
+
+        e.detail.entry.newValue = newValue;
+        e.detail.input.classList.add('primary-colour');
+      } else {
+
+        delete e.detail.entry.newValue;
+        e.detail.input.classList.remove('primary-colour');
+      }
+
+      // Hide upload button if no other field in the infoj has a newValue.
+      if (!e.detail.entry.location.infoj.some(field => typeof field.newValue !== 'undefined')) {
+
+        upload.style.display = 'none';
+      } else {
+
+        upload.style.display = 'inline-block';
+      }
+    });
 
     
     // Create the header element to contain the control elements
