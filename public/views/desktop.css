@@ -64,8 +64,11 @@ body {
     position: relative;
 }
 
-.btn-column {
+.mapview > .btn-column {
     position: absolute;
+}
+
+.btn-column {
     height: 100%;
     padding: 4px;
     background-color: #fff;
