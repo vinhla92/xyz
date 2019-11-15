@@ -34,7 +34,7 @@ export default _xyz => {
       onclick=${e => {
         e.stopPropagation();
         _xyz.utils.toggleExpanderParent(e.target, true);
-      }}><div>Style</div><button
+      }}><span>Style</span><button
       class="btn_header xyz-icon icon-expander primary-color-filter">`);
   
   

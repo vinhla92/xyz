@@ -34,12 +34,13 @@ export default _xyz => (layer, filter_entry) => {
 
     const step = filter_entry.type === 'integer' ? 1 : 0.01;
      
-    // Label for min / greater then control.   
-    block.appendChild(_xyz.utils.wire()`<div class="range-label">Greater or equal`);
+    // Label for min / greater then control.
+    var range = _xyz.utils.wire()`
+    <div class="flex-input">
+      <span>Greater or equal`
 
     const input_min = _xyz.utils.wire()`
     <input
-      class="range-input"
       type="number"
       min=${field_range.min}
       value=${field_range.min}
@@ -49,7 +50,9 @@ export default _xyz => (layer, filter_entry) => {
         slider_min.value = e.target.value;
         applyFilter();}}>`;
 
-    block.appendChild(input_min);
+    range.appendChild(input_min);
+
+    block.appendChild(range);
 
     const div_min = _xyz.utils.wire()`<div class="range">`;
     block.appendChild(div_min);
@@ -70,11 +73,12 @@ export default _xyz => (layer, filter_entry) => {
     div_min.appendChild(slider_min);
   
     // Label for max / smaller then control.
-    block.appendChild(_xyz.utils.wire()`<div class="range-label">Smaller or equal`);
+    var range = _xyz.utils.wire()`
+    <div class="flex-input">
+      <span>Smaller or equal`
 
     const input_max = _xyz.utils.wire()`
     <input
-      class="range-input"
       type="number"
       min=${field_range.min}
       value=${field_range.max}
@@ -85,7 +89,9 @@ export default _xyz => (layer, filter_entry) => {
         applyFilter();
       }}>`;
 
-    block.appendChild(input_max);
+    range.appendChild(input_max);
+
+    block.appendChild(range);
 
     var div_max = _xyz.utils.wire()`<div class="range">`;
     block.appendChild(div_max);

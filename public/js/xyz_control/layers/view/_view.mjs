@@ -39,7 +39,7 @@ export default _xyz => {
     });
     
     const header = _xyz.utils.wire()`
-    <div class="header enabled"><div>${layer.name || layer.key}`;
+    <div class="header enabled"><span>${layer.name || layer.key}`;
   
     // Add symbol to layer header.
     if (layer.format === 'cluster' && layer.style.marker) {

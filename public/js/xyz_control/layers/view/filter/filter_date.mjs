@@ -12,23 +12,27 @@ export default _xyz => (layer, filter_entry) => {
   filter_entry.el = block;
 
   // Label for min / greater then control.
-  block.appendChild(_xyz.utils.wire()`
-  <div class="range-label">After`);
-
+  var range = _xyz.utils.wire()`
+  <div class="flex-input">
+    <span>After`
+  
   const input_min = _xyz.utils.wire()`
-  <input type="text" class="range-input" readonly>`
-  block.appendChild(input_min);
+  <input type="text" readonly>`
 
-  // separator container
-  block.appendChild(_xyz.utils.wire()`
-  <div style="width: 100%; height: 10px">`);
+  range.appendChild(input_min);
 
-  block.appendChild(_xyz.utils.wire()`
-  <div class="range-label">Before`);
+  block.appendChild(range);
+
+  var range = _xyz.utils.wire()`
+  <div class="flex-input">
+    <span>Before`
 
   const input_max = _xyz.utils.wire()`
-  <input type="text" class="range-input" readonly>`
-  block.appendChild(input_max);
+  <input type="text" readonly>`
+
+  range.appendChild(input_max);
+
+  block.appendChild(range);
 
   _xyz.utils.datePicker({
     element: input_min,

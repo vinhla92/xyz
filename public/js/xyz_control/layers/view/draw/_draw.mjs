@@ -58,7 +58,7 @@ function panel(layer) {
       onclick=${e => {
         e.stopPropagation();
         _xyz.utils.toggleExpanderParent(e.target, true);
-      }}><div>Add new Locations</div><button
+      }}><span>Add new Locations</span><button
       class="btn_header xyz-icon icon-expander primary-color-filter">`);
   
   

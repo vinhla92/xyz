@@ -20,10 +20,6 @@
 
 .drawer.layer-group {
 
-    >.header {
-        font-weight: 400;
-    }
-
     >.drawer.layer-view {
         padding-left: 10px;
     }
@@ -33,10 +29,6 @@
 
     >.header {
         font-weight: bold;
-    }
-
-    >:not(.header) {
-        font-size: 85%;
     }
 
     >*:last-child {
@@ -67,28 +59,18 @@
         border-top: 1px solid #f0f0f0;
         padding-bottom: 5px;
         padding-right: 5px;
+        font-size: 90%;
+
+        button {
+            font-size: 90%;
+        }
 
         >.header {
             font-weight: bold;
             padding: 5px 0;
             margin-right: -5px;
         }
-
     }
-}
-
-input {
-    width: 100%;
-}
-
-.range-label {
-    display: inline;
-    line-height: 1.7;
-}
-
-.range-input {
-    float: right;
-    width: 60%;
 }
 
 .sample-poly {

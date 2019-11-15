@@ -25,7 +25,7 @@ export default _xyz => {
       onclick=${e => {
         e.stopPropagation();
         _xyz.utils.toggleExpanderParent(e.target, true);
-      }}><div>Reports</div><button
+      }}><span>Reports</span><button
       class="btn_header xyz-icon icon-expander primary-color-filter">`);
 
     Object.entries(layer.report.templates).forEach(entry => {

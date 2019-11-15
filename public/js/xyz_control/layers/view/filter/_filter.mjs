@@ -34,9 +34,9 @@ export default _xyz => {
 
   function block(layer, filter_entry) {
     const block = _xyz.utils.wire()`
-    <div class="drawer panel">
-    <div class="header">
-    <div>${filter_entry.label}</div>
+    <div class="drawer">
+    <div class="header bold">
+    <span>${filter_entry.label}</span>
     <button
       class="btn_header xyz-icon icon-close primary-color-filter"
       onclick=${e=>{
@@ -88,7 +88,7 @@ export default _xyz => {
       onclick=${e => {
         e.stopPropagation();
         _xyz.utils.toggleExpanderParent(e.target, true);
-      }}><div>Filter</div><button
+      }}><span>Filter</span><button
       class="btn_header xyz-icon icon-expander primary-color-filter">`);
   
     let filter_entries = {};
@@ -135,8 +135,9 @@ export default _xyz => {
     panel.appendChild(layer.filter.select);
   
     layer.filter.clear_all = _xyz.utils.wire()`
-    <div
-      class="btn_small primary-colour"
+    <button
+      class="primary-colour"
+      style="display: none; margin-bottom: 5px;"
       onclick=${e=>{
   
         e.target.style.display = 'none';

@@ -69,7 +69,7 @@ export default _xyz => {
         e.stopPropagation();
         _xyz.utils.toggleExpanderParent(e.target, true);
       }}>
-      <div>${layer.group}`;
+      <span>${layer.group}`;
 
     drawer.appendChild(header);
 

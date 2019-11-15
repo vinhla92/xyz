@@ -18,6 +18,8 @@ button {
 }
 
 .btn_column {
+    z-index: 999;
+
     &.lv0 {
         box-shadow: inset 2px 0 4px -4px #777;
     }
@@ -27,11 +29,8 @@ button {
     }
 
     &.desktop {
-        // position: absolute;
-        z-index: 999;
-        background-color: #fff;
-        // height: 100%;
         padding: 4px;
+        background-color: #fff;
         opacity: 0.8;
     }
 
@@ -47,8 +46,6 @@ button {
         }
     }
 
-    z-index: 999;
-
     button,
     >a {
         margin-top: 10px;
@@ -61,8 +58,6 @@ button {
         background-color: #fff;
         text-align: center;
         cursor: default;
-        border: none;
-        outline: none;
 
         &.mobile-box-shadow {
             box-shadow: 1px 1px 3px 0 rgba(0, 0, 0, 0.2);
@@ -81,13 +76,6 @@ button {
     width: 25px;
     height: 20px;
     background-position: center;
-}
-
-.btn_small {
-    font-size: 88%;
-    height: 14px;
-    display: none;
-    margin-bottom: 4px;
 }
 
 .btn_wide {

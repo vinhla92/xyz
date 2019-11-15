@@ -74,3 +74,15 @@ input:hover {
         }
     }
 }
+
+.flex-input {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 5px 0;
+
+    > input {
+        text-align: right;
+        min-width: 0;
+    }
+}

@@ -23,7 +23,7 @@ export default _xyz => {
       onclick=${e => {
         e.stopPropagation();
         _xyz.utils.toggleExpanderParent(e.target, true);
-      }}><div>Data Views</div><button
+      }}><span>Data Views</span><button
       class="btn_header xyz-icon icon-expander primary-color-filter">`);
 
       Object.keys(layer.dataview).forEach(key => {
