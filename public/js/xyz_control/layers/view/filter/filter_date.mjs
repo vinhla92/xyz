@@ -13,7 +13,7 @@ export default _xyz => (layer, filter_entry) => {
 
   // Label for min / greater then control.
   var range = _xyz.utils.wire()`
-  <div class="flex-input">
+  <div class="input-flex">
     <span>After`
   
   const input_min = _xyz.utils.wire()`
@@ -24,7 +24,7 @@ export default _xyz => (layer, filter_entry) => {
   block.appendChild(range);
 
   var range = _xyz.utils.wire()`
-  <div class="flex-input">
+  <div class="input-flex">
     <span>Before`
 
   const input_max = _xyz.utils.wire()`

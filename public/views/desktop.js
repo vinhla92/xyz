@@ -2,6 +2,7 @@ const desktop = {
   map: document.getElementById('Map'),
   dataview: document.getElementById('dataview'),
   listviews: document.getElementById('listviews'),
+  scrolly: document.getElementById('listviews').querySelector('.scrolly'),
   vertDivider: document.getElementById('vertDivider'),
   hozDivider: document.getElementById('hozDivider'),
 }
@@ -10,7 +11,7 @@ const desktop = {
 window.addEventListener('resize', () => {
   desktop.map.dispatchEvent(new CustomEvent('updatesize'));
   desktop.dataview.dispatchEvent(new CustomEvent('updatesize'));
-  desktop.listviews.querySelector('.scrolly').dispatchEvent(new CustomEvent('scrolly'));
+  desktop.scrolly.dispatchEvent(new CustomEvent('scrolly'));
 });
 
 // Resize dataview while holding mousedown on resize_bar.
@@ -152,7 +153,7 @@ function init(_xyz) {
   });
 
   // Initialise scrolly on listview element.
-  _xyz.utils.scrolly(desktop.listviews.querySelector('.scrolly'));
+  _xyz.utils.scrolly(desktop.scrolly);
 
   document.getElementById('clear_locations').onclick = () => {
     _xyz.locations.list
@@ -161,42 +162,49 @@ function init(_xyz) {
     if (_xyz.dataview.node) _xyz.map.updateSize();
   };
 
-  _xyz.gazetteer.init({
-    target: document.getElementById('gazetteer'),
-    toggle: document.getElementById('btnGazetteer'),
-  });
-
-
   // Create locales dropdown if length of locales array is > 1.
   if (Object.keys(_xyz.workspace.locales).length > 1) {
 
-    let localeDropdown = document.getElementById('localeDropdown');
-
-    localeDropdown.parentNode.insertBefore(_xyz.utils.wire()`
-      <div class="listview-title secondary-colour-bg">Locales`, localeDropdown);
-
-    localeDropdown.appendChild(_xyz.utils.wire()`
-      <div>Show layers for the following locale:`);
-
-    localeDropdown.appendChild(_xyz.utils.wire()`
+    const localeDropdown = _xyz.utils.wire()`
+    <div>
+      <div class="listview-title secondary-colour-bg">Locales</div>
+      <div>Show layers for the following locale:</div>
       <button
         style="margin-bottom: 10px;"
         class="btn-drop">
-      <div
-        class="head"
-        onclick=${e => {
-        e.preventDefault();
-        e.target.parentElement.classList.toggle('active');
-      }}>
-        <span>${_xyz.workspace.locale.key}</span>
-        <div class="icon"></div>
-      </div>
-      <ul>
-        ${
-      Object.values(_xyz.workspace.locales).map(
-        locale => _xyz.utils.wire()`<li><a href="${_xyz.host + '?locale=' + locale.key}">${locale.key}`)
-      }`);
+        <div
+          class="head"
+          onclick=${e => {
+            e.preventDefault();
+            e.target.parentElement.classList.toggle('active');
+          }}>
+          <span>${_xyz.workspace.locale.key}</span>
+          <div class="icon"></div>
+        </div>
+        <ul>${Object.values(_xyz.workspace.locales).map(
+          locale => _xyz.utils.wire()`<li><a href="${_xyz.host + '?locale=' + locale.key}">${locale.key}`
+        )}`
 
+
+    desktop.scrolly.insertBefore(localeDropdown, desktop.scrolly.firstChild);
+
+  }
+
+  if (_xyz.workspace.locale.gazetteer) {
+
+    const gazetteer = _xyz.utils.wire()`
+    <div>
+      <div class="listview-title secondary-colour-bg">Gazetteer</div>
+      <div>Search gazetteer for following term:</div>
+      <div  class="input-drop">
+        <input type="text" placeholder="Gazetteer">
+        <ul></ul>`
+
+    desktop.scrolly.insertBefore(gazetteer, desktop.scrolly.firstChild);
+
+    _xyz.gazetteer.init({
+      target: gazetteer.querySelector('.input-drop'),
+    });
   }
 
   document.getElementById('btnWorkspace').onclick = () => _xyz.workspace.admin();

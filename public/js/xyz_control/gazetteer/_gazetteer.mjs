@@ -41,28 +41,10 @@ export default _xyz => {
 
     Object.assign(gazetteer, params);
 
-    // Hide the gazetteer when initialised with a toggle button defined.
-    if (gazetteer.toggle) {
-      gazetteer.toggle.style.display = 'none';
-      gazetteer.toggle.classList.remove('active');
-    }
-
-    // Remove the gazetteer group as it will be created during the init.
-    if (gazetteer.group) {
-      gazetteer.group.remove();
-    }
-
-    // The gazetteer will not be initialised with a missing gazetteer definition for the locale.
-    if (!_xyz.workspace.locale.gazetteer) return;
-
-
-    // Group
-    gazetteer.group = _xyz.utils.wire()`<div class="gazetteer">`;
-    gazetteer.target.appendChild(gazetteer.group);
-
-
     // Input
-    gazetteer.input = _xyz.utils.wire()`<input type="text" required placeholder=${_xyz.workspace.locale.gazetteer.placeholder || ''}>`;
+    gazetteer.input = gazetteer.target.querySelector('input');
+
+    gazetteer.input.placeholder = _xyz.workspace.locale.gazetteer.placeholder || '';
 
     // Initiate search on keyup with input value
     gazetteer.input.addEventListener('keyup', e => {
@@ -99,7 +81,7 @@ export default _xyz => {
       // Cancel search and set results to empty on backspace or delete keydown
       if (key === 46 || key === 8) {
         if (gazetteer.xhr) gazetteer.xhr.abort();
-        gazetteer.result.innerHTML = '';
+        gazetteer.clear();
         if (gazetteer.layer) _xyz.map.removeLayer(gazetteer.layer);
         return;
       }
@@ -112,7 +94,7 @@ export default _xyz => {
         if ((latlng[1] > -90 && latlng[1] < 90) && (latlng[0] > -180 && latlng[0] < 180)) {
           if (gazetteer.xhr) gazetteer.xhr.abort();
           results = [];
-          gazetteer.result.innerHTML = '';
+          gazetteer.clear();
           gazetteer.createFeature({
             type: 'Point',
             coordinates: [latlng[1], latlng[0]]
@@ -140,20 +122,12 @@ export default _xyz => {
     // Cancel search and empty results on input focusout
     gazetteer.input.addEventListener('focusout', () => {
       if (gazetteer.xhr) gazetteer.xhr.abort();
-      setTimeout(() => gazetteer.result.innerHTML = '', 400);
+      setTimeout(gazetteer.clear, 400);
     });
-
-    gazetteer.group.appendChild(gazetteer.input);
-    gazetteer.group.appendChild(_xyz.utils.wire()`<span class="bar">`);
-
-
-    // Loader
-    gazetteer.loader = _xyz.utils.wire()`<div class="loader" style="display: none;">`;
-    gazetteer.group.appendChild(gazetteer.loader);
 
 
     // Results
-    gazetteer.result = _xyz.utils.wire()`<ul></ul>`;
+    gazetteer.result = gazetteer.target.querySelector('ul');
 
     gazetteer.result.addEventListener('click', e => {
       if (!e.target['data-source']) return;
@@ -169,35 +143,9 @@ export default _xyz => {
 
     });
 
-    gazetteer.group.appendChild(gazetteer.result);
-
-
-    // Assign toggle method to a target button.
-    if (gazetteer.toggle) {
-
-      gazetteer.toggle.style.display = 'block';
-      gazetteer.group.style.display = 'none';
-
-      // Toggle visibility of the gazetteer group
-      gazetteer.toggle.onclick = () => {
-
-        gazetteer.toggle.classList.toggle('enabled');
-
-        if (gazetteer.group.style.display === 'block') {
-          return gazetteer.group.style.display = 'none';
-        }
-
-        gazetteer.group.style.display = 'block';
-        gazetteer.input.focus();
-      };
-    }
-
-
-    // Toggle visibility of the gazetteer group
-    if (gazetteer.clear) {
-      gazetteer.clear = params.clear;
-      gazetteer.clear.addEventListener('click',
-        () => gazetteer.input.value = '');
+    gazetteer.clear = () => {
+      gazetteer.target.classList.remove('active');
+      gazetteer.result.innerHTML = '';
     }
 
   };

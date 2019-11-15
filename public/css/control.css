@@ -249,46 +249,48 @@ input[type=number] {
 input:hover {
   cursor: pointer; }
 
-.input-group {
-  width: 100%; }
-  .input-group input {
-    width: 100%;
-    border: none;
-    border-bottom: 1px solid #999;
-    /* active state */ }
-    .input-group input:focus {
-      outline: none; }
-    .input-group input:focus ~ label, .input-group input:valid ~ label {
-      top: -10px; }
-  .input-group .bar {
-    position: relative;
-    display: block;
-    width: 100%; }
-    .input-group .bar:before, .input-group .bar:after {
-      content: '';
-      height: 2px;
-      width: 0;
-      bottom: 0;
-      position: absolute;
-      background: #079e00;
-      transition: 0.2s ease all;
-      -moz-transition: 0.2s ease all;
-      -webkit-transition: 0.2s ease all; }
-    .input-group .bar:before {
-      left: 50%; }
-    .input-group .bar:after {
-      right: 50%; }
-  .input-group input:focus ~ .bar:before, .input-group input:focus ~ .bar:after {
-    width: 50%; }
-
-.flex-input {
+.input-flex {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin: 5px 0; }
-  .flex-input > input {
+  .input-flex > input {
     text-align: right;
     min-width: 0; }
+
+.input-drop {
+  width: 100%;
+  overflow: visible;
+  position: relative;
+  box-shadow: 1px 1px 3px 0 #ddd;
+  margin: 5px 0; }
+  .input-drop:disabled {
+    pointer-events: none;
+    opacity: 0.4; }
+  .input-drop input[type=text] {
+    width: 100%;
+    text-overflow: ellipsis;
+    padding: 5px;
+    border: 1px solid #ccc; }
+  .input-drop ul {
+    width: 100%;
+    margin-top: -2px;
+    max-height: 0;
+    transition: max-height 0.3s ease-out;
+    position: absolute;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background-color: white;
+    z-index: 999; }
+    .input-drop ul li {
+      padding: 5px; }
+    .input-drop ul li:hover {
+      cursor: pointer;
+      background-color: #cae0b8; }
+  .input-drop.active > ul {
+    max-height: 600px;
+    box-shadow: 1px 1px 3px 0 #ddd;
+    border: 1px solid #ccc; }
 
 .range {
   width: 100%;
@@ -662,12 +664,8 @@ button {
 
 .btn-drop {
   position: relative;
-  cursor: pointer;
   width: 100%;
   background-color: white;
-  border: none;
-  padding: 0;
-  outline: 0;
   box-shadow: 1px 1px 3px 0 #ddd;
   margin: 5px 0;
   font-family: inherit; }
@@ -1487,37 +1485,6 @@ button {
     line-height: 1.5; }
   .scroll-list > li:hover {
     cursor: pointer; }
-
-.gazetteer {
-  background-color: #fff; }
-  .gazetteer .clear-mask {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 60px;
-    background: linear-gradient(to right, transparent, #fff, #fff);
-    text-align: right;
-    line-height: 2;
-    color: white; }
-  .gazetteer input {
-    width: 100%;
-    font-size: 120%;
-    box-shadow: 0 3px 3px -3px #000; }
-  .gazetteer .bar {
-    position: relative;
-    display: block;
-    width: 100%; }
-  .gazetteer > ul {
-    -webkit-padding-start: 0;
-    -webkit-margin-before: 0;
-    -webkit-margin-after: 0;
-    list-style-type: none;
-    position: absolute;
-    background-color: white;
-    margin: 0;
-    padding: 0 6px 0 0;
-    z-index: 999;
-    box-shadow: 0 3px 3px -3px #000; }
 
 .workspace {
   position: absolute;

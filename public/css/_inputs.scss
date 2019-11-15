@@ -1,9 +1,9 @@
 :focus {
-    outline:none;
+    outline: none;
 }
 
 ::-moz-focus-inner {
-    border:0;
+    border: 0;
 }
 
 ::-moz-focus-outer {
@@ -11,13 +11,15 @@
 }
 
 input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button { 
-    -webkit-appearance: none; /* Chrome */
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    /* Chrome */
     margin: 0;
 }
 
 input[type=number] {
-    -moz-appearance:textfield; /* Firefox */
+    -moz-appearance: textfield;
+    /* Firefox */
 }
 
 input[type=text],
@@ -29,60 +31,61 @@ input:hover {
     cursor: pointer;
 }
 
-.input-group {
-    width: 100%;
-    input {
-        width: 100%;
-        border: none;
-        border-bottom: 1px solid #999;
-        &:focus {
-            outline: none;
-        }
-        /* active state */
-        &:focus~label,
-        &:valid~label {
-            top: -10px;
-        }
-    }
-    .bar {
-        position: relative;
-        display: block;
-        width: 100%;
-        &:before,
-        &:after {
-            content: '';
-            height: 2px;
-            width: 0;
-            bottom: 0;
-            position: absolute;
-            background: #079e00;
-            transition: 0.2s ease all;
-            -moz-transition: 0.2s ease all;
-            -webkit-transition: 0.2s ease all;
-        }
-        &:before {
-            left: 50%;
-        }
-        &:after {
-            right: 50%;
-        }
-    }
-    input:focus~.bar {
-        &:before,
-        &:after {
-            width: 50%;
-        }
-    }
-}
-
-.flex-input {
+.input-flex {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin: 5px 0;
 
-    > input {
+    >input {
         text-align: right;
         min-width: 0;
+    }
+}
+
+.input-drop {
+    width: 100%;
+    overflow: visible;
+    position: relative;
+    box-shadow: 1px 1px 3px 0 #ddd;
+    margin: 5px 0;
+
+    &:disabled {
+        pointer-events: none;
+        opacity: 0.4;
+    }
+
+    input[type=text] {
+        width: 100%;
+        text-overflow: ellipsis;
+        padding: 5px;
+        border: 1px solid #ccc;
+    }
+
+    ul {
+        width: 100%;
+        margin-top: -2px;
+        max-height: 0;
+        transition: max-height 0.3s ease-out;
+        position: absolute;
+        overflow-y: auto;
+        overflow-x: hidden;
+        background-color: white;
+        z-index: 999;
+
+        li {
+            padding: 5px;
+        }
+    
+        li:hover {
+            cursor: pointer;
+            background-color: #cae0b8;
+        }
+    }
+
+    &.active>ul {
+        max-height: 600px;
+        box-shadow: 1px 1px 3px 0 #ddd;
+        border: 1px solid#ccc;
     }
 }

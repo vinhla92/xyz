@@ -21,8 +21,8 @@ body {
     width: calc(100% + 50px);
 }
 
-#listviews > .scrolly > * {
-    padding: 10px 0;
+#listviews > .scrolly > :not(.scrolly_track) {
+    margin: 10px 0;
 }
 
 #clear_locations {
@@ -73,29 +73,6 @@ body {
     padding: 4px;
     background-color: #fff;
     opacity: 0.8;
-}
-
-.gazetteer {
-    padding-top: 5px;
-}
-
-.gazetteer>ul>li {
-    list-style: none;
-    line-height: 1.2em;
-    white-space: nowrap;
-}
-
-.gazetteer>ul>li:hover {
-    cursor: pointer;
-    background-color: #DEF6CA;
-}
-
-.gazetteer>ul>li:focus {
-    background-color: #DEF6CA;
-}
-
-.gazetteer>ul>li.active {
-    background-color: #DEF6CA;
 }
 
 #desktop_mask {
