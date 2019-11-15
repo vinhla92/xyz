@@ -9,7 +9,7 @@ export default _xyz => layer => {
 
     group.appendChild(_xyz.utils.wire()`
     <div
-        class="header btn_subtext primary-colour"
+        class="header primary-colour"
         style="text-align: left;"
         onclick=${e => {
             if (e) e.stopPropagation();
@@ -143,7 +143,7 @@ container.appendChild(group);
 // Add state button to init drawing.
 container.appendChild(_xyz.utils.wire()`
     <button
-        class="btn_state btn_wide primary-colour"
+        class="btn_wide primary-colour"
         onclick=${e => {
 
             e.stopPropagation();

@@ -15,7 +15,7 @@ export default _xyz => group => {
 
   group.header = _xyz.utils.wire()`
   <div
-    class="btn_subtext primary-colour"
+    class="primary-colour"
     style="text-align: left;"
     onclick=${ e => {
       _xyz.utils.toggleExpanderParent(e.target, true);

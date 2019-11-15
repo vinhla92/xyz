@@ -12,11 +12,6 @@ button {
     }
 }
 
-.btn_subtext {
-    font-size: 95%;
-    padding: 8px 0px;
-}
-
 .btn_column {
     z-index: 999;
 
@@ -83,7 +78,7 @@ button {
     line-height: 2;
     text-align: center;
     font-weight: 600;
-    box-shadow: 1px 1px 1px 1px #ccc;
+    box-shadow: 1px 1px 1px #ccc;
     margin: 5px 0;
     width: calc(100% - 1px);
 
@@ -100,9 +95,7 @@ button {
     &:hover:enabled {
         cursor: pointer;
     }
-}
 
-.btn_state {
     &.active {
         color: #000;
         box-shadow: none;

@@ -11,7 +11,7 @@ export default _xyz => show_toolbars => {
 
 
     toolbar.appendChild(_xyz.utils.wire()`
-      <div class="btn_subtext primary-colour" title="Download as CSV"
+      <div class="primary-colour" title="Download as CSV"
       style="cursor: pointer; display: inline-block; margin-right: 6px;"
       onclick=${() => {
         _xyz.dataview.current_table.Tabulator.download('csv', `${_xyz.dataview.current_table.title}.csv`);
@@ -20,7 +20,7 @@ export default _xyz => show_toolbars => {
     `);
 
     toolbar.appendChild(_xyz.utils.wire()`
-      <div class="btn_subtext primary-colour" title="Download as JSON"
+      <div class="primary-colour" title="Download as JSON"
       style="cursor: pointer; display: inline-block; margin-right: 6px;"
       onclick=${() => {
         _xyz.dataview.current_table.Tabulator.download('json', `${_xyz.dataview.current_table.title}.json`);

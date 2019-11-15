@@ -17,7 +17,7 @@ export default _xyz => {
 
     group.appendChild(_xyz.utils.wire()`
     <div
-      class="header btn_subtext primary-colour"
+      class="header primary-colour"
       style="text-align: left;"
       onclick=${e => {
         if (e) e.stopPropagation();
