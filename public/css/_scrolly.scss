@@ -4,15 +4,6 @@
     height: 100%;
     padding-right: 35px;
 
-    // @supports (-webkit-scrollbar:display) {
-    //     width: 100%;
-    //     padding-right: 0;
-
-    //     &::-webkit-scrollbar {
-    //         display: none;
-    //     }
-    // }
-
     >.scrolly_track {
         position: absolute;
         top: 0;
@@ -31,11 +22,6 @@
             cursor: ns-resize;
         }
     }
-
-    .scrolly_spacer {
-        height: 30px;
-    }
-
 
     &.disable-hover,
     &.disable-hover * {

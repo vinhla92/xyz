@@ -69,8 +69,6 @@ export default _xyz => {
 
     const workspace = document.getElementById('workspace');
 
-    const mask = document.getElementById('desktop_mask');
-
     workspace.style.display = 'block';
 
     const btnCloseWS = document.getElementById('btnCloseWS');
@@ -166,7 +164,7 @@ export default _xyz => {
       };
 
       const mask = _xyz.utils.wire()`
-      <div id="desktop_mask" style><p class="msg">Updating Workspace</p>`
+      <div id="desktop_mask" style><p class="primary-colour">Updating Workspace</p>`
 
       document.body.appendChild(mask);
 

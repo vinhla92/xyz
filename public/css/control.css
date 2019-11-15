@@ -138,15 +138,13 @@ input[type=range]::-moz-range-thumb {
     margin: 5px 0 7px 0;
     box-sizing: border-box;
     padding-left: 3px; }
-  .location-view .range {
-    padding: 10px 0 10px 10px; }
   .location-view .lv-0 {
-    font-size: 97%;
-    font-weight: 700; }
+    font-size: 90%;
+    font-weight: bold; }
   .location-view .lv-1 {
-    font-size: 96%; }
+    font-size: 85%; }
   .location-view .lv-2 {
-    font-size: 95%;
+    font-size: 80%;
     padding-left: 10px; }
   .location-view .val {
     font-weight: 400; }
@@ -606,10 +604,6 @@ button {
     box-shadow: inset 2px 0 4px -4px #777; }
   .btn-column.lv1 {
     box-shadow: inset 5px 0 4px -4px #777; }
-  .btn-column.desktop {
-    padding: 4px;
-    background-color: #fff;
-    opacity: 0.8; }
   .btn-column.mobile {
     position: fixed;
     left: 10px; }
@@ -714,7 +708,7 @@ button {
     background-color: white;
     z-index: 1; }
     .btn-drop > ul > li {
-      padding: 10px 5px; }
+      padding: 5px; }
       .btn-drop > ul > li a {
         margin: 0px;
         display: block;
@@ -749,8 +743,6 @@ button {
       background: #666; }
     .scrolly > .scrolly_track:hover {
       cursor: ns-resize; }
-  .scrolly .scrolly_spacer {
-    height: 30px; }
   .scrolly.disable-hover, .scrolly.disable-hover * {
     pointer-events: none !important; }
 
@@ -1495,13 +1487,6 @@ button {
     line-height: 1.5; }
   .scroll-list > li:hover {
     cursor: pointer; }
-
-.listview > .title {
-  font-weight: bold;
-  font-size: 105%;
-  margin-bottom: 10px;
-  padding: 4px;
-  border-radius: 2px; }
 
 .gazetteer {
   background-color: #fff; }

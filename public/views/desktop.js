@@ -103,69 +103,15 @@ _xyz({
 
 function init(_xyz) {
 
-  createMap(_xyz);
-
-  // Create locales dropdown if length of locales array is > 1.
-  if (Object.keys(_xyz.workspace.locales).length > 1) {
-
-    let localeDropdown = document.getElementById('localeDropdown');
-
-    localeDropdown.parentNode.insertBefore(_xyz.utils.wire()`<div class="title secondary-colour-bg">Locales</div>`, localeDropdown);
-
-    localeDropdown.style.marginBottom = '5px';
-
-    localeDropdown.appendChild(_xyz.utils.wire()`
-    <div>Show layers for the following locale`);
-
-    localeDropdown.appendChild(_xyz.utils.wire()`
-      <button class="btn-drop">
-      <div
-        class="head"
-        onclick=${e => {
-          e.preventDefault();
-          e.target.parentElement.classList.toggle('active');
-        }}>
-        <span>${_xyz.workspace.locale.key}</span>
-        <div class="icon"></div>
-      </div>
-      <ul>
-        ${
-          Object.values(_xyz.workspace.locales).map(
-            locale => _xyz.utils.wire()`<li><a href="${_xyz.host + '?locale=' + locale.key}">${locale.key}`)
-        }`);
-
-  }
-
-  document.getElementById('btnWorkspace').onclick = () => _xyz.workspace.admin();
-
-  // Select locations from hooks.
-  _xyz.hooks.current.locations.forEach(_hook => {
-
-    let hook = _hook.split('!');
-
-    _xyz.locations.select({
-      locale: _xyz.workspace.locale.key,
-      layer: _xyz.layers.list[decodeURIComponent(hook[0])],
-      table: hook[1],
-      id: hook[2]
-    });
-  });
-
-  if (_xyz.log) console.log(_xyz);
-}
-
-function createMap(_xyz) {
-
-  // Create mapview control.
   _xyz.mapview.create({
     target: document.getElementById('Map'),
     attribution: {
       logo: _xyz.utils.wire()`
-        <a
-          class="logo"
-          target="_blank"
-          href="https://geolytix.co.uk"
-          style="background-image: url('https://cdn.jsdelivr.net/gh/GEOLYTIX/geolytix@master/public/geolytix.svg');">`
+          <a
+            class="logo"
+            target="_blank"
+            href="https://geolytix.co.uk"
+            style="background-image: url('https://cdn.jsdelivr.net/gh/GEOLYTIX/geolytix@master/public/geolytix.svg');">`
     },
     view: {
       lat: _xyz.hooks.current.lat,
@@ -212,7 +158,7 @@ function createMap(_xyz) {
     _xyz.locations.list
       .filter(record => !!record.location)
       .forEach(record => record.location.remove());
-      if(_xyz.dataview.node) _xyz.map.updateSize();
+    if (_xyz.dataview.node) _xyz.map.updateSize();
   };
 
   _xyz.gazetteer.init({
@@ -220,4 +166,53 @@ function createMap(_xyz) {
     toggle: document.getElementById('btnGazetteer'),
   });
 
-};
+
+  // Create locales dropdown if length of locales array is > 1.
+  if (Object.keys(_xyz.workspace.locales).length > 1) {
+
+    let localeDropdown = document.getElementById('localeDropdown');
+
+    localeDropdown.parentNode.insertBefore(_xyz.utils.wire()`
+      <div class="listview-title secondary-colour-bg">Locales`, localeDropdown);
+
+    localeDropdown.appendChild(_xyz.utils.wire()`
+      <div>Show layers for the following locale:`);
+
+    localeDropdown.appendChild(_xyz.utils.wire()`
+      <button
+        style="margin-bottom: 10px;"
+        class="btn-drop">
+      <div
+        class="head"
+        onclick=${e => {
+        e.preventDefault();
+        e.target.parentElement.classList.toggle('active');
+      }}>
+        <span>${_xyz.workspace.locale.key}</span>
+        <div class="icon"></div>
+      </div>
+      <ul>
+        ${
+      Object.values(_xyz.workspace.locales).map(
+        locale => _xyz.utils.wire()`<li><a href="${_xyz.host + '?locale=' + locale.key}">${locale.key}`)
+      }`);
+
+  }
+
+  document.getElementById('btnWorkspace').onclick = () => _xyz.workspace.admin();
+
+  // Select locations from hooks.
+  _xyz.hooks.current.locations.forEach(_hook => {
+
+    let hook = _hook.split('!');
+
+    _xyz.locations.select({
+      locale: _xyz.workspace.locale.key,
+      layer: _xyz.layers.list[decodeURIComponent(hook[0])],
+      table: hook[1],
+      id: hook[2]
+    });
+  });
+
+  if (_xyz.log) console.log(_xyz);
+}

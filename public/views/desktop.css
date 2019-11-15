@@ -9,23 +9,32 @@ body {
     box-shadow: inset 4px 0px 4px -4px #777;
 }
 
-.listviews {
+#listviews {
     grid-column: 1;
     grid-row: 1/4;
     padding: 0 20px;
-    background-color: #fff;
-    box-shadow: 0 2px 2px #777;
     overflow: hidden;
-    z-index: 1000;
     background-color: #f0f0f0;
 }
 
-.listviews>.scrolly {
+#listviews > .scrolly {
     width: calc(100% + 50px);
 }
 
-.listviews .listview {
+#listviews > .scrolly > * {
     padding: 10px 0;
+}
+
+#clear_locations {
+    font-size: 90%;
+}
+
+.listview-title {
+    font-weight: bold;
+    font-size: 105%;
+    margin-bottom: 10px;
+    padding: 4px;
+    border-radius: 2px;
 }
 
 #vertDivider {
@@ -43,6 +52,7 @@ body {
     grid-row: 1;
     background: repeating-linear-gradient(0deg, #ddd, #fff 3px);
     box-shadow: inset 3px 0 4px -4px #777;
+    z-index: 9999;
 }
 
 #hozDivider:hover {
@@ -54,10 +64,12 @@ body {
     position: relative;
 }
 
-.mapview .btn-column {
-    left: 0;
+.btn-column {
     position: absolute;
     height: 100%;
+    padding: 4px;
+    background-color: #fff;
+    opacity: 0.8;
 }
 
 .gazetteer {
@@ -91,10 +103,9 @@ body {
     z-index: 9999;
 }
 
-#desktop_mask .msg {
+#desktop_mask > p {
     font-weight: 600;
     font-size: 200%;
-    color: #090;
     top: 50%;
     transform: perspective(1px) translateY(-50%);
     position: absolute;
