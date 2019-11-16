@@ -155,7 +155,8 @@ function init(_xyz) {
   // Initialise scrolly on listview element.
   _xyz.utils.scrolly(desktop.scrolly);
 
-  document.getElementById('clear_locations').onclick = () => {
+  document.getElementById('clear_locations').onclick = e => {
+    e.preventDefault();
     _xyz.locations.list
       .filter(record => !!record.location)
       .forEach(record => record.location.remove());
@@ -196,14 +197,14 @@ function init(_xyz) {
     <div>
       <div class="listview-title secondary-colour-bg">Gazetteer</div>
       <div>Search gazetteer for following term:</div>
-      <div  class="input-drop">
+      <div class="input-drop">
         <input type="text" placeholder="Gazetteer">
-        <ul></ul>`
+        <ul>`
 
     desktop.scrolly.insertBefore(gazetteer, desktop.scrolly.firstChild);
 
     _xyz.gazetteer.init({
-      target: gazetteer.querySelector('.input-drop'),
+      group: gazetteer.querySelector('.input-drop'),
     });
   }
 

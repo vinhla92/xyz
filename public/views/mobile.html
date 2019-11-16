@@ -15,21 +15,18 @@
     <script src="{{:dir}}/views/mobile.js" defer></script>
 </head>
 
-<body
-    data-nanoid={{:nanoid}} 
-    data-log={{:log}} 
-    data-user={{:user}} 
-    data-token={{:token}}>
+<body data-nanoid={{:nanoid}} data-log={{:log}} data-user={{:user}} data-token={{:token}}>
 
     <div id="Map" class="mapview map" style="margin-top: 0;"></div>
-
-    <div id="gazetteer" class="gazetteer"></div>
+    
+    <!-- <div id="gazetteer">
+        <div class="input-drop">
+            <input type="text" placeholder="e.g. London">
+            <ul></ul>
+        </div>
+    </div> -->
 
     <div class="btn-column mobile">
-
-        <button id="btnGazetteer" {{:btnSearch}}>
-            <div class="xyz-icon icon-search"></div>
-        </button>
 
         <button id="btnLocate" title="Current location" {{:btnLocate}}>
             <div class="xyz-icon icon-gps-not-fixed"></div>
@@ -46,7 +43,7 @@
         <!-- <a id="btnDocumentation" title="Open Documentation" href="https://geolytix.github.io/xyz/docs" target="_blank" class="enabled">
             <div class="xyz-icon icon-school"></div>
         </a> -->
-        
+
         <a id="btnLogin" title="{{:btnLogin_text}}" {{:btnLogin}} href="{{:dir}}{{:btnLogin_path}}" class="enabled">
             <div class="xyz-icon icon-lock-open"></div>
         </a>
@@ -57,21 +54,20 @@
 
     <div id="ctrls">
 
-        <div id="tabLayers" class="tab active">
+        <div class="tab active">
             <div class="xyz-icon icon-layers"></div>
             <div class="listview">
-                <div id="localeDropdown"></div>
-                <div class="title">Layers</div>
-                <div id="layers" class="content"></div>
+                <div class="listview-title secondary-colour-bg">Layers</div>
+                <div id="layers"></div>
             </div>
         </div>
 
-        <div id="tabLocations" class="tab" style="display: none;">
+        <div class="tab">
             <div class="xyz-icon icon-location"></div>
             <div class="listview">
-                <div class="title">Locations</div>
-                <button id="clear_locations" class="primary-colour">Clear all locations.</button>
-                <div id="locations" class="content"></div>
+                <div class="listview-title secondary-colour-bg">Locations</div>
+                <button id="clear_locations" class="bold primary-colour">Clear all locations.</button>
+                <div id="locations"></div>
             </div>
         </div>
 

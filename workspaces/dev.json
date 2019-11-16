@@ -449,7 +449,14 @@
             "gazetteer": {
                 "provider": "GOOGLE",
                 "code": "GB",
-                "placeholder": "e.g. London"
+                "placeholder": "e.g. London",
+                "datasets": [
+                    {
+                        "layer": "Retail Points",
+                        "table": "dev.retailpoints",
+                        "label": "store"
+                    }
+                ]
             },
             "layers": {
                 "OSM": {

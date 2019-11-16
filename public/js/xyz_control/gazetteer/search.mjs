@@ -2,13 +2,11 @@ export default _xyz => function(term, params = {}){
 
   const gazetteer = this;
 
-  // Abort the current search.
-  gazetteer.xhr && gazetteer.xhr.abort();
-
   // Empty results.
-  gazetteer.result && gazetteer.clear();
+  gazetteer.clear && gazetteer.clear();
 
-  // Create abortable xhr.
+  // Abort existing xhr and create new.
+  gazetteer.xhr && gazetteer.xhr.abort();
   gazetteer.xhr = new XMLHttpRequest();
 
   // Send gazetteer query to backend.
@@ -22,36 +20,44 @@ export default _xyz => function(term, params = {}){
     }));
 
   gazetteer.xhr.setRequestHeader('Content-Type', 'application/json');
-
   gazetteer.xhr.responseType = 'json';
-
   gazetteer.xhr.onload = e => {
 
     if (e.target.status !== 200) return;
       
-    // Parse the response as JSON and check for results length.
-    const json = e.target.response;
-
-    if (params.callback) return params.callback(json);
+    if (params.callback) return params.callback(e.target.response);
 
     // No results
-    if (json.length === 0) {
+    if (e.target.response.length === 0) {
       gazetteer.result.appendChild(_xyz.utils.wire()`
-      <li style="padding: 5px 0;">No results for this search.</li>`);
-      gazetteer.target.classList.add('active');
-      return;
+      <li>No results for this search.`);
+      return gazetteer.group.classList.add('active');
     }
 
     // Add results from JSON to gazetteer.
-    Object.values(json).forEach(entry => {
-      const li = _xyz.utils.wire()`<li>${entry.label}</li>`;
-      Object.entries(entry).forEach(data => li['data-' + data[0]] = data[1]);
-      gazetteer.result.appendChild(li);
-      gazetteer.target.classList.add('active');
+    Object.values(e.target.response).forEach(entry => {
+
+      gazetteer.result.appendChild(_xyz.utils.wire()`
+      <li onclick=${e=>{
+        e.preventDefault();
+
+        if (!entry.source || !entry.id) return;
+
+        gazetteer.select({
+          label: entry.label,
+          id: entry.id,
+          source: entry.source,
+          layer: entry.layer,
+          table: entry.table,
+          marker: entry.marker,
+        }, params.callback || null);
+
+      }}>${entry.label}`);
+
+      gazetteer.group.classList.add('active');
     });
 
   };
 
   gazetteer.xhr.send();
-
 };

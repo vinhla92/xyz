@@ -18,25 +18,27 @@ body {
     background-color: white;
     width: 100%;
     height: 100%;
-    box-shadow: 0 0 10px slategrey;
+    box-shadow: 0 0 10px #ccc;
     z-index: 1000;
 }
 
 #ctrls>.tab {
     flex-grow: 1;
-    text-align: center;
     height: 50px;
-    border-bottom: 1px solid #090;
+    padding: 5px;
+    border-bottom: 1px solid #1F964D;
 }
 
 #ctrls>.tab>.xyz-icon {
     width: 100%;
     height: 100%;
+    background-position: center;
+    pointer-events: none;
     filter: invert(45%) sepia(55%) saturate(608%) hue-rotate(90deg) brightness(93%) contrast(90%);
 }
 
 #ctrls>.tab.active {
-    background-color: #090;
+    background-color: #1F964D;
 }
 
 #ctrls>.tab.active>.xyz-icon {
@@ -55,30 +57,28 @@ body {
     width: 100%;
     left: 0;
     top: 50px;
+    background-color: #f0f0f0;
+}
+
+#ctrls .listview-title {
+    font-weight: bold;
+    font-size: 105%;
+    margin-bottom: 10px;
+    padding: 4px;
+    border-radius: 2px;
 }
 
 #ctrls .listview.shadow {
-    box-shadow: inset 0px 4px 4px -4px #777;
+    box-shadow: inset 0px 4px 4px -4px #ccc;
 }
 
-.gazetteer {
+#clear_locations {
+    font-size: 90%;
+}
+
+#gazetteer {
     position: fixed;
-    left: 0;
-    box-shadow: 0 3px 3px -3px #000;
-}
-
-.gazetteer input {
-    padding: 5px 0 5px 70px;
-}
-
-.gazetteer ul {
-    padding-left: 70px;
     width: 100%;
-}
-
-.gazetteer ul li {
-    font-size: 20px;
-    color: #090;
-    list-style: none;
-    line-height: 1.5em;
+    padding: 0 5px 0 75px;
+    background-color: rgba(255,255,255,0.6)
 }
