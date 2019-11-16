@@ -10,17 +10,18 @@
         }
     }
 
-    .drawer.group {
+    .drawer.panel {
+
+        max-height: 30px;
 
         >.header {
+            height: 30px;
             padding: 5px 0;
         }
-    }
 
-    .drawer.block {
-
-        >.header {
-            padding: 5px 0;
+        table {
+            width: 100%;
+            padding-left: 10px;
         }
     }
 
@@ -32,19 +33,6 @@
 
     .label {
         padding-top: 5px;
-    }
-
-    textarea {
-        resize: none;
-        width: 100%;
-    }
-
-    input {
-        width: 100%;
-        font-family: inherit;
-        margin: 5px 0 7px 0;
-        box-sizing: border-box;
-        padding-left: 3px;
     }
 
     .lv-0 {
@@ -61,22 +49,12 @@
         padding-left: 10px;
     }
 
-    .val {
-        font-weight: 400;
-    }
-
     img {
         width: 100%;
     }
 
     .num {
         text-align: right;
-    }
-
-    .t-expander {
-        vertical-align: bottom;
-        float: right;
-        padding-right: 5px;
     }
 
 }

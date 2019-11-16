@@ -122,25 +122,20 @@ input[type=range]::-moz-range-thumb {
     padding: 0 5px; }
     .location-view.drawer > .header {
       padding: 5px 0; }
-  .location-view .drawer.group > .header {
-    padding: 5px 0; }
-  .location-view .drawer.block > .header {
-    padding: 5px 0; }
+  .location-view .drawer.panel {
+    max-height: 30px; }
+    .location-view .drawer.panel > .header {
+      height: 30px;
+      padding: 5px 0; }
+    .location-view .drawer.panel table {
+      width: 100%;
+      padding-left: 10px; }
   .location-view > table {
     width: 100%;
     text-align: left;
     table-layout: fixed; }
   .location-view .label {
     padding-top: 5px; }
-  .location-view textarea {
-    resize: none;
-    width: 100%; }
-  .location-view input {
-    width: 100%;
-    font-family: inherit;
-    margin: 5px 0 7px 0;
-    box-sizing: border-box;
-    padding-left: 3px; }
   .location-view .lv-0 {
     font-size: 90%;
     font-weight: bold; }
@@ -149,16 +144,10 @@ input[type=range]::-moz-range-thumb {
   .location-view .lv-2 {
     font-size: 80%;
     padding-left: 10px; }
-  .location-view .val {
-    font-weight: 400; }
   .location-view img {
     width: 100%; }
   .location-view .num {
     text-align: right; }
-  .location-view .t-expander {
-    vertical-align: bottom;
-    float: right;
-    padding-right: 5px; }
 
 .dataview {
   overflow: hidden;
@@ -235,6 +224,13 @@ input[type=range]::-moz-range-thumb {
 ::-moz-focus-outer {
   border: 0; }
 
+input {
+  width: 100%; }
+
+textarea {
+  resize: none;
+  width: 100%; }
+
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
@@ -245,7 +241,8 @@ input[type=number] {
 
 input[type=text],
 input[type=number] {
-  border: 1px solid #ccc; }
+  border: 1px solid #ccc;
+  padding: 3px; }
 
 input:hover {
   cursor: pointer; }

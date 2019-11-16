@@ -7,7 +7,7 @@ export default _xyz => group => {
   group.row.appendChild(group.td);
 
   group.div = _xyz.utils.wire()`
-  <div class="drawer group expandable">`;
+  <div class="drawer panel expandable">`;
 
   if (group.expanded) group.div.classList.add('expanded');
 
@@ -15,20 +15,16 @@ export default _xyz => group => {
 
   group.header = _xyz.utils.wire()`
   <div
-    class="primary-colour"
+    class="header primary-colour"
     style="text-align: left;"
     onclick=${ e => {
       _xyz.utils.toggleExpanderParent(e.target, true);
-    }}>`;
+    }}><span>${group.label}`;
 
   group.div.appendChild(group.header);
 
-  // Add label to group header.
-  group.header.appendChild(_xyz.utils.wire()`<span>${group.label}`);
-
   // Add table
-  group.table = _xyz.utils.wire()`
-  <table style="width: 100%; cell-padding: 0; cell-spacing: 0; padding-left: 20px; border-left: 2px solid #B4B4B4;">`;
+  group.table = _xyz.utils.wire()`<table>`;
 
   group.div.appendChild(group.table);
 
@@ -65,8 +61,7 @@ export default _xyz => group => {
     // Add chart control to group header for toggling
     group.viewToggler = _xyz.utils.wire()`
     <button
-      class="xyz-icon btn-header"
-      style="margin: -6px 6px 0 0; float: right;"
+      class="btn-header xyz-icon primary-color-filter"
       onclick=${e => {
         e.stopPropagation();
         group.viewToggler.classList.toggle(group.chartIcon);
