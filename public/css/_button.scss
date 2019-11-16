@@ -23,18 +23,6 @@ button {
         box-shadow: inset 5px 0 4px -4px #777;
     }
 
-    &.mobile {
-        position: fixed;
-        left: 10px;
-
-        >button,
-        >div,
-        >a {
-            box-shadow: 1px 1px 3px 0 rgba(0, 0, 0, 0.2);
-            border-radius: 50%;
-        }
-    }
-
     button,
     >a {
         margin-top: 10px;

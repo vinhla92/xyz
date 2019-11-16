@@ -8,6 +8,17 @@ body {
     height: calc(100% - 50px);
 }
 
+.btn-column {
+    position: fixed;
+    left: 10px;
+}
+
+.btn-column>button,
+.btn-column>a {
+    box-shadow: 1px 1px 3px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 50%;
+}
+
 #spacer {
     height: calc(100% - 50px);
 }

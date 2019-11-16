@@ -606,14 +606,6 @@ button {
     box-shadow: inset 2px 0 4px -4px #777; }
   .btn-column.lv1 {
     box-shadow: inset 5px 0 4px -4px #777; }
-  .btn-column.mobile {
-    position: fixed;
-    left: 10px; }
-    .btn-column.mobile > button,
-    .btn-column.mobile > div,
-    .btn-column.mobile > a {
-      box-shadow: 1px 1px 3px 0 rgba(0, 0, 0, 0.2);
-      border-radius: 50%; }
   .btn-column button,
   .btn-column > a {
     margin-top: 10px;
