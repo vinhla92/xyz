@@ -62,16 +62,10 @@ async function view(req, res, token = { access: 'public' }) {
   res.type('text/html').send(tmpl.render({
     dir: env.path,
     title: env.workspace.title || 'GEOLYTIX | XYZ',
-    user: token.email || '""',
     nanoid: nanoid(6),
     token: req.query.token || token.signed || '""',
     log: env.logs || '""',
-    btnLogin: env.acl_connection ? '' : 'style="display: none;"',
-    btnLogin_style: token.email ? 'face' : 'lock_open',
-    btnLogin_path: token.email ? '' : '/login',
-    btnLogin_text: token.email || 'anonymous (public)',
-    btnAdmin: token.admin_user ? '' : 'style="display: none;"',
-    btnEditor: token.admin_workspace ? '' : 'style="display: none;"'
+    login: (env.acl_connection) ||  '""',
   }));
 
 };

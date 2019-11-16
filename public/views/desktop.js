@@ -104,6 +104,10 @@ _xyz({
 
 function init(_xyz) {
 
+  if (document.body.dataset.token) {
+    _xyz.user = _xyz.utils.JWTDecode(document.body.dataset.token);
+  }
+
   _xyz.mapview.create({
     target: document.getElementById('Map'),
     attribution: {
@@ -249,7 +253,6 @@ function init(_xyz) {
     });
   }
 
-  document.getElementById('btnWorkspace').onclick = () => _xyz.workspace.admin();
 
   // Select locations from hooks.
   _xyz.hooks.current.locations.forEach(_hook => {
@@ -263,6 +266,32 @@ function init(_xyz) {
       id: hook[2]
     });
   });
+
+  if (document.body.dataset.login) {
+    document.querySelector('.btn-column').appendChild(_xyz.utils.wire()`
+    <a
+      title="${_xyz.user ? _xyz.user.email : 'Login'}"
+      class="enabled"
+      href="${_xyz.host + '/login'}">
+      <div class="${'xyz-icon ' + (_xyz.user ? 'icon-face' : 'icon-lock-open')}">`);
+  }
+
+  if (_xyz.user) {
+
+    _xyz.user.admin_user && document.querySelector('.btn-column').appendChild(_xyz.utils.wire()`
+    <a
+      title="Open account admin view"
+      class="enabled"
+      href="${_xyz.host + '/user/admin'}">
+      <div class="xyz-icon icon-supervisor-account">`);
+
+    _xyz.user.admin_workspace && document.querySelector('.btn-column').appendChild(_xyz.utils.wire()`
+    <button
+      title="Open workspace configuration view"
+      class="enabled"
+      onclick=${_xyz.workspace.admin}>
+      <div class="xyz-icon icon-settings">`);
+  }
 
   if (_xyz.log) console.log(_xyz);
 }

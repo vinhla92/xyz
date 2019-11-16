@@ -28,6 +28,8 @@ export {default as Chroma} from 'chroma-js';
 
 export {default as Chart} from 'chart.js';
 
+export {default as JWTDecode} from 'jwt-decode';
+
 import 'chartjs-plugin-datalabels';
 
 import pointOnFeature from '@turf/point-on-feature';

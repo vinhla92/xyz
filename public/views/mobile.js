@@ -34,6 +34,10 @@ _xyz({
 
 function init(_xyz) {
 
+  if (document.body.dataset.token) {
+    _xyz.user = _xyz.utils.JWTDecode(document.body.dataset.token);
+  }
+
   // Create mapview control.
   _xyz.mapview.create({
     target: document.getElementById('Map'),
@@ -185,6 +189,15 @@ function init(_xyz) {
       id: hook[2]
     });
   });
+
+  if (document.body.dataset.login) {
+    document.querySelector('.btn-column').appendChild(_xyz.utils.wire()`
+    <a
+      title="${_xyz.user ? _xyz.user.email : 'Login'}"
+      class="enabled"
+      href="${_xyz.host + '/login'}">
+      <div class="${'xyz-icon ' + (_xyz.user ? 'icon-face' : 'icon-lock-open')}">`);
+  }
 
   if (_xyz.log) console.log(_xyz);
 }
