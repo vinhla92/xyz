@@ -157,15 +157,5 @@ export default _xyz => params => {
     });
   
   }
-
-  // Wire buttons to params targets.
-  if (params.btn) {
-
-    if (params.btn.ZoomIn) _xyz.mapview.btn._ZoomIn(params.btn.ZoomIn, z);
-  
-    if (params.btn.ZoomOut) _xyz.mapview.btn._ZoomOut(params.btn.ZoomOut, z);
-  
-    if (params.btn.Locate) _xyz.mapview.btn._Locate(params.btn.Locate);
-  }
     
 };

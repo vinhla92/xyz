@@ -16,8 +16,6 @@ import icon from './icon.mjs';
 
 import infotip from './infotip.mjs';
 
-import btn from './btn.mjs';
-
 export default _xyz => ({
 
   create: create(_xyz),
@@ -55,7 +53,5 @@ export default _xyz => ({
   getZoom: () => {
     return _xyz.map.getView().getZoom();
   },
-
-  btn: btn(_xyz)
 
 });
