@@ -14,7 +14,7 @@ import format from './layer/_format.mjs';
 
 import locations from '../xyz_control/locations/_locations.mjs';
 
-import gazetteer from '../xyz_control/gazetteer/_gazetteer.mjs';
+import gazetteer from '../xyz_control/gazetteer.mjs';
 
 import charts from '../xyz_control/dataview/charts/_charts.mjs';
 
