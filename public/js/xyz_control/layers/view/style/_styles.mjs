@@ -40,7 +40,7 @@ export default _xyz => {
   
     // Add toggle for label layer.
     layer.style.label && panel.appendChild(_xyz.utils.wire()`
-    <label class="checkbox" style="margin-bottom: 10px;">
+    <label class="input-checkbox" style="margin-bottom: 10px;">
     <input type="checkbox"
       checked=${!!layer.style.label.display}
       onchange=${e => {

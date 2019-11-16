@@ -4,7 +4,7 @@ export default _xyz => entry => {
 
   entry.row.appendChild(_xyz.utils.wire()`
   <td style="padding-top: 5px;" colSpan=2>
-  <label class="checkbox">
+  <label class="input-checkbox">
   <input type="checkbox"
     checked=${!!entry.display}
     onchange=${e => {

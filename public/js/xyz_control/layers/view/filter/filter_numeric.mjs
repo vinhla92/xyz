@@ -54,7 +54,7 @@ export default _xyz => (layer, filter_entry) => {
 
     block.appendChild(range);
 
-    const div_min = _xyz.utils.wire()`<div class="range">`;
+    const div_min = _xyz.utils.wire()`<div class="input-range">`;
     block.appendChild(div_min);
 
     const slider_min = _xyz.utils.wire()`
@@ -93,7 +93,7 @@ export default _xyz => (layer, filter_entry) => {
 
     block.appendChild(range);
 
-    var div_max = _xyz.utils.wire()`<div class="range">`;
+    var div_max = _xyz.utils.wire()`<div class="input-range">`;
     block.appendChild(div_max);
 
     const slider_max = _xyz.utils.wire()`

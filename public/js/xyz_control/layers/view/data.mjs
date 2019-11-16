@@ -41,7 +41,7 @@ export default _xyz => {
 
         // Create checkbox to toggle whether table is in tabs list.
         panel.appendChild(_xyz.utils.wire()`
-        <label class="checkbox">
+        <label class="input-checkbox">
         <input
           type="checkbox"
           checked=${!!tab.display}

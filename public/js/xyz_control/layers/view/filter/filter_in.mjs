@@ -14,7 +14,7 @@ export default _xyz => (layer, filter_entry) => {
   filter_entry.filter.in.forEach(val => {
 
     block.appendChild(_xyz.utils.wire()`
-    <label class="checkbox">
+    <label class="input-checkbox">
     <input
       type="checkbox"
       onchange=${e=>{

@@ -66,7 +66,7 @@ export default _xyz => {
     <div style="margin-top: 12px;">
       <span>Travel time in minutes: </span>
       <span class="bold">${entry.edit.isoline_mapbox.minutes}</span>
-      <div class="range">
+      <div class="input-range">
       <input
         class="secondary-colour-bg"
         type="range"

@@ -3,7 +3,7 @@ export default _xyz => entry => {
   entry.listview.appendChild(_xyz.utils.wire()`
   <tr>
     <td style="padding-top: 5px;" colSpan=2>
-      <label class="checkbox">
+      <label class="input-checkbox">
         <input type="checkbox"
           disabled=${!entry.edit}
           checked=${!!entry.value}

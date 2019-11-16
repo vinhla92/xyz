@@ -88,27 +88,29 @@ export default _xyz => (layer, style, title) => {
   <div style="display: inline-block; width: 35%;">Stroke Weight`);
 
   block.node.appendChild(_xyz.utils.wire()`
-  <div class="range" style="display: inline-block; width: 65%; padding-top:10px; padding-bottom:6px;">
-  <input
-    type="range"
-    class="secondary-colour-bg"
-    min=1
-    value=${style.strokeWidth || 1}
-    max=5
-    oninput=${e=>{
+  <div
+    class="input-range"
+    style="display: inline-block; width: 65%; padding-top:10px; padding-bottom:6px;">
+    <input
+      type="range"
+      class="secondary-colour-bg"
+      min=1
+      value=${style.strokeWidth || 1}
+      max=5
+      oninput=${e=>{
 
-      style.strokeWidth = parseInt(e.target.value);
+        style.strokeWidth = parseInt(e.target.value);
 
-      // Set input value and apply filter.
-      block.sample_poly.style.border = style.strokeWidth + 'px solid ' + style.strokeColor;
+        // Set input value and apply filter.
+        block.sample_poly.style.border = style.strokeWidth + 'px solid ' + style.strokeColor;
 
-      clearTimeout(timeout);
-      timeout = setTimeout(() => {
-        timeout = null;
-        layer.reload();
-      }, 500);
+        clearTimeout(timeout);
+        timeout = setTimeout(() => {
+          timeout = null;
+          layer.reload();
+        }, 500);
 
-    }}>`);
+      }}>`);
 
 
   block.node.appendChild(_xyz.utils.wire()`
@@ -116,7 +118,7 @@ export default _xyz => (layer, style, title) => {
 
   block.node.appendChild(_xyz.utils.wire()`
   <div
-    class="range"
+    class="input-range"
     style="display: inline-block; width: 65%; padding-top:10px; padding-bottom:6px;">
     <input
       type="range"

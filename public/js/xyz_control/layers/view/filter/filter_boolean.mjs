@@ -19,7 +19,7 @@ export default _xyz => (layer, filter_entry) => {
   layer.filter.current[filter_entry.field]['boolean'] = true;
 
   block.appendChild(_xyz.utils.wire()`
-  <label class="checkbox">
+  <label class="input-checkbox">
   <input type="checkbox"
     checked=true 
     onchange=${e=>{

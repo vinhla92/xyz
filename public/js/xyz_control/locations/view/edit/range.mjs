@@ -4,7 +4,7 @@ export default _xyz => entry => {
   <div>
   <span>${entry.edit.range.label}</span>
   <span class="bold">${entry.value}</span>
-  <div class="range">
+  <div class="input-range">
   <input
     class="secondary-colour-bg"
     type="range"
