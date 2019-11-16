@@ -31,10 +31,10 @@ export default _xyz => entry => {
 
     datasets[0] = {
       label: entry.label,
-      backgroundColor: entry.chart.backgroundColor || _xyz.charts.fallbackStyle.backgroundColor,
-      borderColor: entry.chart.borderColor || _xyz.charts.fallbackStyle.borderColor,
-      pointBackgroundColor: entry.chart.backgroundColor || _xyz.charts.fallbackStyle.backgroundColor,
-      pointBorderColor: entry.chart.borderColor || _xyz.charts.fallbackStyle.borderColor,
+      backgroundColor: entry.chart.backgroundColor || _xyz.dataview.charts.fallbackStyle.backgroundColor,
+      borderColor: entry.chart.borderColor || _xyz.dataview.charts.fallbackStyle.borderColor,
+      pointBackgroundColor: entry.chart.backgroundColor || _xyz.dataview.charts.fallbackStyle.backgroundColor,
+      pointBorderColor: entry.chart.borderColor || _xyz.dataview.charts.fallbackStyle.borderColor,
       lineTension: 0.5,
       spanGaps: true,
       data: entry.fields.map(field => (field.type === 'integer' ? parseInt(field.value) : field.value))

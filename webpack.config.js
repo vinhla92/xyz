@@ -4,7 +4,7 @@ const webpack = require('webpack');
 
 module.exports = {
   entry: {
-    xyz_openlayers: ['./public/js/xyz_openlayers/index.mjs']
+    xyz_openlayers: ['./public/js/index.mjs']
   },
   output: {
     path: path.resolve(__dirname, 'public/js/build'),

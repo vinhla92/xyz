@@ -41,7 +41,7 @@ export default _xyz => group => {
     group.fields = group.location.infoj.filter(entry => entry.group === group.label);
 
     // Create chart element
-    group.chartElem = _xyz.charts.create(group);
+    group.chartElem = _xyz.dataview.charts.create(group);
 
     // Add chart
     group.div.appendChild(group.chartElem);

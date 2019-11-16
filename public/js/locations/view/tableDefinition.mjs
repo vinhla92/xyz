@@ -78,7 +78,7 @@ export default _xyz => entry => {
 
     if (fields.length && fields.some(field => field.displayValue)) {
 
-      entry.chart.node.appendChild(_xyz.charts.create({
+      entry.chart.node.appendChild(_xyz.dataview.charts.create({
         label: entry.title,
         fields: fields,
         chart: entry.chart

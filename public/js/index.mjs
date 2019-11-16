@@ -1,24 +1,22 @@
-import * as utils from '../utils/_utils.mjs';
+import * as utils from './utils/_utils.mjs';
 
-import workspace from '../xyz_control/workspace.mjs';
+import workspace from './workspace.mjs';
 
-import hooks from '../xyz_control/hooks.mjs';
+import hooks from './hooks.mjs';
 
-import lib from './lib.mjs';
+import lib from './mapview/lib.mjs';
 
 import mapview from './mapview/_mapview.mjs';
 
-import layers from '../xyz_control/layers/_layers.mjs';
+import layers from './layers/_layers.mjs';
 
-import format from './layer/_format.mjs';
+import format from './mapview/layer/_format.mjs';
 
-import locations from '../xyz_control/locations/_locations.mjs';
+import locations from './locations/_locations.mjs';
 
-import gazetteer from '../xyz_control/gazetteer.mjs';
+import gazetteer from './gazetteer.mjs';
 
-import charts from '../xyz_control/dataview/charts/_charts.mjs';
-
-import dataview from '../xyz_control/dataview/_dataview.mjs';
+import dataview from './dataview/_dataview.mjs';
 
 async function _xyz(params) {
 
@@ -71,8 +69,6 @@ async function _xyz(params) {
   _xyz.locations = locations(_xyz);
 
   _xyz.gazetteer = gazetteer(_xyz);
-
-  _xyz.charts = charts(_xyz);
 
   _xyz.dataview = dataview(_xyz);
 

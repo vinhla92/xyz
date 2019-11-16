@@ -41,9 +41,9 @@ export default _xyz => entry => {
         let idx = Object.keys(tmp).indexOf(key);
         tmp[key].data.push(Number(field.value));
         tmp[key].label = field.label;
-        tmp[key].borderColor = (entry.chart.borderColor[idx] || _xyz.charts.fallbackStyle.borderColor);
+        tmp[key].borderColor = (entry.chart.borderColor[idx] || _xyz.dataview.charts.fallbackStyle.borderColor);
 
-        (entry.chart.type === 'stackedLine' && !entry.chart.fill) ? tmp[key].backgroundColor = null : tmp[key].backgroundColor = (entry.chart.backgroundColor[idx] || _xyz.charts.fallbackStyle.backgroundColor);
+        (entry.chart.type === 'stackedLine' && !entry.chart.fill) ? tmp[key].backgroundColor = null : tmp[key].backgroundColor = (entry.chart.backgroundColor[idx] || _xyz.dataview.charts.fallbackStyle.backgroundColor);
 
       }
     });
@@ -83,12 +83,12 @@ export default _xyz => entry => {
     				ticks: {
     					beginAtZero: entry.chart.beginAtZero || false,
     					callback: (label, index, labels) => {
-    						return entry.chart.unit ? _xyz.charts.units(entry, label) : label;
+    						return entry.chart.unit ? _xyz.dataview.charts.units(entry, label) : label;
     					}
     				},
     				scaleLabel: {
     					display: (entry.chart.unit ? true : false),
-    					labelString: (entry.chart.units ? _xyz.charts.scale(entry) : false)
+    					labelString: (entry.chart.units ? _xyz.dataview.charts.scale(entry) : false)
     				},
     				stacked: true
 

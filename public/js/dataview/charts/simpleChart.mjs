@@ -31,8 +31,8 @@ export default _xyz => entry => {
 
     datasets[0] = {
       label: entry.label || entry.dashboard,
-      backgroundColor: entry.chart.backgroundColor || _xyz.charts.fallbackStyle.backgroundColor,
-      borderColor: entry.chart.borderColor || _xyz.charts.fallbackStyle.borderColor,
+      backgroundColor: entry.chart.backgroundColor || _xyz.dataview.charts.fallbackStyle.backgroundColor,
+      borderColor: entry.chart.borderColor || _xyz.dataview.charts.fallbackStyle.borderColor,
       spanGaps: true,
       data: entry.fields.map(field => (field.type === 'integer' ? parseInt(field.value) : entry.chart.y ? (field[entry.chart.y] ? field[entry.chart.y] : field.value) : field.value))
     };
@@ -49,8 +49,8 @@ export default _xyz => entry => {
     if(entry.chart.negativeBackgroundColor || entry.chart.negativeBorderColor){
       let bgColors = [], bdColors = [];
       datasets[0].data.map(d => {
-        d > 0 ? bgColors.push(entry.chart.backgroundColor || _xyz.charts.fallbackStyle.backgroundColor) : bgColors.push(entry.chart.negativeBackgroundColor || _xyz.charts.fallbackStyle.borderColor);
-        d > 0 ? bdColors.push(entry.chart.backgroundColor || _xyz.charts.fallbackStyle.backgroundColor) : bdColors.push(entry.chart.negativeBackgroundColor || _xyz.charts.fallbackStyle.borderColor);
+        d > 0 ? bgColors.push(entry.chart.backgroundColor || _xyz.dataview.charts.fallbackStyle.backgroundColor) : bgColors.push(entry.chart.negativeBackgroundColor || _xyz.dataview.charts.fallbackStyle.borderColor);
+        d > 0 ? bdColors.push(entry.chart.backgroundColor || _xyz.dataview.charts.fallbackStyle.backgroundColor) : bdColors.push(entry.chart.negativeBackgroundColor || _xyz.dataview.charts.fallbackStyle.borderColor);
       });
 
       datasets[0].backgroundColor = bgColors;
@@ -88,8 +88,8 @@ export default _xyz => entry => {
 
       let idx = series.indexOf(serie);
 
-      tmp[serie].backgroundColor = typeof(entry.chart.backgroundColor) === 'object' ?  entry.chart.backgroundColor[idx] : (entry.chart.backgroundColor || _xyz.charts.fallbackStyle.backgroundColor);
-      tmp[serie].borderColor = typeof(entry.chart.borderColor) === 'object' ? entry.chart.borderColor[idx] : (entry.chart.borderColor || _xyz.charts.fallbackStyle.borderColor);
+      tmp[serie].backgroundColor = typeof(entry.chart.backgroundColor) === 'object' ?  entry.chart.backgroundColor[idx] : (entry.chart.backgroundColor || _xyz.dataview.charts.fallbackStyle.backgroundColor);
+      tmp[serie].borderColor = typeof(entry.chart.borderColor) === 'object' ? entry.chart.borderColor[idx] : (entry.chart.borderColor || _xyz.dataview.charts.fallbackStyle.borderColor);
       tmp[serie].spanGaps = true;
     });
 
@@ -133,12 +133,12 @@ export default _xyz => entry => {
     				ticks: {
     					beginAtZero: entry.chart.beginAtZero || false,
     					callback: (label, index, labels) => {
-    						return entry.chart.unit ? _xyz.charts.units(entry, label) : label;
+    						return entry.chart.unit ? _xyz.dataview.charts.units(entry, label) : label;
     					}
     				},
     				scaleLabel: {
     					display: (entry.chart.unit ? true : false),
-    					labelString: (entry.chart.unit ? _xyz.charts.scale(entry) : false)
+    					labelString: (entry.chart.unit ? _xyz.dataview.charts.scale(entry) : false)
     				}
     			}],
         xAxes: [{

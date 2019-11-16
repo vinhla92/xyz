@@ -26,8 +26,8 @@ export default _xyz => entry => {
 
   datasets[0] = {
     label: entry.label,
-    backgroundColor: entry.chart.backgroundColor || _xyz.charts.fallbackStyle.backgroundColor,
-    borderColor: entry.chart.borderColor || _xyz.charts.fallbackStyle.borderColor,
+    backgroundColor: entry.chart.backgroundColor || _xyz.dataview.charts.fallbackStyle.backgroundColor,
+    borderColor: entry.chart.borderColor || _xyz.dataview.charts.fallbackStyle.borderColor,
     data: data,
     spanGaps: true
   };

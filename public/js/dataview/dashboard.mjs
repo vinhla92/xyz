@@ -25,7 +25,7 @@ export default _xyz => (entry, callback) => {
 
         entry.group.fields = entry.location.infoj.filter(_entry => _entry.group === entry.group.label);
 
-        let chartElem = _xyz.charts.create(entry.group);
+        let chartElem = _xyz.dataview.charts.create(entry.group);
 
         if(!chartElem || !chartElem.style) return;
 

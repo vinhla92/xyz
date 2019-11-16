@@ -1,3 +1,5 @@
+import charts from './charts/_charts.mjs';
+
 import create from './create.mjs';
 
 import addTab from './addTab.mjs';
@@ -27,6 +29,8 @@ export default _xyz => {
   return {
 
     tables: [],
+
+    charts: charts(_xyz),
     
     create: create(_xyz),
 

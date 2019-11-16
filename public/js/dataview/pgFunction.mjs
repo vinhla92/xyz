@@ -27,7 +27,7 @@ export default _xyz => param => {
   
     if(param.entry.chart){
 
-      let chartElem = _xyz.charts.create(param.entry);
+      let chartElem = _xyz.dataview.charts.create(param.entry);
 
       if(!chartElem || !chartElem.style) return;
 

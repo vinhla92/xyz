@@ -40,7 +40,7 @@ export default _xyz => chart => {
 
       _xyz.dataview.node.querySelector('.tab-content').innerHTML = '';
 
-      let chartElem = _xyz.charts.create({
+      let chartElem = _xyz.dataview.charts.create({
         label: chart.key, 
         columns: chart.columns,
         fields: e.target.response, 
