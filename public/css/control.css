@@ -117,8 +117,11 @@ input[type=range]::-moz-range-thumb {
 
 .location-view {
   margin: 5px 0; }
-  .location-view.drawer > .header {
-    padding: 5px 0; }
+  .location-view.drawer {
+    background-color: #fff;
+    padding: 0 5px; }
+    .location-view.drawer > .header {
+      padding: 5px 0; }
   .location-view .drawer.group > .header {
     padding: 5px 0; }
   .location-view .drawer.block > .header {
