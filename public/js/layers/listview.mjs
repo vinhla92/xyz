@@ -73,8 +73,6 @@ export default _xyz => {
 
     drawer.appendChild(header);
 
-    drawer.style.maxHeight = header.offsetHeight + 'px';
-
     // Create layer group meta element.
     const meta = _xyz.utils.wire()`<div class="meta">`;
     drawer.appendChild(meta);
@@ -134,6 +132,8 @@ export default _xyz => {
         e.stopPropagation();
         _xyz.utils.toggleExpanderParent(e.target);
       }}>`);
+
+    drawer.style.maxHeight = header.offsetHeight + 'px';
 
   }
 
