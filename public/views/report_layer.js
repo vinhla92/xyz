@@ -16,7 +16,12 @@ function init(_xyz) {
 
   _xyz.mapview.create({
     scrollWheelZoom: true,
-    target: document.getElementById('report_map')
+    target: document.getElementById('report_map'),
+    view: {
+      lat: params.lat,
+      lng: params.lng,
+      z: params.z
+    }
   });
 
   const layer = _xyz.layers.list[params.layer];
@@ -25,14 +30,14 @@ function init(_xyz) {
 
   if (layer.style.theme) {
 
-    document.getElementById('report_left').appendChild(layer.style.legend);
+    document.getElementById('report_left').appendChild(_xyz.layers.view.style.legend(layer));
 
   }
 
-  // _xyz.dataview.layerTable({
-  //   layer: _xyz.layers.list.COUNTRIES,
-  //   target: document.getElementById('report_table'),
-  //   key: 'table1'
-  // });
+   _xyz.dataview.layerTable({
+     layer: layer,
+     target_id: 'report_table',
+     key: 'Retail Places'
+   });
 
 }

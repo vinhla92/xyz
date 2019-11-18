@@ -61,7 +61,7 @@ export default _xyz => group => {
     // Add chart control to group header for toggling
     group.viewToggler = _xyz.utils.wire()`
     <button
-      class="btn-header xyz-icon primary-color-filter"
+      class="btn-header xyz-icon primary-colour-filter enabled"
       onclick=${e => {
         e.stopPropagation();
         group.viewToggler.classList.toggle(group.chartIcon);

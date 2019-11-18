@@ -158,8 +158,6 @@ function init(_xyz) {
     btnZoomOut.disabled = z <= _xyz.workspace.locale.minZoom;
   });
 
-  
-
 
   if(_xyz.workspace.locale.locate) {
 
@@ -168,7 +166,7 @@ function init(_xyz) {
       onclick=${e=>{
         _xyz.mapview.locate.toggle();
         e.target.classList.toggle('enabled');
-      }}><div class="xyz-icon icon-gps-not-fixed">`);
+      }}><div class="xyz-icon icon-gps-not-fixed off-black-filter">`);
   }
 
 
