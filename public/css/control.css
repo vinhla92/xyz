@@ -241,7 +241,7 @@ input[type=range]::-moz-range-thumb {
 }
 .dataview nav ul.nav_bar-nav li {
   padding: 5px;
-  font-size: 1vw;
+  font-size: 94%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
