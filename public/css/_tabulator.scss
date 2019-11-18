@@ -9,10 +9,11 @@
     text-align: left;
     -ms-transform: translatez(0);
     transform: translatez(0);
-    border-top: 1px solid #333;
-    border-bottom: 1px solid #333;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
     border-right: 1px solid #ddd;
     margin-bottom: 30px;
+    margin-top: 10px;
     // margin-right: 10px;
 }
 
@@ -410,7 +411,7 @@
 }
 
 .tabulator .tabulator-loader .tabulator-loader-msg.tabulator-loading {
-    border: 4px solid #333;
+    border: 4px solid #ddd;
     color: #000;
 }
 
@@ -601,7 +602,7 @@
     height: 11px;
     width: 11px;
     margin-right: 5px;
-    border: 1px solid #333;
+    border: 1px solid #ddd;
     border-radius: 2px;
     background: rgba(0, 0, 0, 0.1);
     overflow: hidden;

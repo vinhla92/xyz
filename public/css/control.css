@@ -205,7 +205,7 @@ input[type=range]::-moz-range-thumb {
   grid-row: 2;
   display: grid;
   grid-template-columns: 57px 1fr;
-  grid-template-rows: 6px 50px 1fr;
+  grid-template-rows: 6px 36px 1fr;
   z-index: 1000;
   /* to hide static labels outside map */
   background-color: white;
@@ -253,6 +253,7 @@ input[type=range]::-moz-range-thumb {
 }
 .dataview nav ul.nav_bar-nav li.tab-current {
   box-shadow: 0 6px 8px -6px #444;
+  overflow: visible;
 }
 .dataview nav ul.nav_bar-nav li:hover {
   overflow: visible;
@@ -941,10 +942,11 @@ button:disabled {
   text-align: left;
   -ms-transform: translatez(0);
   transform: translatez(0);
-  border-top: 1px solid #333;
-  border-bottom: 1px solid #333;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
   border-right: 1px solid #ddd;
   margin-bottom: 30px;
+  margin-top: 10px;
 }
 
 .tabulator[tabulator-layout=fitDataFill] .tabulator-tableHolder .tabulator-table {
@@ -1341,7 +1343,7 @@ button:disabled {
 }
 
 .tabulator .tabulator-loader .tabulator-loader-msg.tabulator-loading {
-  border: 4px solid #333;
+  border: 4px solid #ddd;
   color: #000;
 }
 
@@ -1530,7 +1532,7 @@ button:disabled {
   height: 11px;
   width: 11px;
   margin-right: 5px;
-  border: 1px solid #333;
+  border: 1px solid #ddd;
   border-radius: 2px;
   background: rgba(0, 0, 0, 0.1);
   overflow: hidden;
@@ -2029,6 +2031,9 @@ button:disabled {
   vertical-align: middle;
 }
 
+.drawer {
+  box-sizing: content-box;
+}
 .drawer > .header {
   display: flex;
   align-items: center;

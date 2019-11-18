@@ -2782,6 +2782,7 @@
                             "type": "tableDefinition",
                             "title": "OAC Profile",
                             "display": true,
+                            "toolbars": {},
                             "target_id": "xyz_table3",
                             "layout": "fitColumns",
                             "class": "_report",
