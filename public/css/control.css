@@ -242,6 +242,10 @@ input[type=range]::-moz-range-thumb {
 .dataview nav ul.nav_bar-nav li {
   padding: 5px;
   font-size: 1vw;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: default;
   -webkit-flex: 1;
   -moz-flex: 1;
   -ms-flex: 1;
@@ -249,6 +253,9 @@ input[type=range]::-moz-range-thumb {
 }
 .dataview nav ul.nav_bar-nav li.tab-current {
   box-shadow: 0 6px 8px -6px #444;
+}
+.dataview nav ul.nav_bar-nav li:hover {
+  overflow: visible;
 }
 .dataview nav .tab-dropdown-container {
   position: relative;
