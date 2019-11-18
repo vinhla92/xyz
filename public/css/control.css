@@ -241,6 +241,7 @@ input[type=range]::-moz-range-thumb {
 }
 .dataview nav ul.nav_bar-nav li {
   padding: 5px;
+  font-size: 1vw;
   -webkit-flex: 1;
   -moz-flex: 1;
   -ms-flex: 1;
@@ -719,7 +720,7 @@ button:hover:enabled {
   cursor: pointer;
 }
 button:disabled {
-  opacity: 0.2;
+  opacity: 0.5;
 }
 
 .btn-column {
