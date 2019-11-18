@@ -59,7 +59,7 @@ export default _xyz => {
     Object.entries(attribution_entries).forEach(entry => {
 
       // Create new attribution for layer if the same attribution does not exist yet.
-      if (!attribution.layer[entry[0]]) {
+      if (attribution.layer && !attribution.layer[entry[0]]) {
 
         attribution.layer[entry[0]] = _xyz.utils.wire()`
         <a target="_blank" href="${entry[1]}">${entry[0]}</a>`;
