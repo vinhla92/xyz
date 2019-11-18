@@ -240,10 +240,9 @@ function init(_xyz) {
 
     const gazetteer = _xyz.utils.wire()`
     <div>
-      <div class="listview-title secondary-colour-bg">Gazetteer</div>
-      <div>Search gazetteer for following term:</div>
+      <div class="listview-title secondary-colour-bg">Search</div>
       <div class="input-drop">
-        <input type="text" placeholder="Gazetteer">
+        <input type="text" placeholder="Search places">
         <ul>`
 
     desktop.scrolly.insertBefore(gazetteer, desktop.scrolly.firstChild);

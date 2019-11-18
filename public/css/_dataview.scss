@@ -4,7 +4,7 @@
     grid-row: 2;
     display: grid;
     grid-template-columns: 57px 1fr;
-    grid-template-rows: 6px 50px 1fr;
+    grid-template-rows: 6px 36px 1fr;
     z-index:1000; /* to hide static labels outside map */
     background-color: white; /* to hide static labels outside map*/
 
@@ -43,12 +43,23 @@
             li {
                 padding: 5px;
                 font-size: 1vw;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+
+                cursor: default;
+
                 -webkit-flex: 1;
                 -moz-flex: 1;
                 -ms-flex: 1;
                 flex: 1;
                 &.tab-current {
                     box-shadow: 0 6px 8px -6px #444;
+                    overflow: visible;
+                }
+
+                &:hover {
+                    overflow: visible;
                 }
             }
         }

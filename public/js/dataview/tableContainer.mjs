@@ -5,7 +5,7 @@ export default _xyz => show_toolbars => {
   if(show_toolbars){
 
     let toolbar = _xyz.utils.wire()`
-      <div style="margin-right: 10px; text-align: right;">`;
+      <div style="margin-right: 10px; margin-top: 10px; text-align: right;">`;
 
     _xyz.dataview.node.querySelector('.tab-content').appendChild(toolbar);
 

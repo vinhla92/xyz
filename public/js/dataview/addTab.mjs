@@ -5,10 +5,8 @@ export default _xyz => table => {
   let style = {};
 
   // Give selection colour if relevant
-  if(table.location && table.location.style && table.location.style.color) style = {
-    background: `-moz-linear-gradient(180deg, ${table.location.style.color} 0%, rgba(255,255,255,1) 12%)`,
-    background: `-webkit-linear-gradient(180deg, ${table.location.style.color} 0%, rgba(255,255,255,1) 12%)`,
-    background: `linear-gradient(180deg, ${table.location.style.color} 0%, rgba(255,255,255,1) 12%)`
+  if(table.location && table.location.style && table.location.style.strokeColor) style = {
+    borderTop: `solid 1px ${table.location.style.strokeColor}`
   };
 
   // Remove current from all tabs.
