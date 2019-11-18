@@ -36,7 +36,7 @@ export default _xyz => entry => {
 
   // Add document control.
   _td.appendChild(_xyz.utils.wire()`
-	<div class="add xyz-icon icon-add-photo">
+	<div class="add xyz-icon icon-add-photo off-black-filter">
 	<input
     type="file"
     accept="image/*;capture=camera"
