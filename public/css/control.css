@@ -162,6 +162,7 @@ input[type=range]::-moz-range-thumb {
   z-index: 1000;
   /* to hide static labels outside map */
   background-color: white;
+<<<<<<< HEAD
   /* to hide static labels outside map*/ }
   .dataview .btn-column {
     grid-row: 2/4; }
@@ -217,6 +218,77 @@ input[type=range]::-moz-range-thumb {
           display: block !important; }
         .dataview nav .tab-dropdown-container .tab-dropdown-content li {
           padding: 5px; }
+=======
+  /* to hide static labels outside map*/
+}
+.dataview .btn-column {
+  grid-row: 2/4;
+}
+.dataview .nav_bar {
+  height: 36px;
+  font-size: 94%;
+  grid-row: 2;
+  grid-column: 2;
+}
+.dataview .tab-content {
+  grid-row: 3;
+  grid-column: 2;
+  overflow: auto;
+}
+.dataview nav {
+  text-align: center;
+  -webkit-box-shadow: 0px 5px 10px -2px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0px 5px 10px -2px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 5px 10px -2px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+}
+.dataview nav ul.nav_bar-nav {
+  display: inline-flex;
+  list-style: none;
+  flex-flow: row wrap;
+  justify-content: center;
+  width: calc(100% - 30px);
+}
+.dataview nav ul.nav_bar-nav li {
+  padding: 5px;
+  font-size: 1vw;
+  -webkit-flex: 1;
+  -moz-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+.dataview nav ul.nav_bar-nav li.tab-current {
+  box-shadow: 0 6px 8px -6px #444;
+}
+.dataview nav .tab-dropdown-container {
+  position: relative;
+  width: 20px;
+  display: inline-flex;
+}
+.dataview nav .tab-dropdown-container button.tab-dropdown {
+  width: 30px;
+  display: none;
+  background-color: white;
+}
+.dataview nav .tab-dropdown-container .tab-dropdown-content {
+  display: none;
+  position: absolute;
+  top: 30px;
+  right: 10px;
+  padding: 4px;
+  background-color: #fff;
+  min-width: 160px;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 2px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+}
+.dataview nav .tab-dropdown-container .tab-dropdown-content.show {
+  display: block !important;
+}
+.dataview nav .tab-dropdown-container .tab-dropdown-content li {
+  padding: 5px;
+}
+>>>>>>> ce1bc3be2b46935ed43238c5717795a4b7f10362
 
 :focus {
   outline: none; }
@@ -576,11 +648,22 @@ input:hover {
 button {
   border: none;
   outline: none;
+<<<<<<< HEAD
   background: none; }
   button:hover:enabled {
     cursor: pointer; }
   button:disabled {
     opacity: 0.5; }
+=======
+  background: none;
+}
+button:hover:enabled {
+  cursor: pointer;
+}
+button:disabled {
+  opacity: 0.5;
+}
+>>>>>>> ce1bc3be2b46935ed43238c5717795a4b7f10362
 
 .btn-column {
   z-index: 999; }
