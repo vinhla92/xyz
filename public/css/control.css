@@ -110,7 +110,8 @@ input[type=range]::-moz-range-thumb {
   border-top: 1px solid #f0f0f0;
   padding-bottom: 5px;
   padding-right: 5px;
-  font-size: 90%; }
+  font-size: 90%;
+  box-sizing: border-box; }
   .layer-view .drawer.panel button {
     font-size: 90%; }
   .layer-view .drawer.panel > .header {
