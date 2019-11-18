@@ -1660,30 +1660,32 @@ button {
   .link-with-img > * {
     vertical-align: middle; }
 
-.drawer > .header {
-  display: flex;
-  align-items: center; }
-  .drawer > .header > :nth-child(1) {
+.drawer {
+  box-sizing: content-box; }
+  .drawer > .header {
+    display: flex;
+    align-items: center; }
+    .drawer > .header > :nth-child(1) {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis; }
+    .drawer > .header > :nth-child(2) {
+      margin-left: auto; }
+    .drawer > .header:hover {
+      cursor: pointer; }
+  .drawer.expandable {
     overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis; }
-  .drawer > .header > :nth-child(2) {
-    margin-left: auto; }
-  .drawer > .header:hover {
-    cursor: pointer; }
-.drawer.expandable {
-  overflow: hidden;
-  transition: max-height 0.3s ease-out; }
-  .drawer.expandable > .header > .icon-expander {
-    background-image: url("../icons/icon-keyboard-arrow-down.svg"); }
-.drawer.expanded {
-  overflow: visible;
-  max-height: none !important; }
-  .drawer.expanded > .header > .icon-expander {
-    background-image: url("../icons/icon-keyboard-arrow-up.svg"); }
-.drawer.disabled {
-  opacity: 0.4;
-  pointer-events: none; }
+    transition: max-height 0.3s ease-out; }
+    .drawer.expandable > .header > .icon-expander {
+      background-image: url("../icons/icon-keyboard-arrow-down.svg"); }
+  .drawer.expanded {
+    overflow: visible;
+    max-height: none !important; }
+    .drawer.expanded > .header > .icon-expander {
+      background-image: url("../icons/icon-keyboard-arrow-up.svg"); }
+  .drawer.disabled {
+    opacity: 0.4;
+    pointer-events: none; }
 
 *,
 *::after,
