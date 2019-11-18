@@ -65,7 +65,7 @@ async function view(req, res, token = { access: 'public' }) {
     nanoid: nanoid(6),
     token: req.query.token || token.signed || '""',
     log: env.logs || '""',
-    login: (env.acl_connection) ||  '""',
+    login: (env.acl_connection) && 'true' ||  '""',
   }));
 
 };

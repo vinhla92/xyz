@@ -577,7 +577,7 @@ button {
   button:hover:enabled {
     cursor: pointer; }
   button:disabled {
-    opacity: 0.2; }
+    opacity: 0.5; }
 
 .btn-column {
   z-index: 999; }
