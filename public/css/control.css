@@ -40,6 +40,10 @@ a {
   border-bottom: 1px solid #1F964D;
 }
 
+.primary-colour-filter {
+  filter: invert(45%) sepia(55%) saturate(608%) hue-rotate(90deg) brightness(93%) contrast(90%);
+}
+
 input[type=range]::-webkit-slider-thumb {
   background: #1F964D;
 }
@@ -51,10 +55,6 @@ input[type=range]::-moz-range-thumb {
 /* Secondary colour properties */
 .secondary-colour {
   color: #cae0b8;
-}
-
-.primary-color-filter {
-  filter: invert(45%) sepia(55%) saturate(608%) hue-rotate(90deg) brightness(93%) contrast(90%);
 }
 
 .secondary-color-filter {
@@ -142,6 +142,7 @@ input[type=range]::-moz-range-thumb {
   padding-bottom: 5px;
   padding-right: 5px;
   font-size: 90%;
+  box-sizing: border-box;
 }
 .layer-view .drawer.panel button {
   font-size: 90%;
@@ -182,14 +183,14 @@ input[type=range]::-moz-range-thumb {
   padding-top: 5px;
 }
 .location-view .lv-0 {
-  font-size: 90%;
+  font-size: 95%;
   font-weight: bold;
 }
 .location-view .lv-1 {
-  font-size: 85%;
+  font-size: 90%;
 }
 .location-view .lv-2 {
-  font-size: 80%;
+  font-size: 85%;
   padding-left: 10px;
 }
 .location-view img {
@@ -1830,8 +1831,6 @@ button:disabled {
 .xyz-icon {
   background-repeat: no-repeat;
   background-size: contain;
-  filter: invert(24%) sepia(23%) saturate(0%) hue-rotate(271deg) brightness(86%) contrast(90%);
-  /* off-black filter */
 }
 
 .enabled > .xyz-icon {

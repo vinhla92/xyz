@@ -25,6 +25,8 @@ function init(_xyz) {
 
   if (layer.style.theme) {
 
+    console.log(document.getElementById('report_left'));
+
     document.getElementById('report_left').appendChild(layer.style.legend);
 
   }
