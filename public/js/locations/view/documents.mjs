@@ -38,7 +38,7 @@ export default _xyz => entry => {
 
 	// Add document control.
 	_td.appendChild(_xyz.utils.wire()`
-	<div class="add xyz-icon icon-cloud-upload">
+	<div class="add xyz-icon icon-cloud-upload off-black-filter">
 	<input
 	type="file"
 	accept=".txt,.pdf,.doc,.docx,.xls,.xlsx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document;"

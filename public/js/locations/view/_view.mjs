@@ -200,7 +200,6 @@ export default _xyz => {
         }
       }}>`);
 
-
     // Clear selection.
     header.appendChild(_xyz.utils.wire()`
     <button
@@ -210,6 +209,7 @@ export default _xyz => {
       onclick = ${e => {
         e.stopPropagation();
         location.remove();
+        _xyz.map.updateSize();
       }}>`);
 
 

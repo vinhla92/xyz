@@ -18,6 +18,9 @@ a {
   color: #3F3F3F;
   /*#383836;*/ }
 
+.off-black-filter {
+  filter: invert(24%) sepia(23%) saturate(0%) hue-rotate(271deg) brightness(86%) contrast(90%); }
+
 /* Primary colour properties */
 .primary-colour {
   color: #1F964D; }
