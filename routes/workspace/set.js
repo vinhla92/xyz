@@ -20,7 +20,7 @@ module.exports = fastify => {
 
       // Save workspace to PostgreSQL.
       if (env.pg.workspace) await env.pg.workspace(`
-        INSERT INTO ${env._workspace.split('|')[1]} (settings)
+        INSERT INTO ${env.workspace_connection.split('|')[1]} (settings)
         SELECT $1 AS settings;`, [JSON.stringify(workspace)]);
          
       // Return checked workspace to sender.

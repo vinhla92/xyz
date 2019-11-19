@@ -34,7 +34,7 @@ module.exports = {
 
   _defaults: require('../workspaces/_defaults'),
 
-  _workspace: process.env.WORKSPACE,
+  workspace_connection: process.env.WORKSPACE,
 
   workspace: {},
 
