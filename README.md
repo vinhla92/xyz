@@ -1,12 +1,3 @@
-//expandedTag
-//drawer css
-//login icon
-//gazetteer input
-//ctrl folder
-//report panel
-//table panel
-
-
 **v2.0.0**
 
 # xyz

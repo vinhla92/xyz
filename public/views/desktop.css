@@ -75,6 +75,15 @@ body {
     opacity: 0.8;
 }
 
+.btn-column.lv0 {
+    box-shadow: inset 2px 0 4px -4px #777;
+    z-index: 9999;
+}
+
+.btn-column.lv1 {
+    box-shadow: inset 5px 0 4px -4px #777;
+}
+
 #desktop_mask {
     position: fixed;
     width: 100%;

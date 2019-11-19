@@ -18,7 +18,7 @@ export default _xyz => {
 
     attribution.container && attribution.container.remove();
    
-    attribution.container = _xyz.utils.wire()`<div class="attribution secondary-colour-shadow">`;
+    attribution.container = _xyz.utils.wire()`<div class="attribution">`;
 
     _xyz.mapview.node.appendChild(attribution.container);
 

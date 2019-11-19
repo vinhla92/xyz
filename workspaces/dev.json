@@ -465,7 +465,7 @@
                     "attribution": {
                         "© OpenStreetMap": "http://www.openstreetmap.org/copyright"
                     },
-                    "URI": "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    "URI": "https://{a-c}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 },
                 "OS Zoomstack": {
                     "group": "Base Layer",

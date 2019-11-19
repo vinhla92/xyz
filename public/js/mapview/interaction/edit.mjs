@@ -176,13 +176,13 @@ export default _xyz => {
    
     e.preventDefault();
 
-    const menu = _xyz.utils.wire()`<ul class="context">`;
+    const menu = _xyz.utils.wire()`<ul>`;
 
     _xyz.mapview.interaction.edit.feature.length && menu.appendChild(_xyz.utils.wire()`<li onclick=${update}>Update</li>`);
 
     _xyz.mapview.interaction.edit.feature.length && menu.appendChild(_xyz.utils.wire()`<li onclick=${undo}>Undo</li>`);
 
-    menu.appendChild(_xyz.utils.wire()`<li onclick=${finish}>Cancel</li>`);
+    menu.appendChild(_xyz.utils.wire()`<li class="off-white-hover" onclick=${finish}>Cancel</li>`);
 
     _xyz.mapview.popup.create({
       coords: _xyz.mapview.interaction.edit.vertices[_xyz.mapview.interaction.edit.vertices.length - 1],

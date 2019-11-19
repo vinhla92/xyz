@@ -159,20 +159,23 @@ export default _xyz => {
   
     e && e.preventDefault();
 
-    const menu = _xyz.utils.wire()`<ul class="context">`;
+    const menu = _xyz.utils.wire()`<ul>`;
 
     const features = _xyz.mapview.interaction.draw.Source.getFeatures();
 
-    if (features.length) menu.appendChild(_xyz.utils.wire()`<li onclick=${update}>Save</li>`);
+    if (features.length) menu.appendChild(_xyz.utils.wire()`
+      <li  class="off-white-hover" onclick=${update}>Save</li>`);
 
-    if (!features.length) menu.appendChild(_xyz.utils.wire()`<li onclick=${e=>{
-      e.preventDefault();
-      _xyz.mapview.interaction.draw.interaction.removeLastPoint();
-      _xyz.mapview.interaction.draw.vertices.pop();
-      _xyz.mapview.popup.node && _xyz.mapview.popup.node.remove();
-    }}>Remove last vertex</li>`);
+    if (!features.length) menu.appendChild(_xyz.utils.wire()`
+      <li  class="off-white-hover" onclick=${e=>{
+        e.preventDefault();
+        _xyz.mapview.interaction.draw.interaction.removeLastPoint();
+        _xyz.mapview.interaction.draw.vertices.pop();
+        _xyz.mapview.popup.node && _xyz.mapview.popup.node.remove();
+      }}>Remove last vertex</li>`);
 
-    menu.appendChild(_xyz.utils.wire()`<li onclick=${finish}>Cancel</li>`);
+    menu.appendChild(_xyz.utils.wire()`
+      <li  class="off-white-hover" onclick=${finish}>Cancel</li>`);
 
     _xyz.mapview.popup.create({
       coords: _xyz.mapview.interaction.draw.vertices[_xyz.mapview.interaction.draw.vertices.length - 1],

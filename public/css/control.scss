@@ -9,21 +9,22 @@
 // @import url('https://fonts.googleapis.com/css?family=Sintony|Sintony:300,400,500,700');
 
 @import 'colour_scheme';
+
+@import 'icons';
+@import 'inputs';
+@import 'button';
+@import 'drawer';
+
+@import 'datepicker';
+@import 'scrolly';
+@import 'tabulator';
+@import 'workspace';
+
+@import 'mapview';
+@import 'dataview';
 @import 'layerview';
 @import 'locationview';
-@import 'dataview';
-@import 'inputs';
-@import 'itemlist';
-@import 'datepicker';
-@import 'button';
-@import 'scrolly';
-@import 'attribution';
-@import 'tabulator';
-@import 'mapview';
-@import 'workspace';
-@import 'contextmenu';
-@import 'icons';
-@import 'drawer';
+
 
 *,
 *::after,
@@ -52,7 +53,7 @@ a {
     background-color: transparent;
 }
 
-.noselect {
+.no-select {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -moz-user-select: none;
