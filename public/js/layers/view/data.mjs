@@ -24,7 +24,7 @@ export default _xyz => {
         e.stopPropagation();
         _xyz.utils.toggleExpanderParent(e.target, true);
       }}><span>Data Views</span><button
-      class="btn-header xyz-icon icon-expander primary-color-filter">`);
+      class="btn-header xyz-icon icon-expander primary-colour-filter">`);
 
       Object.keys(layer.dataview).forEach(key => {
 

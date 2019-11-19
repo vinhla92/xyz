@@ -135,10 +135,6 @@ export default _xyz => entry => {
     					callback: (label, index, labels) => {
     						return entry.chart.unit ? _xyz.dataview.charts.units(entry, label) : label;
     					}
-    				},
-    				scaleLabel: {
-    					display: (entry.chart.unit ? true : false),
-    					labelString: (entry.chart.unit ? _xyz.dataview.charts.scale(entry) : false)
     				}
     			}],
         xAxes: [{
