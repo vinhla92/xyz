@@ -18,7 +18,7 @@ export default _xyz => {
     group.appendChild(_xyz.utils.wire()`
     <div
       class="header primary-colour"
-      style="text-align: left;"
+      style="text-align: left; font-weight: 400;"
       onclick=${e => {
         if (e) e.stopPropagation();
         _xyz.utils.toggleExpanderParent(e.target);
