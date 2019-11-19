@@ -276,9 +276,6 @@ input:hover {
     z-index: 999; }
     .input-drop ul li {
       padding: 5px; }
-    .input-drop ul li:hover {
-      cursor: pointer;
-      background-color: #cae0b8; }
   .input-drop.active > ul {
     max-height: 600px;
     box-shadow: 1px 1px 3px 0 #ddd;
