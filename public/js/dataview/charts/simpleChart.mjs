@@ -137,7 +137,7 @@ export default _xyz => entry => {
     					}
     				},
     				scaleLabel: {
-    					display: (entry.chart.unit ? true : false),
+    					//display: (entry.chart.unit ? true : false),
     					labelString: (entry.chart.unit ? _xyz.dataview.charts.scale(entry) : false)
     				}
     			}],
