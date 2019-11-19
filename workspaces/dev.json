@@ -1264,6 +1264,63 @@
                             "field": "pop_diff",
                             "fieldfx": "(pop__16 - pop__11)",
                             "type": "integer"
+                        },
+                        {
+                            "label": "Profile",
+                            "type": "group",
+                            "chart": {
+                                "active": true,
+                                "x": "label x",
+                                "y": "label y",
+                                "type": "horizontalBar",
+                                "backgroundColor": [
+                                    "#FFA630",
+                                    "#C6DEA6",
+                                    "#7EBDC3",
+                                    "#7A6263",
+                                    "#CED097"
+                                ],
+                                "borderColor": [
+                                    "#FFA630",
+                                    "#C6DEA6",
+                                    "#7EBDC3",
+                                    "#7A6263",
+                                    "#CED097"
+                                ]
+                            }
+                        },
+                        {
+                            "group": "Profile",
+                            "label": "Comparison",
+                            "title": "Comp",
+                            "field": "comp_pct",
+                            "type": "numeric"
+                        },
+                        {
+                            "group": "Profile",
+                            "label": "Conv",
+                            "title": "Convenience",
+                            "field": "conv_pct",
+                            "type": "numeric"
+                        },
+                        {
+                            "group": "Profile",
+                            "label": "F/B/L",
+                            "field": "fbl_pct",
+                            "type": "numeric",
+                            "title": "Food/Bev/Leisure"
+                        },
+                        {
+                            "group": "Profile",
+                            "label": "Services",
+                            "field": "serv_pct",
+                            "type": "numeric"
+                        },
+                        {
+                            "group": "Profile",
+                            "label": "Class/Brass",
+                            "field": "classbrass",
+                            "type": "numeric"
                         }
                     ]
                 },
@@ -1574,6 +1631,7 @@
                             "field": "catchment_10min",
                             "fieldfx": "ST_asGeoJson(catchment_10min)",
                             "type": "geometry",
+                            "display": true,
                             "edit": {
                                 "isoline_here": {
                                     "minutes": 10

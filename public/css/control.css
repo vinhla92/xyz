@@ -200,6 +200,9 @@ input[type=range]::-moz-range-thumb {
   text-align: right;
   font-weight: 400;
 }
+.location-view .val {
+  font-weight: 400;
+}
 
 .dataview {
   overflow: hidden;
