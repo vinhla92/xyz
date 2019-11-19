@@ -1,0 +1,146 @@
+{
+    "title": "XYZ KFC Japan",
+    "locales": {
+        "Japan": {
+            "minZoom": 5,
+            "maxZoom": 16,
+            "view": {
+                "lat": 38.996,
+                "lng": 135.666,
+                "z": 5
+            },
+            "bounds": {
+                "north": 49,
+                "east": 153,
+                "south": 17,
+                "west": 111
+            },
+            "gazetteer": {
+                "provider": "GOOGLE",
+                "code": "JP",
+                "placeholder": "e.g. Shibuya",
+                "datasets": [
+                    {
+                        "layer": "KFC Stores",
+                        "table": "kfc.jpn_kfc_restrict_stores",
+                        "label": "restaurant_name"
+                    }
+                ]
+            },
+            "maskBounds": true,
+            "layers": {
+                "Mapbox Base": {
+                    "display": true,
+                    "attribution": {
+                        "© Mapbox": "https://www.mapbox.com/about/maps",
+                        "© OpenStreetMap": "http://www.openstreetmap.org/copyright"
+                    },
+                    "format": "tiles",
+                    "URI": "https://api.mapbox.com/styles/v1/dbauszus/ciozrimi3002bdsm8bjtn2v1y/tiles/256/{z}/{x}/{y}?&provider=MAPBOX"
+                },
+                "KFC Stores": {
+                    "display": true,
+                    "format": "cluster",
+                    "dbs": "XYZ",
+                    "table": "kfc.jpn_kfc_restrict_stores",
+                    "geom": "geom_p_4326",
+                    "srid": "4326",
+                    "qID": "id",
+                    "cluster_label": "restaurant_name",
+                    "cluster_kmeans": 0.1,
+                    "cluster_dbscan": 0.007,
+                    "style": {
+                        "label": {
+                            "field": "restaurant_name",
+                            "display": true,
+                            "declutter": true,
+                            "strokeColor": "#fff",
+                            "strokeWidth": 3
+                        },
+                        "marker": {
+                            "type": "target",
+                            "fillColor": "#F8EADC"
+                        },
+                        "markerMulti": {
+                            "type": "target",
+                            "fillColor": "#EECEB2"
+                        },
+                        "highlight": {
+                            "type": "target",
+                            "fillColor": "#9F080C"
+                        }
+                    },
+                    "infoj": [
+                        {
+                            "label": "JDE",
+                            "field": "jde_number",
+                            "type": "text",
+                            "inline": true
+                        },
+                        {
+                            "label": "Restaurant",
+                            "field": "restaurant_name",
+                            "type": "text",
+                            "inline": true
+                        },
+                        {
+                            "label": "Type",
+                            "field": "facility_type",
+                            "type": "text",
+                            "inline": true,
+                            "level": 1
+                        },
+                        {
+                            "label": "Franchisee",
+                            "field": "franchisee_legal_entity",
+                            "type": "text",
+                            "inline": true,
+                            "level": 1
+                        },
+                        {
+                            "label": "Status",
+                            "field": "status",
+                            "type": "text",
+                            "inline": true,
+                            "level": 1
+                        },
+                        {
+                            "label": "Date open",
+                            "field": "original_open_date",
+                            "type": "text",
+                            "inline": true,
+                            "level": 1
+                        },
+                        {
+                            "label": "Date close",
+                            "field": "closure_date",
+                            "type": "text",
+                            "inline": true,
+                            "level": 1
+                        },
+                        {
+                            "label": "Sales weekly",
+                            "field": "weekly_average_sales",
+                            "type": "text",
+                            "inline": true
+                        },
+                        {
+                            "label": "Transactions weekly",
+                            "field": "weekly_average_transactions",
+                            "type": "text",
+                            "inline": true
+                        }
+                    ]
+                },
+                "Mapbox Label": {
+                    "format": "tiles",
+                    "attribution": {
+                        "© Mapbox": "https://www.mapbox.com/about/maps",
+                        "© OpenStreetMap": "http://www.openstreetmap.org/copyright"
+                    },
+                    "URI": "https://api.mapbox.com/styles/v1/dbauszus/cj9puo8pr5o0c2sovhdwhkc7z/tiles/256/{z}/{x}/{y}?&provider=MAPBOX"
+                }
+            }
+        }
+    }
+}
