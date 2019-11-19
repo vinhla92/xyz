@@ -15,14 +15,6 @@ button {
 .btn-column {
     z-index: 999;
 
-    &.lv0 {
-        box-shadow: inset 2px 0 4px -4px #777;
-    }
-
-    &.lv1 {
-        box-shadow: inset 5px 0 4px -4px #777;
-    }
-
     button,
     >a {
         margin-top: 10px;
@@ -35,11 +27,6 @@ button {
         background-color: #fff;
         text-align: center;
         cursor: default;
-
-        &.mobile-box-shadow {
-            box-shadow: 1px 1px 3px 0 rgba(0, 0, 0, 0.2);
-            border-radius: 50%;
-        }
 
         .xyz-icon {
             width: 100%;

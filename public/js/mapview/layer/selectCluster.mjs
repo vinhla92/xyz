@@ -37,10 +37,10 @@ export default _xyz => function(feature) {
     if (cluster.length > 1) {
 
       const ul = _xyz.utils.wire()`
-      <ul class="scroll-list">
+      <ul>
       ${cluster.map(
         li => _xyz.utils.wire()`
-        <li onclick=${
+        <li class="secondary-colour-hover" onclick=${
           () => _xyz.locations.select({
             locale: _xyz.workspace.locale.key,
             layer: layer,

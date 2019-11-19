@@ -1,25 +1,22 @@
-/*$primary_colour:  #1F964D;
-$secondary_colour: #DEF6CA; //#cae0b8;
-$tertiary_colour: hotpink;
-$off_white: ghostwhite;
-$off_black: #383836;*/
-
 body {
-    color: #383836;
+    color: #3f3f3f;
 }
 
 a {
-    color: #383836;
+    color: #3f3f3f;
 }
-
-/* Color scheme */
 
 .off-white {
     color: ghostwhite;
 }
 
+.off-white-hover:hover {
+    background-color: ghostwhite;
+    cursor: pointer;
+}
+
 .off-black {
-    color: #3F3F3F;/*#383836;*/
+    color: #3f3f3f;
 }
 
 .off-black-filter {
@@ -27,42 +24,38 @@ a {
 }
 
 /* Primary colour properties */
-
 .primary-colour {
-    color: #1F964D;
-}
-
-.primary-colour-bg {
-
-    background-color: #1F964D;
-}
-
-.primary-colour-bb { /* border bottom for the active tab */
-	border-bottom: 1px solid #1F964D;
+    color: #1f964d;
 }
 
 .primary-colour-filter {
     filter: invert(45%) sepia(55%) saturate(608%) hue-rotate(90deg) brightness(93%) contrast(90%);
 }
 
+.primary-colour-bg {
+    background-color: #1f964d;
+}
+
+.primary-colour-bb {
+	border-bottom: 1px solid #1f964d;
+}
+
 input[type=range]::-webkit-slider-thumb {
-    background: #1F964D;
+    background: #1f964d;
 }
 
 input[type=range]::-moz-range-thumb {
-    background: #1F964D;
+    background: #1f964d;
 }
 
 /* Secondary colour properties */
-
 .secondary-colour {
     color: #cae0b8;
 }
 
-.secondary-color-filter {
+.secondary-colour-filter {
     filter: invert(90%) sepia(21%) saturate(301%) hue-rotate(48deg) brightness(104%) contrast(93%);
 }
-
 
 .secondary-colour-bg {
     background-color: #cae0b8;
@@ -72,30 +65,7 @@ input[type=range]::-moz-range-thumb {
     border-bottom: solid 1px #cae0b8;
 }
 
-.secondary-colour-shadow {
-	text-shadow: 1px 1px 1px #cae0b8;
-}
-
-.contextmenu li:hover {
+.secondary-colour-hover:hover {
     background-color: #cae0b8;
-}
-
-.scroll-list li:hover {
-    background-color: #cae0b8;
-}
-
-/* Tertiary colour properties */
-
-.tertiary-colour {
-    color: hotpink;
-}
-
-.tertiary-colour-bg {
-    background-color: hotpink;
-}
-
-/* off-white peoperties */
-
-.context li:hover {
-    background-color: ghostwhite;
+    cursor: pointer;
 }
