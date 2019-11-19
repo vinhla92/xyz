@@ -66,6 +66,7 @@ async function view(req, res, token = { access: 'public' }) {
     token: req.query.token || token.signed || '""',
     log: env.logs || '""',
     login: (env.acl_connection) && 'true' ||  '""',
+    pgworkspace: (env.pg.workspace) && 'true' ||  '""',
   }));
 
 };

@@ -9,19 +9,19 @@ const checkWorkspaceTable = require('./checkWorkspaceTable');
 module.exports = async () => {
 
   // Load zero config workspace if workspace is not defined in environment settings.
-  if (!env._workspace) {
+  if (!env.workspace_connection) {
     env.workspace = await assignDefaults({});
     return;
   }
 
   // Load workspace from file.
-  if (env._workspace.split(':')[0] === 'file') {
+  if (env.workspace_connection.split(':')[0] === 'file') {
 
     let workspace = {};
    
     try {
       workspace = await JSON.parse(
-        require('fs').readFileSync('./workspaces/' + env._workspace.split(':').pop()), 'utf8');
+        require('fs').readFileSync('./workspaces/' + env.workspace_connection.split(':').pop()), 'utf8');
   
     } catch (err) {
       Object.keys(err).forEach(key => !err[key] && delete err[key]);
@@ -35,10 +35,10 @@ module.exports = async () => {
   }
 
   // Load workspace from database.
-  if (env._workspace.split(':')[0] === 'postgres') {
+  if (env.workspace_connection.split(':')[0] === 'postgres') {
 
     // Global workspace table name.
-    const table = env._workspace.split('|')[1];
+    const table = env.workspace_connection.split('|')[1];
 
     if (!table) {
       env.workspace = await assignDefaults({});
@@ -47,7 +47,7 @@ module.exports = async () => {
 
     // Create PostgreSQL connection pool for workspace table.
     const pool = new require('pg').Pool({
-      connectionString: env._workspace.split('|')[0]
+      connectionString: env.workspace_connection.split('|')[0]
     });
 
     env.pg.workspace = async (q, arr) => {
