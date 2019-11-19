@@ -1848,6 +1848,8 @@
                                 "active": true,
                                 "type": "bar",
                                 "unit": "k",
+                                "maxRotationX": 90,
+                                "minRotationX": 90,
                                 "backgroundColor": [
                                     "#E6A5AE",
                                     "#E08F9A",
@@ -1998,6 +2000,7 @@
                             "chart": {
                                 "active": false,
                                 "title": true,
+                                "hideTicksX": true,
                                 "type": "bar",
                                 "unit": "k",
                                 "datalabels": {
