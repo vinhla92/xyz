@@ -75,6 +75,8 @@ module.exports = fastify => {
           ST_Y(ST_PointOnSurface(${geom})) AS y
         FROM ${table} ${where_sql}`;
 
+      console.log(q);
+
 
       var rows = await env.dbs[layer.dbs](q);
         

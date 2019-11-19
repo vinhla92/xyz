@@ -38,7 +38,7 @@ export default _xyz => {
     <div class="header bold">
     <span>${filter_entry.label}</span>
     <button
-      class="btn-header xyz-icon icon-close primary-color-filter"
+      class="btn-header xyz-icon icon-close primary-colour-filter"
       onclick=${e=>{
       
         delete layer.filter.current[filter_entry.field];
@@ -89,7 +89,7 @@ export default _xyz => {
         e.stopPropagation();
         _xyz.utils.toggleExpanderParent(e.target, true);
       }}><span>Filter</span><button
-      class="btn-header xyz-icon icon-expander primary-color-filter">`);
+      class="btn-header xyz-icon icon-expander primary-colour-filter">`);
   
     let filter_entries = {};
   
