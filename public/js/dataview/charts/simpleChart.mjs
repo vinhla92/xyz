@@ -143,8 +143,10 @@ export default _xyz => entry => {
     			}],
         xAxes: [{
           ticks: {
-            min: typeof(entry.chart.minX) !== undefined ?  entry.chart.minX : null,
-            display: entry.chart.hideTicksX ? false : null
+            min: entry.chart.minX !== undefined ?  entry.chart.minX : null,
+            display: entry.chart.hideTicksX === undefined ? true : false,
+            maxRotation: entry.chart.maxRotationX || null,
+            minRotation: entry.chart.minRotationX || null
           }
         }]
     		},
