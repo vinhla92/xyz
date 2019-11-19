@@ -16,7 +16,6 @@ import remove from './remove.mjs';
 
 import count from './count.mjs';
 
-
 export default _xyz => {
 
   const layers = {
@@ -64,7 +63,7 @@ export default _xyz => {
     if (_layer.style && _layer.style.themes) _layer.style.themes[Object.keys(_layer.style.themes)[0]];
 
     // Initialise Openlayers source and layer.
-    _xyz.layers.format[layer.format](_layer);
+    _xyz.mapview.layer[layer.format](_layer);
 
     return _layer;
   }

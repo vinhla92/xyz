@@ -10,13 +10,11 @@ import mapview from './mapview/_mapview.mjs';
 
 import layers from './layers/_layers.mjs';
 
-import format from './mapview/layer/_format.mjs';
-
 import locations from './locations/_locations.mjs';
 
-import gazetteer from './gazetteer.mjs';
-
 import dataview from './dataview/_dataview.mjs';
+
+import gazetteer from './gazetteer.mjs';
 
 async function _xyz(params) {
 
@@ -61,10 +59,7 @@ async function _xyz(params) {
 
   Object.assign(_xyz.mapview, mapview(_xyz));
 
-  _xyz.layers = Object.assign(
-    {},
-    layers(_xyz),
-    {format: format(_xyz)});
+  _xyz.layers = layers(_xyz);
 
   _xyz.locations = locations(_xyz);
 

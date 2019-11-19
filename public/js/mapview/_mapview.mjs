@@ -16,6 +16,8 @@ import icon from './icon.mjs';
 
 import infotip from './infotip.mjs';
 
+import layer from './layer/_layer.mjs';
+
 export default _xyz => ({
 
   create: create(_xyz),
@@ -35,6 +37,8 @@ export default _xyz => ({
   geoJSON: geoJSON(_xyz),
 
   icon: icon(_xyz),
+
+  layer: layer(_xyz),
 
   getBounds: getBounds(_xyz),
 

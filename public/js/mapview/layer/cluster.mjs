@@ -191,6 +191,6 @@ export default _xyz => layer => {
     }
   });
 
-  layer.label = _xyz.layers.format.clusterLabel(layer);
+  layer.label = _xyz.mapview.layer.clusterLabel(layer);
 
 };

@@ -12,7 +12,7 @@ export default _xyz => {
     if (current[key]) {
       current[key] = decodeURI(value).split(',');
     } else {
-      current[key] = value;
+      current[key] = decodeURI(value);
     }
   });
 

@@ -1,7 +1,7 @@
 {
     "title": "XYZ dev",
     "locales": {
-        "NE": {
+        "Natural Earth": {
             "minZoom": 3,
             "maxZoom": 14,
             "layers": {

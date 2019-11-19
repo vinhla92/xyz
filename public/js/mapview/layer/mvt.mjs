@@ -119,6 +119,6 @@ export default _xyz => layer => {
 
   layer.L.set('layer', layer, true);
 
-  layer.label = _xyz.layers.format.mvtLabel(layer);
+  layer.label = _xyz.mapview.layer.mvtLabel(layer);
 
 };
