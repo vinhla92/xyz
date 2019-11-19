@@ -7,6 +7,8 @@ module.exports = async (fields, infoj, qID, roles, locale) => {
 
     if (entry.columns) return;
 
+    if(entry.type === 'key') return;
+
     //if (entry.withSelect) return;
 
     if (entry.clusterArea) {

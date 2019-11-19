@@ -696,7 +696,17 @@
                             "strokeColor": "#ff69b4",
                             "strokeWidth": 2
                         }
-                    }
+                    },
+                    "infoj": [
+                        {
+                            "type": "key"
+                        },
+                        {
+                            "field": "strokecolor",
+                            "label": "Stroke color",
+                            "inline": true
+                        }
+                    ]
                 },
                 "Scratch": {
                     "meta": "This is a test layer for editing and drawing geometries.",

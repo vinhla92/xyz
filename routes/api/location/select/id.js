@@ -55,10 +55,6 @@ module.exports =  fastify => {
       const fields_with = [];
 
       infoj && await infoj.forEach(entry => {
-
-        // if (entry.withSelect) {
-        //   fields_with.push(`${entry.fieldfx} as ${entry.field}`);
-        // } else
         
         if (entry.field && !entry.columns) {
           fields_with.push(entry.field);
@@ -72,7 +68,7 @@ module.exports =  fastify => {
         FROM ${table}
         WHERE ${qID} = $1
       )
-      select ${(infoj && fields_with.join() + ',') || ''} geomj, PointOnSurface from q`;
+      select ${(infoj && fields_with.join() ? (infoj && fields_with.join() + ',') : '') || ''} geomj, PointOnSurface from q`;
 
       var rows = await env.dbs[layer.dbs](q, [id]);
 
