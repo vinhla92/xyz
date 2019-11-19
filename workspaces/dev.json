@@ -486,6 +486,31 @@
                     "format": "tiles",
                     "URI": "https://api.mapbox.com/styles/v1/dbauszus/ciozrimi3002bdsm8bjtn2v1y/tiles/256/{z}/{x}/{y}?&provider=MAPBOX"
                 },
+                "Grid": {
+                    "attribution": {
+                        "© ONS": "https://www.ons.gov.uk"
+                    },
+                    "srid": "4326",
+                    "format": "grid",
+                    "dbs": "XYZ",
+                    "geom": "geomcntr",
+                    "tables": {
+                        "7": null,
+                        "8": "gb_hx_16k",
+                        "9": "gb_hx_8k",
+                        "10": "gb_hx_4k",
+                        "11": "gb_hx_2k",
+                        "12": "gb_hx_1k",
+                        "13": "gb_hx_1k",
+                        "14": null
+                    },
+                    "grid_fields": {
+                        "Population 2001": "pop__01",
+                        "Population 2011": "pop__11",
+                        "Female population": "gen_female__11",
+                        "Male population": "gen_male__11"
+                    }
+                },
                 "Cluster Catchments": {
                     "group": "Cluster",
                     "format": "cluster",
@@ -1645,31 +1670,6 @@
                             }
                         }
                     ]
-                },
-                "Grid": {
-                    "attribution": {
-                        "© ONS": "https://www.ons.gov.uk"
-                    },
-                    "srid": "4326",
-                    "format": "grid",
-                    "dbs": "XYZ",
-                    "geom": "geomcntr",
-                    "tables": {
-                        "7": null,
-                        "8": "gb_hx_16k",
-                        "9": "gb_hx_8k",
-                        "10": "gb_hx_4k",
-                        "11": "gb_hx_2k",
-                        "12": "gb_hx_1k",
-                        "13": "gb_hx_1k",
-                        "14": null
-                    },
-                    "grid_fields": {
-                        "Population 2001": "pop__01",
-                        "Population 2011": "pop__11",
-                        "Female population": "gen_female__11",
-                        "Male population": "gen_male__11"
-                    }
                 },
                 "PPD": {
                     "group": "Cluster",

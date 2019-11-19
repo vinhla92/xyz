@@ -73,9 +73,9 @@ body {
 
 #ctrls .listview-title {
     font-weight: bold;
-    font-size: 105%;
+    /*font-size: 105%;*/
     margin-bottom: 10px;
-    padding: 4px;
+    padding: 3px;
     border-radius: 2px;
 }
 
