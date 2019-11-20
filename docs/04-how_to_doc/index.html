@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Document</title>
+  <style>
+
+    .grid {
+      display: block;
+      margin: 20px;
+      font-family: system-ui;
+      display:grid;
+      grid-column-gap: 15px;
+      grid-template-columns: 1fr 5fr;
+    }
+
+    .grid > .toggle {
+        display: none;
+        border-right: 2px solid #000;
+        padding: 5px;
+    }
+
+    .grid > .toggle > .burger {
+      border-top: 2px solid #eee;
+      margin-top: 5px;
+      box-shadow: 1px 1px 1px #999;
+    }
+
+    .grid > .toggle:hover {
+      cursor: pointer;
+    }
+
+    @media only screen and (max-width: 900px) {
+      .grid {
+        grid-template-columns: 30px 5fr;
+        margin: 0px;
+      }
+
+      .grid > .nav {
+        display: none;
+      }
+
+      .grid > .toggle {
+        display: block;
+      }
+    }
+
+    ._grid {
+      grid-template-columns: 1fr 5fr;
+    }
+
+    ._grid > .nav {
+      display: block;
+    }
+
+    ._grid > .toggle {
+      display: none;
+    }
+
+    .grid > .nav {
+      grid-column: 1;
+      padding-inline-start: 0px;
+      list-style-type: none;
+    }
+
+    .grid > .content {
+      grid-column: 2/4;
+    }
+
+    .active {
+      font-weight: bold;
+    }
+
+    a {
+      text-decoration: none;
+      white-space: nowrap;
+      color: #333;
+    }
+
+    li {
+      line-height: 1.5;
+    }
+
+    li._1 {
+      padding-left: 0px;
+    }
+
+    li._2 {
+      padding-left: 0px;
+    }
+
+    li._3 {
+      padding-left: 0px;
+    }
+
+    li._4 {
+      padding-left: 0px;
+    }
+
+    li._5 {
+      padding-left: 20px;
+    }
+
+    li._6 {
+      padding-left: 40px;
+    }
+
+    li.first {
+      padding-left: 0px;
+      margin-top: 10px;
+    }
+
+    li.second {
+      padding-left: 20px;
+    }
+
+    pre {
+      display: block;
+      font-family: monospace;
+      white-space: pre;
+      margin: 1em 0px;
+      padding: 20px;
+      box-shadow: 0px 0px 2px #555;
+      border-radius: 5px;
+      overflow-x: scroll;
+    }
+
+    pre > code {
+      font-family: monospace;
+    }
+
+    .content a {
+      color: #090;
+    }
+
+    .content img {
+      max-width: 100%;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <div class="grid">
+
+    <div id="toggle" class="toggle"><div class="burger"></div><div class="burger"></div><div class="burger"></div></div>
+
+    <ul class="nav">
+
+      
+      
+      
+      
+      <li class="_4  ">
+        <a href="/xyz/docs/00-developer/00-introduction/">Developer</a>
+      </li>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <li class="_4  ">
+        <a href="/xyz/docs/01-infrastructure/00-infrastructure/">Infrastructure</a>
+      </li>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <li class="_4  ">
+        <a href="/xyz/docs/02-design/00-design/">Design</a>
+      </li>
+      
+      
+      
+      
+      
+      
+      
+      <li class="_3  active">
+        <a href="/xyz/docs/04-how_to_doc/">How to Document</a>
+      </li>
+      
+      
+      
+      <li class="_3  ">
+        <a href="/xyz/docs/05-release-notes/">Release Notes</a>
+      </li>
+      
+      
+
+    </ul>
+
+    <div class="content">
+      <h2>This document covers the Introduction of Creating Documentation</h2>
+      <h2>Pre-Requirements</h2>
+<p>Please ensure you have <a href="https://www.ruby-lang.org/en/downloads/">ruby</a> installed on your local development enviornment. And that you have bundler installed</p>
+<pre><code class="language-bash">$ gem install bundler
+</code></pre>
+<h2>Installation</h2>
+<p>Install the dependencies with <a href="http://bundler.io/">Bundler</a>:</p>
+<pre><code class="language-bash">bundle install
+</code></pre>
+<h2>Development</h2>
+<p>Install <a href="https://getuikit.com/">UIkit</a> font end framework dependency via Npm:</p>
+<pre><code class="language-bash">npm install
+</code></pre>
+<p>Run the following to generate to serve your site locally:</p>
+<pre><code class="language-bash">bundle exec jekyll serve
+</code></pre>
+<p>Run the following to generate the sites static files:</p>
+<pre><code class="language-bash">bundle exec jekyll build
+</code></pre>
+<h2>Key Concepts</h2>
+<h3>Liquid Templating</h3>
+<p>Jekyll uses the Liquid templating language to process templates.</p>
+<p>Generally in Liquid you output content using two curly braces e.g. '{'{ variable }'}' and perform logic statements by surrounding them in a curly brace percentage sign e.g. '{'% if statement %'}' '{'% endif %'}'.</p>
+<h3>Front Matter</h3>
+<p>Front Matter is what we use to give different .md files their properties for the liquid templates to make us of.<br>
+The different kinds of front matter properties are the following:</p>
+<pre><code class="language-yml">---
+title: Title
+subtitle: Subtitle,
+,
+layout: doc
+tags: [featured, development, bugs, etc]
+author: author
+---
+</code></pre>
+<h3>Creating a Developer Docs Post</h3>
+<p>To create new developer doc post entries in <code>_docs</code> folder, you would create a .md file with the following front matter settings:</p>
+<pre><code class="language-yml">---
+title: Title
+subtitle: Subtitle
+tags: [featured, development]
+author: author
+---
+</code></pre>
+<h3>Developer Docs Sidebar Navigation</h3>
+<p>Sidebar navigation on docs post can edited in <code>_data/navigation_docs.yml</code>:</p>
+<pre><code class="language-yml">- title: Getting Started    # Section title
+  docs:
+  - home                    # Doc file name from _docs folder
+  - quickstart
+  - installation
+  - windows
+</code></pre>
+<h3>Creating a Infrastructure Docs Post</h3>
+<p>To create new infrastructure doc post entries in <code>_Infrastructure</code> folder, you would create a .md file with the following front matter settings:</p>
+<pre><code class="language-yml">---
+title: Title
+subtitle: Subtitle
+layout: infrastructure
+tags: [featured, development]
+author: author
+---
+</code></pre>
+<h3>Infrastructure Docs Sidebar Navigation</h3>
+<p>Sidebar navigation on Infrastructure docs post can edited in <code>_data/navigation_infrastructure.yml</code>:</p>
+<pre><code class="language-yml">- title: Deployments
+  docs:
+  - deployments/now
+  - deployments/aws
+  - deployments/ubuntu
+</code></pre>
+
+    </div>
+
+  </div>
+
+</body>
+
+<script>
+    const toggle = document.getElementById('toggle');
+
+    toggle.onclick = e => { e.target.parentElement.classList.add('_grid'); };
+</script>
+
+</html>

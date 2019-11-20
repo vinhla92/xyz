@@ -1,0 +1,654 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Table Definition</title>
+  <style>
+
+    .grid {
+      display: block;
+      margin: 20px;
+      font-family: system-ui;
+      display:grid;
+      grid-column-gap: 15px;
+      grid-template-columns: 1fr 5fr;
+    }
+
+    .grid > .toggle {
+        display: none;
+        border-right: 2px solid #000;
+        padding: 5px;
+    }
+
+    .grid > .toggle > .burger {
+      border-top: 2px solid #eee;
+      margin-top: 5px;
+      box-shadow: 1px 1px 1px #999;
+    }
+
+    .grid > .toggle:hover {
+      cursor: pointer;
+    }
+
+    @media only screen and (max-width: 900px) {
+      .grid {
+        grid-template-columns: 30px 5fr;
+        margin: 0px;
+      }
+
+      .grid > .nav {
+        display: none;
+      }
+
+      .grid > .toggle {
+        display: block;
+      }
+    }
+
+    ._grid {
+      grid-template-columns: 1fr 5fr;
+    }
+
+    ._grid > .nav {
+      display: block;
+    }
+
+    ._grid > .toggle {
+      display: none;
+    }
+
+    .grid > .nav {
+      grid-column: 1;
+      padding-inline-start: 0px;
+      list-style-type: none;
+    }
+
+    .grid > .content {
+      grid-column: 2/4;
+    }
+
+    .active {
+      font-weight: bold;
+    }
+
+    a {
+      text-decoration: none;
+      white-space: nowrap;
+      color: #333;
+    }
+
+    li {
+      line-height: 1.5;
+    }
+
+    li._1 {
+      padding-left: 0px;
+    }
+
+    li._2 {
+      padding-left: 0px;
+    }
+
+    li._3 {
+      padding-left: 0px;
+    }
+
+    li._4 {
+      padding-left: 0px;
+    }
+
+    li._5 {
+      padding-left: 20px;
+    }
+
+    li._6 {
+      padding-left: 40px;
+    }
+
+    li.first {
+      padding-left: 0px;
+      margin-top: 10px;
+    }
+
+    li.second {
+      padding-left: 20px;
+    }
+
+    pre {
+      display: block;
+      font-family: monospace;
+      white-space: pre;
+      margin: 1em 0px;
+      padding: 20px;
+      box-shadow: 0px 0px 2px #555;
+      border-radius: 5px;
+      overflow-x: scroll;
+    }
+
+    pre > code {
+      font-family: monospace;
+    }
+
+    .content a {
+      color: #090;
+    }
+
+    .content img {
+      max-width: 100%;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <div class="grid">
+
+    <div id="toggle" class="toggle"><div class="burger"></div><div class="burger"></div><div class="burger"></div></div>
+
+    <ul class="nav">
+
+      
+      <li>
+        <a style="font-weight: bold; font-size: 30px;" href="/xyz/docs"><---</a>
+      </li>
+      
+      
+      
+      
+      <li class="_4  ">
+        <a href="/xyz/docs/00-developer/00-introduction/">Developer</a>
+      </li>
+      
+      
+      
+      <li class="_4  ">
+        <a href="/xyz/docs/00-developer/01-license/">License</a>
+      </li>
+      
+      
+      
+      <li class="_5 first ">
+        <a href="/xyz/docs/00-developer/02-access/00-access/">Access</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/02-access/01-acl/">Access Control List (ACL)</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/02-access/02-registration/">User Account Registration</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/02-access/03-password-reset/">Password Reset</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/02-access/04-failed-login-attempts/">Failed Login attempts</a>
+      </li>
+      
+      
+      
+      <li class="_5 first ">
+        <a href="/xyz/docs/00-developer/03-environment_settings/00-environment-settings/">Environment Settings</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/03-environment_settings/01-hosting/">Hosting</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/03-environment_settings/02-access-control/">Access Control</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/03-environment_settings/03-workspace-connections/">Workspace Connections</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/03-environment_settings/04-3rd-party-api-keys/">3rd Party API Keys</a>
+      </li>
+      
+      
+      
+      <li class="_5 first ">
+        <a href="/xyz/docs/00-developer/04-workspaces/00-workspaces/">Workspaces</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/04-workspaces/01-editing/">Editing</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/04-workspaces/02-access-restrictions/">Access Restrictions & Filters</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/04-workspaces/03-locate/">Locate</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/04-workspaces/04-title/">Title</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/04-workspaces/05-workspace-checks/">Workspace Checks</a>
+      </li>
+      
+      
+      
+      <li class="_5 first ">
+        <a href="/xyz/docs/00-developer/05-layers/00-layers/">Layers</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/05-layers/01-tile-layer/">Tile Layer</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/05-layers/02-postgis-layer/">PostGIS Data Layer</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/05-layers/03-cluster-layer/">Cluster Layer</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/05-layers/04-geojson-layer/">GeoJson Layer</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/05-layers/05-vector-tile-mvt-layer/">MapBox Vector Tile (MVT) Layer</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/05-layers/06-grid-hex/">Grid (Hex) Layer</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/05-layers/07-filter/">Filter</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/05-layers/08-tables/">Tables</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/05-layers/09-charts/">Charts</a>
+      </li>
+      
+      
+      
+      <li class="_5 first ">
+        <a href="/xyz/docs/00-developer/06-infoj/00-infoj/">InfoJ</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/06-infoj/01-groups/">Groups</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/06-infoj/02-filter/">Filter</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/06-infoj/03-lookups/">Lookups</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/06-infoj/04-withSelect/">With Select</a>
+      </li>
+      
+      
+      
+      <li class="_5  active">
+        <a href="/xyz/docs/00-developer/06-infoj/05-tabledefinition/">Table Definition</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/06-infoj/06-orderedlist/">Ordered List</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/06-infoj/07-geometry/">Geometry</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/06-infoj/08-isolines/">Isolines</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/06-infoj/09-locations/">Locations</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/06-infoj/10-clusterArea/">Cluster Area</a>
+      </li>
+      
+      
+      
+      <li class="_6 second ">
+        <a href="/xyz/docs/00-developer/06-infoj/11-charts/00-charts/">Charts</a>
+      </li>
+      
+      
+      
+      <li class="_6  ">
+        <a href="/xyz/docs/00-developer/06-infoj/11-charts/01-cakeChart/">Cake charts</a>
+      </li>
+      
+      
+      
+      <li class="_6  ">
+        <a href="/xyz/docs/00-developer/06-infoj/11-charts/02-polarChart/">Polar charts</a>
+      </li>
+      
+      
+      
+      <li class="_6  ">
+        <a href="/xyz/docs/00-developer/06-infoj/11-charts/03-radarChart/">Radar charts</a>
+      </li>
+      
+      
+      
+      <li class="_6  ">
+        <a href="/xyz/docs/00-developer/06-infoj/11-charts/04-simpleChart/">Simple charts</a>
+      </li>
+      
+      
+      
+      <li class="_6  ">
+        <a href="/xyz/docs/00-developer/06-infoj/11-charts/05-stackedChart/">Stacked charts</a>
+      </li>
+      
+      
+      
+      <li class="_5 first ">
+        <a href="/xyz/docs/00-developer/07-locales/00-locales/">Locales</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/07-locales/01-gazetteer/">Gazetteer</a>
+      </li>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+
+    </ul>
+
+    <div class="content">
+      <h2>Filter</h2>
+      <p>Location may have its own table view presenting relevant data when selected. Location table visibility can be toggled on and off from selection:</p>
+<p><img src="../../../assets/img/table_definition_1.png" alt=""></p>
+<p>Data are calculated against additional geometries which are associated with the location. They can use values calculated within subqueries as well as fixed expressions not related spatially.</p>
+<pre><code class="language-text">&quot;infoj&quot;: [
+  {
+    &quot;type&quot;: &quot;tableDefinition&quot;,     // defines table
+    &quot;title&quot;: &quot;Age Profile&quot;,        // required and unique within infoj
+    &quot;columns&quot;: [],
+    &quot;rows&quot;: [],
+    &quot;agg&quot;: []                      // optional
+  }
+]
+</code></pre>
+<p><code>&quot;title&quot;</code> is a required parameter and must be unique within <code>infoj</code> definition. The <code>tableDefinition</code> object has 3 children: <code>columns</code> and <code>rows</code>. <code>agg</code> is optional property and can store values which need to be calculated from query results.</p>
+<p><code>&quot;columns&quot;</code> stores geometry objects which will be used to calculate spatial aggregate. Configuration below creates 3 geometry columns for 5, 10, 15 minute drive time.</p>
+<pre><code class="language-text">&quot;columns&quot;: [
+                {
+                  &quot;type&quot;: &quot;integer&quot;,            // PostgreSQL data type to return, defaults to &quot;text&quot;
+                  &quot;label&quot;: &quot;0-5 mins&quot;,          // Nice column header, optional
+                  &quot;field&quot;: &quot;min5&quot;,              // unique column alias, required
+                  &quot;lookup&quot;: {                   // see lookup section
+                    &quot;table_a&quot;: &quot;sites&quot;,
+                    &quot;table_b&quot;: &quot;gb_hx_1k&quot;,
+                    &quot;geom_a&quot;: &quot;isoline_5min&quot;,
+                    &quot;geom_b&quot;: &quot;geomcntr&quot;
+                  }
+                },
+                {
+                  &quot;type&quot;: &quot;integer&quot;,
+                  &quot;label&quot;: &quot;0-10 mins&quot;,
+                  &quot;field&quot;: &quot;min10&quot;,
+                  &quot;lookup&quot;: {
+                    &quot;table_a&quot;: &quot;sites&quot;,
+                    &quot;table_b&quot;: &quot;gb_hx_1k&quot;,
+                    &quot;geom_a&quot;: &quot;isoline_10min&quot;,
+                    &quot;geom_b&quot;: &quot;geomcntr&quot;
+                  }
+                },
+                {
+                  &quot;type&quot;: &quot;integer&quot;,
+                  &quot;label&quot;: &quot;0-15 mins&quot;,
+                  &quot;field&quot;: &quot;min15&quot;,
+                  &quot;lookup&quot;: {
+                    &quot;table_a&quot;: &quot;sites&quot;,
+                    &quot;table_b&quot;: &quot;gb_hx_1k&quot;,
+                    &quot;geom_a&quot;: &quot;isoline_15min&quot;,
+                    &quot;geom_b&quot;: &quot;geomcntr&quot;
+                  }
+                }
+</code></pre>
+<p>In order to include total aggregate value (like 'UK Total' column in the example) another column object must be added with the following setup:</p>
+<pre><code class="language-text">&quot;columns&quot;: [
+  {
+    &quot;field&quot;: &quot;uk&quot;,  // PostgreSQL alias, required and unique column alias
+    &quot;aspatial&quot;: &quot;age_under_18_uk, age_18to24_uk, age_25to29_uk, age_30to44_uk ,age_45to59_uk, age_60plus_uk, age_total_uk FROM public.report_summary&quot; 
+  } 
+]
+</code></pre>
+<p><code>&quot;aspatial&quot;</code> contains a query which returns fixed values in a subquery. These values are stored in a separated table they can be queried from to avoid unnecessary calculation on the fly.</p>
+<p><code>&quot;rows&quot;</code> stores fields or expressions for each row of the table.</p>
+<pre><code class="language-text">&quot;rows&quot;: [
+                {
+                  &quot;field&quot;: &quot;age_under_18&quot;, // PostgreSQL alias, required and unique column alias
+                  &quot;label&quot;: &quot;&lt; 18&quot;,         // nice label to display, optional
+                  &quot;fieldfx&quot;: &quot;SUM(pop__11 - age_18to19__11 - age_20to24__11 - age_25to29__11 - age_30to44__11 - age_45to59__11 - age60plus)&quot;
+                },
+                {
+                  &quot;field&quot;: &quot;age_18to24&quot;,
+                  &quot;fieldfx&quot;: &quot;SUM(age_18to19__11 + age_20to24__11)&quot;,
+                  &quot;label&quot;: &quot;18 to 24&quot;
+                },
+                {
+                  &quot;field&quot;: &quot;age_25to29&quot;,
+                  &quot;fieldfx&quot;: &quot;SUM(age_25to29__11)&quot;, // SQL statement aliased with field property
+                  &quot;label&quot;: &quot;25 to 29&quot;
+                },
+                {
+                  &quot;field&quot;: &quot;age_30to44&quot;,
+                  &quot;fieldfx&quot;: &quot;SUM(age_30to44__11)&quot;,
+                  &quot;label&quot;: &quot;30 to 44&quot;
+                },
+                {
+                  &quot;field&quot;: &quot;age_45to59&quot;,
+                  &quot;fieldfx&quot;: &quot;SUM(age_45to59__11)&quot;,
+                  &quot;label&quot;: &quot;45 to 59&quot;
+                },
+                {
+                  &quot;field&quot;: &quot;age_60plus&quot;,
+                  &quot;fieldfx&quot;: &quot;SUM(age60plus)&quot;,
+                  &quot;label&quot;: &quot;60+&quot;
+                },
+                {
+                  &quot;field&quot;: &quot;age_profile_total&quot;,
+                  &quot;fieldfx&quot;: &quot;SUM(pop__11)&quot;,
+                  &quot;label&quot;: &quot;Total&quot;
+                }
+              ]
+</code></pre>
+<p>&quot;agg&quot; is an optional parameter and it stores columns calculated from query results (i. e. &quot;rows&quot;). In the table above there are 3 columns based on either calculation from results or aspatial column: % with 15 min and Age Profile Index both based on 15 minute catchment results and UK Total which is an aspatial (fixed) value for each row.</p>
+<p>For those 3 sets of values the configuration below was used:</p>
+<pre><code class="language-text">&quot;agg&quot;: {
+          &quot;share15&quot;: { // key is unique column alias
+              &quot;label&quot;: &quot;% with 15 min&quot;,
+              &quot;type&quot;: &quot;integer&quot;,
+              &quot;rows&quot;: [
+                &quot;100*min15.age_under_18/min15.age_profile_total&quot;, // expression for each row
+                &quot;100*min15.age_18to24/min15.age_profile_total&quot;,
+                &quot;100*min15.age_25to29/min15.age_profile_total&quot;,
+                &quot;100*min15.age_30to44/min15.age_profile_total&quot;,
+                &quot;100*min15.age_45to59/min15.age_profile_total&quot;,
+                &quot;100*min15.age_60plus/min15.age_profile_total&quot;,
+                &quot;100*min15.age_profile_total/min15.age_profile_total&quot;
+              ]
+          },
+          &quot;age_uk_total&quot;: {
+              &quot;label&quot;: &quot;UK Total&quot;,
+              &quot;type&quot;: &quot;integer&quot;,
+              &quot;rows&quot;: [
+                &quot;uk.age_under_18_uk&quot;,
+                &quot;uk.age_18to24_uk&quot;,
+                &quot;uk.age_25to29_uk&quot;,
+                &quot;uk.age_30to44_uk&quot;,
+                &quot;uk.age_45to59_uk&quot;, 
+                &quot;uk.age_60plus_uk&quot;, 
+                &quot;uk.age_total_uk&quot;
+              ]
+          },
+          &quot;age_index&quot;: {
+              &quot;label&quot;: &quot;Age Profile Index&quot;,
+               &quot;type&quot;: &quot;numeric(1000, 2)&quot;,
+               &quot;rows&quot;: [
+                  &quot;uk.age_total_uk*(100*min15.age_under_18/min15.age_profile_total)/uk.age_under_18_uk&quot;,
+                  &quot;uk.age_total_uk*(100*min15.age_18to24/min15.age_profile_total)/uk.age_18to24_uk&quot;,
+                  &quot;uk.age_total_uk*(100*min15.age_25to29/min15.age_profile_total)/uk.age_25to29_uk&quot;,
+                  &quot;uk.age_total_uk*(100*min15.age_30to44/min15.age_profile_total)/uk.age_30to44_uk&quot;,
+                  &quot;uk.age_total_uk*(100*min15.age_45to59/min15.age_profile_total)/uk.age_45to59_uk&quot;,
+                  &quot;uk.age_total_uk*(100*min15.age_60plus/min15.age_profile_total)/uk.age_60plus_uk&quot;,
+                  &quot;uk.age_total_uk*(100*min15.age_profile_total/min15.age_profile_total)/uk.age_total_uk&quot;
+                ]
+              }
+            }
+</code></pre>
+<h2>Sorting</h2>
+<p>Table sort requests will now be sent to the backend.<br>
+If you show 99 out of n records then the 99 records will be retrieved after sorting.</p>
+<h2>Viewport Flag</h2>
+<p>Layer table now has a viewport flag, which is set to false by default. This can be toggled with a button in the tableview control itself.</p>
+<p><img src="../../../assets/img/table_definition_2.png" alt=""></p>
+<p>When the viewport is off, the layer table will not update with viewport changes since all data is down.</p>
+<p>This will work together with sorting the layer table.</p>
+<p><img src="../../../assets/img/table_definition_3.png" alt=""></p>
+<h2>Selecting Location</h2>
+<p>You can select a row in the table view that will point to said location on the map.</p>
+<p><img src="../../../assets/img/table_definition_4.png" alt=""></p>
+
+    </div>
+
+  </div>
+
+</body>
+
+<script>
+    const toggle = document.getElementById('toggle');
+
+    toggle.onclick = e => { e.target.parentElement.classList.add('_grid'); };
+</script>
+
+</html>

@@ -1,0 +1,561 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>InfoJ</title>
+  <style>
+
+    .grid {
+      display: block;
+      margin: 20px;
+      font-family: system-ui;
+      display:grid;
+      grid-column-gap: 15px;
+      grid-template-columns: 1fr 5fr;
+    }
+
+    .grid > .toggle {
+        display: none;
+        border-right: 2px solid #000;
+        padding: 5px;
+    }
+
+    .grid > .toggle > .burger {
+      border-top: 2px solid #eee;
+      margin-top: 5px;
+      box-shadow: 1px 1px 1px #999;
+    }
+
+    .grid > .toggle:hover {
+      cursor: pointer;
+    }
+
+    @media only screen and (max-width: 900px) {
+      .grid {
+        grid-template-columns: 30px 5fr;
+        margin: 0px;
+      }
+
+      .grid > .nav {
+        display: none;
+      }
+
+      .grid > .toggle {
+        display: block;
+      }
+    }
+
+    ._grid {
+      grid-template-columns: 1fr 5fr;
+    }
+
+    ._grid > .nav {
+      display: block;
+    }
+
+    ._grid > .toggle {
+      display: none;
+    }
+
+    .grid > .nav {
+      grid-column: 1;
+      padding-inline-start: 0px;
+      list-style-type: none;
+    }
+
+    .grid > .content {
+      grid-column: 2/4;
+    }
+
+    .active {
+      font-weight: bold;
+    }
+
+    a {
+      text-decoration: none;
+      white-space: nowrap;
+      color: #333;
+    }
+
+    li {
+      line-height: 1.5;
+    }
+
+    li._1 {
+      padding-left: 0px;
+    }
+
+    li._2 {
+      padding-left: 0px;
+    }
+
+    li._3 {
+      padding-left: 0px;
+    }
+
+    li._4 {
+      padding-left: 0px;
+    }
+
+    li._5 {
+      padding-left: 20px;
+    }
+
+    li._6 {
+      padding-left: 40px;
+    }
+
+    li.first {
+      padding-left: 0px;
+      margin-top: 10px;
+    }
+
+    li.second {
+      padding-left: 20px;
+    }
+
+    pre {
+      display: block;
+      font-family: monospace;
+      white-space: pre;
+      margin: 1em 0px;
+      padding: 20px;
+      box-shadow: 0px 0px 2px #555;
+      border-radius: 5px;
+      overflow-x: scroll;
+    }
+
+    pre > code {
+      font-family: monospace;
+    }
+
+    .content a {
+      color: #090;
+    }
+
+    .content img {
+      max-width: 100%;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <div class="grid">
+
+    <div id="toggle" class="toggle"><div class="burger"></div><div class="burger"></div><div class="burger"></div></div>
+
+    <ul class="nav">
+
+      
+      <li>
+        <a style="font-weight: bold; font-size: 30px;" href="/xyz/docs"><---</a>
+      </li>
+      
+      
+      
+      
+      <li class="_4  ">
+        <a href="/xyz/docs/00-developer/00-introduction/">Developer</a>
+      </li>
+      
+      
+      
+      <li class="_4  ">
+        <a href="/xyz/docs/00-developer/01-license/">License</a>
+      </li>
+      
+      
+      
+      <li class="_5 first ">
+        <a href="/xyz/docs/00-developer/02-access/00-access/">Access</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/02-access/01-acl/">Access Control List (ACL)</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/02-access/02-registration/">User Account Registration</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/02-access/03-password-reset/">Password Reset</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/02-access/04-failed-login-attempts/">Failed Login attempts</a>
+      </li>
+      
+      
+      
+      <li class="_5 first ">
+        <a href="/xyz/docs/00-developer/03-environment_settings/00-environment-settings/">Environment Settings</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/03-environment_settings/01-hosting/">Hosting</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/03-environment_settings/02-access-control/">Access Control</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/03-environment_settings/03-workspace-connections/">Workspace Connections</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/03-environment_settings/04-3rd-party-api-keys/">3rd Party API Keys</a>
+      </li>
+      
+      
+      
+      <li class="_5 first ">
+        <a href="/xyz/docs/00-developer/04-workspaces/00-workspaces/">Workspaces</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/04-workspaces/01-editing/">Editing</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/04-workspaces/02-access-restrictions/">Access Restrictions & Filters</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/04-workspaces/03-locate/">Locate</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/04-workspaces/04-title/">Title</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/04-workspaces/05-workspace-checks/">Workspace Checks</a>
+      </li>
+      
+      
+      
+      <li class="_5 first ">
+        <a href="/xyz/docs/00-developer/05-layers/00-layers/">Layers</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/05-layers/01-tile-layer/">Tile Layer</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/05-layers/02-postgis-layer/">PostGIS Data Layer</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/05-layers/03-cluster-layer/">Cluster Layer</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/05-layers/04-geojson-layer/">GeoJson Layer</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/05-layers/05-vector-tile-mvt-layer/">MapBox Vector Tile (MVT) Layer</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/05-layers/06-grid-hex/">Grid (Hex) Layer</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/05-layers/07-filter/">Filter</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/05-layers/08-tables/">Tables</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/05-layers/09-charts/">Charts</a>
+      </li>
+      
+      
+      
+      <li class="_5 first active">
+        <a href="/xyz/docs/00-developer/06-infoj/00-infoj/">InfoJ</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/06-infoj/01-groups/">Groups</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/06-infoj/02-filter/">Filter</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/06-infoj/03-lookups/">Lookups</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/06-infoj/04-withSelect/">With Select</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/06-infoj/05-tabledefinition/">Table Definition</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/06-infoj/06-orderedlist/">Ordered List</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/06-infoj/07-geometry/">Geometry</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/06-infoj/08-isolines/">Isolines</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/06-infoj/09-locations/">Locations</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/06-infoj/10-clusterArea/">Cluster Area</a>
+      </li>
+      
+      
+      
+      <li class="_6 second ">
+        <a href="/xyz/docs/00-developer/06-infoj/11-charts/00-charts/">Charts</a>
+      </li>
+      
+      
+      
+      <li class="_6  ">
+        <a href="/xyz/docs/00-developer/06-infoj/11-charts/01-cakeChart/">Cake charts</a>
+      </li>
+      
+      
+      
+      <li class="_6  ">
+        <a href="/xyz/docs/00-developer/06-infoj/11-charts/02-polarChart/">Polar charts</a>
+      </li>
+      
+      
+      
+      <li class="_6  ">
+        <a href="/xyz/docs/00-developer/06-infoj/11-charts/03-radarChart/">Radar charts</a>
+      </li>
+      
+      
+      
+      <li class="_6  ">
+        <a href="/xyz/docs/00-developer/06-infoj/11-charts/04-simpleChart/">Simple charts</a>
+      </li>
+      
+      
+      
+      <li class="_6  ">
+        <a href="/xyz/docs/00-developer/06-infoj/11-charts/05-stackedChart/">Stacked charts</a>
+      </li>
+      
+      
+      
+      <li class="_5 first ">
+        <a href="/xyz/docs/00-developer/07-locales/00-locales/">Locales</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/07-locales/01-gazetteer/">Gazetteer</a>
+      </li>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+
+    </ul>
+
+    <div class="content">
+      <h2>This document covers the Introduction of InfoJ</h2>
+      <p><code>infoj</code> is a JSON array [of Objects] which describes the properties of a location.</p>
+<pre><code class="language-text">&quot;infoj&quot;: [
+  {
+    &quot;field&quot;: &quot;name&quot;,
+    &quot;label&quot;: &quot;Name: &quot;,
+    &quot;type&quot;: &quot;text&quot;
+  },
+  {
+    &quot;label&quot;: &quot;Label&quot;
+  },
+  {...}
+]
+</code></pre>
+<p><strong>Each infoj array entry must describe a single property only.</strong></p>
+<p>The <strong><code>field</code></strong> is the datasource (PostGIS table) field to be queried for a property value to be presented in the location info.</p>
+<p>The <strong><code>label</code></strong> will be displayed before the field value. A label without a field definition will be displayed on its own. The label will not be displayed if a field has no value and is not editable.</p>
+<p>The <strong><code>type</code></strong> defines the nature of an entry and how the data should be displayed. <code>&quot;text&quot;</code> is the default content format.</p>
+<p><code>&quot;type&quot; : &quot;text&quot;</code></p>
+<p>In order to split data rows with label headers define entry as:</p>
+<p><code>&quot;type&quot; : &quot;label&quot;</code></p>
+<p>A text will be displayed on a new line below the label.</p>
+<p><code>&quot;type&quot; : &quot;textarea&quot;</code></p>
+<p>A multi-line input will be provided for an editable textarea. Otherwise the display of a textarea does not deviate from a simple text type.</p>
+<p><code>&quot;type&quot; : &quot;integer&quot;</code></p>
+<p>Integer will be rounded and displayed with comma delimiter.</p>
+<p><code>&quot;type&quot; : &quot;numeric&quot;</code></p>
+<p>Numeric values will be rounded to 2 decimal places and displayed with comma delimiter.</p>
+<p><code>&quot;type&quot; : &quot;date&quot;</code></p>
+<p>Dates will be displayed as a formatted string. <strong>Important</strong>: internally dates are stored as <a href="https://www.unixtimestamp.com/"><em>unix timestamps</em></a>. The database field must be of the type <code>bigint</code> in order to store dates.</p>
+<p>Dates, integer and numeric values will be displayed inline with the label. Text will displayed on a new line below the label.</p>
+<p><code>&quot;type&quot;: &quot;boolean&quot;</code></p>
+<p>Boolean data type is displayed as a checkbox element in the location view and can be also set up as editable. Boolean data type is stored in the database as <a href="https://www.postgresql.org/docs/11/datatype-boolean.html"><em>boolean</em></a>.</p>
+<p>The checkbox is also shown when it is not editable.</p>
+<p><img src="../../../assets/img/infoj_1.png" alt=""></p>
+<p><code>&quot;type&quot; : &quot;html&quot;</code></p>
+<p>Setting the type to html will render the field value as html rather than text.</p>
+<p><img src="../../../assets/img/infoj_1.png" alt=""></p>
+<p><code>&quot;inline&quot; : true</code></p>
+<p>Setting the inline key in an <code>infoj</code> entry will force text values to be displayed inline with the label.</p>
+<h2><strong>Special property types</strong></h2>
+<p><code>&quot;type&quot; : &quot;group&quot;</code></p>
+<p>Any subsequent entries can be added to a <a href="groups.md"><strong>group entry</strong></a>.</p>
+<p><code>&quot;type&quot; : &quot;images&quot;</code></p>
+<p>The entry will be displayed as an image array in a scrollable table row. The entry must have edit set to true in order to upload or remove images. The database table field for image arrays must be of the type <code>TEXT[]</code> and have a default of <code>'{}'::TEXT[]</code></p>
+<p>A cloudinary account is required in order to upload images to the cloudinary image hosting platform. The access key for the cloudinary account must be defined in the environment settings as a <a href="../../../environment-settings/3rd-party-api-keys.md"><strong>3rd party API key</strong></a>.</p>
+<p><code>&quot;type&quot; : &quot;streetview&quot;</code></p>
+<p>The entry will displayed as a Google Streetview image requested for the location of a marker. A Google API key with access to the Google Streetview service must be defined in the environment settings as a <a href="../../../environment-settings/3rd-party-api-keys.md"><strong>3rd party API key</strong></a>.</p>
+<p><code>&quot;type&quot; : &quot;geometry&quot;</code></p>
+<p>A geometry associated with the location will be read from the table field and displayed in the map control together with the location's own geometry.</p>
+<p><code>&quot;type&quot;: &quot;key&quot;</code></p>
+<p>This property displays layer name in location view.</p>
+<h2><strong>Supporting infoj keys</strong></h2>
+<p><code>&quot;title&quot; : &quot;I am a tooltip&quot;</code></p>
+<p>The title will be displayed when the cursor hovers over the info entry label.</p>
+<p><code>&quot;level&quot; : 1</code></p>
+<p>The level is a class which will be assigned to the table row which holds the entry label and value. This class can be used to assign hierarchical styling to entries.</p>
+<p><code>&quot;fieldfx&quot; : &quot;(field_a + field_b)&quot;</code></p>
+<p>Function fields can be used to calculate a value from other fields in the same table. These fields can not be edited.</p>
+<p><code>&quot;prefix&quot; : &quot;$ &quot;</code></p>
+<p><code>&quot;postfix&quot; : &quot; %&quot;</code></p>
+<p>A prefix will be added at the beginning, a postfix at the end of the displayed value. Handy for adding units to the output.</p>
+
+    </div>
+
+  </div>
+
+</body>
+
+<script>
+    const toggle = document.getElementById('toggle');
+
+    toggle.onclick = e => { e.target.parentElement.classList.add('_grid'); };
+</script>
+
+</html>

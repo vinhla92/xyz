@@ -1,0 +1,602 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Groups</title>
+  <style>
+
+    .grid {
+      display: block;
+      margin: 20px;
+      font-family: system-ui;
+      display:grid;
+      grid-column-gap: 15px;
+      grid-template-columns: 1fr 5fr;
+    }
+
+    .grid > .toggle {
+        display: none;
+        border-right: 2px solid #000;
+        padding: 5px;
+    }
+
+    .grid > .toggle > .burger {
+      border-top: 2px solid #eee;
+      margin-top: 5px;
+      box-shadow: 1px 1px 1px #999;
+    }
+
+    .grid > .toggle:hover {
+      cursor: pointer;
+    }
+
+    @media only screen and (max-width: 900px) {
+      .grid {
+        grid-template-columns: 30px 5fr;
+        margin: 0px;
+      }
+
+      .grid > .nav {
+        display: none;
+      }
+
+      .grid > .toggle {
+        display: block;
+      }
+    }
+
+    ._grid {
+      grid-template-columns: 1fr 5fr;
+    }
+
+    ._grid > .nav {
+      display: block;
+    }
+
+    ._grid > .toggle {
+      display: none;
+    }
+
+    .grid > .nav {
+      grid-column: 1;
+      padding-inline-start: 0px;
+      list-style-type: none;
+    }
+
+    .grid > .content {
+      grid-column: 2/4;
+    }
+
+    .active {
+      font-weight: bold;
+    }
+
+    a {
+      text-decoration: none;
+      white-space: nowrap;
+      color: #333;
+    }
+
+    li {
+      line-height: 1.5;
+    }
+
+    li._1 {
+      padding-left: 0px;
+    }
+
+    li._2 {
+      padding-left: 0px;
+    }
+
+    li._3 {
+      padding-left: 0px;
+    }
+
+    li._4 {
+      padding-left: 0px;
+    }
+
+    li._5 {
+      padding-left: 20px;
+    }
+
+    li._6 {
+      padding-left: 40px;
+    }
+
+    li.first {
+      padding-left: 0px;
+      margin-top: 10px;
+    }
+
+    li.second {
+      padding-left: 20px;
+    }
+
+    pre {
+      display: block;
+      font-family: monospace;
+      white-space: pre;
+      margin: 1em 0px;
+      padding: 20px;
+      box-shadow: 0px 0px 2px #555;
+      border-radius: 5px;
+      overflow-x: scroll;
+    }
+
+    pre > code {
+      font-family: monospace;
+    }
+
+    .content a {
+      color: #090;
+    }
+
+    .content img {
+      max-width: 100%;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <div class="grid">
+
+    <div id="toggle" class="toggle"><div class="burger"></div><div class="burger"></div><div class="burger"></div></div>
+
+    <ul class="nav">
+
+      
+      <li>
+        <a style="font-weight: bold; font-size: 30px;" href="/xyz/docs"><---</a>
+      </li>
+      
+      
+      
+      
+      <li class="_4  ">
+        <a href="/xyz/docs/00-developer/00-introduction/">Developer</a>
+      </li>
+      
+      
+      
+      <li class="_4  ">
+        <a href="/xyz/docs/00-developer/01-license/">License</a>
+      </li>
+      
+      
+      
+      <li class="_5 first ">
+        <a href="/xyz/docs/00-developer/02-access/00-access/">Access</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/02-access/01-acl/">Access Control List (ACL)</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/02-access/02-registration/">User Account Registration</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/02-access/03-password-reset/">Password Reset</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/02-access/04-failed-login-attempts/">Failed Login attempts</a>
+      </li>
+      
+      
+      
+      <li class="_5 first ">
+        <a href="/xyz/docs/00-developer/03-environment_settings/00-environment-settings/">Environment Settings</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/03-environment_settings/01-hosting/">Hosting</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/03-environment_settings/02-access-control/">Access Control</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/03-environment_settings/03-workspace-connections/">Workspace Connections</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/03-environment_settings/04-3rd-party-api-keys/">3rd Party API Keys</a>
+      </li>
+      
+      
+      
+      <li class="_5 first ">
+        <a href="/xyz/docs/00-developer/04-workspaces/00-workspaces/">Workspaces</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/04-workspaces/01-editing/">Editing</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/04-workspaces/02-access-restrictions/">Access Restrictions & Filters</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/04-workspaces/03-locate/">Locate</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/04-workspaces/04-title/">Title</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/04-workspaces/05-workspace-checks/">Workspace Checks</a>
+      </li>
+      
+      
+      
+      <li class="_5 first ">
+        <a href="/xyz/docs/00-developer/05-layers/00-layers/">Layers</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/05-layers/01-tile-layer/">Tile Layer</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/05-layers/02-postgis-layer/">PostGIS Data Layer</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/05-layers/03-cluster-layer/">Cluster Layer</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/05-layers/04-geojson-layer/">GeoJson Layer</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/05-layers/05-vector-tile-mvt-layer/">MapBox Vector Tile (MVT) Layer</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/05-layers/06-grid-hex/">Grid (Hex) Layer</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/05-layers/07-filter/">Filter</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/05-layers/08-tables/">Tables</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/05-layers/09-charts/">Charts</a>
+      </li>
+      
+      
+      
+      <li class="_5 first ">
+        <a href="/xyz/docs/00-developer/06-infoj/00-infoj/">InfoJ</a>
+      </li>
+      
+      
+      
+      <li class="_5  active">
+        <a href="/xyz/docs/00-developer/06-infoj/01-groups/">Groups</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/06-infoj/02-filter/">Filter</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/06-infoj/03-lookups/">Lookups</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/06-infoj/04-withSelect/">With Select</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/06-infoj/05-tabledefinition/">Table Definition</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/06-infoj/06-orderedlist/">Ordered List</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/06-infoj/07-geometry/">Geometry</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/06-infoj/08-isolines/">Isolines</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/06-infoj/09-locations/">Locations</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/06-infoj/10-clusterArea/">Cluster Area</a>
+      </li>
+      
+      
+      
+      <li class="_6 second ">
+        <a href="/xyz/docs/00-developer/06-infoj/11-charts/00-charts/">Charts</a>
+      </li>
+      
+      
+      
+      <li class="_6  ">
+        <a href="/xyz/docs/00-developer/06-infoj/11-charts/01-cakeChart/">Cake charts</a>
+      </li>
+      
+      
+      
+      <li class="_6  ">
+        <a href="/xyz/docs/00-developer/06-infoj/11-charts/02-polarChart/">Polar charts</a>
+      </li>
+      
+      
+      
+      <li class="_6  ">
+        <a href="/xyz/docs/00-developer/06-infoj/11-charts/03-radarChart/">Radar charts</a>
+      </li>
+      
+      
+      
+      <li class="_6  ">
+        <a href="/xyz/docs/00-developer/06-infoj/11-charts/04-simpleChart/">Simple charts</a>
+      </li>
+      
+      
+      
+      <li class="_6  ">
+        <a href="/xyz/docs/00-developer/06-infoj/11-charts/05-stackedChart/">Stacked charts</a>
+      </li>
+      
+      
+      
+      <li class="_5 first ">
+        <a href="/xyz/docs/00-developer/07-locales/00-locales/">Locales</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/07-locales/01-gazetteer/">Gazetteer</a>
+      </li>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+
+    </ul>
+
+    <div class="content">
+      <h2>Groups</h2>
+      <p><code>infoj</code> entries can be grouped for a more structured visual display in the location's info drawer.</p>
+<pre><code class="language-text">&quot;infoj&quot;: [
+  {
+    &quot;label&quot;: &quot;Group A&quot;,
+    &quot;type&quot;: &quot;group&quot;,
+    &quot;expanded&quot;: true
+  },
+  {
+    &quot;group&quot;: &quot;Group A&quot;,
+    &quot;label&quot;: &quot;Size&quot;,
+    &quot;field&quot;: &quot;size_sqm&quot;,
+    &quot;type&quot;: &quot;integer&quot;
+  },
+  {...}
+]
+</code></pre>
+<p>Groups are created by defining an entry as <code>&quot;type&quot; : &quot;group&quot;</code>. <strong>A group must have a unique label</strong>. Any subsequent entry can be added to a previously defined group by assigning the group's label to the <code>group</code> key of the entry that should be added to the group.</p>
+<p>By default, groups are displayed in a collapsed state that shows just the group label and hides all its entries. To overwrite this behaviour, set the group's <code>expanded</code> option to <code>true</code>.</p>
+<h2>Charts</h2>
+<p>Grouped integer and numeric values can be displayed as a chart by defining the chart type in the group's entry. Default chart settings:</p>
+<pre><code class="language-text">&quot;chart&quot;: {
+  &quot;x&quot;: &quot;label x&quot;,
+  &quot;y&quot;: &quot;label y&quot;
+}
+</code></pre>
+<p><img src="../../../assets/img/infoj_groups_1.png" alt="Default chart."></p>
+<p>Chart <code>&quot;type&quot;</code> defaults to <code>&quot;line&quot;</code>. Charts are built using <a href="https://www.chartjs.org/docs/latest/">Chart.js</a> where all supported chart types are documented. If data values run in big numbers and take space on left margin they can be scaled by setting <code>&quot;unit&quot;</code> property. Supported values are <code>&quot;k&quot;</code> for thousands and <code>&quot;M&quot;</code> for millions.</p>
+<p><img src="../../../assets/img/infoj_groups_2.png" alt="Bar chart with scaled y-values."></p>
+<p>In order to give chart data series colours set the following properties:</p>
+<pre><code class="language-text">&quot;chart&quot;: {
+  &quot;type&quot;: &quot;horizontalBar&quot;,
+  &quot;x&quot;: &quot;label x&quot;,
+  &quot;y&quot;: &quot;label y&quot;,
+  &quot;backgroundColor&quot;: [&quot;#FFA630&quot;, &quot;#C6DEA6&quot;, &quot;#7EBDC3&quot;, &quot;#7A6263&quot;, &quot;#CED097&quot;],
+  &quot;borderColor&quot;: [&quot;#FFA630&quot;, &quot;#C6DEA6&quot;, &quot;#7EBDC3&quot;, &quot;#7A6263&quot;, &quot;#CED097&quot;],
+  &quot;excludeNull&quot;: true // removes null entries from chart data
+}
+</code></pre>
+<p><img src="../../../assets/img/infoj_groups_3.png" alt="Horizontal bar chart with custom colours."></p>
+<p>Both properties take either single colour as string or array of colours. Colours can be given in either Hex, RGB or HSL.</p>
+<p>Legend is hidden by default. In order to display legend:</p>
+<pre><code class="language-text">&quot;chart&quot;: {
+  &quot;x&quot;: &quot;label x&quot;,
+  &quot;y&quot;: &quot;label y&quot;,
+  &quot;legend&quot;: true
+}
+</code></pre>
+<p>By default, a group is displayed in table view, and can be switched to chart view when clicking an icon. To swap this behaviour, i.e. show a chart by default and allow switching to table view with the icon, add the <code>active</code> option to the chart object:</p>
+<pre><code class="language-text">&quot;chart&quot;: {
+  &quot;x&quot;: &quot;label x&quot;,
+  &quot;y&quot;: &quot;label y&quot;,
+  &quot;active&quot;: true
+}
+</code></pre>
+<h4>Stacked bar chart</h4>
+<p>Charts of type <code>bar</code> and <code>horizontalBar</code> support data visualised in stacks.</p>
+<p><img src="../../../assets/img/infoj_groups_4.png" alt="Two data stacks"></p>
+<p>In order to define a stacked chart:</p>
+<ul>
+<li>set <code>&quot;stack&quot;</code> property to one of the <code>stacks</code> values in each group item</li>
+<li>set <code>&quot;backgroundColor&quot;</code> or <code>&quot;borderColor&quot;</code> to array of colours to use for respective stacks</li>
+<li>important: <code>label</code> within group must be consistent across stacks.</li>
+</ul>
+<pre><code class="language-text">{
+              &quot;label&quot;: &quot;Sales&quot;,
+              &quot;type&quot;: &quot;group&quot;,
+              &quot;chart&quot;: {
+                &quot;active&quot;: true,
+                &quot;type&quot;: &quot;bar&quot;,
+                &quot;backgroundColor&quot;: [&quot;#FFA630&quot;, &quot;#C6DEA6&quot;],
+                &quot;borderColor&quot;: [&quot;#FFA630&quot;, &quot;#C6DEA6&quot;]
+              }
+            },
+            {
+              &quot;group&quot;: &quot;Sales&quot;,
+              &quot;label&quot;: &quot;Eat In Weekday&quot;,
+              &quot;field&quot;: &quot;actual_sales_eat_in_leisurely_weekday_treat&quot;,
+              &quot;type&quot;: &quot;integer&quot;,
+              &quot;stack&quot;: &quot;Actual Sales&quot;
+            },
+            {
+              &quot;group&quot;: &quot;Sales&quot;,
+              &quot;label&quot;: &quot;Takeaway Weekend&quot;,
+              &quot;field&quot;: &quot;actual_sales_takeaway_weekend_lunch&quot;,
+              &quot;type&quot;: &quot;integer&quot;,
+              &quot;stack&quot;: &quot;Actual Sales&quot;
+            },
+            {
+              &quot;group&quot;: &quot;Sales&quot;,
+              &quot;label&quot;: &quot;Eat In Weekday&quot;,
+              &quot;field&quot;: &quot;model_sale_eat_in_leisurely_weekday_treat&quot;,
+              &quot;type&quot;: &quot;integer&quot;,
+              &quot;stack&quot;: &quot;Model Sales&quot;
+            },
+            {
+              &quot;group&quot;: &quot;Sales&quot;,
+              &quot;label&quot;: &quot;Takeaway Weekend&quot;,
+              &quot;field&quot;: &quot;model_sale_takeaway_weekend_lunch&quot;,
+              &quot;type&quot;: &quot;integer&quot;,
+              &quot;stack&quot;: &quot;Model Sales&quot;
+            }
+</code></pre>
+
+    </div>
+
+  </div>
+
+</body>
+
+<script>
+    const toggle = document.getElementById('toggle');
+
+    toggle.onclick = e => { e.target.parentElement.classList.add('_grid'); };
+</script>
+
+</html>

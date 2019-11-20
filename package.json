@@ -51,6 +51,7 @@
     "tabulator-tables": "^4.4.3"
   },
   "devDependencies": {
+    "@11ty/eleventy": "^0.9.0",
     "eslint": "^4.19.1",
     "husky": "^1.1.3",
     "lint-staged": "^8.0.4",
@@ -58,3 +59,5 @@
     "webpack-cli": "^3.3.7"
   }
 }
+
+    

@@ -1,0 +1,559 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Editing</title>
+  <style>
+
+    .grid {
+      display: block;
+      margin: 20px;
+      font-family: system-ui;
+      display:grid;
+      grid-column-gap: 15px;
+      grid-template-columns: 1fr 5fr;
+    }
+
+    .grid > .toggle {
+        display: none;
+        border-right: 2px solid #000;
+        padding: 5px;
+    }
+
+    .grid > .toggle > .burger {
+      border-top: 2px solid #eee;
+      margin-top: 5px;
+      box-shadow: 1px 1px 1px #999;
+    }
+
+    .grid > .toggle:hover {
+      cursor: pointer;
+    }
+
+    @media only screen and (max-width: 900px) {
+      .grid {
+        grid-template-columns: 30px 5fr;
+        margin: 0px;
+      }
+
+      .grid > .nav {
+        display: none;
+      }
+
+      .grid > .toggle {
+        display: block;
+      }
+    }
+
+    ._grid {
+      grid-template-columns: 1fr 5fr;
+    }
+
+    ._grid > .nav {
+      display: block;
+    }
+
+    ._grid > .toggle {
+      display: none;
+    }
+
+    .grid > .nav {
+      grid-column: 1;
+      padding-inline-start: 0px;
+      list-style-type: none;
+    }
+
+    .grid > .content {
+      grid-column: 2/4;
+    }
+
+    .active {
+      font-weight: bold;
+    }
+
+    a {
+      text-decoration: none;
+      white-space: nowrap;
+      color: #333;
+    }
+
+    li {
+      line-height: 1.5;
+    }
+
+    li._1 {
+      padding-left: 0px;
+    }
+
+    li._2 {
+      padding-left: 0px;
+    }
+
+    li._3 {
+      padding-left: 0px;
+    }
+
+    li._4 {
+      padding-left: 0px;
+    }
+
+    li._5 {
+      padding-left: 20px;
+    }
+
+    li._6 {
+      padding-left: 40px;
+    }
+
+    li.first {
+      padding-left: 0px;
+      margin-top: 10px;
+    }
+
+    li.second {
+      padding-left: 20px;
+    }
+
+    pre {
+      display: block;
+      font-family: monospace;
+      white-space: pre;
+      margin: 1em 0px;
+      padding: 20px;
+      box-shadow: 0px 0px 2px #555;
+      border-radius: 5px;
+      overflow-x: scroll;
+    }
+
+    pre > code {
+      font-family: monospace;
+    }
+
+    .content a {
+      color: #090;
+    }
+
+    .content img {
+      max-width: 100%;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <div class="grid">
+
+    <div id="toggle" class="toggle"><div class="burger"></div><div class="burger"></div><div class="burger"></div></div>
+
+    <ul class="nav">
+
+      
+      <li>
+        <a style="font-weight: bold; font-size: 30px;" href="/xyz/docs"><---</a>
+      </li>
+      
+      
+      
+      
+      <li class="_4  ">
+        <a href="/xyz/docs/00-developer/00-introduction/">Developer</a>
+      </li>
+      
+      
+      
+      <li class="_4  ">
+        <a href="/xyz/docs/00-developer/01-license/">License</a>
+      </li>
+      
+      
+      
+      <li class="_5 first ">
+        <a href="/xyz/docs/00-developer/02-access/00-access/">Access</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/02-access/01-acl/">Access Control List (ACL)</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/02-access/02-registration/">User Account Registration</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/02-access/03-password-reset/">Password Reset</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/02-access/04-failed-login-attempts/">Failed Login attempts</a>
+      </li>
+      
+      
+      
+      <li class="_5 first ">
+        <a href="/xyz/docs/00-developer/03-environment_settings/00-environment-settings/">Environment Settings</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/03-environment_settings/01-hosting/">Hosting</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/03-environment_settings/02-access-control/">Access Control</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/03-environment_settings/03-workspace-connections/">Workspace Connections</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/03-environment_settings/04-3rd-party-api-keys/">3rd Party API Keys</a>
+      </li>
+      
+      
+      
+      <li class="_5 first ">
+        <a href="/xyz/docs/00-developer/04-workspaces/00-workspaces/">Workspaces</a>
+      </li>
+      
+      
+      
+      <li class="_5  active">
+        <a href="/xyz/docs/00-developer/04-workspaces/01-editing/">Editing</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/04-workspaces/02-access-restrictions/">Access Restrictions & Filters</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/04-workspaces/03-locate/">Locate</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/04-workspaces/04-title/">Title</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/04-workspaces/05-workspace-checks/">Workspace Checks</a>
+      </li>
+      
+      
+      
+      <li class="_5 first ">
+        <a href="/xyz/docs/00-developer/05-layers/00-layers/">Layers</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/05-layers/01-tile-layer/">Tile Layer</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/05-layers/02-postgis-layer/">PostGIS Data Layer</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/05-layers/03-cluster-layer/">Cluster Layer</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/05-layers/04-geojson-layer/">GeoJson Layer</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/05-layers/05-vector-tile-mvt-layer/">MapBox Vector Tile (MVT) Layer</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/05-layers/06-grid-hex/">Grid (Hex) Layer</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/05-layers/07-filter/">Filter</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/05-layers/08-tables/">Tables</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/05-layers/09-charts/">Charts</a>
+      </li>
+      
+      
+      
+      <li class="_5 first ">
+        <a href="/xyz/docs/00-developer/06-infoj/00-infoj/">InfoJ</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/06-infoj/01-groups/">Groups</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/06-infoj/02-filter/">Filter</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/06-infoj/03-lookups/">Lookups</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/06-infoj/04-withSelect/">With Select</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/06-infoj/05-tabledefinition/">Table Definition</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/06-infoj/06-orderedlist/">Ordered List</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/06-infoj/07-geometry/">Geometry</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/06-infoj/08-isolines/">Isolines</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/06-infoj/09-locations/">Locations</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/06-infoj/10-clusterArea/">Cluster Area</a>
+      </li>
+      
+      
+      
+      <li class="_6 second ">
+        <a href="/xyz/docs/00-developer/06-infoj/11-charts/00-charts/">Charts</a>
+      </li>
+      
+      
+      
+      <li class="_6  ">
+        <a href="/xyz/docs/00-developer/06-infoj/11-charts/01-cakeChart/">Cake charts</a>
+      </li>
+      
+      
+      
+      <li class="_6  ">
+        <a href="/xyz/docs/00-developer/06-infoj/11-charts/02-polarChart/">Polar charts</a>
+      </li>
+      
+      
+      
+      <li class="_6  ">
+        <a href="/xyz/docs/00-developer/06-infoj/11-charts/03-radarChart/">Radar charts</a>
+      </li>
+      
+      
+      
+      <li class="_6  ">
+        <a href="/xyz/docs/00-developer/06-infoj/11-charts/04-simpleChart/">Simple charts</a>
+      </li>
+      
+      
+      
+      <li class="_6  ">
+        <a href="/xyz/docs/00-developer/06-infoj/11-charts/05-stackedChart/">Stacked charts</a>
+      </li>
+      
+      
+      
+      <li class="_5 first ">
+        <a href="/xyz/docs/00-developer/07-locales/00-locales/">Locales</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/00-developer/07-locales/01-gazetteer/">Gazetteer</a>
+      </li>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+
+    </ul>
+
+    <div class="content">
+      <h2>Editing Workspace</h2>
+      <p>Locations and their properties can be edited by enabling editing capabilities in the layer and <code>infoj</code> definitions.</p>
+<h2>Edit locations</h2>
+<pre><code class="language-text">&quot;edit&quot;: {
+  &quot;point&quot;: true,
+  &quot;polygon&quot;: true,
+  &quot;rectangle&quot;: true,
+  &quot;circle&quot;: true,
+  &quot;line&quot;: true,
+  &quot;catchment&quot;: {...},
+  &quot;delete&quot;: true
+}
+</code></pre>
+<p>Adding an edit object to the layer definition will add an edit panel to the layer's drawer. Depending on the entries of this layer object specific controls to draw new location geometries are added to the editing panel.</p>
+<h2>Editing properties</h2>
+<p><code>&quot;edit&quot;: true</code></p>
+<p>By adding an edit key to an infoj entry the field becomes editable in the location's info panel.</p>
+<pre><code class="language-text">&quot;edit&quot;: {
+  &quot;range&quot;: {
+    &quot;min&quot;: 0,
+    &quot;max&quot;: 30,
+    &quot;step&quot;: 1,
+    &quot;label&quot;: &quot;Area Code: &quot;
+  }
+}
+</code></pre>
+<p>Defining a range object as the edit value a range slider will be inserted into the info control.</p>
+<pre><code class="language-text">{
+  &quot;field&quot;: &quot;status&quot;,
+  &quot;label&quot;: &quot;Status:&quot;,
+  &quot;type&quot;: &quot;text&quot;,
+  &quot;edit&quot;: {
+    &quot;options&quot;: [
+      &quot;Open&quot;,
+      {
+        &quot;Closed&quot;: [
+          &quot;Permanent&quot;,
+          &quot;Temporarily&quot;
+        ]
+      },
+      {
+        &quot;Other&quot;: &quot;text&quot;
+      }
+    ]
+  }
+},
+{
+  &quot;field&quot;: &quot;status_det&quot;,
+  &quot;label&quot;: &quot;Detailed Status: &quot;,
+  &quot;type&quot;: &quot;text&quot;,
+  &quot;edit&quot;: {
+    &quot;options_field&quot;: &quot;open_closed&quot;
+  }
+}
+</code></pre>
+<p>Options are displayed dropdown elements. An object with &quot;text&quot; as value allows the input of custom text for the options field.</p>
+<p>Setting an options_field in a subsequent entry to the entry with the options will display a dependent dropdown for this field.</p>
+<p>e.g. Selecting 'Closed' in the first dropdown will populate the second dropdown with the options 'Permanent' and 'Temporarily'.</p>
+<h3>Datepicker</h3>
+<p>Editable date fields will display a datepicker dialog. The date field in the database must be of the type <code>bigint</code> since dates are stored as <a href="https://www.unixtimestamp.com/">unix timestamps</a>.</p>
+
+    </div>
+
+  </div>
+
+</body>
+
+<script>
+    const toggle = document.getElementById('toggle');
+
+    toggle.onclick = e => { e.target.parentElement.classList.add('_grid'); };
+</script>
+
+</html>

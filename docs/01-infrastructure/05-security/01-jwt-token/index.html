@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JWT Token</title>
+  <style>
+
+    .grid {
+      display: block;
+      margin: 20px;
+      font-family: system-ui;
+      display:grid;
+      grid-column-gap: 15px;
+      grid-template-columns: 1fr 5fr;
+    }
+
+    .grid > .toggle {
+        display: none;
+        border-right: 2px solid #000;
+        padding: 5px;
+    }
+
+    .grid > .toggle > .burger {
+      border-top: 2px solid #eee;
+      margin-top: 5px;
+      box-shadow: 1px 1px 1px #999;
+    }
+
+    .grid > .toggle:hover {
+      cursor: pointer;
+    }
+
+    @media only screen and (max-width: 900px) {
+      .grid {
+        grid-template-columns: 30px 5fr;
+        margin: 0px;
+      }
+
+      .grid > .nav {
+        display: none;
+      }
+
+      .grid > .toggle {
+        display: block;
+      }
+    }
+
+    ._grid {
+      grid-template-columns: 1fr 5fr;
+    }
+
+    ._grid > .nav {
+      display: block;
+    }
+
+    ._grid > .toggle {
+      display: none;
+    }
+
+    .grid > .nav {
+      grid-column: 1;
+      padding-inline-start: 0px;
+      list-style-type: none;
+    }
+
+    .grid > .content {
+      grid-column: 2/4;
+    }
+
+    .active {
+      font-weight: bold;
+    }
+
+    a {
+      text-decoration: none;
+      white-space: nowrap;
+      color: #333;
+    }
+
+    li {
+      line-height: 1.5;
+    }
+
+    li._1 {
+      padding-left: 0px;
+    }
+
+    li._2 {
+      padding-left: 0px;
+    }
+
+    li._3 {
+      padding-left: 0px;
+    }
+
+    li._4 {
+      padding-left: 0px;
+    }
+
+    li._5 {
+      padding-left: 20px;
+    }
+
+    li._6 {
+      padding-left: 40px;
+    }
+
+    li.first {
+      padding-left: 0px;
+      margin-top: 10px;
+    }
+
+    li.second {
+      padding-left: 20px;
+    }
+
+    pre {
+      display: block;
+      font-family: monospace;
+      white-space: pre;
+      margin: 1em 0px;
+      padding: 20px;
+      box-shadow: 0px 0px 2px #555;
+      border-radius: 5px;
+      overflow-x: scroll;
+    }
+
+    pre > code {
+      font-family: monospace;
+    }
+
+    .content a {
+      color: #090;
+    }
+
+    .content img {
+      max-width: 100%;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <div class="grid">
+
+    <div id="toggle" class="toggle"><div class="burger"></div><div class="burger"></div><div class="burger"></div></div>
+
+    <ul class="nav">
+
+      
+      <li>
+        <a style="font-weight: bold; font-size: 30px;" href="/xyz/docs"><---</a>
+      </li>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <li class="_4  ">
+        <a href="/xyz/docs/01-infrastructure/00-infrastructure/">Infrastructure</a>
+      </li>
+      
+      
+      
+      <li class="_4  ">
+        <a href="/xyz/docs/01-infrastructure/01-client/">Client</a>
+      </li>
+      
+      
+      
+      <li class="_4  ">
+        <a href="/xyz/docs/01-infrastructure/02-server/">Server</a>
+      </li>
+      
+      
+      
+      <li class="_4  ">
+        <a href="/xyz/docs/01-infrastructure/03-testing/">Testing</a>
+      </li>
+      
+      
+      
+      <li class="_5 first ">
+        <a href="/xyz/docs/01-infrastructure/04-dependencies/00-introduction/">Introduction</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/01-infrastructure/04-dependencies/01-sass/">Sass</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/01-infrastructure/04-dependencies/02-web-pack/">Webpack</a>
+      </li>
+      
+      
+      
+      <li class="_5 first ">
+        <a href="/xyz/docs/01-infrastructure/05-security/00-security/">Security</a>
+      </li>
+      
+      
+      
+      <li class="_5  active">
+        <a href="/xyz/docs/01-infrastructure/05-security/01-jwt-token/">JWT Token</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/01-infrastructure/05-security/02-sql-injections/">SQL injections</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/01-infrastructure/05-security/03-strategy/">Strategy</a>
+      </li>
+      
+      
+      
+      <li class="_5 first ">
+        <a href="/xyz/docs/01-infrastructure/06-deployments/00-deployments/">Deployments</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/01-infrastructure/06-deployments/01-aws/">AWS Deployments</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/01-infrastructure/06-deployments/02-now/">Now Deployments</a>
+      </li>
+      
+      
+      
+      <li class="_5  ">
+        <a href="/xyz/docs/01-infrastructure/06-deployments/03-ubuntu/">Ubuntu Deployments</a>
+      </li>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+
+    </ul>
+
+    <div class="content">
+      <h2>Security</h2>
+      <p><a href="https://jwt.io/">JSON Web Token (JWT)</a> are used as access token for private instances and admin endpoints. Token decode as follows.</p>
+<pre><code class="language-text">{
+  alg: &quot;HS256&quot;,
+  typ: &quot;JWT&quot;
+}.
+{
+  email: &quot;dennis.bauszus@geolytix.co.uk&quot;,
+  access: &quot;admin&quot;,
+  iat: 1542035244,
+  exp: 1542035364
+}.
+[signature]
+</code></pre>
+<p>The signature is created with the <a href="../../environment-settings/access-control.md"><strong>SECRET defined in the environment settings</strong></a>. The email field is used to lookup a user account in the ACL and determine its access level.</p>
+
+    </div>
+
+  </div>
+
+</body>
+
+<script>
+    const toggle = document.getElementById('toggle');
+
+    toggle.onclick = e => { e.target.parentElement.classList.add('_grid'); };
+</script>
+
+</html>
